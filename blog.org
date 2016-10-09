@@ -1,0 +1,6 @@
+# Created 2016-10-09 Sun 02:34
+#+TITLE: Blog posts
+#+AUTHOR: Thibault Marin
+All the blog posts:
+
+* [[file:posts/2016-10-05-Awesome-wm_configuration.org][(2016-10-05) Awesome-wm configuration]]

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+     xmlns:georss="http://www.georss.org/georss"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:media="http://search.yahoo.com/mrss/"><channel>
+	<title>My website's RSS</title>
+	<atom:link href="/blog/rss.xml" rel="self" type="application/rss+xml" />
+	<link>/blog/</link>
+	<description><![CDATA[]]></description>
+	<language>en</language>
+	<pubDate>Sun, 09 Oct 2016 02:34:18 -0500</pubDate>
+	<lastBuildDate>Sun, 09 Oct 2016 02:34:18 -0500</lastBuildDate>
+	<generator>Emacs 24.5 Org-mode 8.3.6</generator>
+	<webMaster>) (nil)</webMaster>
+	<image>
+		<url>http://orgmode.org/img/org-mode-unicorn-logo.png</url>
+		<title>My website's RSS</title>
+		<link>/blog/</link>
+	</image>
+
+	<div id="table-of-contents">
+		<h2>Table of Contents</h2>
+		<div id="text-table-of-contents">
+			<ul>
+				<li><a href="#orgc08b851">Awesome-wm configuration</a>
+				<ul>
+					<li><a href="#orgba501c4"><span class="done DONE">DONE</span> Introduction <code>[2/2]</code></a></li>
+				</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<item>
+		<title>Awesome-wm configuration</title>
+		<link>/blog/rss.html#orgc08b851</link>
+		<author>) (nil)</author>
+		<guid isPermaLink="false">/blog/rss.html#orgc08b851</guid>
+		<pubDate>Sun, 09 Oct 2016 02:34:00 -0500</pubDate>
+
+		<description><![CDATA[<div id="outline-container-orgba501c4" class="outline-3">
+		<h3 id="orgba501c4"><a id="ID-4527b244-6eb1-45a5-9900-1de26add6672"></a><span class="done DONE">DONE</span> Introduction <code>[2/2]</code></h3>
+		<div class="outline-text-3" id="text-orgba501c4">
+		<p>
+		This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
+		documentation of the different modules developed and used. The actual
+		configuration (a set of lua files) can be produced by running <code>org-babel-tangle</code>
+		on the original org file.
+		</p>
+
+		<p>
+		The resulting desktop is shown on Fig.&nbsp;<a href="#orgd558bdb">1</a>.  The following
+		bash script produces the image.  The most interesting part is the top wibox,
+		which is shown enlarged on Fig.&nbsp;.
+		</p>
+
+		<div class="org-src-container">
+		<pre class="src src-sh" id="org39611f6"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
+		<span style="color: #a0522d;">res_x</span>=1920
+		<span style="color: #a0522d;">res_y</span>=1080
+		<span style="color: #a0522d;">screen_idx</span>=1
+
+		<span style="color: #a0522d;">width</span>=$(( $<span style="color: #a0522d;">res_x</span> ))
+		<span style="color: #a0522d;">height</span>=$(( $<span style="color: #a0522d;">res_y</span> ))
+		<span style="color: #a0522d;">start_x</span>=$(( $<span style="color: #a0522d;">screen_idx</span> * $<span style="color: #a0522d;">res_x</span> ))
+		<span style="color: #a0522d;">start_y</span>=$(( 0 ))
+
+		scrot desktop.png
+		convert desktop.png -crop ${<span style="color: #a0522d;">width</span>}x${<span style="color: #a0522d;">height</span>}+${<span style="color: #a0522d;">start_x</span>}+${<span style="color: #a0522d;">start_y</span>} desktop-main.png
+		rm desktop.png -rf
+		</pre>
+		</div>
+
+
+
+		<div id="orgd558bdb" class="figure">
+		<p><img src="/blog/../images/2016-10-05-Awesome-wm_configuration/desktop-main.png" alt="desktop-main.png" width="100%" />
+		</p>
+		<p><span class="figure-number">Figure 1: </span>My awesome-wm desktop.</p>
+		</div>
+
+
+		<p>
+		This configuration is currently used on the following system:
+		</p>
+
+		<dl class="org-dl">
+		<dt>OS</dt><dd></dd>
+		</dl>
+		<div class="org-src-container">
+		<pre class="src src-sh" id="org2cb1981">lsb_release -a
+		uname -a
+		</pre>
+		</div>
+
+		<pre class="example">
+		Distributor ID:	Debian
+		Description:	Debian GNU/Linux testing (stretch)
+		Release:	testing
+		Codename:	stretch
+		Linux dell-desktop 4.6.0-1-amd64 #1 SMP Debian 4.6.4-1 (2016-07-18) x86_64 GNU/Linux
+		</pre>
+
+		<dl class="org-dl">
+		<dt>awesome</dt><dd></dd>
+		</dl>
+		<div class="org-src-container">
+		<pre class="src src-sh" id="org88ca3c8">awesome --version
+		</pre>
+		</div>
+
+		<pre class="example">
+		awesome v3.5.9 (Mighty Ravendark)
+		• Build: Mar 27 2016 02:23:55 for x86_64 by gcc version 5.3.1 (pbuilder@minjo)
+		• Compiled against Lua 5.1.5 (running with Lua 5.1)
+		• D-Bus support: ✔
+		</pre>
+
+		<dl class="org-dl">
+		<dt>emacs</dt><dd></dd>
+		</dl>
+		<div class="org-src-container">
+		<pre class="src src-emacs-lisp" id="org063f6b2">(emacs-version)
+		</pre>
+		</div>
+
+		<pre class="example">
+		"GNU Emacs 24.5.1 (x86_64-pc-linux-gnu, GTK+ Version 3.21.5)
+		of 2016-09-05 on trouble, modified by Debian"
+		</pre>
+
+		<dl class="org-dl">
+		<dt>org-mode</dt><dd></dd>
+		</dl>
+		<div class="org-src-container">
+		<pre class="src src-emacs-lisp" id="org188b9f0">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
+		</pre>
+		</div>
+
+		<pre class="example">
+		"Org mode version 8.3.6 (release_8.3.6-1210-gd942f7 @ ... )"
+		</pre>
+
+		<p>
+		Most of the code in this configuration comes from the default <code>rc.lua</code> delivered
+		with awesome-wm.  On my system, it is located under <code>/etc/xdg/awesome/rc.lua</code>.
+		</p>
+
+		<p>
+		Tangling this org file produces several lua files.  The main configuration is
+		contained in the <code>rc.lua</code> file (widgets, keybindings), and code for modules is
+		tangled to separate files.  To disable a component of this configuration, the
+		corresponding code block must be skipped during tangling.  To disable tangling
+		of an individual block, the preferred way is to add the <code>header-args</code> property
+		on the parent heading:
+		</p>
+
+		<div class="org-src-container">
+		<pre class="src src-org"><span style="color: #a0522d;">** Disabled heading</span>
+		<span style="color: #a020f0;">   :PROPERTIES:</span>
+		<span style="color: #a020f0;">:header-args:</span> :tangle no
+		<span style="color: #a020f0;">   :END:</span>
+		</pre>
+		</div>
+
+		<p>
+		This can be done by adding the text manually or by using the <code>org-set-property</code>
+		function, which is bound to <code>C-c C-x p</code> by default.  Alternatively, individual
+		source blocks can be disabled by adding <code>:tangle no</code> on the <code>#+BEGIN_SRC</code> line.
+		</p>
+
+		<p>
+		It is important to note that when tangling this file, any change made directly
+		to the lua files will be overridden by the code in this org file.  This can be
+		prevented by changing the permissions of the tangled files (see
+		<a href="http://orgmode.org/manual/tangle_002dmode.html">http://orgmode.org/manual/tangle_002dmode.html</a>).  Alternatively, the detangle
+		functionality in org-mode can be utilized to merge changes from the lua files
+		back to this org file: simply run <code>org-detangle</code> from the modified lua file and
+		changes should be merged back.  This requires the <code>#+PROPERTY: comments link</code>
+		option which is set at the top of this file.
+		</p>
+
+		<p>
+		This org file can also be exported to html to produce the documentation.  Note
+		that exporting this file (e.g. to HTML) executes some bash scripts (for
+		screenshots for instance), so use at your own risk.
+		</p>
+
+
+
+		<p>
+		<a href="/blog/posts/2016-10-05-Awesome-wm_configuration.html">(Read more)</a>
+		</p>
+		</div>
+		</div>
+		]]></description>
+</item>
+</channel>
+</rss>
