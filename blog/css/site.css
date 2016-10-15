@@ -303,6 +303,11 @@ pre.src.src.src-lua {
     background-color: var(--lua-bg);
 }
 
+/* Source block label */
+.src-label {
+    color: darkgray;
+}
+
 #org-info-js_console-container {
     bottom: 0;
     margin-top: 0;

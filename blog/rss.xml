@@ -14,8 +14,8 @@
 	<link>/blog/</link>
 	<description><![CDATA[]]></description>
 	<language>en</language>
-	<pubDate>Sun, 09 Oct 2016 02:34:18 -0500</pubDate>
-	<lastBuildDate>Sun, 09 Oct 2016 02:34:18 -0500</lastBuildDate>
+	<pubDate>Fri, 14 Oct 2016 23:06:10 -0500</pubDate>
+	<lastBuildDate>Fri, 14 Oct 2016 23:06:10 -0500</lastBuildDate>
 	<generator>Emacs 24.5 Org-mode 8.3.6</generator>
 	<webMaster>) (nil)</webMaster>
 	<image>
@@ -28,9 +28,9 @@
 		<h2>Table of Contents</h2>
 		<div id="text-table-of-contents">
 			<ul>
-				<li><a href="#orgc08b851">Awesome-wm configuration</a>
+				<li><a href="#orgc498e7a">Awesome-wm configuration</a>
 				<ul>
-					<li><a href="#orgba501c4"><span class="done DONE">DONE</span> Introduction <code>[2/2]</code></a></li>
+					<li><a href="#org0e6b7f4"><span class="done DONE">DONE</span> Introduction <code>[2/2]</code></a></li>
 				</ul>
 				</li>
 			</ul>
@@ -39,14 +39,14 @@
 
 	<item>
 		<title>Awesome-wm configuration</title>
-		<link>/blog/rss.html#orgc08b851</link>
+		<link>/blog/rss.html#orgc498e7a</link>
 		<author>) (nil)</author>
-		<guid isPermaLink="false">/blog/rss.html#orgc08b851</guid>
-		<pubDate>Sun, 09 Oct 2016 02:34:00 -0500</pubDate>
+		<guid isPermaLink="false">/blog/rss.html#orgc498e7a</guid>
+		<pubDate>Fri, 14 Oct 2016 23:06:00 -0500</pubDate>
 
-		<description><![CDATA[<div id="outline-container-orgba501c4" class="outline-3">
-		<h3 id="orgba501c4"><a id="ID-4527b244-6eb1-45a5-9900-1de26add6672"></a><span class="done DONE">DONE</span> Introduction <code>[2/2]</code></h3>
-		<div class="outline-text-3" id="text-orgba501c4">
+		<description><![CDATA[<div id="outline-container-org0e6b7f4" class="outline-3">
+		<h3 id="org0e6b7f4"><a id="ID-8ae65ac9-bb75-4597-8975-d16274783785"></a><span class="done DONE">DONE</span> Introduction <code>[2/2]</code></h3>
+		<div class="outline-text-3" id="text-org0e6b7f4">
 		<p>
 		This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
 		documentation of the different modules developed and used. The actual
@@ -55,13 +55,13 @@
 		</p>
 
 		<p>
-		The resulting desktop is shown on Fig.&nbsp;<a href="#orgd558bdb">1</a>.  The following
+		The resulting desktop is shown on Fig.&nbsp;<a href="#org5533ed5">1</a>.  The following
 		bash script produces the image.  The most interesting part is the top wibox,
 		which is shown enlarged on Fig.&nbsp;.
 		</p>
 
 		<div class="org-src-container">
-		<pre class="src src-sh" id="org39611f6"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
+		<pre class="src src-sh" id="org73a4f1c"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
 		<span style="color: #a0522d;">res_x</span>=1920
 		<span style="color: #a0522d;">res_y</span>=1080
 		<span style="color: #a0522d;">screen_idx</span>=1
@@ -79,8 +79,8 @@
 
 
 
-		<div id="orgd558bdb" class="figure">
-		<p><img src="/blog/../images/2016-10-05-Awesome-wm_configuration/desktop-main.png" alt="desktop-main.png" width="100%" />
+		<div id="org5533ed5" class="figure">
+		<p><a href="/blog/../images/2016-10-05-Awesome-wm_configuration/desktop-main.png" width="100%"><img src="/blog/../images/2016-10-05-Awesome-wm_configuration/desktop-main.png" alt="desktop-main.png" width="100%" /></a>
 		</p>
 		<p><span class="figure-number">Figure 1: </span>My awesome-wm desktop.</p>
 		</div>
@@ -94,7 +94,7 @@
 		<dt>OS</dt><dd></dd>
 		</dl>
 		<div class="org-src-container">
-		<pre class="src src-sh" id="org2cb1981">lsb_release -a
+		<pre class="src src-sh" id="orgb24a17d">lsb_release -a
 		uname -a
 		</pre>
 		</div>
@@ -111,7 +111,7 @@
 		<dt>awesome</dt><dd></dd>
 		</dl>
 		<div class="org-src-container">
-		<pre class="src src-sh" id="org88ca3c8">awesome --version
+		<pre class="src src-sh" id="org99f2889">awesome --version
 		</pre>
 		</div>
 
@@ -126,7 +126,7 @@
 		<dt>emacs</dt><dd></dd>
 		</dl>
 		<div class="org-src-container">
-		<pre class="src src-emacs-lisp" id="org063f6b2">(emacs-version)
+		<pre class="src src-emacs-lisp" id="org26555db">(emacs-version)
 		</pre>
 		</div>
 
@@ -139,12 +139,12 @@
 		<dt>org-mode</dt><dd></dd>
 		</dl>
 		<div class="org-src-container">
-		<pre class="src src-emacs-lisp" id="org188b9f0">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
+		<pre class="src src-emacs-lisp" id="orgb5cbee8">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
 		</pre>
 		</div>
 
 		<pre class="example">
-		"Org mode version 8.3.6 (release_8.3.6-1210-gd942f7 @ ... )"
+		"Org mode version 8.3.6 (release_8.3.6-1217-g05d918 @ ... )"
 		</pre>
 
 		<p>
@@ -162,7 +162,7 @@
 		</p>
 
 		<div class="org-src-container">
-		<pre class="src src-org"><span style="color: #a0522d;">** Disabled heading</span>
+		<pre class="src src-org" id="orgabbd19d"><span style="color: #a0522d;">** Disabled heading</span>
 		<span style="color: #a020f0;">   :PROPERTIES:</span>
 		<span style="color: #a020f0;">:header-args:</span> :tangle no
 		<span style="color: #a020f0;">   :END:</span>

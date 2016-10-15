@@ -1,4 +1,4 @@
-# Created 2016-10-09 Sun 02:34
+# Created 2016-10-14 Fri 23:06
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016/10/05
@@ -45,7 +45,7 @@ rm desktop.png -rf
 
 #+NAME: img-desktop-main
 #+CAPTION: My awesome-wm desktop.
-[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png]]
+[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png]]
 
 
 This configuration is currently used on the following system:
@@ -93,7 +93,7 @@ awesome --version
 #+END_SRC
 
 #+RESULTS: el-org-version
-: "Org mode version 8.3.6 (release_8.3.6-1210-gd942f7 @ ... )"
+: "Org mode version 8.3.6 (release_8.3.6-1217-g05d918 @ ... )"
 
 Most of the code in this configuration comes from the default =rc.lua= delivered
 with awesome-wm.  On my system, it is located under =/etc/xdg/awesome/rc.lua=.
@@ -105,6 +105,7 @@ corresponding code block must be skipped during tangling.  To disable tangling
 of an individual block, the preferred way is to add the =header-args= property
 on the parent heading:
 
+#+NAME: org-disable-tangle-example
 #+BEGIN_SRC org
 ,** Disabled heading
    :PROPERTIES:
@@ -119,7 +120,7 @@ source blocks can be disabled by adding =:tangle no= on the =#+BEGIN_SRC= line.
 It is important to note that when tangling this file, any change made directly
 to the lua files will be overridden by the code in this org file.  This can be
 prevented by changing the permissions of the tangled files (see
-[[http://orgmode.org/manual/tangle_002dmode.html]]).  Alternatively, the detangle
+http://orgmode.org/manual/tangle_002dmode.html).  Alternatively, the detangle
 functionality in org-mode can be utilized to merge changes from the lua files
 back to this org file: simply run =org-detangle= from the modified lua file and
 changes should be merged back.  This requires the =#+PROPERTY: comments link=
@@ -615,7 +616,7 @@ rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
 #+CAPTION: [[#email][mail]], [[#ttrss][ttrss]], [[#memory][memory]],
 #+CAPTION: [[#volume][volume]], systray, [[#layouts][layout]],
 #+CAPTION: [[#calendar][date + calendar]], [[#shutdown][shutdown menu]].
-[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png]]
+[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png]]
 
 
 
@@ -1064,6 +1065,7 @@ sudoers file must be edited to allow the desired user to run the =shutdown=
 command without password.  On Debian, the sudoers file can be edited by running
 =sudo visudo= from a terminal.  My sudoers file contains the following:
 
+#+NAME: visudo-shutdown
 #+BEGIN_SRC conf
 username ALL=SHUTDOWN
 username ALL=NOPASSWD: SHUTDOWN
@@ -1567,7 +1569,7 @@ local capi = {
 
 *** Utility functions
 A few utility functions are used in the module:
-- =scandir= :: List files in folder (from [[http://stackoverflow.com/a/11130774]]).
+- =scandir= :: List files in folder (from http://stackoverflow.com/a/11130774).
 - =get_path= :: Extract path from filename.
 - =cmusover_addToWidget= :: Show album popup on mouse over.
 - =get_mp3_info= :: Get a string representation of file ID3 tags using eyeD3.  The
@@ -1753,7 +1755,7 @@ rm desktop.png -rf
 
 #+NAME: img-cmus-popup
 #+CAPTION: Cmus popup notification, with album cover and track list.
-[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png]]
+[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png]]
 
 
 *** Quick play command
@@ -4095,7 +4097,7 @@ rm desktop.png -rf
 
 #+NAME: img-global_prompt-help
 #+CAPTION: Help notification from global prompt.
-[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png]]
+[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png]]
 
 
 
@@ -4327,6 +4329,7 @@ the =music.db= file using the =updatedb= program, and song searches are
 performed using the =locate= program (both parts of the =findutils= package).
 The =music.db= file is updated on a schedule (daily) via =crontab=:
 
+#+NAME: cron-musicdb-update
 #+BEGIN_SRC conf
 
 # Crontab entry for music database update
@@ -4635,7 +4638,7 @@ my_utility = {}
 
 The =my_utility.lines= function splits the input string by rows.  A table with
 the lines is returned; it can be iterated over using =for k, v in
-pairs(lines_output)=.  This was taken from [[http://lua-users.org/wiki/SplitJoin]].
+pairs(lines_output)=.  This was taken from http://lua-users.org/wiki/SplitJoin.
 
 #+NAME: module-utility-lines
 #+BEGIN_SRC lua
@@ -4729,13 +4732,13 @@ rm desktop.png -rf
 
 #+NAME: img-confirm_action
 #+CAPTION: Confirmation prompt before shutdown (left-most text).
-[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png]]
+[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png]]
 
 
 ** Run once
 The =run_once= utility is a commonly used lua function to spawn a program if is
 not already running.  The code is from
-[[https://awesome.naquadah.org/wiki/Autostart]].
+https://awesome.naquadah.org/wiki/Autostart.
 
 #+NAME: module-utility-run_once
 #+BEGIN_SRC lua
@@ -4775,10 +4778,10 @@ return my_utility
 
 * Resources
 
-- awesome wiki: [[https://awesome.naquadah.org/wiki]] (this may disappear in the
-  future as described in [[https://github.com/awesomeWM/awesome-www/issues/7]])
-- awesome-wm API: [[http://new.awesomewm.org/doc/api]]
-- blingbling examples: [[https://github.com/cedlemo/blingbling]]
+- awesome wiki: https://awesome.naquadah.org/wiki (this may disappear in the
+  future as described in https://github.com/awesomeWM/awesome-www/issues/7)
+- awesome-wm API: http://new.awesomewm.org/doc/api
+- blingbling examples: https://github.com/cedlemo/blingbling
 - Themes:
-  - [[https://awesome.naquadah.org/wiki/Beautiful_themes]]
-  - [[https://github.com/copycat-killer/awesome-copycats]]
+  - https://awesome.naquadah.org/wiki/Beautiful_themes
+  - https://github.com/copycat-killer/awesome-copycats

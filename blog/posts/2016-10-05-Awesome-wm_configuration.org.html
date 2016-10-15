@@ -197,14 +197,14 @@
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Introduction </span><span class="org-checkbox-statistics-done">[2/2]</span>
 
-This file contains my configuration for the <span class="org-link"><a href="https://awesome.naquadah.org/">[[https://awesome.naquadah.org/][awesome]]</a></span> window manager along with
+This file contains my configuration for the <span class="org-link"><a href="https://awesome.naquadah.org/">awesome</a></span> window manager along with
 documentation of the different modules developed and used. The actual
 configuration (a set of lua files) can be produced by running <span class="org-verbatim">=org-babel-tangle=</span>
 on the original org file.
 
-The resulting desktop is shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop-main]]</a></span>.  The following
+The resulting desktop is shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop-main</a></span>.  The following
 bash script produces the image.  The most interesting part is the top wibox,
-which is shown enlarged on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop]]</a></span>.
+which is shown enlarged on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop</a></span>.
 
 <span class="org-meta-line">#+NAME: sh-scrot-main</span>
 <span class="org-block-begin-line">#+BEGIN_SRC sh :exports code :tangle no :cache yes
@@ -230,7 +230,7 @@ rm desktop.png -rf
 <span class="org-meta-line">#+NAME: img-desktop-main</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 100%</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">My awesome-wm desktop.
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png">[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png]]</a></span>
+</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png</a></span>
 
 
 This configuration is currently used on the following system:
@@ -290,6 +290,7 @@ corresponding code block must be skipped during tangling.  To disable tangling
 of an individual block, the preferred way is to add the <span class="org-verbatim">=header-args=</span> property
 on the parent heading:
 
+<span class="org-meta-line">#+NAME: org-disable-tangle-example</span>
 <span class="org-block-begin-line">#+BEGIN_SRC org :tangle no
 </span><span class="org-block">,** Disabled heading
 </span><span class="org-special-keyword"><span class="org-block">   :PROPERTIES:</span></span><span class="org-block">
@@ -304,7 +305,7 @@ source blocks can be disabled by adding <span class="org-verbatim">=:tangle no=<
 It is important to note that when tangling this file, any change made directly
 to the lua files will be overridden by the code in this org file.  This can be
 prevented by changing the permissions of the tangled files (see
-<span class="org-link"><a href="http://orgmode.org/manual/tangle_002dmode.html">[[http://orgmode.org/manual/tangle_002dmode.html]]</a></span>).  Alternatively, the detangle
+<span class="org-link"><a href="http://orgmode.org/manual/tangle_002dmode.html">http://orgmode.org/manual/tangle_002dmode.html</a></span>).  Alternatively, the detangle
 functionality in org-mode can be utilized to merge changes from the lua files
 back to this org file: simply run <span class="org-verbatim">=org-detangle=</span> from the modified lua file and
 changes should be merged back.  This requires the <span class="org-verbatim">=#+PROPERTY: comments link=</span>
@@ -318,18 +319,18 @@ screenshots for instance), so use at your own risk.
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Requirements</span>
 
 
-- The only non-standard awesome library required should be <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Blingbling">[[https://awesome.naquadah.org/wiki/Blingbling][blingbling]]</a></span> which I
+- The only non-standard awesome library required should be <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Blingbling">blingbling</a></span> which I
   have checked out from git into <span class="org-verbatim">=~/.config/awesome/blingbling=</span>.  The blingbling
-  path should be accessible by the lua import system.  See the <span class="org-link"><a href="nil:nil">[[#import_blingbling][blingbling import
-  section]]</a></span> for the list of components which require blingbling.
+  path should be accessible by the lua import system.  See the <span class="org-link"><a href="nil:nil">blingbling import
+  section</a></span> for the list of components which require blingbling.
 
 - Since the configuration is written in an org-mode file, emacs is also required
   to extract (tangle) the lua code.  A makefile is provided to run the tangle
-  operation on this file from the command line (the <span class="org-link"><a href="https://www.gnu.org/software/make">[[https://www.gnu.org/software/make][GNU make]]</a></span> utility is required
+  operation on this file from the command line (the <span class="org-link"><a href="https://www.gnu.org/software/make">GNU make</a></span> utility is required
   to use the makefile).  It also requires a recent version of org-mode, and
   basic emacs modes for lua and python.
 
-- The music player widget requires <span class="org-link"><a href="https://cmus.github.io/">[[https://cmus.github.io/][cmus]]</a></span> and uses <span class="org-link"><a href="http://eyed3.nicfit.net/">[[http://eyed3.nicfit.net/][eyeD3]]</a></span> to extract cover art from
+- The music player widget requires <span class="org-link"><a href="https://cmus.github.io/">cmus</a></span> and uses <span class="org-link"><a href="http://eyed3.nicfit.net/">eyeD3</a></span> to extract cover art from
   audio files.
 
 - The bash script used to display the volume through OSD requires the <span class="org-verbatim">=aosd_cat=</span>
@@ -339,30 +340,30 @@ screenshots for instance), so use at your own risk.
   processes when moving the mouse over the widget.  This can be replaced by the
   <span class="org-verbatim">=top=</span> command for instance.
 
-- The calendar widget lists events for each day using <span class="org-link"><a href="https://github.com/pimutils/khal">[[https://github.com/pimutils/khal][khal]]</a></span>.  I have it
-  synchronized to my (<span class="org-link"><a href="http://owncloud.org">[[http://owncloud.org][owncloud]]</a></span>) CalDAV server using <span class="org-link"><a href="https://github.com/pimutils/vdirsyncer">[[https://github.com/pimutils/vdirsyncer][vdirsyncer]]</a></span>.
+- The calendar widget lists events for each day using <span class="org-link"><a href="https://github.com/pimutils/khal">khal</a></span>.  I have it
+  synchronized to my (<span class="org-link"><a href="http://owncloud.org">owncloud</a></span>) CalDAV server using <span class="org-link"><a href="https://github.com/pimutils/vdirsyncer">vdirsyncer</a></span>.
 
-- The mail widget relies on <span class="org-link"><a href="https://www.djcbsoftware.nl/code/mu/">[[https://www.djcbsoftware.nl/code/mu/][mu]]</a></span> to find emails to show in the popup notification
+- The mail widget relies on <span class="org-link"><a href="https://www.djcbsoftware.nl/code/mu/">mu</a></span> to find emails to show in the popup notification
   (emails are stored in maildir format).  This could be replaced by some other
   script for IMAP emails.
 
-- The news widget requires a <span class="org-link"><a href="https://tt-rss.org/">[[https://tt-rss.org/][Tiny Tiny RSS]]</a></span> instance, and the <span class="org-link"><a href="https://github.com/Vassius/ttrss-pythom">[[https://github.com/Vassius/ttrss-pythom][ttrss-python]]</a></span>
+- The news widget requires a <span class="org-link"><a href="https://tt-rss.org/">Tiny Tiny RSS</a></span> instance, and the <span class="org-link"><a href="https://github.com/Vassius/ttrss-pythom">ttrss-python</a></span>
   package; a wrapper python script to get news feeds is provided in this file.
 
-- If using the <span class="org-link"><a href="nil:nil">[[#global_prompt][global prompt module]]</a></span>, some modes include additional dependencies:
+- If using the <span class="org-link"><a href="nil:nil">global prompt module</a></span>, some modes include additional dependencies:
 
-  - The music prompt requires <span class="org-link"><a href="http://www.mplayerhq.hu/design7/news.html">[[http://www.mplayerhq.hu/design7/news.html][mplayer]]</a></span> and uses the <span class="org-verbatim">=locate=</span> program (part of the
-    <span class="org-link"><a href="https://www.gnu.org/software/findutils/">[[https://www.gnu.org/software/findutils/][=findutils=]]</a></span> package) to find audio files.
+  - The music prompt requires <span class="org-link"><a href="http://www.mplayerhq.hu/design7/news.html">mplayer</a></span> and uses the <span class="org-verbatim">=locate=</span> program (part of the
+    <span class="org-link"><a href="https://www.gnu.org/software/findutils/">=findutils=</a></span> package) to find audio files.
 
-  - The <span class="org-link"><a href="nil:nil">[[#global_prompt_calc][calc]]</a></span> prompt requires a python script to perform calculations from
+  - The <span class="org-link"><a href="nil:nil">calc</a></span> prompt requires a python script to perform calculations from
     strings.  This script is provided in this org file.
 
-- The transparency effect on focus (see the <span class="org-link"><a href="nil:nil">[[#effects_transparency][transparency]]</a></span> section) requires a
+- The transparency effect on focus (see the <span class="org-link"><a href="nil:nil">transparency</a></span> section) requires a
   compositor, such as <span class="org-verbatim">=xcompmgr=</span>.
 
 - When generating the HTML documentation (by running <span class="org-verbatim">=C-c C-e h h=</span> on this
   buffer), screenshots are taken from the active desktop (assuming awesome-wm is
-  the running desktop environment).  This requires the <span class="org-verbatim">=scrot=</span> and <span class="org-link"><a href="http://www.imagemagick.org">[[http://www.imagemagick.org][=imagemagick=]]</a></span>
+  the running desktop environment).  This requires the <span class="org-verbatim">=scrot=</span> and <span class="org-link"><a href="http://www.imagemagick.org">=imagemagick=</a></span>
   programs.
 
 
@@ -534,9 +535,9 @@ similar to main menus in other desktop environments.
 <span class="org-special-keyword">:END:</span>
 
 The blingbling module is used by the following widgets:
-- <span class="org-link"><a href="nil:nil">[[#volume][volume display and control]]</a></span>,
-- <span class="org-link"><a href="nil:nil">[[#memory][memory usage monitor]]</a></span>,
-- <span class="org-link"><a href="nil:nil">[[#calendar][calendar popup]]</a></span>
+- <span class="org-link"><a href="nil:nil">volume display and control</a></span>,
+- <span class="org-link"><a href="nil:nil">memory usage monitor</a></span>,
+- <span class="org-link"><a href="nil:nil">calendar popup</a></span>
 
 The blingbling library itself must be placed in a location accessible for the
 import system.
@@ -564,7 +565,7 @@ filenames should match the names used with the <span class="org-verbatim">=requi
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> launchbar module</span>
 
 This module creates the launchers in the wibox from <span class="org-verbatim">=.desktop=</span> files (see the
-<span class="org-link"><a href="nil:nil">[[#launchbar][Launchbar]]</a></span> section).
+<span class="org-link"><a href="nil:nil">Launchbar</a></span> section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-launchbar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -575,7 +576,7 @@ This module creates the launchers in the wibox from <span class="org-verbatim">=
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> cmus module</span>
 
-Control and display information from the <span class="org-link"><a href="https://cmus.github.io/">[[https://cmus.github.io/][cmus]]</a></span> music player (see the <span class="org-link"><a href="nil:nil">[[#cmus][cmus]]</a></span>
+Control and display information from the <span class="org-link"><a href="https://cmus.github.io/">cmus</a></span> music player (see the <span class="org-link"><a href="nil:nil">cmus</a></span>
 section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-cmus</span>
@@ -587,7 +588,7 @@ section).
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> ttrss module</span>
 
-View RSS feed updates from <span class="org-link"><a href="https://tt-rss.org/">[[https://tt-rss.org/][Tiny Tiny RSS]]</a></span> instance (see the <span class="org-link"><a href="nil:nil">[[#ttrss][Tiny Tiny RSS]]</a></span>
+View RSS feed updates from <span class="org-link"><a href="https://tt-rss.org/">Tiny Tiny RSS</a></span> instance (see the <span class="org-link"><a href="nil:nil">Tiny Tiny RSS</a></span>
 section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-ttrss</span>
@@ -599,7 +600,7 @@ section).
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> themes module</span>
 
-Manage desktop themes (see the <span class="org-link"><a href="nil:nil">[[#theme][Theme]]</a></span> section).
+Manage desktop themes (see the <span class="org-link"><a href="nil:nil">Theme</a></span> section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-theme</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -610,7 +611,7 @@ Manage desktop themes (see the <span class="org-link"><a href="nil:nil">[[#theme
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> </span><span class="org-verbatim"><span class="org-level-3">=icon_finder=</span></span><span class="org-level-3"> module</span>
 
-Helper utility to find program icons in system paths (see the <span class="org-link"><a href="nil:nil">[[#icon_finder][Icon finder]]</a></span>
+Helper utility to find program icons in system paths (see the <span class="org-link"><a href="nil:nil">Icon finder</a></span>
 section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-icon_finder</span>
@@ -622,7 +623,7 @@ section).
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> </span><span class="org-verbatim"><span class="org-level-3">=global_prompt=</span></span><span class="org-level-3"> module</span>
 
-Generic command launcher (gnome-do style) (see the <span class="org-link"><a href="nil:nil">[[#global_prompt][Global prompt]]</a></span> section).
+Generic command launcher (gnome-do style) (see the <span class="org-link"><a href="nil:nil">Global prompt</a></span> section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-global_prompt</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -633,7 +634,7 @@ Generic command launcher (gnome-do style) (see the <span class="org-link"><a hre
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> </span><span class="org-verbatim"><span class="org-level-3">=my_utility=</span></span><span class="org-level-3"> module</span>
 
-Some utility functions (see the <span class="org-link"><a href="nil:nil">[[#my_utility][Utilities]]</a></span> section).
+Some utility functions (see the <span class="org-link"><a href="nil:nil">Utilities</a></span> section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-utility</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -678,8 +679,8 @@ music_player = </span><span class="string"><span class="org-block">"mplayer"</sp
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">icons</span>
 <span class="org-special-keyword">:END:</span>
 
-Create an instance of the <span class="org-link"><a href="nil:nil">[[#icon_finder][Icon finder]]</a></span> module.  It is used throughout the
-configuration to find icons for programs and session operations (<span class="org-link"><a href="nil:nil">[[#shutdown][Shutdown menu]]</a></span>).
+Create an instance of the <span class="org-link"><a href="nil:nil">Icon finder</a></span> module.  It is used throughout the
+configuration to find icons for programs and session operations (<span class="org-link"><a href="nil:nil">Shutdown menu</a></span>).
 
 <span class="org-meta-line">#+NAME: src-setup-icons</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -767,10 +768,10 @@ mytasklist = {}
 This configuration is used with a dual screen system, where the widgets are
 identical on both screens (except for the systray, which can only be added to
 one screen).  An example of wibox produced by this file is shown on
-Fig<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop]]</a></span>.
+Fig<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop</a></span>.
 
 The following bash snippet produces the screenshot shown on
-Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop]]</a></span> on export (the result is cached, so it is not
+Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop</a></span> on export (the result is cached, so it is not
 re-generated if the content of the code block is not changed).
 
 <span class="org-meta-line">#+NAME: sh-scrot-wibox</span>
@@ -805,7 +806,7 @@ rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
 </span><span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#email][mail]]</a>, <a href="nil:nil">[[#ttrss][ttrss]]</a>, <a href="nil:nil">[[#memory][memory]]</a>,
 </span><span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#volume][volume]]</a>, systray, <a href="nil:nil">[[#layouts][layout]]</a>,
 </span><span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#calendar][date + calendar]]</a>, <a href="nil:nil">[[#shutdown][shutdown menu]]</a>.
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png">[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png]]</a></span>
+</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png</a></span>
 
 
 
@@ -870,7 +871,7 @@ The theme module has two main functions:
 - define a complete <span class="org-verbatim">=beautiful=</span> table for a given theme.
 
 The <span class="org-verbatim">=theme_customatization.set_custom_theme=</span> function takes a theme name as
-input along with the <span class="org-link"><a href="nil:nil">[[#awesome_paths][=awesome_paths=]]</a></span> variable.  It searches files named
+input along with the <span class="org-link"><a href="nil:nil">=awesome_paths=</a></span> variable.  It searches files named
 <span class="org-verbatim">=theme.lua=</span> in the custom and system theme paths.  If a theme is found, the
 <span class="org-verbatim">=beautiful.init=</span> function is called to initialize the <span class="org-verbatim">=beautiful=</span> table.  Next,
 the <span class="org-verbatim">=custom_defaults.lua=</span> file is executed to complete the <span class="org-verbatim">=beautiful=</span> variables
@@ -1050,7 +1051,7 @@ In the main <span class="org-verbatim">=rc.lua=</span> file, the theme folders a
 <span class="org-verbatim">=awesome_paths=</span> table (<span class="org-verbatim">=awesome_paths.themes_system_path=</span> and
 <span class="org-verbatim">=awesome_paths.themes_custom_path=</span>).  Then the theme to load is read from the
 <span class="org-verbatim">=themes/theme=</span> file.  This file should contain a single line with the name of
-the theme to use (see the <span class="org-link"><a href="nil:nil">[[src-theme-file][theme definition block]]</a></span>).  Note that lines starting
+the theme to use (see the <span class="org-link"><a href="nil:nil">theme definition block</a></span>).  Note that lines starting
 with "#" are ignored (such lines occur when tangling this org-file, to allow
 "de-tangling").  Also note that parsing is rudimentary so empty lines may cause
 issues.
@@ -1118,12 +1119,12 @@ layout on some tags is customized.
 
 - The first tag on each screen is for email: one for work using icedove and one
   for my personal email using mu4e (emacs).  These are not started
-  automatically, I have a <span class="org-link"><a href="nil:nil">[[#rules][rule]]</a></span> to force icedove on the second screen, and I
+  automatically, I have a <span class="org-link"><a href="nil:nil">rule</a></span> to force icedove on the second screen, and I
   manually start mu4e on the desired tag.
 - The second tag on the second screen is used for my resident instances or
-  <span class="org-link"><a href="http://newsbeuter.org/">[[http://newsbeuter.org/][newsbeuter]]</a></span> (terminal RSS reader) and <span class="org-link"><a href="https://cmus.github.io/">[[https://cmus.github.io/][cmus]]</a></span> (terminal music player).  Both
-  programs are launched on startup (see <span class="org-link"><a href="nil:nil">[[#startup_applications][Startup applications]]</a></span>) and rules are used
-  to place them on the right screen and tag (see the <span class="org-link"><a href="nil:nil">[[#rules][Rules]]</a></span> section).
+  <span class="org-link"><a href="http://newsbeuter.org/">newsbeuter</a></span> (terminal RSS reader) and <span class="org-link"><a href="https://cmus.github.io/">cmus</a></span> (terminal music player).  Both
+  programs are launched on startup (see <span class="org-link"><a href="nil:nil">Startup applications</a></span>) and rules are used
+  to place them on the right screen and tag (see the <span class="org-link"><a href="nil:nil">Rules</a></span> section).
 
 <span class="org-meta-line">#+NAME: src-desktop-tags</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -1153,10 +1154,10 @@ layout on some tags is customized.
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Main bar </span><span class="org-checkbox-statistics-done">[27/27]</span>
 
 This section is the main part of the configuration, it defines and configures
-the widgets present on the main wibox (Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop]]</a></span>).
+the widgets present on the main wibox (Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop</a></span>).
 
 Note that the widgets defined here must be later added to the wibox, which is
-done in the <span class="org-link"><a href="nil:nil">[[#wibox][Wibox]]</a></span> section.
+done in the <span class="org-link"><a href="nil:nil">Wibox</a></span> section.
 
 First, we create the simplest widget: a separator used to add visual spacing
 between widgets.
@@ -1178,14 +1179,14 @@ separator:set_markup(</span><span class="string"><span class="org-block">" &lt;s
 
 In most desktop environments, application shortcuts are stored in <span class="org-verbatim">=.desktop=</span>
 files that give the application name, icon, command, etc.  The specification is
-available <span class="org-link"><a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html">[[https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html][here]]</a></span>.  The standard <span class="org-verbatim">=awful.widget.launcher=</span> module allows to add
+available <span class="org-link"><a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html">here</a></span>.  The standard <span class="org-verbatim">=awful.widget.launcher=</span> module allows to add
 <span class="org-verbatim">=.desktop=</span> files to a launchbar which can be displayed in a wibox (as shown on
-Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop]]</a></span>).
+Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop</a></span>).
 
 A few examples can be found online, most notably:
-- <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Quick_launch_bar_widget/3.5">[[https://awesome.naquadah.org/wiki/Quick_launch_bar_widget/3.5][The basic quick launch bar]]</a></span> requires <span class="org-verbatim">=.desktop=</span> files to include a <span class="org-verbatim">=Position=</span>
+- <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Quick_launch_bar_widget/3.5">The basic quick launch bar</a></span> requires <span class="org-verbatim">=.desktop=</span> files to include a <span class="org-verbatim">=Position=</span>
   field.  Usual <span class="org-verbatim">=.desktop=</span> files do not have this field so this is impractical.
-- <span class="org-link"><a href="https://gist.github.com/alexander-yakushev/6343832">[[https://gist.github.com/alexander-yakushev/6343832][This script]]</a></span> lists all the <span class="org-verbatim">=.desktop=</span> files in a given folder and adds them to
+- <span class="org-link"><a href="https://gist.github.com/alexander-yakushev/6343832">This script</a></span> lists all the <span class="org-verbatim">=.desktop=</span> files in a given folder and adds them to
   the launchbar.  If the position field is missing, it is replaced, and
   launchers are added in alphabetical order.
 
@@ -1199,7 +1200,7 @@ This version is based on the second code segment, the only difference is that
 the Exec entry of the <span class="org-verbatim">=.desktop=</span> file is cleaned up from its command line
 arguments, such as "%u" for firefox (they seem to cause problems when
 launching).  The other addition is the use of the custom <span class="org-verbatim">=icon_finder=</span> module
-described in the <span class="org-link"><a href="nil:nil">[[#icon_finder][Icon finder]]</a></span> section.
+described in the <span class="org-link"><a href="nil:nil">Icon finder</a></span> section.
 
 <span class="org-meta-line">#+NAME: module-launchbar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -1263,7 +1264,7 @@ and instantiate the launchbar object with the same folder as a parameter.  My
 shortcuts are in a subfolder of the awesome config folder called <span class="org-verbatim">=shortcuts=</span>.
 
 Note that the creation function also takes the icon finder instance as a
-parameter (created in the <span class="org-link"><a href="nil:nil">[[#icons][Icons]]</a></span> section).
+parameter (created in the <span class="org-link"><a href="nil:nil">Icons</a></span> section).
 
 <span class="org-meta-line">#+NAME: src-main-launchbar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -1290,14 +1291,15 @@ sudoers file must be edited to allow the desired user to run the <span class="or
 command without password.  On Debian, the sudoers file can be edited by running
 <span class="org-verbatim">=sudo visudo=</span> from a terminal.  My sudoers file contains the following:
 
+<span class="org-meta-line">#+NAME: visudo-shutdown</span>
 <span class="org-block-begin-line">#+BEGIN_SRC conf :tangle no
 </span><span class="variable-name"><span class="org-block">username ALL</span></span><span class="org-block">=SHUTDOWN
 </span><span class="variable-name"><span class="org-block">username ALL</span></span><span class="org-block">=NOPASSWD: SHUTDOWN
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-The menu is created as follows.  First, the icons are obtained from the <span class="org-link"><a href="nil:nil">[[#icons][icon
-finder instance]]</a></span>, then the menu is built, wrapping commands with the
-<span class="org-link"><a href="nil:nil">[[#my_utility_confirm][=confirm_action=]]</a></span> function, which prompts for confirmation.  Note that the
+The menu is created as follows.  First, the icons are obtained from the <span class="org-link"><a href="nil:nil">icon
+finder instance</a></span>, then the menu is built, wrapping commands with the
+<span class="org-link"><a href="nil:nil">=confirm_action=</a></span> function, which prompts for confirmation.  Note that the
 filenames used to recover icons are the ones used in common themes (icons are in
 found in folders set in the <span class="org-verbatim">=awesome_paths=</span> variable).
 
@@ -1359,7 +1361,7 @@ The main menu is based on the default configuration with a few additions:
 - A theme selection menu
 - A "Leave" menu to control the session (shutdown, restart, lock)
 
-The icons are found using the <span class="org-link"><a href="nil:nil">[[#icon_finder][icon finder]]</a></span> module.
+The icons are found using the <span class="org-link"><a href="nil:nil">icon finder</a></span> module.
 
 This code block also configures the menubar, which can be used to quickly find
 and launch applications by typing part of their name.
@@ -1422,7 +1424,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 The blingbling module provides a widget for displaying the volume.  Volume
 control commands are also supported: a left click on the widget toggles the mute
 option, a right click on the widget spawns a menu with a single entry linking to
-the mixer program (see <span class="org-link"><a href="nil:nil">[[#default_programs][Default programs]]</a></span>).
+the mixer program (see <span class="org-link"><a href="nil:nil">Default programs</a></span>).
 
 <span class="org-meta-line">#+NAME: src-main-volume</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -1464,7 +1466,7 @@ volume_master:buttons(volume_buttons)
 The volume widget relies on a bash script to control the volume (using the
 <span class="org-verbatim">=amixer=</span> command).  It also displays the volume on the screen via OSD (using the
 <span class="org-verbatim">=aosd_cat=</span> command.  The bash script is bound to volume keys on the keyboard
-(see <span class="org-link"><a href="nil:nil">[[#bindings_keyboard][Keyboard bindings]]</a></span>).
+(see <span class="org-link"><a href="nil:nil">Keyboard bindings</a></span>).
 
 <span class="org-meta-line">#+NAME: script-osd-sh</span>
 <span class="org-block-begin-line">#+BEGIN_SRC sh :mkdirp yes :tangle-mode (identity #o755)
@@ -1551,8 +1553,8 @@ The volume widget relies on a bash script to control the volume (using the
 <span class="org-special-keyword">:END:</span>
 
 Memory is monitored using another blingbling widget.  The widget setup was taken
-from <span class="org-link"><a href="https://github.com/cedlemo/blingbling#line_graph">[[https://github.com/cedlemo/blingbling#line_graph][the blingbling example page]]</a></span>.  It spawns a popup window with the output of
-the <span class="org-verbatim">=htop=</span> command on left-click (<span class="org-link"><a href="https://github.com/cedlemo/blingbling#popups">[[https://github.com/cedlemo/blingbling#popups][see here]]</a></span>).
+from <span class="org-link"><a href="https://github.com/cedlemo/blingbling#line_graph">the blingbling example page</a></span>.  It spawns a popup window with the output of
+the <span class="org-verbatim">=htop=</span> command on left-click (<span class="org-link"><a href="https://github.com/cedlemo/blingbling#popups">see here</a></span>).
 
 <span class="org-meta-line">#+NAME: src-main-memory</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -1622,7 +1624,7 @@ of active emails when moving the mouse over the widget.
 <span class="org-special-keyword">:header-args+:</span> <span class="org-property-value">:tangle mailhoover.lua</span>
 <span class="org-special-keyword">:END:</span>
 
-This module was taken from <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Email_maildir_naughty_hoover">[[https://awesome.naquadah.org/wiki/Email_maildir_naughty_hoover][this post]]</a></span>, with small modifications to account for my
+This module was taken from <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Email_maildir_naughty_hoover">this post</a></span>, with small modifications to account for my
 local setup.  In particular, the list of emails is obtained via a mu request
 (<span class="org-verbatim">=querystring=</span>).
 
@@ -1772,7 +1774,7 @@ mailicon:buttons(mailbuttons)
 <span class="org-special-keyword">:END:</span>
 
 Music is controlled by cmus, which is launched on startup.  The original widget
-was taken from <span class="org-link"><a href="http://blog.rolinh.ch/linux/un-widget-controleur-pour-le-lecteur-audio-cmus-pour-awesome-wm/">[[http://blog.rolinh.ch/linux/un-widget-controleur-pour-le-lecteur-audio-cmus-pour-awesome-wm/][here]]</a></span>.
+was taken from <span class="org-link"><a href="http://blog.rolinh.ch/linux/un-widget-controleur-pour-le-lecteur-audio-cmus-pour-awesome-wm/">here</a></span>.
 
 The widget has the following features:
 1. Show the current play state, song artist, title and current position in the
@@ -1783,17 +1785,17 @@ The widget has the following features:
    notification window (popup), with the cover art (parsed from the file
    metadata using eyeD3).
 5. A function to search for a given album by name or select an album at random
-   and play it in cmus (<span class="org-link"><a href="nil:nil">[[#cmus_play][Quick play command]]</a></span>).  This function is not used by the
-   widget but by the <span class="org-link"><a href="nil:nil">[[#global_prompt][global prompt module]]</a></span>.
+   and play it in cmus (<span class="org-link"><a href="nil:nil">Quick play command</a></span>).  This function is not used by the
+   widget but by the <span class="org-link"><a href="nil:nil">global prompt module</a></span>.
 
-An example of the widget in action is shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-cmus-popup]]</a></span>.
+An example of the widget in action is shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-cmus-popup</a></span>.
 
 This module is not generic, modifications are likely to be necessary if the
 setup is different from mine.  My music library is organized as follows:
 - All my music is in <span class="org-verbatim">=~/data/music/=</span> where each album is in a separate folder
   with name <span class="org-verbatim">=YYYY-ARTIST-ALBUM=</span> (the quick play command explicitly assumes this
   format, so it probably won't work with different conventions).  The format is
-  set in a regular expression (<span class="org-verbatim">=cmus_album_regex=</span> in the <span class="org-link"><a href="nil:nil">[[#cmus_global_variables][Global variables]]</a></span>
+  set in a regular expression (<span class="org-verbatim">=cmus_album_regex=</span> in the <span class="org-link"><a href="nil:nil">Global variables</a></span>
   section).
 - Songs all have the cover art in their metadata.  This is where the cover art
   displayed in the popup notification comes from.  There is no clever mechanism
@@ -1834,7 +1836,7 @@ First, import the necessary libraries.
 <span class="org-special-keyword">:END:</span>
 
 A few utility functions are used in the module:
-- <span class="org-list-dt"><span class="org-verbatim">=scandir=</span></span><span class="org-list-dt"> ::</span> List files in folder (from <span class="org-link"><a href="http://stackoverflow.com/a/11130774">[[http://stackoverflow.com/a/11130774]]</a></span>).
+- <span class="org-list-dt"><span class="org-verbatim">=scandir=</span></span><span class="org-list-dt"> ::</span> List files in folder (from <span class="org-link"><a href="http://stackoverflow.com/a/11130774">http://stackoverflow.com/a/11130774</a></span>).
 - <span class="org-list-dt"><span class="org-verbatim">=get_path=</span></span><span class="org-list-dt"> ::</span> Extract path from filename.
 - <span class="org-list-dt"><span class="org-verbatim">=cmusover_addToWidget=</span></span><span class="org-list-dt"> ::</span> Show album popup on mouse over.
 - <span class="org-list-dt"><span class="org-verbatim">=get_mp3_info=</span></span><span class="org-list-dt"> ::</span> Get a string representation of file ID3 tags using eyeD3.  The
@@ -1984,9 +1986,9 @@ used: clicking on the widget toggles the play state (play / pause).
 <span class="org-special-keyword">:header-args+:</span> <span class="org-property-value">:tangle cmus.lua</span>
 <span class="org-special-keyword">:END:</span>
 
-The popup notification (Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-cmus-popup]]</a></span>) shows the content of the
-global variables defined earlier (see <span class="org-link"><a href="nil:nil">[[#cmus_global_variables][global variables]]</a></span>) and updated by the
-<span class="org-verbatim">=cmus_hook=</span> function (see the <span class="org-link"><a href="nil:nil">[[#cmus_hook][Main hook]]</a></span> section).
+The popup notification (Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-cmus-popup</a></span>) shows the content of the
+global variables defined earlier (see <span class="org-link"><a href="nil:nil">global variables</a></span>) and updated by the
+<span class="org-verbatim">=cmus_hook=</span> function (see the <span class="org-link"><a href="nil:nil">Main hook</a></span> section).
 
 <span class="org-meta-line">#+NAME: module-cmus-popup</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -2014,7 +2016,7 @@ global variables defined earlier (see <span class="org-link"><a href="nil:nil">[
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 The following bash script, uses <span class="org-verbatim">=awesome-client=</span> to spawn the popup notification
-and performs a screen capture (Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-cmus-popup]]</a></span>).
+and performs a screen capture (Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-cmus-popup</a></span>).
 
 <span class="org-meta-line">#+NAME: sh-scrot-cmus-info</span>
 <span class="org-block-begin-line">#+BEGIN_SRC sh :exports code :tangle no :cache yes
@@ -2042,7 +2044,7 @@ rm desktop.png -rf
 <span class="org-meta-line">#+NAME: img-cmus-popup</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 60%</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Cmus popup notification, with album cover and track list.
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png">[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png]]</a></span>
+</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png</a></span>
 
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Quick play command</span>
@@ -2054,7 +2056,7 @@ rm desktop.png -rf
 The quick play command <span class="org-verbatim">=cmus_play=</span> is used to start playing a new album, picked
 randomly (<span class="org-verbatim">=rand=</span> mode) or from a string (<span class="org-verbatim">=album=</span> mode).  There is no single song
 mode; it could probably be added, but I use a direct search and mplayer to play
-individual songs via the <span class="org-link"><a href="nil:nil">[[#global_prompt_music][global prompt module]]</a></span>.
+individual songs via the <span class="org-link"><a href="nil:nil">global prompt module</a></span>.
 
 Once the folder to play is found, some work is required to get cmus to play it.
 First, cmus must be in playlist mode (i.e. the <span class="org-verbatim">=play_library=</span> flag must of set
@@ -2136,15 +2138,15 @@ widget, and the content of the popup notification.  It is run on a frequent
 timer (2 seconds by default).
 
 The hook first checks for the presence of a running cmus instance using the
-<span class="org-link"><a href="nil:nil">[[#cmus_pid][=getCmusPid=]]</a></span> function.  If a running instance is found and its status is
+<span class="org-link"><a href="nil:nil">=getCmusPid=</a></span> function.  If a running instance is found and its status is
 currently "playing" or "paused", the hook proceeds to extract information about
-the currently playing file.  As shown in Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop]]</a></span>, the widget
+the currently playing file.  As shown in Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop</a></span>, the widget
 shows the playing status with a unicode character (play / pause), the artist and
 song title and the track position (formatted as "position" / "duration").
 
 The rest of the function populates the album track list.  <span class="org-verbatim">=cmus_album_str=</span>
 contains the album name and the year between parentheses.  If the album name is
-different from the one cached in the <span class="org-link"><a href="nil:nil">[[#cmus_global_variables][global variable]]</a></span> <span class="org-verbatim">=cmus_album_g=</span>, the track
+different from the one cached in the <span class="org-link"><a href="nil:nil">global variable</a></span> <span class="org-verbatim">=cmus_album_g=</span>, the track
 list is updated.
 
 To update the track list, the cover art is first extracted from the current
@@ -2153,7 +2155,7 @@ the album art as metadata.  The extracted cover art is saved in the folder
 defined by the <span class="org-verbatim">=cmus_img_fold=</span> variable.
 
 Further, all the <span class="org-verbatim">=.mp3=</span> files in the same folder as the file being played are
-listed, their metadata is extracted using the <span class="org-link"><a href="nil:nil">[[#cmus_utils][=get_mp3_info=]]</a></span> function, and they
+listed, their metadata is extracted using the <span class="org-link"><a href="nil:nil">=get_mp3_info=</a></span> function, and they
 are added to the <span class="org-verbatim">=cmus_album_list_g=</span> variable.  The song currently playing is
 highlighted in the list.
 
@@ -2289,8 +2291,8 @@ cmusover_addToWidget(tb_cmus)
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">ttrss</span>
 <span class="org-special-keyword">:END:</span>
 
-The RSS widget relies on an instance of Tiny Tiny RSS and the <span class="org-link"><a href="https://github.com/Vassius/ttrss-python">[[https://github.com/Vassius/ttrss-python][ttrss python
-package]]</a></span>.  Extraction of RSS entries is performed using the following python
+The RSS widget relies on an instance of Tiny Tiny RSS and the <span class="org-link"><a href="https://github.com/Vassius/ttrss-python">ttrss python
+package</a></span>.  Extraction of RSS entries is performed using the following python
 wrapper script.
 
 
@@ -2432,9 +2434,9 @@ from the url.  This should also work for the un-encrypted version using
 <span class="org-verbatim">=.authinfo=</span>.
 
 If not using authinfo, the credentials can be hard-coded in this emacs-lisp
-snippet.  In the following source block, replace line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[(user-nil)]]</a></span> by
-line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[(user-hardcoded)]]</a></span> and line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[(pass-nil)]]</a></span> by
-line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[(pass-hardcoded)]]</a></span> and set the correct password.
+snippet.  In the following source block, replace line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(user-nil)</a></span> by
+line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(user-hardcoded)</a></span> and line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(pass-nil)</a></span> by
+line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(pass-hardcoded)</a></span> and set the correct password.
 
 <span class="org-meta-line">#+NAME: ttrss-credentials</span>
 <span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -n -r :tangle no :results silent :exports code
@@ -2470,7 +2472,7 @@ if the org file is version-controlled and the tangled lua files are not.
 <span class="org-special-keyword">:header-args+:</span> <span class="org-property-value">:tangle ttrss.lua</span>
 <span class="org-special-keyword">:END:</span>
 
-The tt-rss module defines functions used by the <span class="org-link"><a href="nil:nil">[[#ttrss-widget][widget]]</a></span>:
+The tt-rss module defines functions used by the <span class="org-link"><a href="nil:nil">widget</a></span>:
 - <span class="org-list-dt"><span class="org-verbatim">=ttrss_get_count=</span></span><span class="org-list-dt"> ::</span> return the number of unread feeds,
 - <span class="org-list-dt"><span class="org-verbatim">=ttrss_get_feeds=</span></span><span class="org-list-dt"> ::</span> return a formatted list of unread feeds,
 - <span class="org-list-dt"><span class="org-verbatim">=ttrss_mark_read=</span></span><span class="org-list-dt"> ::</span> mark all feeds as read,
@@ -2478,7 +2480,7 @@ The tt-rss module defines functions used by the <span class="org-link"><a href="
   the list of unread feeds on mouse-over.
 
 These functions internally use the <span class="org-verbatim">=ttrss_get=</span> function which interacts with the
-<span class="org-link"><a href="nil:nil">[[#ttrss-wrapper-py][=ttrss-wrapper.py=]]</a></span> python script.
+<span class="org-link"><a href="nil:nil">=ttrss-wrapper.py=</a></span> python script.
 
 <span class="org-meta-line">#+NAME: module-ttrss</span>
 <span class="org-meta-line">#+HEADER: :var ttrss_cred=(get-ttrss-cred "127.0.0.1:81/tt-rss")</span>
@@ -2605,7 +2607,7 @@ This section contains setup of visual effects that can be used with awesome-wm.
 
 It is sometimes difficult to tell which monitor is the active one, so I
 implemented a simple hook to highlight the wibox on the active screen.  The
-actual colors are defined through the <span class="org-link"><a href="nil:nil">[[#theme][theme manager]]</a></span>.
+actual colors are defined through the <span class="org-link"><a href="nil:nil">theme manager</a></span>.
 
 <span class="org-meta-line">#+NAME: src-effects-monitor-highlight</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -2696,7 +2698,7 @@ Mouse bindings are defined using tables filled by <span class="org-verbatim">=aw
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> General bindings</span>
 
 This section handles mouse actions on an empty workspace:
-- a right-click pops-up the <span class="org-link"><a href="nil:nil">[[#main_menu][main menu]]</a></span>,
+- a right-click pops-up the <span class="org-link"><a href="nil:nil">main menu</a></span>,
 - the mouse wheel moves to the previous / next tag.
 
 <span class="org-meta-line">#+NAME: src-bindings-mouse-root</span>
@@ -2718,7 +2720,7 @@ Mouse actions for clicks on windows are defined here:
 - <span class="org-verbatim">=modkey=</span> + left click drag moves the window,
 - <span class="org-verbatim">=modkey=</span> + right click drag resizes the window.
 The <span class="org-verbatim">=clientbuttons=</span> table created by this block is later added to each window
-via the <span class="org-link"><a href="nil:nil">[[#rules][rules]]</a></span> mechanism.
+via the <span class="org-link"><a href="nil:nil">rules</a></span> mechanism.
 
 <span class="org-meta-line">#+NAME: src-bindings-mouse-client</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3313,12 +3315,12 @@ globalkeys = awful.util.table.join(
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Application shortcuts</span>
 
-Keybindings for frequently used <span class="org-link"><a href="nil:nil">[[#default_programs][applications]]</a></span>.
+Keybindings for frequently used <span class="org-link"><a href="nil:nil">applications</a></span>.
 
 
 <span class="org-level-5">***** </span><span class="org-done">DONE</span><span class="org-level-5"> Toggle main menu</span>
 
-Toggle <span class="org-link"><a href="nil:nil">[[#main_menu][main menu]]</a></span>:
+Toggle <span class="org-link"><a href="nil:nil">main menu</a></span>:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-mainmenu</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3491,7 +3493,7 @@ globalkeys = awful.util.table.join(globalkeys,
 
 <span class="org-level-5">***** </span><span class="org-done">DONE</span><span class="org-level-5"> Global prompt</span>
 
-Toggle the custom <span class="org-link"><a href="nil:nil">[[#global_prompt][global prompt]]</a></span> with <span class="org-verbatim">=modkey=</span> + <span class="org-verbatim">=z=</span>.
+Toggle the custom <span class="org-link"><a href="nil:nil">global prompt</a></span> with <span class="org-verbatim">=modkey=</span> + <span class="org-verbatim">=z=</span>.
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-prompts-global</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3754,9 +3756,9 @@ clientkeys = awful.util.table.join(clientkeys,
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">wibox</span>
 <span class="org-special-keyword">:END:</span>
 
-The wibox is the top bar shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop-main]]</a></span>.  It is populated
-with widgets previously set up, including the <span class="org-link"><a href="nil:nil">[[#main_menu][main menu]]</a></span>, <span class="org-link"><a href="nil:nil">[[#tags][tag list]]</a></span>, task list and
-the custom <span class="org-link"><a href="nil:nil">[[#cmus][music]]</a></span> / <span class="org-link"><a href="nil:nil">[[#email][email]]</a></span> / <span class="org-link"><a href="nil:nil">[[#ttrss][news]]</a></span> widgets.
+The wibox is the top bar shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop-main</a></span>.  It is populated
+with widgets previously set up, including the <span class="org-link"><a href="nil:nil">main menu</a></span>, <span class="org-link"><a href="nil:nil">tag list</a></span>, task list and
+the custom <span class="org-link"><a href="nil:nil">music</a></span> / <span class="org-link"><a href="nil:nil">email</a></span> / <span class="org-link"><a href="nil:nil">news</a></span> widgets.
 
 A wibox is created on each screen; the only difference between the screens is
 that only a single instance of the system tray widget can be added (it is added
@@ -3776,7 +3778,7 @@ In the following sections, <span class="org-verbatim">=s=</span> is the current 
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Main prompt box</span>
 
-The prompts defined in the <span class="org-link"><a href="nil:nil">[[#keybindings_prompts][key bindings section]]</a></span> toggle the visibility of a text
+The prompts defined in the <span class="org-link"><a href="nil:nil">key bindings section</a></span> toggle the visibility of a text
 widget on the wibox for user input.  This text widget is defined here:
 
 <span class="org-meta-line">#+NAME: src-wibox-prompt</span>
@@ -3791,7 +3793,7 @@ widget on the wibox for user input.  This text widget is defined here:
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Wibox</span>
 
 This section defines the main wibox, which can be seen at the top in
-Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-desktop-main]]</a></span>.  It contains all the widgets and is defined as
+Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-desktop-main</a></span>.  It contains all the widgets and is defined as
 follows:
 
 <span class="org-meta-line">#+NAME: src-wibox-wibox</span>
@@ -3822,7 +3824,7 @@ The <span class="org-verbatim">=left_layout=</span> contains the left-side widge
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Confirmation prompt</span>
 
-Several actions in this configuration use a <span class="org-link"><a href="nil:nil">[[#my_utility_confirm][confirmation prompt]]</a></span>.  This is done
+Several actions in this configuration use a <span class="org-link"><a href="nil:nil">confirmation prompt</a></span>.  This is done
 via a common <span class="org-verbatim">=awful.widget.prompt=</span> object.  This prompt is visible only when
 used.
 
@@ -3839,7 +3841,7 @@ used.
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Main menu</span>
 
-The main menu defined <span class="org-link"><a href="nil:nil">[[#main_menu][earlier]]</a></span> is added at the beginning (left-most position) of
+The main menu defined <span class="org-link"><a href="nil:nil">earlier</a></span> is added at the beginning (left-most position) of
 the wibox.
 
 <span class="org-meta-line">#+NAME: src-wibox-launcher</span>
@@ -3851,7 +3853,7 @@ the wibox.
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Tag list</span>
 
 The following creates a visual tag list, setting the mouse bindings defined in
-the <span class="org-link"><a href="nil:nil">[[#bindings_mouse_taglist][mouse bindings section]]</a></span>.
+the <span class="org-link"><a href="nil:nil">mouse bindings section</a></span>.
 
 <span class="org-meta-line">#+NAME: src-wibox-taglist</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3865,7 +3867,7 @@ the <span class="org-link"><a href="nil:nil">[[#bindings_mouse_taglist][mouse bi
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Launchbar</span>
 
-Add the <span class="org-link"><a href="nil:nil">[[#launchbar][launchbar]]</a></span> widgets, which includes launchers (with icons) to selected
+Add the <span class="org-link"><a href="nil:nil">launchbar</a></span> widgets, which includes launchers (with icons) to selected
 programs.
 
 <span class="org-meta-line">#+NAME: src-wibox-launchbar</span>
@@ -3889,7 +3891,7 @@ First, create the layout container:
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> cmus widget</span>
 
-Add the widget created to interact with <span class="org-link"><a href="nil:nil">[[#cmus][cmus]]</a></span>.
+Add the widget created to interact with <span class="org-link"><a href="nil:nil">cmus</a></span>.
 
 <span class="org-meta-line">#+NAME: src-wibox-cmus</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3900,7 +3902,7 @@ Add the widget created to interact with <span class="org-link"><a href="nil:nil"
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Email widget</span>
 
-Add the <span class="org-link"><a href="nil:nil">[[#email][email widget]]</a></span> to the wibox.
+Add the <span class="org-link"><a href="nil:nil">email widget</a></span> to the wibox.
 
 <span class="org-meta-line">#+NAME: src-wibox-email</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3911,7 +3913,7 @@ Add the <span class="org-link"><a href="nil:nil">[[#email][email widget]]</a></s
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> News widget</span>
 
-Add the <span class="org-link"><a href="nil:nil">[[#ttrss][tt-rss]]</a></span> widget to the wibox.
+Add the <span class="org-link"><a href="nil:nil">tt-rss</a></span> widget to the wibox.
 
 <span class="org-meta-line">#+NAME: src-wibox-ttrss</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3922,7 +3924,7 @@ Add the <span class="org-link"><a href="nil:nil">[[#ttrss][tt-rss]]</a></span> w
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Memory widget</span>
 
-Add the <span class="org-link"><a href="nil:nil">[[#memory][memory widget]]</a></span> to the wibox: combine the text and graph widgets.
+Add the <span class="org-link"><a href="nil:nil">memory widget</a></span> to the wibox: combine the text and graph widgets.
 
 <span class="org-meta-line">#+NAME: src-wibox-memory</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3934,7 +3936,7 @@ Add the <span class="org-link"><a href="nil:nil">[[#memory][memory widget]]</a><
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Volume widget</span>
 
-Add the <span class="org-link"><a href="nil:nil">[[#volume][volume widget]]</a></span> (text and graph) to the wibox.
+Add the <span class="org-link"><a href="nil:nil">volume widget</a></span> (text and graph) to the wibox.
 
 <span class="org-meta-line">#+NAME: src-wibox-volume</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3977,7 +3979,7 @@ over enabled layouts with left / right clicks or the mouse wheel.
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Calendar widget</span>
 
-Add the <span class="org-link"><a href="nil:nil">[[#calendar][calendar widget]]</a></span> to the wibox.
+Add the <span class="org-link"><a href="nil:nil">calendar widget</a></span> to the wibox.
 
 <span class="org-meta-line">#+NAME: src-wibox-calendar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3987,7 +3989,7 @@ Add the <span class="org-link"><a href="nil:nil">[[#calendar][calendar widget]]<
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Leave menu</span>
 
-Add a <span class="org-link"><a href="nil:nil">[[#shutdown][leave menu]]</a></span> to the wibox.
+Add a <span class="org-link"><a href="nil:nil">leave menu</a></span> to the wibox.
 
 <span class="org-meta-line">#+NAME: src-wibox-leave</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -3999,7 +4001,7 @@ Add a <span class="org-link"><a href="nil:nil">[[#shutdown][leave menu]]</a></sp
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Task list</span>
 
 The following creates a visual task list, setting the mouse bindings defined in
-the <span class="org-link"><a href="nil:nil">[[#bindings_mouse_tasklist][mouse bindings section]]</a></span>.
+the <span class="org-link"><a href="nil:nil">mouse bindings section</a></span>.
 
 <span class="org-meta-line">#+NAME: src-wibox-tasklist</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -4029,7 +4031,7 @@ for the main wibox.
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Close screen for loop</span>
 
-This code block closes the <span class="org-link"><a href="nil:nil">[[src-wibox-start-loop][for loop]]</a></span> creating a wibox on each screen.
+This code block closes the <span class="org-link"><a href="nil:nil">for loop</a></span> creating a wibox on each screen.
 
 <span class="org-meta-line">#+NAME: src-wibox-end-loop</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -4045,7 +4047,7 @@ This code block closes the <span class="org-link"><a href="nil:nil">[[src-wibox-
 <span class="org-special-keyword">:END:</span>
 
 Awesome allows the definition of rules for program window management based on
-their class or instance name.  If the link is still up, <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Understanding_Rules">[[https://awesome.naquadah.org/wiki/Understanding_Rules][this page]]</a></span> contains some
+their class or instance name.  If the link is still up, <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Understanding_Rules">this page</a></span> contains some
 basic description of rules.
 
 Only a few simple rules are defined here:
@@ -4187,7 +4189,7 @@ disabled) and border coloring.
 <span class="org-special-keyword">:END:</span>
 
 This is a module used to attempt to automatically find icons for programs.  It
-is used by the <span class="org-link"><a href="nil:nil">[[#launchbar][launchbar]]</a></span> module, and menus (<span class="org-link"><a href="nil:nil">[[#main_menu][main menu]]</a></span> and <span class="org-link"><a href="nil:nil">[[#shutdown][shutdown menu]]</a></span>).  It
+is used by the <span class="org-link"><a href="nil:nil">launchbar</a></span> module, and menus (<span class="org-link"><a href="nil:nil">main menu</a></span> and <span class="org-link"><a href="nil:nil">shutdown menu</a></span>).  It
 searches for icons in folders defined in the <span class="org-verbatim">=awesome_paths.iconapps_dir=</span>
 variable (<span class="org-verbatim">=png=</span> and <span class="org-verbatim">=svg=</span> files).
 
@@ -4405,12 +4407,12 @@ global_prompt.prompt_TEMPLATE = {
 </span>
 A prompt is a table with the following entries:
 - <span class="org-list-dt"><span class="org-verbatim">=keyword=</span></span><span class="org-list-dt"> ::</span> List of keywords for prompt.
-- <span class="org-list-dt"><span class="org-verbatim">=help=</span></span><span class="org-list-dt"> ::</span> Help message (for use with <span class="org-link"><a href="nil:nil">[[#global_prompt_help][help prompt]]</a></span>).
+- <span class="org-list-dt"><span class="org-verbatim">=help=</span></span><span class="org-list-dt"> ::</span> Help message (for use with <span class="org-link"><a href="nil:nil">help prompt</a></span>).
 - <span class="org-list-dt"><span class="org-verbatim">=run_function=</span></span><span class="org-list-dt"> ::</span> Function to run when calling the prompt.  The <span class="org-verbatim">=name=</span>
   parameter is the <span class="org-verbatim">=ARGS=</span> string passed from the prompt (the user input is
   <span class="org-verbatim">=KEYWORD ARGS=</span>).
 - <span class="org-list-dt"><span class="org-verbatim">=comp_function=</span></span><span class="org-list-dt"> ::</span> Completion function which can be created using
-  <span class="org-link"><a href="nil:nil">[[#global_prompt_utils][=generic_completion_wrapper=]]</a></span>.
+  <span class="org-link"><a href="nil:nil">=generic_completion_wrapper=</a></span>.
 
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> help</span>
@@ -4419,7 +4421,7 @@ A prompt is a table with the following entries:
 <span class="org-special-keyword">:END:</span>
 
 The help prompt prints a list of the available prompts, along with the
-corresponding help text as shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-global_prompt-help]]</a></span>.  The
+corresponding help text as shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-global_prompt-help</a></span>.  The
 keyword is <span class="org-verbatim">=h=</span> or <span class="org-verbatim">=?=</span>.
 
 <span class="org-meta-line">#+NAME: module-global_prompt-help</span>
@@ -4446,7 +4448,7 @@ global_prompt.prompt_help = {
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 The following script manually spawns the help box shown on
-Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-global_prompt-help]]</a></span> and performs a screenshot.
+Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-global_prompt-help</a></span> and performs a screenshot.
 
 <span class="org-meta-line">#+NAME: sh-scrot-global_prompt-help</span>
 <span class="org-block-begin-line">#+BEGIN_SRC sh :exports code :tangle no :cache yes
@@ -4478,14 +4480,14 @@ rm desktop.png -rf
 <span class="org-meta-line">#+NAME: img-global_prompt-help</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 40%</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Help notification from global prompt.
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png">[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png]]</a></span>
+</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png</a></span>
 
 
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> session</span>
 
 The session prompt offers session management commands (shutdown, restart,
-logout, lock), similar to the <span class="org-link"><a href="nil:nil">[[#shutdown][shutdown menu]]</a></span>.  The keyword is <span class="org-verbatim">=s=</span>, so <span class="org-verbatim">=s
+logout, lock), similar to the <span class="org-link"><a href="nil:nil">shutdown menu</a></span>.  The keyword is <span class="org-verbatim">=s=</span>, so <span class="org-verbatim">=s
 shutdown=</span> will trigger a shutdown (with confirmation prompt).
 
 <span class="org-meta-line">#+NAME: module-global_prompt-session</span>
@@ -4584,7 +4586,7 @@ logarithmic etc.).
 <span class="org-special-keyword">:header-args+:</span> <span class="org-property-value">:tangle scripts/calc.py</span>
 <span class="org-special-keyword">:END:</span>
 
-The calculator script was adapted from <span class="org-link"><a href="http://www.peterbe.com/plog/calculator-in-python-for-dummies">[[http://www.peterbe.com/plog/calculator-in-python-for-dummies][this one]]</a></span>.
+The calculator script was adapted from <span class="org-link"><a href="http://www.peterbe.com/plog/calculator-in-python-for-dummies">this one</a></span>.
 
 <span class="org-meta-line">#+NAME: script-calc-py</span>
 <span class="org-block-begin-line">#+BEGIN_SRC python :mkdirp yes
@@ -4658,10 +4660,10 @@ global_prompt.prompt_calc = {
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> cmus</span>
 
-The cmus prompt is an interface to the <span class="org-link"><a href="nil:nil">[[#cmus_play][cmus quick play command]]</a></span>.  The supported
+The cmus prompt is an interface to the <span class="org-link"><a href="nil:nil">cmus quick play command</a></span>.  The supported
 arguments are:
 - <span class="org-list-dt">play/pause/stop/next/prev ::</span> control playback,
-- <span class="org-list-dt">info ::</span> spawn the <span class="org-link"><a href="nil:nil">[[#cmus_popup][cmus popup notification]]</a></span>,
+- <span class="org-list-dt">info ::</span> spawn the <span class="org-link"><a href="nil:nil">cmus popup notification</a></span>,
 - <span class="org-list-dt">random ::</span> play a random album,
 - <span class="org-list-dt">album ::</span> play an album with title matching the remaining prompt arguments.
 
@@ -4722,6 +4724,7 @@ the <span class="org-verbatim">=music.db=</span> file using the <span class="org
 performed using the <span class="org-verbatim">=locate=</span> program (both parts of the <span class="org-verbatim">=findutils=</span> package).
 The <span class="org-verbatim">=music.db=</span> file is updated on a schedule (daily) via <span class="org-verbatim">=crontab=</span>:
 
+<span class="org-meta-line">#+NAME: cron-musicdb-update</span>
 <span class="org-block-begin-line">#+BEGIN_SRC conf :tangle no
 </span><span class="org-block">
 </span><span class="comment-delimiter"><span class="org-block"># </span></span><span class="comment"><span class="org-block">Crontab entry for music database update
@@ -4738,7 +4741,7 @@ The music prompt defines two keywords:
   <span class="org-verbatim">=q=</span>).
 
 Note that the spawned mplayer instance is given a custom class name (<span class="org-verbatim">=-c
-tmplayer=</span>) to apply a custom <span class="org-link"><a href="nil:nil">[[#rules][rule]]</a></span> to it: it is placed on the same screen and
+tmplayer=</span>) to apply a custom <span class="org-link"><a href="nil:nil">rule</a></span> to it: it is placed on the same screen and
 client as the main cmus instance.
 
 The completion function for the <span class="org-verbatim">=m=</span> keyword performs a search on the argument
@@ -4862,7 +4865,7 @@ global_prompt.prompt_music = {
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> web                                                </span><span class="org-tag"><span class="org-level-3">:feature_request:</span></span>
 
 The web prompt was originally aimed at handling questions where the answer would
-be obtained from a web search (e.g. using <span class="org-link"><a href="https://duckduckgo.com/api">[[https://duckduckgo.com/api][duckduckgo]]</a></span> search API).  This is
+be obtained from a web search (e.g. using <span class="org-link"><a href="https://duckduckgo.com/api">duckduckgo</a></span> search API).  This is
 currently not implemented and the web prompt simply spawns a web browser window,
 and starts a duckduckgo search with the input arguments.
 
@@ -4972,14 +4975,14 @@ global_prompt.prompt_list = { global_prompt.prompt_help,
 <span class="org-special-keyword">:END:</span>
 
 The end of the <span class="org-verbatim">=rc.lua=</span> file contains a list of applications to run on startup.
-Programs are spawned using the <span class="org-link"><a href="nil:nil">[[#my_utility_run_once][=run_once=]]</a></span> utility.  The applications launched on
+Programs are spawned using the <span class="org-link"><a href="nil:nil">=run_once=</a></span> utility.  The applications launched on
 startup are:
 - <span class="org-verbatim">=dual_default.sh=</span> which is a <span class="org-verbatim">=xrandr=</span> script to setup my monitors
 - <span class="org-verbatim">=numlock&amp;=</span> which switches the numlock key on
 - the dropbox daemon
 - the network-manager applet
 - <span class="org-verbatim">=xscreensaver=</span> for screen locking
-- the UPnP server <span class="org-link"><a href="https://wiki.gnome.org/Projects/Rygel">[[https://wiki.gnome.org/Projects/Rygel][=rygel=]]</a></span>
+- the UPnP server <span class="org-link"><a href="https://wiki.gnome.org/Projects/Rygel">=rygel=</a></span>
 - the RSS reader <span class="org-verbatim">=newsbeuter=</span>
 - the music player <span class="org-verbatim">=cmus=</span>
 
@@ -5043,7 +5046,7 @@ my_utility = {}
 
 The <span class="org-verbatim">=my_utility.lines=</span> function splits the input string by rows.  A table with
 the lines is returned; it can be iterated over using <span class="org-verbatim">=for k, v in
-pairs(lines_output)=</span>.  This was taken from <span class="org-link"><a href="http://lua-users.org/wiki/SplitJoin">[[http://lua-users.org/wiki/SplitJoin]]</a></span>.
+pairs(lines_output)=</span>.  This was taken from <span class="org-link"><a href="http://lua-users.org/wiki/SplitJoin">http://lua-users.org/wiki/SplitJoin</a></span>.
 
 <span class="org-meta-line">#+NAME: module-utility-lines</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -5083,7 +5086,7 @@ some very basic escaping.
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">my_utility_confirm</span>
 <span class="org-special-keyword">:END:</span>
 
-The <span class="org-verbatim">=my_utility.confirm_action=</span> is used with the <span class="org-link"><a href="nil:nil">[[#shutdown][shutdown menu]]</a></span> to prompt for
+The <span class="org-verbatim">=my_utility.confirm_action=</span> is used with the <span class="org-link"><a href="nil:nil">shutdown menu</a></span> to prompt for
 confirmation before performing actions (e.g. shutdown).  It uses a promptbox
 placed on each wibox and runs the function <span class="org-verbatim">=func=</span> when the "y" character is
 entered in the promptbox.  Note that, since the promptbox is barely visible, the
@@ -5113,7 +5116,7 @@ color of the whole wibox (on the current screen) is temporarily set to
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 Here is an example of usage using <span class="org-verbatim">=awesome-client=</span>, with a screenshot of the
-confirmation prompt on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">[[img-confirm_action]]</a></span>.
+confirmation prompt on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">img-confirm_action</a></span>.
 
 <span class="org-meta-line">#+NAME: sh-scrot-confirm_action</span>
 <span class="org-block-begin-line">#+BEGIN_SRC sh :exports code :tangle no :cache yes
@@ -5144,7 +5147,7 @@ rm desktop.png -rf
 <span class="org-meta-line">#+NAME: img-confirm_action</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 60%</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Confirmation prompt before shutdown (left-most text).
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png">[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png]]</a></span>
+</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png</a></span>
 
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Run once</span>
@@ -5154,7 +5157,7 @@ rm desktop.png -rf
 
 The <span class="org-verbatim">=run_once=</span> utility is a commonly used lua function to spawn a program if is
 not already running.  The code is from
-<span class="org-link"><a href="https://awesome.naquadah.org/wiki/Autostart">[[https://awesome.naquadah.org/wiki/Autostart]]</a></span>.
+<span class="org-link"><a href="https://awesome.naquadah.org/wiki/Autostart">https://awesome.naquadah.org/wiki/Autostart</a></span>.
 
 <span class="org-meta-line">#+NAME: module-utility-run_once</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -5194,19 +5197,19 @@ functions are called using <span class="org-verbatim">=my_utility.function(...)=
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Resources</span>
 
-- awesome wiki: <span class="org-link"><a href="https://awesome.naquadah.org/wiki">[[https://awesome.naquadah.org/wiki]]</a></span> (this may disappear in the
-  future as described in <span class="org-link"><a href="https://github.com/awesomeWM/awesome-www/issues/7">[[https://github.com/awesomeWM/awesome-www/issues/7]]</a></span>)
-- awesome-wm API: <span class="org-link"><a href="http://new.awesomewm.org/doc/api">[[http://new.awesomewm.org/doc/api]]</a></span>
-- blingbling examples: <span class="org-link"><a href="https://github.com/cedlemo/blingbling">[[https://github.com/cedlemo/blingbling]]</a></span>
+- awesome wiki: <span class="org-link"><a href="https://awesome.naquadah.org/wiki">https://awesome.naquadah.org/wiki</a></span> (this may disappear in the
+  future as described in <span class="org-link"><a href="https://github.com/awesomeWM/awesome-www/issues/7">https://github.com/awesomeWM/awesome-www/issues/7</a></span>)
+- awesome-wm API: <span class="org-link"><a href="http://new.awesomewm.org/doc/api">http://new.awesomewm.org/doc/api</a></span>
+- blingbling examples: <span class="org-link"><a href="https://github.com/cedlemo/blingbling">https://github.com/cedlemo/blingbling</a></span>
 - Themes:
-  - <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Beautiful_themes">[[https://awesome.naquadah.org/wiki/Beautiful_themes]]</a></span>
-  - <span class="org-link"><a href="https://github.com/copycat-killer/awesome-copycats">[[https://github.com/copycat-killer/awesome-copycats]]</a></span>
+  - <span class="org-link"><a href="https://awesome.naquadah.org/wiki/Beautiful_themes">https://awesome.naquadah.org/wiki/Beautiful_themes</a></span>
+  - <span class="org-link"><a href="https://github.com/copycat-killer/awesome-copycats">https://github.com/copycat-killer/awesome-copycats</a></span>
 
 
 
 <span class="org-level-1">* Notes                                                            </span><span class="org-tag"><span class="org-level-1">:noexport:</span></span>
 
-- <span class="org-checkbox">[X]</span> <span class="org-link"><a href="https://expoundite.net/guides/dotfile-management">[[https://expoundite.net/guides/dotfile-management]]</a></span>
+- <span class="org-checkbox">[X]</span> <span class="org-link"><a href="https://expoundite.net/guides/dotfile-management">https://expoundite.net/guides/dotfile-management</a></span>
   - <span class="org-checkbox">[X]</span> :tangle: property in subtree
   - <span class="org-checkbox">[X]</span> Get passwords from .authinfo.gpg
 - <span class="org-checkbox">[-]</span> How to manage conditional tangling?
