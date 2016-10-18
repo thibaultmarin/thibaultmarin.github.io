@@ -1,4 +1,4 @@
-# Created 2016-10-14 Fri 23:06
+# Created 2016-10-17 Mon 23:01
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016/10/05
@@ -7,7 +7,8 @@
 #+TODO: TODO REVIEW | DONE DEFERRED ABANDONED
 #+INFOJS_OPT: view:content toc:t mouse:t ltoc:nil ftoc:nil
 #+PROPERTY: COOKIE_DATA todo recursive
-#+PROPERTY: header-args :tangle rc.lua
+#+PROPERTY: header-args+ :eval never
+#+PROPERTY: header-args+ :tangle rc.lua
 #+PROPERTY: header-args+ :exports code
 #+PROPERTY: header-args+ :comments link
 #+STARTUP: hideblocks
@@ -2099,6 +2100,23 @@ python3 scripts/ttrss-wrapper.py --help || echo
 #+END_SRC
 
 #+RESULTS: sh-ttrss-py-usage
+#+BEGIN_EXAMPLE
+usage: ttrss-wrapper.py [-h] -U URL -u USER [-p PASSWD] [-W TEXT_WIDTH] [-c]
+                        [-r]
+
+Get tt-rss feeds.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -U URL, --url URL     TinyTiny RSS URL
+  -u USER, --user USER  Username
+  -p PASSWD, --pass PASSWD
+                        Password
+  -W TEXT_WIDTH, --width TEXT_WIDTH
+                        Width of text output
+  -c, --count           Output only the number of unread items
+  -r, --mark-read       Mark all unread items as read
+#+END_EXAMPLE
 
 
 *** Credentials

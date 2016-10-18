@@ -189,7 +189,8 @@
 <span class="org-meta-line">#+TODO: TODO REVIEW | DONE DEFERRED ABANDONED</span>
 <span class="org-meta-line">#+INFOJS_OPT: view:content toc:t mouse:t ltoc:nil ftoc:nil</span>
 <span class="org-meta-line">#+PROPERTY: COOKIE_DATA todo recursive</span>
-<span class="org-meta-line">#+PROPERTY: header-args :tangle rc.lua</span>
+<span class="org-meta-line">#+PROPERTY: header-args+ :eval never</span>
+<span class="org-meta-line">#+PROPERTY: header-args+ :tangle rc.lua</span>
 <span class="org-meta-line">#+PROPERTY: header-args+ :exports code</span>
 <span class="org-meta-line">#+PROPERTY: header-args+ :comments link</span>
 <span class="org-meta-line">#+STARTUP: hideblocks</span>
@@ -224,7 +225,7 @@ convert desktop.png -crop ${</span><span class="variable-name"><span class="org-
 rm desktop.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[B5C042D3841BEB561E6A367F03D0611474D96782]: sh-scrot-main</span>
+<span class="org-meta-line">#+RESULTS[B5C0...]: sh-scrot-main</span>
 
 
 <span class="org-meta-line">#+NAME: img-desktop-main</span>
@@ -278,7 +279,7 @@ uname -a
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 <span class="org-meta-line">#+RESULTS: el-org-version</span>
-<span class="org-code">: "Org mode version 8.3.6 (release_8.3.6-1210-gd942f7 @ ... )"
+<span class="org-code">: "Org mode version 8.3.6 (release_8.3.6-1217-g05d918 @ ... )"
 </span>
 Most of the code in this configuration comes from the default <span class="org-verbatim">=rc.lua=</span> delivered
 with awesome-wm.  On my system, it is located under <span class="org-verbatim">=/etc/xdg/awesome/rc.lua=</span>.
@@ -382,7 +383,7 @@ To get a reproducible <span class="org-verbatim">=make=</span> behavior, a minim
 provided here:
 
 <span class="org-meta-line">#+NAME: makefile-init-el</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :tangle makefile-init.el :noweb yes
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :tangle makefile-init.el :noweb yes :results silent
 </span><span class="org-block">
 </span><span class="comment-delimiter"><span class="org-block">;; </span></span><span class="comment"><span class="org-block">Assume default folder for emacs packages
 </span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">let</span></span><span class="org-block"> ((default-directory  </span><span class="string"><span class="org-block">"~/.emacs.d/elpa/"</span></span><span class="org-block">))
@@ -422,7 +423,7 @@ when generating the HTML documentation, since it seems to interact with syntax
 highlighting.
 
 <span class="org-meta-line">#+NAME: makefile</span>
-<span class="org-block-begin-line">#+BEGIN_SRC makefile
+<span class="org-block-begin-line">#+BEGIN_SRC makefile :results silent
 </span><span class="org-block">
 </span><span class="comment-delimiter"><span class="org-block"># </span></span><span class="comment"><span class="org-block">Makefile for org file, with targets:
 </span></span><span class="comment-delimiter"><span class="org-block"># </span></span><span class="comment"><span class="org-block">all: Tangle source blocks
@@ -794,7 +795,7 @@ convert desktop-wibox-l.png desktop-wibox-r.png -append desktop-wibox.png
 rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[6DE29F351040F17242EA1C881DCEFF562100E5BB]: sh-scrot-wibox</span>
+<span class="org-meta-line">#+RESULTS[6DE2...]: sh-scrot-wibox</span>
 
 
 
@@ -2039,7 +2040,7 @@ convert desktop.png -crop ${</span><span class="variable-name"><span class="org-
 rm desktop.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[6A446875DD481892F7F83D0F7947D490669A2857]: sh-scrot-cmus-info</span>
+<span class="org-meta-line">#+RESULTS[6A44...]: sh-scrot-cmus-info</span>
 
 <span class="org-meta-line">#+NAME: img-cmus-popup</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 60%</span>
@@ -2439,7 +2440,7 @@ line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:n
 line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(pass-hardcoded)</a></span> and set the correct password.
 
 <span class="org-meta-line">#+NAME: ttrss-credentials</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -n -r :tangle no :results silent :exports code
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -n -r :tangle no :results silent :exports code :eval query-export
 </span><span class="org-block">(</span><span class="keyword"><span class="org-block">defun</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">get-ttrss-cred</span></span><span class="org-block"> (</span><span class="type"><span class="org-block">&amp;optional</span></span><span class="org-block"> url)
   (</span><span class="keyword"><span class="org-block">let</span></span><span class="org-block"> ((ttrss-url (</span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> url url </span><span class="string"><span class="org-block">"127.0.0.1:81/tt-rss"</span></span><span class="org-block">))
         (ttrss-user nil)                                         (ref:user-nil)
@@ -4474,7 +4475,7 @@ convert desktop.png -crop ${</span><span class="variable-name"><span class="org-
 rm desktop.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[D64F1FDD8BA95C0EF4579B0F656F8047DC46F5F5]: sh-scrot-global_prompt-help</span>
+<span class="org-meta-line">#+RESULTS[D64F...]: sh-scrot-global_prompt-help</span>
 
 
 <span class="org-meta-line">#+NAME: img-global_prompt-help</span>
@@ -5142,7 +5143,7 @@ convert desktop.png -crop ${</span><span class="variable-name"><span class="org-
 rm desktop.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[697AAFE023955683CD8753808C2394DEF30198C0]: sh-scrot-confirm_action</span>
+<span class="org-meta-line">#+RESULTS[697A...]: sh-scrot-confirm_action</span>
 
 <span class="org-meta-line">#+NAME: img-confirm_action</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 60%</span>
