@@ -103,10 +103,6 @@
         /* font-lock-doc-face */
         color: #8b2252;
       }
-      .flyspell-duplicate {
-        /* flyspell-duplicate */
-        text-decoration: underline;
-      }
       .function-name {
         /* font-lock-function-name-face */
         color: #0000ff;
@@ -1542,7 +1538,7 @@ In each page's <span class="org-verbatim">=&lt;head&gt;=</span> section, a few i
         //document.location.href = rpl(document.location.href, </span><span class="string"><span class="org-block">"html"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"org"</span></span><span class="org-block">);
         var re = /[\/]$/g;
         var html_url = document.location.href.replace(re, '/index.html');
-        var out_ext = flag_html? </span><span class="string"><span class="org-block">"org.html"</span></span><span class="org-block">: </span><span class="string"><span class="org-block">"org"</span></span><span class="org-block">;
+        var out_ext = flag_html? "org.html": "org";
         window.open(rpl(html_url, </span><span class="string"><span class="org-block">"html"</span></span><span class="org-block">, out_ext), '_blank');
     }
 &lt;/</span><span class="function-name"><span class="org-block">script</span></span><span class="org-block">&gt;
@@ -1623,17 +1619,17 @@ the <span class="org-link"><a href="nil:nil">sitemap</a></span> itself.
 ,#+DATE: </span><span class="org-date"><span class="org-block">&lt;2016-10-02 Sun&gt;</span></span><span class="org-block">
 
 Random articles about linux, emacs, science, etc.  This site and the articles
-are built with </span><span class="org-link"><span class="org-block"><a href="https://gnu.org/s/emacs">[[https://gnu.org/s/emacs][emacs]]</a></span></span><span class="org-block"> and
-</span><span class="org-link"><span class="org-block"><a href="http://orgmode.org">[[http://orgmode.org][org-mode]]</a></span></span><span class="org-block"> (using
-</span><span class="org-link"><span class="org-block"><a href="http://orgmode.org/worg/code/org-info-js">[[http://orgmode.org/worg/code/org-info-js][org-js]]</a></span></span><span class="org-block">).
+are built with </span><span class="org-link"><span class="org-block">[[https://gnu.org/s/emacs][emacs]]</span></span><span class="org-block"> and
+</span><span class="org-link"><span class="org-block">[[http://orgmode.org][org-mode]]</span></span><span class="org-block"> (using
+</span><span class="org-link"><span class="org-block">[[http://orgmode.org/worg/code/org-info-js][org-js]]</span></span><span class="org-block">).
 
 ,* Blog
 
 ,#+INCLUDE: sitemap.org::*posts :lines "-5" :only-contents t(ref:main-inc-sitemap)
 
-</span><span class="org-link"><span class="org-block"><a href="file:blog.org">[[file:blog.org][Older posts]]</a></span></span><span class="org-block">
+</span><span class="org-link"><span class="org-block">[[file:blog.org][Older posts]]</span></span><span class="org-block">
 
-,* </span><span class="org-link"><span class="org-block"><a href="file:sitemap.org">[[file:sitemap.org][Sitemap]]</a></span></span><span class="org-block">
+,* </span><span class="org-link"><span class="org-block">[[file:sitemap.org][Sitemap]]</span></span><span class="org-block">
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -1645,7 +1641,7 @@ are built with </span><span class="org-link"><span class="org-block"><a href="ht
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">page-blog-posts</span>
 <span class="org-special-keyword">:END:</span>
 
-The blog page simply lists all the posts using the <span class="org-link"><a href="nil:nil">sitemap</a></span>.
+The blog page simply lists all the posts using the <a href="nil:nil">[[#sitemap][sitemap]]</a>.
 
 <span class="org-meta-line">#+NAME: blog-org</span>
 <span class="org-block-begin-line">#+BEGIN_SRC org
@@ -1667,7 +1663,7 @@ All the blog posts:
 <span class="org-special-keyword">:END:</span>
 
 The <span class="org-verbatim">=setup.org=</span> file contains default headers added to the top of each org file
-pushed as a blog post using the <span class="org-link"><a href="nil:nil">push-to-blog</a></span> function.  The additional header
+pushed as a blog post using the [[#el-push-to-blog][push-to-blog]] function.  The additional header
 performs the following:
 - setup the path to the org-infojs source (local) and the table of contents
   defaults,
@@ -1728,9 +1724,9 @@ revision 40120a8).
 
 The idea is to generate a <span class="org-verbatim">=sitemap.org=</span> file which contains a subtree for blog
 posts, sorted by date (most recent first).  Then, the org-mode <span class="org-verbatim">=#+INCLUDE=</span>
-directive is used to display the blog posts (see the <span class="org-link"><a href="http://orgmode.org/manual/Include-files.html">documentation</a></span>) on any page.
-A list of the last 5 posts is shown on the <span class="org-link"><a href="nil:nil">main page</a></span> and a full list is included
-in the <span class="org-link"><a href="nil:nil">blog page</a></span>.  This keeps lists of posts up-to-date.
+directive is used to display the blog posts (see the [[http://orgmode.org/manual/Include-files.html][documentation]]) on any page.
+A list of the last 5 posts is shown on the [[#index_org][main page]] and a full list is included
+in the [[#page-blog-posts][blog page]].  This keeps lists of posts up-to-date.
 
 <span class="org-meta-line">#+NAME: elisp-sitemap-new</span>
 <span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
@@ -1743,7 +1739,7 @@ in the <span class="org-link"><a href="nil:nil">blog page</a></span>.  This keep
   (</span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> (directory-name-p entry)
       (file-name-nondirectory (directory-file-name entry))
     (format
-     </span><span class="string"><span class="org-block">"<a href="file:%s">[[file:%s][%s%s]]</a>"</span></span><span class="org-block">
+     </span><span class="string"><span class="org-block">"[[file:%s][%s%s]]"</span></span><span class="org-block">
      (file-relative-name entry root)
      (</span><span class="keyword"><span class="org-block">let</span></span><span class="org-block"> ((date
             (format-time-string </span><span class="string"><span class="org-block">"%Y-%m-%d"</span></span><span class="org-block">
@@ -1764,7 +1760,7 @@ in the <span class="org-link"><a href="nil:nil">blog page</a></span>.  This keep
 
 A simple RSS feed is also created using <span class="org-verbatim">=ox-rss=</span>.  It includes the first section
 of the document as feed content (extracted using the
- <span class="org-link"><a href="nil:nil">=&#8482;/org-get-first-paragraph= function</a></span>).
+ [[(func-get-paragraph)][=&#8482;/org-get-first-paragraph= function]]).
 The RSS feed is also limited to the latest 30 entries.
 
 There are currently issues with the styling and images in the feed, but it is
@@ -1807,11 +1803,11 @@ sufficient for my simple use.
           (</span><span class="keyword"><span class="org-block">let*</span></span><span class="org-block"> ((post-file (concat (file-name-as-directory postsdir) post))
                  (post-title (org-publish-find-title post-file))
                  (preview-str (&#8482;/org-get-first-paragraph post-file)))
-            (insert (concat </span><span class="string"><span class="org-block">"* <a href="file:posts/">[[file:posts/"</a></span></span><span class="org-block"><a href="file:posts/"> post </a></span><span class="string"><span class="org-block"><a href="file:posts/">"]["</a></span></span><span class="org-block"><a href="file:posts/"> post-title </a></span><span class="string"><span class="org-block"><a href="file:posts/">"]]</a>\n\n"</span></span><span class="org-block">))
+            (insert (concat </span><span class="string"><span class="org-block">"* [[file:posts/"</span></span><span class="org-block"> post </span><span class="string"><span class="org-block">"]["</span></span><span class="org-block"> post-title </span><span class="string"><span class="org-block">"]]\n\n"</span></span><span class="org-block">))
             (insert </span><span class="string"><span class="org-block">"*"</span></span><span class="org-block">)
             (insert preview-str)
             (newline 1)
-            (insert (concat </span><span class="string"><span class="org-block">"<a href="file:posts/">[[file:posts/"</a></span></span><span class="org-block"><a href="file:posts/"> post </a></span><span class="string"><span class="org-block"><a href="file:posts/">"][(Read more)]]</a>\n\n"</span></span><span class="org-block">))))
+            (insert (concat </span><span class="string"><span class="org-block">"[[file:posts/"</span></span><span class="org-block"> post </span><span class="string"><span class="org-block">"][(Read more)]]\n\n"</span></span><span class="org-block">))))
         (save-buffer))))
   (</span><span class="keyword"><span class="org-block">let</span></span><span class="org-block"> ((user-mail-address </span><span class="string"><span class="org-block">")"</span></span><span class="org-block">)
         (org-export-with-broken-links t))
@@ -1829,7 +1825,7 @@ version of the mathjax library is loaded.
 </span><span class="comment-delimiter"><span class="org-block">;; </span></span><span class="comment"><span class="org-block">Use https for mathjax
 </span></span><span class="org-block">(setcdr
  (assq 'path org-html-mathjax-options)
- '(</span><span class="string"><span class="org-block">"<a href="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML</a>"</span></span><span class="org-block">))
+ '(</span><span class="string"><span class="org-block">"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"</span></span><span class="org-block">))
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -1887,8 +1883,8 @@ un-modified input buffer.
 <span class="org-special-keyword">:END:</span>
 
 The derived backend modifies the source block handling function by inserting the
-name of the tangled file.  The regular <span class="org-verbatim">=html=</span> exporter is first used to <span class="org-link"><a href="nil:nil">produce
-the html code for the source block</a></span> (including syntax highlighting).  The html
+name of the tangled file.  The regular <span class="org-verbatim">=html=</span> exporter is first used to [[(proc-src-html)][produce
+the html code for the source block]] (including syntax highlighting).  The html
 output is then modified by inserting a <span class="org-verbatim">=&lt;div&gt;=</span> block, fixed at the bottom right
 of the source block.  The CSS class <span class="org-verbatim">=src-label=</span> is added to the div block to
 allow for customization of the appearance.
@@ -1963,25 +1959,25 @@ variable.  The following function returns a list of project properties to use
 with <span class="org-verbatim">=org-publish-project-alist=</span>.
 
 It relies on the <span class="org-verbatim">=&#8482;/get-perso=</span> utility to get the root folder
-(line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(root-perso)</a></span>).  This can be replaced by a full path to the website
+(line<span class="org-macro">{{{tt}}}</span>[[(root-perso)]]).  This can be replaced by a full path to the website
 root folder.
 
 The function defines the paths to the org source, the destination, the
-attachment folders, etc. and loads the content of the custom HTML <span class="org-link"><a href="nil:nil">head</a></span>, <span class="org-link"><a href="nil:nil">preamble</a></span>
-and <span class="org-link"><a href="nil:nil">postamble</a></span>.  It creates multiple projects to control the publishing of the
+attachment folders, etc. and loads the content of the custom HTML [[#html_head][head]], [[#html_preamble][preamble]]
+and [[#html_postamble][postamble]].  It creates multiple projects to control the publishing of the
 website:
 - <span class="org-verbatim">=w-org=</span> is the main publishing of org files to html.  It uses two
   <span class="org-verbatim">=publishing-function=</span> entries: one to generate the html file and one to export
   a complete org file (which can be accessed on the output webpage by clicking
-  on the buttons defined in the <span class="org-link"><a href="nil:nil">footer</a></span>).  The <span class="org-link"><a href="nil:nil">sitemap</a></span> generation is also
+  on the buttons defined in the [[#html_postamble][footer]]).  The [[#sitemap][sitemap]] generation is also
   configured in this project.  Additional features include the insertion of a
   RSS link to the header, and the suppression of TODO items and statistics
   cookies.
 - <span class="org-verbatim">=w-images=</span> simply publishes images in the <span class="org-verbatim">=images/=</span> folder using the
   <span class="org-verbatim">=org-publish-attachment=</span> function.
 - <span class="org-verbatim">=w-js=</span> publishes the javascript files in the <span class="org-verbatim">=js/=</span> folder.
-- <span class="org-verbatim">=w-css=</span> publishes the <span class="org-link"><a href="nil:nil">CSS file</a></span> in the <span class="org-verbatim">=css/=</span> folder.
-- <span class="org-verbatim">=w-rss=</span> generates the <span class="org-link"><a href="nil:nil">RSS</a></span> feed using the <span class="org-verbatim">=ox-rss=</span> package.
+- <span class="org-verbatim">=w-css=</span> publishes the [[#css][CSS file]] in the <span class="org-verbatim">=css/=</span> folder.
+- <span class="org-verbatim">=w-rss=</span> generates the [[#rss][RSS]] feed using the <span class="org-verbatim">=ox-rss=</span> package.
 - Finally, <span class="org-verbatim">=website=</span> is a meta project which simply encapsulates all the other
   projects.
 
@@ -2133,7 +2129,7 @@ forced: <span class="org-verbatim">=(&#8482;/publish-website "website" t)=</span
 The mechanism to publish new posts uses the <span class="org-verbatim">=&#8482;/push-to-blog=</span> function to convert
 a standalone org file into a post.  The function performs the following:
 - add a <span class="org-verbatim">=#+SETUPFILE=</span> line to the header (the content of the setup file is
-  described <span class="org-link"><a href="nil:nil">here</a></span>),
+  described [[#sec-org-setup][here]]),
 - format the output filename with the post date preceding the title
   (e.g. <span class="org-verbatim">=YYYY-MM-DD-Post_title.org=</span>),
 - search for TODO items, exit if any is found,
@@ -2180,7 +2176,7 @@ a standalone org file into a post.  The function performs the following:
               (setq setupfile-added-p t))
             (</span><span class="keyword"><span class="org-block">cond</span></span><span class="org-block"> ((string= key </span><span class="string"><span class="org-block">"TITLE"</span></span><span class="org-block">)
                    (setq out-file
-                         (replace-regexp-in-string </span><span class="string"><span class="org-block">"<a href="nil:nil">[[:space:]]</a>+"</span></span><span class="org-block"> </span><span class="string"><span class="org-block">"_"</span></span><span class="org-block"> value)))
+                         (replace-regexp-in-string </span><span class="string"><span class="org-block">"[[:space:]]+"</span></span><span class="org-block"> </span><span class="string"><span class="org-block">"_"</span></span><span class="org-block"> value)))
                   ((string= key </span><span class="string"><span class="org-block">"DATE"</span></span><span class="org-block">)
                    (setq post-date
                          (format-time-string
@@ -2257,14 +2253,14 @@ This block closes the <span class="org-verbatim">=my-website.el=</span> file.
 <span class="org-special-keyword">:ID:</span>       <span class="org-property-value">35175cd5-e1ea-44ba-af48-eda2320f9e60</span>
 <span class="org-special-keyword">:END:</span>
 
-- <span class="org-list-dt"><span class="org-link"><a href="http://bastibe.de/2013-11-13-blogging-with-emacs.html">http://bastibe.de/2013-11-13-blogging-with-emacs.html</a></span></span><span class="org-list-dt"> ::</span> advice org-rss to
+- <span class="org-list-dt"><a href="http://bastibe.de/2013-11-13-blogging-with-emacs.html">http://bastibe.de/2013-11-13-blogging-with-emacs.html</a> ::</span> advice org-rss to
   include full text on level 2 headlines
-- <span class="org-link"><a href="http://emacs-doctor.com/blogging-from-emacs.html">http://emacs-doctor.com/blogging-from-emacs.html</a></span>
-- <span class="org-link"><a href="http://endlessparentheses.com/how-i-blog-one-year-of-posts-in-a-single-org-file.html">http://endlessparentheses.com/how-i-blog-one-year-of-posts-in-a-single-org-file.html</a></span>
-- <span class="org-link"><a href="https://github.com/howardabrams/dot-files/blob/master/emacs-blog.org">https://github.com/howardabrams/dot-files/blob/master/emacs-blog.org</a></span>
-- <span class="org-link"><a href="http://www.john2x.com/blog/blogging-with-orgmode.html">http://www.john2x.com/blog/blogging-with-orgmode.html</a></span>
-- <span class="org-link"><a href="https://ogbe.net/blog/blogging_with_org.html">https://ogbe.net/blog/blogging_with_org.html</a></span>
-- <span class="org-link"><a href="http://nicolas.petton.fr/blog/blogging-with-org-mode.html">http://nicolas.petton.fr/blog/blogging-with-org-mode.html</a></span>
+- <a href="http://emacs-doctor.com/blogging-from-emacs.html">http://emacs-doctor.com/blogging-from-emacs.html</a>
+- <a href="http://endlessparentheses.com/how-i-blog-one-year-of-posts-in-a-single-org-file.html">http://endlessparentheses.com/how-i-blog-one-year-of-posts-in-a-single-org-file.html</a>
+- https://github.com/howardabrams/dot-files/blob/master/emacs-blog.org
+- http://www.john2x.com/blog/blogging-with-orgmode.html
+- https://ogbe.net/blog/blogging_with_org.html
+- http://nicolas.petton.fr/blog/blogging-with-org-mode.html
 
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Notes                                                       </span><span class="org-tag"><span class="org-level-1">:noexport:</span></span>
@@ -2272,7 +2268,7 @@ This block closes the <span class="org-verbatim">=my-website.el=</span> file.
 - Fix RSS issues
 - Tag system
 - Link between articles
-- Improve <span class="flyspell-duplicate">CSS</span>
+- Improve CSS
 </pre>
   </body>
 </html>

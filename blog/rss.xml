@@ -14,8 +14,8 @@
 	<link>/blog/index.html</link>
 	<description><![CDATA[]]></description>
 	<language>en</language>
-	<pubDate>Sun, 13 Nov 2016 21:43:50 -0600</pubDate>
-	<lastBuildDate>Sun, 13 Nov 2016 21:43:50 -0600</lastBuildDate>
+	<pubDate>Sun, 13 Nov 2016 21:55:15 -0600</pubDate>
+	<lastBuildDate>Sun, 13 Nov 2016 21:55:15 -0600</lastBuildDate>
 	<generator>Emacs 24.5 Org-mode 9.0</generator>
 	<webMaster>) (nil)</webMaster>
 	<image>
@@ -47,7 +47,7 @@
 		<link>/blog/index.html/rss.html#org288365c</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org288365c</guid>
-		<pubDate>Sun, 13 Nov 2016 21:43:00 -0600</pubDate>
+		<pubDate>Sun, 13 Nov 2016 21:55:00 -0600</pubDate>
 
 		<description><![CDATA[<div id="outline-container-org0e6b7f4" class="outline-3">
 		<h3 id="org0e6b7f4"><a id="ID-bee322f3-5c88-4db6-85bb-96ccd5204aa3"></a>Introduction</h3>
@@ -157,10 +157,10 @@
 	<link>/blog/index.html/rss.html#orgc498e7a</link>
 	<author>) (nil)</author>
 	<guid isPermaLink="false">/blog/index.html/rss.html#orgc498e7a</guid>
-	<pubDate>Sun, 13 Nov 2016 21:43:00 -0600</pubDate>
+	<pubDate>Sun, 13 Nov 2016 21:55:00 -0600</pubDate>
 
 	<description><![CDATA[<div id="outline-container-org0e6b7f4" class="outline-3">
-	<h3 id="org0e6b7f4"><a id="ID-b0a9b4fa-e050-4f51-b733-a56a2fd66e35"></a>Introduction </h3>
+	<h3 id="org0e6b7f4"><a id="ID-7dba73a7-cee5-44c1-8b4c-58319aed52e5"></a>Introduction </h3>
 	<div class="outline-text-3" id="text-org0e6b7f4">
 	<p>
 	This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
