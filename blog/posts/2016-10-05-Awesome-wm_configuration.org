@@ -1,7 +1,7 @@
-# Created 2016-10-17 Mon 23:01
+# Created 2016-11-13 Sun 21:43
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
-#+DATE: 2016/10/05
+#+DATE: 2016-10-05
 #+AUTHOR: Thibault Marin
 #+SETUPFILE: ../setup.org
 #+TODO: TODO REVIEW | DONE DEFERRED ABANDONED
@@ -225,10 +225,10 @@ provided here:
 ;; Credential extraction function (uses auth-source)
 (defun get-ttrss-cred (&optional url)
   (let ((ttrss-url (if url url "127.0.0.1:81/tt-rss"))
-        (ttrss-user nil)                                         (ref:user-nil)
-        ;;(ttrss-user "myuser")                            (ref:user-hardcoded)
-        (ttrss-pass nil)                                         (ref:pass-nil)
-        ;;(ttrss-pass "mypassword")                        (ref:pass-hardcoded)
+        (ttrss-user nil)
+        ;;(ttrss-user "myuser")
+        (ttrss-pass nil)
+        ;;(ttrss-pass "mypassword")
         )
     (when (require 'auth-source)
       (let ((auth (nth 0 (auth-source-search :host ttrss-url

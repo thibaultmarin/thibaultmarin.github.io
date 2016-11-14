@@ -1,6 +1,7 @@
-# Created 2016-10-14 Fri 23:05
+# Created 2016-11-13 Sun 21:43
 #+TITLE: Blog posts
 #+AUTHOR: Thibault Marin
 All the blog posts:
 
+* [[file:posts/2016-11-13-Personal_website_in_org.org][(2016-11-13) Personal website in org]]
 * [[file:posts/2016-10-05-Awesome-wm_configuration.org][(2016-10-05) Awesome-wm configuration]]

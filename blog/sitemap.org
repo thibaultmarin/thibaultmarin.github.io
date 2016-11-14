@@ -1,8 +1,10 @@
-# Created 2016-10-14 Fri 23:06
-#+TITLE: Sitemap for project w-org
-#+DATE: 2016/10/14
+# Created 2016-11-13 Sun 21:43
+#+TITLE: Sitemap
 #+AUTHOR: Thibault Marin
-* posts
-** [[file:posts/2016-10-05-Awesome-wm_configuration.org][(2016-10-05) Awesome-wm configuration]]
+
+
 * [[file:blog.org][Blog posts]]
 * [[file:index.org][misc/]]
+* posts
+** [[file:posts/2016-11-13-Personal_website_in_org.org][(2016-11-13) Personal website in org]]
+** [[file:posts/2016-10-05-Awesome-wm_configuration.org][(2016-10-05) Awesome-wm configuration]]

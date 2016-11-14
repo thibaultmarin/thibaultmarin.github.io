@@ -167,6 +167,16 @@
         color: #ff0000;
         font-weight: bold;
       }
+      .whitespace-empty {
+        /* whitespace-empty */
+        color: #b22222;
+        background-color: #ffff00;
+      }
+      .whitespace-line {
+        /* whitespace-line */
+        color: #ee82ee;
+        background-color: #333333;
+      }
 
       a {
         color: inherit;
@@ -230,8 +240,8 @@ rm desktop.png -rf
 
 <span class="org-meta-line">#+NAME: img-desktop-main</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 100%</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">My awesome-wm desktop.
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png</a></span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">My awesome-wm desktop.</span>
+<span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png</a></span>
 
 
 This configuration is currently used on the following system:
@@ -412,7 +422,7 @@ provided here:
 (setq org-edit-src-content-indentation 0)
 
 </span><span class="comment-delimiter"><span class="org-block">;; </span></span><span class="comment"><span class="org-block">Credential extraction function (uses auth-source)
-</span></span><span class="org-block">&lt;&lt;ttrss-credentials&gt;&gt;
+</span></span><span class="org-block">&lt;&lt;ttrss-credentials-noref&gt;&gt;
 
 </span><span class="comment-delimiter"><span class="org-block">;; </span></span><span class="comment"><span class="org-block">Define credential extraction function before tangling
 </span></span><span class="org-block">(add-hook 'org-babel-pre-tangle-hook 'get-ttrss-cred)
@@ -469,8 +479,8 @@ Standard modules listed here should come installed with awesome.
 
 <span class="org-meta-line">#+NAME: src-imports-standard</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Standard awesome library
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Standard awesome library
 </span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">gears</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"gears"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">awful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">util</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful.util"</span></span><span class="org-block">)
@@ -497,8 +507,8 @@ launchbar programs, theme selection, maildir, icons, etc.
 
 <span class="org-meta-line">#+NAME: src-setup-paths</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Define global folders
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Define global folders
 </span></span><span class="org-block">awesome_paths = {}
 
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">config_dir is used for local theme customizations and shortcut search
@@ -524,8 +534,8 @@ similar to main menus in other desktop environments.
 
 <span class="org-meta-line">#+NAME: src-imports-debian</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Load Debian menu entries
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Load Debian menu entries
 </span></span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"debian.menu"</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
@@ -545,8 +555,8 @@ import system.
 
 <span class="org-meta-line">#+NAME: src-imports-blingbling</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Blingbling library
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Blingbling library
 </span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">blingbling</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"blingbling"</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
@@ -558,8 +568,8 @@ filenames should match the names used with the <span class="org-verbatim">=requi
 
 <span class="org-meta-line">#+NAME: src-imports-custom</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Custom libraries
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Custom libraries
 </span></span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -570,8 +580,8 @@ This module creates the launchers in the wibox from <span class="org-verbatim">=
 
 <span class="org-meta-line">#+NAME: src-imports-custom-launchbar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">launchbar</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">'launchbar'</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">launchbar</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">'launchbar'</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -582,8 +592,8 @@ section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-cmus</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">cmus</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"cmus"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">cmus</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"cmus"</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -594,8 +604,8 @@ section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-ttrss</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">ttrss</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"ttrss"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">ttrss</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"ttrss"</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -605,8 +615,8 @@ Manage desktop themes (see the <span class="org-link"><a href="nil:nil">Theme</a
 
 <span class="org-meta-line">#+NAME: src-imports-custom-theme</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">theme_customization</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"theme_customization"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">theme_customization</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"theme_customization"</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -617,8 +627,8 @@ section).
 
 <span class="org-meta-line">#+NAME: src-imports-custom-icon_finder</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">icon_finder</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"icon_finder"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">icon_finder</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"icon_finder"</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -628,8 +638,8 @@ Generic command launcher (gnome-do style) (see the <span class="org-link"><a hre
 
 <span class="org-meta-line">#+NAME: src-imports-custom-global_prompt</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">global_prompt</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"global_prompt"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">global_prompt</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"global_prompt"</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -639,8 +649,8 @@ Some utility functions (see the <span class="org-link"><a href="nil:nil">Utiliti
 
 <span class="org-meta-line">#+NAME: src-imports-custom-utility</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">my_utility</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">'my_utility'</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">my_utility</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">'my_utility'</span></span><span class="org-block">)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -660,8 +670,8 @@ Define default programs.
 
 <span class="org-meta-line">#+NAME: src-setup-default-programs</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Define default programs
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Define default programs
 </span></span><span class="org-block">terminal = </span><span class="string"><span class="org-block">"x-terminal-emulator"</span></span><span class="org-block">
 termapps = </span><span class="string"><span class="org-block">"terminator"</span></span><span class="org-block">
 editor = </span><span class="builtin"><span class="org-block">os</span></span><span class="org-block">.</span><span class="builtin"><span class="org-block">getenv</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"EDITOR"</span></span><span class="org-block">) </span><span class="keyword"><span class="org-block">or</span></span><span class="org-block"> </span><span class="string"><span class="org-block">"editor"</span></span><span class="org-block">
@@ -685,8 +695,8 @@ configuration to find icons for programs and session operations (<span class="or
 
 <span class="org-meta-line">#+NAME: src-setup-icons</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Icon finder
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Icon finder
 </span></span><span class="org-block">myiconfinder = icon_finder.new(awesome_paths.iconapps_dir)
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">}}
 </span></span><span class="org-block-end-line">#+END_SRC
@@ -699,8 +709,8 @@ helpful to debug issues in <span class="org-verbatim">=rc.lua=</span>.
 
 <span class="org-meta-line">#+NAME: src-setup-error</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Error handling
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Error handling
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Check if awesome encountered an error during startup and fell back to
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">another config (This code will only ever execute for the fallback config)
 </span></span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> awesome.startup_errors </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block">
@@ -734,8 +744,8 @@ modifier.  Also set <span class="org-verbatim">=Alt=</span> key.
 
 <span class="org-meta-line">#+NAME: src-setup-modkey</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Default modkey.
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Default modkey.
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Usually, Mod4 is the key with a logo between Control and Alt.
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">If you do not like this or do not have such a key,
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">I suggest you to remap Mod4 to another key using xmodmap or other tools.
@@ -752,8 +762,8 @@ Create empty structures for different widgets.
 
 <span class="org-meta-line">#+NAME: src-setup-init-widgets</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Initialize widgets
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Initialize widgets
 </span></span><span class="org-block">mywibox = {}
 mywibox_prompt = {}
 mypromptbox = {}
@@ -801,13 +811,13 @@ rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
 
 <span class="org-meta-line">#+NAME: img-desktop</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 100%</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Main wibox (split into two rows for display) with widgets (from left
-</span><span class="org-meta-line">#+CAPTION:</span> <span class="org-block">to right): <a href="nil:nil">[[#main_menu][awesome menu]]</a>, <a href="nil:nil">[[#tags][tags]]</a>,
-</span><span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#launchbar][launchbar]]</a>, tasklist, <a href="nil:nil">[[#cmus][cmus]]</a>,
-</span><span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#email][mail]]</a>, <a href="nil:nil">[[#ttrss][ttrss]]</a>, <a href="nil:nil">[[#memory][memory]]</a>,
-</span><span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#volume][volume]]</a>, systray, <a href="nil:nil">[[#layouts][layout]]</a>,
-</span><span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#calendar][date + calendar]]</a>, <a href="nil:nil">[[#shutdown][shutdown menu]]</a>.
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png</a></span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Main wibox (split into two rows for display) with widgets (from left</span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">to right): <a href="nil:nil">[[#main_menu][awesome menu]]</a>, <a href="nil:nil">[[#tags][tags]]</a>,</span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#launchbar][launchbar]]</a>, tasklist, <a href="nil:nil">[[#cmus][cmus]]</a>,</span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#email][mail]]</a>, <a href="nil:nil">[[#ttrss][ttrss]]</a>, <a href="nil:nil">[[#memory][memory]]</a>,</span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#volume][volume]]</a>, systray, <a href="nil:nil">[[#layouts][layout]]</a>,</span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block"><a href="nil:nil">[[#calendar][date + calendar]]</a>, <a href="nil:nil">[[#shutdown][shutdown menu]]</a>.</span>
+<span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png</a></span>
 
 
 
@@ -882,8 +892,8 @@ table is augmented by inserting fields found in the theme's <span class="org-ver
 
 <span class="org-meta-line">#+NAME: module-theme</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Theme helper script
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Theme helper script
 </span></span><span class="org-block">
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">dofile</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">dofile</span></span><span class="org-block">
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">lfs</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"lfs"</span></span><span class="org-block">)
@@ -1020,8 +1030,8 @@ some of the fields use values from the <span class="org-verbatim">=beautiful=</s
 
 <span class="org-meta-line">#+NAME: src-desktop-theme-custom_defaults</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua :mkdirp yes
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">beautiful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"beautiful"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">beautiful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"beautiful"</span></span><span class="org-block">)
 
 custom_defaults = {}
 
@@ -1059,8 +1069,8 @@ issues.
 
 <span class="org-meta-line">#+NAME: src-desktop-theme</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Theme management
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Theme management
 </span></span><span class="org-block">awesome_paths.themes_system_path = awesome_paths.system_dir .. </span><span class="string"><span class="org-block">"/themes/"</span></span><span class="org-block">
 awesome_paths.themes_custom_path = awesome_paths.config_dir .. </span><span class="string"><span class="org-block">"/themes/"</span></span><span class="org-block">
 theme_fname = awesome_paths.themes_custom_path .. </span><span class="string"><span class="org-block">"/theme"</span></span><span class="org-block">
@@ -1129,8 +1139,8 @@ layout on some tags is customized.
 
 <span class="org-meta-line">#+NAME: src-desktop-tags</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Tags
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Tags
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Define a tag table which hold all screen tags.
 </span></span><span class="org-block">tags = {
    {
@@ -1165,8 +1175,8 @@ between widgets.
 
 <span class="org-meta-line">#+NAME: src-main-misc</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">---- </span></span><span class="comment"><span class="org-block">{{{ Separators
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">---- </span></span><span class="comment"><span class="org-block">{{{ Separators
 </span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">separator</span></span><span class="org-block"> = wibox.widget.textbox()
 separator:set_markup(</span><span class="string"><span class="org-block">" &lt;span foreground='grey'&gt;&#183;&lt;/span&gt; "</span></span><span class="org-block">)
 </span><span class="comment-delimiter"><span class="org-block">---- </span></span><span class="comment"><span class="org-block">}}}
@@ -1205,8 +1215,8 @@ described in the <span class="org-link"><a href="nil:nil">Icon finder</a></span>
 
 <span class="org-meta-line">#+NAME: module-launchbar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Quick launchbar widget for Awesome WM
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Quick launchbar widget for Awesome WM
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block"><a href="http://awesome.naquadah.org/wiki/Quick_launch_bar_widget/3.5">http://awesome.naquadah.org/wiki/Quick_launch_bar_widget/3.5</a>
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Put into your awesome/ folder and add the following to rc.lua:
 </span></span><span class="comment-delimiter"><span class="org-block">--   </span></span><span class="comment"><span class="org-block">local launchbar = require('launchbar')
@@ -1269,8 +1279,8 @@ parameter (created in the <span class="org-link"><a href="nil:nil">Icons</a></sp
 
 <span class="org-meta-line">#+NAME: src-main-launchbar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Launchbar
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Launchbar
 </span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">mylaunchbar</span></span><span class="org-block"> = launchbar.new(awesome_paths.config_dir .. </span><span class="string"><span class="org-block">"/shortcuts/"</span></span><span class="org-block">,
                                   myiconfinder)
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">}}
@@ -1306,8 +1316,8 @@ found in folders set in the <span class="org-verbatim">=awesome_paths=</span> va
 
 <span class="org-meta-line">#+NAME: src-main-shutdown</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Shutdown menu
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Shutdown menu
 </span></span><span class="org-block">
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Session management icons
 </span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">icon_shutdown</span></span><span class="org-block"> = myiconfinder:find(</span><span class="string"><span class="org-block">"system-shutdown.png"</span></span><span class="org-block">)
@@ -1369,8 +1379,8 @@ and launch applications by typing part of their name.
 
 <span class="org-meta-line">#+NAME: src-main-menu</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Menu
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Menu
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a laucher widget and a main menu
 </span></span><span class="org-block">myawesomemenu = {
    { </span><span class="string"><span class="org-block">"manual"</span></span><span class="org-block">, terminal .. </span><span class="string"><span class="org-block">" -e man awesome"</span></span><span class="org-block"> },
@@ -1429,8 +1439,8 @@ the mixer program (see <span class="org-link"><a href="nil:nil">Default programs
 
 <span class="org-meta-line">#+NAME: src-main-volume</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Volume
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Volume
 </span></span><span class="org-block">volume_text = wibox.widget.textbox()
 volume_text:set_text(</span><span class="string"><span class="org-block">"&#128266;"</span></span><span class="org-block">)
 volume_master = blingbling.volume({height = 18, width = 40, bar =</span><span class="constant"><span class="org-block">true</span></span><span class="org-block">,
@@ -1559,8 +1569,8 @@ the <span class="org-verbatim">=htop=</span> command on left-click (<span class=
 
 <span class="org-meta-line">#+NAME: src-main-memory</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Memory usage
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Memory usage
 </span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">memory_label</span></span><span class="org-block"> = wibox.widget.textbox()
 memory_label:set_text(</span><span class="string"><span class="org-block">"&#9636; "</span></span><span class="org-block">)
 memory_label:set_align(</span><span class="string"><span class="org-block">"center"</span></span><span class="org-block">)
@@ -1590,8 +1600,8 @@ the <span class="org-verbatim">=khal=</span> program is installed and configured
 
 <span class="org-meta-line">#+NAME: src-main-calendar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Calendar
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Calendar
 </span></span><span class="org-block">
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a textclock widget
 </span></span><span class="org-block">mytextclock = awful.widget.textclock()
@@ -1631,8 +1641,8 @@ local setup.  In particular, the list of emails is obtained via a mu request
 
 <span class="org-meta-line">#+NAME: module-mail</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">string</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">string</span></span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">string</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">string</span></span><span class="org-block">
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">tostring</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">tostring</span></span><span class="org-block">
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">io</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">io</span></span><span class="org-block">
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">table</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">table</span></span><span class="org-block">
@@ -1724,8 +1734,8 @@ open mail clients (icedove and mu4e).
 
 <span class="org-meta-line">#+NAME: src-main-mail</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Mail widget
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Mail widget
 </span></span><span class="org-block">mailicon = wibox.widget.textbox()
 mailfolders = {
    awesome_paths.home_dir  .. </span><span class="string"><span class="org-block">'/maildir/INBOX'</span></span><span class="org-block">,
@@ -1817,8 +1827,8 @@ First, import the necessary libraries.
 
 <span class="org-meta-line">#+NAME: module-cmus-import</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">awful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">awful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">naughty</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"naughty"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">beautiful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">'beautiful'</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">util</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful.util"</span></span><span class="org-block">)
@@ -1847,8 +1857,8 @@ A few utility functions are used in the module:
 
 <span class="org-meta-line">#+NAME: module-cmus-utils</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Lua implementation of scandir function
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Lua implementation of scandir function
 </span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">scandir</span></span><span class="org-block">(directory, pattern)
     </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block">, </span><span class="variable-name"><span class="org-block">t</span></span><span class="org-block">, </span><span class="variable-name"><span class="org-block">popen</span></span><span class="org-block"> = 0, {}, </span><span class="builtin"><span class="org-block">io</span></span><span class="org-block">.</span><span class="builtin"><span class="org-block">popen</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">filename</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">in</span></span><span class="org-block"> popen(</span><span class="string"><span class="org-block">'ls -a "'</span></span><span class="org-block">..directory..</span><span class="string"><span class="org-block">'/"'</span></span><span class="org-block">..pattern):lines() </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
@@ -1902,8 +1912,8 @@ art.
 
 <span class="org-meta-line">#+NAME: module-cmus-cover-setup</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Album folder regexp
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Album folder regexp
 </span></span><span class="org-block">cmus_album_regex = </span><span class="string"><span class="org-block">"^[0-9]\\{4\\}-"</span></span><span class="org-block">
 
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Album display (with cover)
@@ -1926,8 +1936,8 @@ This function detects whether a cmus instance is running by requesting its PID.
 
 <span class="org-meta-line">#+NAME: module-cmus-get-pid</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Get cmus PID to check if it is running
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Get cmus PID to check if it is running
 </span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">getCmusPid</span></span><span class="org-block">()
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">fpid</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">io</span></span><span class="org-block">.</span><span class="builtin"><span class="org-block">popen</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"pgrep cmus"</span></span><span class="org-block">)
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">pid</span></span><span class="org-block"> = fpid:read(</span><span class="string"><span class="org-block">"*n"</span></span><span class="org-block">)
@@ -1950,8 +1960,8 @@ used: clicking on the widget toggles the play state (play / pause).
 
 <span class="org-meta-line">#+NAME: module-cmus-control</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Enable cmus control
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Enable cmus control
 </span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">cmus_control</span></span><span class="org-block"> (action)
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">cmus_info</span></span><span class="org-block">, </span><span class="variable-name"><span class="org-block">cmus_state</span></span><span class="org-block">
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">cmus_run</span></span><span class="org-block"> = getCmusPid()
@@ -1993,8 +2003,8 @@ global variables defined earlier (see <span class="org-link"><a href="nil:nil">g
 
 <span class="org-meta-line">#+NAME: module-cmus-popup</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">cmus_popup</span></span><span class="org-block">(timeout)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">cmus_popup</span></span><span class="org-block">(timeout)
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">img</span></span><span class="org-block">
    </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> util.file_readable(cmus_img_g) </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block">
       img = cmus_img_g
@@ -2044,8 +2054,8 @@ rm desktop.png -rf
 
 <span class="org-meta-line">#+NAME: img-cmus-popup</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 60%</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Cmus popup notification, with album cover and track list.
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png</a></span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Cmus popup notification, with album cover and track list.</span>
+<span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png</a></span>
 
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Quick play command</span>
@@ -2073,8 +2083,8 @@ bash script).
 
 <span class="org-meta-line">#+NAME: module-cmus-play</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">cmus_play</span></span><span class="org-block">(mode, fold)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">cmus_play</span></span><span class="org-block">(mode, fold)
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">out</span></span><span class="org-block">
    </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> mode == </span><span class="string"><span class="org-block">"rand"</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block">
       alb_sel_cmd = </span><span class="string"><span class="org-block">"ls "</span></span><span class="org-block"> .. global_prompt.music_folder .. </span><span class="string"><span class="org-block">" | "</span></span><span class="org-block"> ..
@@ -2162,8 +2172,8 @@ highlighted in the list.
 
 <span class="org-meta-line">#+NAME: module-cmus-hook</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">cmus_hook</span></span><span class="org-block">()
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">cmus_hook</span></span><span class="org-block">()
    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">check if cmus is running
 </span></span><span class="org-block">   </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">cmus_run</span></span><span class="org-block"> = getCmusPid()
    </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> cmus_run </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block">
@@ -2261,8 +2271,8 @@ notification to mouse over events and setup the click actions.
 
 <span class="org-meta-line">#+NAME: src-main-cmus</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ cmus
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ cmus
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Cmus Widget
 </span></span><span class="org-block">tb_cmus = wibox.widget.textbox()
 tb_cmus:set_text(</span><span class="string"><span class="org-block">"cmus"</span></span><span class="org-block">)
@@ -2439,6 +2449,32 @@ snippet.  In the following source block, replace line<span class="org-macro">{{{
 line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(user-hardcoded)</a></span> and line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(pass-nil)</a></span> by
 line<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:nil">(pass-hardcoded)</a></span> and set the correct password.
 
+<span class="comment"># Need to versions of source block, one for use in makefile (with noweb,</span>
+<span class="comment"># disabling source labels) and one with source labels for export.</span>
+
+<span class="org-meta-line">#+NAME: ttrss-credentials-noref</span>
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :tangle no :results silent :exports none
+</span><span class="org-block">(</span><span class="keyword"><span class="org-block">defun</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">get-ttrss-cred</span></span><span class="org-block"> (</span><span class="type"><span class="org-block">&amp;optional</span></span><span class="org-block"> url)
+  (</span><span class="keyword"><span class="org-block">let</span></span><span class="org-block"> ((ttrss-url (</span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> url url </span><span class="string"><span class="org-block">"127.0.0.1:81/tt-rss"</span></span><span class="org-block">))
+        (ttrss-user nil)
+        </span><span class="comment-delimiter"><span class="org-block">;;</span></span><span class="comment"><span class="org-block">(ttrss-user "myuser")
+</span></span><span class="org-block">        (ttrss-pass nil)
+        </span><span class="comment-delimiter"><span class="org-block">;;</span></span><span class="comment"><span class="org-block">(ttrss-pass "mypassword")
+</span></span><span class="org-block">        )
+    (</span><span class="keyword"><span class="org-block">when</span></span><span class="org-block"> (</span><span class="keyword"><span class="org-block">require</span></span><span class="org-block"> '</span><span class="constant"><span class="org-block">auth-source</span></span><span class="org-block">)
+      (</span><span class="keyword"><span class="org-block">let</span></span><span class="org-block"> ((auth (nth 0 (auth-source-search </span><span class="builtin"><span class="org-block">:host</span></span><span class="org-block"> ttrss-url
+                                             </span><span class="builtin"><span class="org-block">:requires</span></span><span class="org-block"> '(user secret)))))
+        (</span><span class="keyword"><span class="org-block">when</span></span><span class="org-block"> (and (plist-get auth </span><span class="builtin"><span class="org-block">:secret</span></span><span class="org-block">) (plist-get auth </span><span class="builtin"><span class="org-block">:user</span></span><span class="org-block">))
+          (setq ttrss-pass (funcall (plist-get auth </span><span class="builtin"><span class="org-block">:secret</span></span><span class="org-block">))
+                ttrss-user (plist-get auth </span><span class="builtin"><span class="org-block">:user</span></span><span class="org-block">))
+          )
+        )
+      )
+    `(,ttrss-url ,ttrss-user ,ttrss-pass)
+    )
+  )
+</span><span class="org-block-end-line">#+END_SRC
+</span>
 <span class="org-meta-line">#+NAME: ttrss-credentials</span>
 <span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -n -r :tangle no :results silent :exports code :eval query-export
 </span><span class="org-block">(</span><span class="keyword"><span class="org-block">defun</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">get-ttrss-cred</span></span><span class="org-block"> (</span><span class="type"><span class="org-block">&amp;optional</span></span><span class="org-block"> url)
@@ -2486,8 +2522,8 @@ These functions internally use the <span class="org-verbatim">=ttrss_get=</span>
 <span class="org-meta-line">#+NAME: module-ttrss</span>
 <span class="org-meta-line">#+HEADER: :var ttrss_cred=(get-ttrss-cred "127.0.0.1:81/tt-rss")</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Script options
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Script options
 </span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">ttrss_cmd</span></span><span class="org-block"> = </span><span class="string"><span class="org-block">"python3 "</span></span><span class="org-block"> .. awesome_paths.config_dir ..
    </span><span class="string"><span class="org-block">"/scripts/ttrss-wrapper.py "</span></span><span class="org-block">
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">ttrss_url</span></span><span class="org-block"> = </span><span class="string"><span class="org-block">"<a href="http://">http://</a>"</span></span><span class="org-block"> .. ttrss_cred[1]
@@ -2562,8 +2598,8 @@ are added to the widget:
 
 <span class="org-meta-line">#+NAME: src-main-ttrss</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ tt-rss
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ tt-rss
 </span></span><span class="org-block">tb_ttrss = wibox.widget.textbox()
 tb_ttrss:set_text(</span><span class="string"><span class="org-block">"ttrss"</span></span><span class="org-block">)
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">refresh
@@ -2612,8 +2648,8 @@ actual colors are defined through the <span class="org-link"><a href="nil:nil">t
 
 <span class="org-meta-line">#+NAME: src-effects-monitor-highlight</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Highlight current monitor
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Highlight current monitor
 </span></span><span class="org-block">screen_highlight_timer = timer({timeout = 0.2})
 screen_highlight_idx = 1
 screen_highlight_timer:connect_signal(
@@ -2652,8 +2688,8 @@ regaining focus.  Note that this block is disabled by default (see the
 
 <span class="org-meta-line">#+NAME: src-effects-transparency</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Transparency
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Transparency
 </span></span><span class="org-block">client.connect_signal(</span><span class="string"><span class="org-block">"focus"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">(c)
                          c.border_color = beautiful.border_focus
                          c.opacity = 1
@@ -2665,6 +2701,8 @@ client.connect_signal(</span><span class="string"><span class="org-block">"unfoc
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">}}
 </span></span><span class="org-block-end-line">#+END_SRC
 </span>
+<span class="org-meta-line">#+RESULTS: src-effects-transparency</span>
+
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Window border change on focus</span>
 
@@ -2673,8 +2711,8 @@ focus.  This comes from the default configuration.
 
 <span class="org-meta-line">#+NAME: src-effects-border</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Window border
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Window border
 </span></span><span class="org-block">client.connect_signal(</span><span class="string"><span class="org-block">"focus"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">(c)
                          c.border_color = beautiful.border_focus
 </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
@@ -2704,8 +2742,8 @@ This section handles mouse actions on an empty workspace:
 
 <span class="org-meta-line">#+NAME: src-bindings-mouse-root</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Mouse bindings
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Mouse bindings
 </span></span><span class="org-block">root.buttons(awful.util.table.join(
     awful.button({ }, 3, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () mymainmenu:toggle() </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">),
     awful.button({ }, 4, awful.tag.viewprev),
@@ -2725,8 +2763,8 @@ via the <span class="org-link"><a href="nil:nil">rules</a></span> mechanism.
 
 <span class="org-meta-line">#+NAME: src-bindings-mouse-client</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Focus, move, resize window on click
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Focus, move, resize window on click
 </span></span><span class="org-block">clientbuttons = awful.util.table.join(
     awful.button({ }, 1, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c) client.focus = c; c:raise() </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">),
     awful.button({ modkey }, 1, awful.mouse.client.move),
@@ -2754,8 +2792,8 @@ the tag list widget:
 
 <span class="org-meta-line">#+NAME: src-bindings-mouse-taglist</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-mytaglist.buttons = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">mytaglist.buttons = awful.util.table.join(
    awful.button({ }, 1, awful.tag.viewonly),
    awful.button({ modkey }, 1, awful.client.movetotag),
    awful.button({ }, 3, awful.tag.viewtoggle),
@@ -2781,8 +2819,8 @@ Task list mouse actions are the following:
 
 <span class="org-meta-line">#+NAME: src-bindings-mouse-tasklist</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-mytasklist.buttons = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">mytasklist.buttons = awful.util.table.join(
    awful.button({ }, 1, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c)
          </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> c == client.focus </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block">
             c.minimized = </span><span class="constant"><span class="org-block">true</span></span><span class="org-block">
@@ -2837,8 +2875,8 @@ First, we initialize the table for the keys.
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-start</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Key bindings
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Key bindings
 </span></span><span class="org-block">globalkeys = {}
 </span><span class="org-block-end-line">#+END_SRC
 </span>
@@ -2855,8 +2893,8 @@ Move the the previous / next tag:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-prevnext</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"Left"</span></span><span class="org-block">,  awful.tag.viewprev ),
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"Right"</span></span><span class="org-block">, awful.tag.viewnext )
 )
@@ -2870,8 +2908,8 @@ environments) on all screens:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-prevnext-ctrl_alt</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ altkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"Left"</span></span><span class="org-block">,
        </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
           </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">screen_cur</span></span><span class="org-block"> = mouse.screen
@@ -2914,8 +2952,8 @@ Move the current window to the previous / next tag:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-move-prevnext</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
    awful.key({ altkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"Left"</span></span><span class="org-block">,
        </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
           </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">screen_cur</span></span><span class="org-block"> = mouse.screen
@@ -2984,8 +3022,8 @@ Bind numbers to tags (with <span class="org-verbatim">=modkey=</span>):
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-num</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Bind all key numbers to tags.
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Bind all key numbers to tags.
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Be careful: we use keycodes to make it works on any keyboard layout.
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">This should map on the top row of your keyboard, usually 1 to 9.
 </span></span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
@@ -3010,8 +3048,8 @@ Alternative binding to go to a tag by number on all screens with <span class="or
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-num-ctrl_alt</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
     globalkeys = awful.util.table.join(globalkeys,
         </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">View tag for all screens.
 </span></span><span class="org-block">        awful.key({ altkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"#"</span></span><span class="org-block"> .. i + 9,
@@ -3035,8 +3073,8 @@ Move the other screen to a specific tag number (assumes two screens) using
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-num-other</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
     globalkeys = awful.util.table.join(globalkeys,
         </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">View tag for other screen.
 </span></span><span class="org-block">        awful.key({ modkey, altkey }, </span><span class="string"><span class="org-block">"#"</span></span><span class="org-block"> .. i + 9,
@@ -3062,8 +3100,8 @@ Move the current client (window) to tag by number:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-num-move</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
     globalkeys = awful.util.table.join(globalkeys,
         </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Move client to tag.
 </span></span><span class="org-block">        awful.key({ modkey, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"#"</span></span><span class="org-block"> .. i + 9,
@@ -3087,9 +3125,9 @@ Activate other tag on the current one:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-num-select-from</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
 
-</span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
     globalkeys = awful.util.table.join(globalkeys,
         </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Toggle tag.
 </span></span><span class="org-block">        awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"#"</span></span><span class="org-block"> .. i + 9,
@@ -3111,8 +3149,8 @@ Activate current tag on another one:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-num-select-to</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">i</span></span><span class="org-block"> = 1, 9 </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
     globalkeys = awful.util.table.join(globalkeys,
         </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Toggle tag.
 </span></span><span class="org-block">        awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"#"</span></span><span class="org-block"> .. i + 9,
@@ -3135,8 +3173,8 @@ Move to previous / next screen with <span class="org-verbatim">=modkey=</span> +
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-screen</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"j"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.screen.focus_relative( 1) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">),
@@ -3152,8 +3190,8 @@ Use <span class="org-verbatim">=modkey=</span> + <span class="org-verbatim">=Ctr
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-tags-screen-tab</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"Tab"</span></span><span class="org-block">,
        </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.screen.focus_relative( 1) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">),
     awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"Tab"</span></span><span class="org-block">,
@@ -3173,8 +3211,8 @@ Move to the previous / next window on the current screen using <span class="org-
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-clients-prevnext</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Clients
 </span></span><span class="org-block">    awful.key({ modkey, }, </span><span class="string"><span class="org-block">"j"</span></span><span class="org-block">,
         </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
@@ -3196,8 +3234,8 @@ Go to the tag with the last focused window:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-clients-last</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"Escape"</span></span><span class="org-block">, awful.tag.history.restore)
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3209,8 +3247,8 @@ Jump to window with urgent flag:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-clients-urgent</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"u"</span></span><span class="org-block">, awful.client.urgent.jumpto)
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3222,8 +3260,8 @@ Loop through window history on the current tag and screen (like <span class="org
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-clients-history</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"Tab"</span></span><span class="org-block">,
         </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
             awful.client.focus.history.previous()
@@ -3241,8 +3279,8 @@ Restore minimized window:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-clients-restore</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"n"</span></span><span class="org-block">, awful.client.restore)
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3260,8 +3298,8 @@ Swap window with previous / next in current layout using <span class="org-verbat
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-layout-move</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Layout manipulation
 </span></span><span class="org-block">   awful.key({ modkey, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"j"</span></span><span class="org-block">,
@@ -3278,8 +3316,8 @@ Control client size within layout:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-layout-resize</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey,           }, </span><span class="string"><span class="org-block">"l"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.tag.incmwfact( 0.05) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">),
@@ -3303,8 +3341,8 @@ Cycle through available layouts using <span class="org-verbatim">=modkey=</span>
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-layout-change</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey,         }, </span><span class="string"><span class="org-block">"space"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.layout.inc(layouts,  1) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">),
@@ -3325,8 +3363,8 @@ Toggle <span class="org-link"><a href="nil:nil">main menu</a></span>:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-mainmenu</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"w"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () mymainmenu:show() </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3338,8 +3376,8 @@ Open a terminal with <span class="org-verbatim">=modkey=</span> + <span class="o
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-terminal</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, </span><span class="string"><span class="org-block">"Return"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.util.spawn(terminal) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
@@ -3353,8 +3391,8 @@ Start the web browser with <span class="org-verbatim">=modkey=</span> + <span cl
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-web</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"Return"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.util.spawn(internet_browser) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
@@ -3369,8 +3407,8 @@ Start conkeror, an alternative web browser using <span class="org-verbatim">=mod
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-conkeror</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"Return"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.util.spawn(</span><span class="string"><span class="org-block">"conkeror"</span></span><span class="org-block">) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
@@ -3384,8 +3422,8 @@ Start emacs with <span class="org-verbatim">=modkey=</span> + <span class="org-v
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-emacs</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"Return"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.util.spawn(emacs) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
@@ -3399,8 +3437,8 @@ Start the file explorer software with <span class="org-verbatim">=modkey=</span>
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-explorer</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, </span><span class="string"><span class="org-block">"e"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () awful.util.spawn_with_shell(explorer .. </span><span class="string"><span class="org-block">" ~"</span></span><span class="org-block">) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
@@ -3414,8 +3452,8 @@ Restart awesome-wm (reload <span class="org-verbatim">=rc.lua=</span>) with <spa
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-restart</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"r"</span></span><span class="org-block">, awesome.restart)
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3427,8 +3465,8 @@ Log out with <span class="org-verbatim">=modkey=</span> + <span class="org-verba
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-applications-logout</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"q"</span></span><span class="org-block">, awesome.quit)
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3448,8 +3486,8 @@ Execute arbitrary shell commands with <span class="org-verbatim">=modkey=</span>
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-prompts-exec</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Prompt
 </span></span><span class="org-block">    awful.key({ modkey }, </span><span class="string"><span class="org-block">"r"</span></span><span class="org-block">,
        </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
@@ -3475,8 +3513,8 @@ Execute lua code with <span class="org-verbatim">=modkey=</span> + <span class="
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-prompts-lua</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, </span><span class="string"><span class="org-block">"x"</span></span><span class="org-block">,
        </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
           mywibox_prompt[mouse.screen].visible = </span><span class="constant"><span class="org-block">true</span></span><span class="org-block">
@@ -3498,8 +3536,8 @@ Toggle the custom <span class="org-link"><a href="nil:nil">global prompt</a></sp
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-prompts-global</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-globalkeys = awful.util.table.join(globalkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, </span><span class="string"><span class="org-block">"z"</span></span><span class="org-block">,
        </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
           mywibox_prompt[mouse.screen].visible = </span><span class="constant"><span class="org-block">true</span></span><span class="org-block">
@@ -3523,8 +3561,8 @@ Start the menubar with <span class="org-verbatim">=modkey=</span> + <span class=
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-menubar</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Menubar
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Menubar
 </span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, </span><span class="string"><span class="org-block">"a"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">() menubar.show() </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
 )
@@ -3537,8 +3575,8 @@ Use special keyboard keys to control the audio volume:
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-volume</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Volume
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Volume
 </span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ }, </span><span class="string"><span class="org-block">"XF86AudioRaiseVolume"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
           awful.util.spawn(awesome_paths.config_dir ..
@@ -3559,8 +3597,8 @@ Lock the screen using <span class="org-verbatim">=xscreensaver=</span> with <spa
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-lock</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Screen lock
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Screen lock
 </span></span><span class="org-block">globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"l"</span></span><span class="org-block">,
        </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> ()
@@ -3576,8 +3614,8 @@ Register the keybindings defined in the <span class="org-verbatim">=globalkeys=<
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-register</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Set keys
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Set keys
 </span></span><span class="org-block">root.keys(globalkeys)
 </span><span class="org-block-end-line">#+END_SRC
 </span>
@@ -3588,8 +3626,8 @@ The keybindings defined in this section control individual windows.
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = {}
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = {}
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Fullscreen</span>
@@ -3598,8 +3636,8 @@ Get the current window in fullscreen with <span class="org-verbatim">=modkey=</s
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-fullscreen</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(
    clientkeys,
    awful.key({ modkey, }, </span><span class="string"><span class="org-block">"f"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c) c.fullscreen = </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.fullscreen  </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
@@ -3613,8 +3651,8 @@ Kill current window with <span class="org-verbatim">=modkey=</span> + <span clas
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-kill</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(clientkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, </span><span class="string"><span class="org-block">"Shift"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"c"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c) c:kill() </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3627,8 +3665,8 @@ Set window to floating mode (does not use layout) with <span class="org-verbatim
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-floating</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(clientkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"space"</span></span><span class="org-block">, awful.client.floating.toggle )
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3642,8 +3680,8 @@ shortcut.
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-swap-master</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(
    clientkeys,
    awful.key({ modkey, </span><span class="string"><span class="org-block">"Control"</span></span><span class="org-block"> }, </span><span class="string"><span class="org-block">"Return"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c) c:swap(awful.client.getmaster()) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
@@ -3657,8 +3695,8 @@ Send current window to other screen with <span class="org-verbatim">=modkey=</sp
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-other-screen</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(clientkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"o"</span></span><span class="org-block">, awful.client.movetoscreen )
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3670,8 +3708,8 @@ Toggle on-top flag (useful for floating windows) with <span class="org-verbatim"
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-ontop</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(clientkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"t"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c) c.ontop = </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.ontop </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
 )
 </span><span class="org-block-end-line">#+END_SRC
@@ -3683,8 +3721,8 @@ Minimize the current window with <span class="org-verbatim">=modkey=</span> + <s
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-minimize</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(clientkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, </span><span class="string"><span class="org-block">"n"</span></span><span class="org-block">,
         </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c)
             </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">The client currently has the input focus, so it cannot be
@@ -3701,8 +3739,8 @@ Toggle maximize property for the current window with <span class="org-verbatim">
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-maximize</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(clientkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey,           }, </span><span class="string"><span class="org-block">"m"</span></span><span class="org-block">,
         </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c)
             c.maximized_horizontal = </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.maximized_horizontal
@@ -3719,8 +3757,8 @@ properties, etc.).  Triggered by pressing <span class="org-verbatim">=modkey=</s
 
 <span class="org-meta-line">#+NAME: src-bindings-keyboard-client-info</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-clientkeys = awful.util.table.join(clientkeys,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey,           }, </span><span class="string"><span class="org-block">"i"</span></span><span class="org-block">,
       </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c)
         </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">geom</span></span><span class="org-block"> = c:geometry()
@@ -3732,7 +3770,7 @@ clientkeys = awful.util.table.join(clientkeys,
         </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> c.name </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block"> t = t .. </span><span class="string"><span class="org-block">"Name: "</span></span><span class="org-block"> .. c.name .. </span><span class="string"><span class="org-block">"\n"</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> c.type </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block"> t = t .. </span><span class="string"><span class="org-block">"Type: "</span></span><span class="org-block"> .. c.type .. </span><span class="string"><span class="org-block">"\n"</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> c.fullscreen </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block"> t = t .. </span><span class="string"><span class="org-block">"Fullscreen; yes\n"</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
-        </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> c.maximized_horizontal </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block"> t = t .. </span><span class="string"><span class="org-block">"Maximized Horizontal: yes\n"</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
+        </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> c.maximized_horizontal </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block"> t = t .. </span><span class="string"><span class="org-block">"Maximized Horizontal: yes\n"</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">en</span></span><span class="whitespace-line"><span class="keyword"><span class="org-block">d</span></span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> c.maximized_vertical </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block"> t = t .. </span><span class="string"><span class="org-block">"Maximized Vertical: yes\n"</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> c.above </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block"> t = t .. </span><span class="string"><span class="org-block">"Above: yes\n"</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
 
@@ -3767,8 +3805,8 @@ on screen 1 for my configuration).
 
 <span class="org-meta-line">#+NAME: src-wibox-start-loop</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Wibox
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{ Wibox
 </span></span><span class="org-block">
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a wibox for each screen and add it
 </span></span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">s</span></span><span class="org-block"> = 1, screen.count() </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block">
@@ -3784,8 +3822,8 @@ widget on the wibox for user input.  This text widget is defined here:
 
 <span class="org-meta-line">#+NAME: src-wibox-prompt</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a promptbox for each screen
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a promptbox for each screen
 </span></span><span class="org-block">    mypromptbox[s] = awful.widget.prompt()
     mypromptbox[s].font = </span><span class="string"><span class="org-block">"Consolas 18"</span></span><span class="org-block">
 </span><span class="org-block-end-line">#+END_SRC
@@ -3799,8 +3837,8 @@ follows:
 
 <span class="org-meta-line">#+NAME: src-wibox-wibox</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create the wibox
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create the wibox
 </span></span><span class="org-block">    mywibox[s] = awful.wibox({ position = </span><span class="string"><span class="org-block">"top"</span></span><span class="org-block">, screen = s })
 </span><span class="org-block-end-line">#+END_SRC
 </span>
@@ -3858,8 +3896,8 @@ the <span class="org-link"><a href="nil:nil">mouse bindings section</a></span>.
 
 <span class="org-meta-line">#+NAME: src-wibox-taglist</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a taglist widget
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a taglist widget
 </span></span><span class="org-block">    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all,
                                         mytaglist.buttons)
     left_layout:add(mytaglist[s])
@@ -3884,8 +3922,8 @@ First, create the layout container:
 
 <span class="org-meta-line">#+NAME: src-wibox-right-start</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Widgets that are aligned to the right
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Widgets that are aligned to the right
 </span></span><span class="org-block">    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">right_layout</span></span><span class="org-block"> = wibox.layout.fixed.horizontal()
 </span><span class="org-block-end-line">#+END_SRC
 </span>
@@ -4006,8 +4044,8 @@ the <span class="org-link"><a href="nil:nil">mouse bindings section</a></span>.
 
 <span class="org-meta-line">#+NAME: src-wibox-tasklist</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a tasklist widget
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">    </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Create a tasklist widget
 </span></span><span class="org-block">    mytasklist[s] = awful.widget.tasklist(
        s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 </span><span class="org-block-end-line">#+END_SRC
@@ -4036,8 +4074,8 @@ This code block closes the <span class="org-link"><a href="nil:nil">for loop</a>
 
 <span class="org-meta-line">#+NAME: src-wibox-end-loop</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">}}}
 </span></span><span class="org-block-end-line">#+END_SRC
 </span>
@@ -4061,8 +4099,8 @@ Only a few simple rules are defined here:
 
 <span class="org-meta-line">#+NAME: src-rules</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Rules
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Rules
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Rules to apply to new clients (through the "manage" signal).
 </span></span><span class="org-block">awful.rules.rules = {
     </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">All clients will match this rule.
@@ -4106,8 +4144,8 @@ disabled) and border coloring.
 
 <span class="org-meta-line">#+NAME: src-signals</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Signals
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">{{{ Signals
 </span></span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Signal function to execute when a new client appears.
 </span></span><span class="org-block">client.connect_signal(</span><span class="string"><span class="org-block">"manage"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> (c, startup)
     </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Enable sloppy focus
@@ -4123,12 +4161,12 @@ disabled) and border coloring.
 </span></span><span class="org-block">        </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">i.e. put it at the end of others instead of setting it master.
 </span></span><span class="org-block">        </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">awful.client.setslave(c)
 </span></span><span class="org-block">
-        </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Put windows in a smart way, only if they does not set an initial position.
-</span></span><span class="org-block">        </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.size_hints.user_position </span><span class="keyword"><span class="org-block">and</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.size_hints.program_position </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block">
+        </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Put windows in a smart way, only if they does not set an initial posi</span></span><span class="whitespace-line"><span class="comment"><span class="org-block">tion.</span></span></span><span class="comment"><span class="org-block">
+</span></span><span class="org-block">        </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.size_hints.user_position </span><span class="keyword"><span class="org-block">and</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.size_hints.program_position </span><span class="whitespace-line"><span class="keyword"><span class="org-block">then</span></span></span><span class="org-block">
             awful.placement.no_overlap(c)
             awful.placement.no_offscreen(c)
         </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
-    </span><span class="keyword"><span class="org-block">elseif</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.size_hints.user_position </span><span class="keyword"><span class="org-block">and</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.size_hints.program_position </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block">
+    </span><span class="keyword"><span class="org-block">elseif</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.size_hints.user_position </span><span class="keyword"><span class="org-block">and</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> c.size_hints.program_position </span><span class="whitespace-line"><span class="keyword"><span class="org-block">then</span></span></span><span class="org-block">
         </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">Prevent clients from being unreachable after screen count change
 </span></span><span class="org-block">        awful.placement.no_offscreen(c)
     </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
@@ -4196,8 +4234,8 @@ variable (<span class="org-verbatim">=png=</span> and <span class="org-verbatim"
 
 <span class="org-meta-line">#+NAME: module-icon_finder</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">util</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful.util"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">util</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful.util"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">beautiful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"beautiful"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">lfs</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"lfs"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">io</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">io</span></span><span class="org-block">
@@ -4301,8 +4339,8 @@ This module requires basic awesome-wm libraries, and file system tools.
 
 <span class="org-meta-line">#+NAME: module-global_prompt-setup</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">awful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">awful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">util</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful.util"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">lfs</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"lfs"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">runorraise</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"runorraise"</span></span><span class="org-block">)
@@ -4338,8 +4376,8 @@ First, define some helper functions:
 
 <span class="org-meta-line">#+NAME: module-global_prompt-utils</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">generic_completion_wrapper</span></span><span class="org-block">(kw, list, str, cur_pos, ncomp)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">generic_completion_wrapper</span></span><span class="org-block">(kw, list, str, cur_pos, ncomp)
    out_str, out_pos = awful.completion.generic(str, cur_pos, ncomp, list)
    out_str = kw .. </span><span class="string"><span class="org-block">" "</span></span><span class="org-block"> .. out_str
    out_pos = out_pos + kw:len() + 1
@@ -4392,8 +4430,8 @@ input is of the form <span class="org-verbatim">=KEYWORD ARGS=</span>).  A promp
 
 <span class="org-meta-line">#+NAME: global_prompt_template</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua :tangle no :exports code
-</span><span class="org-block">
-global_prompt.prompt_TEMPLATE = {
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.prompt_TEMPLATE = {
    keyword={</span><span class="string"><span class="org-block">"?"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"h"</span></span><span class="org-block">}, </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">list of strings
 </span></span><span class="org-block">   help=</span><span class="string"><span class="org-block">"Help message for prompt"</span></span><span class="org-block">,
    </span><span class="function-name"><span class="org-block">run_function</span></span><span class="org-block"> = </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">(kw, name)
@@ -4427,8 +4465,8 @@ keyword is <span class="org-verbatim">=h=</span> or <span class="org-verbatim">=
 
 <span class="org-meta-line">#+NAME: module-global_prompt-help</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-global_prompt.prompt_help = {
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.prompt_help = {
    keyword={</span><span class="string"><span class="org-block">"?"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"h"</span></span><span class="org-block">}, help=</span><span class="string"><span class="org-block">"Show a list of available commands"</span></span><span class="org-block">,
    </span><span class="function-name"><span class="org-block">run_function</span></span><span class="org-block"> = </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">(kw, name)
       help_str = </span><span class="string"><span class="org-block">""</span></span><span class="org-block">
@@ -4480,8 +4518,8 @@ rm desktop.png -rf
 
 <span class="org-meta-line">#+NAME: img-global_prompt-help</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 40%</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Help notification from global prompt.
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png</a></span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Help notification from global prompt.</span>
+<span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png</a></span>
 
 
 
@@ -4493,8 +4531,8 @@ shutdown=</span> will trigger a shutdown (with confirmation prompt).
 
 <span class="org-meta-line">#+NAME: module-global_prompt-session</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-global_prompt.prompt_session = {
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.prompt_session = {
    keyword={</span><span class="string"><span class="org-block">"s"</span></span><span class="org-block">}, help=</span><span class="string"><span class="org-block">"Session control (shutdown, restart, logout, lock)"</span></span><span class="org-block">,
    </span><span class="function-name"><span class="org-block">run_function</span></span><span class="org-block"> = </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">(kw, cmd)
       </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">list of commands: mplayer -input cmdlist | more
@@ -4534,8 +4572,8 @@ class / title pairs.  Tab completion is also implemented.
 
 <span class="org-meta-line">#+NAME: module-global_prompt-window</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-global_prompt.prompt_window = {
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.prompt_window = {
    keyword={</span><span class="string"><span class="org-block">"j"</span></span><span class="org-block">}, help=</span><span class="string"><span class="org-block">"Jump to window"</span></span><span class="org-block">,
    </span><span class="function-name"><span class="org-block">run_function</span></span><span class="org-block"> = </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">(kw, cmd)
       cmd_l = </span><span class="builtin"><span class="org-block">string</span></span><span class="org-block">.</span><span class="builtin"><span class="org-block">lower</span></span><span class="org-block">(cmd)
@@ -4635,8 +4673,8 @@ a popup notification.
 
 <span class="org-meta-line">#+NAME: module-global_prompt-calc</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-global_prompt.calc_cmd = </span><span class="string"><span class="org-block">"python3 "</span></span><span class="org-block"> .. awesome_paths.config_dir ..
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.calc_cmd = </span><span class="string"><span class="org-block">"python3 "</span></span><span class="org-block"> .. awesome_paths.config_dir ..
    </span><span class="string"><span class="org-block">"/scripts/calc.py "</span></span><span class="org-block">
 global_prompt.prompt_calc = {
    keyword={</span><span class="string"><span class="org-block">"c"</span></span><span class="org-block">}, help=</span><span class="string"><span class="org-block">"Calculator"</span></span><span class="org-block">,
@@ -4671,8 +4709,8 @@ arguments are:
 
 <span class="org-meta-line">#+NAME: module-global_prompt-cmus</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-global_prompt.prompt_cmus = {
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.prompt_cmus = {
    keyword={</span><span class="string"><span class="org-block">"cm"</span></span><span class="org-block">}, help=</span><span class="string"><span class="org-block">"cmus remote"</span></span><span class="org-block">,
    </span><span class="function-name"><span class="org-block">run_function</span></span><span class="org-block"> = </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">(kw, cmd)
       </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">list of commands: mplayer -input cmdlist | more
@@ -4751,8 +4789,8 @@ for the <span class="org-verbatim">=mc=</span> keyword simply lists the availabl
 
 <span class="org-meta-line">#+NAME: module-global_prompt-mplayer</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-global_prompt.mplayer_pipe = </span><span class="string"><span class="org-block">"/tmp/awesome-mplayer.pipe"</span></span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.mplayer_pipe = </span><span class="string"><span class="org-block">"/tmp/awesome-mplayer.pipe"</span></span><span class="org-block">
 global_prompt.music_folder = </span><span class="string"><span class="org-block">"/media/data/music/"</span></span><span class="org-block">
 global_prompt.music_locate_db = global_prompt.music_folder .. </span><span class="string"><span class="org-block">"music.db"</span></span><span class="org-block">
 global_prompt.music_ext_list = { </span><span class="string"><span class="org-block">".mp3"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">".flac"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">".ogg"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">".aac"</span></span><span class="org-block"> }
@@ -4872,8 +4910,8 @@ and starts a duckduckgo search with the input arguments.
 
 <span class="org-meta-line">#+NAME: module-global_prompt-web</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-global_prompt.search_url = </span><span class="string"><span class="org-block">"<a href="https://duckduckgo.com/?q=%s">https://duckduckgo.com/?q=%s</a>"</span></span><span class="org-block">
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.search_url = </span><span class="string"><span class="org-block">"<a href="https://duckduckgo.com/?q=%s">https://duckduckgo.com/?q=%s</a>"</span></span><span class="org-block">
 global_prompt.prompt_web = {
    keyword={</span><span class="string"><span class="org-block">"w"</span></span><span class="org-block">}, help=</span><span class="string"><span class="org-block">"Web search"</span></span><span class="org-block">,
    </span><span class="function-name"><span class="org-block">run_function</span></span><span class="org-block"> = </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">(kw, expr)
@@ -4904,8 +4942,8 @@ respectively.
 
 <span class="org-meta-line">#+NAME: module-global_prompt-main</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-global_prompt.prompt_list = { global_prompt.prompt_help,
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">global_prompt.prompt_list = { global_prompt.prompt_help,
                               global_prompt.prompt_music,
                               global_prompt.prompt_calc,
                               global_prompt.prompt_cmus,
@@ -4989,10 +5027,10 @@ startup are:
 
 <span class="org-meta-line">#+NAME: src-startup-apps</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-my_utility.run_once(awesome_paths.config_dir .. </span><span class="string"><span class="org-block">"/scripts/dual_default.sh"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="org-block">my_utility.run_once(awesome_paths.config_dir .. </span><span class="string"><span class="org-block">"/scripts/dual_default.sh"</span></span><span class="org-block">)
 my_utility.run_once(</span><span class="string"><span class="org-block">"numlockx&amp;"</span></span><span class="org-block">)
-my_utility.run_once(awesome_paths.home_dir .. </span><span class="string"><span class="org-block">"/.dropbox-dist/dropboxd"</span></span><span class="org-block">) </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">dropbox
+my_utility.run_once(awesome_paths.home_dir .. </span><span class="string"><span class="org-block">"/.dropbox-dist/dropboxd"</span></span><span class="org-block">) </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">drop</span></span><span class="whitespace-line"><span class="comment"><span class="org-block">box</span></span></span><span class="comment"><span class="org-block">
 </span></span><span class="org-block">my_utility.run_once(</span><span class="string"><span class="org-block">"nm-applet"</span></span><span class="org-block">) </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">networking
 </span></span><span class="org-block">my_utility.run_once(</span><span class="string"><span class="org-block">"xscreensaver -nosplash"</span></span><span class="org-block">)
 my_utility.run_once(</span><span class="string"><span class="org-block">"rygel"</span></span><span class="org-block">)
@@ -5034,8 +5072,8 @@ configuration.
 
 <span class="org-meta-line">#+NAME: module-utility-imports</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">awful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful"</span></span><span class="org-block">)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">awful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"awful"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">naughty</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"naughty"</span></span><span class="org-block">)
 </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">beautiful</span></span><span class="org-block"> = </span><span class="builtin"><span class="org-block">require</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"beautiful"</span></span><span class="org-block">)
 
@@ -5051,8 +5089,8 @@ pairs(lines_output)=</span>.  This was taken from <span class="org-link"><a href
 
 <span class="org-meta-line">#+NAME: module-utility-lines</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">my_utility.lines</span></span><span class="org-block">(str)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">my_utility.lines</span></span><span class="org-block">(str)
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">t</span></span><span class="org-block"> = {}
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">helper</span></span><span class="org-block">(line) </span><span class="builtin"><span class="org-block">table</span></span><span class="org-block">.</span><span class="builtin"><span class="org-block">insert</span></span><span class="org-block">(t, line) </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> </span><span class="string"><span class="org-block">""</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
    helper((str:gsub(</span><span class="string"><span class="org-block">"(.-)\r?\n"</span></span><span class="org-block">, helper)))
@@ -5069,8 +5107,8 @@ some very basic escaping.
 
 <span class="org-meta-line">#+NAME: module-utility-html_escape</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">my_utility.html_escape</span></span><span class="org-block">(str)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">my_utility.html_escape</span></span><span class="org-block">(str)
    </span><span class="keyword"><span class="org-block">local</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">t</span></span><span class="org-block"> = str
    t = t:gsub(</span><span class="string"><span class="org-block">"&amp;"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"&amp;amp;"</span></span><span class="org-block">)
    t = t:gsub(</span><span class="string"><span class="org-block">"&lt;"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"&amp;lt;"</span></span><span class="org-block">)
@@ -5096,8 +5134,8 @@ color of the whole wibox (on the current screen) is temporarily set to
 
 <span class="org-meta-line">#+NAME: module-utility-confirm</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">my_utility.confirm_action</span></span><span class="org-block">(func, name)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">my_utility.confirm_action</span></span><span class="org-block">(func, name)
    mywibox[mouse.screen]:set_bg(beautiful.bg_urgent)
    mywibox[mouse.screen]:set_fg(beautiful.fg_urgent)
    awful.prompt.run({prompt = name .. </span><span class="string"><span class="org-block">" [y/N] "</span></span><span class="org-block">},
@@ -5147,8 +5185,8 @@ rm desktop.png -rf
 
 <span class="org-meta-line">#+NAME: img-confirm_action</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 60%</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Confirmation prompt before shutdown (left-most text).
-</span><span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png</a></span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Confirmation prompt before shutdown (left-most text).</span>
+<span class="org-link"><a href="file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png">file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png</a></span>
 
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Run once</span>
@@ -5162,8 +5200,8 @@ not already running.  The code is from
 
 <span class="org-meta-line">#+NAME: module-utility-run_once</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">my_utility.run_once</span></span><span class="org-block">(prg, arg_string, pname, screen)
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">my_utility.run_once</span></span><span class="org-block">(prg, arg_string, pname, screen)
     </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">not</span></span><span class="org-block"> prg </span><span class="keyword"><span class="org-block">then</span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">do</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> </span><span class="constant"><span class="org-block">nil</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
@@ -5191,8 +5229,8 @@ functions are called using <span class="org-verbatim">=my_utility.function(...)=
 
 <span class="org-meta-line">#+NAME: module-utility-close</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
-</span><span class="org-block">
-</span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> my_utility
+</span><span class="whitespace-empty"><span class="org-block">
+</span></span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> my_utility
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 

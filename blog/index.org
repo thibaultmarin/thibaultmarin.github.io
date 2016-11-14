@@ -1,12 +1,15 @@
-# Created 2016-10-14 Fri 23:05
+# Created 2016-11-13 Sun 21:43
 #+TITLE: misc/
-#+DATE: 2016/10/02
+#+DATE: 2016-10-02
 #+AUTHOR: Thibault Marin
 Random articles about linux, emacs, science, etc.  This site and the articles
-are built with [[https://gnu.org/s/emacs][emacs]] and [[http://orgmode.org][org-mode]] (using [[http://orgmode.org/worg/code/org-info-js][org-js]]).
+are built with [[https://gnu.org/s/emacs][emacs]] and
+[[http://orgmode.org][org-mode]] (using
+[[http://orgmode.org/worg/code/org-info-js][org-js]]).
 
 * Blog
 
+** [[file:posts/2016-11-13-Personal_website_in_org.org][(2016-11-13) Personal website in org]]
 ** [[file:posts/2016-10-05-Awesome-wm_configuration.org][(2016-10-05) Awesome-wm configuration]]
 
 [[file:blog.org][Older posts]]

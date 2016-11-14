@@ -192,9 +192,11 @@
     margin: 0;
     padding-left: var(--toc-ul-padding-left);
 }
+
 #table-of-contents ul {
     font-size: var(--toc-ul-font-size);
 }
+
 .org-info-js_local-toc ul {
     font-size: var(--toc-ul-local-font-size);
 }
@@ -204,6 +206,7 @@
     margin: 0;
     padding-left: var(--toc-extra-padding-x);
 }
+
 #table-of-contents > div > ul > li > ul{
     font-size: var(--toc-ul-2-font-size);
     vertical-align: middle;
@@ -214,6 +217,7 @@
     color: var(--toc-li-color);
     text-decoration: none;
 }
+
 #table-of-contents li a {
     vertical-align: middle;
 }
@@ -242,6 +246,19 @@
     padding: var(--rss-padding);
     background: var(--rss-img) no-repeat 0 var(--rss-pos);
     background-size: var(--rss-size);
+}
+
+@media screen and (min-width: 600px) {
+    .topnav {
+        position: fixed;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .topnav {
+        position: relative;
+        width: 100%;
+    }
 }
 
 .topnav ul {
@@ -275,19 +292,6 @@
 
 .topnav .right {
     float: right;
-}
-
-@media screen and (min-width: 600px) {
-    .topnav {
-        position: fixed;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .topnav {
-        position: relative;
-        width: 100%;
-    }
 }
 
 pre.src {

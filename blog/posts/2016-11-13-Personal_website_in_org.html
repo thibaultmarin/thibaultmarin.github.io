@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2016-11-13 Sun 21:43 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal website in org</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Thibault Marin">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel='stylesheet' href='/blog/css/site.css' type='text/css'/>
+<script type="text/javascript">
+    function rpl(expr, a, b) {
+      var i = 0;
+      while (i != -1) {
+         i = expr.indexOf(a, i);
+         if (i >= 0) {
+            expr = expr.substring(0, i) + b + expr.substring(i + a.length);
+            i += b.length;
+         }
+      }
+      return expr
+    }
+
+    function show_org_source(flag_html = false){
+        //document.location.href = rpl(document.location.href, "html", "org");
+        var re = /[\/]$/g;
+        var html_url = document.location.href.replace(re, '/index.html');
+        var out_ext = flag_html? "org.html": "org";
+        window.open(rpl(html_url, "html", out_ext), '_blank');
+    }
+</script>
+<link rel="alternate" type="application/rss+xml"
+                href="/blog/rss.xml"
+                title="RSS feed">
+<script type="text/javascript" src="/blog/js/org-info.js">
+/**
+ *
+ * @source: /blog/js/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in /blog/js/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in /blog/js/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "2");
+org_html_manager.set("LINK_HOME", "/blog/index.html");
+org_html_manager.set("LINK_UP", "/blog/index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "1");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "showall");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href="/blog/index.html"> UP </a>
+ |
+ <a accesskey="H" href="/blog/index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<div class='topnav'>
+  <ul>
+    <li><a href='/blog/index.html'>Home</a></li>
+    <li><a href='/blog/blog.html'>Blog</a></li>
+    <li class="right feed"><a href='/blog/rss.xml'>RSS</a></li>
+  </ul>
+</div>
+
+<div class="foreword">
+  [2016-11-13 (last updated: 2016-11-13 Sun 21:43) Press <kbd>?</kbd> for navigation help]
+</div>
+</div>
+<div id="content">
+<h1 class="title">Personal website in org</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org911448e">Introduction</a></li>
+<li><a href="#css">Style</a>
+<ul>
+<li><a href="#org6b7b6bd">Variables</a></li>
+<li><a href="#orgeb430f9">Table of contents</a>
+<ul>
+<li><a href="#orgb4b364e">Basic style</a></li>
+<li><a href="#org4537ca0">Position</a>
+<ul>
+<li><a href="#org7fb05a9">Large screen</a></li>
+<li><a href="#org280cab5">Medium screen</a></li>
+<li><a href="#org86c21d9">Small screen</a></li>
+</ul>
+</li>
+<li><a href="#org6740c7e">List style</a></li>
+</ul>
+</li>
+<li><a href="#org116149d">Navigation bar</a>
+<ul>
+<li><a href="#orga22c93a">Basic style</a></li>
+<li><a href="#orge45ee65">Position</a>
+<ul>
+<li><a href="#orgf2a99c4">Medium and large screen</a></li>
+<li><a href="#org0df171c">Small screen</a></li>
+</ul>
+</li>
+<li><a href="#org7227fc0">List style</a></li>
+</ul>
+</li>
+<li><a href="#orgaac1558">Source blocks</a></li>
+<li><a href="#org4c98700">Org-js</a></li>
+<li><a href="#org8087188">Body</a>
+<ul>
+<li><a href="#org290eb60">Preamble</a></li>
+<li><a href="#orge43e1df">Content</a></li>
+<li><a href="#orgb8eb575">Postamble</a></li>
+</ul>
+</li>
+<li><a href="#org47c903a">Fonts</a></li>
+<li><a href="#org366d3b9">HTML tags</a>
+<ul>
+<li><a href="#orga572f23">Buttons</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org13ef010">Common HTML</a>
+<ul>
+<li><a href="#html_head">Head</a></li>
+<li><a href="#html_preamble">Preamble</a></li>
+<li><a href="#html_postamble">Postamble</a></li>
+</ul>
+</li>
+<li><a href="#index_org">Main page</a></li>
+<li><a href="#page-blog-posts">Blog page</a></li>
+<li><a href="#sec-org-setup">Org header</a></li>
+<li><a href="#org3a06ec3">Emacs setup</a>
+<ul>
+<li><a href="#org9d1f62a">Header</a></li>
+<li><a href="#sitemap">Sitemap</a></li>
+<li><a href="#rss">RSS</a></li>
+<li><a href="#org60899b1">Mathjax path</a></li>
+<li><a href="#orgb85161e">Custom backend</a>
+<ul>
+<li><a href="#orga0cb001">Preprocess buffer</a></li>
+<li><a href="#src-block-tangle">Source block processing</a></li>
+</ul>
+</li>
+<li><a href="#orgaeadafc">Publishing function</a></li>
+<li><a href="#org93e204d">Org-publishing setup</a></li>
+<li><a href="#el-publish-wrapper">Publishing wrapper function</a></li>
+<li><a href="#el-push-to-blog">Push org-file to blog</a></li>
+<li><a href="#org3bd45bd">Footer</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org911448e" class="outline-2">
+<h2 id="org911448e"><a id="ID-bee322f3-5c88-4db6-85bb-96ccd5204aa3"></a>Introduction</h2>
+<div class="outline-text-2" id="text-org911448e">
+<p>
+This post describes the configuration for this website, which is statically
+generated using emacs and org-mode.  Org-mode's publishing functionality is used
+to generate the HTML content from source <code>org</code> files.  Here is a list of
+existing examples that I have used to build this website:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://bastibe.de/2013-11-13-blogging-with-emacs.html">http://bastibe.de/2013-11-13-blogging-with-emacs.html</a></li>
+<li><a href="http://emacs-doctor.com/blogging-from-emacs.html">http://emacs-doctor.com/blogging-from-emacs.html</a></li>
+<li><a href="http://endlessparentheses.com/how-i-blog-one-year-of-posts-in-a-single-org-file.html">http://endlessparentheses.com/how-i-blog-one-year-of-posts-in-a-single-org-file.html</a></li>
+<li><a href="https://github.com/howardabrams/dot-files/blob/master/emacs-blog.org">https://github.com/howardabrams/dot-files/blob/master/emacs-blog.org</a></li>
+<li><a href="http://www.john2x.com/blog/blogging-with-orgmode.html">http://www.john2x.com/blog/blogging-with-orgmode.html</a></li>
+<li><a href="https://ogbe.net/blog/blogging_with_org.html">https://ogbe.net/blog/blogging_with_org.html</a></li>
+<li><a href="http://nicolas.petton.fr/blog/blogging-with-org-mode.html">http://nicolas.petton.fr/blog/blogging-with-org-mode.html</a></li>
+</ul>
+
+<p>
+As for other posts in this website, the actual configuration files, including
+emacs-lisp configuration, CSS, etc. can be generated by tangling the org-file
+(<code>org-babel-tangle</code> bound to <code>C-c C-v t</code> by default).
+</p>
+
+<p>
+The folder structure is similar to the one described in the <a href="http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html">Worg tutorial</a>: the
+website source is composed of org files with the following structure:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh" id="org761e2b9"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>tree -a org/ -I <span style="color: #8b2252;">"*~"</span>
+</pre>
+</div>
+
+<pre class="example">
+org/
+├── blog.org
+├── css
+│   └── site.css
+├── html
+│   ├── html_head.html
+│   ├── html_postamble.html
+│   └── html_preamble.html
+├── images
+│   ├── 2016-10-05-Awesome-wm_configuration
+│   │   ├── desktop-cmus-popup.png
+│   │   ├── desktop-confirm_action.png
+│   │   ├── desktop-global_prompt-help.png
+│   │   ├── desktop-main.png
+│   │   └── desktop-wibox.png
+│   ├── 2016-11-13-Personal_website_in_org
+│   │   └── website-post.png
+│   └── feed-icon-28x28.png
+├── index.org
+├── js
+│   └── org-info.js
+├── posts
+│   ├── 2016-10-05-Awesome-wm_configuration.org
+│   └── 2016-11-13-Personal_website_in_org.org
+├── rss.org
+├── setup.org
+└── sitemap.org
+
+7 directories, 19 files
+</pre>
+
+<p>
+The start page is the index.org file, which is described <a href="#index_org">later</a>.  It includes
+links to the different pages, and a list of recent blog posts.  Blog posts are
+located in the <code>posts/</code> folder, where each file contains a single post and the
+filename is prefixed by the post date.  Attachments for blog posts (e.g. images)
+are placed in the <code>images/</code> folder with a subfolder corresponding to the post
+filename.  Blog posts are pushed to the blog from regular org files using a
+<a href="#el-push-to-blog">custom function</a> which handles file naming and attachments.  Finally, the static
+content is located in the <code>css/</code>, <code>js/</code> and <code>html/</code> folders.
+</p>
+
+<p>
+The workflow I use to update this website is as follows:
+</p>
+<ul class="org-ul">
+<li>for basic webpages (i.e. everything but the blog posts), edit the org files in
+the source tree,</li>
+<li>for blog posts, create a standalone org file outside of the website source
+tree, then push it using the <a href="#el-push-to-blog">push-to-blog</a> function, which handles file links
+and adds boilerplate options to the org file before moving the processed org
+file to the website source tree,</li>
+<li>finally run the <a href="#el-publish-wrapper">publishing wrapper function</a> to generate the website,</li>
+<li>optionally push the changes to the actual server (e.g. github pages).</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org1e606a0" class="outline-2">
+<h2 id="css"><a id="org1e606a0"></a><a id="ID-d87746eb-1ea4-4db0-9ee8-75f3cf74d49b"></a>Style</h2>
+<div class="outline-text-2" id="text-css">
+<p>
+The styling of the website is done in CSS, the goal being to make it modular
+rather than aesthetically pleasing (as visible on Fig.&nbsp;<a href="#org34b055a">1</a>).
+When tangled, this section generates the <code>site.css</code> used for styling.
+</p>
+
+
+<div id="org34b055a" class="figure">
+<p><a href="../images/2016-11-13-Personal_website_in_org/website-post.png" width="80%"><img src="../images/2016-11-13-Personal_website_in_org/website-post.png" alt="website-post.png" width="80%"></a>
+</p>
+<p><span class="figure-number">Figure 1: </span>Screenshot of a post.</p>
+</div>
+
+<p>
+The website design is "responsive": the layout varies based on the client's
+size.  Three client sizes are considered: large (width \(\geq\) 1024 px), medium
+(600 px \(\leq\) width \(<\) 1024 px) and small (width \(<\) 600 px).
+</p>
+</div>
+
+<div id="outline-container-org6b7b6bd" class="outline-3">
+<h3 id="org6b7b6bd"><a id="ID-cb63337a-a5db-48d4-acbf-619dbbc2af8e"></a>Variables</h3>
+<div class="outline-text-3" id="text-org6b7b6bd">
+<p>
+Most of the properties used for styling are defined at the top of the style
+file.  This could be done via org variables passed to the CSS source block, but
+<code>ob-css</code> does not support this (it seems that it could be added with minimal
+effort for scalar variables at least).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orgbead5e7"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/** </span><span style="color: #b22222;">CSS variables</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+
+:root {
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Body </span><span style="color: #b22222;">*/</span>
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">---- </span><span style="color: #b22222;">*/</span>
+    --body-bg: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+    --content-padding: 10px;
+    --content-bg: <span style="color: #000000; background-color: #F3FAFD;">#F3FAFD</span>;
+    --body-margin: 30px; <span style="color: #b22222;">/* </span><span style="color: #b22222;">not used for small screens </span><span style="color: #b22222;">*/</span>
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Footer </span><span style="color: #b22222;">*/</span>
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">------ </span><span style="color: #b22222;">*/</span>
+    --footer-border: 1px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+    --footer-padding: 10px;
+    --footer-buttons-bg: <span style="color: #ffffff; background-color: #4C6FB0;">#4C6FB0</span>;
+    --footer-buttons-bg-hover: <span style="color: #ffffff; background-color: #000080;">navy</span>;
+    --footer-buttons-padding: 5px 10px;
+    --footer-buttons-color: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+    --footer-buttons-font-size: 90%;
+    --footer-buttons-border: 2px solid <span style="color: #ffffff; background-color: #000080;">navy</span>;
+    --footer-buttons-min-width: 270px;
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Table of contents </span><span style="color: #b22222;">*/</span>
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">----------------- </span><span style="color: #b22222;">*/</span>
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Basic style </span><span style="color: #b22222;">*/</span>
+    --toc-bg: <span style="color: #000000; background-color: #f1f1f1;">#f1f1f1</span>;
+    --toc-box-shadow: 0 0 1em <span style="color: #ffffff; background-color: #777777;">#777777</span>;
+    --toc-border-radius: 5px;
+    --toc-li-color: <span style="color: #ffffff; background-color: #000000;">black</span>;
+    --toc-hover-bg-color: <span style="color: #ffffff; background-color: #555;">#555</span>;
+    --toc-hover-color: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Layout </span><span style="color: #b22222;">*/</span>
+    --toc-nav-vspacing: 20px;
+    --toc-base-padding: 5px;
+    --toc-ul-padding-left: 20px;
+    --toc-local-padding: 5px;
+    --toc-extra-padding-x: 4px;
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Navigation bar </span><span style="color: #b22222;">*/</span>
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">-------------- </span><span style="color: #b22222;">*/</span>
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Basic style </span><span style="color: #b22222;">*/</span>
+    --nav-bg: <span style="color: #ffffff; background-color: #333;">#333</span>;
+    --nav-hover: <span style="color: #ffffff; background-color: #111;">#111</span>;
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">RSS </span><span style="color: #b22222;">*/</span>
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">--- </span><span style="color: #b22222;">*/</span>
+    --rss-img: url(<span style="color: #8b2252;">"/blog/images/feed-icon-28x28.png"</span>);
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Org-js </span><span style="color: #b22222;">*/</span>
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">------ </span><span style="color: #b22222;">*/</span>
+    --org-js-console-bg: var(--footer-buttons-bg);
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Fonts </span><span style="color: #b22222;">*/</span>
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">----- </span><span style="color: #b22222;">*/</span>
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Text </span><span style="color: #b22222;">*/</span>
+    --font-body-family: Arial, sans-serif;
+    --font-body-size: 16pt;
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Code </span><span style="color: #b22222;">*/</span>
+    --font-code-family: DejaVu, Lucida Console, monospace;
+    --font-code-color: <span style="color: #ffffff; background-color: #4E4E4F;">#4E4E4F</span>;
+    --font-code-size: 14pt;
+    --font-src-family: DejaVu, Lucida Console, monospace;
+    --font-example-family: DejaVu, Lucida Console, monospace;
+    --font-example-size: 11pt;
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Links </span><span style="color: #b22222;">*/</span>
+    --font-a-color: <span style="color: #ffffff; background-color: #000080;">navy</span>;
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Color scheme </span><span style="color: #b22222;">*/</span>
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">------------ </span><span style="color: #b22222;">*/</span>
+
+    <span style="color: #b22222;">/* </span><span style="color: #b22222;">Source blocks </span><span style="color: #b22222;">*/</span>
+    --src-bg: <span style="color: #000000; background-color: #fBF9E7;">#fBF9E7</span>;
+    --lua-bg: var(--src-bg);
+
+}
+
+<span style="color: #b22222;">/** </span><span style="color: #b22222;">Responsive variables</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
+
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">Large screens </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">@media</span> (min-width: 1024px) {
+    :root {
+        --side-width: 250px;
+        --body-width: 60%;
+        --nav-base-font-size: 80%;
+        --nav-height: 50px;
+        --nav-padding: 14px 16px;
+        --toc-base-font-size: 75%;
+        --toc-ul-font-size: 150%;
+        --toc-ul-local-font-size: 130%;
+        --toc-ul-2-font-size: 80%;
+        --font-src-size: 11pt;
+        --rss-padding: 0 0 0 25px;
+        --rss-size: 25px 25px;
+        --rss-pos: 50%;
+    }
+}
+
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">Medium screens </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">@media</span> (min-width: 600px) and (max-width: 1024px) {
+    :root {
+        --side-width: 150px;
+        --body-width: calc(92% - var(--side-width));
+        --nav-base-font-size: 70%;
+        --nav-height: 30px;
+        --nav-padding: 5px 6px;
+        --toc-base-font-size: 70%;
+        --toc-ul-font-size: 130%;
+        --toc-ul-local-font-size: 130%;
+        --toc-ul-2-font-size: 80%;
+        --font-src-size: 11pt;
+        --rss-padding: 0 0 19px 9px;
+        --rss-size: 10px 10px;
+        --rss-pos: 25%;
+    }
+}
+
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">Small screens </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">@media</span> (max-width: 600px) {
+    :root {
+        --side-width: 150px; <span style="color: #b22222;">/* </span><span style="color: #b22222;">unused in this case </span><span style="color: #b22222;">*/</span>
+        --body-width: 100%;
+        --nav-base-font-size: 80%;
+        --nav-height: 30px;
+        --nav-padding: 5px 6px;
+        --toc-base-font-size: 80%;
+        --toc-ul-font-size: 120%;
+        --toc-ul-local-font-size: 130%;
+        --toc-ul-2-font-size: 80%;
+        --font-src-size: 10pt;
+        --rss-padding: 0 0 19px 20px;
+        --rss-size: 20px 20px;
+        --rss-pos: 19%;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgeb430f9" class="outline-3">
+<h3 id="orgeb430f9"><a id="ID-e2781b6f-6b0e-4705-84cf-f662f6c94a88"></a>Table of contents</h3>
+<div class="outline-text-3" id="text-orgeb430f9">
+<p>
+Exported pages use <a href="http://orgmode.org/worg/code/org-info-js/">org-infojs</a> for navigation.  It comes with a nice table of
+contents for the document (with CSS id <code>#table-of-contents</code>).  Similar to the
+fixed table of contents used on the <a href="http://orgmode.org/worg/">Worg website</a>, it is fixed on one side of the
+page.
+</p>
+
+<p>
+A local table of contents for each section is also used (since blog posts tend
+to be quite lengthy), and styled in a similar fashion.  The relevant CSS class
+is <code>.org-info-js_local-toc</code>.
+</p>
+
+<p>
+The table of contents is "responsive" as it adapts to the viewport (client)
+size:
+</p>
+<ul class="org-ul">
+<li>Fixed vertical menu for large screens</li>
+<li>Reduce to single level table on medium size screens</li>
+<li>Collapse to regular section (floating) for small screens</li>
+</ul>
+</div>
+
+
+<div id="outline-container-orgb4b364e" class="outline-4">
+<h4 id="orgb4b364e"><a id="ID-cda2e81d-7dd7-497a-8891-2d2d940c856a"></a>Basic style</h4>
+<div class="outline-text-4" id="text-orgb4b364e">
+<p>
+First, we define the basic styling properties for the table of contents: color,
+shadow, size, etc.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orgac58e4a"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/** </span><span style="color: #0000ff;">Table of content</span>
+<span style="color: #0000ff;"> </span><span style="color: #0000ff;">*/</span>
+
+<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Basic styling (color, font, shadow) common to global and local TOC </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">#table-of-contents, .org-info-js_local-toc </span>{
+    <span style="color: #a0522d;">background-color</span>: var(--toc-bg);
+    <span style="color: #a0522d;">box-shadow</span>: var(--toc-box-shadow);
+    <span style="color: #a0522d;">border-bottom-left-radius</span>: var(--toc-border-radius);
+    <span style="color: #a0522d;">font-size</span>: var(--toc-base-font-size);
+}
+
+<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Size (global TOC only) </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">#table-of-contents </span>{
+    <span style="color: #a0522d;">width</span>: var(--side-width);
+}
+
+<span style="color: #0000ff;">.org-info-js_local-toc </span>{
+    <span style="color: #a0522d;">padding</span>: var(--toc-local-padding);
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4537ca0" class="outline-4">
+<h4 id="org4537ca0"><a id="ID-75a4b1a4-b337-4e27-a68c-d2fb293813c0"></a>Position</h4>
+<div class="outline-text-4" id="text-org4537ca0">
+<p>
+The placement of the table of contents depends on the screen size: the different
+definitions are placed here.
+</p>
+</div>
+
+<div id="outline-container-org7fb05a9" class="outline-5">
+<h5 id="org7fb05a9"><a id="ID-ab5fa256-502d-4c13-86ef-53339df52a2c"></a>Large screen</h5>
+<div class="outline-text-5" id="text-org7fb05a9">
+<p>
+For medium and large screens, the table of contents is fixed on the left of the
+screen.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org4de3898"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/* </span><span style="color: #b22222;">Fixed vertical table of content </span><span style="color: #b22222;">*/</span>
+<span style="color: #483d8b;">@media</span> screen and (min-width: 600px) {
+<span style="color: #0000ff;">    #table-of-contents </span>{
+        <span style="color: #a0522d;">position</span>: fixed;
+        <span style="color: #a0522d;">left</span>: 0;
+        <span style="color: #a0522d;">top</span>: calc(var(--nav-height) + var(--toc-nav-vspacing));
+        <span style="color: #a0522d;">bottom</span>: var(--toc-nav-vspacing);
+        <span style="color: #a0522d;">padding</span>: var(--toc-base-padding);
+        <span style="color: #a0522d;">overflow</span>: auto;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org280cab5" class="outline-5">
+<h5 id="org280cab5"><a id="ID-14d429ec-fcb5-48a1-be13-e429fadea414"></a>Medium screen</h5>
+<div class="outline-text-5" id="text-org280cab5">
+<p>
+For medium and small screens, the table of contents is limited to only top level
+headings.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orga1edecd"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 1024px) {
+<span style="color: #0000ff;">    #table-of-contents &gt; div &gt; ul &gt; li &gt; ul </span>{
+        <span style="color: #a0522d;">display</span>: none;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org86c21d9" class="outline-5">
+<h5 id="org86c21d9"><a id="ID-868b5c03-dd76-4d1d-b849-e1929795c7ae"></a>Small screen</h5>
+<div class="outline-text-5" id="text-org86c21d9">
+<p>
+For small screens, the table of contents is a regular section, and it is set to
+use (almost) all the available width.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orgbba4268"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 600px) {
+<span style="color: #0000ff;">    #table-of-contents </span>{
+        <span style="color: #a0522d;">position</span>: relative;
+        <span style="color: #a0522d;">width</span>: 90%;
+        <span style="color: #a0522d;">margin</span>: auto;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6740c7e" class="outline-4">
+<h4 id="org6740c7e"><a id="ID-971e4499-d7fa-43fc-97fb-f0271db7c212"></a>List style</h4>
+<div class="outline-text-4" id="text-org6740c7e">
+<p>
+The style for entries in the table of contents are defined here.  The following
+block sets font sizes and alignment.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org5d04367"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#table-of-contents ul, .org-info-js_local-toc ul </span>{
+    <span style="color: #a0522d;">list-style-type</span>: none;
+    <span style="color: #a0522d;">margin</span>: 0;
+    <span style="color: #a0522d;">padding-left</span>: var(--toc-ul-padding-left);
+}
+
+<span style="color: #0000ff;">#table-of-contents ul </span>{
+    <span style="color: #a0522d;">font-size</span>: var(--toc-ul-font-size);
+}
+
+<span style="color: #0000ff;">.org-info-js_local-toc ul </span>{
+    <span style="color: #a0522d;">font-size</span>: var(--toc-ul-local-font-size);
+}
+
+<span style="color: #0000ff;">#table-of-contents &gt; div &gt; ul, .org-info-js_local-toc &gt; div &gt; ul </span>{
+    <span style="color: #a0522d;">list-style-type</span>: none;
+    <span style="color: #a0522d;">margin</span>: 0;
+    <span style="color: #a0522d;">padding-left</span>: var(--toc-extra-padding-x);
+}
+
+<span style="color: #0000ff;">#table-of-contents &gt; div &gt; ul &gt; li &gt; ul</span>{
+    <span style="color: #a0522d;">font-size</span>: var(--toc-ul-2-font-size);
+    <span style="color: #a0522d;">vertical-align</span>: middle;
+}
+</pre>
+</div>
+
+<p>
+The appearance of links is defined here:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org78d4b29"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#table-of-contents li a, .org-info-js_local-toc li a </span>{
+    <span style="color: #a0522d;">display</span>: block;
+    <span style="color: #a0522d;">color</span>: var(--toc-li-color);
+    <span style="color: #a0522d;">text-decoration</span>: none;
+}
+
+<span style="color: #0000ff;">#table-of-contents li a </span>{
+    <span style="color: #a0522d;">vertical-align</span>: middle;
+}
+
+#table-of-contents li a:hover:not(.active), .org-info-js_local-toc li a:hover:not(.active) {
+    <span style="color: #a0522d;">background-color</span>: var(--toc-hover-bg-color);
+    <span style="color: #a0522d;">color</span>: var(--toc-hover-color);
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org116149d" class="outline-3">
+<h3 id="org116149d"><a id="ID-eb314cce-91d0-47ec-81fe-52ea6ce8cb10"></a>Navigation bar</h3>
+<div class="outline-text-3" id="text-org116149d">
+<p>
+A small navigation bar is added to all pages in the website (on the top left
+corner).  It contains links to the home page, a list of blog posts and the RSS
+feed.  As for the table of contents, its sizes decreases for medium size
+clients, and collapses to a floating menu at the top for small clients.
+</p>
+</div>
+
+<div id="outline-container-orga22c93a" class="outline-4">
+<h4 id="orga22c93a"><a id="ID-71b62fa3-83e7-4472-92de-dbbede6a7601"></a>Basic style</h4>
+<div class="outline-text-4" id="text-orga22c93a">
+<p>
+First, the basic style elements are defined, including the position, size, color
+and text alignment.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org32c54f2"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/** </span><span style="color: #0000ff;">Navigation bar</span>
+<span style="color: #0000ff;"> </span><span style="color: #0000ff;">*/</span>
+
+<span style="color: #0000ff;">.topnav </span>{
+    <span style="color: #a0522d;">top</span>: 0;
+    <span style="color: #a0522d;">left</span>: 0;
+    <span style="color: #a0522d;">max-height</span>: var(--nav-height);
+    <span style="color: #a0522d;">vertical-align</span>: middle;
+    <span style="color: #a0522d;">background-color</span>: var(--nav-bg);
+    <span style="color: #a0522d;">width</span>: var(--side-width);
+    <span style="color: #a0522d;">font-size</span>: var(--nav-base-font-size);
+}
+
+<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">RSS icon </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">.feed </span>{
+    <span style="color: #a0522d;">margin-left</span>: 3px;
+    <span style="color: #a0522d;">padding</span>: var(--rss-padding);
+    <span style="color: #a0522d;">background</span>: var(--rss-img) no-repeat 0 var(--rss-pos);
+    <span style="color: #a0522d;">background-size</span>: var(--rss-size);
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge45ee65" class="outline-4">
+<h4 id="orge45ee65"><a id="ID-3c9e02b8-0849-4e35-9cdc-bf4f0d9627c7"></a>Position</h4>
+<div class="outline-text-4" id="text-orge45ee65">
+</div>
+
+<div id="outline-container-orgf2a99c4" class="outline-5">
+<h5 id="orgf2a99c4"><a id="ID-af3932bf-610f-4ac6-bf2c-63433f1b611d"></a>Medium and large screen</h5>
+<div class="outline-text-5" id="text-orgf2a99c4">
+<p>
+For medium and large screens, the navigation bar is fixed on the top left
+corner.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orgef77397"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (min-width: 600px) {
+<span style="color: #0000ff;">    .topnav </span>{
+        <span style="color: #a0522d;">position</span>: fixed;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0df171c" class="outline-5">
+<h5 id="org0df171c"><a id="ID-6a5b666d-440b-4ff7-bef9-99d9ac7d0a3d"></a>Small screen</h5>
+<div class="outline-text-5" id="text-org0df171c">
+<p>
+For small screens, the navigation bar is placed at the top, and made floating.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org2acb263"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 600px) {
+<span style="color: #0000ff;">    .topnav </span>{
+        <span style="color: #a0522d;">position</span>: relative;
+        <span style="color: #a0522d;">width</span>: 100%;
+    }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org7227fc0" class="outline-4">
+<h4 id="org7227fc0"><a id="ID-b3878dce-bc15-4854-81eb-b91c7dbe229d"></a>List style</h4>
+<div class="outline-text-4" id="text-org7227fc0">
+<p>
+The following block sets the style of the navigation items.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org26871f4"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.topnav ul </span>{
+    <span style="color: #a0522d;">list-style-type</span>: none;
+    <span style="color: #a0522d;">margin</span>: 0;
+    <span style="color: #a0522d;">padding</span>: 0;
+    <span style="color: #a0522d;">overflow</span>: hidden;
+    <span style="color: #a0522d;">position</span>: relative;
+    <span style="color: #a0522d;">vertical-align</span>: middle;
+}
+
+<span style="color: #0000ff;">.topnav li </span>{
+    <span style="color: #a0522d;">float</span>: left;
+    <span style="color: #a0522d;">vertical-align</span>: middle;
+    <span style="color: #a0522d;">position</span>: relative;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org80cfdf7"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.topnav li a </span>{
+    <span style="color: #a0522d;">display</span>: block;
+    <span style="color: #a0522d;">color</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+    <span style="color: #a0522d;">text-align</span>: left;
+    <span style="color: #a0522d;">padding</span>: var(--nav-padding);
+    <span style="color: #a0522d;">text-decoration</span>: none;
+    <span style="color: #a0522d;">position</span>: relative;
+    <span style="color: #a0522d;">vertical-align</span>: middle;
+}
+
+.topnav li a:hover:not(.active) {
+    <span style="color: #a0522d;">background-color</span>: var(--nav-hover);
+}
+
+<span style="color: #0000ff;">.topnav .right </span>{
+    <span style="color: #a0522d;">float</span>: right;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgaac1558" class="outline-3">
+<h3 id="orgaac1558"><a id="ID-55a06366-98b3-46fc-9f6e-a07d6abd2c18"></a>Source blocks</h3>
+<div class="outline-text-3" id="text-orgaac1558">
+<p>
+This section defines the appearance of source blocks in the rendered HTML.  The
+main features are:
+</p>
+<ul class="org-ul">
+<li>allow scrollbars on overflow,</li>
+<li>move the tooltip with the language inside the div block,</li>
+<li>set colors for the background and the filename label (see the
+<a href="#src-block-tangle">source labeling setup</a> section).</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org61854d3"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">pre.src </span>{
+    <span style="color: #a0522d;">overflow-x</span>: auto;
+}
+
+<span style="color: #0000ff;">pre.src:before </span>{
+    <span style="color: #a0522d;">top</span>: 0;
+}
+
+<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Source block color based on file type </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">pre.src.src.src-lua </span>{
+    <span style="color: #a0522d;">background-color</span>: var(--lua-bg);
+}
+
+<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Source block label </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">.src-label </span>{
+    <span style="color: #a0522d;">color</span>: <span style="color: #000000; background-color: #A9A9A9;">darkgray</span>;
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4c98700" class="outline-3">
+<h3 id="org4c98700"><a id="ID-5b1786d0-71b6-4a5d-b506-a91cf3a40546"></a>Org-js</h3>
+<div class="outline-text-3" id="text-org4c98700">
+<p>
+The org-infojs tool inserts a search box in the rendered html.  It is used for
+search operations.  The following sets the default location for the search box.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orgd6ff69b"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#org-info-js_console-container </span>{
+    <span style="color: #a0522d;">bottom</span>: 0;
+    <span style="color: #a0522d;">margin-top</span>: 0;
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8087188" class="outline-3">
+<h3 id="org8087188"><a id="ID-3e911a21-793c-4bb5-87dd-d95e38bcaf1b"></a>Body</h3>
+<div class="outline-text-3" id="text-org8087188">
+<p>
+The following CSS controls the size of the body, which adapts to the client
+size.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org6fc8386"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Body </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">body </span>{
+    <span style="color: #a0522d;">width</span>: var(--body-width);
+    <span style="color: #a0522d;">overflow-x</span>: hidden;
+    <span style="color: #a0522d;">background-color</span>: var(--body-bg);
+}
+
+<span style="color: #483d8b;">@media</span> (min-width: 600px) {
+<span style="color: #0000ff;">    body </span>{
+        <span style="color: #a0522d;">margin-left</span>: calc(var(--side-width) + var(--body-margin));
+        <span style="color: #a0522d;">margin-right</span>: var(--body-margin);
+    }
+}
+
+<span style="color: #483d8b;">@media</span> (max-width: 600px) {
+<span style="color: #0000ff;">    body </span>{
+        <span style="color: #a0522d;">margin-left</span>: 0;
+        <span style="color: #a0522d;">margin-right</span>: 0;
+    }
+}
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org290eb60" class="outline-4">
+<h4 id="org290eb60"><a id="ID-f65fbe40-7980-450f-9b0e-5b40caf9f9da"></a>Preamble</h4>
+<div class="outline-text-4" id="text-org290eb60">
+<p>
+The preamble is a text added to the top of the page.  The actual content is
+defined in the <a href="#html_preamble">HTML preamble section</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org38c0e51"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Text before post (date and help) </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">.foreword </span>{
+    <span style="color: #a0522d;">color</span>: <span style="color: #000000; background-color: #808080;">gray</span>;
+    <span style="color: #a0522d;">font-size</span>: 80%;
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge43e1df" class="outline-4">
+<h4 id="orge43e1df"><a id="ID-5c01f512-8351-48e9-9c2a-e3a4a669d974"></a>Content</h4>
+<div class="outline-text-4" id="text-orge43e1df">
+<p>
+The following block is used to limit the width of the main content and add a
+background color.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orgb9bd5e5"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Main content </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">#content </span>{
+    <span style="color: #a0522d;">background-color</span>: var(--content-bg);
+    <span style="color: #a0522d;">padding-left</span>: var(--content-padding);
+    <span style="color: #a0522d;">padding-right</span>: var(--content-padding);
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb8eb575" class="outline-4">
+<h4 id="orgb8eb575"><a id="ID-4e87e731-c88f-4c68-bdeb-39c02f64ca57"></a>Postamble</h4>
+<div class="outline-text-4" id="text-orgb8eb575">
+<p>
+This section defines the layout of the <a href="#html_postamble">HTML postamble</a> used on all pages.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org31f039a"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#postamble </span>{
+    <span style="color: #a0522d;">padding</span>: var(--footer-padding);
+    <span style="color: #a0522d;">border</span>: var(--footer-border);
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org47c903a" class="outline-3">
+<h3 id="org47c903a">Fonts</h3>
+<div class="outline-text-3" id="text-org47c903a">
+<p>
+Here, the fonts for text, links and code are selected.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orgda48a66"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Fonts </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">body </span>{
+    <span style="color: #a0522d;">font-family</span>: var(--font-body-family);
+    <span style="color: #a0522d;">font-size</span>: var(--font-body-size);
+}
+
+<span style="color: #0000ff;">code </span>{
+    <span style="color: #a0522d;">font-family</span>: var(--font-code-family);
+    <span style="color: #a0522d;">font-size</span>: var(--font-code-size);
+    <span style="color: #a0522d;">color</span>: var(--font-code-color);
+}
+
+<span style="color: #0000ff;">pre.src </span>{
+    <span style="color: #a0522d;">font-family</span>: var(--font-src-family);
+    <span style="color: #a0522d;">font-size</span>: var(--font-src-size);
+    <span style="color: #a0522d;">background-color</span>: var(--src-bg);
+}
+
+<span style="color: #0000ff;">pre.example </span>{
+    <span style="color: #a0522d;">font-family</span>: var(--font-example-family);
+    <span style="color: #a0522d;">font-size</span>: var(--font-example-size);
+}
+
+<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Links </span><span style="color: #0000ff;">*/</span>
+<span style="color: #0000ff;">a </span>{
+    <span style="color: #a0522d;">text-decoration</span>: none;
+    <span style="color: #a0522d;">color</span>: var(--font-a-color);
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org366d3b9" class="outline-3">
+<h3 id="org366d3b9"><a id="ID-7c0f16bb-f153-4eab-a554-82eef98f782b"></a>HTML tags</h3>
+<div class="outline-text-3" id="text-org366d3b9">
+</div>
+
+<div id="outline-container-orga572f23" class="outline-4">
+<h4 id="orga572f23"><a id="ID-f9d92e98-006d-4a67-b76d-e66ebc558c4a"></a>Buttons</h4>
+<div class="outline-text-4" id="text-orga572f23">
+<p>
+The <a href="#html_postamble">HTML postamble</a> uses buttons to view the page org source; their appearance is
+defined here:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="org3f5bced"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.footer-button </span>{
+    <span style="color: #a0522d;">border</span>: none;
+    <span style="color: #a0522d;">text-align</span>: center;
+    <span style="color: #a0522d;">text-decoration</span>: none;
+    <span style="color: #a0522d;">display</span>: inline-block;
+    <span style="color: #a0522d;">background-color</span>: var(--footer-buttons-bg);
+    <span style="color: #a0522d;">color</span>: var(--footer-buttons-color);
+    <span style="color: #a0522d;">padding</span>: var(--footer-buttons-padding);
+    <span style="color: #a0522d;">font-size</span>: var(--footer-buttons-font-size);
+    <span style="color: #a0522d;">border</span>: var(--footer-buttons-border);
+    <span style="color: #a0522d;">min-width</span>: var(--footer-buttons-min-width);
+}
+<span style="color: #0000ff;">.footer-button:hover </span>{
+    <span style="color: #a0522d;">background-color</span>: var(--footer-buttons-bg-hover);
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org13ef010" class="outline-2">
+<h2 id="org13ef010"><a id="ID-7f96bffb-29f9-4dad-9df3-89f62db9c047"></a>Common HTML</h2>
+<div class="outline-text-2" id="text-org13ef010">
+<p>
+The org publishing mechanism supports inclusion of common HTML at the beginning
+and the end of each published page, as described <a href="http://orgmode.org/manual/HTML-preamble-and-postamble.html">here</a>.
+</p>
+</div>
+
+<div id="outline-container-org6977d4d" class="outline-3">
+<h3 id="html_head"><a id="org6977d4d"></a><a id="ID-964b9f7f-8357-4c26-a22b-ab2925b139b1"></a>Head</h3>
+<div class="outline-text-3" id="text-html_head">
+<p>
+In each page's <code>&lt;head&gt;</code> section, a few items are added:
+</p>
+<ul class="org-ul">
+<li>the <a href="#css">CSS file</a> controlling the website appearance,</li>
+<li>some <a href="#coderef-html-head-js-src"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-html-head-js-src');" onmouseout="CodeHighlightOff(this, 'coderef-html-head-js-src');">javascript code</a> used by the <a href="#html_postamble">HTML postamble</a> buttons to link to the org
+file source (and a htmlized version of it).</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-html" id="org1fe4a76"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>&lt;<span style="color: #0000ff;">link</span> <span style="color: #a0522d;">rel</span>='stylesheet' <span style="color: #a0522d;">href</span>='/blog/css/site.css' <span style="color: #a0522d;">type</span>='text/css'/&gt;
+&lt;<span style="color: #0000ff;">script</span> <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"text/javascript"</span>&gt;
+    function rpl(expr, a, b) {
+      var i = 0;
+      while (i != -1) {
+         i = expr.indexOf(a, i);
+         if (i &gt;= 0) {
+            expr = expr.substring(0, i) + b + expr.substring(i + a.length);
+            i += b.length;
+         }
+      }
+      return expr
+    }
+
+<span id="coderef-html-head-js-src" class="coderef-off">    function show_org_source(flag_html = false){</span>
+        //document.location.href = rpl(document.location.href, <span style="color: #8b2252;">"html"</span>, <span style="color: #8b2252;">"org"</span>);
+        var re = /[\/]$/g;
+        var html_url = document.location.href.replace(re, '/index.html');
+        var out_ext = flag_html? "org.html": "org";
+        window.open(rpl(html_url, <span style="color: #8b2252;">"html"</span>, out_ext), '_blank');
+    }
+&lt;/<span style="color: #0000ff;">script</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org943600d" class="outline-3">
+<h3 id="html_preamble"><a id="org943600d"></a><a id="ID-a279701a-63c3-4ecf-9705-76d277de52a2"></a>Preamble</h3>
+<div class="outline-text-3" id="text-html_preamble">
+<p>
+The preamble contains the navigation bar with links to the website home, posts
+and RSS.  It also adds a <a href="#coderef-html-foreword"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-html-foreword');" onmouseout="CodeHighlightOff(this, 'coderef-html-foreword');">short text</a> before the webpage's content with the file
+date and a pointer to access the help menu of the org-infojs script.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html" id="org4910b7f"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">class</span>='topnav'&gt;
+  &lt;<span style="color: #0000ff;">ul</span>&gt;
+    &lt;<span style="color: #0000ff;">li</span>&gt;&lt;<span style="color: #0000ff;">a</span> <span style="color: #a0522d;">href</span>='/blog/index.html'&gt;Home&lt;/<span style="color: #0000ff;">a</span>&gt;&lt;/<span style="color: #0000ff;">li</span>&gt;
+    &lt;<span style="color: #0000ff;">li</span>&gt;&lt;<span style="color: #0000ff;">a</span> <span style="color: #a0522d;">href</span>='/blog/blog.html'&gt;Blog&lt;/<span style="color: #0000ff;">a</span>&gt;&lt;/<span style="color: #0000ff;">li</span>&gt;
+    &lt;<span style="color: #0000ff;">li</span> <span style="color: #a0522d;">class</span>=<span style="color: #8b2252;">"right feed"</span>&gt;&lt;<span style="color: #0000ff;">a</span> <span style="color: #a0522d;">href</span>='/blog/rss.xml'&gt;RSS&lt;/<span style="color: #0000ff;">a</span>&gt;&lt;/<span style="color: #0000ff;">li</span>&gt;
+  &lt;/<span style="color: #0000ff;">ul</span>&gt;
+&lt;/<span style="color: #0000ff;">div</span>&gt;
+
+<span id="coderef-html-foreword" class="coderef-off">&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">class</span>=<span style="color: #8b2252;">"foreword"</span>&gt;</span>
+  [<span style="color: #a0522d;">%d</span> (last updated: <span style="color: #a0522d;">%C</span>) Press &lt;<span style="color: #0000ff;">kbd</span>&gt;?&lt;/<span style="color: #0000ff;">kbd</span>&gt; for navigation help]
+&lt;/<span style="color: #0000ff;">div</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6dc6778" class="outline-3">
+<h3 id="html_postamble"><a id="org6dc6778"></a><a id="ID-2e06602c-d7f7-4788-abb9-57f9f1e8efcb"></a>Postamble</h3>
+<div class="outline-text-3" id="text-html_postamble">
+<p>
+The postamble is composed of a simple block showing the emacs and org-mode
+versions used to build the page, along with buttons to access the source org
+file, and an htmlized version.  The raw version should allow to reproduce the
+output published on the website.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html" id="org22131f3"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"show_source"</span>&gt;
+  &lt;<span style="color: #0000ff;">input</span> <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"button"</span> <span style="color: #a0522d;">class</span>=<span style="color: #8b2252;">"footer-button"</span> <span style="color: #a0522d;">value</span>=<span style="color: #8b2252;">"Show Org source (html)"</span>
+         <span style="color: #a0522d;">onClick</span>='show_org_source(true)' /&gt;
+  &lt;<span style="color: #0000ff;">input</span> <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"button"</span> <span style="color: #a0522d;">class</span>=<span style="color: #8b2252;">"footer-button"</span> <span style="color: #a0522d;">value</span>=<span style="color: #8b2252;">"Show Org source (raw)"</span>
+         <span style="color: #a0522d;">onClick</span>='show_org_source()' /&gt;
+&lt;/<span style="color: #0000ff;">div</span>&gt;
+&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">class</span>='footer'&gt;
+  <span style="color: #b22222;">&lt;!-- </span><span style="color: #b22222;">Copyright 2016 %a (%v HTML).&lt;br&gt; </span><span style="color: #b22222;">--&gt;</span>
+  Copyright 2016 <span style="color: #a0522d;">%a.</span>&lt;<span style="color: #0000ff;">br</span>&gt;
+  Last updated <span style="color: #a0522d;">%C.</span> &lt;<span style="color: #0000ff;">br</span>&gt;
+  Built with <span style="color: #a0522d;">%c.</span>
+&lt;/<span style="color: #0000ff;">div</span>&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org071e056" class="outline-2">
+<h2 id="index_org"><a id="org071e056"></a><a id="ID-ee738399-bad2-4b0a-a129-ecb2c4b1e96f"></a>Main page</h2>
+<div class="outline-text-2" id="text-index_org">
+<p>
+The main page of the website is minimalist, it lists the most recent blog posts
+by <a href="#coderef-main-inc-sitemap"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-main-inc-sitemap');" onmouseout="CodeHighlightOff(this, 'coderef-main-inc-sitemap');">including</a> the top of the <a href="#sitemap">sitemap</a> and links to the <a href="#page-blog-posts">full list of blog posts</a> and
+the <a href="#sitemap">sitemap</a> itself.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org" id="org92fc09e"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">misc/</span>
+<span style="color: #7f7f7f;">#+DATE:</span> <span style="color: #191970;">&lt;2016-10-02 Sun&gt;</span>
+
+Random articles about linux, emacs, science, etc.  This site and the articles
+are built with <span style="color: #3a5fcd; text-decoration: underline;"><a href="https://gnu.org/s/emacs">emacs</a></span> and
+<span style="color: #3a5fcd; text-decoration: underline;"><a href="http://orgmode.org">org-mode</a></span> (using
+<span style="color: #3a5fcd; text-decoration: underline;"><a href="http://orgmode.org/worg/code/org-info-js">org-js</a></span>).
+
+<span style="color: #0000ff;">* Blog</span>
+
+<span id="coderef-main-inc-sitemap" class="coderef-off"><span style="color: #b22222;">#+INCLUDE: sitemap.org::*posts :lines "-5" :only-contents t</span></span>
+
+<span style="color: #3a5fcd; text-decoration: underline;"><a href="file:blog.org">Older posts</a></span>
+
+<span style="color: #0000ff;">* </span><span style="color: #3a5fcd; text-decoration: underline;"><a href="file:sitemap.org">Sitemap</a></span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc5f19e8" class="outline-2">
+<h2 id="page-blog-posts"><a id="orgc5f19e8"></a><a id="ID-58d69e17-37cc-4c12-a1ed-56afd060bdc5"></a>Blog page</h2>
+<div class="outline-text-2" id="text-page-blog-posts">
+<p>
+The blog page simply lists all the posts using the <a href="#sitemap">sitemap</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org" id="org83b98e9"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">Blog posts</span>
+
+All the blog posts:
+
+<span style="color: #b22222;">#+INCLUDE: sitemap.org::*posts :only-contents t</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org7919b75" class="outline-2">
+<h2 id="sec-org-setup"><a id="org7919b75"></a><a id="ID-a26c93a0-2ff5-4993-8d04-2afe280702f4"></a>Org header</h2>
+<div class="outline-text-2" id="text-sec-org-setup">
+<p>
+The <code>setup.org</code> file contains default headers added to the top of each org file
+pushed as a blog post using the <a href="#el-push-to-blog">push-to-blog</a> function.  The additional header
+performs the following:
+</p>
+<ul class="org-ul">
+<li>setup the path to the org-infojs source (local) and the table of contents
+defaults,</li>
+<li>add the <code>:comments link</code> header argument to allow for edits in the tangled
+file and use of <code>org-detangle</code>,</li>
+<li>prevents evaluation of source blocks by default,</li>
+<li>define common macros</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-org" id="org1efc835"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">#+INFOJS_OPT: toc:t tdepth:2 view:showall ftoc:t path:/blog/js/org-info.js</span>
+<span style="color: #b22222;">#+PROPERTY: header-args+ :comments link :eval never</span>
+<span style="color: #b22222;">#+STARTUP: nohideblocks</span>
+<span style="color: #b22222;">#+MACRO: tt \nbsp{}</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3a06ec3" class="outline-2">
+<h2 id="org3a06ec3">Emacs setup</h2>
+<div class="outline-text-2" id="text-org3a06ec3">
+<p>
+This section contains the emacs-lisp backend code used to produce the website
+from the set of source org files.  While the org-publish mechanism handles most
+of this, some specific items are handled manually.
+</p>
+
+<p>
+When tangled, this section creates the <code>my-website.el</code> file which can then be
+loaded from the emacs setup file (using <code>(require 'my-website)</code>).
+</p>
+</div>
+
+<div id="outline-container-org9d1f62a" class="outline-3">
+<h3 id="org9d1f62a">Header</h3>
+<div class="outline-text-3" id="text-org9d1f62a">
+<p>
+This first section creates the header for the <code>my-website.el</code> file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="orgf288de0"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-website.el --- Personal website configuration</span>
+
+<span style="color: #b22222;">;;; </span><span style="color: #b22222;">Commentary:</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Defines functions for publishing a static website.  This file was produced</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">automatically from website.org.  See the website.org file for a full</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">description.</span>
+
+<span style="color: #b22222;">;;; </span><span style="color: #b22222;">Code:</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org057671d" class="outline-3">
+<h3 id="sitemap"><a id="org057671d"></a>Sitemap</h3>
+<div class="outline-text-3" id="text-sitemap">
+<p>
+The sitemap is used here to provide an automatically updated list of blog posts.
+The current version requires a relatively recent version of org-mode (more
+specifically, this website is built using the org-mode <code>wip-sitemap</code> branch
+revision 40120a8).
+</p>
+
+<p>
+The idea is to generate a <code>sitemap.org</code> file which contains a subtree for blog
+posts, sorted by date (most recent first).  Then, the org-mode <code>#+INCLUDE</code>
+directive is used to display the blog posts (see the <a href="http://orgmode.org/manual/Include-files.html">documentation</a>) on any page.
+A list of the last 5 posts is shown on the <a href="#index_org">main page</a> and a full list is included
+in the <a href="#page-blog-posts">blog page</a>.  This keeps lists of posts up-to-date.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="orge26d50e"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-publish-org-sitemap</span> (title list)
+  <span style="color: #8b2252;">"Sitemap generation function."</span>
+  (concat <span style="color: #8b2252;">"#+TITLE: Sitemap\n\n"</span>
+          (org-list-to-subtree list)))
+
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-publish-org-sitemap-format</span> (entry root style)
+  (<span style="color: #a020f0;">if</span> (directory-name-p entry)
+      (file-name-nondirectory (directory-file-name entry))
+    (format
+     <span style="color: #8b2252;">"[[file:%s][%s%s]]"</span>
+     (file-relative-name entry root)
+     (<span style="color: #a020f0;">let</span> ((date
+            (format-time-string <span style="color: #8b2252;">"%Y-%m-%d"</span>
+                                (org-publish-find-date entry))))
+       (<span style="color: #a020f0;">if</span> (or (equal date <span style="color: #8b2252;">""</span>)
+               (not (string-match
+                     <span style="color: #8b2252;">"posts/"</span>
+                     (file-relative-name entry root))))
+           <span style="color: #8b2252;">""</span> (format <span style="color: #8b2252;">"(%s) "</span> date)))
+     (org-publish-find-title entry))))
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org48b3ff8" class="outline-3">
+<h3 id="rss"><a id="org48b3ff8"></a>RSS</h3>
+<div class="outline-text-3" id="text-rss">
+<p>
+A simple RSS feed is also created using <code>ox-rss</code>.  It includes the first section
+of the document as feed content (extracted using the
+ <a href="#coderef-func-get-paragraph"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-func-get-paragraph');" onmouseout="CodeHighlightOff(this, 'coderef-func-get-paragraph');"><code>™/org-get-first-paragraph</code> function</a>).
+The RSS feed is also limited to the latest 30 entries.
+</p>
+
+<p>
+There are currently issues with the styling and images in the feed, but it is
+sufficient for my simple use.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org716164f"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span id="coderef-func-get-paragraph" class="coderef-off">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-get-first-paragraph</span> (file)</span>
+  <span style="color: #8b2252;">"Get string content of first paragraph of file."</span>
+  (<span style="color: #a020f0;">with-temp-buffer</span>
+    (insert-file-contents file)
+    (goto-char (point-min))
+    (show-all)
+    (<span style="color: #a020f0;">let</span> ((first-begin (<span style="color: #a020f0;">progn</span>
+                         (org-forward-heading-same-level 1)
+                         (point)))
+          (first-end (<span style="color: #a020f0;">progn</span>
+                       (org-next-visible-heading 1)
+                       (point))))
+      (buffer-substring first-begin first-end))))
+
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-rss-publish-to-rss</span> (plist filename pub-dir)
+  <span style="color: #8b2252;">"Prepare rss.org file before exporting."</span>
+  (<span style="color: #a020f0;">let*</span> ((basedir (plist-get plist <span style="color: #483d8b;">:base-directory</span>))
+         (postsdir (concat (file-name-as-directory basedir) <span style="color: #8b2252;">"posts"</span>)))
+    (<span style="color: #a020f0;">with-current-buffer</span> (find-file filename)
+      (erase-buffer)
+      (insert <span style="color: #8b2252;">"#+TITLE: misc/ blog RSS\n"</span>)
+      (insert <span style="color: #8b2252;">"#+SETUPFILE: setup.org\n"</span>)
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">The following does not seem to work</span>
+      (insert (concat
+               <span style="color: #8b2252;">"#+HTML_HEAD: &lt;link rel=\"stylesheet\" type=\"text/css\""</span>
+               <span style="color: #8b2252;">" href=\"/blog/css/site.css\" /&gt;\n\n"</span>))
+      (<span style="color: #a020f0;">let*</span> ((files-all
+              (reverse (directory-files postsdir nil
+                                        <span style="color: #8b2252;">"[0-9-]+.*\\.org$"</span>)))
+             (files (subseq files-all 0 (min (length files-all) 30))))
+        (<span style="color: #a020f0;">dolist</span> (post files)
+          (<span style="color: #a020f0;">let*</span> ((post-file (concat (file-name-as-directory postsdir) post))
+                 (post-title (org-publish-find-title post-file))
+                 (preview-str (&#8482;/org-get-first-paragraph post-file)))
+            (insert (concat <span style="color: #8b2252;">"* [[file:posts/"</span> post <span style="color: #8b2252;">"]["</span> post-title <span style="color: #8b2252;">"]]\n\n"</span>))
+            (insert <span style="color: #8b2252;">"*"</span>)
+            (insert preview-str)
+            (newline 1)
+            (insert (concat <span style="color: #8b2252;">"[[file:posts/"</span> post <span style="color: #8b2252;">"][(Read more)]]\n\n"</span>))))
+        (save-buffer))))
+  (<span style="color: #a020f0;">let</span> ((user-mail-address <span style="color: #8b2252;">")"</span>)
+        (org-export-with-broken-links t))
+    (org-rss-publish-to-rss plist filename pub-dir)))
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org60899b1" class="outline-3">
+<h3 id="org60899b1">Mathjax path</h3>
+<div class="outline-text-3" id="text-org60899b1">
+<p>
+In order to use the website on secured connections (<code>https</code>), the <code>https</code>
+version of the mathjax library is loaded.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="orgde09bc1"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Use https for mathjax</span>
+(setcdr
+ (assq 'path org-html-mathjax-options)
+ '(<span style="color: #8b2252;">"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb85161e" class="outline-3">
+<h3 id="orgb85161e">Custom backend</h3>
+<div class="outline-text-3" id="text-orgb85161e">
+<p>
+The backend used for exporting org files to HTML is derived from the builtin
+<code>html</code> backend, adding one functionality: the name of the tangle file for each
+for block is shown in the block, as an overlay.
+</p>
+
+<p>
+To achieve this, the tangle process must be first initiated, i.e. tangled blocks
+must be collected using the <code>org-babel-tangle-collect-blocks</code> storing the
+tangled filename for each block in a cache (the <code>™/org-tangle-list-cache</code>
+variable).  Then, during export, the source blocks are filtered and the filename
+is added to the source block <code>&lt;pre&gt;</code> tag.  Note that this is not valid CSS, but
+it seems to work on most browsers, so it will do for now.
+</p>
+</div>
+
+
+<div id="outline-container-orga0cb001" class="outline-4">
+<h4 id="orga0cb001">Preprocess buffer</h4>
+<div class="outline-text-4" id="text-orga0cb001">
+<p>
+The <code>™/org-export-collect-tangle</code> function is responsible for collecting source
+blocks for tangling and saving the output filename in the cache.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org6b75c8a"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">&#8482;/org-tangle-list-cache</span> nil)
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-export-collect-tangle</span> (backend)
+  (setq &#8482;/org-tangle-list-cache nil)
+  (<span style="color: #a020f0;">when</span> (equal backend '&#8482;/html)
+    (<span style="color: #a020f0;">save-excursion</span>
+      (<span style="color: #a020f0;">save-restriction</span>
+        (widen)
+        (show-all)
+        (org-babel-execute-buffer)
+        (<span style="color: #a020f0;">let</span> ((src-blocks (org-babel-tangle-collect-blocks)))
+          (<span style="color: #a020f0;">dolist</span> (src-lang src-blocks)
+            (<span style="color: #a020f0;">dolist</span> (src-block (cdr src-lang))
+              (<span style="color: #a020f0;">let</span> ((src-block-name (nth 3 src-block))
+                    (src-block-tangle (cdr (assoc <span style="color: #483d8b;">:tangle</span> (nth 4 src-block)))))
+                (add-to-list '&#8482;/org-tangle-list-cache
+                             `(,src-block-name . ,src-block-tangle))))))))))
+</pre>
+</div>
+
+<p>
+The function is added as a preprocessing hook, since this hook is run on the
+un-modified input buffer.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="orgcc29d17"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>(add-hook 'org-export-before-processing-hook '&#8482;/org-export-collect-tangle)
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc852482" class="outline-4">
+<h4 id="src-block-tangle"><a id="orgc852482"></a>Source block processing</h4>
+<div class="outline-text-4" id="text-src-block-tangle">
+<p>
+The derived backend modifies the source block handling function by inserting the
+name of the tangled file.  The regular <code>html</code> exporter is first used to <a href="#coderef-proc-src-html"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-proc-src-html');" onmouseout="CodeHighlightOff(this, 'coderef-proc-src-html');">produce
+the html code for the source block</a> (including syntax highlighting).  The html
+output is then modified by inserting a <code>&lt;div&gt;</code> block, fixed at the bottom right
+of the source block.  The CSS class <code>src-label</code> is added to the div block to
+allow for customization of the appearance.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org2b0b6c5"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/html-src-block</span> (src-block contents info)
+  <span style="color: #8b2252;">"Transcode a SRC-BLOCK element from Org to HTML.</span>
+<span style="color: #8b2252;">CONTENTS is nil.  INFO is a plist used as a communication</span>
+<span style="color: #8b2252;">  channel.  Add name of tangle file to source block (this</span>
+<span style="color: #8b2252;">  requires a preprocessing hook to be added with</span>
+<span style="color: #8b2252;">  `</span><span style="color: #8b2252;">&#8482;/org-export-collect-tangle</span><span style="color: #8b2252;">'."</span>
+  (<span style="color: #a020f0;">let*</span> ((src-block-name (org-element-property <span style="color: #483d8b;">:name</span> src-block))
+         (src-block-tangle
+          (<span style="color: #a020f0;">when</span> &#8482;/org-tangle-list-cache
+            (cdr (assoc src-block-name &#8482;/org-tangle-list-cache))))
+<span id="coderef-proc-src-html" class="coderef-off">         (export-out (org-export-with-backend</span>
+                      'html src-block contents info))
+         )
+    (<span style="color: #a020f0;">when</span> (and src-block-tangle (&gt; (length src-block-tangle) 0)
+               (not (string= src-block-tangle <span style="color: #8b2252;">"no"</span>)))
+      (<span style="color: #a020f0;">let</span> ((src-start-pat <span style="color: #8b2252;">"</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">(</span><span style="color: #8b2252;">&lt;pre class=\"src src-[</span><span style="color: #8b2252;">^</span><span style="color: #8b2252;">&gt;]+&gt;</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">)</span><span style="color: #8b2252;">"</span>))
+        (setq export-out
+              (replace-regexp-in-string
+               src-start-pat
+               (concat <span style="color: #8b2252;">"\\1&lt;div style=\"position: absolute; bottom: 0;"</span>
+                       <span style="color: #8b2252;">" right: 0; text-align:right;\" class=\"src-label\"&gt;["</span>
+                       src-block-tangle <span style="color: #8b2252;">"]&lt;/div&gt;"</span>) export-out))))
+      export-out
+    )
+  )
+</pre>
+</div>
+
+<p>
+Finally, the derived backend is defined, using the custom translation function
+for source blocks.  Everything else is handled by the regular <code>html</code> backend.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="orga433d29"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>(org-export-define-derived-backend '&#8482;/html 'html
+  <span style="color: #483d8b;">:translate-alist</span> '((src-block . &#8482;/html-src-block)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgaeadafc" class="outline-3">
+<h3 id="orgaeadafc">Publishing function</h3>
+<div class="outline-text-3" id="text-orgaeadafc">
+<p>
+A simple wrapper function is created to export to the custom backend.  It is
+almost identical to <code>org-html-publish-to-html</code> with the exception of the actual
+backend used.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org8638282"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-html-publish-to-&#8482;-html</span> (plist filename pub-dir)
+  <span style="color: #8b2252;">"Publish an org file to HTML.</span>
+
+<span style="color: #8b2252;">FILENAME is the filename of the Org file to be published.  PLIST</span>
+<span style="color: #8b2252;">is the property list for the given project.  PUB-DIR is the</span>
+<span style="color: #8b2252;">publishing directory.</span>
+
+<span style="color: #8b2252;">Return output file name."</span>
+  (org-publish-org-to '&#8482;/html filename
+              (concat <span style="color: #8b2252;">"."</span> (or (plist-get plist <span style="color: #483d8b;">:html-extension</span>)
+                      org-html-extension
+                      <span style="color: #8b2252;">"html"</span>))
+              plist pub-dir))
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org93e204d" class="outline-3">
+<h3 id="org93e204d">Org-publishing setup</h3>
+<div class="outline-text-3" id="text-org93e204d">
+<p>
+The publishing configuration is set via the <code>org-publish-project-alist</code>
+variable.  The following function returns a list of project properties to use
+with <code>org-publish-project-alist</code>.
+</p>
+
+<p>
+It relies on the <code>™/get-perso</code> utility to get the root folder
+(line&nbsp;<a href="#coderef-root-perso"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-root-perso');" onmouseout="CodeHighlightOff(this, 'coderef-root-perso');">5</a>).  This can be replaced by a full path to the website
+root folder.
+</p>
+
+<p>
+The function defines the paths to the org source, the destination, the
+attachment folders, etc. and loads the content of the custom HTML <a href="#html_head">head</a>, <a href="#html_preamble">preamble</a>
+and <a href="#html_postamble">postamble</a>.  It creates multiple projects to control the publishing of the
+website:
+</p>
+<ul class="org-ul">
+<li><code>w-org</code> is the main publishing of org files to html.  It uses two
+<code>publishing-function</code> entries: one to generate the html file and one to export
+a complete org file (which can be accessed on the output webpage by clicking
+on the buttons defined in the <a href="#html_postamble">footer</a>).  The <a href="#sitemap">sitemap</a> generation is also
+configured in this project.  Additional features include the insertion of a
+RSS link to the header, and the suppression of TODO items and statistics
+cookies.</li>
+<li><code>w-images</code> simply publishes images in the <code>images/</code> folder using the
+<code>org-publish-attachment</code> function.</li>
+<li><code>w-js</code> publishes the javascript files in the <code>js/</code> folder.</li>
+<li><code>w-css</code> publishes the <a href="#css">CSS file</a> in the <code>css/</code> folder.</li>
+<li><code>w-rss</code> generates the <a href="#rss">RSS</a> feed using the <code>ox-rss</code> package.</li>
+<li>Finally, <code>website</code> is a meta project which simply encapsulates all the other
+projects.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org7b84ed6"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Get project settings</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/get-publish-project-spec</span> ()
+  <span style="color: #8b2252;">"Return project settings for use with `</span><span style="color: #8b2252;">org-publish-project-alist</span><span style="color: #8b2252;">'."</span>
+  (<span style="color: #a020f0;">let*</span> ((website-root (file-name-as-directory
+<span id="coderef-root-perso" class="coderef-off">                        (&#8482;/get-perso <span style="color: #8b2252;">"website-root"</span>)))</span>
+         (website-org (file-name-as-directory
+                       (concat website-root <span style="color: #8b2252;">"org"</span>)))
+         (website-www (file-name-as-directory
+                       (concat website-root <span style="color: #8b2252;">"www"</span>)))
+         (website-org-img (file-name-as-directory
+                           (concat website-org <span style="color: #8b2252;">"images"</span>)))
+         (website-www-img (file-name-as-directory
+                           (concat website-www <span style="color: #8b2252;">"images"</span>)))
+         (website-org-js (file-name-as-directory
+                          (concat website-org <span style="color: #8b2252;">"js"</span>)))
+         (website-www-js (file-name-as-directory
+                          (concat website-www <span style="color: #8b2252;">"js"</span>)))
+         (website-org-css (file-name-as-directory
+                           (concat website-org <span style="color: #8b2252;">"css"</span>)))
+         (website-www-css (file-name-as-directory
+                           (concat website-www <span style="color: #8b2252;">"css"</span>)))
+         (website-org-html (file-name-as-directory
+                            (concat website-org <span style="color: #8b2252;">"html"</span>)))
+         (website-org-posts (file-name-as-directory
+                             (concat website-org <span style="color: #8b2252;">"posts"</span>)))
+         (get-content (<span style="color: #a020f0;">lambda</span> (x)
+                        (<span style="color: #a020f0;">with-temp-buffer</span>
+                          (insert-file-contents (concat website-org-html
+                                                        x))
+                          (buffer-string))))
+         (website-html-head (funcall get-content <span style="color: #8b2252;">"html_head.html"</span>))
+         (website-html-preamble (funcall get-content <span style="color: #8b2252;">"html_preamble.html"</span>))
+         (website-html-postamble (funcall get-content <span style="color: #8b2252;">"html_postamble.html"</span>)))
+    `(
+      (<span style="color: #8b2252;">"w-org"</span>
+       <span style="color: #483d8b;">:base-directory</span> ,website-org
+       <span style="color: #483d8b;">:base-extension</span> <span style="color: #8b2252;">"org"</span>
+       <span style="color: #483d8b;">:recursive</span> t
+       <span style="color: #483d8b;">:exclude</span> <span style="color: #8b2252;">"setup\\.org</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">|</span><span style="color: #8b2252;">website\\.org</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">|</span><span style="color: #8b2252;">rss\\.org"</span>
+       <span style="color: #483d8b;">:publishing-directory</span> ,website-www
+       <span style="color: #483d8b;">:publishing-function</span> (&#8482;/org-html-publish-to-&#8482;-html
+                             org-org-publish-to-org)
+       <span style="color: #483d8b;">:html-extension</span> <span style="color: #8b2252;">"html"</span>
+       <span style="color: #483d8b;">:htmlized-source</span> t
+       <span style="color: #483d8b;">:html-doctype</span> <span style="color: #8b2252;">"html5"</span>
+       <span style="color: #b22222;">;;</span><span style="color: #b22222;">:html-html5-fancy t</span>
+       <span style="color: #483d8b;">:language</span> <span style="color: #8b2252;">"en"</span>
+       <span style="color: #483d8b;">:section-numbers</span> nil
+       <span style="color: #483d8b;">:auto-sitemap</span> t
+       <span style="color: #483d8b;">:sitemap-date-format</span> <span style="color: #8b2252;">"Published: %a %b %d %Y"</span>
+       <span style="color: #483d8b;">:sitemap-sort-files</span> anti-chronologically
+       <span style="color: #483d8b;">:sitemap-function</span> &#8482;/org-publish-org-sitemap
+       <span style="color: #483d8b;">:sitemap-format-entry</span> &#8482;/org-publish-org-sitemap-format
+       <span style="color: #483d8b;">:with-toc</span> nil <span style="color: #b22222;">;; </span><span style="color: #b22222;">except when otherwise stated</span>
+       <span style="color: #483d8b;">:with-date</span> t
+       <span style="color: #483d8b;">:headline-levels</span> 4
+       <span style="color: #483d8b;">:with-sub-superscript</span> t
+       <span style="color: #483d8b;">:with-todo-keywords</span> nil
+       <span style="color: #483d8b;">:with-statistics-cookies</span> nil
+       <span style="color: #483d8b;">:with-email</span> nil
+       <span style="color: #483d8b;">:html-link-home</span> <span style="color: #8b2252;">"/blog/index.html"</span>
+       <span style="color: #483d8b;">:html-link-up</span> <span style="color: #8b2252;">"/blog/index.html"</span>
+       <span style="color: #483d8b;">:html-head-extra</span>
+       <span style="color: #8b2252;">"&lt;link rel=\"alternate\" type=\"application/rss+xml\"</span>
+<span style="color: #8b2252;">                href=\"/blog/rss.xml\"</span>
+<span style="color: #8b2252;">                title=\"RSS feed\"&gt;"</span>
+       <span style="color: #483d8b;">:html-head</span> ,website-html-head
+       <span style="color: #483d8b;">:html-preamble</span> ,website-html-preamble
+       <span style="color: #483d8b;">:html-postamble</span> ,website-html-postamble)
+
+      (<span style="color: #8b2252;">"w-images"</span>
+       <span style="color: #483d8b;">:base-directory</span> ,website-org-img
+       <span style="color: #483d8b;">:base-extension</span> <span style="color: #8b2252;">"jpg</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">|</span><span style="color: #8b2252;">gif</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">|</span><span style="color: #8b2252;">png"</span>
+       <span style="color: #483d8b;">:recursive</span> t
+       <span style="color: #483d8b;">:publishing-directory</span> ,website-www-img
+       <span style="color: #483d8b;">:publishing-function</span> org-publish-attachment)
+
+      (<span style="color: #8b2252;">"w-js"</span>
+       <span style="color: #483d8b;">:base-directory</span> ,website-org-js
+       <span style="color: #483d8b;">:base-extension</span> <span style="color: #8b2252;">"js"</span>
+       <span style="color: #483d8b;">:publishing-directory</span> ,website-www-js
+       <span style="color: #483d8b;">:publishing-function</span> org-publish-attachment)
+
+      (<span style="color: #8b2252;">"w-css"</span>
+       <span style="color: #483d8b;">:base-directory</span> ,website-org-css
+       <span style="color: #483d8b;">:base-extension</span> <span style="color: #8b2252;">"css"</span>
+       <span style="color: #483d8b;">:publishing-directory</span> ,website-www-css
+       <span style="color: #483d8b;">:publishing-function</span> org-publish-attachment)
+
+      (<span style="color: #8b2252;">"w-rss"</span>
+       <span style="color: #483d8b;">:base-directory</span> ,website-org
+       <span style="color: #483d8b;">:base-extension</span> <span style="color: #8b2252;">"org"</span>
+       <span style="color: #483d8b;">:include</span> (<span style="color: #8b2252;">"rss.org"</span>)
+       <span style="color: #483d8b;">:exclude</span> <span style="color: #8b2252;">".*"</span>
+       <span style="color: #483d8b;">:with-author</span> nil
+       <span style="color: #483d8b;">:with-todo-keywords</span> nil
+       <span style="color: #483d8b;">:with-statistics-cookies</span> nil
+       <span style="color: #483d8b;">:with-email</span> nil
+       <span style="color: #483d8b;">:html-link-home</span> <span style="color: #8b2252;">"/blog/index.html"</span>
+       <span style="color: #483d8b;">:publishing-directory</span> ,website-www
+       <span style="color: #483d8b;">:publishing-function</span> &#8482;/org-rss-publish-to-rss
+       <span style="color: #483d8b;">:section-numbers</span> nil
+       <span style="color: #483d8b;">:html-link-use-abs-url</span> nil)
+
+      (<span style="color: #8b2252;">"website"</span> <span style="color: #483d8b;">:components</span>
+       (<span style="color: #8b2252;">"w-org"</span> <span style="color: #8b2252;">"w-images"</span> <span style="color: #8b2252;">"w-js"</span> <span style="color: #8b2252;">"w-css"</span> <span style="color: #8b2252;">"w-rss"</span>)))))
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org78a14ea" class="outline-3">
+<h3 id="el-publish-wrapper"><a id="org78a14ea"></a>Publishing wrapper function</h3>
+<div class="outline-text-3" id="text-el-publish-wrapper">
+<p>
+The <code>™/publish-website</code> function is the entry point to generate the website
+from the source org files.  It sets up the configuration lists, defines some
+simple options and calls the publishing function.
+</p>
+
+<p>
+The website is updated when calling <code>(™/publish-website)</code>, which only publishes
+newly modified files.  When used with additional arguments, a full update can be
+forced: <code>(™/publish-website "website" t)</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org5843bad"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">org-publish for website</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/publish-website</span> (<span style="color: #228b22;">&amp;optional</span> project force)
+  <span style="color: #8b2252;">"Publish personal website."</span>
+  (interactive)
+  (<span style="color: #a020f0;">unless</span> project (setq project <span style="color: #8b2252;">"website"</span>))
+  (<span style="color: #a020f0;">let</span> ((org-publish-project-alist (&#8482;/get-publish-project-spec))
+        (org-export-date-timestamp-format <span style="color: #8b2252;">"%Y-%m-%d"</span>)
+        (org-todo-keywords '((sequence <span style="color: #8b2252;">"TODO"</span> <span style="color: #8b2252;">"REVIEW"</span> <span style="color: #8b2252;">"|"</span>
+                                       <span style="color: #8b2252;">"DONE"</span> <span style="color: #8b2252;">"DEFERRED"</span> <span style="color: #8b2252;">"ABANDONED"</span>))))
+    (org-publish-project project force)))
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org6fa911e" class="outline-3">
+<h3 id="el-push-to-blog"><a id="org6fa911e"></a>Push org-file to blog</h3>
+<div class="outline-text-3" id="text-el-push-to-blog">
+<p>
+The mechanism to publish new posts uses the <code>™/push-to-blog</code> function to convert
+a standalone org file into a post.  The function performs the following:
+</p>
+<ul class="org-ul">
+<li>add a <code>#+SETUPFILE</code> line to the header (the content of the setup file is
+described <a href="#sec-org-setup">here</a>),</li>
+<li>format the output filename with the post date preceding the title
+(e.g. <code>YYYY-MM-DD-Post_title.org</code>),</li>
+<li>search for TODO items, exit if any is found,</li>
+<li>moves file links (images) to a subfolder of the <code>org/images/</code> folder named after
+the formatted output filename (e.g. <code>YYYY-MM-DD-Post_title/</code>),</li>
+<li>modify links to files to point to the copy location,</li>
+<li>finally, save the modified org file to the <code>org/posts/</code> folder.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org1d16d40"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Push to blog</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/push-to-blog</span> (org-file)
+  <span style="color: #8b2252;">"Add ORG-FILE to personal blog."</span>
+  (<span style="color: #a020f0;">let*</span> ((blog-dir (concat
+                    (file-name-as-directory (&#8482;/get-perso <span style="color: #8b2252;">"website-root"</span>))
+                    (file-name-as-directory <span style="color: #8b2252;">"org"</span>)))
+         (post-dir (concat
+                    (file-name-as-directory blog-dir)
+                    (file-name-as-directory <span style="color: #8b2252;">"posts"</span>)))
+         (img-dir-base (concat
+                        (file-name-as-directory blog-dir)
+                        (file-name-as-directory <span style="color: #8b2252;">"images"</span>)))
+         (file-base (file-name-base org-file))
+         post-date
+         (has-date nil)
+         out-file
+         (org-inhibit-startup t)
+         (visiting (find-buffer-visiting org-file))
+         (buffer (or visiting (find-file-noselect org-file)))
+         (org-tree (<span style="color: #a020f0;">with-current-buffer</span> buffer
+                     (org-element-parse-buffer))))
+    (<span style="color: #a020f0;">let</span> (setupfile-added-p)
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">Add SETUPFILE entry to tree, parse TITLE and DATE</span>
+      (org-element-map
+          org-tree 'keyword
+        (<span style="color: #a020f0;">lambda</span> (r)
+          (<span style="color: #a020f0;">let</span> ((key (org-element-property <span style="color: #483d8b;">:key</span> r))
+                (value (org-element-property <span style="color: #483d8b;">:value</span> r)))
+            (<span style="color: #a020f0;">unless</span> setupfile-added-p
+              (<span style="color: #a020f0;">let</span> ((elt-setup (org-element-copy r)))
+                (org-element-put-property elt-setup <span style="color: #483d8b;">:key</span> <span style="color: #8b2252;">"SETUPFILE"</span>)
+                (org-element-put-property elt-setup <span style="color: #483d8b;">:value</span> <span style="color: #8b2252;">"../setup.org"</span>)
+                (org-element-insert-before elt-setup r))
+              (setq setupfile-added-p t))
+            (<span style="color: #a020f0;">cond</span> ((string= key <span style="color: #8b2252;">"TITLE"</span>)
+                   (setq out-file
+                         (replace-regexp-in-string <span style="color: #8b2252;">"[[:space:]]+"</span> <span style="color: #8b2252;">"_"</span> value)))
+                  ((string= key <span style="color: #8b2252;">"DATE"</span>)
+                   (setq post-date
+                         (format-time-string
+                          <span style="color: #8b2252;">"%Y-%m-%d"</span>
+                          (org-time-string-to-time value))))))
+          (and out-file post-date setupfile-added-p))
+        nil t)
+      (<span style="color: #a020f0;">when</span> (not (and post-date out-file setupfile-added-p))
+        (<span style="color: #ff0000; font-weight: bold;">error</span> <span style="color: #8b2252;">"TITLE and DATE must be defined"</span>)))
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">Look for remaining TODO</span>
+    (<span style="color: #a020f0;">let</span> ((has-todo nil))
+      (org-element-map org-tree 'headline
+        (<span style="color: #a020f0;">lambda</span> (r)
+          (setq
+           has-todo (or has-todo
+                        (equal 'todo
+                               (org-element-property <span style="color: #483d8b;">:todo-type</span> r))))
+          has-todo)
+        nil t)
+      (<span style="color: #a020f0;">when</span> has-todo
+        (<span style="color: #ff0000; font-weight: bold;">error</span> <span style="color: #8b2252;">"Remaining TODO items in file"</span>)))
+    (<span style="color: #a020f0;">let*</span> ((base-fname (concat post-date <span style="color: #8b2252;">"-"</span> out-file))
+           (out-file-full (concat post-dir base-fname <span style="color: #8b2252;">".org"</span>))
+           (img-dir (concat img-dir-base base-fname)))
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">Copy images and update links</span>
+      (org-element-map org-tree 'link
+        (<span style="color: #a020f0;">lambda</span> (r)
+          (<span style="color: #a020f0;">when</span> (string= (org-element-property <span style="color: #483d8b;">:type</span> r) <span style="color: #8b2252;">"file"</span>)
+            (<span style="color: #a020f0;">let*</span> ((link-file (org-element-property <span style="color: #483d8b;">:path</span> r))
+                   (link-file-base (file-name-base link-file))
+                   (link-file-ext (file-name-extension link-file t))
+                   (out-link (concat (file-name-as-directory img-dir)
+                                     link-file-base link-file-ext)))
+              <span style="color: #b22222;">;; </span><span style="color: #b22222;">Copy file</span>
+              (mkdir img-dir t)
+              (copy-file link-file out-link t)
+              <span style="color: #b22222;">;; </span><span style="color: #b22222;">Update link target</span>
+              (org-element-put-property
+               r <span style="color: #483d8b;">:path</span> (concat <span style="color: #8b2252;">"../images/"</span>
+                               (file-name-as-directory base-fname)
+                               link-file-base link-file-ext))))))
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">Write output</span>
+      (<span style="color: #a020f0;">with-current-buffer</span> (find-file out-file-full)
+        (erase-buffer)
+        (insert (org-element-interpret-data org-tree))
+        (save-buffer)
+        )
+      )
+    )
+  )
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3bd45bd" class="outline-3">
+<h3 id="org3bd45bd">Footer</h3>
+<div class="outline-text-3" id="text-org3bd45bd">
+<p>
+This block closes the <code>my-website.el</code> file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="org58f4545"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div>(<span style="color: #a020f0;">provide</span> '<span style="color: #008b8b;">my-website</span>)
+<span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-website.el ends here</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="show_source">
+  <input type="button" class="footer-button" value="Show Org source (html)"
+         onClick='show_org_source(true)' />
+  <input type="button" class="footer-button" value="Show Org source (raw)"
+         onClick='show_org_source()' />
+</div>
+<div class='footer'>
+  <!-- Copyright 2016 Thibault Marin (<a href="http://validator.w3.org/check?uri=referer">Validate</a> HTML).<br> -->
+  Copyright 2016 Thibault Marin.<br>
+  Last updated 2016-11-13 Sun 21:43. <br>
+  Built with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 9.0).
+</div>
+</div>
+</body>
+</html>
