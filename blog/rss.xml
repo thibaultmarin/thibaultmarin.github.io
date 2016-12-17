@@ -14,8 +14,8 @@
 	<link>/blog/index.html</link>
 	<description><![CDATA[]]></description>
 	<language>en</language>
-	<pubDate>Sun, 13 Nov 2016 21:55:15 -0600</pubDate>
-	<lastBuildDate>Sun, 13 Nov 2016 21:55:15 -0600</lastBuildDate>
+	<pubDate>Sat, 17 Dec 2016 12:03:40 -0600</pubDate>
+	<lastBuildDate>Sat, 17 Dec 2016 12:03:40 -0600</lastBuildDate>
 	<generator>Emacs 24.5 Org-mode 9.0</generator>
 	<webMaster>) (nil)</webMaster>
 	<image>
@@ -28,6 +28,11 @@
 		<h2>Table of Contents</h2>
 		<div id="text-table-of-contents">
 			<ul>
+				<li><a href="#org35bc9e1">hpp2plantuml - Convert C++ header files to PlantUML</a>
+				<ul>
+					<li><a href="#sec-intro">Motivation</a></li>
+				</ul>
+				</li>
 				<li><a href="#org288365c">Personal website in org</a>
 				<ul>
 					<li><a href="#org0e6b7f4">Introduction</a></li>
@@ -43,11 +48,53 @@
 	</div>
 
 	<item>
+		<title>hpp2plantuml - Convert C++ header files to PlantUML</title>
+		<link>/blog/index.html/rss.html#org35bc9e1</link>
+		<author>) (nil)</author>
+		<guid isPermaLink="false">/blog/index.html/rss.html#org35bc9e1</guid>
+		<pubDate>Sat, 17 Dec 2016 12:03:00 -0600</pubDate>
+
+		<description><![CDATA[<div id="outline-container-orgca4b11f" class="outline-3">
+		<h3 id="sec-intro"><a id="orgca4b11f"></a><a id="ID-86453803-580a-4680-831d-225cfea952d8"></a>Motivation</h3>
+		<div class="outline-text-3" id="text-sec-intro">
+		<p>
+		The purpose of this tool is to convert C++ header files to a UML representation
+		in <a href="https://plantuml.com/">PlantUML</a> syntax that can be used to generate diagrams with PlantUML.
+		</p>
+
+		<p>
+		<a href="https://plantuml.com/">PlantUML</a> is a program rendering UML diagrams from plain text inputs using an
+		expressive language.
+		</p>
+
+		<p>
+		This module generates the text input to PlantUML from C++ header files.  Its
+		ambition is limited but it should produce reasonable conversion for simple class
+		hierarchies.  It aims at supporting:
+		</p>
+		<ul class="org-ul">
+		<li>class members with properties (<code>private</code>, <code>method</code>, <code>protected</code>), methods with
+		basic qualifiers (<code>static</code>, abstract),</li>
+		<li>inheritance relationships,</li>
+		<li>aggregation relationships (very basic support).</li>
+		</ul>
+
+
+
+		<p>
+		<a href="posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.html">(Read more)</a>
+		</p>
+		</div>
+		</div>
+		]]></description>
+	</item>
+
+	<item>
 		<title>Personal website in org</title>
 		<link>/blog/index.html/rss.html#org288365c</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org288365c</guid>
-		<pubDate>Sun, 13 Nov 2016 21:55:00 -0600</pubDate>
+		<pubDate>Sat, 17 Dec 2016 12:03:00 -0600</pubDate>
 
 		<description><![CDATA[<div id="outline-container-org0e6b7f4" class="outline-3">
 		<h3 id="org0e6b7f4"><a id="ID-bee322f3-5c88-4db6-85bb-96ccd5204aa3"></a>Introduction</h3>
@@ -157,10 +204,10 @@
 	<link>/blog/index.html/rss.html#orgc498e7a</link>
 	<author>) (nil)</author>
 	<guid isPermaLink="false">/blog/index.html/rss.html#orgc498e7a</guid>
-	<pubDate>Sun, 13 Nov 2016 21:55:00 -0600</pubDate>
+	<pubDate>Sat, 17 Dec 2016 12:03:00 -0600</pubDate>
 
 	<description><![CDATA[<div id="outline-container-org0e6b7f4" class="outline-3">
-	<h3 id="org0e6b7f4"><a id="ID-7dba73a7-cee5-44c1-8b4c-58319aed52e5"></a>Introduction </h3>
+	<h3 id="org0e6b7f4"><a id="ID-bb18205d-b833-4804-a111-966a8823df7c"></a>Introduction </h3>
 	<div class="outline-text-3" id="text-org0e6b7f4">
 	<p>
 	This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
