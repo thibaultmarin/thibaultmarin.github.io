@@ -1,4 +1,4 @@
-# Created 2016-12-17 Sat 12:03
+# Created 2016-12-17 Sat 12:51
 #+OPTIONS: todo:nil ^:nil
 #+TITLE: hpp2plantuml - Convert C++ header files to PlantUML
 #+DATE: 2016-11-30
@@ -37,7 +37,7 @@ hierarchies.  It aims at supporting:
 The license adopted for this project is the MIT license.
 
 #+NAME: license
-#+BEGIN_SRC conf
+#+BEGIN_SRC conf :tangle LICENSE
 
 The MIT License (MIT)
 
@@ -76,7 +76,7 @@ The full list of non-standard dependencies is produced by the following source
 block (returning either imports or a dependency list used in [[#sec-package-setup-py][=setup.py=]]):
 
 #+NAME: py-dependencies
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :var output="import" :var dep-list=py-dependency-list :results value :eval no-export
 (cond
  ((string= output "import")
   (mapconcat
@@ -89,12 +89,12 @@ block (returning either imports or a dependency list used in [[#sec-package-setu
 #+END_SRC
 
 #+NAME: py-imports
-#+BEGIN_SRC python
+#+BEGIN_SRC python :noweb yes
 # %% Imports
 
 import re
 import glob
-nil
+<<py-dependencies("import")>>
 #+END_SRC
 
 The tests rely on the [[http://nose.readthedocs.io/en/latest/][nosetest]] framework and the package documentation is built
@@ -920,7 +920,7 @@ ready to process by PlantUML.
 
 An example use case for the ~Diagram~ class could be:
 #+NAME: py-diag-example
-#+BEGIN_SRC python
+#+BEGIN_SRC python :tangle no
 # Create object
 diag = Diagram()
 # Initialize from filename
@@ -1643,7 +1643,7 @@ the representation of variables.
 
 
 #+NAME: test-unit-class_var
-#+BEGIN_SRC python
+#+BEGIN_SRC python :var test_list_classvar=tbl-unittest-class_var
 # %% Test class variables
 
 
@@ -1679,7 +1679,7 @@ supported by PlantUML.
 
 
 #+NAME: test-unit-class_method
-#+BEGIN_SRC python
+#+BEGIN_SRC python :var test_list_classmethod=tbl-unittest-class_method
 # %% Test class methods
 
 
@@ -1713,7 +1713,7 @@ Table\nbsp{}[[tbl-unittest-class]].  It includes templates and abstract classes.
 
 
 #+NAME: test-unit-class
-#+BEGIN_SRC python
+#+BEGIN_SRC python :var test_list_class=tbl-unittest-class
 # %% Test classes
 
 
@@ -1744,7 +1744,7 @@ Table\nbsp{}[[tbl-unittest-enum]].
 
 
 #+NAME: test-unit-enum
-#+BEGIN_SRC python
+#+BEGIN_SRC python :var test_list_enum=tbl-unittest-enum
 # %% Test enum objects
 
 
@@ -1779,7 +1779,7 @@ relationships (with and without count).
 
 
 #+NAME: test-unit-link
-#+BEGIN_SRC python
+#+BEGIN_SRC python :var test_list_link=tbl-unittest-link
 class TestLink:
     def test_list_entries(self):
         for test_idx, (input_str, output_ref_str) in \
@@ -1812,7 +1812,7 @@ The following can be extended to improve testing, as long as the corresponding
 [[#sec-test-system-ref][reference output]] is kept up-to-date.
 
 #+NAME: hpp-simple-classes-1-2
-#+BEGIN_SRC c++
+#+BEGIN_SRC c++ :mkdirp yes :tangle tests/simple_classes_1_2.hpp
 enum Enum01 { VALUE_0, VALUE_1, VALUE_2 };
 
 class Class01 {
@@ -1840,7 +1840,7 @@ private:
 #+END_SRC
 
 #+NAME: hpp-simple-classes-3
-#+BEGIN_SRC c++
+#+BEGIN_SRC c++ :mkdirp yes :tangle tests/simple_classes_3.hpp
 template<typename T>
 class Class03 {
 public:
@@ -1862,7 +1862,7 @@ The comparison takes into account the white space, indentation, etc.
 
 
 #+NAME: puml-simple-classes
-#+BEGIN_SRC plantuml
+#+BEGIN_SRC plantuml :mkdirp yes :tangle tests/simple_classes.puml
 @startuml
 abstract class Class01 {
 	+{abstract} AbstractPublicMethod(int param) : bool
@@ -2056,19 +2056,19 @@ The header is filled with the content of org-mode blocks.  The version number is
 obtained using the source block described [[#sec-org-el-version][here]].
 
 #+NAME: py-init
-#+BEGIN_SRC python
+#+BEGIN_SRC python :noweb yes :tangle src/hpp2plantuml/__init__.py
 """ hpp2plantuml module
 
-nil
+<<el-org-exp("sec-module", "rst")>>
 
 Usage:
 
-nil
+<<el-org-exp("sec-module-usage", "rst", "keep")>>
 """
 
 __title__ = "hpp2plantuml"
 __description__ = "Convert C++ header files to PlantUML"
-__version__ = nil
+__version__ = <<get-version()>>
 __uri__ = "https://github.com/thibaultmarin/hpp2plantuml"
 __doc__ = __description__ + " <" + __uri__ + ">"
 __author__ = "Thibault Marin"
@@ -2094,7 +2094,7 @@ documentation files.  In practice, the documentation is built using a [[#sec-pac
 command]] for =setup.py= run using ~python setup.py sphinx~.
 
 #+NAME: cfg-setup
-#+BEGIN_SRC conf
+#+BEGIN_SRC conf :tangle setup.cfg
 
 [bdist_wheel]
 universal = 1
@@ -2161,7 +2161,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: Implementation :: PyPy",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-INSTALL_REQUIRES = nil
+INSTALL_REQUIRES = <<py-dependencies("requirements")>>
 INSTALL_REQUIRES += ['sphinx', ]
 SETUP_REQUIRES = ['sphinx', 'numpydoc']
 ###################################################################
@@ -2175,6 +2175,50 @@ The following helper functions provide tools to extract metadata from the
 
 #+NAME: py-setup-helper
 #+BEGIN_SRC python
+
+HERE = os.path.abspath(os.path.dirname(__file__))
+
+
+def read(*parts):
+    """
+    Build an absolute path from *parts* and and return the contents of the
+    resulting file.  Assume UTF-8 encoding.
+    """
+    with codecs.open(os.path.join(HERE, *parts), "rb", "utf-8") as f:
+        return f.read()
+
+
+META_FILE = read(META_PATH)
+
+
+def find_meta(meta):
+    """
+    Extract __*meta*__ from META_FILE.
+    """
+    meta_match = re.search(
+        r"^__{meta}__ = ['\"]([^'\"]*)['\"]".format(meta=meta),
+        META_FILE, re.M
+    )
+    if meta_match:
+        return meta_match.group(1)
+    raise RuntimeError("Unable to find __{meta}__ string.".format(meta=meta))
+
+# %% Sphinx Build
+
+
+class Sphinx(Command):
+    user_options = []
+    description = 'Build sphinx documentation'
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        metadata = self.distribution.metadata
+        ,#+BEGIN_SRC python
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -2282,7 +2326,7 @@ if __name__ == "__main__":
 The manifest file is used to include extra files to the package.
 
 #+NAME: setup-manifest
-#+BEGIN_SRC conf
+#+BEGIN_SRC conf :tangle MANIFEST.in
 include *.rst *.txt LICENSE
 recursive-include tests *.py
 recursive-include tests *.hpp
@@ -2299,17 +2343,17 @@ The README file is automatically generated from blocks defined in this
 org-file (converted to RST format).
 
 #+NAME: rst-README
-#+BEGIN_SRC rst
+#+BEGIN_SRC rst :noweb yes :tangle README.rst
 
 hpp2plantuml - Convert C++ header files to PlantUML
 ===================================================
 
-nil
+<<el-org-exp("sec-intro", "rst")>>
 
 Usage
 -----
 
-nil
+<<el-org-exp("sec-module-usage", "rst", "keep")>>
 #+END_SRC
 
 
@@ -2337,7 +2381,7 @@ content of the file is mostly following the defaults, with a few exceptions:
   ([[(sphinx-conf-numpydoc)]]).
 
 #+NAME: py-sphinx-conf
-#+BEGIN_SRC python -r
+#+BEGIN_SRC python -r :noweb yes :mkdirp yes :tangle doc/source/conf.py
 
 # -*- coding: utf-8 -*-
 #
@@ -2420,9 +2464,9 @@ author = u'Thibault Marin'
 # built documents.
 #
 # The short X.Y version.
-version = u'v' + unil
+version = u'v' + u<<get-version()>>
 # The full version, including alpha/beta/rc tags.
-release = u'v' + unil
+release = u'v' + u<<get-version()>>
 
 # The language for content autogenerated by Sphinx. Refer to documentation
 # for a list of supported languages.
@@ -2496,7 +2540,7 @@ html_theme = 'alabaster'
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = u'hpp2plantuml ' + u'v' + unil
+# html_title = u'hpp2plantuml ' + u'v' + u<<get-version()>>
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -2713,7 +2757,7 @@ parts of the org document including a brief description of the usage and links
 to the automatically generated and the org-file documents.
 
 #+NAME: doc-rst-index
-#+BEGIN_SRC rst
+#+BEGIN_SRC rst :noweb yes :mkdirp yes :tangle doc/source/index.rst
 
 .. hpp2plantuml documentation master file.
 
@@ -2723,9 +2767,9 @@ hpp2plantuml documentation
 .. toctree::
    :maxdepth: 4
 
-nil
+<<el-org-exp("sec-intro", "rst")>>
 
-nil
+<<el-org-exp("sec-module-usage", "rst", "keep")>>
 
 Module documentation generated from docstrings
 ----------------------------------------------
@@ -2752,7 +2796,7 @@ In order to build the documentation on the [[http://read-the-docs.readthedocs.io
 file is added for the =numpydoc= package.
 
 #+NAME: req-readthedocs
-#+BEGIN_SRC conf
+#+BEGIN_SRC conf :mkdirp yes :tangle doc/source/readthedocs-requirements.txt
 numpydoc
 #+END_SRC
 
@@ -2768,7 +2812,7 @@ The following source block is used to get the module's version number defined in
 [[hpp2plantuml-version][a single location]] and include it at multiple locations.
 
 #+NAME: get-version
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :var ver=hpp2plantuml-version :var lang="python"
 (cond ((string= lang "python")
        (format "'%s'" ver)))
 #+END_SRC
@@ -2785,7 +2829,7 @@ the target section are removed (~children = "remove"~) of kept (any other
 string, e.g. "keep").
 
 #+NAME: el-org-exp
-#+BEGIN_SRC emacs-lisp -r
+#+BEGIN_SRC emacs-lisp -r :var input="sec-module-usage" :var lang="rst" :var children="remove" :results silent
 (save-excursion
   (let ((org-tree (org-element-parse-buffer)))
     (org-element-map
@@ -2845,7 +2889,7 @@ The command and options to generate the org-file documentation in rst format are
 encapsulated in the following source block.
 
 #+NAME: el-export-rst-org-doc
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :results silent
 (require 'ox-rst)
 (let ((org-export-with-toc nil)
       (org-export-with-todo-keywords nil)
