@@ -1,9 +1,9 @@
-# Created 2016-12-17 Sat 12:03
+# Created 2017-02-16 Thu 23:52
 #+TITLE: misc/
 #+DATE: 2016-10-02
 #+AUTHOR: Thibault Marin
-Random articles about linux, emacs, science, etc.  This site and the articles
-are built with [[https://gnu.org/s/emacs][emacs]] and
+Random articles about linux, emacs, data processing, etc.  This site and the
+articles are built with [[https://gnu.org/s/emacs][emacs]] and
 [[http://orgmode.org][org-mode]] (using
 [[http://orgmode.org/worg/code/org-info-js][org-js]]).
 

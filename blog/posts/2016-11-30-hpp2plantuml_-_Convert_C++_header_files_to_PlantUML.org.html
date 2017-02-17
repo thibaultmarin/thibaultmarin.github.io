@@ -27,10 +27,6 @@
         /* font-lock-constant-face */
         color: #008b8b;
       }
-      .flyspell-duplicate {
-        /* flyspell-duplicate */
-        text-decoration: underline;
-      }
       .function-name {
         /* font-lock-function-name-face */
         color: #0000ff;
@@ -262,7 +258,7 @@ This module has mostly standard dependencies; the only exception is the
 
 <span class="org-meta-line">#+NAME: py-dependency-list</span>
 <span class="org-table">| argparse        |</span>
-<span class="org-table">| </span><span class="org-table"><span class="flyspell-duplicate">CppHeaderParser</span></span><span class="org-table"> |</span>
+<span class="org-table">| CppHeaderParser |</span>
 
 The full list of non-standard dependencies is produced by the following source
 block (returning either imports or a dependency list used in <span class="org-link"><a href="nil:nil">=setup.py=</a></span>):
@@ -300,7 +296,7 @@ with <span class="org-link"><a href="http://sphinx-doc.org">Sphinx</a></span>.
 
 The package relies on a layer of objects used as intermediate between the parsed
 header files (parsed using <span class="org-code">~CppHeaderParser~</span>) and the text output for use with
-<span class="flyspell-duplicate">PlantUML</span>.
+PlantUML.
 
 The main entry point (<span class="org-link"><a href="nil:nil">~CreatePlantUMLFile~</a></span>) takes as input a list of header
 files and creates a <span class="org-link"><a href="nil:nil">~Diagram~</a></span> object from it, which contains the internal object
@@ -3143,7 +3139,7 @@ encapsulated in the following source block.
 - <span class="org-checkbox">[X]</span> Write elisp function which:
   - <span class="org-checkbox">[X]</span> tangles source files
   - <span class="org-checkbox">[X]</span> creates documentation rst (and README.rst)
-- <span class="org-checkbox">[X]</span> Link to org-mode rst documentation from index.rst -&gt; Use only org-mode <span class="flyspell-duplicate">rst</span>?
+- <span class="org-checkbox">[X]</span> Link to org-mode rst documentation from index.rst -&gt; Use only org-mode rst?
 </pre>
   </body>
 </html>

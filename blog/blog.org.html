@@ -6,8 +6,12 @@
     <style type="text/css">
     <!--
       body {
-        color: #000000;
-        background-color: #ffffff;
+        color: #657b83;
+        background-color: #fdf6e3;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #b22222;
       }
       .org-document-info-keyword {
         /* org-document-info-keyword */
@@ -37,11 +41,13 @@
   </head>
   <body>
     <pre>
+<span class="comment"># <a href="file:~/dotfiles/emacs/website/website.org::blog-org">blog-org</a></span>
 <span class="org-document-info-keyword">#+TITLE:</span> <span class="org-document-title">Blog posts
 </span>
 All the blog posts:
 
 <span class="org-meta-line">#+INCLUDE: sitemap.org::*posts :only-contents t</span>
+<span class="comment"># blog-org ends here</span>
 </pre>
   </body>
 </html>

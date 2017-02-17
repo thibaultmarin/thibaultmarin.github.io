@@ -14,8 +14,8 @@
 	<link>/blog/index.html</link>
 	<description><![CDATA[]]></description>
 	<language>en</language>
-	<pubDate>Sat, 17 Dec 2016 12:03:40 -0600</pubDate>
-	<lastBuildDate>Sat, 17 Dec 2016 12:03:40 -0600</lastBuildDate>
+	<pubDate>Mon, 19 Dec 2016 13:36:50 -0600</pubDate>
+	<lastBuildDate>Mon, 19 Dec 2016 13:36:50 -0600</lastBuildDate>
 	<generator>Emacs 24.5 Org-mode 9.0</generator>
 	<webMaster>) (nil)</webMaster>
 	<image>
@@ -52,10 +52,10 @@
 		<link>/blog/index.html/rss.html#org35bc9e1</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org35bc9e1</guid>
-		<pubDate>Sat, 17 Dec 2016 12:03:00 -0600</pubDate>
+		<pubDate>Mon, 19 Dec 2016 13:36:00 -0600</pubDate>
 
-		<description><![CDATA[<div id="outline-container-orgca4b11f" class="outline-3">
-		<h3 id="sec-intro"><a id="orgca4b11f"></a><a id="ID-86453803-580a-4680-831d-225cfea952d8"></a>Motivation</h3>
+		<description><![CDATA[<div id="outline-container-orgbc6ad65" class="outline-3">
+		<h3 id="sec-intro"><a id="orgbc6ad65"></a><a id="ID-a48aa180-1719-4a40-8605-2673f9dc527f"></a>Motivation</h3>
 		<div class="outline-text-3" id="text-sec-intro">
 		<p>
 		The purpose of this tool is to convert C++ header files to a UML representation
@@ -94,7 +94,7 @@
 		<link>/blog/index.html/rss.html#org288365c</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org288365c</guid>
-		<pubDate>Sat, 17 Dec 2016 12:03:00 -0600</pubDate>
+		<pubDate>Mon, 19 Dec 2016 13:36:00 -0600</pubDate>
 
 		<description><![CDATA[<div id="outline-container-org0e6b7f4" class="outline-3">
 		<h3 id="org0e6b7f4"><a id="ID-bee322f3-5c88-4db6-85bb-96ccd5204aa3"></a>Introduction</h3>
@@ -204,10 +204,10 @@
 	<link>/blog/index.html/rss.html#orgc498e7a</link>
 	<author>) (nil)</author>
 	<guid isPermaLink="false">/blog/index.html/rss.html#orgc498e7a</guid>
-	<pubDate>Sat, 17 Dec 2016 12:03:00 -0600</pubDate>
+	<pubDate>Mon, 19 Dec 2016 13:36:00 -0600</pubDate>
 
 	<description><![CDATA[<div id="outline-container-org0e6b7f4" class="outline-3">
-	<h3 id="org0e6b7f4"><a id="ID-bb18205d-b833-4804-a111-966a8823df7c"></a>Introduction </h3>
+	<h3 id="org0e6b7f4"><a id="ID-4564a75b-4c0b-4cb7-b24e-7fef16c3c286"></a>Introduction </h3>
 	<div class="outline-text-3" id="text-org0e6b7f4">
 	<p>
 	This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
@@ -238,7 +238,6 @@
 	rm desktop.png -rf
 	</pre>
 	</div>
-
 
 
 	<div id="org5533ed5" class="figure">

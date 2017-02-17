@@ -1,4 +1,4 @@
-# Created 2016-11-13 Sun 21:55
+# Created 2017-02-16 Thu 23:52
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016-10-05
@@ -7,7 +7,6 @@
 #+TODO: TODO REVIEW | DONE DEFERRED ABANDONED
 #+INFOJS_OPT: view:content toc:t mouse:t ltoc:nil ftoc:nil
 #+PROPERTY: COOKIE_DATA todo recursive
-#+PROPERTY: header-args+ :eval never
 #+PROPERTY: header-args+ :tangle rc.lua
 #+PROPERTY: header-args+ :exports code
 #+PROPERTY: header-args+ :comments link
@@ -60,10 +59,10 @@ uname -a
 
 #+RESULTS: sh-debian-version
 : Distributor ID:	Debian
-: Description:	Debian GNU/Linux testing (stretch)
-: Release:	testing
+: Description:	Debian GNU/Linux 9.0 (stretch)
+: Release:	9.0
 : Codename:	stretch
-: Linux dell-desktop 4.6.0-1-amd64 #1 SMP Debian 4.6.4-1 (2016-07-18) x86_64 GNU/Linux
+: Linux dell-desktop 4.9.0-1-amd64 #1 SMP Debian 4.9.2-2 (2017-01-12) x86_64 GNU/Linux
 
 - awesome :: 
 #+NAME: sh-awesome-wm-version
@@ -72,10 +71,12 @@ awesome --version
 #+END_SRC
 
 #+RESULTS: sh-awesome-wm-version
-: awesome v3.5.9 (Mighty Ravendark)
-:  • Build: Mar 27 2016 02:23:55 for x86_64 by gcc version 5.3.1 (pbuilder@minjo)
+: awesome v4.0 (Harder, Better, Faster, Stronger)
 :  • Compiled against Lua 5.1.5 (running with Lua 5.1)
 :  • D-Bus support: ✔
+:  • execinfo support: ✔
+:  • RandR 1.5 support: ✔
+:  • LGI version: 0.9.1
 
 - emacs :: 
 #+NAME: el-emacs-version
@@ -84,8 +85,8 @@ awesome --version
 #+END_SRC
 
 #+RESULTS: el-emacs-version
-: "GNU Emacs 24.5.1 (x86_64-pc-linux-gnu, GTK+ Version 3.21.5)
-:  of 2016-09-05 on trouble, modified by Debian"
+: "GNU Emacs 25.1.1 (x86_64-pc-linux-gnu, GTK+ Version 3.22.5)
+:  of 2016-12-31, modified by Debian"
 
 - org-mode :: 
 #+NAME: el-org-version
@@ -94,7 +95,7 @@ awesome --version
 #+END_SRC
 
 #+RESULTS: el-org-version
-: "Org mode version 8.3.6 (release_8.3.6-1217-g05d918 @ ... )"
+: "Org mode version 9.0.4 (release_9.0.4-270-ga10ddb @ ... )"
 
 Most of the code in this configuration comes from the default =rc.lua= delivered
 with awesome-wm.  On my system, it is located under =/etc/xdg/awesome/rc.lua=.
@@ -110,13 +111,14 @@ on the parent heading:
 #+BEGIN_SRC org
 ,** Disabled heading
    :PROPERTIES:
-   :header-args: :tangle no
+   :header-args+: :tangle no
    :END:
 #+END_SRC
 
 This can be done by adding the text manually or by using the =org-set-property=
-function, which is bound to =C-c C-x p= by default.  Alternatively, individual
-source blocks can be disabled by adding =:tangle no= on the =#+BEGIN_SRC= line.
+function, which is bound to  by default.  Alternatively,
+individual source blocks can be disabled by adding =:tangle no= on the
+=#+BEGIN_SRC= line.
 
 It is important to note that when tangling this file, any change made directly
 to the lua files will be overridden by the code in this org file.  This can be
@@ -134,14 +136,8 @@ screenshots for instance), so use at your own risk.
 
 ** Requirements
 
-
-- The only non-standard awesome library required should be [[https://awesome.naquadah.org/wiki/Blingbling][blingbling]] which I
-  have checked out from git into =~/.config/awesome/blingbling=.  The blingbling
-  path should be accessible by the lua import system.  See the [[#import_blingbling][blingbling import
-  section]] for the list of components which require blingbling.
-
-- Since the configuration is written in an org-mode file, emacs is also required
-  to extract (tangle) the lua code.  A makefile is provided to run the tangle
+- Since the configuration is written in an org-mode file, emacs is required to
+  extract (tangle) the lua code.  A makefile is provided to run the tangle
   operation on this file from the command line (the [[https://www.gnu.org/software/make][GNU make]] utility is required
   to use the makefile).  It also requires a recent version of org-mode, and
   basic emacs modes for lua and python.
@@ -177,10 +173,10 @@ screenshots for instance), so use at your own risk.
 - The transparency effect on focus (see the [[#effects_transparency][transparency]] section) requires a
   compositor, such as =xcompmgr=.
 
-- When generating the HTML documentation (by running =C-c C-e h h= on this
-  buffer), screenshots are taken from the active desktop (assuming awesome-wm is
-  the running desktop environment).  This requires the =scrot= and [[http://www.imagemagick.org][=imagemagick=]]
-  programs.
+- When generating the HTML documentation (by running  on
+  this buffer), screenshots are taken from the active desktop (assuming
+  awesome-wm is the running desktop environment).  This requires the =scrot= and
+  [[http://www.imagemagick.org][=imagemagick=]] programs.
 
 
 ** Makefile
@@ -212,9 +208,7 @@ provided here:
     (lua        . t)
     (makefile   . t)
     (python     . t)
-    (shell      . t)
-    )
- )
+    (shell      . t)))
 
 ;; Org options
 (setq org-confirm-babel-evaluate nil)
@@ -235,13 +229,8 @@ provided here:
                                              :requires '(user secret)))))
         (when (and (plist-get auth :secret) (plist-get auth :user))
           (setq ttrss-pass (funcall (plist-get auth :secret))
-                ttrss-user (plist-get auth :user))
-          )
-        )
-      )
-    `(,ttrss-url ,ttrss-user ,ttrss-pass)
-    )
-  )
+                ttrss-user (plist-get auth :user)))))
+    `(,ttrss-url ,ttrss-user ,ttrss-pass)))
 
 ;; Define credential extraction function before tangling
 (add-hook 'org-babel-pre-tangle-hook 'get-ttrss-cred)
@@ -298,12 +287,10 @@ Standard modules listed here should come installed with awesome.
 
 #+NAME: src-imports-standard
 #+BEGIN_SRC lua
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 local util = require("awful.util")
-awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -313,6 +300,7 @@ local vicious = require("vicious")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+local hotkeys_popup = require("awful.hotkeys_popup").widget
 #+END_SRC
 
 
@@ -322,7 +310,6 @@ launchbar programs, theme selection, maildir, icons, etc.
 
 #+NAME: src-setup-paths
 #+BEGIN_SRC lua
-
 -- Define global folders
 awesome_paths = {}
 
@@ -349,26 +336,8 @@ similar to main menus in other desktop environments.
 
 #+NAME: src-imports-debian
 #+BEGIN_SRC lua
-
 -- Load Debian menu entries
 require("debian.menu")
-#+END_SRC
-
-
-** Blingbling
-The blingbling module is used by the following widgets:
-- [[#volume][volume display and control]],
-- [[#memory][memory usage monitor]],
-- [[#calendar][calendar popup]]
-
-The blingbling library itself must be placed in a location accessible for the
-import system.
-
-#+NAME: src-imports-blingbling
-#+BEGIN_SRC lua
-
--- Blingbling library
-local blingbling = require("blingbling")
 #+END_SRC
 
 
@@ -379,7 +348,6 @@ filenames should match the names used with the =require= command.
 
 #+NAME: src-imports-custom
 #+BEGIN_SRC lua
-
 -- Custom libraries
 #+END_SRC
 
@@ -391,7 +359,6 @@ This module creates the launchers in the wibox from =.desktop= files (see the
 
 #+NAME: src-imports-custom-launchbar
 #+BEGIN_SRC lua
-
 local launchbar = require('launchbar')
 #+END_SRC
 
@@ -403,7 +370,6 @@ section).
 
 #+NAME: src-imports-custom-cmus
 #+BEGIN_SRC lua
-
 local cmus = require("cmus")
 #+END_SRC
 
@@ -415,7 +381,6 @@ section).
 
 #+NAME: src-imports-custom-ttrss
 #+BEGIN_SRC lua
-
 local ttrss = require("ttrss")
 #+END_SRC
 
@@ -426,7 +391,6 @@ Manage desktop themes (see the [[#theme][Theme]] section).
 
 #+NAME: src-imports-custom-theme
 #+BEGIN_SRC lua
-
 local theme_customization = require("theme_customization")
 #+END_SRC
 
@@ -438,7 +402,6 @@ section).
 
 #+NAME: src-imports-custom-icon_finder
 #+BEGIN_SRC lua
-
 local icon_finder = require("icon_finder")
 #+END_SRC
 
@@ -449,7 +412,6 @@ Generic command launcher (gnome-do style) (see the [[#global_prompt][Global prom
 
 #+NAME: src-imports-custom-global_prompt
 #+BEGIN_SRC lua
-
 local global_prompt = require("global_prompt")
 #+END_SRC
 
@@ -460,7 +422,6 @@ Some utility functions (see the [[#my_utility][Utilities]] section).
 
 #+NAME: src-imports-custom-utility
 #+BEGIN_SRC lua
-
 local my_utility = require('my_utility')
 #+END_SRC
 
@@ -477,10 +438,9 @@ Define default programs.
 
 #+NAME: src-setup-default-programs
 #+BEGIN_SRC lua
-
 -- Define default programs
 terminal = "x-terminal-emulator"
-termapps = "terminator"
+termapps = "urxvt" -- "terminator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 internet_browser = "x-www-browser"
@@ -498,7 +458,6 @@ configuration to find icons for programs and session operations ([[#shutdown][Sh
 
 #+NAME: src-setup-icons
 #+BEGIN_SRC lua
-
 -- {{ Icon finder
 myiconfinder = icon_finder.new(awesome_paths.iconapps_dir)
 -- }}
@@ -512,7 +471,6 @@ helpful to debug issues in =rc.lua=.
 
 #+NAME: src-setup-error
 #+BEGIN_SRC lua
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -532,9 +490,24 @@ do
 
         naughty.notify({ preset = naughty.config.presets.critical,
                          title = "Oops, an error happened!",
-                         text = err })
+                         text = tostring(err) })
         in_error = false
     end)
+end
+-- }}}
+
+-- {{{ Helper functions
+local function client_menu_toggle_fn()
+    local instance = nil
+
+    return function ()
+        if instance and instance.wibox.visible then
+            instance:hide()
+            instance = nil
+        else
+            instance = awful.menu.clients({ theme = { width = 250 } })
+        end
+    end
 end
 -- }}}
 #+END_SRC
@@ -547,7 +520,6 @@ modifier.  Also set =Alt= key.
 
 #+NAME: src-setup-modkey
 #+BEGIN_SRC lua
-
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -556,24 +528,6 @@ modifier.  Also set =Alt= key.
 -- others.
 modkey = "Mod4"
 altkey = "Mod1"
-#+END_SRC
-
-
-** Initialize wibox widgets
-
-Create empty structures for different widgets.
-
-#+NAME: src-setup-init-widgets
-#+BEGIN_SRC lua
-
--- Initialize widgets
-mywibox = {}
-mywibox_prompt = {}
-mypromptbox = {}
-mypromptbox_conf = {}
-mylayoutbox = {}
-mytaglist = {}
-mytasklist = {}
 #+END_SRC
 
 
@@ -628,9 +582,8 @@ entries disabled.
 #+NAME: src-desktop-layouts
 #+BEGIN_SRC lua
 -- Table of layouts to cover with awful.layout.inc, order matters.
-local layouts =
+awful.layout.layouts =
 {
-    awful.layout.suit.floating,
     -- awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -641,7 +594,9 @@ local layouts =
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    awful.layout.suit.magnifier,
+    awful.layout.suit.corner.nw,
+    awful.layout.suit.floating
 }
 -- }}}
 #+END_SRC
@@ -721,14 +676,15 @@ function theme_customization.set_custom_theme(theme, awesome_paths)
    fname_custom_defaults = awesome_paths.themes_custom_path
       .. "/custom_defaults.lua"
    if util.file_readable(fname_custom_defaults) then
-      dofile(fname_custom_defaults) -- `custom_defaults` table
+      -- `custom_defaults` table
+      custom_defaults = dofile(fname_custom_defaults)
    else
       custom_defaults = {}
    end
 
    -- Load theme customization
    if fname_custom then
-      dofile(fname_custom) -- `custom` table
+      custom = dofile(fname_custom) -- `custom` table
    else
       custom = {a="b"}
    end
@@ -785,7 +741,7 @@ function theme_customization.create_themes_menu(awesome_paths)
    menuitems = {}
    for theme_name, theme_file in pairs(theme_list) do
       theme = nil
-      dofile(theme_file)
+      theme = dofile(theme_file)
       theme_icon = theme.awesome_icon
       theme = nil
       table.insert(menuitems, {
@@ -853,7 +809,6 @@ issues.
 
 #+NAME: src-desktop-theme
 #+BEGIN_SRC lua
-
 -- {{ Theme management
 awesome_paths.themes_system_path = awesome_paths.system_dir .. "/themes/"
 awesome_paths.themes_custom_path = awesome_paths.config_dir .. "/themes/"
@@ -877,12 +832,26 @@ theme_customization.set_custom_theme(theme_name, awesome_paths)
 theme_menuitems = theme_customization.create_themes_menu(awesome_paths)
 -- }}
 
--- {{ Wallpaper
-if beautiful.wallpaper then
-   for s = 1, screen.count() do
-      gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-   end
+local function set_wallpaper(s)
+    -- Wallpaper
+    if beautiful.wallpaper then
+        local wallpaper = beautiful.wallpaper
+        -- If wallpaper is a function, call it with the screen
+        if type(wallpaper) == "function" then
+            wallpaper = wallpaper(s)
+        end
+        gears.wallpaper.maximized(wallpaper, s, true)
+    end
 end
+
+-- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+screen.connect_signal("property::geometry", set_wallpaper)
+
+
+awful.screen.connect_for_each_screen(function(s)
+    -- Wallpaper
+    set_wallpaper(s)
+end)
 --}}
 #+END_SRC
 
@@ -894,7 +863,7 @@ file:
 #+NAME: src-theme-file
 #+BEGIN_SRC conf
 
-default
+xresources
 #+END_SRC
 
 
@@ -915,27 +884,30 @@ layout on some tags is customized.
 
 #+NAME: src-desktop-tags
 #+BEGIN_SRC lua
-
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {
-   {
-      names  = { "@", "www", 3, 4, 5, 6, 7, 8, 9 },
-      layout = { layouts[5], layouts[2], layouts[2], layouts[2], layouts[2],
-                 layouts[2], layouts[2], layouts[2], layouts[1]}
-   },
-   {
-      names  = { "@", "news/cmus", "www", 4, 5, 6, 7, 8, 9 },
-      layout = { layouts[2], layouts[2], layouts[2], layouts[2], layouts[2],
-                 layouts[2], layouts[2], layouts[2], layouts[1]}
-}}
-for s = 1, screen.count() do
-   -- Each screen has its own tag table.
-   if s <= #tags then si = s else si = #tags end
-   tags[s] = awful.tag(tags[si].names, s, tags[si].layout)
-end
+awful.screen.connect_for_each_screen(function(s)
+
+      -- Each screen has its own tag table.
+      --awful.tag({ "@", "2", "3", "4", "5", "6", "7", "8", "9" }, s,
+      --   awful.layout.layouts[1])
+
+      awful.tag.add("@", { layout = awful.layout.suit.tile.bottom,
+                           screen = s })
+      for i = 2, 8 do
+         awful.tag.add(i, { layout = awful.layout.suit.tile.left,
+                              screen = s })
+      end
+
+      awful.tag.add("9", { layout = awful.layout.suit.tile.floating,
+                           screen = s })
+
+      s.tags[1]:view_only()
+end)
 -- }}}
 #+END_SRC
+
+
 
 
 * Main bar 
@@ -951,7 +923,6 @@ between widgets.
 
 #+NAME: src-main-misc
 #+BEGIN_SRC lua
-
 ---- {{{ Separators
 local separator = wibox.widget.textbox()
 separator:set_markup(" <span foreground='grey'>·</span> ")
@@ -1047,7 +1018,6 @@ parameter (created in the [[#icons][Icons]] section).
 
 #+NAME: src-main-launchbar
 #+BEGIN_SRC lua
-
 -- {{ Launchbar
 local mylaunchbar = launchbar.new(awesome_paths.config_dir .. "/shortcuts/",
                                   myiconfinder)
@@ -1080,7 +1050,6 @@ found in folders set in the =awesome_paths= variable).
 
 #+NAME: src-main-shutdown
 #+BEGIN_SRC lua
-
 -- {{ Shutdown menu
 
 -- Session management icons
@@ -1094,13 +1063,13 @@ myleave_menuitems = {
    { "shutdown",
      function() my_utility.confirm_action(
            function()
-              awful.util.spawn('sudo /sbin/shutdown -h now')
+              awful.spawn('sudo /sbin/shutdown -h now')
            end, "Shutdown")
      end, icon_shutdown },
    { "restart",
      function() my_utility.confirm_action(
            function()
-              awful.util.spawn('sudo /sbin/shutdown -r now')
+              awful.spawn('sudo /sbin/shutdown -r now')
            end, "Restart")
      end,
      icon_restart },
@@ -1114,7 +1083,7 @@ myleave_menuitems = {
    { "lock",
      function() my_utility.confirm_action(
            function()
-              awful.util.spawn("xscreensaver-command -lock")
+              awful.spawn("xscreensaver-command -lock")
            end, "Lock")
      end,
      icon_lock }
@@ -1139,10 +1108,10 @@ and launch applications by typing part of their name.
 
 #+NAME: src-main-menu
 #+BEGIN_SRC lua
-
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
+   { "hotkeys", function() return false, hotkeys_popup.show_help end},
    { "manual", terminal .. " -e man awesome" },
    { "edit config", emacs .. " " .. awesome.conffile },
    { "restart", awesome.restart },
@@ -1188,42 +1157,90 @@ menubar.utils.terminal = terminal
 
 
 ** Volume widget
-The blingbling module provides a widget for displaying the volume.  Volume
-control commands are also supported: a left click on the widget toggles the mute
-option, a right click on the widget spawns a menu with a single entry linking to
-the mixer program (see [[#default_programs][Default programs]]).
+The volume widget user the =wibox.container.radialprofressbar= widget defined in
+awesome-wm 4 versions.  Volume control commands are also supported: a left click
+on the widget toggles the mute option, a right click on the widget spawns a menu
+with a single entry linking to the mixer program (see [[#default_programs][Default programs]]).
 
 #+NAME: src-main-volume
 #+BEGIN_SRC lua
-
 -- {{{ Volume
+
 volume_text = wibox.widget.textbox()
-volume_text:set_text("🔊")
-volume_master = blingbling.volume({height = 18, width = 40, bar =true,
-                                   show_text = true, label ="$percent%"})
-volume_master:update_master()
-volume_master:set_master_control()
+volume_text:set_text("")
+
+volume_master = wibox.container.radialprogressbar()
+volume_master.border_color = nil
+volume_master.min_value = 0
+volume_master.max_value = 100
+volume_master.forced_width = 20
+volume_master.border_width = 3
+volume_master.widget = volume_text
+
+function update_volume_widget()
+   volume_char_list = {"🔇", "🔈", "🔉"}
+
+   awful.spawn.easy_async(
+      awesome_paths.config_dir .. "/scripts/osdvol.sh get",
+      function (stdout, stderr, reason, exitcode)
+         for k, v in stdout:gmatch("([0-9]+)%%.*[[]([onf]+)[]].*") do
+            -- There should be only one match
+            vol_str = k
+            ismute = v == "off"
+         end
+         vol = tonumber(vol_str)
+         volume_master.value = vol
+         if ismute then
+            vol_char = volume_char_list[1]
+         else
+            bin = math.floor(vol / (100 / (#volume_char_list - 1)))
+            if bin < 0 then
+               bin = 0
+            elseif bin >= #volume_char_list - 1 then
+               bin = #volume_char_list - 2
+            end
+            vol_char = volume_char_list[bin + 2]
+         end
+
+         volume_text:set_text(vol_char)
+      end
+   )
+end
 
 volume_menu_items = {
    { "mixer", function () run_or_raise(mixer, { instance = "mixer" }) end }
 }
 volume_menu = awful.menu.new( { items = volume_menu_items } )
 volume_buttons = awful.util.table.join(
-   awful.button({ }, 1, function ()
-         awful.util.spawn(awesome_paths.config_dir ..
-                          "/scripts/osdvol.sh mute") end),
-   awful.button({ }, 4, function ()
-         awful.util.spawn(awesome_paths.config_dir ..
-                          "/scripts/osdvol.sh volup") end),
-   awful.button({ }, 5, function ()
-         awful.util.spawn(awesome_paths.config_dir ..
-                          "/scripts/osdvol.sh voldown") end),
-   awful.button({ }, 3, function () volume_menu:toggle() end)
+   awful.button({ }, 1,
+      function ()
+         awful.spawn(awesome_paths.config_dir ..
+                        "/scripts/osdvol.sh mute")
+         update_volume_widget()
+   end),
+   awful.button({ }, 4,
+      function ()
+         awful.spawn(awesome_paths.config_dir ..
+                        "/scripts/osdvol.sh volup")
+         update_volume_widget()
+   end),
+   awful.button({ }, 5,
+      function ()
+         awful.spawn(awesome_paths.config_dir ..
+                        "/scripts/osdvol.sh voldown")
+         update_volume_widget()
+   end),
+   awful.button({ }, 3,
+      function ()
+         volume_menu:toggle()
+         update_volume_widget()
+   end)
 )
-volume_text:buttons(volume_buttons)
 volume_master:buttons(volume_buttons)
+update_volume_widget()
 -- }}}
 #+END_SRC
+
 
 *** OSD volume
 The volume widget relies on a bash script to control the volume (using the
@@ -1253,20 +1270,24 @@ VOLSTEP=5%
 # kills an existing osd_cat process
 # needed when holding down a key to force repaint of the onscreen message
 preKill() {
-    killall aosd_cat
+	killall aosd_cat
+}
+
+isMute() {
+	VOLMUTE="$(amixer sget Master,0 | grep "Front Left:" | awk '{print $6}')"
 }
 
 # gets the actual volume value
 getVol() {
-    VOL="$(amixer sget Master,0 | grep "Front Left:"|
-           awk '{print $5}'|sed -r 's/[][]//g')"
+	VOL="$(amixer sget Master,0 | grep "Front Left:"|
+	 awk '{print $5}'|sed -r 's/[][]//g')"
 }
 
 # gets the actual volume value and prints is on the screen
 # with a percent bar + a percent number
 showVol() {
-    getVol
-    echo $VOL |  aosd_cat -p 1 --fore-color=green --shadow-color=\#006633 \
+	getVol
+	echo $VOL |  aosd_cat -p 1 --fore-color=green --shadow-color=\#006633 \
 						  --font="Droid Sans Mono 32" \
 						  --x-offset=50 --y-offset=-0 --transparency=2 \
 						  --fade-in=0 --fade-out=0 --fade-full=1000
@@ -1274,17 +1295,17 @@ showVol() {
 
 # reises the master channel by "VOLSTEP"
 volUp() {
-    amixer sset Master,0 "$VOLSTEP+"
+	amixer sset Master,0 "$VOLSTEP+"
 }
 
 # decreases the master channel by "VOLSTEP"
 volDown() {
-    amixer sset Master,0 "$VOLSTEP-"
+	amixer sset Master,0 "$VOLSTEP-"
 }
 
 # mutes the master channel
 volMute() {
-    amixer sset Master,0 toggle
+	amixer sset Master,0 toggle
 }
 
 
@@ -1292,75 +1313,187 @@ volMute() {
 preKill
 
 case "$1" in
-    "volup")
-            volUp
-            showVol
-            ;;
-    "voldown")
-            volDown
-            showVol
-            ;;
-    "mute")
-            volMute
-            showVol
-            ;;
-    ,*)
-            ;;
+	"volup")
+		volUp
+		showVol
+		;;
+	"voldown")
+		volDown
+		showVol
+		;;
+	"mute")
+		volMute
+		showVol
+		;;
+	"get")
+		getVol
+        isMute
+        echo "$VOL $VOLMUTE"
+		;;
+	,*)
+		;;
 esac
 #+END_SRC
 
 
 ** Memory
-Memory is monitored using another blingbling widget.  The widget setup was taken
-from [[https://github.com/cedlemo/blingbling#line_graph][the blingbling example page]].  It spawns a popup window with the output of
-the =htop= command on left-click ([[https://github.com/cedlemo/blingbling#popups][see here]]).
+Memory is monitored using a simple graph widget.  The memory metrics (total and
+and used memory) are obtained by calling the ~free~ utility.  A popup window
+with the output of the =top= command is shown one mouse-over events.
 
 #+NAME: src-main-memory
 #+BEGIN_SRC lua
-
 -- {{{ Memory usage
+
 local memory_label = wibox.widget.textbox()
 memory_label:set_text("▤ ")
-memory_label:set_align("center")
-local memory_graph = blingbling.line_graph({
-      height = 18,
-      width = 40,
-      show_text = true,
-      label = "$percent %",
-      rounded_size = 0.3,
-      graph_background_color = beautiful.mem_bg
-})
-vicious.register(memory_graph, vicious.widgets.mem,'$1',2)
-blingbling.popups.htop(memory_graph, { terminal =  terminal })
+memory_graph = wibox.widget.graph {
+   width = 20,
+   height = 20
+}
+memory_widget = wibox.widget {
+   max_value = 100,
+   widget = memory_graph,
+   forced_width = 20,
+   color = beautiful.fg_normal,
+   background_color = beautiful.bg_focus,
+   border_color = beautiful.bg_normal
+}
+memory_widget_async = false
+
+-- Read maximum size
+awful.spawn.easy_async(
+   "free -m",
+   function (stdout, stderr, reason, code)
+      memory_widget.max_value = tonumber(
+         stdout:gmatch(".*Mem:[ ]*([0-9]+).*")())
+   end
+)
+
+function memory_widget_update()
+   awful.spawn.easy_async(
+      "free -m",
+      function (stdout, stderr, reason, code)
+         memory_widget:add_value(
+            tonumber(stdout:gmatch(".*Mem:[ ]*[0-9]+[ ]*([0-9]+).*")()))
+      end
+   )
+   return true
+end
+
+function memory_widget_htop_popup(str)
+   top_str = ""
+   num_lines_left = 20
+   for k, str in pairs(my_utility.lines(str)) do
+      if num_lines_left > 0 then
+         top_str = top_str .. "\n" .. str
+         num_lines_left = num_lines_left - 1
+      else
+         break
+      end
+   end
+   memory_popup = naughty.notify({
+         title = "",
+         text = top_str,
+         font = "monospace 10",
+         timeout = 0,
+         hover_timeout = 0.5,
+         screen = awful.screen.focused()})
+end
+
+function memory_widget_htop()
+   memory_cmd = "top -b -n1 -o %CPU"
+   if memory_widget_async then
+      awful.spawn.easy_async(
+         memory_cmd,
+         function (stdout, stderr, reason, exitcode)
+            memory_widget_htop_popup(stdout)
+         end
+      )
+   else
+      memory_widget_htop_popup(
+         io.popen(memory_cmd):read("*all"))
+   end
+end
+
+memory_widget:connect_signal(
+   'mouse::enter',
+   function ()
+       memory_widget_htop()
+   end
+)
+
+memory_widget:connect_signal(
+   'mouse::leave',
+   function ()
+      if memory_popup then
+         naughty.destroy(memory_popup)
+      end
+   end
+)
+
+memory_widget_timer = gears.timer.start_new(
+   5, function () return memory_widget_update() end)
+
 -- }}}
 #+END_SRC
 
 
 ** Calendar
-The calendar widget implemented in blingbling is used to show the date and time
-in the wibox.  It is combined with the =khal= program to display the agenda when
-the mouse moves over a particular day in the popup calendar.  This assumes that
-the =khal= program is installed and configured.
+The calendar widget simply consists in display the output of the =khal= command
+as a popup when the mouse points to the date widet.  This assumes that the
+=khal= program is installed and configured.
 
 #+NAME: src-main-calendar
 #+BEGIN_SRC lua
-
 -- {{{ Calendar
 
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
+mytextclock_cal_async = false
 
-local calendar = blingbling.calendar(mytextclock)
-calendar:set_link_to_external_calendar(true)
-calendar:clear_and_add_function_get_events_from(
-   function(day, month, year)
-      local f = io.popen('khal agenda --days 1 ' ..
-                            year .. '-' .. month .. '-' .. day)
-      local out = f:read("*all")
-      f:close()
-      return out
+
+function mytextclock_widget_khal_popup(str)
+   textclock_popup = naughty.notify({
+         title = "",
+         text = str,
+         font = "monospace 10",
+         timeout = 0,
+         hover_timeout = 0.5,
+         screen = awful.screen.focused()})
+end
+
+function textclock_widget_khal()
+   cmd = "bash -c \"source ~/data/software/python-env/caldav/bin/" ..
+      "activate && khal\""
+   if mytextclock_cal_async then
+      awful.spawn.easy_async(
+         cmd,
+         function (stdout, stderr, reason, exitcode)
+            mytextclock_widget_khal_popup(stdout)
+         end
+      )
+   else
+      mytextclock_widget_khal_popup(io.popen(cmd):read("*all"))
+   end
+end
+
+mytextclock:connect_signal(
+   'mouse::enter',
+   function ()
+       textclock_widget_khal()
    end
 )
+
+mytextclock:connect_signal(
+   'mouse::leave',
+   function ()
+      if textclock_popup then
+         naughty.destroy(textclock_popup)
+      end
+   end
+)
+
 -- }}}
 #+END_SRC
 
@@ -1383,10 +1516,6 @@ local tostring = tostring
 local io = io
 local table = table
 local pairs = pairs
-local capi = {
-    mouse = mouse,
-    screen = screen
-}
 local os = os
 local awful = require("awful")
 local naughty = require("naughty")
@@ -1413,7 +1542,7 @@ function mailhoover:addToWidget(print,mywidget, querystring, maxcount,
                   info,
                timeout = 0,
                hover_timeout = 0.5,
-               screen = capi.mouse.screen
+               screen = awful.screen.focused()
          })
    end)
    mywidget:connect_signal('mouse::leave',
@@ -1470,18 +1599,14 @@ open mail clients (icedove and mu4e).
 
 #+NAME: src-main-mail
 #+BEGIN_SRC lua
-
 -- Mail widget
 mailicon = wibox.widget.textbox()
-mailfolders = {
-   awesome_paths.home_dir  .. '/maildir/INBOX',
-   awesome_paths.home_dir  .. '/maildir/INBOX/free.fr',
-   awesome_paths.home_dir  .. '/maildir/INBOX/gmx.com',
-   awesome_paths.home_dir  .. '/maildir/INBOX/ieee.org',
-   awesome_paths.home_dir  .. '/maildir/INBOX/iit.edu',
-   awesome_paths.home_dir  .. '/maildir/INBOX/yahoo.fr',
-   awesome_paths.home_dir  .. '/maildir/status/action'
-}
+mailfolders = my_utility.scandir(awesome_paths.home_dir  ..
+                                    '/maildir/INBOX', '*/ -d')
+my_utility.table_path_remove(mailfolders, { ".", "..", "cur", "new", "tmp" })
+table.insert(mailfolders, awesome_paths.home_dir  .. '/maildir/INBOX')
+table.insert(mailfolders, awesome_paths.home_dir  .. '/maildir/status/action')
+
 vicious.register(mailicon, vicious.widgets.mdir,
                  function (widget, args)
                     local new_messages = args[1] + args[2]
@@ -1561,16 +1686,11 @@ local naughty = require("naughty")
 local beautiful = require('beautiful')
 local util = require("awful.util")
 local my_utility = require("my_utility")
-local capi = {
-    mouse = mouse,
-    screen = screen
-}
 #+END_SRC
 
 
 *** Utility functions
 A few utility functions are used in the module:
-- =scandir= :: List files in folder (from http://stackoverflow.com/a/11130774).
 - =get_path= :: Extract path from filename.
 - =cmusover_addToWidget= :: Show album popup on mouse over.
 - =get_mp3_info= :: Get a string representation of file ID3 tags using eyeD3.  The
@@ -1580,16 +1700,6 @@ A few utility functions are used in the module:
 
 #+NAME: module-cmus-utils
 #+BEGIN_SRC lua
-
--- Lua implementation of scandir function
-function scandir(directory, pattern)
-    local i, t, popen = 0, {}, io.popen
-    for filename in popen('ls -a "'..directory..'/"'..pattern):lines() do
-        i = i + 1
-        t[i] = string.gsub(filename, "//", "/")
-    end
-    return t
-end
 
 function get_path(str, sep)
     sep = sep or '/'
@@ -1724,7 +1834,7 @@ function cmus_popup(timeout)
             icon_size = 192,
             timeout = timeout,
             hover_timeout = 0.5,
-            screen = capi.mouse.screen
+            screen = awful.screen.focused()
       })
    end
 end
@@ -1822,12 +1932,12 @@ function cmus_play(mode, fold)
          if flag_batch then
             file:write(cmd .. "\nsleep 1\n")
          else
-            awful.util.spawn_with_shell(cmd)
+            awful.spawn.with_shell(cmd)
          end
       end
       if flag_batch then
          file:close()
-         awful.util.spawn_with_shell("bash /tmp/cmus.sh")
+         awful.spawn.with_shell("bash /tmp/cmus.sh")
       end
    end
 end
@@ -1928,13 +2038,14 @@ function cmus_hook()
                end
             end
             cmus_album_g = cmus_album_str
-            cmus_file_list_g = scandir(get_path(cmus_file), '*.mp3')
+            cmus_file_list_g = my_utility.scandir(get_path(cmus_file), '*.mp3')
          end
          if cmus_file_g ~= cmus_file then
             cmus_file_g = cmus_file
             cmus_album_list_g = ''
             for k, f in pairs(cmus_file_list_g) do
-               local file_info = get_mp3_info(f, 35)
+               local f_esc = my_utility.filename_escape(f)
+               local file_info = get_mp3_info(f_esc, 35)
                file_info = my_utility.html_escape(file_info)
                if f == cmus_file then
                   file_info = "<span color='" .. beautiful.cmus_fg ..
@@ -1962,7 +2073,6 @@ notification to mouse over events and setup the click actions.
 
 #+NAME: src-main-cmus
 #+BEGIN_SRC lua
-
 -- {{{ cmus
 -- Cmus Widget
 tb_cmus = wibox.widget.textbox()
@@ -1979,8 +2089,8 @@ cmus_timer:start()
 cmusbuttons = awful.util.table.join(
    awful.button({ }, 1, function() cmus_control("play_pause") end),
    awful.button({ }, 3, function() run_or_raise(termapps ..
-                                                   " -c cmus -e cmus",
-                                                { instance="cmus"} ) end)
+                                                   " -e cmus",
+                                                { instance="urxvt"} ) end)
 )
 tb_cmus:buttons(cmusbuttons)
 cmusover_addToWidget(tb_cmus)
@@ -2099,7 +2209,7 @@ Here is the help text for the =ttrss-wrapper.py= script:
 python3 scripts/ttrss-wrapper.py --help || echo
 #+END_SRC
 
-#+RESULTS: sh-ttrss-py-usage
+#+RESULTS[b8ddeafb0e559ca8cf4d92efcbc16d7de54a9090]: sh-ttrss-py-usage
 #+BEGIN_EXAMPLE
 usage: ttrss-wrapper.py [-h] -U URL -u USER [-p PASSWD] [-W TEXT_WIDTH] [-c]
                         [-r]
@@ -2145,13 +2255,8 @@ line\nbsp{}[[(pass-hardcoded)]] and set the correct password.
                                              :requires '(user secret)))))
         (when (and (plist-get auth :secret) (plist-get auth :user))
           (setq ttrss-pass (funcall (plist-get auth :secret))
-                ttrss-user (plist-get auth :user))
-          )
-        )
-      )
-    `(,ttrss-url ,ttrss-user ,ttrss-pass)
-    )
-  )
+                ttrss-user (plist-get auth :user)))))
+    `(,ttrss-url ,ttrss-user ,ttrss-pass)))
 #+END_SRC
 
 Note that this approach saves the credentials unencrypted in the =ttrss.lua=
@@ -2183,11 +2288,8 @@ local ttrss_user = ttrss_cred[2]
 local ttrss_pass = ttrss_cred[3]
 local ttrss_textwidth = 100
 
+local awful = require("awful")
 local naughty = require("naughty")
-local capi = {
-    mouse = mouse,
-    screen = screen
-}
 
 function ttrss_get_count()
     return ttrss_get("count")
@@ -2225,7 +2327,7 @@ function ttrss_set_mouseover(mywidget)
                                        text = info,
                                        timeout = 0,
                                        hover_timeout = 0.5,
-                                       screen = capi.mouse.screen})
+                                       screen = awful.screen.focused()})
                               end
    end)
    mywidget:connect_signal('mouse::leave', function ()
@@ -2246,7 +2348,6 @@ are added to the widget:
 
 #+NAME: src-main-ttrss
 #+BEGIN_SRC lua
-
 -- {{{ tt-rss
 tb_ttrss = wibox.widget.textbox()
 tb_ttrss:set_text("ttrss")
@@ -2266,8 +2367,8 @@ ttrssmenu_l_items = {
 }
 ttrssmenu_r_items = {
    { "newsbeuter", function () run_or_raise(
-           termapps .. " -c newsbeuter -e newsbeuter",
-           { instance="newsbeuter"} ) end },
+           termapps .. " -e newsbeuter",
+           { instance="urxvt"} ) end },
    { "liferea", function () run_or_raise(
            "liferea", { class = "Liferea" }) end }
 }
@@ -2280,6 +2381,17 @@ ttrss_buttons = awful.util.table.join(
 tb_ttrss:buttons(ttrss_buttons)
 ttrss_set_mouseover(tb_ttrss)
 -- }}}
+#+END_SRC
+
+
+** Keyboard layout
+
+Add a widget to control the keyboard layout.
+
+#+NAME: src-main-keyboard
+#+BEGIN_SRC lua
+-- Keyboard map indicator and switcher
+mykeyboardlayout = awful.widget.keyboardlayout()
 #+END_SRC
 
 
@@ -2296,25 +2408,24 @@ actual colors are defined through the [[#theme][theme manager]].
 
 #+NAME: src-effects-monitor-highlight
 #+BEGIN_SRC lua
-
 -- {{{ Highlight current monitor
 screen_highlight_timer = timer({timeout = 0.2})
 screen_highlight_idx = 1
 screen_highlight_timer:connect_signal(
    "timeout",
    function ()
-      if mouse.screen ~= screen_highlight_idx then
-         screen_highlight_idx = mouse.screen
-         for s = 1, screen.count() do
-            if s == mouse.screen then
+      if awful.screen.focused() ~= screen_highlight_idx then
+         screen_highlight_idx = awful.screen.focused()
+         for s in screen do
+            if s == awful.screen.focused() then
                col_bg = beautiful.screen_highlight_bg_active
                col_fg = beautiful.screen_highlight_fg_active
             else
                col_bg = beautiful.screen_highlight_bg_inactive
                col_fg = beautiful.screen_highlight_fg_inactive
             end
-            mywibox[s]:set_bg(col_bg)
-            mywibox[s]:set_fg(col_fg)
+            s.mywibox:set_bg(col_bg)
+            s.mywibox:set_fg(col_fg)
          end
       end
 end)
@@ -2352,7 +2463,6 @@ focus.  This comes from the default configuration.
 
 #+NAME: src-effects-border
 #+BEGIN_SRC lua
-
 -- {{ Window border
 client.connect_signal("focus", function(c)
                          c.border_color = beautiful.border_focus
@@ -2361,6 +2471,16 @@ client.connect_signal("unfocus", function(c)
                          c.border_color = beautiful.border_normal
 end)
 -- }}
+#+END_SRC
+
+
+** Snap client to screen edges
+
+Awesome 4 adds edge snapping, the following disables it.
+
+#+NAME: src-effects-edge-snap
+#+BEGIN_SRC lua
+awful.mouse.snap.edge_enabled = false
 #+END_SRC
 
 
@@ -2383,7 +2503,6 @@ This section handles mouse actions on an empty workspace:
 
 #+NAME: src-bindings-mouse-root
 #+BEGIN_SRC lua
-
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -2404,7 +2523,6 @@ via the [[#rules][rules]] mechanism.
 
 #+NAME: src-bindings-mouse-client
 #+BEGIN_SRC lua
-
 -- Focus, move, resize window on click
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
@@ -2429,17 +2547,25 @@ the tag list widget:
 
 #+NAME: src-bindings-mouse-taglist
 #+BEGIN_SRC lua
-
-mytaglist.buttons = awful.util.table.join(
-   awful.button({ }, 1, awful.tag.viewonly),
-   awful.button({ modkey }, 1, awful.client.movetotag),
-   awful.button({ }, 3, awful.tag.viewtoggle),
-   awful.button({ modkey }, 3, awful.client.toggletag),
-   awful.button({ }, 4, function(t)
-         awful.tag.viewprev(awful.tag.getscreen(t)) end),
-   awful.button({ }, 5, function(t)
-         awful.tag.viewnext(awful.tag.getscreen(t)) end)
-)
+-- Create a wibox for each screen and add it
+local taglist_buttons = awful.util.table.join(
+                    awful.button({ }, 1, function(t) t:view_only() end),
+                    awful.button({ modkey }, 1, function(t)
+                                              if client.focus then
+                                                  client.focus:move_to_tag(t)
+                                              end
+                                          end),
+                    awful.button({ }, 3, awful.tag.viewtoggle),
+                    awful.button({ modkey }, 3, function(t)
+                                              if client.focus then
+                                                  client.focus:toggle_tag(t)
+                                              end
+                                          end),
+                    awful.button({ }, 4,
+                       function(t) awful.tag.viewprev(t.screen) end),
+                    awful.button({ }, 5,
+                       function(t) awful.tag.viewnext(t.screen) end)
+                )
 #+END_SRC
 
 
@@ -2452,8 +2578,7 @@ Task list mouse actions are the following:
 
 #+NAME: src-bindings-mouse-tasklist
 #+BEGIN_SRC lua
-
-mytasklist.buttons = awful.util.table.join(
+local tasklist_buttons = awful.util.table.join(
    awful.button({ }, 1, function (c)
          if c == client.focus then
             c.minimized = true
@@ -2461,8 +2586,8 @@ mytasklist.buttons = awful.util.table.join(
             -- Without this, the following
             -- :isvisible() makes no sense
             c.minimized = false
-            if not c:isvisible() then
-               awful.tag.viewonly(c:tags()[1])
+            if not c:isvisible() and c.first_tag then
+               c.first_tag:view_only()
             end
             -- This will also un-minimize
             -- the client, if needed
@@ -2470,23 +2595,12 @@ mytasklist.buttons = awful.util.table.join(
             c:raise()
          end
    end),
-   awful.button({ }, 3, function ()
-         if instance then
-            instance:hide()
-            instance = nil
-         else
-            instance = awful.menu.clients({
-                  theme = { width = 250 }
-            })
-         end
-   end),
+   awful.button({ }, 3, client_menu_toggle_fn()),
    awful.button({ }, 4, function ()
          awful.client.focus.byidx(1)
-         if client.focus then client.focus:raise() end
    end),
    awful.button({ }, 5, function ()
          awful.client.focus.byidx(-1)
-         if client.focus then client.focus:raise() end
 end))
 #+END_SRC
 
@@ -2504,10 +2618,22 @@ First, we initialize the table for the keys.
 
 #+NAME: src-bindings-keyboard-start
 #+BEGIN_SRC lua
-
 -- {{{ Key bindings
 globalkeys = {}
 #+END_SRC
+
+**** Shortcuts popup
+
+Display the help popup.
+
+#+NAME: src-bindings-keyboard-help
+#+BEGIN_SRC lua
+globalkeys = awful.util.table.join(globalkeys,
+    awful.key({ modkey, }, "s", hotkeys_popup.show_help,
+       {description="show help", group="awesome"})
+)
+#+END_SRC
+
 
 
 **** Tags
@@ -2522,10 +2648,11 @@ Move the the previous / next tag:
 
 #+NAME: src-bindings-keyboard-tags-prevnext
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey, }, "Left",  awful.tag.viewprev ),
-    awful.key({ modkey, }, "Right", awful.tag.viewnext )
+    awful.key({ modkey, }, "Left", awful.tag.viewprev,
+              {description = "view previous", group = "tag"}),
+    awful.key({ modkey, }, "Right", awful.tag.viewnext,
+              {description = "view next", group = "tag"})
 )
 #+END_SRC
 
@@ -2537,40 +2664,41 @@ environments) on all screens:
 
 #+NAME: src-bindings-keyboard-tags-prevnext-ctrl_alt
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ altkey, "Control" }, "Left",
        function ()
-          local screen_cur = mouse.screen
-          local tag_orig = awful.tag.selected(screen_cur)
-          local tag_prev = awful.tag.getidx(tag_orig)
+          local screen_cur = awful.screen.focused()
+          local tag_orig = screen_cur.selected_tag
+          local tag_prev = tag_orig.index
           tag_prev = tag_prev - 1
           if tag_prev == 0 then
-             tag_prev = #awful.tag.gettags(screen_cur)
+             tag_prev = #screen_cur.tags
           end
-          for s = 1, screen.count() do
-             local tag = awful.tag.gettags(s)[tag_prev]
+          for s in screen do
+             local tag = s.tags[tag_prev]
              if tag then
-                awful.tag.viewonly(tag)
+                tag:view_only()
              end
           end
-       end),
+       end,
+       {description = "Move all screens to left tag", group = "tag"}),
     awful.key({ altkey, "Control" }, "Right",
        function ()
-          local screen_cur = mouse.screen
-          local tag_orig = awful.tag.selected(screen_cur)
-          local tag_next = awful.tag.getidx(tag_orig)
+          local screen_cur = awful.screen.focused()
+          local tag_orig = screen_cur.selected_tag
+          local tag_next = tag_orig.index
           tag_next = tag_next + 1
-          if tag_next > #awful.tag.gettags(screen_cur) then
+          if tag_next > #screen_cur.tags then
              tag_next = 1
           end
-          for s = 1, screen.count() do
-             local tag = awful.tag.gettags(s)[tag_next]
+          for s in screen do
+             local tag = s.tags[tag_next]
              if tag then
-                awful.tag.viewonly(tag)
+                tag:view_only()
              end
           end
-       end)
+       end,
+       {description = "Move all screens to right tag", group = "tag"})
 )
 #+END_SRC
 
@@ -2581,66 +2709,69 @@ Move the current window to the previous / next tag:
 
 #+NAME: src-bindings-keyboard-tags-move-prevnext
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
    awful.key({ altkey, "Control", "Shift" }, "Left",
        function ()
-          local screen_cur = mouse.screen
-          local tag_orig = awful.tag.selected(screen_cur)
-          local tag_prev = awful.tag.getidx(tag_orig)
+          local screen_cur = awful.screen.focused()
+          local tag_orig = screen_cur.selected_tag
+          local tag_prev = tag_orig.index
           tag_prev = tag_prev - 1
           if tag_prev == 0 then
-             tag_prev = #awful.tag.gettags(screen_cur)
+             tag_prev = #screen_cur.tags
           end
 
           if client.focus then
-             local tag = awful.tag.gettags(screen_cur)[tag_prev]
+             local tag = screen_cur.tags[tag_prev]
              if tag then
-                awful.client.movetotag(tag)
+                client.focus:move_to_tag(tag)
              end
           end
 
-          for s = 1, screen.count() do
+          for s in screen do
              if s ~= screen_cur then
-                local tag = awful.tag.gettags(s)[tag_prev]
+                local tag = s.tags[tag_prev]
                 if tag then
-                   awful.tag.viewonly(tag)
+                   tag:view_only()
                 end
              end
           end
-          if tags[screen_cur][tag_prev] then
-             awful.tag.viewonly(tags[screen_cur][tag_prev])
+          if screen_cur.tags[tag_prev] then
+             local tag = screen_cur.tags[tag_prev]
+             tag:view_only()
           end
-       end),
+       end,
+       {description = "Move client left tag", group = "tag"}),
     awful.key({ altkey, "Control", "Shift" }, "Right",
        function ()
-          local screen_cur = mouse.screen
-          local tag_orig = awful.tag.selected(screen_cur)
-          local tag_next = awful.tag.getidx(tag_orig)
+          local screen_cur = awful.screen.focused()
+          local tag_orig = screen_cur.selected_tag
+          local tag_next = tag_orig.index
           tag_next = tag_next + 1
-          if tag_next > #awful.tag.gettags(screen_cur) then
+          if tag_next > #screen_cur.tags then
              tag_next = 1
           end
 
           if client.focus then
-             local tag = awful.tag.gettags(screen_cur)[tag_next]
+             local tag = screen_cur.tags[tag_next]
              if tag then
-                awful.client.movetotag(tag)
+                client.focus:move_to_tag(tag)
              end
           end
 
-          for s = 1, screen.count() do
+          for s in screen do
              if s ~= screen_cur then
-                local tag = awful.tag.gettags(s)[tag_next]
+                local tag = s.tags[tag_next]
                 if tag then
-                   awful.tag.viewonly(tag)
+                   tag:view_only()
                 end
              end
           end
-          if tags[screen_cur][tag_next] then
-             awful.tag.viewonly(tags[screen_cur][tag_next])
+          if screen_cur.tags[tag_next] then
+             local tag = screen_cur.tags[tag_next]
+             tag:view_only()
           end
-       end)
+       end,
+       {description = "Move client right tag", group = "tag"})
 )
 #+END_SRC
 
@@ -2651,7 +2782,6 @@ Bind numbers to tags (with =modkey=):
 
 #+NAME: src-bindings-keyboard-tags-num
 #+BEGIN_SRC lua
-
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
@@ -2660,12 +2790,13 @@ for i = 1, 9 do
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
-                        local screen = mouse.screen
-                        local tag = awful.tag.gettags(screen)[i]
+                        local screen = awful.screen.focused()
+                        local tag = screen.tags[i]
                         if tag then
-                           awful.tag.viewonly(tag)
+                           tag:view_only()
                         end
-                  end)
+                  end,
+                  {description = "view tag #"..i, group = "tag"})
     )
 end
 #+END_SRC
@@ -2677,19 +2808,19 @@ Alternative binding to go to a tag by number on all screens with =Ctrl= + =Alt=:
 
 #+NAME: src-bindings-keyboard-tags-num-ctrl_alt
 #+BEGIN_SRC lua
-
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag for all screens.
         awful.key({ altkey, "Control" }, "#" .. i + 9,
                   function ()
-                        for s = 1, screen.count() do
-                              local tag = awful.tag.gettags(s)[i]
+                        for s in screen do
+                              local tag = s.tags[i]
                               if tag then
-                                 awful.tag.viewonly(tag)
+                                 tag:view_only()
                               end
                         end
-        end)
+                  end,
+                  {description = "toggle tag #" .. i, group = "tag"})
     )
 end
 #+END_SRC
@@ -2702,22 +2833,22 @@ Move the other screen to a specific tag number (assumes two screens) using
 
 #+NAME: src-bindings-keyboard-tags-num-other
 #+BEGIN_SRC lua
-
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag for other screen.
         awful.key({ modkey, altkey }, "#" .. i + 9,
                   function ()
-                     local screen_cur = mouse.screen
-                     for s = 1, screen.count() do
+                     local screen_cur = awful.screen.focused()
+                     for s in screen do
                         if s ~= screen_cur then
-                           local tag = awful.tag.gettags(s)[i]
+                           local tag = s.tags[i]
                            if tag then
-                              awful.tag.viewonly(tag)
+                              tag:view_only()
                            end
                         end
                      end
-                  end)
+                  end,
+                  {description = "Change tag for other screen", group = "tag"})
     )
 end
 #+END_SRC
@@ -2729,20 +2860,19 @@ Move the current client (window) to tag by number:
 
 #+NAME: src-bindings-keyboard-tags-num-move
 #+BEGIN_SRC lua
-
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- Move client to tag.
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
            function ()
               if client.focus then
-                 local tag = awful.tag.gettags(
-                    client.focus.screen)[i]
+                 local tag = client.focus.screen.tags[i]
                  if tag then
-                    awful.client.movetotag(tag)
+                    client.focus:move_to_tag(tag)
                  end
               end
-        end)
+           end,
+           {description = "move focused client to tag #"..i, group = "tag"})
     )
 end
 #+END_SRC
@@ -2754,19 +2884,19 @@ Activate other tag on the current one:
 
 #+NAME: src-bindings-keyboard-tags-num-select-from
 #+BEGIN_SRC lua
-
-
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- Toggle tag.
         awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
-                      local screen = mouse.screen
-                      local tag = awful.tag.gettags(screen)[i]
+                      local screen = awful.screen.focused()
+                      local tag = screen.tags[i]
                       if tag then
                          awful.tag.viewtoggle(tag)
                       end
-                  end)
+                  end,
+                  {description = "toggle focused client on tag #" .. i,
+                   group = "tag"})
     )
 end
 #+END_SRC
@@ -2778,16 +2908,15 @@ Activate current tag on another one:
 
 #+NAME: src-bindings-keyboard-tags-num-select-to
 #+BEGIN_SRC lua
-
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- Toggle tag.
         awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
            function ()
               if client.focus then
-                 local tag = awful.tag.gettags(client.focus.screen)[i]
+                 local tag = client.focus.screen.tags[i]
                  if tag then
-                    awful.client.toggletag(tag)
+                    client.focus:toggle_tag(tag)
                  end
               end
         end)
@@ -2802,13 +2931,14 @@ Move to previous / next screen with =modkey= + =Ctrl= + =j= / =k=:
 
 #+NAME: src-bindings-keyboard-tags-screen
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, "Control" }, "j",
-      function () awful.screen.focus_relative( 1) end),
+      function () awful.screen.focus_relative( 1) end,
+      {description = "focus the next screen", group = "screen"}),
    awful.key({ modkey, "Control" }, "k",
-      function () awful.screen.focus_relative(-1) end)
+      function () awful.screen.focus_relative(-1) end,
+      {description = "focus the previous screen", group = "screen"})
 )
 #+END_SRC
 
@@ -2819,12 +2949,13 @@ Use =modkey= + =Ctrl= + (=Shift=) =TAB=:
 
 #+NAME: src-bindings-keyboard-tags-screen-tab
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, "Control" }, "Tab",
-       function () awful.screen.focus_relative( 1) end),
+       function () awful.screen.focus_relative( 1) end,
+      {description = "focus the next screen", group = "screen"}),
     awful.key({ modkey, "Control", "Shift" }, "Tab",
-       function () awful.screen.focus_relative(-1) end)
+       function () awful.screen.focus_relative(-1) end,
+      {description = "focus the previous screen", group = "screen"})
 )
 #+END_SRC
 
@@ -2840,19 +2971,18 @@ Move to the previous / next window on the current screen using =modkey= + =j= /
 
 #+NAME: src-bindings-keyboard-clients-prevnext
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
     -- Clients
     awful.key({ modkey, }, "j",
         function ()
             awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
+        end,
+        {description = "focus next by index", group = "client"}),
     awful.key({ modkey, }, "k",
         function ()
             awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end)
+        end,
+        {description = "focus prev by index", group = "client"})
 )
 #+END_SRC
 
@@ -2863,9 +2993,9 @@ Go to the tag with the last focused window:
 
 #+NAME: src-bindings-keyboard-clients-last
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey, }, "Escape", awful.tag.history.restore)
+    awful.key({ modkey, }, "Escape", awful.tag.history.restore,
+       {description = "go back", group = "tag"})
 )
 #+END_SRC
 
@@ -2876,9 +3006,9 @@ Jump to window with urgent flag:
 
 #+NAME: src-bindings-keyboard-clients-urgent
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey, }, "u", awful.client.urgent.jumpto)
+    awful.key({ modkey, }, "u", awful.client.urgent.jumpto,
+       {description = "jump to urgent client", group = "client"})
 )
 #+END_SRC
 
@@ -2889,7 +3019,6 @@ Loop through window history on the current tag and screen (like =Alt= + =TAB=):
 
 #+NAME: src-bindings-keyboard-clients-history
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, "Tab",
         function ()
@@ -2897,7 +3026,8 @@ globalkeys = awful.util.table.join(globalkeys,
             if client.focus then
                 client.focus:raise()
             end
-        end)
+        end,
+        {description = "go back", group = "client"})
 )
 #+END_SRC
 
@@ -2908,9 +3038,17 @@ Restore minimized window:
 
 #+NAME: src-bindings-keyboard-clients-restore
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey, "Control" }, "n", awful.client.restore)
+    awful.key({ modkey, "Control" }, "n",
+       function ()
+          local c = awful.client.restore()
+          -- Focus restored client
+          if c then
+             client.focus = c
+             c:raise()
+          end
+       end,
+       {description = "restore minimized", group = "client"})
 )
 #+END_SRC
 
@@ -2927,14 +3065,15 @@ Swap window with previous / next in current layout using =modkey= + =shift= +
 
 #+NAME: src-bindings-keyboard-layout-move
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
    -- Layout manipulation
    awful.key({ modkey, "Shift" }, "j",
-      function () awful.client.swap.byidx(  1) end),
+      function () awful.client.swap.byidx(  1) end,
+      {description = "swap with next client by index", group = "client"}),
    awful.key({ modkey, "Shift" }, "k",
-      function () awful.client.swap.byidx( -1) end)
+      function () awful.client.swap.byidx( -1) end,
+      {description = "swap with previousclient by index", group = "client"})
 )
 #+END_SRC
 
@@ -2945,21 +3084,28 @@ Control client size within layout:
 
 #+NAME: src-bindings-keyboard-layout-resize
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey,           }, "l",
-      function () awful.tag.incmwfact( 0.05) end),
+      function () awful.tag.incmwfact( 0.05) end,
+      {description = "increase master width factor", group = "layout"}),
    awful.key({ modkey,           }, "h",
-      function () awful.tag.incmwfact(-0.05) end),
+      function () awful.tag.incmwfact(-0.05) end,
+      {description = "decrease master width factor", group = "layout"}),
    awful.key({ modkey, "Shift"   }, "h",
-      function () awful.tag.incnmaster( 1)   end),
+      function () awful.tag.incnmaster( 1)   end,
+      {description = "increase the number of master clients",
+       group = "layout"}),
    awful.key({ modkey, "Shift"   }, "l",
-      function () awful.tag.incnmaster(-1)   end),
+      function () awful.tag.incnmaster(-1)   end,
+      {description = "decrease the number of master clients",
+       group = "layout"}),
    awful.key({ modkey, "Control" }, "h",
-      function () awful.tag.incncol( 1)      end),
+      function () awful.tag.incncol( 1)      end,
+      {description = "increase the number of columns", group = "layout"}),
    awful.key({ modkey, "Control" }, "l",
-      function () awful.tag.incncol(-1)      end)
+      function () awful.tag.incncol(-1)      end,
+      {description = "decrease the number of columns", group = "layout"})
 )
 #+END_SRC
 
@@ -2970,13 +3116,14 @@ Cycle through available layouts using =modkey= + =space=.
 
 #+NAME: src-bindings-keyboard-layout-change
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
-   awful.key({ modkey,         }, "space",
-      function () awful.layout.inc(layouts,  1) end),
+   awful.key({ modkey, }, "space",
+      function () awful.layout.inc( 1) end,
+      {description = "select next", group = "layout"}),
    awful.key({ modkey, "Shift" }, "space",
-      function () awful.layout.inc(layouts, -1) end)
+      function () awful.layout.inc(-1) end,
+      {description = "select previous", group = "layout"})
 )
 #+END_SRC
 
@@ -2992,9 +3139,9 @@ Toggle [[#main_menu][main menu]]:
 
 #+NAME: src-bindings-keyboard-applications-mainmenu
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey, }, "w", function () mymainmenu:show() end)
+    awful.key({ modkey, }, "w", function () mymainmenu:show() end,
+              {description = "show main menu", group = "awesome"})
 )
 #+END_SRC
 
@@ -3005,11 +3152,11 @@ Open a terminal with =modkey= + =return=.
 
 #+NAME: src-bindings-keyboard-applications-terminal
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, "Return",
-      function () awful.util.spawn(terminal) end)
+      function () awful.spawn(terminal) end,
+      { description = "open a terminal", group = "launcher" })
 )
 #+END_SRC
 
@@ -3020,11 +3167,11 @@ Start the web browser with =modkey= + =ctrl= + =return=.
 
 #+NAME: src-bindings-keyboard-applications-web
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, "Control" }, "Return",
-      function () awful.util.spawn(internet_browser) end)
+      function () awful.spawn(internet_browser) end,
+      { description = "internet browser", group = "launcher" })
 )
 #+END_SRC
 
@@ -3036,11 +3183,11 @@ Start conkeror, an alternative web browser using =modkey= + =ctrl= + =shift= +
 
 #+NAME: src-bindings-keyboard-applications-conkeror
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, "Control", "Shift" }, "Return",
-      function () awful.util.spawn("conkeror") end)
+      function () awful.spawn("conkeror") end,
+      { description = "conkeror browser", group = "launcher" })
 )
 #+END_SRC
 
@@ -3051,11 +3198,11 @@ Start emacs with =modkey= + =shift= + =return=.
 
 #+NAME: src-bindings-keyboard-applications-emacs
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, "Shift" }, "Return",
-      function () awful.util.spawn(emacs) end)
+      function () awful.spawn(emacs) end,
+      { description = "start emacs", group = "launcher" })
 )
 #+END_SRC
 
@@ -3066,11 +3213,11 @@ Start the file explorer software with =modkey= + =e=.
 
 #+NAME: src-bindings-keyboard-applications-explorer
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, "e",
-      function () awful.util.spawn_with_shell(explorer .. " ~") end)
+      function () awful.spawn.with_shell(explorer .. " ~") end,
+      { description = "open file explorer", group = "launcher" })
 )
 #+END_SRC
 
@@ -3081,9 +3228,9 @@ Restart awesome-wm (reload =rc.lua=) with =modkey= + =ctrl= + =r=.
 
 #+NAME: src-bindings-keyboard-applications-restart
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey, "Control" }, "r", awesome.restart)
+    awful.key({ modkey, "Control" }, "r", awesome.restart,
+       {description = "reload awesome", group = "awesome"})
 )
 #+END_SRC
 
@@ -3094,9 +3241,9 @@ Log out with =modkey= + =shift= + =q=.
 
 #+NAME: src-bindings-keyboard-applications-logout
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey, "Shift" }, "q", awesome.quit)
+    awful.key({ modkey, "Shift" }, "q", awesome.quit,
+       {description = "quit awesome", group = "awesome"})
 )
 #+END_SRC
 
@@ -3111,23 +3258,11 @@ Execute arbitrary shell commands with =modkey= + =r=.
 
 #+NAME: src-bindings-keyboard-prompts-exec
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
-   -- Prompt
+    -- Prompt
     awful.key({ modkey }, "r",
-       function ()
-          mywibox_prompt[mouse.screen].visible = true
-          awful.prompt.run(
-             { prompt = "Exec: " },
-             mypromptbox[mouse.screen].widget,
-             awful.util.spawn,
-             awful.completion.shell,
-             awful.util.getdir("cache") .. "/history_eval",
-             50,
-             function ()
-                mywibox_prompt[mouse.screen].visible = false
-          end)
-    end)
+       function () awful.screen.focused().mypromptbox:run() end,
+       {description = "run prompt", group = "launcher"})
 )
 #+END_SRC
 
@@ -3138,19 +3273,17 @@ Execute lua code with =modkey= + =x=.
 
 #+NAME: src-bindings-keyboard-prompts-lua
 #+BEGIN_SRC lua
-
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, "x",
-       function ()
-          mywibox_prompt[mouse.screen].visible = true
-          awful.prompt.run({ prompt = "Run Lua code: " },
-             mypromptbox[mouse.screen].widget,
-             awful.util.eval, nil,
-             awful.util.getdir("cache") .. "/history_eval",
-             50,
-             function () mywibox_prompt[mouse.screen].visible = false end
-          )
-    end)
+              function ()
+                  awful.prompt.run {
+                    prompt       = "Run Lua code: ",
+                    textbox      = awful.screen.focused().mypromptbox.widget,
+                    exe_callback = awful.util.eval,
+                    history_path = awful.util.get_cache_dir() .. "/history_eval"
+                  }
+              end,
+              {description = "lua execute prompt", group = "awesome"})
 )
 #+END_SRC
 
@@ -3161,21 +3294,25 @@ Toggle the custom [[#global_prompt][global prompt]] with =modkey= + =z=.
 
 #+NAME: src-bindings-keyboard-prompts-global
 #+BEGIN_SRC lua
-
-globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey }, "z",
-       function ()
-          mywibox_prompt[mouse.screen].visible = true
-          awful.prompt.run({ prompt = "► " },
-             mypromptbox[mouse.screen].widget,
-             global_prompt.run, global_prompt.comp,
-             awful.util.getdir("cache") .. "/history_global",
-             50,
-             function ()
-                mywibox_prompt[mouse.screen].visible = false
-             end
-          )
-    end)
+globalkeys = awful.util.table.join(
+   globalkeys,
+   awful.key({ modkey }, "z",
+      function ()
+         awful.screen.focused().mywibox_globalprompt.visible = true
+         awful.prompt.run {
+            prompt = "► ",
+            textbox = awful.screen.focused().myglobalpromptbox.widget,
+            exe_callback = global_prompt.run,
+            completion_callback = global_prompt.comp,
+            history_path = awful.util.getdir("cache") .. "/history_global",
+            history_max = 50,
+            done_callback = function ()
+               for s in screen do
+                  s.mywibox_globalprompt.visible = false
+               end
+            end
+         }
+   end)
 )
 #+END_SRC
 
@@ -3186,10 +3323,10 @@ Start the menubar with =modkey= + =a=.
 
 #+NAME: src-bindings-keyboard-menubar
 #+BEGIN_SRC lua
-
 -- Menubar
 globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ modkey }, "a", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end,
+              {description = "show the menubar", group = "launcher"})
 )
 #+END_SRC
 
@@ -3200,18 +3337,27 @@ Use special keyboard keys to control the audio volume:
 
 #+NAME: src-bindings-keyboard-volume
 #+BEGIN_SRC lua
-
 -- Volume
-globalkeys = awful.util.table.join(globalkeys,
-    awful.key({ }, "XF86AudioRaiseVolume", function ()
-          awful.util.spawn(awesome_paths.config_dir ..
-                           "/scripts/osdvol.sh volup") end),
-    awful.key({ }, "XF86AudioLowerVolume", function ()
-          awful.util.spawn(awesome_paths.config_dir ..
-                           "/scripts/osdvol.sh voldown") end),
-    awful.key({ }, "XF86AudioMute", function ()
-          awful.util.spawn(awesome_paths.config_dir ..
-                           "/scripts/osdvol.sh mute") end)
+globalkeys = awful.util.table.join(
+   globalkeys,
+   awful.key({ }, "XF86AudioRaiseVolume",
+      function ()
+         awful.spawn(awesome_paths.config_dir ..
+                        "/scripts/osdvol.sh volup")
+         update_volume_widget()
+   end),
+   awful.key({ }, "XF86AudioLowerVolume",
+      function ()
+         awful.spawn(awesome_paths.config_dir ..
+                        "/scripts/osdvol.sh voldown")
+         update_volume_widget()
+   end),
+   awful.key({ }, "XF86AudioMute",
+      function ()
+         awful.spawn(awesome_paths.config_dir ..
+                        "/scripts/osdvol.sh mute")
+         update_volume_widget()
+   end)
 )
 #+END_SRC
 
@@ -3222,12 +3368,11 @@ Lock the screen using =xscreensaver= with =modkey= + =ctrl= + =l=.
 
 #+NAME: src-bindings-keyboard-lock
 #+BEGIN_SRC lua
-
 -- Screen lock
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, "Control" }, "l",
        function ()
-          awful.util.spawn("xscreensaver-command -lock")
+          awful.spawn("xscreensaver-command -lock")
     end)
 )
 #+END_SRC
@@ -3239,7 +3384,6 @@ Register the keybindings defined in the =globalkeys= table:
 
 #+NAME: src-bindings-keyboard-register
 #+BEGIN_SRC lua
-
 -- Set keys
 root.keys(globalkeys)
 #+END_SRC
@@ -3251,7 +3395,6 @@ The keybindings defined in this section control individual windows.
 
 #+NAME: src-bindings-keyboard-client
 #+BEGIN_SRC lua
-
 clientkeys = {}
 #+END_SRC
 
@@ -3261,7 +3404,6 @@ Get the current window in fullscreen with =modkey= + =f=.
 
 #+NAME: src-bindings-keyboard-client-fullscreen
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(
    clientkeys,
    awful.key({ modkey, }, "f",
@@ -3276,7 +3418,6 @@ Kill current window with =modkey= + =shift= + =c=.
 
 #+NAME: src-bindings-keyboard-client-kill
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, "Shift" }, "c", function (c) c:kill() end)
 )
@@ -3290,7 +3431,6 @@ Set window to floating mode (does not use layout) with =modkey= + =ctrl= +
 
 #+NAME: src-bindings-keyboard-client-floating
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle )
 )
@@ -3305,7 +3445,6 @@ shortcut.
 
 #+NAME: src-bindings-keyboard-client-swap-master
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(
    clientkeys,
    awful.key({ modkey, "Control" }, "Return",
@@ -3320,7 +3459,6 @@ Send current window to other screen with =modkey= + =o=.
 
 #+NAME: src-bindings-keyboard-client-other-screen
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, "o", awful.client.movetoscreen )
 )
@@ -3333,7 +3471,6 @@ Toggle on-top flag (useful for floating windows) with =modkey= + =t=.
 
 #+NAME: src-bindings-keyboard-client-ontop
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, "t", function (c) c.ontop = not c.ontop end)
 )
@@ -3346,7 +3483,6 @@ Minimize the current window with =modkey= + =n=.
 
 #+NAME: src-bindings-keyboard-client-minimize
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, "n",
         function (c)
@@ -3364,7 +3500,6 @@ Toggle maximize property for the current window with =modkey= + =m=.
 
 #+NAME: src-bindings-keyboard-client-maximize
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey,           }, "m",
         function (c)
@@ -3382,7 +3517,6 @@ properties, etc.).  Triggered by pressing =modkey= + =i=.
 
 #+NAME: src-bindings-keyboard-client-info
 #+BEGIN_SRC lua
-
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey,           }, "i",
       function (c)
@@ -3426,11 +3560,10 @@ on screen 1 for my configuration).
 
 #+NAME: src-wibox-start-loop
 #+BEGIN_SRC lua
-
 -- {{ Wibox
 
 -- Create a wibox for each screen and add it
-for s = 1, screen.count() do
+awful.screen.connect_for_each_screen(function(s)
 #+END_SRC
 
 In the following sections, =s= is the current screen index.
@@ -3443,10 +3576,34 @@ widget on the wibox for user input.  This text widget is defined here:
 
 #+NAME: src-wibox-prompt
 #+BEGIN_SRC lua
-
     -- Create a promptbox for each screen
-    mypromptbox[s] = awful.widget.prompt()
-    mypromptbox[s].font = "Consolas 18"
+    s.mypromptbox = awful.widget.prompt()
+    s.mypromptbox.font = "Consolas 18"
+
+    -- Confirmation prompt
+    s.mypromptbox_conf = awful.widget.prompt()
+
+    -- Global prompt
+    s.myglobalpromptbox = awful.widget.prompt()
+    s.mywibox_globalprompt = awful.wibox({ position = "bottom", screen = s,
+                                     font = "Consolas 18" })
+    s.mywibox_globalprompt:setup {
+       layout = wibox.layout.align.horizontal,
+       s.myglobalpromptbox
+    }
+    s.mywibox_globalprompt.visible = false
+#+END_SRC
+
+
+** Launchers
+
+Create launchers.
+
+#+NAME: src-wibox-launchers
+#+BEGIN_SRC lua
+    -- Create launchers
+    s.mylaunchbar = launchbar.new(awesome_paths.config_dir .. "/shortcuts/",
+                                  myiconfinder)
 #+END_SRC
 
 
@@ -3458,235 +3615,65 @@ follows:
 
 #+NAME: src-wibox-wibox
 #+BEGIN_SRC lua
-
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    s.mywibox = awful.wibox({ position = "top", screen = s })
+
+    -- Create an imagebox widget which will contains an icon indicating which
+    -- layout we're using.  We need one layoutbox per screen.
+    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox:buttons(
+       awful.util.table.join(
+          awful.button({ }, 1, function () awful.layout.inc( 1) end),
+          awful.button({ }, 3, function () awful.layout.inc(-1) end),
+          awful.button({ }, 4, function () awful.layout.inc( 1) end),
+          awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+
+    -- Create a tasklist widget
+    s.mytasklist = awful.widget.tasklist(
+       s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
+
+    -- Create a taglist widget
+    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all,
+                                       taglist_buttons)
+
+    -- Add widgets to the wibox
+    s.mywibox:setup {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            mylauncher,
+            s.mypromptbox_conf,
+            s.mytaglist,
+            s.mylaunchbar,
+            s.mypromptbox
+        },
+        s.mytasklist, -- Middle widget
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            tb_cmus,
+            separator,
+            mailicon,
+            separator,
+            tb_ttrss,
+            separator,
+            memory_label,
+            memory_widget,
+            separator,
+            volume_master,
+            separator,
+            mykeyboardlayout,
+            wibox.widget.systray(),
+            mytextclock,
+            --calendar,
+            s.mylayoutbox,
+            myleave_launcher
+        },
+    }
 #+END_SRC
-
-
-
-** Combine widgets
 
 The wibox is decomposed into three sections: left, center and right.  Widgets
 are added to each section and then concatenated into a single layout which is in
 turn added to the wibox.
-
-*** Left layout
-
-The =left_layout= contains the left-side widgets:
-
-#+NAME: src-wibox-left-start
-#+BEGIN_SRC lua
-    -- Widgets that are aligned to the left
-    local left_layout = wibox.layout.fixed.horizontal()
-#+END_SRC
-
-
-**** Confirmation prompt
-
-Several actions in this configuration use a [[#my_utility_confirm][confirmation prompt]].  This is done
-via a common =awful.widget.prompt= object.  This prompt is visible only when
-used.
-
-#+NAME: src-wibox-left-prompt_conf
-#+BEGIN_SRC lua
-    mypromptbox_conf[s] = awful.widget.prompt()
-    mywibox_prompt[s] = awful.wibox({ position = "bottom", screen = s,
-                                      font = "Consolas 18" })
-    mywibox_prompt[s].visible = false
-    mywibox_prompt[s]:set_widget(mypromptbox[s])
-    left_layout:add(mypromptbox_conf[s])
-#+END_SRC
-
-
-**** Main menu
-
-The main menu defined [[#main_menu][earlier]] is added at the beginning (left-most position) of
-the wibox.
-
-#+NAME: src-wibox-launcher
-#+BEGIN_SRC lua
-    left_layout:add(mylauncher)
-#+END_SRC
-
-
-**** Tag list
-
-The following creates a visual tag list, setting the mouse bindings defined in
-the [[#bindings_mouse_taglist][mouse bindings section]].
-
-#+NAME: src-wibox-taglist
-#+BEGIN_SRC lua
-
-    -- Create a taglist widget
-    mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all,
-                                        mytaglist.buttons)
-    left_layout:add(mytaglist[s])
-#+END_SRC
-
-
-**** Launchbar
-
-Add the [[#launchbar][launchbar]] widgets, which includes launchers (with icons) to selected
-programs.
-
-#+NAME: src-wibox-launchbar
-#+BEGIN_SRC lua
-    left_layout:add(mylaunchbar)
-#+END_SRC
-
-
-
-*** Right layout
-
-First, create the layout container:
-
-#+NAME: src-wibox-right-start
-#+BEGIN_SRC lua
-
-    -- Widgets that are aligned to the right
-    local right_layout = wibox.layout.fixed.horizontal()
-#+END_SRC
-
-
-**** cmus widget
-
-Add the widget created to interact with [[#cmus][cmus]].
-
-#+NAME: src-wibox-cmus
-#+BEGIN_SRC lua
-    right_layout:add(tb_cmus)
-    right_layout:add(separator)
-#+END_SRC
-
-
-**** Email widget
-
-Add the [[#email][email widget]] to the wibox.
-
-#+NAME: src-wibox-email
-#+BEGIN_SRC lua
-    right_layout:add(mailicon)
-    right_layout:add(separator)
-#+END_SRC
-
-
-**** News widget
-
-Add the [[#ttrss][tt-rss]] widget to the wibox.
-
-#+NAME: src-wibox-ttrss
-#+BEGIN_SRC lua
-    right_layout:add(tb_ttrss)
-    right_layout:add(separator)
-#+END_SRC
-
-
-**** Memory widget
-
-Add the [[#memory][memory widget]] to the wibox: combine the text and graph widgets.
-
-#+NAME: src-wibox-memory
-#+BEGIN_SRC lua
-    right_layout:add(memory_label)
-    right_layout:add(memory_graph)
-    right_layout:add(separator)
-#+END_SRC
-
-
-**** Volume widget
-
-Add the [[#volume][volume widget]] (text and graph) to the wibox.
-
-#+NAME: src-wibox-volume
-#+BEGIN_SRC lua
-    right_layout:add(volume_text)
-    right_layout:add(volume_master)
-    right_layout:add(separator)
-#+END_SRC
-
-
-**** System tray
-
-Add the system tray widget to the first screen.
-
-#+NAME: src-wibox-systray
-#+BEGIN_SRC lua
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-#+END_SRC
-
-
-**** Layout widget
-
-The following creates an icon indicating the current layout, and able to cycle
-over enabled layouts with left / right clicks or the mouse wheel.
-
-#+NAME: src-wibox-layout
-#+BEGIN_SRC lua
-    -- Create an imagebox widget which will contains an icon indicating which
-    -- layout we're using.
-    -- We need one layoutbox per screen.
-    mylayoutbox[s] = awful.widget.layoutbox(s)
-    mylayoutbox[s]:buttons(
-       awful.util.table.join(
-          awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-          awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-          awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-          awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
-    right_layout:add(mylayoutbox[s])
-#+END_SRC
-
-
-**** Calendar widget
-
-Add the [[#calendar][calendar widget]] to the wibox.
-
-#+NAME: src-wibox-calendar
-#+BEGIN_SRC lua
-    right_layout:add(calendar)
-#+END_SRC
-
-
-**** Leave menu
-
-Add a [[#shutdown][leave menu]] to the wibox.
-
-#+NAME: src-wibox-leave
-#+BEGIN_SRC lua
-    right_layout:add(myleave_launcher)
-#+END_SRC
-
-
-
-*** Task list
-
-The following creates a visual task list, setting the mouse bindings defined in
-the [[#bindings_mouse_tasklist][mouse bindings section]].
-
-#+NAME: src-wibox-tasklist
-#+BEGIN_SRC lua
-
-    -- Create a tasklist widget
-    mytasklist[s] = awful.widget.tasklist(
-       s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
-#+END_SRC
-
-
-*** Combine layouts
-
-Combine the =left_layout=, =right_layout= and the task list into a single layout
-for the main wibox.
-
-#+NAME: src-wibox-layout-lcr
-#+BEGIN_SRC lua
-    -- Now bring it all together (with the tasklist in the middle)
-    local layout = wibox.layout.align.horizontal()
-    layout:set_left(left_layout)
-    layout:set_middle(mytasklist[s])
-    layout:set_right(right_layout)
-
-    mywibox[s]:set_widget(layout)
-#+END_SRC
 
 
 ** Close screen for loop
@@ -3695,8 +3682,7 @@ This code block closes the [[src-wibox-start-loop][for loop]] creating a wibox o
 
 #+NAME: src-wibox-end-loop
 #+BEGIN_SRC lua
-
-end
+end)
 -- }}}
 #+END_SRC
 
@@ -3716,7 +3702,6 @@ Only a few simple rules are defined here:
 
 #+NAME: src-rules
 #+BEGIN_SRC lua
-
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -3727,28 +3712,56 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      raise = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
+                     buttons = clientbuttons,
+                     screen = awful.screen.preferred } },
+
+    -- Floating clients.
+    { rule_any = {
+        instance = {
+          "DTA",  -- Firefox addon DownThemAll.
+          "copyq",  -- Includes session name in class.
+        },
+        class = {
+          "Arandr",
+          "Gpick",
+          "Kruler",
+          "MessageWin",  -- kalarm.
+          "Sxiv",
+          "Wpa_gui",
+          "pinentry",
+          "veromix",
+          "xtightvncviewer",
+          "MPlayer",
+          "gimp",
+          "plugin-container"},
+
+        name = {
+          "Event Tester",  -- xev.
+        },
+        role = {
+          "AlarmWindow",  -- Thunderbird's calendar.
+          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+        }
+      }, properties = { floating = true }},
+
+    -- Add titlebars to normal clients and dialogs
+    --{ rule_any = {type = { "normal", "dialog" }
+    --  }, properties = { titlebars_enabled = true }
+    --},
+
+    -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+    --   properties = { screen = 1, tag = "2" } },
     { rule = { instance = "cmus" },
-      properties = { tag = tags[2][2] } },
+      properties = { screen = 2, tag = "2" } },
     { rule = { instance = "tmplayer" },
-      properties = { tag = tags[2][2] } },
+      properties = { screen = 2, tag = "2" } },
     { rule = { instance = "newsbeuter" },
-      properties = { tag = tags[2][2] } },
+      properties = { screen = 2, tag = "2" } },
     { rule = { class = "Icedove" },
-      properties = { tag = tags[2][1] } },
-    { rule = { instance = "plugin-container" },
-      properties = { floating = true } },
-    { rule = { instance = "ristretto" },
-      properties = { maximized = false } },
+      properties = { screen = 2, tag = "@" } }
+    --{ rule = { instance = "ristretto" },
+    --  properties = { maximized = false } },
 }
 -- }}}
 #+END_SRC
@@ -3761,76 +3774,68 @@ disabled) and border coloring.
 
 #+NAME: src-signals
 #+BEGIN_SRC lua
-
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
-client.connect_signal("manage", function (c, startup)
-    -- Enable sloppy focus
-    c:connect_signal("mouse::enter", function(c)
-        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-            and awful.client.focus.filter(c) then
-            client.focus = c
-        end
-    end)
+client.connect_signal("manage", function (c)
+    -- Set the windows at the slave,
+    -- i.e. put it at the end of others instead of setting it master.
+    -- if not awesome.startup then awful.client.setslave(c) end
 
-    if not startup then
-        -- Set the windows at the slave,
-        -- i.e. put it at the end of others instead of setting it master.
-        -- awful.client.setslave(c)
-
-        -- Put windows in a smart way, only if they does not set an initial position.
-        if not c.size_hints.user_position and not c.size_hints.program_position then
-            awful.placement.no_overlap(c)
-            awful.placement.no_offscreen(c)
-        end
-    elseif not c.size_hints.user_position and not c.size_hints.program_position then
-        -- Prevent clients from being unreachable after screen count change
+    if awesome.startup and
+      not c.size_hints.user_position
+      and not c.size_hints.program_position then
+        -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
+end)
 
-    local titlebars_enabled = false
-    if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-        -- buttons for the titlebar
-        local buttons = awful.util.table.join(
-                awful.button({ }, 1, function()
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.move(c)
-                end),
-                awful.button({ }, 3, function()
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.resize(c)
-                end)
-                )
+-- Add a titlebar if titlebars_enabled is set to true in the rules.
+client.connect_signal("request::titlebars", function(c)
+    -- buttons for the titlebar
+    local buttons = awful.util.table.join(
+        awful.button({ }, 1, function()
+            client.focus = c
+            c:raise()
+            awful.mouse.client.move(c)
+        end),
+        awful.button({ }, 3, function()
+            client.focus = c
+            c:raise()
+            awful.mouse.client.resize(c)
+        end)
+    )
 
-        -- Widgets that are aligned to the left
-        local left_layout = wibox.layout.fixed.horizontal()
-        left_layout:add(awful.titlebar.widget.iconwidget(c))
-        left_layout:buttons(buttons)
+    awful.titlebar(c) : setup {
+        { -- Left
+            awful.titlebar.widget.iconwidget(c),
+            buttons = buttons,
+            layout  = wibox.layout.fixed.horizontal
+        },
+        { -- Middle
+            { -- Title
+                align  = "center",
+                widget = awful.titlebar.widget.titlewidget(c)
+            },
+            buttons = buttons,
+            layout  = wibox.layout.flex.horizontal
+        },
+        { -- Right
+            awful.titlebar.widget.floatingbutton (c),
+            awful.titlebar.widget.maximizedbutton(c),
+            awful.titlebar.widget.stickybutton   (c),
+            awful.titlebar.widget.ontopbutton    (c),
+            awful.titlebar.widget.closebutton    (c),
+            layout = wibox.layout.fixed.horizontal()
+        },
+        layout = wibox.layout.align.horizontal
+    }
+end)
 
-        -- Widgets that are aligned to the right
-        local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(awful.titlebar.widget.floatingbutton(c))
-        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-        right_layout:add(awful.titlebar.widget.stickybutton(c))
-        right_layout:add(awful.titlebar.widget.ontopbutton(c))
-        right_layout:add(awful.titlebar.widget.closebutton(c))
-
-        -- The title goes in the middle
-        local middle_layout = wibox.layout.flex.horizontal()
-        local title = awful.titlebar.widget.titlewidget(c)
-        title:set_align("center")
-        middle_layout:add(title)
-        middle_layout:buttons(buttons)
-
-        -- Now bring it all together
-        local layout = wibox.layout.align.horizontal()
-        layout:set_left(left_layout)
-        layout:set_right(right_layout)
-        layout:set_middle(middle_layout)
-
-        awful.titlebar(c):set_widget(layout)
+-- Enable sloppy focus, so that focus follows mouse.
+client.connect_signal("mouse::enter", function(c)
+    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+        and awful.client.focus.filter(c) then
+        client.focus = c
     end
 end)
 
@@ -4115,7 +4120,7 @@ rm desktop.png -rf
 
 #+NAME: img-global_prompt-help
 #+CAPTION: Help notification from global prompt.
-[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-global_prompt-help.png]]
+[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-global-prompt-help.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-global-prompt-help.png]]
 
 
 
@@ -4135,12 +4140,12 @@ global_prompt.prompt_session = {
       if cmd == "shutdown" then
          my_utility.confirm_action(
             function()
-               awful.util.spawn('sudo /sbin/shutdown -h now')
+               awful.spawn('sudo /sbin/shutdown -h now')
             end, "Shutdown")
       elseif cmd == "restart" then
          my_utility.confirm_action(
             function()
-               awful.util.spawn('sudo /sbin/shutdown -r now')
+               awful.spawn('sudo /sbin/shutdown -r now')
             end, "Restart")
       elseif cmd == "logout" then
          my_utility.confirm_action(
@@ -4148,7 +4153,7 @@ global_prompt.prompt_session = {
                awesome.quit()
             end, "Logout")
       elseif cmd == "lock" then
-         awful.util.spawn('xscreensaver-command -lock')
+         awful.spawn('xscreensaver-command -lock')
       end
    end,
    comp_function = function(kw, name, cur_pos, ncomp)
@@ -4328,7 +4333,7 @@ global_prompt.prompt_cmus = {
       end
       if mp_cmd then
          cmd = "cmus-remote " .. mp_cmd
-         awful.util.spawn_with_shell(cmd)
+         awful.spawn.with_shell(cmd)
       end
    end,
    comp_function = function(kw, name, cur_pos, ncomp)
@@ -4409,16 +4414,16 @@ global_prompt.prompt_music = {
          if fname then
             if music_player == "mplayer" then
                if not lfs.attributes(global_prompt.mplayer_pipe, "mode") then
-                  awful.util.spawn("mkfifo " .. global_prompt.mplayer_pipe)
+                  awful.spawn("mkfifo " .. global_prompt.mplayer_pipe)
                end
                extra_args = " -slave -input file=" ..
                   global_prompt.mplayer_pipe .. " "
             else
                extra_args = ""
             end
-            awful.util.spawn(termapps .. " -c tmplayer -e \"" ..
-                                music_player .. extra_args .. " \\\"" ..
-                                fname .. "\\\"\"")
+            awful.spawn(termapps .. " -name tmplayer -e bash -c \"" ..
+                           music_player .. extra_args .. " \\\"" ..
+                           fname .. "\\\"\"")
          else
             naughty.notify( {
                   text = name .. " not found (" .. search_str .. ")" } )
@@ -4435,7 +4440,7 @@ global_prompt.prompt_music = {
                mp_cmd = name
             end
             cmd = "echo \"" .. mp_cmd .. "\" > " .. global_prompt.mplayer_pipe
-            awful.util.spawn_with_shell(cmd)
+            awful.spawn.with_shell(cmd)
          end
       end
    end,
@@ -4507,7 +4512,7 @@ global_prompt.prompt_web = {
       else
          expr_url = expr
       end
-      awful.util.spawn_with_shell(internet_browser .. " " .. expr_url)
+      awful.spawn.with_shell(internet_browser .. " " .. expr_url)
    end,
    comp_function = nil
 }
@@ -4607,7 +4612,6 @@ startup are:
 
 #+NAME: src-startup-apps
 #+BEGIN_SRC lua
-
 my_utility.run_once(awesome_paths.config_dir .. "/scripts/dual_default.sh")
 my_utility.run_once("numlockx&")
 my_utility.run_once(awesome_paths.home_dir .. "/.dropbox-dist/dropboxd") -- dropbox
@@ -4617,8 +4621,9 @@ my_utility.run_once("rygel")
 -- Compositing (required for transparency)
 --my_utility.run_once("xcompmgr")
 
-my_utility.run_once(termapps .. " -c newsbeuter -e newsbeuter")
-my_utility.run_once(termapps .. " -c cmus -e cmus")
+my_utility.run_once(termapps .. " -name newsbeuter -e newsbeuter")
+my_utility.run_once(termapps .. " -name cmus -e cmus")
+
 --run_or_raise(terminal)
 --my_utility.run_once("pidgin",nil,nil,2)
 #+END_SRC
@@ -4688,7 +4693,59 @@ function my_utility.html_escape(str)
 
    return t
 end
+
+function my_utility.filename_escape(str)
+   local t = str
+
+   t = t:gsub("[$]", "\\$")
+
+   return t
+end
 #+END_SRC
+
+
+** File listing
+
+The =scandir= utility lists files in a given folder (from
+http://stackoverflow.com/a/11130774).
+
+#+NAME: module-utility-scandir
+#+BEGIN_SRC lua
+
+-- Lua implementation of scandir function
+function my_utility.scandir(directory, pattern)
+    local i, t, popen = 0, {}, io.popen
+    for filename in popen('ls -a "'..directory..'/"'..pattern):lines() do
+        i = i + 1
+        t[i] = string.gsub(filename, "//", "/")
+    end
+    return t
+end
+#+END_SRC
+
+
+** Table operations
+
+#+NAME: module-utility-scandir
+#+BEGIN_SRC lua
+
+-- Remove paths from list of paths (based on last folder)
+function my_utility.table_path_remove(table_in, remove_list)
+
+   for i = 1, #remove_list do
+      tstring = remove_list[i]
+      for j = 1, #table_in do
+         mstring = string.sub(table_in[j], -#tstring - 1, -2)
+         if tstring == mstring then
+            table.remove(table_in, j)
+            break
+         end
+      end
+   end
+
+end
+#+END_SRC
+
 
 
 ** Confirmation popup
@@ -4703,21 +4760,24 @@ color of the whole wibox (on the current screen) is temporarily set to
 #+BEGIN_SRC lua
 
 function my_utility.confirm_action(func, name)
-   mywibox[mouse.screen]:set_bg(beautiful.bg_urgent)
-   mywibox[mouse.screen]:set_fg(beautiful.fg_urgent)
-   awful.prompt.run({prompt = name .. " [y/N] "},
-      mypromptbox_conf[mouse.screen].widget,
-      function (t)
-         if string.lower(t) == 'y' then
-            func()
+   awful.screen.focused().mywibox:set_bg(beautiful.bg_urgent)
+   awful.screen.focused().mywibox:set_fg(beautiful.fg_urgent)
+   awful.prompt.run {
+         prompt = name .. " [y/N] ",
+         textbox = awful.screen.focused().mypromptbox_conf.widget,
+         exe_callback = function (t)
+            if string.lower(t) == 'y' then
+               func()
+            end
+         end,
+         history_path = nil,
+         done_callback = function ()
+            awful.screen.focused().mywibox:set_bg(
+               beautiful.screen_highlight_bg_active)
+            awful.screen.focused().mywibox:set_fg(
+               beautiful.screen_highlight_fg_active)
          end
-      end,
-      nil, nil, 0,
-      function ()
-         mywibox[mouse.screen]:set_bg(beautiful.screen_highlight_bg_active)
-         mywibox[mouse.screen]:set_fg(beautiful.screen_highlight_fg_active)
-      end
-   )
+   }
 end
 #+END_SRC
 
@@ -4750,7 +4810,7 @@ rm desktop.png -rf
 
 #+NAME: img-confirm_action
 #+CAPTION: Confirmation prompt before shutdown (left-most text).
-[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm_action.png]]
+[[file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm-action.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm-action.png]]
 
 
 ** Run once
@@ -4761,7 +4821,7 @@ https://awesome.naquadah.org/wiki/Autostart.
 #+NAME: module-utility-run_once
 #+BEGIN_SRC lua
 
-function my_utility.run_once(prg, arg_string, pname, screen)
+function my_utility.run_once(prg, arg_string, pname, s, tag)
     if not prg then
         do return nil end
     end
@@ -4771,12 +4831,20 @@ function my_utility.run_once(prg, arg_string, pname, screen)
     end
 
     if not arg_string then
-       awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname ..
-                                      "' || (" .. prg .. ")",screen)
+       cmd_pgrep = pname
+       cmd_exe = prg
     else
-       awful.util.spawn_with_shell("pgrep -f -u $USER -x '" .. pname .. " "..
-                                      arg_string .."' || (" .. prg .. " " ..
-                                      arg_string .. ")",screen)
+       cmd_pgrep = pname .. " " .. arg_string
+       cmd_exe = prg .. " " .. arg_string
+    end
+    cmd = "pgrep -f -u $USER -x '" .. cmd_pgrep .. "' || (" .. cmd_exe .. ")"
+    if s and tag then
+       local pid = io.popen("pgrep -f -x '" .. cmd_pgrep .. "'"):read("*all")
+       if pid == "" then
+          awful.spawn(cmd_exe, { tag = screen[s].tags[tag] })
+       end
+    else
+       awful.spawn.with_shell(cmd)
     end
 end
 #+END_SRC

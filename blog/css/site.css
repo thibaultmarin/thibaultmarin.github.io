@@ -1,3 +1,4 @@
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-variables][style-css-variables]] */
 /** CSS variables
  */
 
@@ -6,7 +7,8 @@
     /* ---- */
     --body-bg: white;
     --content-padding: 10px;
-    --content-bg: #F3FAFD;
+    --content-bg: #F1F1F1;
+    --content-box-shadow: 0;
     --body-margin: 30px; /* not used for small screens */
 
     /* Footer */
@@ -26,7 +28,7 @@
 
     /* Basic style */
     --toc-bg: #f1f1f1;
-    --toc-box-shadow: 0 0 1em #777777;
+    --toc-box-shadow: 0 0 0.8em #777777;
     --toc-border-radius: 5px;
     --toc-li-color: black;
     --toc-hover-bg-color: #555;
@@ -92,7 +94,7 @@
         --nav-base-font-size: 80%;
         --nav-height: 50px;
         --nav-padding: 14px 16px;
-        --toc-base-font-size: 75%;
+        --toc-base-font-size: 70%;
         --toc-ul-font-size: 150%;
         --toc-ul-local-font-size: 130%;
         --toc-ul-2-font-size: 80%;
@@ -140,7 +142,9 @@
         --rss-pos: 19%;
     }
 }
+/* style-css-variables ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-toc][style-css-toc]] */
 /** Table of content
  */
 
@@ -160,7 +164,9 @@
 .org-info-js_local-toc {
     padding: var(--toc-local-padding);
 }
+/* style-css-toc ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-toc-layout_large][style-css-toc-layout_large]] */
 /* Fixed vertical table of content */
 @media screen and (min-width: 600px) {
     #table-of-contents {
@@ -172,13 +178,17 @@
         overflow: auto;
     }
 }
+/* style-css-toc-layout_large ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-toc-layout_medium][style-css-toc-layout_medium]] */
 @media screen and (max-width: 1024px) {
     #table-of-contents > div > ul > li > ul {
         display: none;
     }
 }
+/* style-css-toc-layout_medium ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-toc-layout_small][style-css-toc-layout_small]] */
 @media screen and (max-width: 600px) {
     #table-of-contents {
         position: relative;
@@ -186,7 +196,9 @@
         margin: auto;
     }
 }
+/* style-css-toc-layout_small ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-toc-ul][style-css-toc-ul]] */
 #table-of-contents ul, .org-info-js_local-toc ul {
     list-style-type: none;
     margin: 0;
@@ -211,7 +223,9 @@
     font-size: var(--toc-ul-2-font-size);
     vertical-align: middle;
 }
+/* style-css-toc-ul ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-toc-li][style-css-toc-li]] */
 #table-of-contents li a, .org-info-js_local-toc li a {
     display: block;
     color: var(--toc-li-color);
@@ -226,7 +240,9 @@
     background-color: var(--toc-hover-bg-color);
     color: var(--toc-hover-color);
 }
+/* style-css-toc-li ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-navbar][style-css-navbar]] */
 /** Navigation bar
  */
 
@@ -247,20 +263,26 @@
     background: var(--rss-img) no-repeat 0 var(--rss-pos);
     background-size: var(--rss-size);
 }
+/* style-css-navbar ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-navbar-large][style-css-navbar-large]] */
 @media screen and (min-width: 600px) {
     .topnav {
         position: fixed;
     }
 }
+/* style-css-navbar-large ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-navbar-small][style-css-navbar-small]] */
 @media screen and (max-width: 600px) {
     .topnav {
         position: relative;
         width: 100%;
     }
 }
+/* style-css-navbar-small ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-navbar-ul][style-css-navbar-ul]] */
 .topnav ul {
     list-style-type: none;
     margin: 0;
@@ -275,7 +297,9 @@
     vertical-align: middle;
     position: relative;
 }
+/* style-css-navbar-ul ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-navbar-li][style-css-navbar-li]] */
 .topnav li a {
     display: block;
     color: white;
@@ -293,7 +317,9 @@
 .topnav .right {
     float: right;
 }
+/* style-css-navbar-li ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-src-block][style-css-src-block]] */
 pre.src {
     overflow-x: auto;
 }
@@ -311,12 +337,16 @@ pre.src.src.src-lua {
 .src-label {
     color: darkgray;
 }
+/* style-css-src-block ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-org-js][style-css-org-js]] */
 #org-info-js_console-container {
     bottom: 0;
     margin-top: 0;
 }
+/* style-css-org-js ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-body][style-css-body]] */
 /* Body */
 body {
     width: var(--body-width);
@@ -337,25 +367,42 @@ body {
         margin-right: 0;
     }
 }
+/* style-css-body ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-preamble][style-css-preamble]] */
 /* Text before post (date and help) */
 .foreword {
     color: gray;
     font-size: 80%;
 }
+/* style-css-preamble ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-home-up][style-css-home-up]] */
+@media screen and (max-width: 600px) {
+    #org-div-home-and-up {
+        display: none;
+    }
+}
+/* style-css-home-up ends here */
+
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-content][style-css-content]] */
 /* Main content */
 #content {
     background-color: var(--content-bg);
+    box-shadow: var(--content-box-shadow);
     padding-left: var(--content-padding);
     padding-right: var(--content-padding);
 }
+/* style-css-content ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-postamble][style-css-postamble]] */
 #postamble {
     padding: var(--footer-padding);
     border: var(--footer-border);
 }
+/* style-css-postamble ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-fonts][style-css-fonts]] */
 /* Fonts */
 body {
     font-family: var(--font-body-family);
@@ -384,7 +431,9 @@ a {
     text-decoration: none;
     color: var(--font-a-color);
 }
+/* style-css-fonts ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-button][style-css-button]] */
 .footer-button {
     border: none;
     text-align: center;
@@ -400,3 +449,18 @@ a {
 .footer-button:hover {
     background-color: var(--footer-buttons-bg-hover);
 }
+/* style-css-button ends here */
+
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-kbd][style-css-kbd]] */
+kbd {
+    font-family: DejaVu, Lucida Console, monospace;
+    display: inline-block;
+    padding: 1px 4px;
+    color: #616161;
+    vertical-align: middle;
+    background-color: #fefefe;
+    border: solid 1px #616161;
+    border-radius: 4px;
+    box-shadow: inset 0 -1px 2px #b0b0b0;
+}
+/* style-css-kbd ends here */

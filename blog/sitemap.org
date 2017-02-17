@@ -1,10 +1,12 @@
-# Created 2016-12-17 Sat 12:03
+# Created 2017-02-16 Thu 23:52
 #+TITLE: Sitemap
 #+AUTHOR: Thibault Marin
 
 
-* [[file:blog.org][Blog posts]]
-* [[file:index.org][misc/]]
+* [[file:source-blocks.org][(2017-02-16) source-blocks]]
+* [[file:blog.org][(2017-02-16) Blog posts]]
+* [[file:code.org][(2017-02-16) code]]
+* [[file:index.org][(2016-10-02) misc/]]
 * posts
 ** [[file:posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.org][(2016-11-30) hpp2plantuml - Convert C++ header files to PlantUML]]
 ** [[file:posts/2016-11-13-Personal_website_in_org.org][(2016-11-13) Personal website in org]]

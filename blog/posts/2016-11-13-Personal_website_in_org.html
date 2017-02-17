@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2016-11-13 Sun 21:55 -->
+<!-- 2017-02-16 Thu 23:52 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Personal website in org</title>
@@ -177,6 +177,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<!-- [[file:~/dotfiles/emacs/website/website.org::html-head][html-head]] -->
 <link rel='stylesheet' href='/blog/css/site.css' type='text/css'/>
 <script type="text/javascript">
     function rpl(expr, a, b) {
@@ -199,6 +200,7 @@
         window.open(rpl(html_url, "html", out_ext), '_blank');
     }
 </script>
+<!-- html-head ends here -->
 <link rel="alternate" type="application/rss+xml"
                 href="/blog/rss.xml"
                 title="RSS feed">
@@ -348,6 +350,7 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="/blog/index.html"> HOME </a>
 </div><div id="preamble" class="status">
+<!-- [[file:~/dotfiles/emacs/website/website.org::html-preamble][html-preamble]] -->
 <div class='topnav'>
   <ul>
     <li><a href='/blog/index.html'>Home</a></li>
@@ -357,8 +360,9 @@ for the JavaScript code in this tag.
 </div>
 
 <div class="foreword">
-  [2016-11-13 (last updated: 2016-11-13 Sun 21:43) Press <kbd>?</kbd> for navigation help]
+  [2016-11-13 Sun 00:00 (last updated: 2017-02-16 Thu 23:51) Press <kbd>?</kbd> for navigation help]
 </div>
+<!-- html-preamble ends here -->
 </div>
 <div id="content">
 <h1 class="title">Personal website in org</h1>
@@ -366,53 +370,54 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgca458a3">Introduction</a></li>
+<li><a href="#orgb88b32b">Introduction</a></li>
 <li><a href="#css">Style</a>
 <ul>
-<li><a href="#org7667fc9">Variables</a></li>
-<li><a href="#org7c2002a">Table of contents</a>
+<li><a href="#orgaa3547a">Variables</a></li>
+<li><a href="#org6194992">Table of contents</a>
 <ul>
-<li><a href="#orge3f0414">Basic style</a></li>
-<li><a href="#org9cdef4e">Position</a>
+<li><a href="#orgbfe301a">Basic style</a></li>
+<li><a href="#org6ab027c">Position</a>
 <ul>
-<li><a href="#org487f13e">Large screen</a></li>
-<li><a href="#orgb2dce5b">Medium screen</a></li>
-<li><a href="#org7940734">Small screen</a></li>
+<li><a href="#org9352118">Large screen</a></li>
+<li><a href="#org5330c7d">Medium screen</a></li>
+<li><a href="#org2dc7399">Small screen</a></li>
 </ul>
 </li>
-<li><a href="#org1343972">List style</a></li>
+<li><a href="#org53065ee">List style</a></li>
 </ul>
 </li>
-<li><a href="#orgda04781">Navigation bar</a>
+<li><a href="#org28e6688">Navigation bar</a>
 <ul>
-<li><a href="#orge3a3d6c">Basic style</a></li>
-<li><a href="#org51c8c70">Position</a>
+<li><a href="#orgd7dac4e">Basic style</a></li>
+<li><a href="#orga68a089">Position</a>
 <ul>
-<li><a href="#org7b937ee">Medium and large screen</a></li>
-<li><a href="#org65972f0">Small screen</a></li>
+<li><a href="#org78f17f6">Medium and large screen</a></li>
+<li><a href="#orgdc1823a">Small screen</a></li>
 </ul>
 </li>
-<li><a href="#org2442ac1">List style</a></li>
+<li><a href="#org6fba78c">List style</a></li>
 </ul>
 </li>
-<li><a href="#org70de68b">Source blocks</a></li>
-<li><a href="#org5c34614">Org-js</a></li>
-<li><a href="#org1e8c8da">Body</a>
+<li><a href="#org423dc62">Source blocks</a></li>
+<li><a href="#org6222fc3">Org-js</a></li>
+<li><a href="#orgfd2d47b">Body</a>
 <ul>
-<li><a href="#org2c86597">Preamble</a></li>
-<li><a href="#orgb894144">Content</a></li>
-<li><a href="#orge7193a6">Postamble</a></li>
+<li><a href="#org7f925f9">Preamble</a></li>
+<li><a href="#orgd434efd">Content</a></li>
+<li><a href="#org23ce7b1">Postamble</a></li>
 </ul>
 </li>
-<li><a href="#org268d156">Fonts</a></li>
-<li><a href="#orgafedacc">HTML tags</a>
+<li><a href="#org49c65a8">Fonts</a></li>
+<li><a href="#org7adb6f3">HTML tags</a>
 <ul>
-<li><a href="#org0348467">Buttons</a></li>
+<li><a href="#orgeb5021b">Buttons</a></li>
+<li><a href="#org9c75a34">Keyboard shortcut (<code>&lt;kbd&gt;</code>)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org48d049a">Common HTML</a>
+<li><a href="#orgc842d2b">Common HTML</a>
 <ul>
 <li><a href="#html_head">Head</a></li>
 <li><a href="#html_preamble">Preamble</a></li>
@@ -422,32 +427,32 @@ for the JavaScript code in this tag.
 <li><a href="#index_org">Main page</a></li>
 <li><a href="#page-blog-posts">Blog page</a></li>
 <li><a href="#sec-org-setup">Org header</a></li>
-<li><a href="#org483d523">Emacs setup</a>
+<li><a href="#org7ca6b2f">Emacs setup</a>
 <ul>
-<li><a href="#orga97723b">Header</a></li>
+<li><a href="#org159373a">Header</a></li>
 <li><a href="#sitemap">Sitemap</a></li>
 <li><a href="#rss">RSS</a></li>
-<li><a href="#orgf62bad7">Mathjax path</a></li>
-<li><a href="#org47332d8">Custom backend</a>
+<li><a href="#org693d4c9">Mathjax path</a></li>
+<li><a href="#org697dbb3">Custom backend</a>
 <ul>
-<li><a href="#org94b79dd">Preprocess buffer</a></li>
+<li><a href="#org70ab803">Preprocess buffer</a></li>
 <li><a href="#src-block-tangle">Source block processing</a></li>
 </ul>
 </li>
-<li><a href="#org1bc6dfe">Publishing function</a></li>
-<li><a href="#org60198f5">Org-publishing setup</a></li>
+<li><a href="#org79b77c0">Publishing function</a></li>
+<li><a href="#org4b72072">Org-publishing setup</a></li>
 <li><a href="#el-publish-wrapper">Publishing wrapper function</a></li>
 <li><a href="#el-push-to-blog">Push org-file to blog</a></li>
-<li><a href="#orgbd48fed">Footer</a></li>
+<li><a href="#org8f64d75">Footer</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgca458a3" class="outline-2">
-<h2 id="orgca458a3"><a id="ID-bee322f3-5c88-4db6-85bb-96ccd5204aa3"></a>Introduction</h2>
-<div class="outline-text-2" id="text-orgca458a3">
+<div id="outline-container-orgb88b32b" class="outline-2">
+<h2 id="orgb88b32b"><a id="ID-bee322f3-5c88-4db6-85bb-96ccd5204aa3"></a>Introduction</h2>
+<div class="outline-text-2" id="text-orgb88b32b">
 <p>
 This post describes the configuration for this website, which is statically
 generated using emacs and org-mode.  Org-mode's publishing functionality is used
@@ -468,7 +473,7 @@ existing examples that I have used to build this website:
 <p>
 As for other posts in this website, the actual configuration files, including
 emacs-lisp configuration, CSS, etc. can be generated by tangling the org-file
-(<code>org-babel-tangle</code> bound to <code>C-c C-v t</code> by default).
+(<code>org-babel-tangle</code> bound to <kbd>C-c</kbd> <kbd>C-v</kbd> <kbd>t</kbd> by default).
 </p>
 
 <p>
@@ -477,7 +482,7 @@ website source is composed of org files with the following structure:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org3e22bf6">tree -a org/ -I <span style="color: #8b2252;">"*~"</span>
+<pre class="src src-sh" id="org928e76b">tree -a org/ -I <span style="color: #8b2252;">"*~"</span>
 </pre>
 </div>
 
@@ -541,17 +546,17 @@ file to the website source tree,</li>
 </div>
 
 
-<div id="outline-container-org0d37a99" class="outline-2">
-<h2 id="css"><a id="org0d37a99"></a><a id="ID-d87746eb-1ea4-4db0-9ee8-75f3cf74d49b"></a>Style</h2>
+<div id="outline-container-org8349a7d" class="outline-2">
+<h2 id="css"><a id="org8349a7d"></a><a id="ID-d87746eb-1ea4-4db0-9ee8-75f3cf74d49b"></a>Style</h2>
 <div class="outline-text-2" id="text-css">
 <p>
 The styling of the website is done in CSS, the goal being to make it modular
-rather than aesthetically pleasing (as visible on Fig.&nbsp;<a href="#org250b45d">1</a>).
+rather than aesthetically pleasing (as visible on Fig.&nbsp;<a href="#org7e03be4">1</a>).
 When tangled, this section generates the <code>site.css</code> used for styling.
 </p>
 
 
-<div id="org250b45d" class="figure">
+<div id="org7e03be4" class="figure">
 <p><a href="../images/2016-11-13-Personal_website_in_org/website-post.png" width="80%"><img src="../images/2016-11-13-Personal_website_in_org/website-post.png" alt="website-post.png" width="80%"></a>
 </p>
 <p><span class="figure-number">Figure 1: </span>Screenshot of a post.</p>
@@ -564,9 +569,9 @@ size.  Three client sizes are considered: large (width \(\geq\) 1024 px), medium
 </p>
 </div>
 
-<div id="outline-container-org7667fc9" class="outline-3">
-<h3 id="org7667fc9"><a id="ID-cb63337a-a5db-48d4-acbf-619dbbc2af8e"></a>Variables</h3>
-<div class="outline-text-3" id="text-org7667fc9">
+<div id="outline-container-orgaa3547a" class="outline-3">
+<h3 id="orgaa3547a"><a id="ID-cb63337a-a5db-48d4-acbf-619dbbc2af8e"></a>Variables</h3>
+<div class="outline-text-3" id="text-orgaa3547a">
 <p>
 Most of the properties used for styling are defined at the top of the style
 file.  This could be done via org variables passed to the CSS source block, but
@@ -575,86 +580,87 @@ effort for scalar variables at least).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org12e6371"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/** </span><span style="color: #b22222;">CSS variables</span>
+<pre class="src src-css" id="org14bf79b"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/** </span><span style="color: #b22222;">CSS variables</span>
 <span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
 
-:root {
+<span style="color: #0000ff;">:root </span>{
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Body </span><span style="color: #b22222;">*/</span>
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">---- </span><span style="color: #b22222;">*/</span>
-    --body-bg: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
-    --content-padding: 10px;
-    --content-bg: <span style="color: #000000; background-color: #F3FAFD;">#F3FAFD</span>;
-    --body-margin: 30px; <span style="color: #b22222;">/* </span><span style="color: #b22222;">not used for small screens </span><span style="color: #b22222;">*/</span>
+    <span style="color: #a0522d;">--body-bg</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+    <span style="color: #a0522d;">--content-padding</span>: 10px;
+    <span style="color: #a0522d;">--content-bg</span>: <span style="color: #000000; background-color: #F1F1F1;">#F1F1F1</span>;
+    <span style="color: #a0522d;">--content-box-shadow</span>: 0;
+    <span style="color: #a0522d;">--body-margin</span>: 30px; <span style="color: #b22222;">/* </span><span style="color: #b22222;">not used for small screens </span><span style="color: #b22222;">*/</span>
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Footer </span><span style="color: #b22222;">*/</span>
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">------ </span><span style="color: #b22222;">*/</span>
-    --footer-border: 1px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
-    --footer-padding: 10px;
-    --footer-buttons-bg: <span style="color: #ffffff; background-color: #4C6FB0;">#4C6FB0</span>;
-    --footer-buttons-bg-hover: <span style="color: #ffffff; background-color: #000080;">navy</span>;
-    --footer-buttons-padding: 5px 10px;
-    --footer-buttons-color: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
-    --footer-buttons-font-size: 90%;
-    --footer-buttons-border: 2px solid <span style="color: #ffffff; background-color: #000080;">navy</span>;
-    --footer-buttons-min-width: 270px;
+    <span style="color: #a0522d;">--footer-border</span>: 1px solid <span style="color: #ffffff; background-color: #000000;">black</span>;
+    <span style="color: #a0522d;">--footer-padding</span>: 10px;
+    <span style="color: #a0522d;">--footer-buttons-bg</span>: <span style="color: #ffffff; background-color: #4C6FB0;">#4C6FB0</span>;
+    <span style="color: #a0522d;">--footer-buttons-bg-hover</span>: <span style="color: #ffffff; background-color: #000080;">navy</span>;
+    <span style="color: #a0522d;">--footer-buttons-padding</span>: 5px 10px;
+    <span style="color: #a0522d;">--footer-buttons-color</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+    <span style="color: #a0522d;">--footer-buttons-font-size</span>: 90%;
+    <span style="color: #a0522d;">--footer-buttons-border</span>: 2px solid <span style="color: #ffffff; background-color: #000080;">navy</span>;
+    <span style="color: #a0522d;">--footer-buttons-min-width</span>: 270px;
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Table of contents </span><span style="color: #b22222;">*/</span>
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">----------------- </span><span style="color: #b22222;">*/</span>
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Basic style </span><span style="color: #b22222;">*/</span>
-    --toc-bg: <span style="color: #000000; background-color: #f1f1f1;">#f1f1f1</span>;
-    --toc-box-shadow: 0 0 1em <span style="color: #ffffff; background-color: #777777;">#777777</span>;
-    --toc-border-radius: 5px;
-    --toc-li-color: <span style="color: #ffffff; background-color: #000000;">black</span>;
-    --toc-hover-bg-color: <span style="color: #ffffff; background-color: #555;">#555</span>;
-    --toc-hover-color: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
+    <span style="color: #a0522d;">--toc-bg</span>: <span style="color: #000000; background-color: #f1f1f1;">#f1f1f1</span>;
+    <span style="color: #a0522d;">--toc-box-shadow</span>: 0 0 0.8em <span style="color: #ffffff; background-color: #777777;">#777777</span>;
+    <span style="color: #a0522d;">--toc-border-radius</span>: 5px;
+    <span style="color: #a0522d;">--toc-li-color</span>: <span style="color: #ffffff; background-color: #000000;">black</span>;
+    <span style="color: #a0522d;">--toc-hover-bg-color</span>: <span style="color: #ffffff; background-color: #555;">#555</span>;
+    <span style="color: #a0522d;">--toc-hover-color</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Layout </span><span style="color: #b22222;">*/</span>
-    --toc-nav-vspacing: 20px;
-    --toc-base-padding: 5px;
-    --toc-ul-padding-left: 20px;
-    --toc-local-padding: 5px;
-    --toc-extra-padding-x: 4px;
+    <span style="color: #a0522d;">--toc-nav-vspacing</span>: 20px;
+    <span style="color: #a0522d;">--toc-base-padding</span>: 5px;
+    <span style="color: #a0522d;">--toc-ul-padding-left</span>: 20px;
+    <span style="color: #a0522d;">--toc-local-padding</span>: 5px;
+    <span style="color: #a0522d;">--toc-extra-padding-x</span>: 4px;
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Navigation bar </span><span style="color: #b22222;">*/</span>
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">-------------- </span><span style="color: #b22222;">*/</span>
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Basic style </span><span style="color: #b22222;">*/</span>
-    --nav-bg: <span style="color: #ffffff; background-color: #333;">#333</span>;
-    --nav-hover: <span style="color: #ffffff; background-color: #111;">#111</span>;
+    <span style="color: #a0522d;">--nav-bg</span>: <span style="color: #ffffff; background-color: #333;">#333</span>;
+    <span style="color: #a0522d;">--nav-hover</span>: <span style="color: #ffffff; background-color: #111;">#111</span>;
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">RSS </span><span style="color: #b22222;">*/</span>
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">--- </span><span style="color: #b22222;">*/</span>
-    --rss-img: url(<span style="color: #8b2252;">"/blog/images/feed-icon-28x28.png"</span>);
+    <span style="color: #a0522d;">--rss-img</span>: url(<span style="color: #8b2252;">"/blog/images/feed-icon-28x28.png"</span>);
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Org-js </span><span style="color: #b22222;">*/</span>
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">------ </span><span style="color: #b22222;">*/</span>
-    --org-js-console-bg: var(--footer-buttons-bg);
+    <span style="color: #a0522d;">--org-js-console-bg</span>: var(<span style="color: #a0522d;">--footer-buttons-bg</span>);
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Fonts </span><span style="color: #b22222;">*/</span>
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">----- </span><span style="color: #b22222;">*/</span>
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Text </span><span style="color: #b22222;">*/</span>
-    --font-body-family: Arial, sans-serif;
-    --font-body-size: 16pt;
+    <span style="color: #a0522d;">--font-body-family</span>: Arial, sans-serif;
+    <span style="color: #a0522d;">--font-body-size</span>: 16pt;
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Code </span><span style="color: #b22222;">*/</span>
-    --font-code-family: DejaVu, Lucida Console, monospace;
-    --font-code-color: <span style="color: #ffffff; background-color: #4E4E4F;">#4E4E4F</span>;
-    --font-code-size: 14pt;
-    --font-src-family: DejaVu, Lucida Console, monospace;
-    --font-example-family: DejaVu, Lucida Console, monospace;
-    --font-example-size: 11pt;
+    <span style="color: #a0522d;">--font-code-family</span>: DejaVu, Lucida Console, monospace;
+    <span style="color: #a0522d;">--font-code-color</span>: <span style="color: #ffffff; background-color: #4E4E4F;">#4E4E4F</span>;
+    <span style="color: #a0522d;">--font-code-size</span>: 14pt;
+    <span style="color: #a0522d;">--font-src-family</span>: DejaVu, Lucida Console, monospace;
+    <span style="color: #a0522d;">--font-example-family</span>: DejaVu, Lucida Console, monospace;
+    <span style="color: #a0522d;">--font-example-size</span>: 11pt;
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Links </span><span style="color: #b22222;">*/</span>
-    --font-a-color: <span style="color: #ffffff; background-color: #000080;">navy</span>;
+    <span style="color: #a0522d;">--font-a-color</span>: <span style="color: #ffffff; background-color: #000080;">navy</span>;
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Color scheme </span><span style="color: #b22222;">*/</span>
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">------------ </span><span style="color: #b22222;">*/</span>
 
     <span style="color: #b22222;">/* </span><span style="color: #b22222;">Source blocks </span><span style="color: #b22222;">*/</span>
-    --src-bg: <span style="color: #000000; background-color: #fBF9E7;">#fBF9E7</span>;
-    --lua-bg: var(--src-bg);
+    <span style="color: #a0522d;">--src-bg</span>: <span style="color: #000000; background-color: #fBF9E7;">#fBF9E7</span>;
+    <span style="color: #a0522d;">--lua-bg</span>: var(<span style="color: #a0522d;">--src-bg</span>);
 
 }
 
@@ -664,57 +670,57 @@ effort for scalar variables at least).
 <span style="color: #b22222;">/* </span><span style="color: #b22222;">Large screens </span><span style="color: #b22222;">*/</span>
 <span style="color: #483d8b;">@media</span> (min-width: 1024px) {
     :root {
-        --side-width: 250px;
-        --body-width: 60%;
-        --nav-base-font-size: 80%;
-        --nav-height: 50px;
-        --nav-padding: 14px 16px;
-        --toc-base-font-size: 75%;
-        --toc-ul-font-size: 150%;
-        --toc-ul-local-font-size: 130%;
-        --toc-ul-2-font-size: 80%;
-        --font-src-size: 11pt;
-        --rss-padding: 0 0 0 25px;
-        --rss-size: 25px 25px;
-        --rss-pos: 50%;
+        <span style="color: #a0522d;">--side-width</span>: 250px;
+        <span style="color: #a0522d;">--body-width</span>: 60%;
+        <span style="color: #a0522d;">--nav-base-font-size</span>: 80%;
+        <span style="color: #a0522d;">--nav-height</span>: 50px;
+        <span style="color: #a0522d;">--nav-padding</span>: 14px 16px;
+        <span style="color: #a0522d;">--toc-base-font-size</span>: 70%;
+        <span style="color: #a0522d;">--toc-ul-font-size</span>: 150%;
+        <span style="color: #a0522d;">--toc-ul-local-font-size</span>: 130%;
+        <span style="color: #a0522d;">--toc-ul-2-font-size</span>: 80%;
+        <span style="color: #a0522d;">--font-src-size</span>: 11pt;
+        <span style="color: #a0522d;">--rss-padding</span>: 0 0 0 25px;
+        <span style="color: #a0522d;">--rss-size</span>: 25px 25px;
+        <span style="color: #a0522d;">--rss-pos</span>: 50%;
     }
 }
 
 <span style="color: #b22222;">/* </span><span style="color: #b22222;">Medium screens </span><span style="color: #b22222;">*/</span>
 <span style="color: #483d8b;">@media</span> (min-width: 600px) and (max-width: 1024px) {
     :root {
-        --side-width: 150px;
-        --body-width: calc(92% - var(--side-width));
-        --nav-base-font-size: 70%;
-        --nav-height: 30px;
-        --nav-padding: 5px 6px;
-        --toc-base-font-size: 70%;
-        --toc-ul-font-size: 130%;
-        --toc-ul-local-font-size: 130%;
-        --toc-ul-2-font-size: 80%;
-        --font-src-size: 11pt;
-        --rss-padding: 0 0 19px 9px;
-        --rss-size: 10px 10px;
-        --rss-pos: 25%;
+        <span style="color: #a0522d;">--side-width</span>: 150px;
+        <span style="color: #a0522d;">--body-width</span>: calc(92% - var(<span style="color: #a0522d;">--side-width</span>));
+        <span style="color: #a0522d;">--nav-base-font-size</span>: 70%;
+        <span style="color: #a0522d;">--nav-height</span>: 30px;
+        <span style="color: #a0522d;">--nav-padding</span>: 5px 6px;
+        <span style="color: #a0522d;">--toc-base-font-size</span>: 70%;
+        <span style="color: #a0522d;">--toc-ul-font-size</span>: 130%;
+        <span style="color: #a0522d;">--toc-ul-local-font-size</span>: 130%;
+        <span style="color: #a0522d;">--toc-ul-2-font-size</span>: 80%;
+        <span style="color: #a0522d;">--font-src-size</span>: 11pt;
+        <span style="color: #a0522d;">--rss-padding</span>: 0 0 19px 9px;
+        <span style="color: #a0522d;">--rss-size</span>: 10px 10px;
+        <span style="color: #a0522d;">--rss-pos</span>: 25%;
     }
 }
 
 <span style="color: #b22222;">/* </span><span style="color: #b22222;">Small screens </span><span style="color: #b22222;">*/</span>
 <span style="color: #483d8b;">@media</span> (max-width: 600px) {
     :root {
-        --side-width: 150px; <span style="color: #b22222;">/* </span><span style="color: #b22222;">unused in this case </span><span style="color: #b22222;">*/</span>
-        --body-width: 100%;
-        --nav-base-font-size: 80%;
-        --nav-height: 30px;
-        --nav-padding: 5px 6px;
-        --toc-base-font-size: 80%;
-        --toc-ul-font-size: 120%;
-        --toc-ul-local-font-size: 130%;
-        --toc-ul-2-font-size: 80%;
-        --font-src-size: 10pt;
-        --rss-padding: 0 0 19px 20px;
-        --rss-size: 20px 20px;
-        --rss-pos: 19%;
+        <span style="color: #a0522d;">--side-width</span>: 150px; <span style="color: #b22222;">/* </span><span style="color: #b22222;">unused in this case </span><span style="color: #b22222;">*/</span>
+        <span style="color: #a0522d;">--body-width</span>: 100%;
+        <span style="color: #a0522d;">--nav-base-font-size</span>: 80%;
+        <span style="color: #a0522d;">--nav-height</span>: 30px;
+        <span style="color: #a0522d;">--nav-padding</span>: 5px 6px;
+        <span style="color: #a0522d;">--toc-base-font-size</span>: 80%;
+        <span style="color: #a0522d;">--toc-ul-font-size</span>: 120%;
+        <span style="color: #a0522d;">--toc-ul-local-font-size</span>: 130%;
+        <span style="color: #a0522d;">--toc-ul-2-font-size</span>: 80%;
+        <span style="color: #a0522d;">--font-src-size</span>: 10pt;
+        <span style="color: #a0522d;">--rss-padding</span>: 0 0 19px 20px;
+        <span style="color: #a0522d;">--rss-size</span>: 20px 20px;
+        <span style="color: #a0522d;">--rss-pos</span>: 19%;
     }
 }
 </pre>
@@ -723,9 +729,9 @@ effort for scalar variables at least).
 </div>
 
 
-<div id="outline-container-org7c2002a" class="outline-3">
-<h3 id="org7c2002a"><a id="ID-e2781b6f-6b0e-4705-84cf-f662f6c94a88"></a>Table of contents</h3>
-<div class="outline-text-3" id="text-org7c2002a">
+<div id="outline-container-org6194992" class="outline-3">
+<h3 id="org6194992"><a id="ID-e2781b6f-6b0e-4705-84cf-f662f6c94a88"></a>Table of contents</h3>
+<div class="outline-text-3" id="text-org6194992">
 <p>
 Exported pages use <a href="http://orgmode.org/worg/code/org-info-js/">org-infojs</a> for navigation.  It comes with a nice table of
 contents for the document (with CSS id <code>#table-of-contents</code>).  Similar to the
@@ -751,33 +757,33 @@ size:
 </div>
 
 
-<div id="outline-container-orge3f0414" class="outline-4">
-<h4 id="orge3f0414"><a id="ID-cda2e81d-7dd7-497a-8891-2d2d940c856a"></a>Basic style</h4>
-<div class="outline-text-4" id="text-orge3f0414">
+<div id="outline-container-orgbfe301a" class="outline-4">
+<h4 id="orgbfe301a"><a id="ID-cda2e81d-7dd7-497a-8891-2d2d940c856a"></a>Basic style</h4>
+<div class="outline-text-4" id="text-orgbfe301a">
 <p>
 First, we define the basic styling properties for the table of contents: color,
 shadow, size, etc.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org3604cb6"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/** </span><span style="color: #0000ff;">Table of content</span>
-<span style="color: #0000ff;"> </span><span style="color: #0000ff;">*/</span>
+<pre class="src src-css" id="org220e71a"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/** </span><span style="color: #b22222;">Table of content</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
 
-<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Basic styling (color, font, shadow) common to global and local TOC </span><span style="color: #0000ff;">*/</span>
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">Basic styling (color, font, shadow) common to global and local TOC </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">#table-of-contents, .org-info-js_local-toc </span>{
-    <span style="color: #a0522d;">background-color</span>: var(--toc-bg);
-    <span style="color: #a0522d;">box-shadow</span>: var(--toc-box-shadow);
-    <span style="color: #a0522d;">border-bottom-left-radius</span>: var(--toc-border-radius);
-    <span style="color: #a0522d;">font-size</span>: var(--toc-base-font-size);
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--toc-bg</span>);
+    <span style="color: #a0522d;">box-shadow</span>: var(<span style="color: #a0522d;">--toc-box-shadow</span>);
+    <span style="color: #a0522d;">border-bottom-left-radius</span>: var(<span style="color: #a0522d;">--toc-border-radius</span>);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--toc-base-font-size</span>);
 }
 
-<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Size (global TOC only) </span><span style="color: #0000ff;">*/</span>
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">Size (global TOC only) </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">#table-of-contents </span>{
-    <span style="color: #a0522d;">width</span>: var(--side-width);
+    <span style="color: #a0522d;">width</span>: var(<span style="color: #a0522d;">--side-width</span>);
 }
 
 <span style="color: #0000ff;">.org-info-js_local-toc </span>{
-    <span style="color: #a0522d;">padding</span>: var(--toc-local-padding);
+    <span style="color: #a0522d;">padding</span>: var(<span style="color: #a0522d;">--toc-local-padding</span>);
 }
 </pre>
 </div>
@@ -785,32 +791,32 @@ shadow, size, etc.
 </div>
 
 
-<div id="outline-container-org9cdef4e" class="outline-4">
-<h4 id="org9cdef4e"><a id="ID-75a4b1a4-b337-4e27-a68c-d2fb293813c0"></a>Position</h4>
-<div class="outline-text-4" id="text-org9cdef4e">
+<div id="outline-container-org6ab027c" class="outline-4">
+<h4 id="org6ab027c"><a id="ID-75a4b1a4-b337-4e27-a68c-d2fb293813c0"></a>Position</h4>
+<div class="outline-text-4" id="text-org6ab027c">
 <p>
 The placement of the table of contents depends on the screen size: the different
 definitions are placed here.
 </p>
 </div>
 
-<div id="outline-container-org487f13e" class="outline-5">
-<h5 id="org487f13e"><a id="ID-ab5fa256-502d-4c13-86ef-53339df52a2c"></a>Large screen</h5>
-<div class="outline-text-5" id="text-org487f13e">
+<div id="outline-container-org9352118" class="outline-5">
+<h5 id="org9352118"><a id="ID-ab5fa256-502d-4c13-86ef-53339df52a2c"></a>Large screen</h5>
+<div class="outline-text-5" id="text-org9352118">
 <p>
 For medium and large screens, the table of contents is fixed on the left of the
 screen.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="orged8e019"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/* </span><span style="color: #b22222;">Fixed vertical table of content </span><span style="color: #b22222;">*/</span>
+<pre class="src src-css" id="orgf8b6b91"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/* </span><span style="color: #b22222;">Fixed vertical table of content </span><span style="color: #b22222;">*/</span>
 <span style="color: #483d8b;">@media</span> screen and (min-width: 600px) {
-<span style="color: #0000ff;">    #table-of-contents </span>{
+    <span style="color: #0000ff;">#table-of-contents </span>{
         <span style="color: #a0522d;">position</span>: fixed;
         <span style="color: #a0522d;">left</span>: 0;
-        <span style="color: #a0522d;">top</span>: calc(var(--nav-height) + var(--toc-nav-vspacing));
-        <span style="color: #a0522d;">bottom</span>: var(--toc-nav-vspacing);
-        <span style="color: #a0522d;">padding</span>: var(--toc-base-padding);
+        <span style="color: #a0522d;">top</span>: calc(var(<span style="color: #a0522d;">--nav-height</span>) + var(<span style="color: #a0522d;">--toc-nav-vspacing</span>));
+        <span style="color: #a0522d;">bottom</span>: var(<span style="color: #a0522d;">--toc-nav-vspacing</span>);
+        <span style="color: #a0522d;">padding</span>: var(<span style="color: #a0522d;">--toc-base-padding</span>);
         <span style="color: #a0522d;">overflow</span>: auto;
     }
 }
@@ -820,17 +826,17 @@ screen.
 </div>
 
 
-<div id="outline-container-orgb2dce5b" class="outline-5">
-<h5 id="orgb2dce5b"><a id="ID-14d429ec-fcb5-48a1-be13-e429fadea414"></a>Medium screen</h5>
-<div class="outline-text-5" id="text-orgb2dce5b">
+<div id="outline-container-org5330c7d" class="outline-5">
+<h5 id="org5330c7d"><a id="ID-14d429ec-fcb5-48a1-be13-e429fadea414"></a>Medium screen</h5>
+<div class="outline-text-5" id="text-org5330c7d">
 <p>
 For medium and small screens, the table of contents is limited to only top level
 headings.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org2ecc595"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 1024px) {
-<span style="color: #0000ff;">    #table-of-contents &gt; div &gt; ul &gt; li &gt; ul </span>{
+<pre class="src src-css" id="orga87086b"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 1024px) {
+    <span style="color: #0000ff;">#table-of-contents &gt; div &gt; ul &gt; li &gt; ul </span>{
         <span style="color: #a0522d;">display</span>: none;
     }
 }
@@ -840,17 +846,17 @@ headings.
 </div>
 
 
-<div id="outline-container-org7940734" class="outline-5">
-<h5 id="org7940734"><a id="ID-868b5c03-dd76-4d1d-b849-e1929795c7ae"></a>Small screen</h5>
-<div class="outline-text-5" id="text-org7940734">
+<div id="outline-container-org2dc7399" class="outline-5">
+<h5 id="org2dc7399"><a id="ID-868b5c03-dd76-4d1d-b849-e1929795c7ae"></a>Small screen</h5>
+<div class="outline-text-5" id="text-org2dc7399">
 <p>
 For small screens, the table of contents is a regular section, and it is set to
 use (almost) all the available width.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org2d0567c"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 600px) {
-<span style="color: #0000ff;">    #table-of-contents </span>{
+<pre class="src src-css" id="org9896c65"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 600px) {
+    <span style="color: #0000ff;">#table-of-contents </span>{
         <span style="color: #a0522d;">position</span>: relative;
         <span style="color: #a0522d;">width</span>: 90%;
         <span style="color: #a0522d;">margin</span>: auto;
@@ -863,37 +869,37 @@ use (almost) all the available width.
 </div>
 
 
-<div id="outline-container-org1343972" class="outline-4">
-<h4 id="org1343972"><a id="ID-971e4499-d7fa-43fc-97fb-f0271db7c212"></a>List style</h4>
-<div class="outline-text-4" id="text-org1343972">
+<div id="outline-container-org53065ee" class="outline-4">
+<h4 id="org53065ee"><a id="ID-971e4499-d7fa-43fc-97fb-f0271db7c212"></a>List style</h4>
+<div class="outline-text-4" id="text-org53065ee">
 <p>
 The style for entries in the table of contents are defined here.  The following
 block sets font sizes and alignment.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org84d9ff0"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#table-of-contents ul, .org-info-js_local-toc ul </span>{
+<pre class="src src-css" id="org9c780c5"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#table-of-contents ul, .org-info-js_local-toc ul </span>{
     <span style="color: #a0522d;">list-style-type</span>: none;
     <span style="color: #a0522d;">margin</span>: 0;
-    <span style="color: #a0522d;">padding-left</span>: var(--toc-ul-padding-left);
+    <span style="color: #a0522d;">padding-left</span>: var(<span style="color: #a0522d;">--toc-ul-padding-left</span>);
 }
 
 <span style="color: #0000ff;">#table-of-contents ul </span>{
-    <span style="color: #a0522d;">font-size</span>: var(--toc-ul-font-size);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--toc-ul-font-size</span>);
 }
 
 <span style="color: #0000ff;">.org-info-js_local-toc ul </span>{
-    <span style="color: #a0522d;">font-size</span>: var(--toc-ul-local-font-size);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--toc-ul-local-font-size</span>);
 }
 
 <span style="color: #0000ff;">#table-of-contents &gt; div &gt; ul, .org-info-js_local-toc &gt; div &gt; ul </span>{
     <span style="color: #a0522d;">list-style-type</span>: none;
     <span style="color: #a0522d;">margin</span>: 0;
-    <span style="color: #a0522d;">padding-left</span>: var(--toc-extra-padding-x);
+    <span style="color: #a0522d;">padding-left</span>: var(<span style="color: #a0522d;">--toc-extra-padding-x</span>);
 }
 
 <span style="color: #0000ff;">#table-of-contents &gt; div &gt; ul &gt; li &gt; ul</span>{
-    <span style="color: #a0522d;">font-size</span>: var(--toc-ul-2-font-size);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--toc-ul-2-font-size</span>);
     <span style="color: #a0522d;">vertical-align</span>: middle;
 }
 </pre>
@@ -904,9 +910,9 @@ The appearance of links is defined here:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="orgc89c5a4"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#table-of-contents li a, .org-info-js_local-toc li a </span>{
+<pre class="src src-css" id="org130ab1d"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#table-of-contents li a, .org-info-js_local-toc li a </span>{
     <span style="color: #a0522d;">display</span>: block;
-    <span style="color: #a0522d;">color</span>: var(--toc-li-color);
+    <span style="color: #a0522d;">color</span>: var(<span style="color: #a0522d;">--toc-li-color</span>);
     <span style="color: #a0522d;">text-decoration</span>: none;
 }
 
@@ -914,9 +920,9 @@ The appearance of links is defined here:
     <span style="color: #a0522d;">vertical-align</span>: middle;
 }
 
-#table-of-contents li a:hover:not(.active), .org-info-js_local-toc li a:hover:not(.active) {
-    <span style="color: #a0522d;">background-color</span>: var(--toc-hover-bg-color);
-    <span style="color: #a0522d;">color</span>: var(--toc-hover-color);
+<span style="color: #0000ff;">#table-of-contents li a:hover:not(.active), .org-info-js_local-toc li a:hover:not(.active) </span>{
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--toc-hover-bg-color</span>);
+    <span style="color: #a0522d;">color</span>: var(<span style="color: #a0522d;">--toc-hover-color</span>);
 }
 </pre>
 </div>
@@ -925,9 +931,9 @@ The appearance of links is defined here:
 </div>
 
 
-<div id="outline-container-orgda04781" class="outline-3">
-<h3 id="orgda04781"><a id="ID-eb314cce-91d0-47ec-81fe-52ea6ce8cb10"></a>Navigation bar</h3>
-<div class="outline-text-3" id="text-orgda04781">
+<div id="outline-container-org28e6688" class="outline-3">
+<h3 id="org28e6688"><a id="ID-eb314cce-91d0-47ec-81fe-52ea6ce8cb10"></a>Navigation bar</h3>
+<div class="outline-text-3" id="text-org28e6688">
 <p>
 A small navigation bar is added to all pages in the website (on the top left
 corner).  It contains links to the home page, a list of blog posts and the RSS
@@ -936,34 +942,34 @@ clients, and collapses to a floating menu at the top for small clients.
 </p>
 </div>
 
-<div id="outline-container-orge3a3d6c" class="outline-4">
-<h4 id="orge3a3d6c"><a id="ID-71b62fa3-83e7-4472-92de-dbbede6a7601"></a>Basic style</h4>
-<div class="outline-text-4" id="text-orge3a3d6c">
+<div id="outline-container-orgd7dac4e" class="outline-4">
+<h4 id="orgd7dac4e"><a id="ID-71b62fa3-83e7-4472-92de-dbbede6a7601"></a>Basic style</h4>
+<div class="outline-text-4" id="text-orgd7dac4e">
 <p>
 First, the basic style elements are defined, including the position, size, color
 and text alignment.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org852173b"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/** </span><span style="color: #0000ff;">Navigation bar</span>
-<span style="color: #0000ff;"> </span><span style="color: #0000ff;">*/</span>
+<pre class="src src-css" id="orgb0247d6"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/** </span><span style="color: #b22222;">Navigation bar</span>
+<span style="color: #b22222;"> </span><span style="color: #b22222;">*/</span>
 
 <span style="color: #0000ff;">.topnav </span>{
     <span style="color: #a0522d;">top</span>: 0;
     <span style="color: #a0522d;">left</span>: 0;
-    <span style="color: #a0522d;">max-height</span>: var(--nav-height);
+    <span style="color: #a0522d;">max-height</span>: var(<span style="color: #a0522d;">--nav-height</span>);
     <span style="color: #a0522d;">vertical-align</span>: middle;
-    <span style="color: #a0522d;">background-color</span>: var(--nav-bg);
-    <span style="color: #a0522d;">width</span>: var(--side-width);
-    <span style="color: #a0522d;">font-size</span>: var(--nav-base-font-size);
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--nav-bg</span>);
+    <span style="color: #a0522d;">width</span>: var(<span style="color: #a0522d;">--side-width</span>);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--nav-base-font-size</span>);
 }
 
-<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">RSS icon </span><span style="color: #0000ff;">*/</span>
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">RSS icon </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">.feed </span>{
     <span style="color: #a0522d;">margin-left</span>: 3px;
-    <span style="color: #a0522d;">padding</span>: var(--rss-padding);
-    <span style="color: #a0522d;">background</span>: var(--rss-img) no-repeat 0 var(--rss-pos);
-    <span style="color: #a0522d;">background-size</span>: var(--rss-size);
+    <span style="color: #a0522d;">padding</span>: var(<span style="color: #a0522d;">--rss-padding</span>);
+    <span style="color: #a0522d;">background</span>: var(<span style="color: #a0522d;">--rss-img</span>) no-repeat 0 var(<span style="color: #a0522d;">--rss-pos</span>);
+    <span style="color: #a0522d;">background-size</span>: var(<span style="color: #a0522d;">--rss-size</span>);
 }
 </pre>
 </div>
@@ -971,22 +977,22 @@ and text alignment.
 </div>
 
 
-<div id="outline-container-org51c8c70" class="outline-4">
-<h4 id="org51c8c70"><a id="ID-3c9e02b8-0849-4e35-9cdc-bf4f0d9627c7"></a>Position</h4>
-<div class="outline-text-4" id="text-org51c8c70">
+<div id="outline-container-orga68a089" class="outline-4">
+<h4 id="orga68a089"><a id="ID-3c9e02b8-0849-4e35-9cdc-bf4f0d9627c7"></a>Position</h4>
+<div class="outline-text-4" id="text-orga68a089">
 </div>
 
-<div id="outline-container-org7b937ee" class="outline-5">
-<h5 id="org7b937ee"><a id="ID-af3932bf-610f-4ac6-bf2c-63433f1b611d"></a>Medium and large screen</h5>
-<div class="outline-text-5" id="text-org7b937ee">
+<div id="outline-container-org78f17f6" class="outline-5">
+<h5 id="org78f17f6"><a id="ID-af3932bf-610f-4ac6-bf2c-63433f1b611d"></a>Medium and large screen</h5>
+<div class="outline-text-5" id="text-org78f17f6">
 <p>
 For medium and large screens, the navigation bar is fixed on the top left
 corner.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org7193846"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (min-width: 600px) {
-<span style="color: #0000ff;">    .topnav </span>{
+<pre class="src src-css" id="org5041227"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (min-width: 600px) {
+    <span style="color: #0000ff;">.topnav </span>{
         <span style="color: #a0522d;">position</span>: fixed;
     }
 }
@@ -996,16 +1002,16 @@ corner.
 </div>
 
 
-<div id="outline-container-org65972f0" class="outline-5">
-<h5 id="org65972f0"><a id="ID-6a5b666d-440b-4ff7-bef9-99d9ac7d0a3d"></a>Small screen</h5>
-<div class="outline-text-5" id="text-org65972f0">
+<div id="outline-container-orgdc1823a" class="outline-5">
+<h5 id="orgdc1823a"><a id="ID-6a5b666d-440b-4ff7-bef9-99d9ac7d0a3d"></a>Small screen</h5>
+<div class="outline-text-5" id="text-orgdc1823a">
 <p>
 For small screens, the navigation bar is placed at the top, and made floating.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org4fcee69"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 600px) {
-<span style="color: #0000ff;">    .topnav </span>{
+<pre class="src src-css" id="org4e4fe0a"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 600px) {
+    <span style="color: #0000ff;">.topnav </span>{
         <span style="color: #a0522d;">position</span>: relative;
         <span style="color: #a0522d;">width</span>: 100%;
     }
@@ -1017,15 +1023,15 @@ For small screens, the navigation bar is placed at the top, and made floating.
 </div>
 
 
-<div id="outline-container-org2442ac1" class="outline-4">
-<h4 id="org2442ac1"><a id="ID-b3878dce-bc15-4854-81eb-b91c7dbe229d"></a>List style</h4>
-<div class="outline-text-4" id="text-org2442ac1">
+<div id="outline-container-org6fba78c" class="outline-4">
+<h4 id="org6fba78c"><a id="ID-b3878dce-bc15-4854-81eb-b91c7dbe229d"></a>List style</h4>
+<div class="outline-text-4" id="text-org6fba78c">
 <p>
 The following block sets the style of the navigation items.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="orgcad4418"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.topnav ul </span>{
+<pre class="src src-css" id="orgadddf49"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.topnav ul </span>{
     <span style="color: #a0522d;">list-style-type</span>: none;
     <span style="color: #a0522d;">margin</span>: 0;
     <span style="color: #a0522d;">padding</span>: 0;
@@ -1043,18 +1049,18 @@ The following block sets the style of the navigation items.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org6bf7f10"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.topnav li a </span>{
+<pre class="src src-css" id="org3609413"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.topnav li a </span>{
     <span style="color: #a0522d;">display</span>: block;
     <span style="color: #a0522d;">color</span>: <span style="color: #000000; background-color: #FFFFFF;">white</span>;
     <span style="color: #a0522d;">text-align</span>: left;
-    <span style="color: #a0522d;">padding</span>: var(--nav-padding);
+    <span style="color: #a0522d;">padding</span>: var(<span style="color: #a0522d;">--nav-padding</span>);
     <span style="color: #a0522d;">text-decoration</span>: none;
     <span style="color: #a0522d;">position</span>: relative;
     <span style="color: #a0522d;">vertical-align</span>: middle;
 }
 
-.topnav li a:hover:not(.active) {
-    <span style="color: #a0522d;">background-color</span>: var(--nav-hover);
+<span style="color: #0000ff;">.topnav li a:hover:not(.active) </span>{
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--nav-hover</span>);
 }
 
 <span style="color: #0000ff;">.topnav .right </span>{
@@ -1067,9 +1073,9 @@ The following block sets the style of the navigation items.
 </div>
 
 
-<div id="outline-container-org70de68b" class="outline-3">
-<h3 id="org70de68b"><a id="ID-55a06366-98b3-46fc-9f6e-a07d6abd2c18"></a>Source blocks</h3>
-<div class="outline-text-3" id="text-org70de68b">
+<div id="outline-container-org423dc62" class="outline-3">
+<h3 id="org423dc62"><a id="ID-55a06366-98b3-46fc-9f6e-a07d6abd2c18"></a>Source blocks</h3>
+<div class="outline-text-3" id="text-org423dc62">
 <p>
 This section defines the appearance of source blocks in the rendered HTML.  The
 main features are:
@@ -1082,7 +1088,7 @@ main features are:
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org730bfd2"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">pre.src </span>{
+<pre class="src src-css" id="org42af160"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">pre.src </span>{
     <span style="color: #a0522d;">overflow-x</span>: auto;
 }
 
@@ -1090,12 +1096,12 @@ main features are:
     <span style="color: #a0522d;">top</span>: 0;
 }
 
-<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Source block color based on file type </span><span style="color: #0000ff;">*/</span>
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">Source block color based on file type </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">pre.src.src.src-lua </span>{
-    <span style="color: #a0522d;">background-color</span>: var(--lua-bg);
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--lua-bg</span>);
 }
 
-<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Source block label </span><span style="color: #0000ff;">*/</span>
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">Source block label </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">.src-label </span>{
     <span style="color: #a0522d;">color</span>: <span style="color: #000000; background-color: #A9A9A9;">darkgray</span>;
 }
@@ -1105,16 +1111,16 @@ main features are:
 </div>
 
 
-<div id="outline-container-org5c34614" class="outline-3">
-<h3 id="org5c34614"><a id="ID-5b1786d0-71b6-4a5d-b506-a91cf3a40546"></a>Org-js</h3>
-<div class="outline-text-3" id="text-org5c34614">
+<div id="outline-container-org6222fc3" class="outline-3">
+<h3 id="org6222fc3"><a id="ID-5b1786d0-71b6-4a5d-b506-a91cf3a40546"></a>Org-js</h3>
+<div class="outline-text-3" id="text-org6222fc3">
 <p>
 The org-infojs tool inserts a search box in the rendered html.  It is used for
 search operations.  The following sets the default location for the search box.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org5d6f982"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#org-info-js_console-container </span>{
+<pre class="src src-css" id="orgc0e583c"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#org-info-js_console-container </span>{
     <span style="color: #a0522d;">bottom</span>: 0;
     <span style="color: #a0522d;">margin-top</span>: 0;
 }
@@ -1124,31 +1130,31 @@ search operations.  The following sets the default location for the search box.
 </div>
 
 
-<div id="outline-container-org1e8c8da" class="outline-3">
-<h3 id="org1e8c8da"><a id="ID-3e911a21-793c-4bb5-87dd-d95e38bcaf1b"></a>Body</h3>
-<div class="outline-text-3" id="text-org1e8c8da">
+<div id="outline-container-orgfd2d47b" class="outline-3">
+<h3 id="orgfd2d47b"><a id="ID-3e911a21-793c-4bb5-87dd-d95e38bcaf1b"></a>Body</h3>
+<div class="outline-text-3" id="text-orgfd2d47b">
 <p>
 The following CSS controls the size of the body, which adapts to the client
 size.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org45a00e3"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Body </span><span style="color: #0000ff;">*/</span>
+<pre class="src src-css" id="orgb627f5c"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/* </span><span style="color: #b22222;">Body </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">body </span>{
-    <span style="color: #a0522d;">width</span>: var(--body-width);
+    <span style="color: #a0522d;">width</span>: var(<span style="color: #a0522d;">--body-width</span>);
     <span style="color: #a0522d;">overflow-x</span>: hidden;
-    <span style="color: #a0522d;">background-color</span>: var(--body-bg);
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--body-bg</span>);
 }
 
 <span style="color: #483d8b;">@media</span> (min-width: 600px) {
-<span style="color: #0000ff;">    body </span>{
-        <span style="color: #a0522d;">margin-left</span>: calc(var(--side-width) + var(--body-margin));
-        <span style="color: #a0522d;">margin-right</span>: var(--body-margin);
+    <span style="color: #0000ff;">body </span>{
+        <span style="color: #a0522d;">margin-left</span>: calc(var(<span style="color: #a0522d;">--side-width</span>) + var(<span style="color: #a0522d;">--body-margin</span>));
+        <span style="color: #a0522d;">margin-right</span>: var(<span style="color: #a0522d;">--body-margin</span>);
     }
 }
 
 <span style="color: #483d8b;">@media</span> (max-width: 600px) {
-<span style="color: #0000ff;">    body </span>{
+    <span style="color: #0000ff;">body </span>{
         <span style="color: #a0522d;">margin-left</span>: 0;
         <span style="color: #a0522d;">margin-right</span>: 0;
     }
@@ -1158,40 +1164,54 @@ size.
 </div>
 
 
-<div id="outline-container-org2c86597" class="outline-4">
-<h4 id="org2c86597"><a id="ID-f65fbe40-7980-450f-9b0e-5b40caf9f9da"></a>Preamble</h4>
-<div class="outline-text-4" id="text-org2c86597">
+<div id="outline-container-org7f925f9" class="outline-4">
+<h4 id="org7f925f9"><a id="ID-f65fbe40-7980-450f-9b0e-5b40caf9f9da"></a>Preamble</h4>
+<div class="outline-text-4" id="text-org7f925f9">
 <p>
 The preamble is a text added to the top of the page.  The actual content is
 defined in the <a href="#html_preamble">HTML preamble section</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org9a775b8"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Text before post (date and help) </span><span style="color: #0000ff;">*/</span>
+<pre class="src src-css" id="org9c00bfc"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/* </span><span style="color: #b22222;">Text before post (date and help) </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">.foreword </span>{
     <span style="color: #a0522d;">color</span>: <span style="color: #000000; background-color: #808080;">gray</span>;
     <span style="color: #a0522d;">font-size</span>: 80%;
 }
 </pre>
 </div>
+
+<p>
+The <code>home=/=up</code> buttons are hidden for small clients.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orgb6631eb"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #483d8b;">@media</span> screen and (max-width: 600px) {
+    <span style="color: #0000ff;">#org-div-home-and-up </span>{
+        <span style="color: #a0522d;">display</span>: none;
+    }
+}
+</pre>
+</div>
 </div>
 </div>
 
 
-<div id="outline-container-orgb894144" class="outline-4">
-<h4 id="orgb894144"><a id="ID-5c01f512-8351-48e9-9c2a-e3a4a669d974"></a>Content</h4>
-<div class="outline-text-4" id="text-orgb894144">
+<div id="outline-container-orgd434efd" class="outline-4">
+<h4 id="orgd434efd"><a id="ID-5c01f512-8351-48e9-9c2a-e3a4a669d974"></a>Content</h4>
+<div class="outline-text-4" id="text-orgd434efd">
 <p>
 The following block is used to limit the width of the main content and add a
 background color.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="orgefcfefd"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Main content </span><span style="color: #0000ff;">*/</span>
+<pre class="src src-css" id="org6c7bdb5"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/* </span><span style="color: #b22222;">Main content </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">#content </span>{
-    <span style="color: #a0522d;">background-color</span>: var(--content-bg);
-    <span style="color: #a0522d;">padding-left</span>: var(--content-padding);
-    <span style="color: #a0522d;">padding-right</span>: var(--content-padding);
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--content-bg</span>);
+    <span style="color: #a0522d;">box-shadow</span>: var(<span style="color: #a0522d;">--content-box-shadow</span>);
+    <span style="color: #a0522d;">padding-left</span>: var(<span style="color: #a0522d;">--content-padding</span>);
+    <span style="color: #a0522d;">padding-right</span>: var(<span style="color: #a0522d;">--content-padding</span>);
 }
 </pre>
 </div>
@@ -1199,17 +1219,17 @@ background color.
 </div>
 
 
-<div id="outline-container-orge7193a6" class="outline-4">
-<h4 id="orge7193a6"><a id="ID-4e87e731-c88f-4c68-bdeb-39c02f64ca57"></a>Postamble</h4>
-<div class="outline-text-4" id="text-orge7193a6">
+<div id="outline-container-org23ce7b1" class="outline-4">
+<h4 id="org23ce7b1"><a id="ID-4e87e731-c88f-4c68-bdeb-39c02f64ca57"></a>Postamble</h4>
+<div class="outline-text-4" id="text-org23ce7b1">
 <p>
 This section defines the layout of the <a href="#html_postamble">HTML postamble</a> used on all pages.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org86ef179"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#postamble </span>{
-    <span style="color: #a0522d;">padding</span>: var(--footer-padding);
-    <span style="color: #a0522d;">border</span>: var(--footer-border);
+<pre class="src src-css" id="org4002611"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">#postamble </span>{
+    <span style="color: #a0522d;">padding</span>: var(<span style="color: #a0522d;">--footer-padding</span>);
+    <span style="color: #a0522d;">border</span>: var(<span style="color: #a0522d;">--footer-border</span>);
 }
 </pre>
 </div>
@@ -1218,41 +1238,41 @@ This section defines the layout of the <a href="#html_postamble">HTML postamble<
 </div>
 
 
-<div id="outline-container-org268d156" class="outline-3">
-<h3 id="org268d156">Fonts</h3>
-<div class="outline-text-3" id="text-org268d156">
+<div id="outline-container-org49c65a8" class="outline-3">
+<h3 id="org49c65a8">Fonts</h3>
+<div class="outline-text-3" id="text-org49c65a8">
 <p>
 Here, the fonts for text, links and code are selected.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org9ab4634"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Fonts </span><span style="color: #0000ff;">*/</span>
+<pre class="src src-css" id="org44fc7e6"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #b22222;">/* </span><span style="color: #b22222;">Fonts </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">body </span>{
-    <span style="color: #a0522d;">font-family</span>: var(--font-body-family);
-    <span style="color: #a0522d;">font-size</span>: var(--font-body-size);
+    <span style="color: #a0522d;">font-family</span>: var(<span style="color: #a0522d;">--font-body-family</span>);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--font-body-size</span>);
 }
 
 <span style="color: #0000ff;">code </span>{
-    <span style="color: #a0522d;">font-family</span>: var(--font-code-family);
-    <span style="color: #a0522d;">font-size</span>: var(--font-code-size);
-    <span style="color: #a0522d;">color</span>: var(--font-code-color);
+    <span style="color: #a0522d;">font-family</span>: var(<span style="color: #a0522d;">--font-code-family</span>);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--font-code-size</span>);
+    <span style="color: #a0522d;">color</span>: var(<span style="color: #a0522d;">--font-code-color</span>);
 }
 
 <span style="color: #0000ff;">pre.src </span>{
-    <span style="color: #a0522d;">font-family</span>: var(--font-src-family);
-    <span style="color: #a0522d;">font-size</span>: var(--font-src-size);
-    <span style="color: #a0522d;">background-color</span>: var(--src-bg);
+    <span style="color: #a0522d;">font-family</span>: var(<span style="color: #a0522d;">--font-src-family</span>);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--font-src-size</span>);
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--src-bg</span>);
 }
 
 <span style="color: #0000ff;">pre.example </span>{
-    <span style="color: #a0522d;">font-family</span>: var(--font-example-family);
-    <span style="color: #a0522d;">font-size</span>: var(--font-example-size);
+    <span style="color: #a0522d;">font-family</span>: var(<span style="color: #a0522d;">--font-example-family</span>);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--font-example-size</span>);
 }
 
-<span style="color: #0000ff;">/* </span><span style="color: #0000ff;">Links </span><span style="color: #0000ff;">*/</span>
+<span style="color: #b22222;">/* </span><span style="color: #b22222;">Links </span><span style="color: #b22222;">*/</span>
 <span style="color: #0000ff;">a </span>{
     <span style="color: #a0522d;">text-decoration</span>: none;
-    <span style="color: #a0522d;">color</span>: var(--font-a-color);
+    <span style="color: #a0522d;">color</span>: var(<span style="color: #a0522d;">--font-a-color</span>);
 }
 </pre>
 </div>
@@ -1260,34 +1280,59 @@ Here, the fonts for text, links and code are selected.
 </div>
 
 
-<div id="outline-container-orgafedacc" class="outline-3">
-<h3 id="orgafedacc"><a id="ID-7c0f16bb-f153-4eab-a554-82eef98f782b"></a>HTML tags</h3>
-<div class="outline-text-3" id="text-orgafedacc">
+<div id="outline-container-org7adb6f3" class="outline-3">
+<h3 id="org7adb6f3"><a id="ID-7c0f16bb-f153-4eab-a554-82eef98f782b"></a>HTML tags</h3>
+<div class="outline-text-3" id="text-org7adb6f3">
 </div>
 
-<div id="outline-container-org0348467" class="outline-4">
-<h4 id="org0348467"><a id="ID-f9d92e98-006d-4a67-b76d-e66ebc558c4a"></a>Buttons</h4>
-<div class="outline-text-4" id="text-org0348467">
+<div id="outline-container-orgeb5021b" class="outline-4">
+<h4 id="orgeb5021b"><a id="ID-f9d92e98-006d-4a67-b76d-e66ebc558c4a"></a>Buttons</h4>
+<div class="outline-text-4" id="text-orgeb5021b">
 <p>
 The <a href="#html_postamble">HTML postamble</a> uses buttons to view the page org source; their appearance is
 defined here:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org503f226"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.footer-button </span>{
+<pre class="src src-css" id="org2062333"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">.footer-button </span>{
     <span style="color: #a0522d;">border</span>: none;
     <span style="color: #a0522d;">text-align</span>: center;
     <span style="color: #a0522d;">text-decoration</span>: none;
     <span style="color: #a0522d;">display</span>: inline-block;
-    <span style="color: #a0522d;">background-color</span>: var(--footer-buttons-bg);
-    <span style="color: #a0522d;">color</span>: var(--footer-buttons-color);
-    <span style="color: #a0522d;">padding</span>: var(--footer-buttons-padding);
-    <span style="color: #a0522d;">font-size</span>: var(--footer-buttons-font-size);
-    <span style="color: #a0522d;">border</span>: var(--footer-buttons-border);
-    <span style="color: #a0522d;">min-width</span>: var(--footer-buttons-min-width);
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--footer-buttons-bg</span>);
+    <span style="color: #a0522d;">color</span>: var(<span style="color: #a0522d;">--footer-buttons-color</span>);
+    <span style="color: #a0522d;">padding</span>: var(<span style="color: #a0522d;">--footer-buttons-padding</span>);
+    <span style="color: #a0522d;">font-size</span>: var(<span style="color: #a0522d;">--footer-buttons-font-size</span>);
+    <span style="color: #a0522d;">border</span>: var(<span style="color: #a0522d;">--footer-buttons-border</span>);
+    <span style="color: #a0522d;">min-width</span>: var(<span style="color: #a0522d;">--footer-buttons-min-width</span>);
 }
 <span style="color: #0000ff;">.footer-button:hover </span>{
-    <span style="color: #a0522d;">background-color</span>: var(--footer-buttons-bg-hover);
+    <span style="color: #a0522d;">background-color</span>: var(<span style="color: #a0522d;">--footer-buttons-bg-hover</span>);
+}
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9c75a34" class="outline-4">
+<h4 id="org9c75a34">Keyboard shortcut (<code>&lt;kbd&gt;</code>)</h4>
+<div class="outline-text-4" id="text-org9c75a34">
+<p>
+Define a simple css style for the html <code>&lt;kbd&gt;</code> tag.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css" id="orga4136c0"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/css/site.css]</div><span style="color: #0000ff;">kbd </span>{
+    <span style="color: #a0522d;">font-family</span>: DejaVu, Lucida Console, monospace;
+    <span style="color: #a0522d;">display</span>: inline-block;
+    <span style="color: #a0522d;">padding</span>: 1px 4px;
+    <span style="color: #a0522d;">color</span>: <span style="color: #ffffff; background-color: #616161;">#616161</span>;
+    <span style="color: #a0522d;">vertical-align</span>: middle;
+    <span style="color: #a0522d;">background-color</span>: <span style="color: #000000; background-color: #fefefe;">#fefefe</span>;
+    <span style="color: #a0522d;">border</span>: solid 1px <span style="color: #ffffff; background-color: #616161;">#616161</span>;
+    <span style="color: #a0522d;">border-radius</span>: 4px;
+    <span style="color: #a0522d;">box-shadow</span>: inset 0 -1px 2px <span style="color: #000000; background-color: #b0b0b0;">#b0b0b0</span>;
 }
 </pre>
 </div>
@@ -1297,29 +1342,29 @@ defined here:
 </div>
 
 
-<div id="outline-container-org48d049a" class="outline-2">
-<h2 id="org48d049a"><a id="ID-7f96bffb-29f9-4dad-9df3-89f62db9c047"></a>Common HTML</h2>
-<div class="outline-text-2" id="text-org48d049a">
+<div id="outline-container-orgc842d2b" class="outline-2">
+<h2 id="orgc842d2b"><a id="ID-7f96bffb-29f9-4dad-9df3-89f62db9c047"></a>Common HTML</h2>
+<div class="outline-text-2" id="text-orgc842d2b">
 <p>
 The org publishing mechanism supports inclusion of common HTML at the beginning
 and the end of each published page, as described <a href="http://orgmode.org/manual/HTML-preamble-and-postamble.html">here</a>.
 </p>
 </div>
 
-<div id="outline-container-orgf951b0f" class="outline-3">
-<h3 id="html_head"><a id="orgf951b0f"></a><a id="ID-964b9f7f-8357-4c26-a22b-ab2925b139b1"></a>Head</h3>
+<div id="outline-container-org03543a5" class="outline-3">
+<h3 id="html_head"><a id="org03543a5"></a><a id="ID-964b9f7f-8357-4c26-a22b-ab2925b139b1"></a>Head</h3>
 <div class="outline-text-3" id="text-html_head">
 <p>
 In each page's <code>&lt;head&gt;</code> section, a few items are added:
 </p>
 <ul class="org-ul">
 <li>the <a href="#css">CSS file</a> controlling the website appearance,</li>
-<li>some <a href="#coderef-html-head-js-src"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-html-head-js-src');" onmouseout="CodeHighlightOff(this, 'coderef-html-head-js-src');">javascript code</a> used by the <a href="#html_postamble">HTML postamble</a> buttons to link to the org
+<li>some <a href="#coderef-html-head-js-src" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-html-head-js-src');" onmouseout="CodeHighlightOff(this, 'coderef-html-head-js-src');">javascript code</a> used by the <a href="#html_postamble">HTML postamble</a> buttons to link to the org
 file source (and a htmlized version of it).</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-html" id="org9dc2809"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/html/html_head.html]</div>&lt;<span style="color: #0000ff;">link</span> <span style="color: #a0522d;">rel</span>='stylesheet' <span style="color: #a0522d;">href</span>='/blog/css/site.css' <span style="color: #a0522d;">type</span>='text/css'/&gt;
+<pre class="src src-html" id="org79c02ff"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/html/html_head.html]</div>&lt;<span style="color: #0000ff;">link</span> <span style="color: #a0522d;">rel</span>='stylesheet' <span style="color: #a0522d;">href</span>='/blog/css/site.css' <span style="color: #a0522d;">type</span>='text/css'/&gt;
 &lt;<span style="color: #0000ff;">script</span> <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"text/javascript"</span>&gt;
     function rpl(expr, a, b) {
       var i = 0;
@@ -1347,17 +1392,17 @@ file source (and a htmlized version of it).</li>
 </div>
 
 
-<div id="outline-container-orgb67fc80" class="outline-3">
-<h3 id="html_preamble"><a id="orgb67fc80"></a><a id="ID-a279701a-63c3-4ecf-9705-76d277de52a2"></a>Preamble</h3>
+<div id="outline-container-org03576f0" class="outline-3">
+<h3 id="html_preamble"><a id="org03576f0"></a><a id="ID-a279701a-63c3-4ecf-9705-76d277de52a2"></a>Preamble</h3>
 <div class="outline-text-3" id="text-html_preamble">
 <p>
 The preamble contains the navigation bar with links to the website home, posts
-and RSS.  It also adds a <a href="#coderef-html-foreword"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-html-foreword');" onmouseout="CodeHighlightOff(this, 'coderef-html-foreword');">short text</a> before the webpage's content with the file
+and RSS.  It also adds a <a href="#coderef-html-foreword" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-html-foreword');" onmouseout="CodeHighlightOff(this, 'coderef-html-foreword');">short text</a> before the webpage's content with the file
 date and a pointer to access the help menu of the org-infojs script.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-html" id="org4131e08"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/html/html_preamble.html]</div>&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">class</span>='topnav'&gt;
+<pre class="src src-html" id="orgbcc238b"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/html/html_preamble.html]</div>&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">class</span>='topnav'&gt;
   &lt;<span style="color: #0000ff;">ul</span>&gt;
     &lt;<span style="color: #0000ff;">li</span>&gt;&lt;<span style="color: #0000ff;">a</span> <span style="color: #a0522d;">href</span>='/blog/index.html'&gt;Home&lt;/<span style="color: #0000ff;">a</span>&gt;&lt;/<span style="color: #0000ff;">li</span>&gt;
     &lt;<span style="color: #0000ff;">li</span>&gt;&lt;<span style="color: #0000ff;">a</span> <span style="color: #a0522d;">href</span>='/blog/blog.html'&gt;Blog&lt;/<span style="color: #0000ff;">a</span>&gt;&lt;/<span style="color: #0000ff;">li</span>&gt;
@@ -1374,8 +1419,8 @@ date and a pointer to access the help menu of the org-infojs script.
 </div>
 
 
-<div id="outline-container-org39fdb38" class="outline-3">
-<h3 id="html_postamble"><a id="org39fdb38"></a><a id="ID-2e06602c-d7f7-4788-abb9-57f9f1e8efcb"></a>Postamble</h3>
+<div id="outline-container-org301177b" class="outline-3">
+<h3 id="html_postamble"><a id="org301177b"></a><a id="ID-2e06602c-d7f7-4788-abb9-57f9f1e8efcb"></a>Postamble</h3>
 <div class="outline-text-3" id="text-html_postamble">
 <p>
 The postamble is composed of a simple block showing the emacs and org-mode
@@ -1385,15 +1430,13 @@ output published on the website.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-html" id="org6a6e3a3"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/html/html_postamble.html]</div>&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"show_source"</span>&gt;
+<pre class="src src-html" id="org8df9044"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/html/html_postamble.html]</div>&lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">id</span>=<span style="color: #8b2252;">"show_source"</span>&gt;
   &lt;<span style="color: #0000ff;">input</span> <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"button"</span> <span style="color: #a0522d;">class</span>=<span style="color: #8b2252;">"footer-button"</span> <span style="color: #a0522d;">value</span>=<span style="color: #8b2252;">"Show Org source (html)"</span>
          <span style="color: #a0522d;">onClick</span>='show_org_source(true)' /&gt;
   &lt;<span style="color: #0000ff;">input</span> <span style="color: #a0522d;">type</span>=<span style="color: #8b2252;">"button"</span> <span style="color: #a0522d;">class</span>=<span style="color: #8b2252;">"footer-button"</span> <span style="color: #a0522d;">value</span>=<span style="color: #8b2252;">"Show Org source (raw)"</span>
          <span style="color: #a0522d;">onClick</span>='show_org_source()' /&gt;
 &lt;/<span style="color: #0000ff;">div</span>&gt;
 &lt;<span style="color: #0000ff;">div</span> <span style="color: #a0522d;">class</span>='footer'&gt;
-  <span style="color: #b22222;">&lt;!-- </span><span style="color: #b22222;">Copyright 2016 %a (%v HTML).&lt;br&gt; </span><span style="color: #b22222;">--&gt;</span>
-  Copyright 2016 <span style="color: #a0522d;">%a.</span>&lt;<span style="color: #0000ff;">br</span>&gt;
   Last updated <span style="color: #a0522d;">%C.</span> &lt;<span style="color: #0000ff;">br</span>&gt;
   Built with <span style="color: #a0522d;">%c.</span>
 &lt;/<span style="color: #0000ff;">div</span>&gt;
@@ -1404,21 +1447,21 @@ output published on the website.
 </div>
 
 
-<div id="outline-container-org7854d35" class="outline-2">
-<h2 id="index_org"><a id="org7854d35"></a><a id="ID-ee738399-bad2-4b0a-a129-ecb2c4b1e96f"></a>Main page</h2>
+<div id="outline-container-org2312770" class="outline-2">
+<h2 id="index_org"><a id="org2312770"></a><a id="ID-ee738399-bad2-4b0a-a129-ecb2c4b1e96f"></a>Main page</h2>
 <div class="outline-text-2" id="text-index_org">
 <p>
 The main page of the website is minimalist, it lists the most recent blog posts
-by <a href="#coderef-main-inc-sitemap"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-main-inc-sitemap');" onmouseout="CodeHighlightOff(this, 'coderef-main-inc-sitemap');">including</a> the top of the <a href="#sitemap">sitemap</a> and links to the <a href="#page-blog-posts">full list of blog posts</a> and
+by <a href="#coderef-main-inc-sitemap" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-main-inc-sitemap');" onmouseout="CodeHighlightOff(this, 'coderef-main-inc-sitemap');">including</a> the top of the <a href="#sitemap">sitemap</a> and links to the <a href="#page-blog-posts">full list of blog posts</a> and
 the <a href="#sitemap">sitemap</a> itself.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-org" id="orga33c834"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/index.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">misc/</span>
+<pre class="src src-org" id="org2295539"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/index.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">misc/</span>
 <span style="color: #7f7f7f;">#+DATE:</span> <span style="color: #191970;">&lt;2016-10-02 Sun&gt;</span>
 
-Random articles about linux, emacs, science, etc.  This site and the articles
-are built with <span style="color: #3a5fcd; text-decoration: underline;"><a href="https://gnu.org/s/emacs">emacs</a></span> and
+Random articles about linux, emacs, data processing, etc.  This site and the
+articles are built with <span style="color: #3a5fcd; text-decoration: underline;"><a href="https://gnu.org/s/emacs">emacs</a></span> and
 <span style="color: #3a5fcd; text-decoration: underline;"><a href="http://orgmode.org">org-mode</a></span> (using
 <span style="color: #3a5fcd; text-decoration: underline;"><a href="http://orgmode.org/worg/code/org-info-js">org-js</a></span>).
 
@@ -1435,15 +1478,15 @@ are built with <span style="color: #3a5fcd; text-decoration: underline;"><a href
 </div>
 
 
-<div id="outline-container-org61c5f7e" class="outline-2">
-<h2 id="page-blog-posts"><a id="org61c5f7e"></a><a id="ID-58d69e17-37cc-4c12-a1ed-56afd060bdc5"></a>Blog page</h2>
+<div id="outline-container-orgf3a8f1f" class="outline-2">
+<h2 id="page-blog-posts"><a id="orgf3a8f1f"></a><a id="ID-58d69e17-37cc-4c12-a1ed-56afd060bdc5"></a>Blog page</h2>
 <div class="outline-text-2" id="text-page-blog-posts">
 <p>
 The blog page simply lists all the posts using the <a href="#sitemap">sitemap</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-org" id="org01b18ab"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/blog.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">Blog posts</span>
+<pre class="src src-org" id="org6dd3ed0"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/blog.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">Blog posts</span>
 
 All the blog posts:
 
@@ -1454,8 +1497,8 @@ All the blog posts:
 </div>
 
 
-<div id="outline-container-org382704a" class="outline-2">
-<h2 id="sec-org-setup"><a id="org382704a"></a><a id="ID-a26c93a0-2ff5-4993-8d04-2afe280702f4"></a>Org header</h2>
+<div id="outline-container-org8e2a4b0" class="outline-2">
+<h2 id="sec-org-setup"><a id="org8e2a4b0"></a><a id="ID-a26c93a0-2ff5-4993-8d04-2afe280702f4"></a>Org header</h2>
 <div class="outline-text-2" id="text-sec-org-setup">
 <p>
 The <code>setup.org</code> file contains default headers added to the top of each org file
@@ -1472,19 +1515,37 @@ file and use of <code>org-detangle</code>,</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-org" id="org23de425"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/setup.org]</div><span style="color: #b22222;">#+INFOJS_OPT: toc:t tdepth:2 view:showall ftoc:t path:/blog/js/org-info.js</span>
-<span style="color: #b22222;">#+PROPERTY: header-args+ :comments link :eval never</span>
+<pre class="src src-org" id="org3bf56f6"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/setup.org]</div><span style="color: #b22222;">#+INFOJS_OPT: toc:t tdepth:2 view:showall ftoc:t path:/blog/js/org-info.js</span>
+<span style="color: #b22222;">#+PROPERTY: header-args :eval never</span>
+<span style="color: #b22222;">#+PROPERTY: header-args+ :comments link</span>
 <span style="color: #b22222;">#+STARTUP: nohideblocks</span>
 <span style="color: #b22222;">#+MACRO: tt \nbsp{}</span>
+<span style="color: #b22222;">#+MACRO: kbd call_el-common-kbd[:eval yes :results value raw :exports results]($1)</span>
+</pre>
+</div>
+
+<p>
+Along with header specifications, common source blocks are also included in each
+file via the <code>source-blocks.org</code> file.
+</p>
+<div class="org-src-container">
+<pre class="src src-org" id="orge7b6df0"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[org/source-blocks.org]</div><span style="color: #b22222;">#+NAME: el-common-kbd</span>
+<span style="color: #b22222;">#+BEGIN_SRC emacs-lisp :var x="" :exports none</span>
+<span style="color: #7f7f7f;">(format </span><span style="color: #7f7f7f;">"@@html:%s@@"</span>
+<span style="color: #7f7f7f;">        (mapconcat</span>
+<span style="color: #7f7f7f;">         (</span><span style="color: #7f7f7f;">lambda</span><span style="color: #7f7f7f;"> (el)</span>
+<span style="color: #7f7f7f;">           (format </span><span style="color: #7f7f7f;">"&lt;kbd&gt;%s&lt;/kbd&gt;"</span><span style="color: #7f7f7f;"> el))</span>
+<span style="color: #7f7f7f;">         (split-string x </span><span style="color: #7f7f7f;">" "</span><span style="color: #7f7f7f;">) </span><span style="color: #7f7f7f;">" "</span><span style="color: #7f7f7f;">))</span>
+<span style="color: #b22222;">#+END_SRC</span>
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org483d523" class="outline-2">
-<h2 id="org483d523">Emacs setup</h2>
-<div class="outline-text-2" id="text-org483d523">
+<div id="outline-container-org7ca6b2f" class="outline-2">
+<h2 id="org7ca6b2f">Emacs setup</h2>
+<div class="outline-text-2" id="text-org7ca6b2f">
 <p>
 This section contains the emacs-lisp backend code used to produce the website
 from the set of source org files.  While the org-publish mechanism handles most
@@ -1497,15 +1558,15 @@ loaded from the emacs setup file (using <code>(require 'my-website)</code>).
 </p>
 </div>
 
-<div id="outline-container-orga97723b" class="outline-3">
-<h3 id="orga97723b">Header</h3>
-<div class="outline-text-3" id="text-orga97723b">
+<div id="outline-container-org159373a" class="outline-3">
+<h3 id="org159373a">Header</h3>
+<div class="outline-text-3" id="text-org159373a">
 <p>
 This first section creates the header for the <code>my-website.el</code> file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org937fe98"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-website.el --- Personal website configuration</span>
+<pre class="src src-emacs-lisp" id="org28c4de3"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-website.el --- Personal website configuration</span>
 
 <span style="color: #b22222;">;;; </span><span style="color: #b22222;">Commentary:</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Defines functions for publishing a static website.  This file was produced</span>
@@ -1519,58 +1580,52 @@ This first section creates the header for the <code>my-website.el</code> file.
 </div>
 
 
-<div id="outline-container-org477e356" class="outline-3">
-<h3 id="sitemap"><a id="org477e356"></a>Sitemap</h3>
+<div id="outline-container-org564dddf" class="outline-3">
+<h3 id="sitemap"><a id="org564dddf"></a>Sitemap</h3>
 <div class="outline-text-3" id="text-sitemap">
 <p>
 The sitemap is used here to provide an automatically updated list of blog posts.
-The current version requires a relatively recent version of org-mode (more
-specifically, this website is built using the org-mode <code>wip-sitemap</code> branch
-revision 40120a8).
 </p>
 
 <p>
 The idea is to generate a <code>sitemap.org</code> file which contains a subtree for blog
 posts, sorted by date (most recent first).  Then, the org-mode <code>#+INCLUDE</code>
 directive is used to display the blog posts (see the <a href="http://orgmode.org/manual/Include-files.html">documentation</a>) on any page.
-A list of the last 5 posts is shown on the <a href="#index_org">main page</a> and a full list is included
-in the <a href="#page-blog-posts">blog page</a>.  This keeps lists of posts up-to-date.
+A list of the 5 most recent posts is shown on the <a href="#index_org">main page</a> and a full list is
+included in the <a href="#page-blog-posts">blog page</a>.  This keeps lists of posts up-to-date.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org0a618c1"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-publish-org-sitemap</span> (title list)
+<pre class="src src-emacs-lisp" id="org29c95c0"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-publish-org-sitemap</span> (title list)
   <span style="color: #8b2252;">"Sitemap generation function."</span>
   (concat <span style="color: #8b2252;">"#+TITLE: Sitemap\n\n"</span>
           (org-list-to-subtree list)))
 
-(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-publish-org-sitemap-format</span> (entry root style)
-  (<span style="color: #a020f0;">if</span> (directory-name-p entry)
-      (file-name-nondirectory (directory-file-name entry))
-    (format
-     <span style="color: #8b2252;">"[[file:%s][%s%s]]"</span>
-     (file-relative-name entry root)
-     (<span style="color: #a020f0;">let</span> ((date
-            (format-time-string <span style="color: #8b2252;">"%Y-%m-%d"</span>
-                                (org-publish-find-date entry))))
-       (<span style="color: #a020f0;">if</span> (or (equal date <span style="color: #8b2252;">""</span>)
-               (not (string-match
-                     <span style="color: #8b2252;">"posts/"</span>
-                     (file-relative-name entry root))))
-           <span style="color: #8b2252;">""</span> (format <span style="color: #8b2252;">"(%s) "</span> date)))
-     (org-publish-find-title entry))))
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-publish-org-sitemap-format</span> (entry style project)
+  <span style="color: #8b2252;">"Custom sitemap entry formatting: add date"</span>
+  (<span style="color: #a020f0;">cond</span> ((not (directory-name-p entry))
+         (format <span style="color: #8b2252;">"[[file:%s][(%s) %s]]"</span>
+                 entry
+                 (format-time-string <span style="color: #8b2252;">"%Y-%m-%d"</span>
+                                     (org-publish-find-date entry project))
+                 (org-publish-find-title entry project)))
+        ((eq style 'tree)
+         <span style="color: #b22222;">;; </span><span style="color: #b22222;">Return only last subdir.</span>
+         (file-name-nondirectory (directory-file-name entry)))
+        (t entry)))
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orge2bb566" class="outline-3">
-<h3 id="rss"><a id="orge2bb566"></a>RSS</h3>
+<div id="outline-container-org7d50202" class="outline-3">
+<h3 id="rss"><a id="org7d50202"></a>RSS</h3>
 <div class="outline-text-3" id="text-rss">
 <p>
 A simple RSS feed is also created using <code>ox-rss</code>.  It includes the first section
 of the document as feed content (extracted using the
- <a href="#coderef-func-get-paragraph"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-func-get-paragraph');" onmouseout="CodeHighlightOff(this, 'coderef-func-get-paragraph');"><code>™/org-get-first-paragraph</code> function</a>).
+ <a href="#coderef-func-get-paragraph" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-func-get-paragraph');" onmouseout="CodeHighlightOff(this, 'coderef-func-get-paragraph');"><code>™/org-get-first-paragraph</code> function</a>).
 The RSS feed is also limited to the latest 30 entries.
 </p>
 
@@ -1580,7 +1635,7 @@ sufficient for my simple use.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org75b8b70"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span id="coderef-func-get-paragraph" class="coderef-off">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-get-first-paragraph</span> (file)</span>
+<pre class="src src-emacs-lisp" id="org1e14df0"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span id="coderef-func-get-paragraph" class="coderef-off">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-get-first-paragraph</span> (file)</span>
   <span style="color: #8b2252;">"Get string content of first paragraph of file."</span>
   (<span style="color: #a020f0;">with-temp-buffer</span>
     (insert-file-contents file)
@@ -1629,16 +1684,16 @@ sufficient for my simple use.
 </div>
 
 
-<div id="outline-container-orgf62bad7" class="outline-3">
-<h3 id="orgf62bad7">Mathjax path</h3>
-<div class="outline-text-3" id="text-orgf62bad7">
+<div id="outline-container-org693d4c9" class="outline-3">
+<h3 id="org693d4c9">Mathjax path</h3>
+<div class="outline-text-3" id="text-org693d4c9">
 <p>
 In order to use the website on secured connections (<code>https</code>), the <code>https</code>
 version of the mathjax library is loaded.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgbd42ed5"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Use https for mathjax</span>
+<pre class="src src-emacs-lisp" id="org38e35cc"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Use https for mathjax</span>
 (setcdr
  (assq 'path org-html-mathjax-options)
  '(<span style="color: #8b2252;">"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"</span>))
@@ -1648,13 +1703,13 @@ version of the mathjax library is loaded.
 </div>
 
 
-<div id="outline-container-org47332d8" class="outline-3">
-<h3 id="org47332d8">Custom backend</h3>
-<div class="outline-text-3" id="text-org47332d8">
+<div id="outline-container-org697dbb3" class="outline-3">
+<h3 id="org697dbb3">Custom backend</h3>
+<div class="outline-text-3" id="text-org697dbb3">
 <p>
 The backend used for exporting org files to HTML is derived from the builtin
 <code>html</code> backend, adding one functionality: the name of the tangle file for each
-for block is shown in the block, as an overlay.
+source block is shown in the block, as an overlay.
 </p>
 
 <p>
@@ -1668,18 +1723,18 @@ it seems to work on most browsers, so it will do for now.
 </div>
 
 
-<div id="outline-container-org94b79dd" class="outline-4">
-<h4 id="org94b79dd">Preprocess buffer</h4>
-<div class="outline-text-4" id="text-org94b79dd">
+<div id="outline-container-org70ab803" class="outline-4">
+<h4 id="org70ab803">Preprocess buffer</h4>
+<div class="outline-text-4" id="text-org70ab803">
 <p>
 The <code>™/org-export-collect-tangle</code> function is responsible for collecting source
 blocks for tangling and saving the output filename in the cache.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgb7a63ca"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">&#8482;/org-tangle-list-cache</span> nil)
+<pre class="src src-emacs-lisp" id="org0f8d0c2"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">&#8482;/org-tangle-list-cache</span> nil)
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-export-collect-tangle</span> (backend)
-  (setq &#8482;/org-tangle-list-cache nil)
+  (<span style="color: #a020f0;">setq</span> &#8482;/org-tangle-list-cache nil)
   (<span style="color: #a020f0;">when</span> (equal backend '&#8482;/html)
     (<span style="color: #a020f0;">save-excursion</span>
       (<span style="color: #a020f0;">save-restriction</span>
@@ -1702,19 +1757,19 @@ un-modified input buffer.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgb7d6ef3"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(add-hook 'org-export-before-processing-hook '&#8482;/org-export-collect-tangle)
+<pre class="src src-emacs-lisp" id="org33fe2f6"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(add-hook 'org-export-before-processing-hook '&#8482;/org-export-collect-tangle)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org1ea75b0" class="outline-4">
-<h4 id="src-block-tangle"><a id="org1ea75b0"></a>Source block processing</h4>
+<div id="outline-container-orgf50fcfc" class="outline-4">
+<h4 id="src-block-tangle"><a id="orgf50fcfc"></a>Source block processing</h4>
 <div class="outline-text-4" id="text-src-block-tangle">
 <p>
 The derived backend modifies the source block handling function by inserting the
-name of the tangled file.  The regular <code>html</code> exporter is first used to <a href="#coderef-proc-src-html"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-proc-src-html');" onmouseout="CodeHighlightOff(this, 'coderef-proc-src-html');">produce
+name of the tangled file.  The regular <code>html</code> exporter is first used to <a href="#coderef-proc-src-html" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-proc-src-html');" onmouseout="CodeHighlightOff(this, 'coderef-proc-src-html');">produce
 the html code for the source block</a> (including syntax highlighting).  The html
 output is then modified by inserting a <code>&lt;div&gt;</code> block, fixed at the bottom right
 of the source block.  The CSS class <code>src-label</code> is added to the div block to
@@ -1722,7 +1777,7 @@ allow for customization of the appearance.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgb036172"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/html-src-block</span> (src-block contents info)
+<pre class="src src-emacs-lisp" id="org738e82c"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/html-src-block</span> (src-block contents info)
   <span style="color: #8b2252;">"Transcode a SRC-BLOCK element from Org to HTML.</span>
 <span style="color: #8b2252;">CONTENTS is nil.  INFO is a plist used as a communication</span>
 <span style="color: #8b2252;">  channel.  Add name of tangle file to source block (this</span>
@@ -1733,20 +1788,18 @@ allow for customization of the appearance.
           (<span style="color: #a020f0;">when</span> &#8482;/org-tangle-list-cache
             (cdr (assoc src-block-name &#8482;/org-tangle-list-cache))))
 <span id="coderef-proc-src-html" class="coderef-off">         (export-out (org-export-with-backend</span>
-                      'html src-block contents info))
-         )
-    (<span style="color: #a020f0;">when</span> (and src-block-tangle (&gt; (length src-block-tangle) 0)
+                      'html src-block contents info)))
+    (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> src-block-tangle (&gt; (length src-block-tangle) 0)
                (not (string= src-block-tangle <span style="color: #8b2252;">"no"</span>)))
       (<span style="color: #a020f0;">let</span> ((src-start-pat <span style="color: #8b2252;">"</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">(</span><span style="color: #8b2252;">&lt;pre class=\"src src-[</span><span style="color: #8b2252;">^</span><span style="color: #8b2252;">&gt;]+&gt;</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">)</span><span style="color: #8b2252;">"</span>))
-        (setq export-out
+        (<span style="color: #a020f0;">setq</span> export-out
               (replace-regexp-in-string
                src-start-pat
                (concat <span style="color: #8b2252;">"\\1&lt;div style=\"position: absolute; bottom: 0;"</span>
                        <span style="color: #8b2252;">" right: 0; text-align:right;\" class=\"src-label\"&gt;["</span>
-                       src-block-tangle <span style="color: #8b2252;">"]&lt;/div&gt;"</span>) export-out))))
-      export-out
-    )
-  )
+                       src-block-tangle <span style="color: #8b2252;">"]&lt;/div&gt;"</span>)
+               export-out))))
+      export-out))
 </pre>
 </div>
 
@@ -1756,7 +1809,7 @@ for source blocks.  Everything else is handled by the regular <code>html</code> 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgbb666e2"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(org-export-define-derived-backend '&#8482;/html 'html
+<pre class="src src-emacs-lisp" id="org7fe6ddb"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(org-export-define-derived-backend '&#8482;/html 'html
   <span style="color: #483d8b;">:translate-alist</span> '((src-block . &#8482;/html-src-block)))
 </pre>
 </div>
@@ -1765,9 +1818,9 @@ for source blocks.  Everything else is handled by the regular <code>html</code> 
 </div>
 
 
-<div id="outline-container-org1bc6dfe" class="outline-3">
-<h3 id="org1bc6dfe">Publishing function</h3>
-<div class="outline-text-3" id="text-org1bc6dfe">
+<div id="outline-container-org79b77c0" class="outline-3">
+<h3 id="org79b77c0">Publishing function</h3>
+<div class="outline-text-3" id="text-org79b77c0">
 <p>
 A simple wrapper function is created to export to the custom backend.  It is
 almost identical to <code>org-html-publish-to-html</code> with the exception of the actual
@@ -1775,7 +1828,7 @@ backend used.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org2f6cc60"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-html-publish-to-&#8482;-html</span> (plist filename pub-dir)
+<pre class="src src-emacs-lisp" id="org5aafb26"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-html-publish-to-&#8482;-html</span> (plist filename pub-dir)
   <span style="color: #8b2252;">"Publish an org file to HTML.</span>
 
 <span style="color: #8b2252;">FILENAME is the filename of the Org file to be published.  PLIST</span>
@@ -1784,7 +1837,7 @@ backend used.
 
 <span style="color: #8b2252;">Return output file name."</span>
   (org-publish-org-to '&#8482;/html filename
-              (concat <span style="color: #8b2252;">"."</span> (or (plist-get plist <span style="color: #483d8b;">:html-extension</span>)
+              (concat <span style="color: #8b2252;">"."</span> (<span style="color: #a020f0;">or</span> (plist-get plist <span style="color: #483d8b;">:html-extension</span>)
                       org-html-extension
                       <span style="color: #8b2252;">"html"</span>))
               plist pub-dir))
@@ -1794,9 +1847,9 @@ backend used.
 </div>
 
 
-<div id="outline-container-org60198f5" class="outline-3">
-<h3 id="org60198f5">Org-publishing setup</h3>
-<div class="outline-text-3" id="text-org60198f5">
+<div id="outline-container-org4b72072" class="outline-3">
+<h3 id="org4b72072">Org-publishing setup</h3>
+<div class="outline-text-3" id="text-org4b72072">
 <p>
 The publishing configuration is set via the <code>org-publish-project-alist</code>
 variable.  The following function returns a list of project properties to use
@@ -1805,7 +1858,7 @@ with <code>org-publish-project-alist</code>.
 
 <p>
 It relies on the <code>™/get-perso</code> utility to get the root folder
-(line&nbsp;<a href="#coderef-root-perso"class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-root-perso');" onmouseout="CodeHighlightOff(this, 'coderef-root-perso');">5</a>).  This can be replaced by a full path to the website
+(line&nbsp;<a href="#coderef-root-perso" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-root-perso');" onmouseout="CodeHighlightOff(this, 'coderef-root-perso');">5</a>).  This can be replaced by a full path to the website
 root folder.
 </p>
 
@@ -1833,7 +1886,7 @@ projects.</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org209cc79"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Get project settings</span>
+<pre class="src src-emacs-lisp" id="org2cc57b3"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Get project settings</span>
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/get-publish-project-spec</span> ()
   <span style="color: #8b2252;">"Return project settings for use with `</span><span style="color: #8b2252;">org-publish-project-alist</span><span style="color: #8b2252;">'."</span>
   (<span style="color: #a020f0;">let*</span> ((website-root (file-name-as-directory
@@ -1945,8 +1998,8 @@ projects.</li>
 </div>
 
 
-<div id="outline-container-org348e0e3" class="outline-3">
-<h3 id="el-publish-wrapper"><a id="org348e0e3"></a>Publishing wrapper function</h3>
+<div id="outline-container-org9d65084" class="outline-3">
+<h3 id="el-publish-wrapper"><a id="org9d65084"></a>Publishing wrapper function</h3>
 <div class="outline-text-3" id="text-el-publish-wrapper">
 <p>
 The <code>™/publish-website</code> function is the entry point to generate the website
@@ -1961,11 +2014,11 @@ forced: <code>(™/publish-website "website" t)</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org335b770"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">org-publish for website</span>
+<pre class="src src-emacs-lisp" id="org4347fdd"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">org-publish for website</span>
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/publish-website</span> (<span style="color: #228b22;">&amp;optional</span> project force)
   <span style="color: #8b2252;">"Publish personal website."</span>
-  (interactive)
-  (<span style="color: #a020f0;">unless</span> project (setq project <span style="color: #8b2252;">"website"</span>))
+  (<span style="color: #a020f0;">interactive</span>)
+  (<span style="color: #a020f0;">unless</span> project (<span style="color: #a020f0;">setq</span> project <span style="color: #8b2252;">"website"</span>))
   (<span style="color: #a020f0;">let</span> ((org-publish-project-alist (&#8482;/get-publish-project-spec))
         (org-export-date-timestamp-format <span style="color: #8b2252;">"%Y-%m-%d"</span>)
         (org-todo-keywords '((sequence <span style="color: #8b2252;">"TODO"</span> <span style="color: #8b2252;">"REVIEW"</span> <span style="color: #8b2252;">"|"</span>
@@ -1978,8 +2031,8 @@ forced: <code>(™/publish-website "website" t)</code>.
 
 
 
-<div id="outline-container-orgcc1f737" class="outline-3">
-<h3 id="el-push-to-blog"><a id="orgcc1f737"></a>Push org-file to blog</h3>
+<div id="outline-container-orge86dcbf" class="outline-3">
+<h3 id="el-push-to-blog"><a id="orge86dcbf"></a>Push org-file to blog</h3>
 <div class="outline-text-3" id="text-el-push-to-blog">
 <p>
 The mechanism to publish new posts uses the <code>™/push-to-blog</code> function to convert
@@ -1998,7 +2051,7 @@ the formatted output filename (e.g. <code>YYYY-MM-DD-Post_title/</code>),</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org55a32d3"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Push to blog</span>
+<pre class="src src-emacs-lisp" id="org66a4b1d"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Push to blog</span>
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/push-to-blog</span> (org-file)
   <span style="color: #8b2252;">"Add ORG-FILE to personal blog."</span>
   (<span style="color: #a020f0;">let*</span> ((blog-dir (concat
@@ -2016,7 +2069,7 @@ the formatted output filename (e.g. <code>YYYY-MM-DD-Post_title/</code>),</li>
          out-file
          (org-inhibit-startup t)
          (visiting (find-buffer-visiting org-file))
-         (buffer (or visiting (find-file-noselect org-file)))
+         (buffer (<span style="color: #a020f0;">or</span> visiting (find-file-noselect org-file)))
          (org-tree (<span style="color: #a020f0;">with-current-buffer</span> buffer
                      (org-element-parse-buffer))))
     (<span style="color: #a020f0;">let</span> (setupfile-added-p)
@@ -2027,29 +2080,33 @@ the formatted output filename (e.g. <code>YYYY-MM-DD-Post_title/</code>),</li>
           (<span style="color: #a020f0;">let</span> ((key (org-element-property <span style="color: #483d8b;">:key</span> r))
                 (value (org-element-property <span style="color: #483d8b;">:value</span> r)))
             (<span style="color: #a020f0;">unless</span> setupfile-added-p
-              (<span style="color: #a020f0;">let</span> ((elt-setup (org-element-copy r)))
+              (<span style="color: #a020f0;">let</span> ((elt-setup (org-element-copy r))
+                    (elt-src-block (org-element-copy r)))
+                (org-element-put-property elt-src-block <span style="color: #483d8b;">:key</span> <span style="color: #8b2252;">"INCLUDE"</span>)
+                (org-element-put-property elt-src-block <span style="color: #483d8b;">:value</span> <span style="color: #8b2252;">"../source-blocks.org"</span>)
+                (org-element-insert-before elt-src-block r)
                 (org-element-put-property elt-setup <span style="color: #483d8b;">:key</span> <span style="color: #8b2252;">"SETUPFILE"</span>)
                 (org-element-put-property elt-setup <span style="color: #483d8b;">:value</span> <span style="color: #8b2252;">"../setup.org"</span>)
                 (org-element-insert-before elt-setup r))
-              (setq setupfile-added-p t))
+              (<span style="color: #a020f0;">setq</span> setupfile-added-p t))
             (<span style="color: #a020f0;">cond</span> ((string= key <span style="color: #8b2252;">"TITLE"</span>)
-                   (setq out-file
+                   (<span style="color: #a020f0;">setq</span> out-file
                          (replace-regexp-in-string <span style="color: #8b2252;">"[[:space:]]+"</span> <span style="color: #8b2252;">"_"</span> value)))
                   ((string= key <span style="color: #8b2252;">"DATE"</span>)
-                   (setq post-date
+                   (<span style="color: #a020f0;">setq</span> post-date
                          (format-time-string
                           <span style="color: #8b2252;">"%Y-%m-%d"</span>
                           (org-time-string-to-time value))))))
-          (and out-file post-date setupfile-added-p))
+          (<span style="color: #a020f0;">and</span> out-file post-date setupfile-added-p))
         nil t)
-      (<span style="color: #a020f0;">when</span> (not (and post-date out-file setupfile-added-p))
+      (<span style="color: #a020f0;">when</span> (not (<span style="color: #a020f0;">and</span> post-date out-file setupfile-added-p))
         (<span style="color: #ff0000; font-weight: bold;">error</span> <span style="color: #8b2252;">"TITLE and DATE must be defined"</span>)))
     <span style="color: #b22222;">;; </span><span style="color: #b22222;">Look for remaining TODO</span>
     (<span style="color: #a020f0;">let</span> ((has-todo nil))
       (org-element-map org-tree 'headline
         (<span style="color: #a020f0;">lambda</span> (r)
-          (setq
-           has-todo (or has-todo
+          (<span style="color: #a020f0;">setq</span>
+           has-todo (<span style="color: #a020f0;">or</span> has-todo
                         (equal 'todo
                                (org-element-property <span style="color: #483d8b;">:todo-type</span> r))))
           has-todo)
@@ -2067,39 +2124,36 @@ the formatted output filename (e.g. <code>YYYY-MM-DD-Post_title/</code>),</li>
                    (link-file-base (file-name-base link-file))
                    (link-file-ext (file-name-extension link-file t))
                    (out-link (concat (file-name-as-directory img-dir)
+                                     link-file-base link-file-ext))
+                   (img-path (concat <span style="color: #8b2252;">"../images/"</span>
+                                     (file-name-as-directory base-fname)
                                      link-file-base link-file-ext)))
               <span style="color: #b22222;">;; </span><span style="color: #b22222;">Copy file</span>
               (mkdir img-dir t)
               (copy-file link-file out-link t)
               <span style="color: #b22222;">;; </span><span style="color: #b22222;">Update link target</span>
-              (org-element-put-property
-               r <span style="color: #483d8b;">:path</span> (concat <span style="color: #8b2252;">"../images/"</span>
-                               (file-name-as-directory base-fname)
-                               link-file-base link-file-ext))))))
+              (org-element-put-property r <span style="color: #483d8b;">:path</span> img-path)
+              (setcar (org-element-contents r) (concat <span style="color: #8b2252;">"file:"</span> img-path))))))
       <span style="color: #b22222;">;; </span><span style="color: #b22222;">Write output</span>
       (<span style="color: #a020f0;">with-current-buffer</span> (find-file out-file-full)
         (erase-buffer)
         (insert (org-element-interpret-data org-tree))
-        (save-buffer)
-        )
-      )
-    )
-  )
+        (save-buffer)))))
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orgbd48fed" class="outline-3">
-<h3 id="orgbd48fed">Footer</h3>
-<div class="outline-text-3" id="text-orgbd48fed">
+<div id="outline-container-org8f64d75" class="outline-3">
+<h3 id="org8f64d75">Footer</h3>
+<div class="outline-text-3" id="text-org8f64d75">
 <p>
 This block closes the <code>my-website.el</code> file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org4bf4b70"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">provide</span> '<span style="color: #008b8b;">my-website</span>)
+<pre class="src src-emacs-lisp" id="org89d6e1b"><div style="position: absolute; bottom: 0; right: 0; text-align:right;" class="src-label">[my-website.el]</div>(<span style="color: #a020f0;">provide</span> '<span style="color: #008b8b;">my-website</span>)
 <span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-website.el ends here</span>
 </pre>
 </div>
@@ -2108,6 +2162,7 @@ This block closes the <code>my-website.el</code> file.
 </div>
 </div>
 <div id="postamble" class="status">
+<!-- [[file:~/dotfiles/emacs/website/website.org::html-postamble][html-postamble]] -->
 <div id="show_source">
   <input type="button" class="footer-button" value="Show Org source (html)"
          onClick='show_org_source(true)' />
@@ -2115,11 +2170,10 @@ This block closes the <code>my-website.el</code> file.
          onClick='show_org_source()' />
 </div>
 <div class='footer'>
-  <!-- Copyright 2016 Thibault Marin (<a href="http://validator.w3.org/check?uri=referer">Validate</a> HTML).<br> -->
-  Copyright 2016 Thibault Marin.<br>
-  Last updated 2016-11-13 Sun 21:43. <br>
-  Built with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 9.0).
+  Last updated 2017-02-16 Thu 23:51. <br>
+  Built with <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 9.0.5).
 </div>
+<!-- html-postamble ends here -->
 </div>
 </body>
 </html>
