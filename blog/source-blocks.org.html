@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.43 in css mode. -->
+<html>
+  <head>
+    <title>source-blocks.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #657b83;
+        background-color: #fdf6e3;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #b22222;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .org-block {
+        /* org-block */
+        color: #7f7f7f;
+      }
+      .org-block-begin-line {
+        /* org-block-begin-line */
+        color: #b22222;
+      }
+      .org-block-end-line {
+        /* org-block-end-line */
+        color: #b22222;
+      }
+      .org-meta-line {
+        /* org-meta-line */
+        color: #b22222;
+      }
+      .string {
+        /* font-lock-string-face */
+        color: #8b2252;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment"># <a href="file:~/dotfiles/emacs/website/website.org::source-blocks-org">source-blocks-org</a></span>
+<span class="org-meta-line">#+NAME: el-common-kbd</span>
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :var x="" :exports none
+</span><span class="org-block">(format </span><span class="string"><span class="org-block">"@@html:%s@@"</span></span><span class="org-block">
+        (mapconcat
+         (</span><span class="keyword"><span class="org-block">lambda</span></span><span class="org-block"> (el)
+           (format </span><span class="string"><span class="org-block">"&lt;kbd&gt;%s&lt;/kbd&gt;"</span></span><span class="org-block"> el))
+         (split-string x </span><span class="string"><span class="org-block">" "</span></span><span class="org-block">) </span><span class="string"><span class="org-block">" "</span></span><span class="org-block">))
+</span><span class="org-block-end-line">#+END_SRC
+</span><span class="comment"># source-blocks-org ends here</span>
+</pre>
+  </body>
+</html>
