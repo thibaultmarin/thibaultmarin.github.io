@@ -234,7 +234,7 @@ convert desktop.png -crop ${</span><span class="variable-name"><span class="org-
 rm desktop.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[08D6EDC63D8589B28E5690A9F8EC86EB84815AB9]: sh-scrot-main</span>
+<span class="org-meta-line">#+RESULTS[08D6...]: sh-scrot-main</span>
 
 
 <span class="org-meta-line">#+NAME: img-desktop-main</span>
@@ -321,8 +321,8 @@ prevented by changing the permissions of the tangled files (see
 <span class="org-link"><a href="http://orgmode.org/manual/tangle_002dmode.html">http://orgmode.org/manual/tangle_002dmode.html</a></span>).  Alternatively, the detangle
 functionality in org-mode can be utilized to merge changes from the lua files
 back to this org file: simply run <span class="org-verbatim">=org-detangle=</span> from the modified lua file and
-changes should be merged back.  This requires the <span class="org-verbatim">=#+PROPERTY: comments link=</span>
-option which is set at the top of this file.
+changes should be merged back.  This requires the <span class="org-verbatim">=#+PROPERTY: header-args
+:comments link=</span> option which is set at the top of this file.
 
 This org file can also be exported to html to produce the documentation.  Note
 that exporting this file (e.g. to HTML) executes some bash scripts (for
@@ -515,7 +515,8 @@ launchbar programs, theme selection, maildir, icons, etc.
 awesome_paths.iconapps_dir = { awesome_paths.icon_dir,
                                </span><span class="string"><span class="org-block">"/usr/share/icons/hicolor/16x16/"</span></span><span class="org-block">,
                                </span><span class="string"><span class="org-block">"/usr/share/icons/gnome/16x16/"</span></span><span class="org-block">,
-                               </span><span class="string"><span class="org-block">"/usr/share/icons/Tango/16x16/"</span></span><span class="org-block"> }
+                               </span><span class="string"><span class="org-block">"/usr/share/icons/Tango/16x16/"</span></span><span class="org-block">,
+                               </span><span class="string"><span class="org-block">"/usr/share/pixmaps/"</span></span><span class="org-block"> }
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -638,7 +639,7 @@ termapps = </span><span class="string"><span class="org-block">"urxvt"</span></s
 </span></span><span class="org-block">editor = </span><span class="builtin"><span class="org-block">os</span></span><span class="org-block">.</span><span class="builtin"><span class="org-block">getenv</span></span><span class="org-block">(</span><span class="string"><span class="org-block">"EDITOR"</span></span><span class="org-block">) </span><span class="keyword"><span class="org-block">or</span></span><span class="org-block"> </span><span class="string"><span class="org-block">"editor"</span></span><span class="org-block">
 editor_cmd = terminal .. </span><span class="string"><span class="org-block">" -e "</span></span><span class="org-block"> .. editor
 internet_browser = </span><span class="string"><span class="org-block">"x-www-browser"</span></span><span class="org-block">
-mail_reader = </span><span class="string"><span class="org-block">"icedove"</span></span><span class="org-block">
+mail_reader = </span><span class="string"><span class="org-block">"thunderbird"</span></span><span class="org-block">
 emacs = </span><span class="string"><span class="org-block">"emacs"</span></span><span class="org-block">
 explorer = </span><span class="string"><span class="org-block">"xdg-open"</span></span><span class="org-block">
 mixer = </span><span class="string"><span class="org-block">"pavucontrol"</span></span><span class="org-block">
@@ -760,7 +761,7 @@ convert desktop-wibox-l.png desktop-wibox-r.png -append desktop-wibox.png
 rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[40E53EF3180380968578090597CEDF0AEF6178EF]: sh-scrot-wibox</span>
+<span class="org-meta-line">#+RESULTS[40E5...]: sh-scrot-wibox</span>
 
 
 
@@ -1098,9 +1099,9 @@ is for my home desktop, which has two screens.  It is only slightly modified
 from the default: a few tags are named instead of numbered and the default
 layout on some tags is customized.
 
-- The first tag on each screen is for email: one for work using icedove and one
-  for my personal email using mu4e (emacs).  These are not started
-  automatically, I have a <span class="org-link"><a href="nil:nil">rule</a></span> to force icedove on the second screen, and I
+- The first tag on each screen is for email: one for work using thunderbird and
+  one for my personal email using mu4e (emacs).  These are not started
+  automatically, I have a <span class="org-link"><a href="nil:nil">rule</a></span> to force thunderbird on the second screen, and I
   manually start mu4e on the desired tag.
 - The second tag on the second screen is used for my resident instances or
   <span class="org-link"><a href="http://newsbeuter.org/">newsbeuter</a></span> (terminal RSS reader) and <span class="org-link"><a href="https://cmus.github.io/">cmus</a></span> (terminal music player).  Both
@@ -1860,7 +1861,7 @@ maildir folders.  The color of the widget text changes from
 present.
 
 Additionally, a right-click on the widget spawns a small menu with options to
-open mail clients (icedove and mu4e).
+open mail clients (thunderbird and mu4e).
 
 <span class="org-meta-line">#+NAME: src-main-mail</span>
 <span class="org-block-begin-line">#+BEGIN_SRC lua
@@ -1894,8 +1895,8 @@ mailhoover:addToWidget(</span><span class="builtin"><span class="org-block">prin
 mailmenu_items = {
    { </span><span class="string"><span class="org-block">"emacs"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () run_or_raise(</span><span class="string"><span class="org-block">"emacs -f mu4e"</span></span><span class="org-block">,
                                        { class = </span><span class="string"><span class="org-block">"Emacs"</span></span><span class="org-block"> }) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block"> },
-   { </span><span class="string"><span class="org-block">"icedove"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () run_or_raise(mail_reader,
-                                         { class = </span><span class="string"><span class="org-block">"Icedove"</span></span><span class="org-block"> }) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block"> }
+   { </span><span class="string"><span class="org-block">"thunderbird"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () run_or_raise(mail_reader,
+                                             { class = </span><span class="string"><span class="org-block">"Thunderbird"</span></span><span class="org-block"> }) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block"> }
 }
 mailmenu = awful.menu.new( { items = mailmenu_items } )
 mailbuttons = awful.util.table.join(
@@ -2161,7 +2162,7 @@ convert desktop.png -crop ${</span><span class="variable-name"><span class="org-
 rm desktop.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[6A446875DD481892F7F83D0F7947D490669A2857]: sh-scrot-cmus-info</span>
+<span class="org-meta-line">#+RESULTS[6A44...]: sh-scrot-cmus-info</span>
 
 <span class="org-meta-line">#+NAME: img-cmus-popup</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 60%</span>
@@ -2398,9 +2399,11 @@ cmus_timer:start()
 </span><span class="comment-delimiter"><span class="org-block">-- </span></span><span class="comment"><span class="org-block">pause on click
 </span></span><span class="org-block">cmusbuttons = awful.util.table.join(
    awful.button({ }, 1, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">() cmus_control(</span><span class="string"><span class="org-block">"play_pause"</span></span><span class="org-block">) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">),
-   awful.button({ }, 3, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">() run_or_raise(termapps ..
-                                                   </span><span class="string"><span class="org-block">" -e cmus"</span></span><span class="org-block">,
-                                                { instance=</span><span class="string"><span class="org-block">"urxvt"</span></span><span class="org-block">} ) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
+   awful.button({ }, 3,
+      </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block">()
+         run_or_raise(termapps .. </span><span class="string"><span class="org-block">" -name cmus -e cmus"</span></span><span class="org-block">,
+                      { instance = </span><span class="string"><span class="org-block">"cmus"</span></span><span class="org-block"> })
+   </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">)
 )
 tb_cmus:buttons(cmusbuttons)
 cmusover_addToWidget(tb_cmus)
@@ -2528,7 +2531,7 @@ Here is the help text for the <span class="org-verbatim">=ttrss-wrapper.py=</spa
 </span></span><span class="org-block">python3 scripts/ttrss-wrapper.py --help || </span><span class="builtin"><span class="org-block">echo</span></span><span class="org-block">
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[b8ddeafb0e559ca8cf4d92efcbc16d7de54a9090]: sh-ttrss-py-usage</span>
+<span class="org-meta-line">#+RESULTS[b8dd...]: sh-ttrss-py-usage</span>
 <span class="org-block-begin-line">#+BEGIN_EXAMPLE
 </span><span class="ATTRLIST">usage: ttrss-wrapper.py [-h] -U URL -u USER [-p PASSWD] [-W TEXT_WIDTH] [-c]
                         [-r]
@@ -2715,8 +2718,8 @@ ttrssmenu_l_items = {
 }
 ttrssmenu_r_items = {
    { </span><span class="string"><span class="org-block">"newsbeuter"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () run_or_raise(
-           termapps .. </span><span class="string"><span class="org-block">" -e newsbeuter"</span></span><span class="org-block">,
-           { instance=</span><span class="string"><span class="org-block">"urxvt"</span></span><span class="org-block">} ) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block"> },
+           termapps .. </span><span class="string"><span class="org-block">" -name newsbeuter -e newsbeuter"</span></span><span class="org-block">,
+           { instance=</span><span class="string"><span class="org-block">"newsbeuter"</span></span><span class="org-block">} ) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block"> },
    { </span><span class="string"><span class="org-block">"liferea"</span></span><span class="org-block">, </span><span class="keyword"><span class="org-block">function</span></span><span class="org-block"> () run_or_raise(
            </span><span class="string"><span class="org-block">"liferea"</span></span><span class="org-block">, { class = </span><span class="string"><span class="org-block">"Liferea"</span></span><span class="org-block"> }) </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block"> }
 }
@@ -4072,7 +4075,7 @@ basic description of rules.
 Only a few simple rules are defined here:
 - Set of few programs as "floating": mplayer, pinentry, gimp.
 - Fix cmus, newsbeuter on the second tag of the second screen.
-- Icedove goes on the first tag of the second screen.
+- Thunderbird goes on the first tag of the second screen.
 - I had issues with <span class="org-verbatim">=ristretto=</span> starting in a maximized state; I am not sure
   whether it is necessary, but I am explicitly disabling the "maximized" option
   here.
@@ -4135,7 +4138,7 @@ Only a few simple rules are defined here:
       properties = { screen = 2, tag = </span><span class="string"><span class="org-block">"2"</span></span><span class="org-block"> } },
     { rule = { instance = </span><span class="string"><span class="org-block">"newsbeuter"</span></span><span class="org-block"> },
       properties = { screen = 2, tag = </span><span class="string"><span class="org-block">"2"</span></span><span class="org-block"> } },
-    { rule = { class = </span><span class="string"><span class="org-block">"Icedove"</span></span><span class="org-block"> },
+    { rule = { class = </span><span class="string"><span class="org-block">"Thunderbird"</span></span><span class="org-block"> },
       properties = { screen = 2, tag = </span><span class="string"><span class="org-block">"@"</span></span><span class="org-block"> } }
     </span><span class="comment-delimiter"><span class="org-block">--</span></span><span class="comment"><span class="org-block">{ rule = { instance = "ristretto" },
 </span></span><span class="org-block">    </span><span class="comment-delimiter"><span class="org-block">--  </span></span><span class="comment"><span class="org-block">properties = { maximized = false } },
@@ -4263,7 +4266,7 @@ icon_finder.__index = icon_finder
       </span><span class="string"><span class="org-block">"special"</span></span><span class="org-block">,
       </span><span class="string"><span class="org-block">"status"</span></span><span class="org-block">
    }
-   </span><span class="builtin"><span class="org-block">self</span></span><span class="org-block">.ext_list = { </span><span class="string"><span class="org-block">"png"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"svg"</span></span><span class="org-block"> }
+   </span><span class="builtin"><span class="org-block">self</span></span><span class="org-block">.ext_list = { </span><span class="string"><span class="org-block">"png"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"svg"</span></span><span class="org-block">, </span><span class="string"><span class="org-block">"xpm"</span></span><span class="org-block"> }
    </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">self</span></span><span class="org-block">
 </span><span class="keyword"><span class="org-block">end</span></span><span class="org-block">
 
@@ -4512,7 +4515,7 @@ convert desktop.png -crop ${</span><span class="variable-name"><span class="org-
 rm desktop.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[D64F1FDD8BA95C0EF4579B0F656F8047DC46F5F5]: sh-scrot-global_prompt-help</span>
+<span class="org-meta-line">#+RESULTS[D64F...]: sh-scrot-global_prompt-help</span>
 
 
 <span class="org-meta-line">#+NAME: img-global_prompt-help</span>
@@ -5235,7 +5238,7 @@ convert desktop.png -crop ${</span><span class="variable-name"><span class="org-
 rm desktop.png -rf
 </span><span class="org-block-end-line">#+END_SRC
 </span>
-<span class="org-meta-line">#+RESULTS[697AAFE023955683CD8753808C2394DEF30198C0]: sh-scrot-confirm_action</span>
+<span class="org-meta-line">#+RESULTS[697A...]: sh-scrot-confirm_action</span>
 
 <span class="org-meta-line">#+NAME: img-confirm_action</span>
 <span class="org-meta-line">#+ATTR_HTML: :width 60%</span>

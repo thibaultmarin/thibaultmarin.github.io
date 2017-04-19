@@ -1,4 +1,4 @@
-# Created 2017-02-16 Thu 23:52
+# Created 2017-04-18 Tue 22:50
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016-10-05
@@ -126,8 +126,8 @@ prevented by changing the permissions of the tangled files (see
 http://orgmode.org/manual/tangle_002dmode.html).  Alternatively, the detangle
 functionality in org-mode can be utilized to merge changes from the lua files
 back to this org file: simply run =org-detangle= from the modified lua file and
-changes should be merged back.  This requires the =#+PROPERTY: comments link=
-option which is set at the top of this file.
+changes should be merged back.  This requires the =#+PROPERTY: header-args
+:comments link= option which is set at the top of this file.
 
 This org file can also be exported to html to produce the documentation.  Note
 that exporting this file (e.g. to HTML) executes some bash scripts (for
@@ -325,7 +325,8 @@ awesome_paths.icon_dir = "/usr/share/icons/oxygen/base/16x16/"
 awesome_paths.iconapps_dir = { awesome_paths.icon_dir,
                                "/usr/share/icons/hicolor/16x16/",
                                "/usr/share/icons/gnome/16x16/",
-                               "/usr/share/icons/Tango/16x16/" }
+                               "/usr/share/icons/Tango/16x16/",
+                               "/usr/share/pixmaps/" }
 #+END_SRC
 
 
@@ -444,7 +445,7 @@ termapps = "urxvt" -- "terminator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 internet_browser = "x-www-browser"
-mail_reader = "icedove"
+mail_reader = "thunderbird"
 emacs = "emacs"
 explorer = "xdg-open"
 mixer = "pavucontrol"
@@ -873,9 +874,9 @@ is for my home desktop, which has two screens.  It is only slightly modified
 from the default: a few tags are named instead of numbered and the default
 layout on some tags is customized.
 
-- The first tag on each screen is for email: one for work using icedove and one
-  for my personal email using mu4e (emacs).  These are not started
-  automatically, I have a [[#rules][rule]] to force icedove on the second screen, and I
+- The first tag on each screen is for email: one for work using thunderbird and
+  one for my personal email using mu4e (emacs).  These are not started
+  automatically, I have a [[#rules][rule]] to force thunderbird on the second screen, and I
   manually start mu4e on the desired tag.
 - The second tag on the second screen is used for my resident instances or
   [[http://newsbeuter.org/][newsbeuter]] (terminal RSS reader) and [[https://cmus.github.io/][cmus]] (terminal music player).  Both
@@ -1595,7 +1596,7 @@ maildir folders.  The color of the widget text changes from
 present.
 
 Additionally, a right-click on the widget spawns a small menu with options to
-open mail clients (icedove and mu4e).
+open mail clients (thunderbird and mu4e).
 
 #+NAME: src-main-mail
 #+BEGIN_SRC lua
@@ -1629,8 +1630,8 @@ mailhoover:addToWidget(print, mailicon, mail_query, 20, mail_colors)
 mailmenu_items = {
    { "emacs", function () run_or_raise("emacs -f mu4e",
                                        { class = "Emacs" }) end },
-   { "icedove", function () run_or_raise(mail_reader,
-                                         { class = "Icedove" }) end }
+   { "thunderbird", function () run_or_raise(mail_reader,
+                                             { class = "Thunderbird" }) end }
 }
 mailmenu = awful.menu.new( { items = mailmenu_items } )
 mailbuttons = awful.util.table.join(
@@ -2088,9 +2089,11 @@ cmus_timer:start()
 -- pause on click
 cmusbuttons = awful.util.table.join(
    awful.button({ }, 1, function() cmus_control("play_pause") end),
-   awful.button({ }, 3, function() run_or_raise(termapps ..
-                                                   " -e cmus",
-                                                { instance="urxvt"} ) end)
+   awful.button({ }, 3,
+      function()
+         run_or_raise(termapps .. " -name cmus -e cmus",
+                      { instance = "cmus" })
+   end)
 )
 tb_cmus:buttons(cmusbuttons)
 cmusover_addToWidget(tb_cmus)
@@ -2367,8 +2370,8 @@ ttrssmenu_l_items = {
 }
 ttrssmenu_r_items = {
    { "newsbeuter", function () run_or_raise(
-           termapps .. " -e newsbeuter",
-           { instance="urxvt"} ) end },
+           termapps .. " -name newsbeuter -e newsbeuter",
+           { instance="newsbeuter"} ) end },
    { "liferea", function () run_or_raise(
            "liferea", { class = "Liferea" }) end }
 }
@@ -3695,7 +3698,7 @@ basic description of rules.
 Only a few simple rules are defined here:
 - Set of few programs as "floating": mplayer, pinentry, gimp.
 - Fix cmus, newsbeuter on the second tag of the second screen.
-- Icedove goes on the first tag of the second screen.
+- Thunderbird goes on the first tag of the second screen.
 - I had issues with =ristretto= starting in a maximized state; I am not sure
   whether it is necessary, but I am explicitly disabling the "maximized" option
   here.
@@ -3758,7 +3761,7 @@ awful.rules.rules = {
       properties = { screen = 2, tag = "2" } },
     { rule = { instance = "newsbeuter" },
       properties = { screen = 2, tag = "2" } },
-    { rule = { class = "Icedove" },
+    { rule = { class = "Thunderbird" },
       properties = { screen = 2, tag = "@" } }
     --{ rule = { instance = "ristretto" },
     --  properties = { maximized = false } },
@@ -3881,7 +3884,7 @@ function icon_finder.new(icondirs_list)
       "special",
       "status"
    }
-   self.ext_list = { "png", "svg" }
+   self.ext_list = { "png", "svg", "xpm" }
    return self
 end
 

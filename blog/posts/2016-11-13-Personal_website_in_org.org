@@ -1,4 +1,4 @@
-# Created 2017-02-16 Thu 23:52
+# Created 2017-04-18 Tue 22:51
 #+OPTIONS: ^:t H:4
 #+TITLE: Personal website in org
 #+DATE: 2016-11-13
@@ -165,6 +165,11 @@ effort for scalar variables at least).
     /* --- */
     --rss-img: url("/blog/images/feed-icon-28x28.png");
 
+    /* Tables */
+    /* ------ */
+    --tbl-border-color: #4E4E4F;
+    --tbl-border-size: 1px;
+
     /* Org-js */
     /* ------ */
     --org-js-console-bg: var(--footer-buttons-bg);
@@ -186,6 +191,7 @@ effort for scalar variables at least).
 
     /* Links */
     --font-a-color: navy;
+    --font-a-coderef-color: #7082BC;
 
     /* Color scheme */
     /* ------------ */
@@ -450,7 +456,6 @@ and text alignment.
 
 *** Position
 
-
 **** Medium and large screen
 For medium and large screens, the navigation bar is fixed on the top left
 corner.
@@ -549,6 +554,20 @@ pre.src.src.src-lua {
 /* Source block label */
 .src-label {
     color: darkgray;
+}
+#+END_SRC
+
+
+** Tables
+
+The following defines the style of HTML tables:
+
+#+NAME: style-css-src-block
+#+BEGIN_SRC css
+/* HTML tables */
+table, th, td {
+    border-color: var(--tbl-border-color);
+    border: solid var(--tbl-border-size);
 }
 #+END_SRC
 
@@ -686,11 +705,14 @@ a {
     text-decoration: none;
     color: var(--font-a-color);
 }
+
+a.coderef {
+    color: var(--font-a-coderef-color);
+}
 #+END_SRC
 
 
 ** HTML tags
-
 
 *** Buttons
 The [[#html_postamble][HTML postamble]] uses buttons to view the page org source; their appearance is
@@ -725,14 +747,15 @@ Define a simple css style for the html ~<kbd>~ tag.
 
 kbd {
     font-family: DejaVu, Lucida Console, monospace;
+    font-size: 85%;
     display: inline-block;
-    padding: 1px 4px;
+    padding: 0.5px 5px;
     color: #616161;
     vertical-align: middle;
     background-color: #fefefe;
     border: solid 1px #616161;
     border-radius: 4px;
-    box-shadow: inset 0 -1px 2px #b0b0b0;
+    box-shadow: 0 0 12px 2px #dbdbdb inset, 0 4px 1px -2px #dbdbdb;
 }
 #+END_SRC
 
@@ -879,6 +902,7 @@ performs the following:
 
 Along with header specifications, common source blocks are also included in each
 file via the =source-blocks.org= file.
+
 #+NAME: source-blocks-org
 #+HEADER: :tangle org/source-blocks.org
 #+BEGIN_SRC org
@@ -888,7 +912,7 @@ file via the =source-blocks.org= file.
         (mapconcat
          (lambda (el)
            (format "<kbd>%s</kbd>" el))
-         (split-string x " ") " "))
+         (split-string x " ") "&nbsp;"))
 ,#+END_SRC
 #+END_SRC
 
@@ -984,6 +1008,7 @@ sufficient for my simple use.
       (erase-buffer)
       (insert "#+TITLE: misc/ blog RSS\n")
       (insert "#+SETUPFILE: setup.org\n")
+      (insert "#+INCLUDE: source-blocks.org\n")
       ;; The following does not seem to work
       (insert (concat
                "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\""
@@ -994,7 +1019,7 @@ sufficient for my simple use.
              (files (subseq files-all 0 (min (length files-all) 30))))
         (dolist (post files)
           (let* ((post-file (concat (file-name-as-directory postsdir) post))
-                 (post-title (org-publish-find-title post-file))
+                 (post-title (org-publish-find-title post-file plist))
                  (preview-str (™/org-get-first-paragraph post-file)))
             (insert (concat "* [[file:posts/" post "][" post-title "]]\n\n"))
             (insert "*")
@@ -1045,13 +1070,15 @@ blocks for tangling and saving the output filename in the cache.
 #+BEGIN_SRC emacs-lisp
 (defvar ™/org-tangle-list-cache nil)
 (defun ™/org-export-collect-tangle (backend)
-  (setq ™/org-tangle-list-cache nil)
+  ;; Remove hook to ensure it does not get called recursively
+  (remove-hook 'org-export-before-processing-hook
+               '™/org-export-collect-tangle)
   (when (equal backend '™/html)
+    (setq ™/org-tangle-list-cache nil)
     (save-excursion
       (save-restriction
         (widen)
         (show-all)
-        (org-babel-execute-buffer)
         (let ((src-blocks (org-babel-tangle-collect-blocks)))
           (dolist (src-lang src-blocks)
             (dolist (src-block (cdr src-lang))
@@ -1061,22 +1088,14 @@ blocks for tangling and saving the output filename in the cache.
                              `(,src-block-name . ,src-block-tangle))))))))))
 #+END_SRC
 
-The function is added as a preprocessing hook, since this hook is run on the
-un-modified input buffer.
-
-#+NAME: elisp-html-tangle-preproc-hook
-#+BEGIN_SRC emacs-lisp
-(add-hook 'org-export-before-processing-hook '™/org-export-collect-tangle)
-#+END_SRC
-
 
 *** Source block processing
 The derived backend modifies the source block handling function by inserting the
 name of the tangled file.  The regular =html= exporter is first used to [[(proc-src-html)][produce
 the html code for the source block]] (including syntax highlighting).  The html
-output is then modified by inserting a =<div>= block, fixed at the bottom right
-of the source block.  The CSS class =src-label= is added to the div block to
-allow for customization of the appearance.
+output is then modified by inserting a =<div>= block, fixed at the top right
+corner of the source block.  The CSS class =src-label= is added to the div block
+to allow for customization of the appearance.
 
 #+NAME: elisp-html-tangle-process
 #+BEGIN_SRC emacs-lisp -r
@@ -1094,14 +1113,17 @@ CONTENTS is nil.  INFO is a plist used as a communication
                       'html src-block contents info)))
     (when (and src-block-tangle (> (length src-block-tangle) 0)
                (not (string= src-block-tangle "no")))
-      (let ((src-start-pat "\\(<pre class=\"src src-[^>]+>\\)"))
+      (let ((src-start-pat "<pre>\\(<code class=\"src src-[^>]+>\\)")
+            (src-end-pat "</code>")
+            (div-lbl (concat "<div style=\"position: absolute; top: 0;"
+                             " right: 0; text-align: right;\""
+                             " class=\"src-label\">["
+                             src-block-tangle "]</div>")))
         (setq export-out
               (replace-regexp-in-string
-               src-start-pat
-               (concat "\\1<div style=\"position: absolute; bottom: 0;"
-                       " right: 0; text-align:right;\" class=\"src-label\">["
-                       src-block-tangle "]</div>")
-               export-out))))
+               src-start-pat "<pre class=\"src\">\\1"
+               (replace-regexp-in-string
+                src-end-pat (concat div-lbl "</code>") export-out)))))
       export-out))
 #+END_SRC
 
@@ -1131,11 +1153,17 @@ is the property list for the given project.  PUB-DIR is the
 publishing directory.
 
 Return output file name."
-  (org-publish-org-to '™/html filename
-		      (concat "." (or (plist-get plist :html-extension)
-				      org-html-extension
-				      "html"))
-		      plist pub-dir))
+  (add-hook 'org-export-before-processing-hook
+            '™/org-export-collect-tangle)
+  (let ((res
+         (org-publish-org-to '™/html filename
+                             (concat "." (or (plist-get plist :html-extension)
+                                             org-html-extension
+                                             "html"))
+                             plist pub-dir)))
+    (remove-hook 'org-export-before-processing-hook
+                 '™/org-export-collect-tangle)
+    res))
 #+END_SRC
 
 
@@ -1312,8 +1340,8 @@ a standalone org file into a post.  The function performs the following:
 - format the output filename with the post date preceding the title
   (e.g. =YYYY-MM-DD-Post_title.org=),
 - search for TODO items, exit if any is found,
-- moves file links (images) to a subfolder of the =org/images/= folder named after
-  the formatted output filename (e.g. =YYYY-MM-DD-Post_title/=),
+- move file links (images) to a subfolder of the =org/images/= folder named
+  after the formatted output filename (e.g. =YYYY-MM-DD-Post_title/=),
 - modify links to files to point to the copy location,
 - finally, save the modified org file to the =org/posts/= folder.
 

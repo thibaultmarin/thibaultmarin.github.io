@@ -52,6 +52,11 @@
     /* --- */
     --rss-img: url("/blog/images/feed-icon-28x28.png");
 
+    /* Tables */
+    /* ------ */
+    --tbl-border-color: #4E4E4F;
+    --tbl-border-size: 1px;
+
     /* Org-js */
     /* ------ */
     --org-js-console-bg: var(--footer-buttons-bg);
@@ -73,6 +78,7 @@
 
     /* Links */
     --font-a-color: navy;
+    --font-a-coderef-color: #7082BC;
 
     /* Color scheme */
     /* ------------ */
@@ -339,6 +345,14 @@ pre.src.src.src-lua {
 }
 /* style-css-src-block ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-src-block][style-css-src-block]] */
+/* HTML tables */
+table, th, td {
+    border-color: var(--tbl-border-color);
+    border: solid var(--tbl-border-size);
+}
+/* style-css-src-block ends here */
+
 /* [[file:~/dotfiles/emacs/website/website.org::style-css-org-js][style-css-org-js]] */
 #org-info-js_console-container {
     bottom: 0;
@@ -431,6 +445,10 @@ a {
     text-decoration: none;
     color: var(--font-a-color);
 }
+
+a.coderef {
+    color: var(--font-a-coderef-color);
+}
 /* style-css-fonts ends here */
 
 /* [[file:~/dotfiles/emacs/website/website.org::style-css-button][style-css-button]] */
@@ -454,13 +472,14 @@ a {
 /* [[file:~/dotfiles/emacs/website/website.org::style-css-kbd][style-css-kbd]] */
 kbd {
     font-family: DejaVu, Lucida Console, monospace;
+    font-size: 85%;
     display: inline-block;
-    padding: 1px 4px;
+    padding: 0.5px 5px;
     color: #616161;
     vertical-align: middle;
     background-color: #fefefe;
     border: solid 1px #616161;
     border-radius: 4px;
-    box-shadow: inset 0 -1px 2px #b0b0b0;
+    box-shadow: 0 0 12px 2px #dbdbdb inset, 0 4px 1px -2px #dbdbdb;
 }
 /* style-css-kbd ends here */

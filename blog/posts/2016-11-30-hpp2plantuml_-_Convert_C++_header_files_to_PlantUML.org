@@ -1,4 +1,4 @@
-# Created 2016-12-19 Mon 13:36
+# Created 2017-04-18 Tue 22:51
 #+OPTIONS: todo:nil ^:nil
 #+TITLE: hpp2plantuml - Convert C++ header files to PlantUML
 #+DATE: 2016-11-30
@@ -6,6 +6,10 @@
 #+SETUPFILE: ../setup.org
 #+TODO: TODO REVIEW | DONE DEFERRED ABANDONED
 #+MACRO: tt \nbsp{}
+#+PROPERTY: header-args:conf+ :eval never
+#+PROPERTY: header-args:c+++ :eval never
+#+PROPERTY: header-args:plantuml+ :eval never
+#+PROPERTY: header-args:rst+ :eval never
 #+PROPERTY: header-args+ :exports code :results silent
 #+PROPERTY: header-args:python+ :tangle src/hpp2plantuml/hpp2plantuml.py :mkdirp yes :eval no
 
@@ -14,7 +18,10 @@ this single org-file.
 
 The current version of the code is:
 #+NAME: hpp2plantuml-version
-: 0.1
+: 0.2
+
+The source code can be found on GitHub:
+https://github.com/thibaultmarin/hpp2plantuml.
 
 * Motivation
 The purpose of this tool is to convert C++ header files to a UML representation
@@ -23,7 +30,7 @@ in [[https://plantuml.com][PlantUML]] syntax that can be used to generate diagra
 [[https://plantuml.com][PlantUML]] is a program rendering UML diagrams from plain text inputs using an
 expressive language.
 
-This module generates the text input to PlantUML from C++ header files.  Its
+This package generates the text input to PlantUML from C++ header files.  Its
 ambition is limited but it should produce reasonable conversion for simple class
 hierarchies.  It aims at supporting:
 - class members with properties (~private~, ~method~, ~protected~), methods with
@@ -31,13 +38,16 @@ hierarchies.  It aims at supporting:
 - inheritance relationships,
 - aggregation relationships (very basic support).
 
+The package relies on the [[http://senexcanis.com/open-source/cppheaderparser/][CppHeaderParser]] package for parsing of C++ header
+files.
+
 
 * License
 
 The license adopted for this project is the MIT license.
 
 #+NAME: license
-#+BEGIN_SRC conf :tangle LICENSE
+#+BEGIN_SRC conf
 
 The MIT License (MIT)
 
@@ -69,6 +79,7 @@ This module has mostly standard dependencies; the only exception is the
 [[http://senexcanis.com/open-source/cppheaderparser/][CppHeaderParser]] module used to parse header files.
 
 #+NAME: py-dependency-list
+#+CAPTION: List of dependencies.
 | argparse        |
 | CppHeaderParser |
 
@@ -76,7 +87,7 @@ The full list of non-standard dependencies is produced by the following source
 block (returning either imports or a dependency list used in [[#sec-package-setup-py][=setup.py=]]):
 
 #+NAME: py-dependencies
-#+BEGIN_SRC emacs-lisp :var output="import" :var dep-list=py-dependency-list :results value :eval no-export
+#+BEGIN_SRC emacs-lisp
 (cond
  ((string= output "import")
   (mapconcat
@@ -89,12 +100,13 @@ block (returning either imports or a dependency list used in [[#sec-package-setu
 #+END_SRC
 
 #+NAME: py-imports
-#+BEGIN_SRC python :noweb yes
+#+BEGIN_SRC python
 # %% Imports
 
 import re
 import glob
-<<py-dependencies("import")>>
+import argparse
+import CppHeaderParser
 #+END_SRC
 
 The tests rely on the [[http://nose.readthedocs.io/en/latest/][nosetest]] framework and the package documentation is built
@@ -488,25 +500,33 @@ class ClassMember(ContainerMember):
         self._type = None
         self._static = class_member['static']
         self._scope = member_scope
+        self._properties = []
 
     def render(self):
         """Get string representation of member
 
         The string representation is with the scope indicator and a static
         keyword when the member is static.  It is postfixed by the type (return
-        type for class methods).  The inner part of the returned string
-        contains the variable name and signature for methods.  This is obtained
-        using the :func:`_render_name` method.
+        type for class methods) and additional properties (e.g. ``const``
+        methods are flagged with the ``query`` property).  The inner part of
+        the returned string contains the variable name and signature for
+        methods.  This is obtained using the :func:`_render_name` method.
 
         Returns
         -------
         str
             String representation of member
+
         """
-        member_str = MEMBER_PROP_MAP[self._scope] + \
-                      ('{static} ' if self._static else '') + \
-                      self._render_name() + \
-                      (' : ' + self._type if self._type else '')
+        if len(self._properties) > 0:
+            props = ' {' + ', '.join(self._properties) + '}'
+        else:
+            props = ''
+        vis = MEMBER_PROP_MAP[self._scope] + \
+              ('{static} ' if self._static else '')
+        member_str = vis + self._render_name() + \
+                     (' : ' + self._type if self._type else '') + \
+                     props
         return member_str
 
     def _render_name(self):
@@ -591,9 +611,11 @@ class ClassMethod(ClassMember):
         """Constructor
 
         The method name and additional properties are extracted from the parsed
-        header.  A list of parameter types is also stored to retain the
-        function signature.  The ``~`` character is also appended to destructor
-        methods.
+        header.
+
+        ,* A list of parameter types is stored to retain the function signature.
+        ,* The ``~`` character is appended to destructor methods.
+        ,* ``const`` methods are flagged with the ``query`` property.
 
         Parameters
         ----------
@@ -601,6 +623,7 @@ class ClassMethod(ClassMember):
             Parsed class member method
         member_scope : str
             Scope of the member method
+
         """
         assert(isinstance(class_method,
                           CppHeaderParser.CppHeaderParser.CppMethod))
@@ -615,6 +638,8 @@ class ClassMethod(ClassMember):
         self._abstract = class_method['pure_virtual']
         if class_method['destructor']:
             self._name = '~' + self._name
+        if class_method['const']:
+            self._properties.append('query')
         self._param_list = []
         for param in class_method['parameters']:
             self._param_list.append([_cleanup_type(param['type']),
@@ -920,7 +945,7 @@ ready to process by PlantUML.
 
 An example use case for the ~Diagram~ class could be:
 #+NAME: py-diag-example
-#+BEGIN_SRC python :tangle no
+#+BEGIN_SRC python
 # Create object
 diag = Diagram()
 # Initialize from filename
@@ -1482,6 +1507,38 @@ if __name__ == '__main__':
 #+END_SRC
 
 
+* Installation
+
+** Using =pip=
+
+The package is available on [[https://pypi.python.org/][PyPi]] and can be installed using pip:
+
+#+BEGIN_EXAMPLE
+pip install hpp2plantuml
+#+END_EXAMPLE
+
+
+** From source
+
+The code uses =setuptools=, so it can be built using:
+
+#+BEGIN_EXAMPLE
+python setup.py install
+#+END_EXAMPLE
+
+To build the documentation, run:
+
+#+BEGIN_EXAMPLE
+python setup.py sphinx
+#+END_EXAMPLE
+
+To run the tests, run:
+
+#+BEGIN_EXAMPLE
+python setup.py test
+#+END_EXAMPLE
+
+
 * Usage
 The ~hpp2plantuml~ package can be used from the command line or as a module in
 other applications.
@@ -1505,13 +1562,13 @@ optional arguments:
 #+END_EXAMPLE
 
 
-Input files are added using the ~-i~ option.  Inputs can be file paths or
-include wildcards.  Note that the double quotes are required when using
-wildcards.  The output file is selected with the ~-o~ option.  The output is a
-text file following the PlantUML syntax.
+Input files are added using the ~-i~ option.  Inputs can be full file paths or
+include wildcards.  Note that double quotes are required when using wildcards.
+The output file is selected with the ~-o~ option.  The output is a text file
+following the PlantUML syntax.
 
-For instance, the following command will generate the input file for PlantUML
-from several header files and store the output to the =output.puml= file.
+For instance, the following command will generate an input file for PlantUML
+(=output.puml=) from several header files.
 
 #+NAME: usage-sh
 #+BEGIN_SRC sh
@@ -1521,8 +1578,8 @@ hpp2plantuml -i File_1.hpp -i "include/Helper_*.hpp" -o output.puml
 
 ** Module
 
-To use as a module, simply ~import hpp2plantuml~.  The ~CreatePlantUMLFile~ can
-then be used to create a PlantUML file from a set of input files.
+To use as a module, simply ~import hpp2plantuml~.  The ~CreatePlantUMLFile~
+function can then be used to create a PlantUML file from a set of input files.
 Alternatively, the ~Diagram~ object can be used directly to build internal
 objects (from files or strings).  The ~Diagram.render()~ method can be used to
 produce a string output instead of writing to a text file.
@@ -1637,13 +1694,15 @@ the representation of variables.
 
 #+NAME: tbl-unittest-class_var
 #+CAPTION: List of test segments and corresponding PlantUML strings.
+| C++                                         | plantuml         |
+|---------------------------------------------+------------------|
 | "class Test {\npublic:\nint member; };"     | "+member : int"  |
 | "class Test {\nprivate:\nint * member; };"  | "-member : int*" |
 | "class Test {\nprotected:\nint &member; };" | "#member : int&" |
 
 
 #+NAME: test-unit-class_var
-#+BEGIN_SRC python :var test_list_classvar=tbl-unittest-class_var
+#+BEGIN_SRC python
 # %% Test class variables
 
 
@@ -1671,15 +1730,17 @@ supported by PlantUML.
 
 #+NAME: tbl-unittest-class_method
 #+CAPTION: List of test segments and corresponding PlantUML strings.
-| "class Test {\npublic:\nint & func(int * a); };"                         | "+func(int* a) : int&"         |
-| "class Test {\npublic:\nstatic int func(int & a); };"                    | "+{static} func(int& a) : int" |
-| "class Test {\nprivate:\nvirtual int * func() = 0; };"                   | "-{abstract} func() : int*"    |
-| "class Test {\npublic:\n~Test(); };"                                     | "+~Test()"                     |
-| "class Test {\nprotected:\ntemplate <typename T>int &func(string &); };" | "#func(string &) : int&"       |
+| C++                                                                            | plantuml                            |
+|--------------------------------------------------------------------------------+-------------------------------------|
+| "class Test {\npublic:\nint & func(int * a); };"                               | "+func(int* a) : int&"              |
+| "class Test {\npublic:\nstatic int func(int & a); };"                          | "+{static} func(int& a) : int"      |
+| "class Test {\nprivate:\nvirtual int * func() const = 0; };"                   | "-{abstract} func() : int* {query}" |
+| "class Test {\npublic:\n~Test(); };"                                           | "+~Test()"                          |
+| "class Test {\nprotected:\ntemplate <typename T>int &func(string &) const; };" | "#func(string &) : int& {query}"    |
 
 
 #+NAME: test-unit-class_method
-#+BEGIN_SRC python :var test_list_classmethod=tbl-unittest-class_method
+#+BEGIN_SRC python
 # %% Test class methods
 
 
@@ -1706,6 +1767,8 @@ Table\nbsp{}[[tbl-unittest-class]].  It includes templates and abstract classes.
 
 #+NAME: tbl-unittest-class
 #+CAPTION: List of test segments and corresponding PlantUML strings.
+| C++                                                                | plantuml                                                                              |
+|--------------------------------------------------------------------+---------------------------------------------------------------------------------------|
 | "class Test {\nprotected:\nint & member; };"                       | "class Test {\n\t#member : int&\n}\n"                                                 |
 | "class Test\n{\npublic:\nvirtual int func() = 0; };"               | "abstract class Test {\n\t+{abstract} func() : int\n}\n"                              |
 | "template <typename T> class Test{\nT* func(T& arg); };"           | "class Test <template <typename T>> {\n\t-func(T& arg) : T*\n}\n"                     |
@@ -1713,7 +1776,7 @@ Table\nbsp{}[[tbl-unittest-class]].  It includes templates and abstract classes.
 
 
 #+NAME: test-unit-class
-#+BEGIN_SRC python :var test_list_class=tbl-unittest-class
+#+BEGIN_SRC python
 # %% Test classes
 
 
@@ -1739,12 +1802,14 @@ Table\nbsp{}[[tbl-unittest-enum]].
 
 #+NAME: tbl-unittest-enum
 #+CAPTION: List of test segments and corresponding PlantUML strings.
+| C++                                 | plantuml                                |
+|-------------------------------------+-----------------------------------------|
 | "enum Test { A, B, CD, E };"        | "enum Test {\n\tA\n\tB\n\tCD\n\tE\n}\n" |
 | "enum Test\n{\n A = 0, B = 12\n };" | "enum Test {\n\tA\n\tB\n}\n"            |
 
 
 #+NAME: test-unit-enum
-#+BEGIN_SRC python :var test_list_enum=tbl-unittest-enum
+#+BEGIN_SRC python
 # %% Test enum objects
 
 
@@ -1772,6 +1837,8 @@ relationships (with and without count).
 
 #+NAME: tbl-unittest-link
 #+CAPTION: List of test segments and corresponding PlantUML strings.
+| C++                                    | plantuml        |
+|----------------------------------------+-----------------|
 | "class A{};\nclass B : A{};"           | "A <@-- B"      |
 | "class A{};\nclass B : public A{};"    | "A <@-- B"      |
 | "class B{};\nclass A{B obj;};"         | "A o-- B"       |
@@ -1779,7 +1846,7 @@ relationships (with and without count).
 
 
 #+NAME: test-unit-link
-#+BEGIN_SRC python :var test_list_link=tbl-unittest-link
+#+BEGIN_SRC python
 class TestLink:
     def test_list_entries(self):
         for test_idx, (input_str, output_ref_str) in \
@@ -1812,7 +1879,7 @@ The following can be extended to improve testing, as long as the corresponding
 [[#sec-test-system-ref][reference output]] is kept up-to-date.
 
 #+NAME: hpp-simple-classes-1-2
-#+BEGIN_SRC c++ :mkdirp yes :tangle tests/simple_classes_1_2.hpp
+#+BEGIN_SRC c++
 enum Enum01 { VALUE_0, VALUE_1, VALUE_2 };
 
 class Class01 {
@@ -1823,7 +1890,7 @@ protected:
 	virtual bool _AbstractMethod(int param) = 0;
 public:
 	int public_var;
-	bool PublicMethod(int param);
+	bool PublicMethod(int param) const;
 	static bool StaticPublicMethod(bool param);
 	virtual bool AbstractPublicMethod(int param) = 0;
 };
@@ -1840,7 +1907,7 @@ private:
 #+END_SRC
 
 #+NAME: hpp-simple-classes-3
-#+BEGIN_SRC c++ :mkdirp yes :tangle tests/simple_classes_3.hpp
+#+BEGIN_SRC c++
 template<typename T>
 class Class03 {
 public:
@@ -1862,11 +1929,11 @@ The comparison takes into account the white space, indentation, etc.
 
 
 #+NAME: puml-simple-classes
-#+BEGIN_SRC plantuml :mkdirp yes :tangle tests/simple_classes.puml
+#+BEGIN_SRC plantuml
 @startuml
 abstract class Class01 {
 	+{abstract} AbstractPublicMethod(int param) : bool
-	+PublicMethod(int param) : bool
+	+PublicMethod(int param) : bool {query}
 	+{static} StaticPublicMethod(bool param) : bool
 	#{abstract} _AbstractMethod(int param) : bool
 	#_ProtectedMethod(int param) : bool
@@ -2056,19 +2123,85 @@ The header is filled with the content of org-mode blocks.  The version number is
 obtained using the source block described [[#sec-org-el-version][here]].
 
 #+NAME: py-init
-#+BEGIN_SRC python :noweb yes :tangle src/hpp2plantuml/__init__.py
+#+BEGIN_SRC python
 """ hpp2plantuml module
 
-<<el-org-exp("sec-module", "rst")>>
+.. _sec-module:
 
-Usage:
+Module source code
+------------------
 
-<<el-org-exp("sec-module-usage", "rst", "keep")>>
+The package relies on a layer of objects used as intermediate between the parsed
+header files (parsed using ``CppHeaderParser``) and the text output for use with
+PlantUML.
+
+The main entry point () takes as input a list of header
+files and creates a object from it, which contains the internal object
+representation extracted jointly from the input files.
+
+Objects for different types (e.g. class, struct, etc.) are initialized at
+instantiation time from the parsed header via the ``parse_members`` method.
+Conversion to text input in PlantUML syntax is performed by the ``render`` method.
+
+Relationships between objects are extracted from a ``Diagram`` object by listing
+inheritance properties and parsing member types into .
+
+
+.. _sec-module-usage:
+
+Usage
+-----
+
+The ``hpp2plantuml`` package can be used from the command line or as a module in
+other applications.
+
+Command line
+~~~~~~~~~~~~
+
+The command line usage is (``hpp2plantuml --help``):
+
+
+::
+
+    usage: hpp2plantuml [-h] [-o FILE] -i HEADER-FILE
+
+    hpp2plantuml tool.
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -o FILE, --output-file FILE
+                            Output file
+      -i HEADER-FILE, --input-file HEADER-FILE
+                            Input file (must be quoted when using wildcards)
+
+
+Input files are added using the ``-i`` option.  Inputs can be full file paths or
+include wildcards.  Note that double quotes are required when using wildcards.
+The output file is selected with the ``-o`` option.  The output is a text file
+following the PlantUML syntax.
+
+For instance, the following command will generate an input file for PlantUML
+(``output.puml``) from several header files.
+
+.. code:: sh
+    :name: usage-sh
+
+    hpp2plantuml -i File_1.hpp -i "include/Helper_*.hpp" -o output.puml
+
+Module
+~~~~~~
+
+To use as a module, simply ``import hpp2plantuml``.  The ``CreatePlantUMLFile``
+function can then be used to create a PlantUML file from a set of input files.
+Alternatively, the ``Diagram`` object can be used directly to build internal
+objects (from files or strings).  The ``Diagram.render()`` method can be used to
+produce a string output instead of writing to a text file.
+
 """
 
 __title__ = "hpp2plantuml"
 __description__ = "Convert C++ header files to PlantUML"
-__version__ = <<get-version()>>
+__version__ = '0.2'
 __uri__ = "https://github.com/thibaultmarin/hpp2plantuml"
 __doc__ = __description__ + " <" + __uri__ + ">"
 __author__ = "Thibault Marin"
@@ -2094,7 +2227,7 @@ documentation files.  In practice, the documentation is built using a [[#sec-pac
 command]] for =setup.py= run using ~python setup.py sphinx~.
 
 #+NAME: cfg-setup
-#+BEGIN_SRC conf :tangle setup.cfg
+#+BEGIN_SRC conf
 
 [bdist_wheel]
 universal = 1
@@ -2135,7 +2268,7 @@ except ImportError:
 
 *** Custom content
 
-The non-boiler part of the =setup.py= file defines the package information.
+The non-boilerplate part of the =setup.py= file defines the package information.
 
 #+NAME: py-setup-custom
 #+BEGIN_SRC python
@@ -2161,7 +2294,7 @@ CLASSIFIERS = [
     "Programming Language :: Python :: Implementation :: PyPy",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-INSTALL_REQUIRES = <<py-dependencies("requirements")>>
+INSTALL_REQUIRES = ['argparse', 'CppHeaderParser']
 INSTALL_REQUIRES += ['sphinx', ]
 SETUP_REQUIRES = ['sphinx', 'numpydoc']
 ###################################################################
@@ -2175,50 +2308,6 @@ The following helper functions provide tools to extract metadata from the
 
 #+NAME: py-setup-helper
 #+BEGIN_SRC python
-
-HERE = os.path.abspath(os.path.dirname(__file__))
-
-
-def read(*parts):
-    """
-    Build an absolute path from *parts* and and return the contents of the
-    resulting file.  Assume UTF-8 encoding.
-    """
-    with codecs.open(os.path.join(HERE, *parts), "rb", "utf-8") as f:
-        return f.read()
-
-
-META_FILE = read(META_PATH)
-
-
-def find_meta(meta):
-    """
-    Extract __*meta*__ from META_FILE.
-    """
-    meta_match = re.search(
-        r"^__{meta}__ = ['\"]([^'\"]*)['\"]".format(meta=meta),
-        META_FILE, re.M
-    )
-    if meta_match:
-        return meta_match.group(1)
-    raise RuntimeError("Unable to find __{meta}__ string.".format(meta=meta))
-
-# %% Sphinx Build
-
-
-class Sphinx(Command):
-    user_options = []
-    description = 'Build sphinx documentation'
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        metadata = self.distribution.metadata
-        ,#+BEGIN_SRC python
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -2326,7 +2415,7 @@ if __name__ == "__main__":
 The manifest file is used to include extra files to the package.
 
 #+NAME: setup-manifest
-#+BEGIN_SRC conf :tangle MANIFEST.in
+#+BEGIN_SRC conf
 include *.rst *.txt LICENSE
 recursive-include tests *.py
 recursive-include tests *.hpp
@@ -2343,17 +2432,128 @@ The README file is automatically generated from blocks defined in this
 org-file (converted to RST format).
 
 #+NAME: rst-README
-#+BEGIN_SRC rst :noweb yes :tangle README.rst
+#+BEGIN_SRC rst
 
 hpp2plantuml - Convert C++ header files to PlantUML
 ===================================================
 
-<<el-org-exp("sec-intro", "rst")>>
+.. _sec-intro:
+
+Motivation
+----------
+
+The purpose of this tool is to convert C++ header files to a UML representation
+in `PlantUML <https://plantuml.com>`_ syntax that can be used to generate diagrams with PlantUML.
+
+`PlantUML <https://plantuml.com>`_ is a program rendering UML diagrams from plain text inputs using an
+expressive language.
+
+This package generates the text input to PlantUML from C++ header files.  Its
+ambition is limited but it should produce reasonable conversion for simple class
+hierarchies.  It aims at supporting:
+
+- class members with properties (``private``, ``method``, ``protected``), methods with
+  basic qualifiers (``static``, abstract),
+
+- inheritance relationships,
+
+- aggregation relationships (very basic support).
+
+The package relies on the `CppHeaderParser <http://senexcanis.com/open-source/cppheaderparser/>`_ package for parsing of C++ header
+files.
+
+
+.. _sec-module-usage:
 
 Usage
 -----
 
-<<el-org-exp("sec-module-usage", "rst", "keep")>>
+The ``hpp2plantuml`` package can be used from the command line or as a module in
+other applications.
+
+Command line
+~~~~~~~~~~~~
+
+The command line usage is (``hpp2plantuml --help``):
+
+
+::
+
+    usage: hpp2plantuml [-h] [-o FILE] -i HEADER-FILE
+
+    hpp2plantuml tool.
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -o FILE, --output-file FILE
+                            Output file
+      -i HEADER-FILE, --input-file HEADER-FILE
+                            Input file (must be quoted when using wildcards)
+
+
+Input files are added using the ``-i`` option.  Inputs can be full file paths or
+include wildcards.  Note that double quotes are required when using wildcards.
+The output file is selected with the ``-o`` option.  The output is a text file
+following the PlantUML syntax.
+
+For instance, the following command will generate an input file for PlantUML
+(``output.puml``) from several header files.
+
+.. code:: sh
+    :name: usage-sh
+
+    hpp2plantuml -i File_1.hpp -i "include/Helper_*.hpp" -o output.puml
+
+Module
+~~~~~~
+
+To use as a module, simply ``import hpp2plantuml``.  The ``CreatePlantUMLFile``
+function can then be used to create a PlantUML file from a set of input files.
+Alternatively, the ``Diagram`` object can be used directly to build internal
+objects (from files or strings).  The ``Diagram.render()`` method can be used to
+produce a string output instead of writing to a text file.
+
+
+.. _sec-module-install:
+
+Installation
+------------
+
+Using ``pip``
+~~~~~~~~~~~~~
+
+The package is available on `PyPi <https://pypi.python.org/>`_ and can be installed using pip:
+
+::
+
+    pip install hpp2plantuml
+
+From source
+~~~~~~~~~~~
+
+The code uses ``setuptools``, so it can be built using:
+
+::
+
+    python setup.py install
+
+To build the documentation, run:
+
+::
+
+    python setup.py sphinx
+
+To run the tests, run:
+
+::
+
+    python setup.py test
+
+
+The full documentation is available via:
+
+- `This org-mode post <https://thibaultmarin.github.io/blog/posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.html>`_
+- `Read the docs <http://hpp2plantuml.readthedocs.io/en/latest/>`_
 #+END_SRC
 
 
@@ -2381,7 +2581,7 @@ content of the file is mostly following the defaults, with a few exceptions:
   ([[(sphinx-conf-numpydoc)]]).
 
 #+NAME: py-sphinx-conf
-#+BEGIN_SRC python -r :noweb yes :mkdirp yes :tangle doc/source/conf.py
+#+BEGIN_SRC python -r
 
 # -*- coding: utf-8 -*-
 #
@@ -2464,9 +2664,9 @@ author = u'Thibault Marin'
 # built documents.
 #
 # The short X.Y version.
-version = u'v' + u<<get-version()>>
+version = u'v' + u'0.2'
 # The full version, including alpha/beta/rc tags.
-release = u'v' + u<<get-version()>>
+release = u'v' + u'0.2'
 
 # The language for content autogenerated by Sphinx. Refer to documentation
 # for a list of supported languages.
@@ -2540,7 +2740,7 @@ html_theme = 'alabaster'
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = u'hpp2plantuml ' + u'v' + u<<get-version()>>
+# html_title = u'hpp2plantuml ' + u'v' + u'0.2'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -2757,7 +2957,7 @@ parts of the org document including a brief description of the usage and links
 to the automatically generated and the org-file documents.
 
 #+NAME: doc-rst-index
-#+BEGIN_SRC rst :noweb yes :mkdirp yes :tangle doc/source/index.rst
+#+BEGIN_SRC rst
 
 .. hpp2plantuml documentation master file.
 
@@ -2767,9 +2967,82 @@ hpp2plantuml documentation
 .. toctree::
    :maxdepth: 4
 
-<<el-org-exp("sec-intro", "rst")>>
+.. _sec-intro:
 
-<<el-org-exp("sec-module-usage", "rst", "keep")>>
+Motivation
+----------
+
+The purpose of this tool is to convert C++ header files to a UML representation
+in `PlantUML <https://plantuml.com>`_ syntax that can be used to generate diagrams with PlantUML.
+
+`PlantUML <https://plantuml.com>`_ is a program rendering UML diagrams from plain text inputs using an
+expressive language.
+
+This package generates the text input to PlantUML from C++ header files.  Its
+ambition is limited but it should produce reasonable conversion for simple class
+hierarchies.  It aims at supporting:
+
+- class members with properties (``private``, ``method``, ``protected``), methods with
+  basic qualifiers (``static``, abstract),
+
+- inheritance relationships,
+
+- aggregation relationships (very basic support).
+
+The package relies on the `CppHeaderParser <http://senexcanis.com/open-source/cppheaderparser/>`_ package for parsing of C++ header
+files.
+
+
+.. _sec-module-usage:
+
+Usage
+-----
+
+The ``hpp2plantuml`` package can be used from the command line or as a module in
+other applications.
+
+Command line
+~~~~~~~~~~~~
+
+The command line usage is (``hpp2plantuml --help``):
+
+
+::
+
+    usage: hpp2plantuml [-h] [-o FILE] -i HEADER-FILE
+
+    hpp2plantuml tool.
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -o FILE, --output-file FILE
+                            Output file
+      -i HEADER-FILE, --input-file HEADER-FILE
+                            Input file (must be quoted when using wildcards)
+
+
+Input files are added using the ``-i`` option.  Inputs can be full file paths or
+include wildcards.  Note that double quotes are required when using wildcards.
+The output file is selected with the ``-o`` option.  The output is a text file
+following the PlantUML syntax.
+
+For instance, the following command will generate an input file for PlantUML
+(``output.puml``) from several header files.
+
+.. code:: sh
+    :name: usage-sh
+
+    hpp2plantuml -i File_1.hpp -i "include/Helper_*.hpp" -o output.puml
+
+Module
+~~~~~~
+
+To use as a module, simply ``import hpp2plantuml``.  The ``CreatePlantUMLFile``
+function can then be used to create a PlantUML file from a set of input files.
+Alternatively, the ``Diagram`` object can be used directly to build internal
+objects (from files or strings).  The ``Diagram.render()`` method can be used to
+produce a string output instead of writing to a text file.
+
 
 Module documentation generated from docstrings
 ----------------------------------------------
@@ -2796,7 +3069,7 @@ In order to build the documentation on the [[http://read-the-docs.readthedocs.io
 file is added for the =numpydoc= package.
 
 #+NAME: req-readthedocs
-#+BEGIN_SRC conf :mkdirp yes :tangle doc/source/readthedocs-requirements.txt
+#+BEGIN_SRC conf
 numpydoc
 #+END_SRC
 
@@ -2812,7 +3085,7 @@ The following source block is used to get the module's version number defined in
 [[hpp2plantuml-version][a single location]] and include it at multiple locations.
 
 #+NAME: get-version
-#+BEGIN_SRC emacs-lisp :var ver=hpp2plantuml-version :var lang="python"
+#+BEGIN_SRC emacs-lisp
 (cond ((string= lang "python")
        (format "'%s'" ver)))
 #+END_SRC
@@ -2823,13 +3096,13 @@ The following source block is used to get the module's version number defined in
 The following source block converts the content of an org heading to rst format
 using the [[(rst-convert-region)][~org-rst-convert-region-to-rst~]] function.  The heading to process is
 passed by its CUSTOM_ID property (as a string).  In addition, the output
-language can set (although rst is the only instance used in this document) and
-an additional flag ~children~ can be used to control whether the subsections of
-the target section are removed (~children = "remove"~) of kept (any other
-string, e.g. "keep").
+language can be set (although rst is the only instance used in this document)
+and an additional flag ~children~ can be used to control whether the subsections
+of the target section are removed (~children = "remove"~) of kept (any other
+string, e.g. ~"keep"~).
 
 #+NAME: el-org-exp
-#+BEGIN_SRC emacs-lisp -r :var input="sec-module-usage" :var lang="rst" :var children="remove" :results silent
+#+BEGIN_SRC emacs-lisp -r
 (save-excursion
   (let ((org-tree (org-element-parse-buffer)))
     (org-element-map
@@ -2875,7 +3148,7 @@ blocks, replacing them by a simple example block.
 #+BEGIN_SRC emacs-lisp -r
 (defun custom-rst-filter-org-block (text backend info)(ref:el-rst-filter)
   (when (org-export-derived-backend-p backend 'rst)
-    (let* ((pattern ".*\.\. code-block:: \\([[:alnum:]]+\\)")
+    (let* ((pattern ".*\.\. code:: \\([[:alnum:]]+\\)")
            (pattern-line (concat pattern ".*$"))
            (lang (progn
                    (string-match pattern text)
@@ -2889,7 +3162,7 @@ The command and options to generate the org-file documentation in rst format are
 encapsulated in the following source block.
 
 #+NAME: el-export-rst-org-doc
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp
 (require 'ox-rst)
 (let ((org-export-with-toc nil)
       (org-export-with-todo-keywords nil)

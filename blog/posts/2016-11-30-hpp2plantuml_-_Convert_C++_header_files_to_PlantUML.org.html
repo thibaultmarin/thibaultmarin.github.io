@@ -6,8 +6,8 @@
     <style type="text/css">
     <!--
       body {
-        color: #000000;
-        background-color: #ffffff;
+        color: #657b83;
+        background-color: #fdf6e3;
       }
       .ATTRLIST {
       }
@@ -26,6 +26,10 @@
       .constant {
         /* font-lock-constant-face */
         color: #008b8b;
+      }
+      .doc {
+        /* font-lock-doc-face */
+        color: #8b2252;
       }
       .function-name {
         /* font-lock-function-name-face */
@@ -137,6 +141,10 @@
         /* rst-adornment */
         color: #a020f0;
       }
+      .rst-block {
+        /* rst-block */
+        color: #a020f0;
+      }
       .rst-comment {
         /* rst-comment */
         color: #b22222;
@@ -157,6 +165,10 @@
         /* rst-level-2 */
         background-color: #c7c7c7;
       }
+      .rst-reference {
+        /* rst-reference */
+        color: #a0522d;
+      }
       .string {
         /* font-lock-string-face */
         color: #8b2252;
@@ -168,6 +180,11 @@
       .variable-name {
         /* font-lock-variable-name-face */
         color: #a0522d;
+      }
+      .warning {
+        /* font-lock-warning-face */
+        color: #ff0000;
+        font-weight: bold;
       }
 
       a {
@@ -184,12 +201,17 @@
   </head>
   <body>
     <pre>
+<span class="org-meta-line">#+INCLUDE: ../source-blocks.org</span>
 <span class="org-meta-line">#+SETUPFILE: ../setup.org</span>
 <span class="org-document-info-keyword">#+TITLE:</span> <span class="org-document-title">hpp2plantuml - Convert C++ header files to PlantUML
 </span><span class="org-document-info-keyword">#+DATE:</span> <span class="org-document-info">&lt;2016-11-30 Wed&gt;
 </span><span class="org-meta-line">#+OPTIONS: todo:nil ^:nil</span>
 <span class="org-meta-line">#+TODO: TODO REVIEW | DONE DEFERRED ABANDONED</span>
 <span class="org-meta-line">#+MACRO: tt \nbsp{}</span>
+<span class="org-meta-line">#+PROPERTY: header-args:conf+ :eval never</span>
+<span class="org-meta-line">#+PROPERTY: header-args:c+++ :eval never</span>
+<span class="org-meta-line">#+PROPERTY: header-args:plantuml+ :eval never</span>
+<span class="org-meta-line">#+PROPERTY: header-args:rst+ :eval never</span>
 <span class="org-meta-line">#+PROPERTY: header-args+ :exports code :results silent</span>
 <span class="org-meta-line">#+PROPERTY: header-args:python+ :tangle src/hpp2plantuml/hpp2plantuml.py :mkdirp yes :eval no</span>
 
@@ -198,8 +220,11 @@ this single org-file.
 
 The current version of the code is:
 <span class="org-meta-line">#+NAME: hpp2plantuml-version</span>
-<span class="org-code">: 0.1
+<span class="org-code">: 0.2
 </span>
+The source code can be found on GitHub:
+<span class="org-link"><a href="https://github.com/thibaultmarin/hpp2plantuml">https://github.com/thibaultmarin/hpp2plantuml</a></span>.
+
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Motivation</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">sec-intro</span>
@@ -211,13 +236,16 @@ in <span class="org-link"><a href="https://plantuml.com">PlantUML</a></span> syn
 <span class="org-link"><a href="https://plantuml.com">PlantUML</a></span> is a program rendering UML diagrams from plain text inputs using an
 expressive language.
 
-This module generates the text input to PlantUML from C++ header files.  Its
+This package generates the text input to PlantUML from C++ header files.  Its
 ambition is limited but it should produce reasonable conversion for simple class
 hierarchies.  It aims at supporting:
 - class members with properties (<span class="org-code">~private~</span>, <span class="org-code">~method~</span>, <span class="org-code">~protected~</span>), methods with
   basic qualifiers (<span class="org-code">~static~</span>, abstract),
 - inheritance relationships,
 - aggregation relationships (very basic support).
+
+The package relies on the <span class="org-link"><a href="http://senexcanis.com/open-source/cppheaderparser/">CppHeaderParser</a></span> package for parsing of C++ header
+files.
 
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> License</span>
@@ -257,6 +285,7 @@ This module has mostly standard dependencies; the only exception is the
 <span class="org-link"><a href="http://senexcanis.com/open-source/cppheaderparser/">CppHeaderParser</a></span> module used to parse header files.
 
 <span class="org-meta-line">#+NAME: py-dependency-list</span>
+<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of dependencies.</span>
 <span class="org-table">| argparse        |</span>
 <span class="org-table">| CppHeaderParser |</span>
 
@@ -264,7 +293,7 @@ The full list of non-standard dependencies is produced by the following source
 block (returning either imports or a dependency list used in <span class="org-link"><a href="nil:nil">=setup.py=</a></span>):
 
 <span class="org-meta-line">#+NAME: py-dependencies</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :var output="import" :var dep-list=py-dependency-list :results value :eval no-export
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :var output="import" :var dep-list=py-dependency-list :results value :eval yes
 </span><span class="org-block">(</span><span class="keyword"><span class="org-block">cond</span></span><span class="org-block">
  ((string= output </span><span class="string"><span class="org-block">"import"</span></span><span class="org-block">)
   (mapconcat
@@ -389,12 +418,12 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">Container</span></span><span class="org-block">(</span><span class="builtin"><span class="org-block">object</span></span><span class="org-block">):
-    </span><span class="string"><span class="org-block">"""Base class for C++ objects
+    </span><span class="doc"><span class="org-block">"""Base class for C++ objects
 
     This class defines the basic interface for parsed objects (e.g. class).
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, container_type, name):
-        </span><span class="string"><span class="org-block">"""Class constructor
+        </span><span class="doc"><span class="org-block">"""Class constructor
 
         Parameters
         ----------
@@ -409,7 +438,7 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._member_list = []
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">get_name</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Name property accessor
+        </span><span class="doc"><span class="org-block">"""Name property accessor
 
         Returns
         -------
@@ -419,7 +448,7 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._name
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">parse_members</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_container):
-        </span><span class="string"><span class="org-block">"""Initialize object from header (abstract method)
+        </span><span class="doc"><span class="org-block">"""Initialize object from header (abstract method)
 
         Extract object from CppHeaderParser dictionary representing a class, a
         struct or an enum object.
@@ -433,7 +462,7 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
             </span><span class="string"><span class="org-block">'Derived class must implement :func:`parse_members`.'</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">render</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Render object to string
+        </span><span class="doc"><span class="org-block">"""Render object to string
 
         Returns
         -------
@@ -447,7 +476,7 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> container_str
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">comparison_keys</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Order comparison key between `ClassRelationship` objects
+        </span><span class="doc"><span class="org-block">"""Order comparison key between `ClassRelationship` objects
 
         Use the parent name, the child name then the link type as successive
         keys.
@@ -460,16 +489,16 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._container_type, </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._name
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">sort_members</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Sort container members
+        </span><span class="doc"><span class="org-block">"""Sort container members
 
         sort the list of members by type and name
         """</span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._member_list.sort(key=</span><span class="keyword"><span class="org-block">lambda</span></span><span class="org-block"> obj: obj.comparison_keys())
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_render_container_def</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""String representation of object definition
+        </span><span class="doc"><span class="org-block">"""String representation of object definition
 
-        Return the definition line of an object (e.g. "</span></span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">MyClass</span></span><span class="string"><span class="org-block">").
+        Return the definition line of an object (e.g. "class MyClass").
 
         Returns
         -------
@@ -490,13 +519,13 @@ returning a string representation of the member.  The base class
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">ContainerMember</span></span><span class="org-block">(</span><span class="builtin"><span class="org-block">object</span></span><span class="org-block">):
-    </span><span class="string"><span class="org-block">"""Base class for members of `Container` object
+    </span><span class="doc"><span class="org-block">"""Base class for members of `Container` object
 
     This class defines the basic interface for object members (e.g. class
     variables, etc.)
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_member, **kwargs):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Parameters
         ----------
@@ -507,7 +536,7 @@ returning a string representation of the member.  The base class
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._type = </span><span class="constant"><span class="org-block">None</span></span><span class="org-block">
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">render</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Render object to string (abstract method)
+        </span><span class="doc"><span class="org-block">"""Render object to string (abstract method)
 
         Returns
         -------
@@ -518,7 +547,7 @@ returning a string representation of the member.  The base class
         </span><span class="keyword"><span class="org-block">raise</span></span><span class="org-block"> </span><span class="type"><span class="org-block">NotImplementedError</span></span><span class="org-block">(</span><span class="string"><span class="org-block">'Derived class must implement `render`.'</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">comparison_keys</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Order comparison key between `ClassRelationship` objects
+        </span><span class="doc"><span class="org-block">"""Order comparison key between `ClassRelationship` objects
 
         Use the parent name, the child name then the link type as successive
         keys.
@@ -548,7 +577,7 @@ which is used to determine aggregation relationships between classes.
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">Class</span></span><span class="org-block">(Container):
-    </span><span class="string"><span class="org-block">"""Representation of C++ class
+    </span><span class="doc"><span class="org-block">"""Representation of C++ class
 
     This class derived from `Container` specializes the base class to handle
     class definition in C++ headers.
@@ -560,7 +589,7 @@ which is used to determine aggregation relationships between classes.
     ,* public, private, protected members (static)
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_class):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Extract the class name and properties (template, abstract) and
         inheritance.  Then, extract the class members from the header using the
@@ -583,7 +612,7 @@ which is used to determine aggregation relationships between classes.
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">.parse_members(header_class[1])
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">parse_members</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_class):
-        </span><span class="string"><span class="org-block">"""Initialize class object from header
+        </span><span class="doc"><span class="org-block">"""Initialize class object from header
 
         This method extracts class member variables and methods from header.
 
@@ -604,7 +633,7 @@ which is used to determine aggregation relationships between classes.
                         member_type_handler(header_member, member_prop))
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">build_variable_type_list</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Get type of member variables
+        </span><span class="doc"><span class="org-block">"""Get type of member variables
 
         This function extracts the type of each member variable.  This is used
         to list aggregation relationships between classes.
@@ -621,7 +650,7 @@ which is used to determine aggregation relationships between classes.
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> variable_type_list
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">build_inheritance_list</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Get inheritance list
+        </span><span class="doc"><span class="org-block">"""Get inheritance list
 
         Returns
         -------
@@ -631,7 +660,7 @@ which is used to determine aggregation relationships between classes.
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._inheritance_list
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_render_container_def</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Create the string representation of the class
+        </span><span class="doc"><span class="org-block">"""Create the string representation of the class
 
         Return the class name with template and abstract properties if
         present.  The output string follows the PlantUML syntax.
@@ -671,7 +700,7 @@ class provides the common rendering and relies on child classes implementing the
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">ClassMember</span></span><span class="org-block">(ContainerMember):
-    </span><span class="string"><span class="org-block">"""Class member (variable and method) representation
+    </span><span class="doc"><span class="org-block">"""Class member (variable and method) representation
 
     This class is the base class for class members.  The representation
     includes the member type (variable or method), name, scope (``public``,
@@ -679,7 +708,7 @@ class provides the common rendering and relies on child classes implementing the
 
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, class_member, member_scope=</span><span class="string"><span class="org-block">'private'</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Parameters
         ----------
@@ -692,29 +721,37 @@ class provides the common rendering and relies on child classes implementing the
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._type = </span><span class="constant"><span class="org-block">None</span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._static = class_member[</span><span class="string"><span class="org-block">'static'</span></span><span class="org-block">]
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._scope = member_scope
+        </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._properties = []
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">render</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Get string representation of member
+        </span><span class="doc"><span class="org-block">"""Get string representation of member
 
         The string representation is with the scope indicator and a static
         keyword when the member is static.  It is postfixed by the type (return
-        type for class methods).  The inner part of the returned string
-        contains the variable name and signature for methods.  This is obtained
-        using the :func:`_render_name` method.
+        type for class methods) and additional properties (e.g. ``const``
+        methods are flagged with the ``query`` property).  The inner part of
+        the returned string contains the variable name and signature for
+        methods.  This is obtained using the :func:`_render_name` method.
 
         Returns
         -------
         str
             String representation of member
+
         """</span></span><span class="org-block">
-        </span><span class="variable-name"><span class="org-block">member_str</span></span><span class="org-block"> = MEMBER_PROP_MAP[</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._scope] + \
-                      (</span><span class="string"><span class="org-block">'{static} '</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._static </span><span class="keyword"><span class="org-block">else</span></span><span class="org-block"> </span><span class="string"><span class="org-block">''</span></span><span class="org-block">) + \
-                      </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._render_name() + \
-                      (</span><span class="string"><span class="org-block">' : '</span></span><span class="org-block"> + </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._type </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._type </span><span class="keyword"><span class="org-block">else</span></span><span class="org-block"> </span><span class="string"><span class="org-block">''</span></span><span class="org-block">)
+        </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">len</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._properties) &gt; 0:
+            </span><span class="variable-name"><span class="org-block">props</span></span><span class="org-block"> = </span><span class="string"><span class="org-block">' {'</span></span><span class="org-block"> + </span><span class="string"><span class="org-block">', '</span></span><span class="org-block">.join(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._properties) + </span><span class="string"><span class="org-block">'}'</span></span><span class="org-block">
+        </span><span class="keyword"><span class="org-block">else</span></span><span class="org-block">:
+            </span><span class="variable-name"><span class="org-block">props</span></span><span class="org-block"> = </span><span class="string"><span class="org-block">''</span></span><span class="org-block">
+        </span><span class="variable-name"><span class="org-block">vis</span></span><span class="org-block"> = MEMBER_PROP_MAP[</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._scope] + \
+              (</span><span class="string"><span class="org-block">'{static} '</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._static </span><span class="keyword"><span class="org-block">else</span></span><span class="org-block"> </span><span class="string"><span class="org-block">''</span></span><span class="org-block">)
+        </span><span class="variable-name"><span class="org-block">member_str</span></span><span class="org-block"> = vis + </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._render_name() + \
+                     (</span><span class="string"><span class="org-block">' : '</span></span><span class="org-block"> + </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._type </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._type </span><span class="keyword"><span class="org-block">else</span></span><span class="org-block"> </span><span class="string"><span class="org-block">''</span></span><span class="org-block">) + \
+                     props
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> member_str
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_render_name</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Get member name
+        </span><span class="doc"><span class="org-block">"""Get member name
 
         By default (for member variables), this returns the member name.
         Derived classes can override this to control the name rendering
@@ -739,14 +776,14 @@ to the <span class="org-link"><a href="nil:nil">parent class</a></span>.
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">ClassVariable</span></span><span class="org-block">(ClassMember):
-    </span><span class="string"><span class="org-block">"""Object representation of class member variables
+    </span><span class="doc"><span class="org-block">"""Object representation of class member variables
 
     This class specializes the `ClassMember` object for member variables.
     Additionally to the base class, it stores variable types as strings.  This
     is used to establish aggregation relationships between objects.
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, class_variable, member_scope=</span><span class="string"><span class="org-block">'private'</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Parameters
         ----------
@@ -763,7 +800,7 @@ to the <span class="org-link"><a href="nil:nil">parent class</a></span>.
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._type = _cleanup_type(class_variable[</span><span class="string"><span class="org-block">'type'</span></span><span class="org-block">])
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">get_type</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Variable type accessor
+        </span><span class="doc"><span class="org-block">"""Variable type accessor
 
         Returns
         -------
@@ -794,18 +831,20 @@ implemented in the future.
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">ClassMethod</span></span><span class="org-block">(ClassMember):
-    </span><span class="string"><span class="org-block">"""Class member method representation
+    </span><span class="doc"><span class="org-block">"""Class member method representation
 
     This class extends `ClassMember` for member methods.  It stores additional
     method properties (abstract, destructor flag, input parameter types).
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, class_method, member_scope):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         The method name and additional properties are extracted from the parsed
-        header.  A list of parameter types is also stored to retain the
-        function signature.  The ``~`` character is also appended to destructor
-        methods.
+        header.
+
+        ,* A list of parameter types is stored to retain the function signature.
+        ,* The ``~`` character is appended to destructor methods.
+        ,* ``const`` methods are flagged with the ``query`` property.
 
         Parameters
         ----------
@@ -813,6 +852,7 @@ implemented in the future.
             Parsed class member method
         member_scope : str
             Scope of the member method
+
         """</span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">assert</span></span><span class="org-block">(</span><span class="builtin"><span class="org-block">isinstance</span></span><span class="org-block">(class_method,
                           CppHeaderParser.CppHeaderParser.CppMethod))
@@ -827,13 +867,15 @@ implemented in the future.
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._abstract = class_method[</span><span class="string"><span class="org-block">'pure_virtual'</span></span><span class="org-block">]
         </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> class_method[</span><span class="string"><span class="org-block">'destructor'</span></span><span class="org-block">]:
             </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._name = </span><span class="string"><span class="org-block">'~'</span></span><span class="org-block"> + </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._name
+        </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> class_method[</span><span class="string"><span class="org-block">'const'</span></span><span class="org-block">]:
+            </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._properties.append(</span><span class="string"><span class="org-block">'query'</span></span><span class="org-block">)
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._param_list = []
         </span><span class="keyword"><span class="org-block">for</span></span><span class="org-block"> param </span><span class="keyword"><span class="org-block">in</span></span><span class="org-block"> class_method[</span><span class="string"><span class="org-block">'parameters'</span></span><span class="org-block">]:
             </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._param_list.append([_cleanup_type(param[</span><span class="string"><span class="org-block">'type'</span></span><span class="org-block">]),
                                      param[</span><span class="string"><span class="org-block">'name'</span></span><span class="org-block">]])
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_render_name</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Internal rendering of method name
+        </span><span class="doc"><span class="org-block">"""Internal rendering of method name
 
         This method extends the base :func:`ClassMember._render_name` method by
         adding the method signature to the returned string.
@@ -867,13 +909,13 @@ relatively straightforward and the <span class="org-code">~Struct~</span> class 
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">Struct</span></span><span class="org-block">(Class):
-    </span><span class="string"><span class="org-block">"""Representation of C++ struct objects
+    </span><span class="doc"><span class="org-block">"""Representation of C++ struct objects
 
     This class derived is almost identical to `Class`, the only difference
-    being the container type name ("</span></span><span class="org-block">struct</span><span class="string"><span class="org-block">" instead of "</span></span><span class="keyword"><span class="org-block">class</span></span><span class="string"><span class="org-block">").
+    being the container type name ("struct" instead of "class").
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_struct):
-        </span><span class="string"><span class="org-block">"""Class constructor
+        </span><span class="doc"><span class="org-block">"""Class constructor
 
         Parameters
         ----------
@@ -899,13 +941,13 @@ the actual values.
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">Enum</span></span><span class="org-block">(Container):
-    </span><span class="string"><span class="org-block">"""Class represnting enum objects
+    </span><span class="doc"><span class="org-block">"""Class represnting enum objects
 
     This class defines a simple object inherited from the base `Container`
     class.  It simply lists enumerated values.
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_enum):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Parameters
         ----------
@@ -916,7 +958,7 @@ the actual values.
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">.parse_members(header_enum)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">parse_members</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_enum):
-        </span><span class="string"><span class="org-block">"""Extract enum values from header
+        </span><span class="doc"><span class="org-block">"""Extract enum values from header
 
         Parameters
         ----------
@@ -928,13 +970,13 @@ the actual values.
 
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">EnumValue</span></span><span class="org-block">(ContainerMember):
-    </span><span class="string"><span class="org-block">"""Class representing values in enum object
+    </span><span class="doc"><span class="org-block">"""Class representing values in enum object
 
     This class only contains the name of the enum value (the actual integer
     value is ignored).
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_value, **kwargs):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Parameters
         ----------
@@ -944,7 +986,7 @@ the actual values.
         </span><span class="builtin"><span class="org-block">super</span></span><span class="org-block">().__init__(header_value)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">render</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Rendering to string
+        </span><span class="doc"><span class="org-block">"""Rendering to string
 
         This method simply returns the variable name
 
@@ -979,14 +1021,14 @@ strings and the text representation of a connection link is obtained from the
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">ClassRelationship</span></span><span class="org-block">(</span><span class="builtin"><span class="org-block">object</span></span><span class="org-block">):
-    </span><span class="string"><span class="org-block">"""Base object for class relationships
+    </span><span class="doc"><span class="org-block">"""Base object for class relationships
 
     This class defines the common structure of class relationship objects.
     This includes a parent/child pair and a relationship type (e.g. inheritance
     or aggregation).
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, link_type, c_parent, c_child):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Parameters
         ----------
@@ -1002,7 +1044,7 @@ strings and the text representation of a connection link is obtained from the
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._link_type = link_type
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">comparison_keys</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Order comparison key between `ClassRelationship` objects
+        </span><span class="doc"><span class="org-block">"""Order comparison key between `ClassRelationship` objects
 
         Compare alphabetically based on the parent name, the child name then
         the link type.
@@ -1015,7 +1057,7 @@ strings and the text representation of a connection link is obtained from the
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._parent, </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._child, </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._link_type
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">render</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Render class relationship to string
+        </span><span class="doc"><span class="org-block">"""Render class relationship to string
 
         This method generically appends the parent name, a rendering of the
         link type (obtained from the :func:`_render_link_type` method) and the
@@ -1031,7 +1073,7 @@ strings and the text representation of a connection link is obtained from the
             </span><span class="string"><span class="org-block">' '</span></span><span class="org-block"> + </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._child
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_render_link_type</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Internal representation of link
+        </span><span class="doc"><span class="org-block">"""Internal representation of link
 
         The string representation is obtained from the `LINK_TYPE_MAP`
         constant.
@@ -1057,13 +1099,13 @@ The inheritance relationship is a straightforward specialization of the base
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">ClassInheritanceRelationship</span></span><span class="org-block">(ClassRelationship):
-    </span><span class="string"><span class="org-block">"""Representation of inheritance relationships
+    </span><span class="doc"><span class="org-block">"""Representation of inheritance relationships
 
     This module extends the base `ClassRelationship` class by setting the link
     type to ``inherit``.
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, c_parent, c_child):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Parameters
         ----------
@@ -1089,7 +1131,7 @@ count is omitted when equal to one).
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">ClassAggregationRelationship</span></span><span class="org-block">(ClassRelationship):
-    </span><span class="string"><span class="org-block">"""Representation of aggregation relationships
+    </span><span class="doc"><span class="org-block">"""Representation of aggregation relationships
 
     This module extends the base `ClassRelationship` class by setting the link
     type to ``aggregation``.  It also keeps a count of aggregation, which is
@@ -1100,7 +1142,7 @@ count is omitted when equal to one).
     definition.
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, c_parent, c_child, c_count=1):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         Parameters
         ----------
@@ -1117,7 +1159,7 @@ count is omitted when equal to one).
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._count = c_count
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_render_link_type</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Internal link rendering
+        </span><span class="doc"><span class="org-block">"""Internal link rendering
 
         This method overrides the default link rendering defined in
         :func:`ClassRelationship._render_link_type` to include a count near the
@@ -1198,7 +1240,7 @@ be used to avoid this sorting step.
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">Diagram</span></span><span class="org-block">(</span><span class="builtin"><span class="org-block">object</span></span><span class="org-block">):
-    </span><span class="string"><span class="org-block">"""UML diagram object
+    </span><span class="doc"><span class="org-block">"""UML diagram object
 
     This class lists the objects in the set of files considere, and the
     relationships between object.
@@ -1212,7 +1254,7 @@ be used to avoid this sorting step.
     and file lists inputs.
     """</span></span><span class="org-block">
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">__init__</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Constructor
+        </span><span class="doc"><span class="org-block">"""Constructor
 
         The `Diagram` class constructor simply initializes object lists.  It
         does not create objects or relationships.
@@ -1222,11 +1264,11 @@ be used to avoid this sorting step.
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._aggregation_list = []
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">clear</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Reinitiliaze object"""</span></span><span class="org-block">
+        </span><span class="doc"><span class="org-block">"""Reinitiliaze object"""</span></span><span class="org-block">
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">.__init__()
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_sort_list</span></span><span class="org-block">(input_list):
-        </span><span class="string"><span class="org-block">"""Sort list using `ClassRelationship` comparison
+        </span><span class="doc"><span class="org-block">"""Sort list using `ClassRelationship` comparison
 
         Parameters
         ----------
@@ -1237,7 +1279,7 @@ be used to avoid this sorting step.
         input_list.sort(key=</span><span class="keyword"><span class="org-block">lambda</span></span><span class="org-block"> obj: obj.comparison_keys())
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">sort_elements</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Sort elements in diagram
+        </span><span class="doc"><span class="org-block">"""Sort elements in diagram
 
         Sort the objects and relationship links.  Objects are sorted using the
         :func:`Container.comparison_keys` comparison function and list are
@@ -1251,7 +1293,7 @@ be used to avoid this sorting step.
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_build_helper</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, </span><span class="builtin"><span class="org-block">input</span></span><span class="org-block">, build_from=</span><span class="string"><span class="org-block">'string'</span></span><span class="org-block">, flag_build_lists=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">,
                       flag_reset=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Helper function to initialize a `Diagram` object from parsed headers
+        </span><span class="doc"><span class="org-block">"""Helper function to initialize a `Diagram` object from parsed headers
 
         Parameters
         ----------
@@ -1288,7 +1330,7 @@ be used to avoid this sorting step.
             </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">.sort_elements()
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">create_from_file</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_file):
-        </span><span class="string"><span class="org-block">"""Initialize `Diagram` object from header file
+        </span><span class="doc"><span class="org-block">"""Initialize `Diagram` object from header file
 
         Wrapper around the :func:`_build_helper` function, with ``file`` input,
         building the relationship lists and with object reset.
@@ -1297,7 +1339,7 @@ be used to avoid this sorting step.
                            flag_build_lists=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">, flag_reset=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">create_from_file_list</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, file_list):
-        </span><span class="string"><span class="org-block">"""Initialize `Diagram` object from list of header files
+        </span><span class="doc"><span class="org-block">"""Initialize `Diagram` object from list of header files
 
         Wrapper around the :func:`_build_helper` function, with ``file_list``
         input, building the relationship lists and with object reset.
@@ -1306,7 +1348,7 @@ be used to avoid this sorting step.
                            flag_build_lists=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">, flag_reset=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">add_from_file</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_file):
-        </span><span class="string"><span class="org-block">"""Augment `Diagram` object from header file
+        </span><span class="doc"><span class="org-block">"""Augment `Diagram` object from header file
 
         Wrapper around the :func:`_build_helper` function, with ``file`` input,
         skipping building of the relationship lists and without object reset
@@ -1316,7 +1358,7 @@ be used to avoid this sorting step.
                            flag_build_lists=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">, flag_reset=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">add_from_file_list</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, file_list):
-        </span><span class="string"><span class="org-block">"""Augment `Diagram` object from list of header files
+        </span><span class="doc"><span class="org-block">"""Augment `Diagram` object from list of header files
 
         Wrapper around the :func:`_build_helper` function, with ``file_list``
         input, skipping building of the relationship lists and without object
@@ -1326,7 +1368,7 @@ be used to avoid this sorting step.
                            flag_build_lists=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">, flag_reset=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">create_from_string</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_string):
-        </span><span class="string"><span class="org-block">"""Initialize `Diagram` object from header string
+        </span><span class="doc"><span class="org-block">"""Initialize `Diagram` object from header string
 
         Wrapper around the :func:`_build_helper` function, with ``string``
         input, building the relationship lists and with object reset.
@@ -1335,7 +1377,7 @@ be used to avoid this sorting step.
                            flag_build_lists=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">, flag_reset=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">create_from_string_list</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, string_list):
-        </span><span class="string"><span class="org-block">"""Initialize `Diagram` object from list of header strings
+        </span><span class="doc"><span class="org-block">"""Initialize `Diagram` object from list of header strings
 
         Wrapper around the :func:`_build_helper` function, with ``string_list``
         input, skipping building of the relationship lists and with object
@@ -1345,7 +1387,7 @@ be used to avoid this sorting step.
                            flag_build_lists=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">, flag_reset=</span><span class="constant"><span class="org-block">True</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">add_from_string</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_string):
-        </span><span class="string"><span class="org-block">"""Augment `Diagram` object from header string
+        </span><span class="doc"><span class="org-block">"""Augment `Diagram` object from header string
 
         Wrapper around the :func:`_build_helper` function, with ``string``
         input, skipping building of the relationship lists and without object
@@ -1355,7 +1397,7 @@ be used to avoid this sorting step.
                            flag_build_lists=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">, flag_reset=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">add_from_string_list</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, string_list):
-        </span><span class="string"><span class="org-block">"""Augment `Diagram` object from list of header strings
+        </span><span class="doc"><span class="org-block">"""Augment `Diagram` object from list of header strings
 
         Wrapper around the :func:`_build_helper` function, with ``string_list``
         input, building the relationship lists and without object reset (new
@@ -1365,7 +1407,7 @@ be used to avoid this sorting step.
                            flag_build_lists=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">, flag_reset=</span><span class="constant"><span class="org-block">False</span></span><span class="org-block">)
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">build_relationship_lists</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Build inheritance and aggregation lists from parsed objects
+        </span><span class="doc"><span class="org-block">"""Build inheritance and aggregation lists from parsed objects
 
         This method successively calls the :func:`build_inheritance_list` and
         :func:`build_aggregation_list` methods.
@@ -1374,7 +1416,7 @@ be used to avoid this sorting step.
         </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">.build_aggregation_list()
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">parse_objects</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, header_file, arg_type=</span><span class="string"><span class="org-block">'string'</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Parse objects
+        </span><span class="doc"><span class="org-block">"""Parse objects
 
         This method parses file of string inputs using the CppHeaderParser
         module and extracts internal objects for rendering.
@@ -1398,7 +1440,7 @@ be used to avoid this sorting step.
                 </span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">._objects.append(container_handler(obj))
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">build_inheritance_list</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Build list of inheritance between objects
+        </span><span class="doc"><span class="org-block">"""Build list of inheritance between objects
 
         This method lists all the inheritance relationships between objects
         contained in the `Diagram` object (external relationships are ignored).
@@ -1425,7 +1467,7 @@ be used to avoid this sorting step.
                             ClassInheritanceRelationship(parent, obj_name))
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">build_aggregation_list</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Build list of aggregation relationships
+        </span><span class="doc"><span class="org-block">"""Build list of aggregation relationships
 
         This method loops over objects and finds members with type
         corresponding to other classes defined in the `Diagram` object (keeping
@@ -1465,7 +1507,7 @@ be used to avoid this sorting step.
                                                  comp_count))
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_augment_comp</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">, c_dict, c_parent, c_child):
-        </span><span class="string"><span class="org-block">"""Increment the aggregation reference count
+        </span><span class="doc"><span class="org-block">"""Increment the aggregation reference count
 
         If the aggregation relationship is not in the list (``c_dict``), then
         add a new entry with count 1.  If the relationship is already in the
@@ -1492,7 +1534,7 @@ be used to avoid this sorting step.
                 c_dict[c_child][c_idx][1] += 1
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">render</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""Render full UML diagram
+        </span><span class="doc"><span class="org-block">"""Render full UML diagram
 
         The string returned by this function should be ready to use with the
         PlantUML program.  It includes all the parsed objects with their
@@ -1526,7 +1568,7 @@ be used to avoid this sorting step.
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> diagram_str
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_preamble</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""PlantUML preamble text
+        </span><span class="doc"><span class="org-block">"""PlantUML preamble text
 
         Returns
         -------
@@ -1536,7 +1578,7 @@ be used to avoid this sorting step.
         </span><span class="keyword"><span class="org-block">return</span></span><span class="org-block"> </span><span class="string"><span class="org-block">'@startuml\n'</span></span><span class="org-block">
 
     </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_postamble</span></span><span class="org-block">(</span><span class="keyword"><span class="org-block">self</span></span><span class="org-block">):
-        </span><span class="string"><span class="org-block">"""PlantUML postamble text
+        </span><span class="doc"><span class="org-block">"""PlantUML postamble text
 
         Returns
         -------
@@ -1562,7 +1604,7 @@ variable types by eliminating spaces around <span class="org-verbatim">=*=</span
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_cleanup_type</span></span><span class="org-block">(type_str):
-    </span><span class="string"><span class="org-block">"""Cleanup string representing a C++ type
+    </span><span class="doc"><span class="org-block">"""Cleanup string representing a C++ type
 
     Cleanup simply consists in removing spaces before a ``*`` character and
     preventing multiple successive spaces in the string.
@@ -1595,7 +1637,7 @@ existing filenames without wildcards.
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">expand_file_list</span></span><span class="org-block">(input_files):
-    </span><span class="string"><span class="org-block">"""Find all files in list (expanding wildcards)
+    </span><span class="doc"><span class="org-block">"""Find all files in list (expanding wildcards)
 
     This function uses `glob` to find files matching each string in the input
     list.
@@ -1639,7 +1681,7 @@ output file.
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">CreatePlantUMLFile</span></span><span class="org-block">(file_list, output_file=</span><span class="constant"><span class="org-block">None</span></span><span class="org-block">):
-    </span><span class="string"><span class="org-block">""" Create PlantUML file from list of header files
+    </span><span class="doc"><span class="org-block">""" Create PlantUML file from list of header files
 
     This function parses a list of C++ header files and generates a file for
     use with PlantUML.
@@ -1683,7 +1725,7 @@ to parse input arguments.  The function passes the command line arguments to the
 </span></span><span class="org-block">
 
 </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">main</span></span><span class="org-block">():(ref:module-main)
-    </span><span class="string"><span class="org-block">"""Command line interface
+    </span><span class="doc"><span class="org-block">"""Command line interface
 
     This function is a command-line interface to the
     :func:`hpp2plantuml.CreatePlantUMLFile` function.
@@ -1708,6 +1750,41 @@ to parse input arguments.  The function passes the command line arguments to the
 </span><span class="keyword"><span class="org-block">if</span></span><span class="org-block"> </span><span class="builtin"><span class="org-block">__name__</span></span><span class="org-block"> == </span><span class="string"><span class="org-block">'__main__'</span></span><span class="org-block">:
     main()
 </span><span class="org-block-end-line">#+END_SRC
+</span>
+
+<span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Installation</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">sec-module-install</span>
+<span class="org-special-keyword">:END:</span>
+
+<span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Using </span><span class="org-verbatim"><span class="org-level-2">=pip=</span></span>
+
+The package is available on <span class="org-link"><a href="https://pypi.python.org/">PyPi</a></span> and can be installed using pip:
+
+<span class="org-block-begin-line">#+BEGIN_EXAMPLE
+</span><span class="ATTRLIST">pip install hpp2plantuml
+</span><span class="org-block-end-line">#+END_EXAMPLE
+</span>
+
+<span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> From source</span>
+
+The code uses <span class="org-verbatim">=setuptools=</span>, so it can be built using:
+
+<span class="org-block-begin-line">#+BEGIN_EXAMPLE
+</span><span class="ATTRLIST">python setup.py install
+</span><span class="org-block-end-line">#+END_EXAMPLE
+</span>
+To build the documentation, run:
+
+<span class="org-block-begin-line">#+BEGIN_EXAMPLE
+</span><span class="ATTRLIST">python setup.py sphinx
+</span><span class="org-block-end-line">#+END_EXAMPLE
+</span>
+To run the tests, run:
+
+<span class="org-block-begin-line">#+BEGIN_EXAMPLE
+</span><span class="ATTRLIST">python setup.py test
+</span><span class="org-block-end-line">#+END_EXAMPLE
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Usage</span>
@@ -1737,13 +1814,13 @@ optional arguments:
 </span><span class="org-block-end-line">#+END_EXAMPLE
 </span>
 
-Input files are added using the <span class="org-code">~-i~</span> option.  Inputs can be file paths or
-include wildcards.  Note that the double quotes are required when using
-wildcards.  The output file is selected with the <span class="org-code">~-o~</span> option.  The output is a
-text file following the PlantUML syntax.
+Input files are added using the <span class="org-code">~-i~</span> option.  Inputs can be full file paths or
+include wildcards.  Note that double quotes are required when using wildcards.
+The output file is selected with the <span class="org-code">~-o~</span> option.  The output is a text file
+following the PlantUML syntax.
 
-For instance, the following command will generate the input file for PlantUML
-from several header files and store the output to the <span class="org-verbatim">=output.puml=</span> file.
+For instance, the following command will generate an input file for PlantUML
+(<span class="org-verbatim">=output.puml=</span>) from several header files.
 
 <span class="org-meta-line">#+NAME: usage-sh</span>
 <span class="org-block-begin-line">#+BEGIN_SRC sh
@@ -1753,8 +1830,8 @@ from several header files and store the output to the <span class="org-verbatim"
 
 <span class="org-level-2">** Module</span>
 
-To use as a module, simply <span class="org-code">~import hpp2plantuml~</span>.  The <span class="org-code">~CreatePlantUMLFile~</span> can
-then be used to create a PlantUML file from a set of input files.
+To use as a module, simply <span class="org-code">~import hpp2plantuml~</span>.  The <span class="org-code">~CreatePlantUMLFile~</span>
+function can then be used to create a PlantUML file from a set of input files.
 Alternatively, the <span class="org-code">~Diagram~</span> object can be used directly to build internal
 objects (from files or strings).  The <span class="org-code">~Diagram.render()~</span> method can be used to
 produce a string output instead of writing to a text file.
@@ -1780,7 +1857,7 @@ Following is the test setup code.
 
 <span class="org-meta-line">#+NAME: test-setup</span>
 <span class="org-block-begin-line">#+BEGIN_SRC python
-</span><span class="string"><span class="org-block">"""Test module for hpp2plantuml"""</span></span><span class="org-block">
+</span><span class="doc"><span class="org-block">"""Test module for hpp2plantuml"""</span></span><span class="org-block">
 
 </span><span class="python-cell-cellbreak"><span class="comment-delimiter"><span class="org-block"># </span></span></span><span class="python-cell-cellbreak"><span class="comment"><span class="org-block">%% Imports</span></span></span><span class="comment"><span class="org-block">
 </span></span><span class="org-block">
@@ -1873,6 +1950,8 @@ the representation of variables.
 
 <span class="org-meta-line">#+NAME: tbl-unittest-class_var</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-table">| C++                                         | plantuml         |</span>
+<span class="org-table">|---------------------------------------------+------------------|</span>
 <span class="org-table">| "class Test {\npublic:\nint member; };"     | "+member : int"  |</span>
 <span class="org-table">| "class Test {\nprivate:\nint * member; };"  | "-member : int*" |</span>
 <span class="org-table">| "class Test {\nprotected:\nint &amp;member; };" | "#member : int&amp;" |</span>
@@ -1907,11 +1986,13 @@ supported by PlantUML.
 
 <span class="org-meta-line">#+NAME: tbl-unittest-class_method</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
-<span class="org-table">| "class Test {\npublic:\nint &amp; func(int * a); };"                         | "+func(int* a) : int&amp;"         |</span>
-<span class="org-table">| "class Test {\npublic:\nstatic int func(int &amp; a); };"                    | "+{static} func(int&amp; a) : int" |</span>
-<span class="org-table">| "class Test {\nprivate:\nvirtual int * func() = 0; };"                   | "-{abstract} func() : int*"    |</span>
-<span class="org-table">| "class Test {\npublic:\n~Test(); };"                                     | "+~Test()"                     |</span>
-<span class="org-table">| "class Test {\nprotected:\ntemplate &lt;typename T&gt;int &amp;func(string &amp;); };" | "#func(string &amp;) : int&amp;"       |</span>
+<span class="org-table">| C++                                                                            | plantuml                            |</span>
+<span class="org-table">|--------------------------------------------------------------------------------+-------------------------------------|</span>
+<span class="org-table">| "class Test {\npublic:\nint &amp; func(int * a); };"                               | "+func(int* a) : int&amp;"              |</span>
+<span class="org-table">| "class Test {\npublic:\nstatic int func(int &amp; a); };"                          | "+{static} func(int&amp; a) : int"      |</span>
+<span class="org-table">| "class Test {\nprivate:\nvirtual int * func() const = 0; };"                   | "-{abstract} func() : int* {query}" |</span>
+<span class="org-table">| "class Test {\npublic:\n~Test(); };"                                           | "+~Test()"                          |</span>
+<span class="org-table">| "class Test {\nprotected:\ntemplate &lt;typename T&gt;int &amp;func(string &amp;) const; };" | "#func(string &amp;) : int&amp; {query}"    |</span>
 
 
 <span class="org-meta-line">#+NAME: test-unit-class_method</span>
@@ -1942,6 +2023,8 @@ Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:
 
 <span class="org-meta-line">#+NAME: tbl-unittest-class</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-table">| C++                                                                | plantuml                                                                              |</span>
+<span class="org-table">|--------------------------------------------------------------------+---------------------------------------------------------------------------------------|</span>
 <span class="org-table">| "class Test {\nprotected:\nint &amp; member; };"                       | "class Test {\n\t#member : int&amp;\n}\n"                                                 |</span>
 <span class="org-table">| "class Test\n{\npublic:\nvirtual int func() = 0; };"               | "abstract class Test {\n\t+{abstract} func() : int\n}\n"                              |</span>
 <span class="org-table">| "template &lt;typename T&gt; class Test{\nT* func(T&amp; arg); };"           | "class Test &lt;template &lt;typename T&gt;&gt; {\n\t-func(T&amp; arg) : T*\n}\n"                     |</span>
@@ -1975,6 +2058,8 @@ Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="nil:
 
 <span class="org-meta-line">#+NAME: tbl-unittest-enum</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-table">| C++                                 | plantuml                                |</span>
+<span class="org-table">|-------------------------------------+-----------------------------------------|</span>
 <span class="org-table">| "enum Test { A, B, CD, E };"        | "enum Test {\n\tA\n\tB\n\tCD\n\tE\n}\n" |</span>
 <span class="org-table">| "enum Test\n{\n A = 0, B = 12\n };" | "enum Test {\n\tA\n\tB\n}\n"            |</span>
 
@@ -2008,6 +2093,8 @@ relationships (with and without count).
 
 <span class="org-meta-line">#+NAME: tbl-unittest-link</span>
 <span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-table">| C++                                    | plantuml        |</span>
+<span class="org-table">|----------------------------------------+-----------------|</span>
 <span class="org-table">| "class A{};\nclass B : A{};"           | "A &lt;@-- B"      |</span>
 <span class="org-table">| "class A{};\nclass B : public A{};"    | "A &lt;@-- B"      |</span>
 <span class="org-table">| "class B{};\nclass A{B obj;};"         | "A o-- B"       |</span>
@@ -2063,19 +2150,19 @@ The following can be extended to improve testing, as long as the corresponding
     </span><span class="keyword"><span class="org-block">virtual</span></span><span class="org-block"> </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_AbstractMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">) = 0;
 </span><span class="keyword"><span class="org-block">public</span></span><span class="org-block">:
     </span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">public_var</span></span><span class="org-block">;
-    </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">PublicMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">);
+    </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">PublicMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">) </span><span class="keyword"><span class="org-block">const</span></span><span class="org-block">;
     </span><span class="keyword"><span class="org-block">static</span></span><span class="org-block"> </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">StaticPublicMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">);
     </span><span class="keyword"><span class="org-block">virtual</span></span><span class="org-block"> </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">AbstractPublicMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">) = 0;
 };
 
 </span><span class="keyword"><span class="org-block">class</span></span><span class="org-block"> </span><span class="type"><span class="org-block">Class02</span></span><span class="org-block"> : </span><span class="keyword"><span class="org-block">public</span></span><span class="org-block"> </span><span class="type"><span class="org-block">Class01</span></span><span class="org-block"> {
 </span><span class="keyword"><span class="org-block">public</span></span><span class="org-block">:
-    </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">AbstractPublicMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">) override;
+    </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">AbstractPublicMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">) </span><span class="keyword"><span class="org-block">override</span></span><span class="org-block">;
 </span><span class="keyword"><span class="org-block">private</span></span><span class="org-block">:
     </span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">_private_var</span></span><span class="org-block">;
     </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_PrivateMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">);
     </span><span class="keyword"><span class="org-block">static</span></span><span class="org-block"> </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_StaticPrivateMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">);
-    </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_AbstractMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">) override;
+    </span><span class="type"><span class="org-block">bool</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">_AbstractMethod</span></span><span class="org-block">(</span><span class="type"><span class="org-block">int</span></span><span class="org-block"> </span><span class="variable-name"><span class="org-block">param</span></span><span class="org-block">) </span><span class="keyword"><span class="org-block">override</span></span><span class="org-block">;
 };
 </span><span class="org-block-end-line">#+END_SRC
 </span>
@@ -2110,7 +2197,7 @@ The comparison takes into account the white space, indentation, etc.
 </span><span class="keyword"><span class="org-block">@startuml</span></span><span class="org-block">
 </span><span class="type"><span class="org-block">abstract</span></span><span class="org-block"> class Class01 {
     +{abstract} AbstractPublicMethod(int param) : bool
-    +PublicMethod(int param) : bool
+    +PublicMethod(int param) : bool {query}
     +{static} StaticPublicMethod(bool param) : bool
     #{abstract} _AbstractMethod(int param) : bool
     #_ProtectedMethod(int param) : bool
@@ -2301,13 +2388,11 @@ obtained using the source block described <span class="org-link"><a href="nil:ni
 
 <span class="org-meta-line">#+NAME: py-init</span>
 <span class="org-block-begin-line">#+BEGIN_SRC python :noweb yes :tangle src/hpp2plantuml/__init__.py
-</span><span class="string"><span class="org-block">""" hpp2plantuml module
+</span><span class="doc"><span class="org-block">""" hpp2plantuml module
 
-&lt;&lt;el-org-exp("</span></span><span class="org-block">sec-module</span><span class="string"><span class="org-block">", "</span></span><span class="org-block">rst</span><span class="string"><span class="org-block">")&gt;&gt;
+&lt;&lt;el-org-exp("sec-module", "rst")&gt;&gt;
 
-Usage:
-
-&lt;&lt;el-org-exp("</span></span><span class="org-block">sec-module-usage</span><span class="string"><span class="org-block">", "</span></span><span class="org-block">rst</span><span class="string"><span class="org-block">", "</span></span><span class="org-block">keep</span><span class="string"><span class="org-block">")&gt;&gt;
+&lt;&lt;el-org-exp("sec-module-usage", "rst", "keep")&gt;&gt;
 """</span></span><span class="org-block">
 
 </span><span class="variable-name"><span class="org-block">__title__</span></span><span class="org-block"> = </span><span class="string"><span class="org-block">"hpp2plantuml"</span></span><span class="org-block">
@@ -2384,7 +2469,7 @@ options.  Most of it is taken from <span class="org-link"><a href="https://hynek
 </span>
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Custom content</span>
 
-The non-boiler part of the <span class="org-verbatim">=setup.py=</span> file defines the package information.
+The non-boilerplate part of the <span class="org-verbatim">=setup.py=</span> file defines the package information.
 
 <span class="org-meta-line">#+NAME: py-setup-custom</span>
 <span class="org-block-begin-line">#+BEGIN_SRC python
@@ -2429,7 +2514,7 @@ The following helper functions provide tools to extract metadata from the
 
 
 </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">read</span></span><span class="org-block">(*parts):
-    </span><span class="string"><span class="org-block">"""
+    </span><span class="doc"><span class="org-block">"""
     Build an absolute path from *parts* and and return the contents of the
     resulting file.  Assume UTF-8 encoding.
     """</span></span><span class="org-block">
@@ -2441,7 +2526,7 @@ The following helper functions provide tools to extract metadata from the
 
 
 </span><span class="keyword"><span class="org-block">def</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">find_meta</span></span><span class="org-block">(meta):
-    </span><span class="string"><span class="org-block">"""
+    </span><span class="doc"><span class="org-block">"""
     Extract __*meta*__ from META_FILE.
     """</span></span><span class="org-block">
     </span><span class="variable-name"><span class="org-block">meta_match</span></span><span class="org-block"> = re.search(
@@ -2555,10 +2640,14 @@ org-file (converted to RST format).
 
 &lt;&lt;el-org-exp("sec-intro", "rst")&gt;&gt;
 
-</span><span class="rst-level-2"><span class="org-block">Usage</span></span><span class="org-block">
-</span><span class="rst-adornment"><span class="org-block">-----</span></span><span class="org-block">
-
 &lt;&lt;el-org-exp("sec-module-usage", "rst", "keep")&gt;&gt;
+
+&lt;&lt;el-org-exp("sec-module-install", "rst", "keep")&gt;&gt;
+
+The full documentation is available via:
+
+</span><span class="rst-block"><span class="org-block">- </span></span><span class="rst-reference"><span class="org-block">`This org-mode post <a href="https://thibaultmarin.github.io/blog/posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.html">&lt;https://thibaultmarin.github.io/blog/posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.html&gt;</a>`_</span></span><span class="org-block">
+</span><span class="rst-block"><span class="org-block">- </span></span><span class="rst-reference"><span class="org-block">`Read the docs <a href="http://hpp2plantuml.readthedocs.io/en/latest/">&lt;http://hpp2plantuml.readthedocs.io/en/latest/&gt;</a>`_</span></span><span class="org-block">
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
@@ -3025,7 +3114,7 @@ The following source block is used to get the module's version number defined in
 <span class="org-link"><a href="nil:nil">a single location</a></span> and include it at multiple locations.
 
 <span class="org-meta-line">#+NAME: get-version</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :var ver=hpp2plantuml-version :var lang="python"
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :var ver=hpp2plantuml-version :var lang="python" :eval yes
 </span><span class="org-block">(</span><span class="keyword"><span class="org-block">cond</span></span><span class="org-block"> ((string= lang </span><span class="string"><span class="org-block">"python"</span></span><span class="org-block">)
        (format </span><span class="string"><span class="org-block">"'%s'"</span></span><span class="org-block"> ver)))
 </span><span class="org-block-end-line">#+END_SRC
@@ -3036,13 +3125,13 @@ The following source block is used to get the module's version number defined in
 The following source block converts the content of an org heading to rst format
 using the <span class="org-link"><a href="nil:nil">~org-rst-convert-region-to-rst~</a></span> function.  The heading to process is
 passed by its CUSTOM_ID property (as a string).  In addition, the output
-language can set (although rst is the only instance used in this document) and
-an additional flag <span class="org-code">~children~</span> can be used to control whether the subsections of
-the target section are removed (<span class="org-code">~children = "remove"~</span>) of kept (any other
-string, e.g. "keep").
+language can be set (although rst is the only instance used in this document)
+and an additional flag <span class="org-code">~children~</span> can be used to control whether the subsections
+of the target section are removed (<span class="org-code">~children = "remove"</span><span class="org-code"><span class="org-code">~</span></span><span class="org-code">) of kept (any other
+string, e.g. </span><span class="org-code"><span class="org-code">~"keep"~</span></span>).
 
 <span class="org-meta-line">#+NAME: el-org-exp</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r :var input="sec-module-usage" :var lang="rst" :var children="remove" :results silent
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r :var input="sec-module-usage" :var lang="rst" :var children="remove" :results silent :eval yes
 </span><span class="org-block">(</span><span class="keyword"><span class="org-block">save-excursion</span></span><span class="org-block">
   (</span><span class="keyword"><span class="org-block">let</span></span><span class="org-block"> ((org-tree (org-element-parse-buffer)))
     (org-element-map
@@ -3066,7 +3155,7 @@ string, e.g. "keep").
                                  (org-export-with-todo-keywords nil)
                                  (org-export-with-section-numbers nil)
                                  (org-export-with-broken-links t))
-                             (org-rst-convert-region-to-rst))(ref:rst-convert-region)
+                             (org-rst-convert-region-to-rst))</span><span class="warning"><span class="org-block">(ref:rst-convert-region)</span></span><span class="org-block">
                            (buffer-string)))
                         </span><span class="comment-delimiter"><span class="org-block">;; </span></span><span class="comment"><span class="org-block">Could support more languages
 </span></span><span class="org-block">                        (t out-text))))))
@@ -3088,7 +3177,7 @@ blocks, replacing them by a simple example block.
 <span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r
 </span><span class="org-block">(</span><span class="keyword"><span class="org-block">defun</span></span><span class="org-block"> </span><span class="function-name"><span class="org-block">custom-rst-filter-org-block</span></span><span class="org-block"> (text backend info)(ref:el-rst-filter)
   (</span><span class="keyword"><span class="org-block">when</span></span><span class="org-block"> (org-export-derived-backend-p backend 'rst)
-    (</span><span class="keyword"><span class="org-block">let*</span></span><span class="org-block"> ((pattern </span><span class="string"><span class="org-block">".*\.\. code-block:: </span></span><span class="regexp-grouping-backslash"><span class="string"><span class="org-block">\\</span></span></span><span class="regexp-grouping-construct"><span class="string"><span class="org-block">(</span></span></span><span class="string"><span class="org-block"><a href="nil:nil">[[:alnum:]]</a>+</span></span><span class="regexp-grouping-backslash"><span class="string"><span class="org-block">\\</span></span></span><span class="regexp-grouping-construct"><span class="string"><span class="org-block">)</span></span></span><span class="string"><span class="org-block">"</span></span><span class="org-block">)
+    (</span><span class="keyword"><span class="org-block">let*</span></span><span class="org-block"> ((pattern </span><span class="string"><span class="org-block">".*\.\. code:: </span></span><span class="regexp-grouping-backslash"><span class="string"><span class="org-block">\\</span></span></span><span class="regexp-grouping-construct"><span class="string"><span class="org-block">(</span></span></span><span class="string"><span class="org-block"><a href="nil:nil">[[:alnum:]]</a>+</span></span><span class="regexp-grouping-backslash"><span class="string"><span class="org-block">\\</span></span></span><span class="regexp-grouping-construct"><span class="string"><span class="org-block">)</span></span></span><span class="string"><span class="org-block">"</span></span><span class="org-block">)
            (pattern-line (concat pattern </span><span class="string"><span class="org-block">".*$"</span></span><span class="org-block">))
            (lang (</span><span class="keyword"><span class="org-block">progn</span></span><span class="org-block">
                    (string-match pattern text)
