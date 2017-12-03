@@ -1,4 +1,4 @@
-# Created 2017-04-18 Tue 22:50
+# Created 2017-12-03 Sun 03:37
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016-10-05
@@ -7,7 +7,8 @@
 #+TODO: TODO REVIEW | DONE DEFERRED ABANDONED
 #+INFOJS_OPT: view:content toc:t mouse:t ltoc:nil ftoc:nil
 #+PROPERTY: COOKIE_DATA todo recursive
-#+PROPERTY: header-args+ :tangle rc.lua
+#+PROPERTY: header-args+ :tangle no
+#+PROPERTY: header-args:lua+ :tangle rc.lua
 #+PROPERTY: header-args+ :exports code
 #+PROPERTY: header-args+ :comments link
 #+STARTUP: hideblocks
@@ -1677,6 +1678,8 @@ feasible, with some work.
 
 
 *** Imports
+
+
 First, import the necessary libraries.
 
 #+NAME: module-cmus-import
@@ -1772,6 +1775,7 @@ end
 
 
 *** Controls
+
 A cmus instance can be controlled from a terminal using the =cmus-remote=
 command.  The following function passes simple controls to cmus-remote (play,
 pause, stop, next, etc.).  In practice only the play / pause functionality is
@@ -2028,8 +2032,7 @@ function cmus_hook()
             cmd = "rm " .. cmus_img_fold .. "/*; " ..
                "eyeD3 --no-color --write-images=" .. cmus_img_fold .. "/ " ..
                "\"$(cmus-remote -Q|grep \"^file\"|" ..
-               "awk '{$1=\"\";print $0}'| " ..
-               "sed -r 's/^\\s*//g')\""
+               "sed -r 's/^file\\s*//g')\""
             cmus_img_dump = io.popen(cmd .. " 2>&1"):read("*all")
             if not string.match(cmus_img_dump, 'file not found') then
                local fname = string.match(cmus_img_dump, "Writing %C*")
@@ -4474,10 +4477,10 @@ global_prompt.prompt_music = {
             end
          else
             io.stderr:write(err)
-            return
+            return kw .. ' ' .. name, cur_pos
          end
          if #file_list == 0 then
-            return
+            return kw .. ' ' .. name, cur_pos
          end
          while ncomp > #file_list do
             ncomp = ncomp - #file_list

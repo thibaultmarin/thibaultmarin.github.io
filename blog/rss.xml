@@ -14,9 +14,9 @@
 	<link>/blog/index.html</link>
 	<description><![CDATA[]]></description>
 	<language>en</language>
-	<pubDate>Tue, 18 Apr 2017 22:51:13 -0500</pubDate>
-	<lastBuildDate>Tue, 18 Apr 2017 22:51:13 -0500</lastBuildDate>
-	<generator>Emacs 25.1 Org-mode 9.0.5</generator>
+	<pubDate>Sun, 03 Dec 2017 03:37:54 -0600</pubDate>
+	<lastBuildDate>Sun, 03 Dec 2017 03:37:54 -0600</lastBuildDate>
+	<generator>Emacs 25.2 Org-mode 9.1.3</generator>
 	<webMaster>) (nil)</webMaster>
 	<image>
 		<url>http://orgmode.org/img/org-mode-unicorn-logo.png</url>
@@ -28,6 +28,11 @@
 		<h2>Table of Contents</h2>
 		<div id="text-table-of-contents">
 			<ul>
+				<li><a href="#org62064b4">Personal wiki in org</a>
+				<ul>
+					<li><a href="#orgac27bf1">Introduction</a></li>
+				</ul>
+				</li>
 				<li><a href="#org35bc9e1">hpp2plantuml - Convert C++ header files to PlantUML</a>
 				<ul>
 					<li><a href="#sec-intro">Motivation</a></li>
@@ -35,12 +40,12 @@
 				</li>
 				<li><a href="#org288365c">Personal website in org</a>
 				<ul>
-					<li><a href="#orgdd85d8a">Introduction</a></li>
+					<li><a href="#orga625add">Introduction</a></li>
 				</ul>
 				</li>
 				<li><a href="#orgc498e7a">Awesome-wm configuration</a>
 				<ul>
-					<li><a href="#orge9ec72f">Introduction </a></li>
+					<li><a href="#org9beed3f">Introduction </a></li>
 				</ul>
 				</li>
 			</ul>
@@ -48,14 +53,51 @@
 	</div>
 
 	<item>
+		<title>Personal wiki in org</title>
+		<link>/blog/index.html/rss.html#org62064b4</link>
+		<author>) (nil)</author>
+		<guid isPermaLink="false">/blog/index.html/rss.html#org62064b4</guid>
+		<pubDate>Sun, 03 Dec 2017 03:37:00 -0600</pubDate>
+
+		<description><![CDATA[<div id="outline-container-orgac27bf1" class="outline-3">
+		<h3 id="orgac27bf1">Introduction</h3>
+		<div class="outline-text-3" id="text-orgac27bf1">
+		<p>
+		This post describes the setup to generate a personal wiki in org.  It elaborates
+		on this <a href="2016-11-13-Personal_website_in_org.html">previous post</a> describing the generation of this website.  Generally, the
+		wiki setup is a simplified version of the website, with a few additions:
+		</p>
+
+		<ul class="org-ul">
+		<li>search functionality (implemented client side using ),</li>
+		<li>support link to <a href="http://www.refbase.net">refbase</a> instance (bibliography manager).</li>
+		</ul>
+
+		<p>
+		Compared to other wiki software (e.g. <a href="https://www.mediawiki.org/wiki/MediaWiki">MediaWiki</a>), this does not include user
+		management or the ability to edit pages and upload files from the webpage.  On
+		the other hand, it is fully text-based which allows the use of version control.
+		</p>
+
+
+
+		<p>
+		<a href="posts/2017-08-15-Personal_wiki_in_org.html">(Read more)</a>
+		</p>
+		</div>
+		</div>
+		]]></description>
+	</item>
+
+	<item>
 		<title>hpp2plantuml - Convert C++ header files to PlantUML</title>
 		<link>/blog/index.html/rss.html#org35bc9e1</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org35bc9e1</guid>
-		<pubDate>Tue, 18 Apr 2017 22:51:00 -0500</pubDate>
+		<pubDate>Sun, 03 Dec 2017 03:37:00 -0600</pubDate>
 
 		<description><![CDATA[<div id="outline-container-orgad486e1" class="outline-3">
-		<h3 id="sec-intro"><a id="orgad486e1"></a><a id="ID-69ce77e7-d5ae-431c-aed5-c67874c2dc59"></a>Motivation</h3>
+		<h3 id="sec-intro">Motivation</h3>
 		<div class="outline-text-3" id="text-sec-intro">
 		<p>
 		The purpose of this tool is to convert C++ header files to a UML representation
@@ -99,11 +141,11 @@
 		<link>/blog/index.html/rss.html#org288365c</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org288365c</guid>
-		<pubDate>Tue, 18 Apr 2017 22:51:00 -0500</pubDate>
+		<pubDate>Sun, 03 Dec 2017 03:37:00 -0600</pubDate>
 
-		<description><![CDATA[<div id="outline-container-orgdd85d8a" class="outline-3">
-		<h3 id="orgdd85d8a"><a id="ID-bee322f3-5c88-4db6-85bb-96ccd5204aa3"></a>Introduction</h3>
-		<div class="outline-text-3" id="text-orgdd85d8a">
+		<description><![CDATA[<div id="outline-container-orga625add" class="outline-3">
+		<h3 id="orga625add">Introduction</h3>
+		<div class="outline-text-3" id="text-orga625add">
 		<p>
 		This post describes the configuration for this website, which is statically
 		generated using emacs and org-mode.  Org-mode's publishing functionality is used
@@ -133,8 +175,8 @@
 		</p>
 
 		<div class="org-src-container">
-		<pre><code class="src src-sh" id="org3aca044">tree -a org/ -I <span style="color: #8b2252;">"*~"</span>
-		</code></pre>
+		<pre class="src src-sh" id="org3aca044">tree -a org/ -I <span style="color: #8b2252;">"*~"</span>
+		</pre>
 		</div>
 
 		<pre class="example">
@@ -209,11 +251,11 @@
 	<link>/blog/index.html/rss.html#orgc498e7a</link>
 	<author>) (nil)</author>
 	<guid isPermaLink="false">/blog/index.html/rss.html#orgc498e7a</guid>
-	<pubDate>Tue, 18 Apr 2017 22:51:00 -0500</pubDate>
+	<pubDate>Sun, 03 Dec 2017 03:37:00 -0600</pubDate>
 
-	<description><![CDATA[<div id="outline-container-orge9ec72f" class="outline-3">
-	<h3 id="orge9ec72f"><a id="ID-3338588b-ea4a-4f36-a964-4e66cb465239"></a>Introduction </h3>
-	<div class="outline-text-3" id="text-orge9ec72f">
+	<description><![CDATA[<div id="outline-container-org9beed3f" class="outline-3">
+	<h3 id="org9beed3f">Introduction </h3>
+	<div class="outline-text-3" id="text-org9beed3f">
 	<p>
 	This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
 	documentation of the different modules developed and used. The actual
@@ -228,7 +270,7 @@
 	</p>
 
 	<div class="org-src-container">
-	<pre><code class="src src-sh" id="org257ae27"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
+	<pre class="src src-sh" id="org257ae27"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
 	<span style="color: #a0522d;">res_x</span>=1920
 	<span style="color: #a0522d;">res_y</span>=1080
 	<span style="color: #a0522d;">screen_idx</span>=1
@@ -241,7 +283,7 @@
 	scrot desktop.png
 	convert desktop.png -crop ${<span style="color: #a0522d;">width</span>}x${<span style="color: #a0522d;">height</span>}+${<span style="color: #a0522d;">start_x</span>}+${<span style="color: #a0522d;">start_y</span>} desktop-main.png
 	rm desktop.png -rf
-	</code></pre>
+	</pre>
 	</div>
 
 
@@ -261,9 +303,9 @@
 	<dt>OS</dt><dd></dd>
 	</dl>
 	<div class="org-src-container">
-	<pre><code class="src src-sh" id="org6f0a31c">lsb_release -a
+	<pre class="src src-sh" id="org6f0a31c">lsb_release -a
 	uname -a
-	</code></pre>
+	</pre>
 	</div>
 
 	<pre class="example">
@@ -272,14 +314,15 @@
 	Release:	9.0
 	Codename:	stretch
 	Linux dell-desktop 4.9.0-1-amd64 #1 SMP Debian 4.9.2-2 (2017-01-12) x86_64 GNU/Linux
+
 	</pre>
 
 	<dl class="org-dl">
 	<dt>awesome</dt><dd></dd>
 	</dl>
 	<div class="org-src-container">
-	<pre><code class="src src-sh" id="org2c325eb">awesome --version
-	</code></pre>
+	<pre class="src src-sh" id="org2c325eb">awesome --version
+	</pre>
 	</div>
 
 	<pre class="example">
@@ -289,31 +332,34 @@
 	• execinfo support: ✔
 	• RandR 1.5 support: ✔
 	• LGI version: 0.9.1
+
 	</pre>
 
 	<dl class="org-dl">
 	<dt>emacs</dt><dd></dd>
 	</dl>
 	<div class="org-src-container">
-	<pre><code class="src src-emacs-lisp" id="orgcdf0814">(emacs-version)
-	</code></pre>
+	<pre class="src src-emacs-lisp" id="orgcdf0814">(emacs-version)
+	</pre>
 	</div>
 
 	<pre class="example">
 	"GNU Emacs 25.1.1 (x86_64-pc-linux-gnu, GTK+ Version 3.22.5)
 	of 2016-12-31, modified by Debian"
+
 	</pre>
 
 	<dl class="org-dl">
 	<dt>org-mode</dt><dd></dd>
 	</dl>
 	<div class="org-src-container">
-	<pre><code class="src src-emacs-lisp" id="org40c6986">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
-	</code></pre>
+	<pre class="src src-emacs-lisp" id="org40c6986">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
+	</pre>
 	</div>
 
 	<pre class="example">
 	"Org mode version 9.0.4 (release_9.0.4-270-ga10ddb @ ... )"
+
 	</pre>
 
 	<p>
@@ -331,11 +377,11 @@
 	</p>
 
 	<div class="org-src-container">
-	<pre><code class="src src-org" id="org5632e95"><span style="color: #a0522d;">** Disabled heading</span>
+	<pre class="src src-org" id="org5632e95"><span style="color: #a0522d;">** Disabled heading</span>
 	<span style="color: #a020f0;">   :PROPERTIES:</span>
 	<span style="color: #a020f0;">:header-args+:</span> :tangle no
 	<span style="color: #a020f0;">   :END:</span>
-	</code></pre>
+	</pre>
 	</div>
 
 	<p>

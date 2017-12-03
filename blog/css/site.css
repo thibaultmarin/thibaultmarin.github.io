@@ -66,12 +66,12 @@
 
     /* Text */
     --font-body-family: Arial, sans-serif;
-    --font-body-size: 16pt;
+    --font-body-size: 14pt;
 
     /* Code */
     --font-code-family: DejaVu, Lucida Console, monospace;
     --font-code-color: #4E4E4F;
-    --font-code-size: 14pt;
+    --font-code-size: 11pt;
     --font-src-family: DejaVu, Lucida Console, monospace;
     --font-example-family: DejaVu, Lucida Console, monospace;
     --font-example-size: 11pt;
@@ -96,7 +96,7 @@
 @media (min-width: 1024px) {
     :root {
         --side-width: 250px;
-        --body-width: 60%;
+        --body-width: calc(92% - var(--side-width));
         --nav-base-font-size: 80%;
         --nav-height: 50px;
         --nav-padding: 14px 16px;
@@ -104,6 +104,7 @@
         --toc-ul-font-size: 150%;
         --toc-ul-local-font-size: 130%;
         --toc-ul-2-font-size: 80%;
+        --toc-ul-3-font-size: 80%;
         --font-src-size: 11pt;
         --rss-padding: 0 0 0 25px;
         --rss-size: 25px 25px;
@@ -229,6 +230,11 @@
     font-size: var(--toc-ul-2-font-size);
     vertical-align: middle;
 }
+
+#table-of-contents > div > ul > li > ul > li > ul{
+    font-size: var(--toc-ul-3-font-size);
+    vertical-align: middle;
+}
 /* style-css-toc-ul ends here */
 
 /* [[file:~/dotfiles/emacs/website/website.org::style-css-toc-li][style-css-toc-li]] */
@@ -328,10 +334,19 @@
 /* [[file:~/dotfiles/emacs/website/website.org::style-css-src-block][style-css-src-block]] */
 pre.src {
     overflow-x: auto;
+    overflow-y: auto;
+    line-height: 2.5ex;
+    max-height: 125ex;
 }
 
 pre.src:before {
+    visibility: hidden;
     top: 0;
+    left: 0;
+    /* max-width: 50px; */
+    /* opacity: 0.5; */
+    /* border: none; */
+    /* background-color: transparent; */
 }
 
 /* Source block color based on file type */

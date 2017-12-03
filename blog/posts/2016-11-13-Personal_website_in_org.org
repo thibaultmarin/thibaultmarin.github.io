@@ -1,4 +1,4 @@
-# Created 2017-04-18 Tue 22:51
+# Created 2017-12-03 Sun 03:37
 #+OPTIONS: ^:t H:4
 #+TITLE: Personal website in org
 #+DATE: 2016-11-13
@@ -179,12 +179,12 @@ effort for scalar variables at least).
 
     /* Text */
     --font-body-family: Arial, sans-serif;
-    --font-body-size: 16pt;
+    --font-body-size: 14pt;
 
     /* Code */
     --font-code-family: DejaVu, Lucida Console, monospace;
     --font-code-color: #4E4E4F;
-    --font-code-size: 14pt;
+    --font-code-size: 11pt;
     --font-src-family: DejaVu, Lucida Console, monospace;
     --font-example-family: DejaVu, Lucida Console, monospace;
     --font-example-size: 11pt;
@@ -209,7 +209,7 @@ effort for scalar variables at least).
 @media (min-width: 1024px) {
     :root {
         --side-width: 250px;
-        --body-width: 60%;
+        --body-width: calc(92% - var(--side-width));
         --nav-base-font-size: 80%;
         --nav-height: 50px;
         --nav-padding: 14px 16px;
@@ -217,6 +217,7 @@ effort for scalar variables at least).
         --toc-ul-font-size: 150%;
         --toc-ul-local-font-size: 130%;
         --toc-ul-2-font-size: 80%;
+        --toc-ul-3-font-size: 80%;
         --font-src-size: 11pt;
         --rss-padding: 0 0 0 25px;
         --rss-size: 25px 25px;
@@ -395,6 +396,11 @@ block sets font sizes and alignment.
     font-size: var(--toc-ul-2-font-size);
     vertical-align: middle;
 }
+
+#table-of-contents > div > ul > li > ul > li > ul{
+    font-size: var(--toc-ul-3-font-size);
+    vertical-align: middle;
+}
 #+END_SRC
 
 The appearance of links is defined here:
@@ -540,10 +546,19 @@ main features are:
 #+BEGIN_SRC css
 pre.src {
     overflow-x: auto;
+    overflow-y: auto;
+    line-height: 2.5ex;
+    max-height: 125ex;
 }
 
 pre.src:before {
+    visibility: hidden;
     top: 0;
+    left: 0;
+    /* max-width: 50px; */
+    /* opacity: 0.5; */
+    /* border: none; */
+    /* background-color: transparent; */
 }
 
 /* Source block color based on file type */
@@ -1104,7 +1119,7 @@ to allow for customization of the appearance.
 CONTENTS is nil.  INFO is a plist used as a communication
   channel.  Add name of tangle file to source block (this
   requires a preprocessing hook to be added with
-  `™/org-export-collect-tangle'."
+  `™/org-export-collect-tangle')."
   (let* ((src-block-name (org-element-property :name src-block))
          (src-block-tangle
           (when ™/org-tangle-list-cache
@@ -1113,17 +1128,14 @@ CONTENTS is nil.  INFO is a plist used as a communication
                       'html src-block contents info)))
     (when (and src-block-tangle (> (length src-block-tangle) 0)
                (not (string= src-block-tangle "no")))
-      (let ((src-start-pat "<pre>\\(<code class=\"src src-[^>]+>\\)")
-            (src-end-pat "</code>")
-            (div-lbl (concat "<div style=\"position: absolute; top: 0;"
-                             " right: 0; text-align: right;\""
-                             " class=\"src-label\">["
-                             src-block-tangle "]</div>")))
+      (let ((src-start-pat "\\(<pre class=\"src src-[^>]+>\\)"))
         (setq export-out
               (replace-regexp-in-string
-               src-start-pat "<pre class=\"src\">\\1"
-               (replace-regexp-in-string
-                src-end-pat (concat div-lbl "</code>") export-out)))))
+               src-start-pat
+               (concat "\\1<div style=\"position: absolute; top: 0;"
+                       " right: 0; text-align:right;\" class=\"src-label\">["
+                       src-block-tangle "]</div>")
+               export-out))))
       export-out))
 #+END_SRC
 
@@ -1236,7 +1248,7 @@ website:
        :base-directory ,website-org
        :base-extension "org"
        :recursive t
-       :exclude "setup\\.org\\|website\\.org\\|rss\\.org"
+       :exclude "setup\\.org\\|website\\.org\\|rss\\.org\\|source-blocks\\.org"
        :publishing-directory ,website-www
        :publishing-function (™/org-html-publish-to-™-html
                              org-org-publish-to-org)
@@ -1424,12 +1436,13 @@ a standalone org file into a post.  The function performs the following:
                    (img-path (concat "../images/"
                                      (file-name-as-directory base-fname)
                                      link-file-base link-file-ext)))
-              ;; Copy file
-              (mkdir img-dir t)
-              (copy-file link-file out-link t)
-              ;; Update link target
-              (org-element-put-property r :path img-path)
-              (setcar (org-element-contents r) (concat "file:" img-path))))))
+              (when (member link-file-ext '("png" "jpg" "tif"))
+                ;; Copy file
+                (mkdir img-dir t)
+                (copy-file link-file out-link t)
+                ;; Update link target
+                (org-element-put-property r :path img-path)
+                (setcar (org-element-contents r) (concat "file:" img-path)))))))
       ;; Write output
       (with-current-buffer (find-file out-file-full)
         (erase-buffer)

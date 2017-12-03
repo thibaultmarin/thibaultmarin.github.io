@@ -1,4 +1,4 @@
-# Created 2017-04-18 Tue 22:51
+# Created 2017-12-03 Sun 03:37
 #+TITLE: misc/
 #+DATE: 2016-10-02
 #+AUTHOR: Thibault Marin
@@ -9,6 +9,7 @@ articles are built with [[https://gnu.org/s/emacs][emacs]] and
 
 * Blog
 
+** [[file:posts/2017-08-15-Personal_wiki_in_org.org][(2017-08-15) Personal wiki in org]]
 ** [[file:posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.org][(2016-11-30) hpp2plantuml - Convert C++ header files to PlantUML]]
 ** [[file:posts/2016-11-13-Personal_website_in_org.org][(2016-11-13) Personal website in org]]
 ** [[file:posts/2016-10-05-Awesome-wm_configuration.org][(2016-10-05) Awesome-wm configuration]]

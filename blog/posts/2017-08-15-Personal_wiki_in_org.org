@@ -1,0 +1,1511 @@
+# Created 2017-12-03 Sun 03:37
+#+TITLE: Personal wiki in org
+#+DATE: 2017-08-15
+#+AUTHOR: Thibault Marin
+#+SETUPFILE: ../setup.org
+#+TODO: TODO REVIEW | DONE DEFERRED ABANDONED
+#+PROPERTY: COOKIE_DATA todo recursive
+#+PROPERTY: header-args :eval no-export :results silent :exports code
+#+PROPERTY: header-args+ :comments link
+#+STARTUP: hideblocks
+#+MACRO: tt \nbsp{}
+
+* Introduction
+
+This post describes the setup to generate a personal wiki in org.  It elaborates
+on this [[file:2016-11-13-Personal_website_in_org.org][previous post]] describing the generation of this website.  Generally, the
+wiki setup is a simplified version of the website, with a few additions:
+
+- search functionality (implemented client side using [[#wiki-search][jQuery and Lunr]]),
+- support link to [[http://www.refbase.net][refbase]] instance (bibliography manager).
+
+Compared to other wiki software (e.g. [[https://www.mediawiki.org/wiki/MediaWiki][MediaWiki]]), this does not include user
+management or the ability to edit pages and upload files from the webpage.  On
+the other hand, it is fully text-based which allows the use of version control.
+
+
+* Requirements
+
+The wiki currently uses the following versions of emacs and org-mode:
+
+#+RESULTS: el-version
+: Org mode version 9.1.3 (release_9.1.3-206-g1bb9cf @ .../org-mode/lisp/)
+: GNU Emacs 25.2.2 (x86_64-pc-linux-gnu, GTK+ Version 3.22.20)
+:  of 2017-09-11, modified by Debian
+
+The emacs-side setup only requires the =htmlize= package used during HTML
+publishing.
+
+The main requirements for the published wiki are [[#wiki-js-libs][javascript modules]]:
+- [[https://jquery.com][jQuery]] :: used to [[#search-js-index-download][asynchronously download the search index from the server]],
+  submit search requests to Lunr and [[#search-js-display][display the results]],
+- [[https://lunrjs.com][Lunr]] :: used by the [[#search-js-search][search tool]],
+- [[https://markjs.io/][=mark.js=]] :: used to [[#search-js-highlight][highlight search results]],
+- [[http://www.mathjax.org][MathJax]] :: used to render equations,
+- [[http://orgmode.org/worg/code/org-info-js][=org-info.js=]] :: org-mode navigation library, used for menus.
+
+The wiki originally relied on [[https://github.com/caiorss/org-wiki][org-wiki]], but since my needs are much simpler, it
+is no longer used.
+
+Bibliographic citations rely on a [[http://www.refbase.net][refbase]] instance.  Refbase must be installed
+and setup for it to be useful.
+
+
+* Org setup
+This section defines the main functions used to maintain the wiki.  When
+tangled, it creates the =my-org-wiki.el= file, which can then be [[#dotfiles-org-wiki][loaded and
+further configured]] from =.emacs=.
+
+#+NAME: el-org-wiki-header
+#+BEGIN_SRC emacs-lisp
+;;; my-org-wiki.el --- Personal wiki configuration
+
+;;; Commentary:
+;; Defines functions for publishing a static wiki.  This file was produced
+;; automatically by wiki.org.  See the wiki.org file for a full description.
+
+;;; Code:
+
+;; Dependencies
+(require 'htmlize)
+(require 'org)
+(require 'my-refbase nil t)
+(require 'cl nil t)
+#+END_SRC
+
+
+** Custom parameters
+The wiki can be configured via the following variables:
+- [[(org-wiki-conf-loc)][~org-wiki-location~]] :: path to wiki (with both =.org= and =.html= files),
+- [[(org-wiki-conf-index-level)][~org-wiki-index-level-max~]] :: maximum level for [[#org-wiki-index][index generation]] (this
+  controls the granularity of the search results),
+- [[(org-wiki-conf-index-file)][~org-wiki-index-file~]] :: filename for search [[#org-wiki-index][index]] (stored in =json= format),
+- [[(org-wiki-conf-preamble)][~org-wiki-preamble~]] :: [[el-dotfiles-org-wiki][HTML preamble]] for published HTML pages (defines the
+  navigation bar, header and a widget to browse search results, hidden when
+  no search is active).
+- [[(org-wiki-conf-ignored)][~org-wiki-ignored-files~]] :: List of files ignored during generation of index
+  page table.
+- [[(org-wiki-conf-index-marker)][~org-wiki-index-page-marker~]] :: Special string [[#org-wiki-index-page][automatically replaced]] by a
+  list of wiki pages when added to the [[#wiki-page-index][=index.org=]] page.  Its default value
+  is:
+  #+NAME: el-index-marker
+  : #%AUTO-INDEX%#
+
+#+NAME: el-setup-config
+#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+;; Parameters
+
+(defcustom org-wiki-location "" ;;(ref:org-wiki-conf-loc)
+  "Base directory of wiki."
+  :group 'org-wiki
+  :type 'string)
+
+(defcustom org-wiki-index-level-max 3 ;;(ref:org-wiki-conf-index-level)
+  "Maximum depth for index."
+  :group 'org-wiki
+  :type 'integer)
+
+(defcustom org-wiki-index-file ;;(ref:org-wiki-conf-index-file)
+  "_resources/wiki.json"
+  "Location of lunr index file (relative to `org-wiki-location')."
+  :group 'org-wiki
+  :type 'string)
+
+(defcustom org-wiki-preamble ;;(ref:org-wiki-conf-preamble)
+  "<div class='topnav'>
+      <ul>
+        	<li><a href='index.html'>Home</a></li>
+        	<li><a href='search.html'>Search</a></li>
+      </ul>
+  </div>
+
+  <div class=\"foreword\">
+      [(last updated: %C) Press <kbd>?</kbd> for navigation help]
+  </div>
+
+  <div id='searchbar'>
+      <input id='searchbar_search' type='text' /> <br/>
+      <input type='button' id='searchbar_prev' class='footer-button'
+             value='&uarr;' onClick='searchbar_next(false)' />
+      <input type='button' id='searchbar_next' class='footer-button'
+             value='&darr;' onClick='searchbar_next(true)' />
+      <input type='button' id='searchbar_clear' class='footer-button'
+             value='x' onClick='searchbar_clear()'/>
+  </div>"
+  "HTML preamble for all published files."
+  :group 'org-wiki
+  :type 'string)
+
+(defcustom org-wiki-ignored-files ;;(ref:org-wiki-conf-ignored)
+  '("setup.org" "sitemap.org" "source-blocks.org")
+  "List of non-wiki org files.")
+
+(defcustom org-wiki-index-page-marker ;;(ref:org-wiki-conf-index-marker)
+  "#%AUTO-INDEX%#"
+  "String marker replaced by index table during publishing.")
+#+END_SRC
+
+** Publishing function
+
+The wiki is updated by running the [[(org-wiki-publish)][~org-wiki-publish~]] function.  It is a simple
+wrapper around ~org-publish~ setting common options.
+
+More specifically, this function performs the following:
+- add common [[#org-wiki-org-setup][org-mode setup]] to every page (via a [[(org-wiki-publish-setup)][preprocessing hook]]),
+- automatically add a [[#org-wiki-index-page][list of pages]] (by category) to the index page (also using
+  a [[(org-wiki-publish-index-table)][preprocessing hook]])
+- [[(org-wiki-publish-index)][generate the search index]] file,
+- add the [[(org-wiki-publish-preamble)][HTML preamble]] to every page.
+
+#+NAME: el-setup-publish-function
+#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+;; Publishing function
+(defun org-wiki-publish () ;;(ref:org-wiki-publish)
+  "Publish org files to html."
+  (interactive)
+  ;; Add preprocessing hook to add #+INCLUDE/#+SETUP lines
+  (add-hook 'org-export-before-processing-hook ;;(ref:org-wiki-publish-setup)
+            '™/org-wiki-add-setup)
+  (add-hook 'org-export-before-processing-hook ;;(ref:org-wiki-publish-index-table)
+            '™/org-wiki-insert-index)
+  (let ((™/org-wiki-index-category-list
+         ;; Create category index table and json search index
+         (org-wiki-index (concat ;;(ref:org-wiki-publish-index)
+                          (expand-file-name org-wiki-location)
+                          "/" org-wiki-index-file)))
+        (pub-plist
+         `("html"
+           :base-directory ,org-wiki-location
+           :base-extension "org"
+           :publishing-directory ,org-wiki-location
+           :publishing-function org-html-publish-to-html
+           :exclude "setup\\.org\\|source-blocks\\.org"
+           :html-preamble ,org-wiki-preamble ;;(ref:org-wiki-publish-preamble)
+           :auto-sitemap t
+           :html-postamble nil
+           :htmlized-source t
+           :html-link-home "index.html"
+           :with-sub-superscript nil)))
+    (org-publish pub-plist t))
+  ;; Remove preprocessing hook
+  (remove-hook 'org-export-before-processing-hook
+               '™/org-wiki-add-setup)
+  (remove-hook 'org-export-before-processing-hook
+               '™/org-wiki-insert-index))
+#+END_SRC
+
+
+** Insertion of org header
+The following function inserts common org-mode lines to every page.  It is run
+during publishing.  The actual functionality added by these lines is described
+[[#wiki-setup-org][here]].
+
+#+NAME: el-setup-org-header
+#+BEGIN_SRC emacs-lisp
+(defun ™/org-wiki-add-setup (backend)
+  "Add source-blocks.org and setup.org to org file when BACKEND is html."
+  (when (org-export-derived-backend-p backend 'html)
+    (save-excursion
+      (save-restriction
+        (widen)
+        (show-all)
+        (goto-char (point-min))
+        (insert "#+INCLUDE: source-blocks.org\n")
+        (insert "#+SETUPFILE: setup.org\n")))))
+#+END_SRC
+
+
+** Automatic id generation
+
+To simplify linking between wikipages, the [[(org-wiki-set-id)][~org-wiki-set-id~ function]] can be
+used to automatically generate ~CUSTOM_ID~ properties for each heading in org
+files (up to the maximum heading level defined by [[(org-wiki-conf-index-level)][~org-wiki-index-level-max~]]).
+
+The function ensures unique ~CUSTOM_ID~ entries for a given org file.  It does
+so by appending a counter digit for duplicate heading titles (this is far from
+ideal, a better option may be to prepend the ~CUSTOM_ID~ of the parent heading).
+
+#+NAME: el-setup-set-id-helper
+#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+(defun org-wiki-set-id (&optional force) ;;(ref:org-wiki-set-id)
+  "Set :CUSTOM_ID property on all headings.
+Leave existing properties unchanged if FORCE evaluates to nil."
+  (interactive "P")
+  (let ((tree (org-element-parse-buffer))
+        (id-list (list))
+        (insert-list (list)))
+    (org-element-map
+        tree 'headline
+      (lambda (el)
+        (let ((title (org-element-property :title el))
+              (begin (org-element-property :begin el))
+              (level (org-element-property :level el))
+              (customid (org-element-property :CUSTOM_ID el)))
+          (when (<= level org-wiki-index-level-max)
+            (cond ((and (<= level org-wiki-index-level-max)
+                        (or force (not customid) (member customid id-list)))
+                   (org-element-put-property el :key "CUSTOM_ID")
+                   (let ((cid (org-wiki-make-id (car title) id-list)))
+                     (add-to-list 'insert-list `(,begin . ,cid))
+                     (add-to-list 'id-list cid t)))
+                  (customid (add-to-list 'id-list customid t)))))))
+    (dolist (insert insert-list)
+      (goto-char (car insert))
+      (org-entry-put (point) "CUSTOM_ID" (cdr insert)))))
+#+END_SRC
+
+This function can be run manually for each new wikipage or added as a
+preprocessing hook.
+
+The [[(org-wiki-set-id)][~org-wiki-set-id~ function]] replacing non-ascii characters by reasonable
+ascii equivalents defined in the following function.
+
+#+NAME: el-setup-set-id
+#+BEGIN_SRC emacs-lisp
+;; Create unique id from title and current list
+(defun org-wiki-make-id (title cid_list)
+  "Form CUSTOM_ID from TITLE appending an index if TITLE is in CID_LIST."
+  (let ((rep-list '(("[[:space:]]+" . "_")
+                    ("[/+=!?()'\",;:-]" . "_")
+                    ("á\\|à\\|â\\|ä\\|ā\\|ǎ\\|ã\\|å\\|ą" . "a")
+                    ("é\\|è\\|ê\\|ë\\|ē\\|ě\\|ę" . "e")
+                    ("í\\|ì\\|î\\|ï\\|ī\\|ǐ" . "i")
+                    ("ó\\|ò\\|ô\\|ö\\|õ\\|ǒ\\|ø\\|ō" . "o")
+                    ("ú\\|ù\\|û\\|ü\\|ū"     . "u")
+                    ("Ý\\|ý\\|ÿ"     . "y")
+                    ("ç\\|č\\|ć" . "c")
+                    ("ď\\|ð" . "d")
+                    ("ľ\\|ĺ\\|ł" . "l")
+                    ("ñ\\|ň\\|ń" . "n")
+                    ("þ" . "th")
+                    ("ß" . "ss")
+                    ("æ" . "ae")
+                    ("š\\|ś" . "s")
+                    ("ť" . "t")
+                    ("ř\\|ŕ" . "r")
+                    ("ž\\|ź\\|ż" . "z")
+                    ("[[:nonascii:]]" . "_")
+                    ("^_" . "")
+                    ("_$" . "")
+                    ("_+" . "_")))
+        (cid (downcase title)))
+    (dolist (rep rep-list)
+      (setq cid
+            (replace-regexp-in-string (car rep) (cdr rep) cid)))
+    (when (member cid cid_list)
+      (let ((n 0))
+        (while (member (concat cid "_" (format "%d" n)) cid_list)
+          (incf n))
+        (setq cid (concat cid "_" (format "%d" n)))))
+    cid))
+#+END_SRC
+
+
+** Index generation
+As described in the [[#wiki-search][Search]] section, the search functionality requires the
+generation of an index of the wiki content.
+
+A common approach to enable client-side search consists in indexing the content
+of complete files but this results in inaccurate results: searches return pages
+containing a match, but not the location of the match.
+
+In order to get more accurate results, the index is represented as a tree where
+each node corresponds to a wiki file and a sub-heading (with level controlled by
+the [[(org-wiki-conf-index-level)][~org-wiki-index-level-max~]] variable) instead of using a node per file.  This
+allows for search results at the subsection level.
+
+The index structure is as follows:
+- [[(org-wiki-index-tree-title)][~title~]] :: Title of the wikipage
+- [[(org-wiki-index-tree-sec_title)][~sec_title~]] :: Full path to subsection (e.g. =Section 1 > SubSection 2 > ...=)
+- [[(org-wiki-index-tree-keywords)][~keywords~]] :: Captures the ~KEYWORDS~ property of the org wikipage
+- [[(org-wiki-index-tree-content)][~content~]] :: The text of the subsection (including its subsections if their
+  level is larger than [[(org-wiki-conf-index-level)][~org-wiki-index-level-max~]])
+- [[(org-wiki-index-tree-href)][~href~]] :: The HTML anchor for linking (i.e. the ~CUSTOM_ID~ property)
+
+#+NAME: el-setup-search-index-tree-insert
+#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+;; Lunr index
+(defun org-wiki~add-to-index-tree (outlist point-prev point-cur title
+                                           title-lineage keywords text
+                                           base-file customid)
+  "Helper function to add an entry to the index tree."
+  (when point-prev
+    (setq text (buffer-substring-no-properties
+                point-prev point-cur))
+    (add-to-list
+     'outlist
+     (list `("title" . ,title) ;;(ref:org-wiki-index-tree-title)
+           `("sec_title" .  ;;(ref:org-wiki-index-tree-sec_title)
+             ,(mapconcat #'identity
+                         (remove "" title-lineage)
+                         " > "))
+           `("keywords" . ,keywords) ;;(ref:org-wiki-index-tree-keywords)
+           `("content" . ,text) ;;(ref:org-wiki-index-tree-content)
+           `("href" . ;;(ref:org-wiki-index-tree-href)
+             ,(concat base-file ".html#" customid)))))
+  outlist)
+#+END_SRC
+
+The main index function loops over all org files in the wiki folder and
+populates a list of index entries.
+
+First, it [[(org-wiki-index-get-props)][extracts ~title~ and ~keywords~ properties of the current file]].  It
+then [[(org-wiki-index-browse)][browses headings]] and stores their lineage and content in the index.
+Finally, the index list is stored as a json file.
+
+This function also captures the ~CATEGORY~ property of each page for use by the
+[[#org-wiki-index-page][index table generation function]].
+
+#+NAME: el-setup-index
+#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+(defun org-wiki-index (outfile)
+  "Prepare json index for Lunr search, store in OUTFILE."
+  (let ((category-list '())
+        (file-list
+         (remove-if
+          (lambda (el)
+            (member (file-name-nondirectory el) org-wiki-ignored-files))
+          (directory-files org-wiki-location t ".org$")))
+        (outlist (list)))
+    (dolist (file file-list)
+      (let* ((base-file (file-name-nondirectory
+                         (file-name-sans-extension file)))
+             (visiting (find-buffer-visiting file))
+             (buffer (or visiting (find-file-noselect file))))
+        (with-current-buffer buffer
+          (let* ((tree (org-element-parse-buffer))
+                 (title-lineage (make-list org-wiki-index-level-max ""))
+                 title
+                 keywords
+                 category
+                 text
+                 customid
+                 point-prev
+                 point-cur)
+            (org-element-map ;;(ref:org-wiki-index-get-props)
+                tree 'keyword
+              (lambda (r)
+                (let ((key (org-element-property :key r))
+                      (value (org-element-property :value r)))
+                  (cond ((string= key "TITLE")
+                         (setq title value))
+                        ((string= key "KEYWORDS")
+                         (setq keywords value))
+                        ((string= key "CATEGORY")
+                         (setq category value))))))
+            ;; Update category list
+            (when category
+              (let ((page-link (format "[[file:%s.org][%s]]"
+                                       base-file base-file)))
+                (if (member category (mapcar 'car category-list))
+                    (dolist (cat category-list)
+                      (when (string= (car cat) category)
+                        (setcdr cat (push page-link (cdr cat)))))
+                  (add-to-list 'category-list
+                               (list category page-link)))))
+            ;; Index headings
+            (org-element-map ;;(ref:org-wiki-index-browse)
+                tree 'headline
+              (lambda (el)
+                (let ((level (org-element-property :level el))
+                      (s-title (car (org-element-property :title el))))
+                  (setq point-cur (org-element-property :begin el))
+                  (when (<= level org-wiki-index-level-max)
+                    (setq outlist
+                          (org-wiki~add-to-index-tree
+                           outlist point-prev point-cur title title-lineage
+                           keywords text base-file customid))
+                    ;; Set lineage title at current level
+                    (setf (nth (- level 1) title-lineage) s-title)
+                    ;; Reset following lineage titles
+                    (dolist (n (number-sequence
+                                level (- org-wiki-index-level-max 1)))
+                      (setf (nth n title-lineage) ""))
+                    (setq customid (org-element-property :CUSTOM_ID el))
+                    (setq point-prev point-cur)))))
+            (setq outlist
+                  (org-wiki~add-to-index-tree
+                   outlist point-prev point-cur title title-lineage
+                   keywords text base-file customid))))))
+    ;; Write search index json file
+    (with-temp-buffer
+      (insert (json-encode outlist))
+      (write-file outfile))
+    ;; Return index table
+    category-list))
+#+END_SRC
+
+*** Page index
+The page index is not used for the search but to insert a list of pages grouped
+by categories in the =index.org= page.  The list is obtained during the
+[[el-setup-index][generation of the search index]].
+
+The following function replaces the content of =index.org= at the marker given
+by [[#org-wiki-params][~org-wiki-index-page-marker~]].  It is used as a [[(org-wiki-publish-index-table)][preprocessing hook]] and relies
+on the ~™/org-wiki-index-category-list~ variable to be set by a prior call to
+the [[el-setup-index][~org-wiki-index~]] function (this is done in the [[(org-wiki-publish-index)][publishing function]]).
+
+#+NAME: el-setup-index-page
+#+BEGIN_SRC emacs-lisp
+(defun ™/org-wiki-insert-index (backend)
+  "Insert index table in index.org file."
+  (when (string= (file-name-nondirectory (buffer-file-name)) "index.org")
+    (save-excursion
+      ;; Find marker
+      (goto-char (point-max))
+      (search-backward org-wiki-index-page-marker nil t)
+      ;; Remove marker
+      (org-kill-line)
+      ;; Insert table
+      (insert (concat "|" (mapconcat 'car ™/org-wiki-index-category-list
+                                     "|") "|\n"))
+      (insert "|---\n")
+      (let ((done nil)
+            (n 0))
+        (while (not done)
+          (let ((pages (mapcar (lambda (el) (elt (cdr el) n))
+                               ™/org-wiki-index-category-list)))
+            (if (some 'identity pages)
+                (insert (concat "|" (mapconcat 'identity pages "|") "|\n"))
+              (setq done t))
+            (incf n)))))))
+#+END_SRC
+
+
+** Refbase link
+
+Bibliographic citations are handled by org-links to an existing refbase
+instance.  The interface with the refbase instance is handled by the
+[[#refbase][=my-refbase.el=]] package.
+
+The following defines an org-link for refbase citations (~refbase:bibtexkey~):
+- when activated in emacs, ~refbase~ links open a link to the refbase webpage in
+  the default web browser,
+- when hovering the mouse over the link in emacs, a summary of the citation
+  (author, title, publication) is shown as a tooltip,
+- when exporting to HTML, a hypertext link is inserted to the refbase page along
+  with a tooltip with a summary of the citation (author, title, publication).
+
+Note that this assumes that the =my-refbase.el= file is in the ~load-path~.
+
+#+NAME: el-setup-rb-link
+#+BEGIN_SRC emacs-lisp
+;; refbase link
+
+(defun rblink-follow (path)
+  (let ((link (refbase-get-link path)))
+    (when link (browse-url link))))
+
+(defun rblink-tooltip (window object position)
+  (with-current-buffer object
+    (save-excursion
+      (goto-char position)
+      (let ((path (when (thing-at-point-looking-at org-plain-link-re)
+                    (replace-regexp-in-string
+                     ".*refbase:\\([[:alnum:]]+\\).*" "\\1"
+                     (match-string 0)))))
+        (refbase-get-cite path)))))
+
+(defun rblink-export (path desc backend)
+  (cond ((eq 'html backend)
+         (format "<a href=\"%s\" title=\"%s\">%s</a>"
+                 (refbase-get-link path)
+                 (refbase-get-cite path)
+                 path))))
+
+(org-link-set-parameters
+ "refbase"
+ :follow #'rblink-follow
+ :help-echo #'rblink-tooltip
+ :export #'rblink-export)
+#+END_SRC
+
+
+** Helper function
+
+When migrating from [[https://www.mediawiki.org/wiki/MediaWiki][MediaWiki]] to this org-mode wiki, the following function
+proved useful as a first pass to convert pages.  It is left here for reference.
+
+#+NAME: el-setup-mw-to-org
+#+BEGIN_SRC emacs-lisp
+;; Convert mediawiki to org-wiki
+(defun ™/org-wiki-convert-mw-to-org ()
+  (interactive)
+  (dolist (n (number-sequence 10 1 -1))
+    (let ((pat (concat
+                "^"
+                (mapconcat #'identity (make-list n "\\*") "")))
+          (rep (concat
+                (mapconcat #'identity (make-list (* 2 (- n 1)) " ") "")
+                "-")))
+      (goto-char (point-min))
+      (while (re-search-forward pat nil t)
+        (replace-match rep))))
+  (dolist (n (number-sequence 10 1 -1))
+    (let* ((eqs (make-string n ?=))
+           (pat (format "^%s[[:space:]]*\\(.*?\\)[[:space:]]*%s"
+                        eqs eqs))
+           (rep (format "%s \\1" (make-string (- n 1) ?*))))
+      (goto-char (point-min))
+      (while (re-search-forward pat nil t)
+        (replace-match rep))))
+  (let ((rep-list '(("<math>\\(.+?\\)</math>" . "$\\1$")
+                    ("<math>" . "\\\\begin{align}")
+                    ("</math>" . "\\\\end{align}")
+                    ("<pre>" . "#+BEGIN_EXAMPLE")
+                    ("</pre>" . "#+END_EXAMPLE")
+                    ("<code>\\(.+?\\)</code>" . "~\\1~")
+                    ("<refbase>\\(.+?\\)</refbase>" . "refbase:\\1")
+                    ("[[]\\(https?:[^ ]+\\)[[:space:]]*|?[[:space:]]*\\(.*\\)]" .
+                     "\\2: \\1")
+                    ("<syntaxhighlight lang=[\"]?\\(.*?\\)[\"]?>" .
+                     "#+BEGIN_SRC \\1")
+                    ("</syntaxhighlight>" . "#+END_SRC")
+                    ("'''\\(.*?\\)'''" . "*\\1*"))))
+    (dolist (rep rep-list)
+      (goto-char (point-min))
+      (while (re-search-forward (car rep) nil t)
+        (replace-match (cdr rep))))))
+#+END_SRC
+
+
+** Footer
+
+This concludes the =my-org-wiki= package.
+
+#+NAME: el-org-wiki-footer
+#+BEGIN_SRC emacs-lisp
+
+(provide 'my-org-wiki)
+;;; my-org-wiki.el ends here
+#+END_SRC
+
+
+
+* Refbase package
+This section describes the minimalist refbase package used to handle
+bibliographic citations.  Note that this package assumes a local refbase
+instance for which the (MySQL) database is accessible.
+
+#+NAME: el-rb-header
+#+BEGIN_SRC emacs-lisp
+;;; my-refbase.el --- Helper functions to communicate with refbase instance
+
+;;; Commentary:
+;; Defines functions to perform requests from a refbase instance (using mysql)
+
+;;; Code:
+#+END_SRC
+
+** Parameters
+
+The package is configured by the [[(refbase-pkg-url)][~refbase-url~]] and [[(refbase-pkg-db)][~refbase-db~]] parameters which
+control the URL and the name of the MySQL database.
+
+#+NAME: el-rb-params
+#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+(defcustom refbase-url "" ;;(ref:refbase-pkg-url)
+  "URL of refbase installation."
+  :type 'string
+  :group 'refbase)
+
+(defcustom refbase-db "refbase" ;;(ref:refbase-pkg-db)
+  "Name of the MySQL refbase database."
+  :type 'string
+  :group 'refbase)
+#+END_SRC
+
+** Main function
+
+The following function interrogates a local mysql instance for arbitrary fields
+(e.g. author, title, publication, year, etc.).  Requests are performed for a
+bibtex key rather than refbase's serial number.  This requires the =citekey=
+field to be populated in refbase.
+
+#+NAME: el-rb-get-fields-by-citekey
+#+BEGIN_SRC emacs-lisp
+(defun refbase~get-by-citekey (citekey fields)
+  "Perform MySQL query to extract entry information by cite_key field."
+  (let* ((query (concat
+                 (format "SELECT %s FROM refs r " fields)
+                 "INNER JOIN user_data u ON r.serial = u.data_id "
+                 (format "WHERE u.cite_key='%s';" citekey)))
+         (cmd (format "mysql --login-path=local -sN -r -e \"%s\" %s"
+                      query refbase-db)))
+    (replace-regexp-in-string
+     "\n$" "" (shell-command-to-string cmd))))
+#+END_SRC
+
+** Get link
+
+Using the [[el-rb-get-fields-by-citekey][~refbase~get-by-citekey~]] function, the following function returns a
+link to the refbase page for a given citation.
+
+#+NAME: el-rb-get-link
+#+BEGIN_SRC emacs-lisp
+(defun refbase-get-link (citekey)
+  "Get link to refbase page."
+  (format "%s/show.php?record=%s"
+          refbase-url
+          (refbase~get-by-citekey citekey "serial")))
+#+END_SRC
+
+** Get abstract
+
+The following function returns the abstract for a citation using
+[[el-rb-get-fields-by-citekey][~refbase~get-by-citekey~]].
+
+#+NAME: el-rb-get-abstract
+#+BEGIN_SRC emacs-lisp
+(defun refbase-get-abstract (citekey)
+  "Get abstract of refbase entry."
+  (refbase~get-by-citekey citekey "abstract"))
+#+END_SRC
+
+** Get citation
+
+The following function builds a short summary of a citation using
+[[el-rb-get-fields-by-citekey][~refbase~get-by-citekey~]] containing the author, title, publication, and year.
+
+#+NAME: el-rb-get-citation
+#+BEGIN_SRC emacs-lisp
+(defun refbase-get-cite (citekey)
+  "Get title of refbase entry."
+  (replace-regexp-in-string
+   "\t" ", "
+   (refbase~get-by-citekey citekey "author, title, publication, year")))
+#+END_SRC
+
+** Package footer
+
+#+NAME: el-rb-footer
+#+BEGIN_SRC emacs-lisp
+(provide 'my-refbase)
+;;; my-refbase.el ends here
+#+END_SRC
+
+
+* Wiki setup
+
+This section defines the static content of the wiki website.  It includes the
+javascripts libraries, style sheets and the basic wiki pages.
+
+
+** Javascript libraries
+In this section, third-party javascript dependencies can be downloaded using the
+following source blocks (this requires some shell and wget):
+
+
+- JQuery :: version 2.1.3 but more recent versions should also work:
+  #+NAME: wiki-js-jquery
+  #+BEGIN_SRC sh
+    wget https://code.jquery.com/jquery-2.1.3.min.js -O org/_resources/jquery-2.1.3.min.js
+  #+END_SRC
+- Lunr :: latest version hoping it does not break (2.1.3 is known to work):
+  #+NAME: wiki-js-lunr
+  #+BEGIN_SRC sh
+    wget https://unpkg.com/lunr/lunr.js -O org/_resources/lunr.js
+  #+END_SRC
+- =mark.js= :: version 8.11.0 but more recent versions should also work:
+  #+NAME: wiki-js-mark
+  #+BEGIN_SRC sh
+    wget https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.0/jquery.mark.min.js -O org/_resources/jquery.mark.min.js
+  #+END_SRC
+- =org-info.js= :: use latest version
+  #+NAME: wiki-js-org-info
+  #+BEGIN_SRC sh
+    wget http://orgmode.org/worg/code/org-info-js/org-info.js -O org/_resources/org-info.js
+  #+END_SRC
+- MathJax :: version 2.7.2, but more recent versions should also work:
+  #+NAME: wiki-js-mathjax
+  #+BEGIN_SRC sh
+    wget https://github.com/mathjax/MathJax/archive/2.7.2.zip -O org/_resources/mathjax2.7.2.zip
+    unzip org/_resources/mathjax2.7.2.zip
+    mv MathJax-2.7.2 org/_resources/MathJax
+    rm org/_resources/mathjax2.7.2.zip
+  #+END_SRC
+
+
+** Search
+The search functionality relies on the client-side [[https://lunrjs.com/][Lunr]] library.
+
+The basic idea is to [[#org-wiki-index][generate an index file]] during the static generation of
+wikipages (i.e. when running ~org-publish~), send it to the client via a jQuery
+request and use Lunr to search the index.
+
+
+*** Asynchronous index download using jQuery
+The following block performs three operations:
+1. [[(js-search-get-json)][asynchronously download the index file]],
+2. [[(js-search-lunr-index)][build the Lunr search index]], assigning score "boost" factors to each field,
+   and using the ~href~ link to the wiki entry as [[(js-search-lunr-index-key)][primary key]].
+3. [[(js-search-url-search)][perform a search]] if the URL contains a ~q=~ parameter.
+
+#+NAME: search-js-index-download
+#+BEGIN_SRC javascript -r -l " //(ref:%s)"
+var lunrIndex,
+    pagesIndex,
+    searchStr;
+
+// Initialize lunrjs using our generated index file
+function initLunr() {
+    // First retrieve the index file
+    $.getJSON("_resources/wiki.json") //(ref:js-search-get-json)
+        .done(function(index) {
+            pagesIndex = index;
+
+            // Set up lunrjs by declaring the fields we use
+            // Also provide their boost level for the ranking
+            lunrIndex = lunr(function() { //(ref:js-search-lunr-index)
+                this.field("title", {
+                    boost: 30
+                });
+                this.field("sec_title", {
+                    boost: 20
+                });
+                this.field("keywords", {
+                    boost: 10
+                });
+                this.field("content");
+                this.field("score");
+
+                // ref is the result item identifier
+                this.ref("href"); //(ref:js-search-lunr-index-key)
+
+                // Feed lunr with each file and let lunr actually index them
+                for (pi = 0; pi < pagesIndex.length; pi++) {
+                    this.add(pagesIndex[pi]);
+                }
+            });
+
+            // Immediate search from URL
+            url = window.location.search;
+            if (url[0] == "?") {
+                url = url.slice(1);
+            }
+            var urlParams = new URLSearchParams(url);
+            var urlQuery = urlParams.get('q');
+            if (urlQuery != null) { //(ref:js-search-url-search)
+                $('#search').val(urlQuery);
+                searchStr = urlQuery;
+                var results = search(urlQuery);
+                renderResults(results);
+            }
+        })
+        .fail(function(jqxhr, textStatus, error) {
+            var err = textStatus + ", " + error;
+            console.error("Error getting lunr index flie:", err);
+        });
+}
+#+END_SRC
+
+
+*** Search box listener
+The following adds a listener function to the search box in the [[#wiki-page-search][search page]].
+When two or more characters are typed, a search is performed.
+
+#+NAME: search-js-searchbox-listener
+#+BEGIN_SRC javascript
+var $results
+
+// Add events to search box
+function initUI() {
+    $results = $("#results");
+	$('#search').focus();
+    $("#search").keyup(function() {
+        $results.empty();
+
+        // Only trigger a search when 2 chars. at least have been provided
+        var query = $(this).val();
+        if (query.length < 2) {
+            return;
+        }
+
+        searchStr = query;
+        var results = search(query);
+
+        renderResults(results);
+    });
+}
+#+END_SRC
+
+
+*** Lunr search
+The ~search~ function is a wrapper around Lunr's [[(js-search-lunr-search)][~search~]] function.  Lunr's
+function returns scores and the corresponding primary key (the ~href~ field).
+In order to display, in the results page, more than just the hyperlink, the
+~href~ link is used to find full entries in the page index.  The double ~for~
+loop may not be optimal in terms of speed but it does not seem prohibitively
+slow yet.
+
+#+NAME: search-js-search
+#+BEGIN_SRC javascript -r -l " //(ref:%s)"
+/**
+ ,* Trigger a search in lunr and transform the result
+ ,*
+ ,* @param  {String} query
+ ,* @return {Array}  results
+ ,*/
+function search(query) {
+    // Find the item in our index corresponding to the lunr one to have
+    // more info
+    // Lunr result:
+    //  {ref: "/section/page1", score: 0.2725657778206127}
+    // Our result:
+    //  {title:"Page1", href:"/section/page1", ...}
+    var search_res = lunrIndex.search(query); //(ref:js-search-lunr-search)
+    var out_res = []
+    for (ri = 0; ri < search_res.length; ri++) {
+        var found = false;
+        var pi = 0;
+        while (!found && pi < pagesIndex.length) {
+            if (pagesIndex[pi].href == search_res[ri].ref) {
+                pagesIndex[pi].score = search_res[ri].score;
+                out_res.push(pagesIndex[pi]);
+                found = true;
+            }
+            pi++;
+        }
+    }
+    return out_res;
+}
+#+END_SRC
+
+
+*** Display results
+Search results are grouped by wikipage, and displayed by subsections, along with
+the Lunr search score.  The [[(js-search-display-href)][~href~ link]] is modified to [[#search-js-highlight][highlight the search
+results]].
+
+Most of the code in the function deals with creating the HTML output which
+could probably be simplified with better jQuery skills.
+
+#+NAME: search-js-display
+#+BEGIN_SRC javascript -r -l " //(ref:%s)"
+/**
+ ,* Display the 10 first results
+ ,*
+ ,* @param  {Array} results to display
+ ,*/
+function renderResults(results) { //(ref:js-search-render)
+    if (!results.length) {
+        return;
+    }
+
+    // Reformat into sortable table (only show the ten first results)
+    var res_top = [];
+    for (ri = 0; ri < results.slice(0, 10).length; ri++) {
+        res_top.push([results.slice(0, 10)[ri].title,
+                      results.slice(0, 10)[ri].sec_title,
+                      results.slice(0, 10)[ri].href,
+                      results.slice(0, 10)[ri].score]);
+    }
+    res_top.sort(function(a, b) {
+        if (a[0] == b[0]) {
+            return a[1].localeCompare(b[1]);
+        } else {
+            return a[0].localeCompare(b[0]);
+        }} );
+
+    // Display results
+    var title_prev = "";
+    var $result_all = "";
+    for (ri = 0; ri < res_top.length; ri++) {
+        var res = res_top[ri];
+        var href = res[2].replace(/([^#]+)#(.*)/, //(ref:js-search-display-href)
+                                  '$1?highlight=' + searchStr + '#$2');
+        var title = res[0];
+        var sec_title = res[1];
+        var $result = "";
+        var $result_inner = "<li><a href=\"" + href + "\">";
+        $result_inner += sec_title + "</a> <small>[score: " +
+            res[3].toFixed(3) + "]</small></li>";
+        if (title.localeCompare(title_prev) == 0) {
+            $result = $result_inner;
+        } else {
+            if (title_prev.localeCompare("") != 0) {
+                $result += "</ul></li>"
+            }
+            $result += "<li>" + title + "<ul>";
+            $result += $result_inner;
+        }
+        $result_all += $result;
+        title_prev = title;
+    }
+    if (res_top.length > 0) {
+        $result_all += "</ul></li>"
+    }
+    $('#results').append($result_all);
+}
+#+END_SRC
+
+
+*** Initialization
+The following instantiates the =json= index download when loading the page.
+
+#+NAME: search-js-init
+#+BEGIN_SRC javascript
+
+// Initialize
+initLunr();
+
+$(document).ready(function() {
+    initUI();
+});
+#+END_SRC
+
+
+** Results highlighting
+When a search is performed, the search term is passed to the target page via the
+URL (the ~highlight~ parameter).  The ~highlight~ parameter is parsed by the
+[[(js-search-render)][render function]].  The highlighting it handled by the ~highlight.js~ library:
+1. jump to the first search result,
+2. highlight the search results (using ~mark.js~).
+
+When the ~highlight~ parameter is passed, a search bar is shown on the target
+page, with button to navigate through results.  This is shown on
+Fig.\nbsp{}[[fig-search-bar]].
+
+#+NAME: search-js-highlight
+#+BEGIN_SRC javascript
+var currentClass = "current";
+var currentIndex = 0;
+
+function jumpTo() {
+	if ($mark_results.length) {
+		var position,
+			$current = $mark_results.eq(currentIndex);
+		$mark_results.removeClass(currentClass);
+		if ($current.length) {
+			$current.addClass(currentClass);
+			position = $current.offset().top;
+			window.scrollTo(0, position);
+		}
+	}
+}
+
+$('#searchbar_search').on("input", function() {
+	var searchVal = this.value;
+    $('#content').unmark({
+		done: function() {
+			$('#content').mark(searchVal, {
+				separateWordSearch: true,
+				done: function() {
+					$results = $('#content').find("mark");
+					currentIndex = 0;
+					jumpTo();
+				}
+			});
+		}
+    });
+});
+
+function searchbar_clear() {
+    $('#content').unmark();
+    $('#searchbar_search').val("").focus();
+	$('#searchbar').hide();
+}
+
+function searchbar_next(dir) {
+    if ($mark_results.length) {
+		currentIndex += dir ? 1 : -1;
+		if (currentIndex < 0) {
+			currentIndex = $mark_results.length - 1;
+		}
+		if (currentIndex > $mark_results.length - 1) {
+			currentIndex = 0;
+		}
+		jumpTo();
+    }
+}
+
+function highlight(query) {
+	$('#content').unmark({
+		done: function() {
+			$('#content').mark(query, {
+				separateWordSearch: true,
+				done: function() {
+					$mark_results = $('#content').find("mark");
+					currentIndex = 0;
+					while (currentIndex < $mark_results.length &&
+						   $mark_results[currentIndex].offsetTop <
+						   $(window).scrollTop()) {
+						currentIndex++;
+					}
+					jumpTo();
+				}
+			});
+		}
+	});
+}
+
+$(document).ready(function() {
+	url = window.location.search;
+	if (url[0] == "?") {
+		url = url.slice(1);
+	}
+    var urlParams = new URLSearchParams(url);
+	var urlQuery = urlParams.get('highlight');
+	if (urlQuery != null) {
+		highlight(urlQuery);
+		$('#searchbar').show();
+		$('#searchbar_search').val(urlQuery);
+		$('#searchbar_search').attr('disabled', 'disabled');
+	}
+});
+#+END_SRC
+
+#+NAME: fig-search-bar
+#+CAPTION: Search results highlighting and search bar (in the top right corner).
+[[file:../images/2017-08-15-Personal_wiki_in_org/highlight.png][file:../images/2017-08-15-Personal_wiki_in_org/highlight.png]]
+
+
+** CSS
+
+Styling for the wiki is identical to that of the [[file:2016-11-13-Personal_website_in_org.org][website]].  The following source
+block creates a symbolic link to the website css.
+
+#+NAME: wiki-css-wiki
+#+BEGIN_SRC sh
+ln -sf ../../../website/org/css/site.css org/_resources/wiki.css
+#+END_SRC
+
+
+*** Search
+The highlighting of the search results and the appearance of the search bar are
+controlled by the ~search.css~ file.
+
+#+NAME: css-search
+#+BEGIN_SRC css
+mark {
+  background: yellow;
+}
+
+mark.current {
+  background: orange;
+}
+
+#searchbar {
+    position: fixed;
+    top: 20px;
+    right: 5px;
+    display: none;
+    z-index: 1;
+}
+
+#searchbar_prev, #searchbar_next, #searchbar_clear {
+    padding: 5px;
+    min-width: 20px;
+    height: 40px;
+}
+#+END_SRC
+
+
+** Org header
+Wiki pages are processed before publishing to include the following org-setup.
+This configures common options:
+- path and configuration for [[(org-setup-info-js)][=org-info.js=]]
+  (http://orgmode.org/worg/code/org-info-js/), which provides navigation tools
+  for published pages,
+- the path to a local instance of [[(org-setup-mathjax)][MathJax]],
+- the CSS for the website,
+- the [[#wiki-js-libs][javascript libraries used]].
+
+#+NAME: org-setup
+#+HEADER: :tangle org/setup.org
+#+BEGIN_SRC org -r -l " #(ref:%s)"
+,#+INFOJS_OPT: toc:t tdepth:2 view:showall ftoc:t ltoc:nil path:_resources/org-info.js #(ref:org-setup-info-js)
+,#+PROPERTY: header-args :eval no-export :exports code
+,#+STARTUP: nohideblocks
+,#+MACRO: tt \nbsp{}
+,#+MACRO: kbd call_el-common-kbd[:eval yes :results value raw :exports results]($1) #(ref:org-setup-kbd)
+,#+HTML_MATHJAX: path:"_resources/MathJax/MathJax.js?config=TeX-AMS_HTML" #(ref:org-setup-mathjax)
+,#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="_resources/code.css"/>
+,#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="_resources/wiki.css"/>
+,#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="_resources/search.css"/>
+,#+HTML_HEAD_EXTRA: <script type="text/javascript" src="_resources/jquery-2.1.3.min.js"></script>
+,#+HTML_HEAD_EXTRA: <script type="text/javascript" src="_resources/jquery.mark.min.js"></script>
+,#+HTML_HEAD_EXTRA: <script type="text/javascript" src="_resources/highlight.js"></script>
+,#+HTML_HEAD_EXTRA: <link rel="search" type="application/opensearchdescription+xml" title="Org-wiki search" href="_resources/opensearch.xml"/>
+#+END_SRC
+
+The [[(org-setup-kbd)][~kbd~]] macro relies on a org-mode source block defined in =source-blocks.org=
+(also from the [[file:2016-11-13-Personal_website_in_org.org][website]] setup).  I use a symlink to the version used in my
+personal website.
+
+#+NAME: org-source-block-ln
+#+BEGIN_SRC sh
+ln -sf ../../website/org/source-blocks.org org/source-blocks.org
+#+END_SRC
+
+
+** Basic wiki pages
+
+Wikipages are simple org files which are exported to HTML during the call to the
+[[el-setup-publish-function][publishing function]].  The wiki comes with three predefined pages described in
+this section.
+
+
+*** =index=
+The =index.org= page is the welcome page of the published wiki (published to
+=index.html=).  It may contain a general welcome message, custom links, etc.  In
+this example the index page contains:
+
+1. a table with all the wikipages grouped by category (the generation of the
+   page index is described [[#org-wiki-index-page][here]]),
+2. a link to a =demo= page demonstrating the wiki functionality (e.g. markup,
+   links),
+3. a link to the full sitemap.
+
+
+#+NAME: wikipage-index
+#+HEADER: :tangle org/index.org :noweb yes
+#+BEGIN_SRC org
+,#+TITLE: index
+,#+STARTUP: overview
+
+,* Index
+
+#%AUTO-INDEX%#
+
+
+,* Editing help
+  :PROPERTIES:
+  :CUSTOM_ID: editing_help
+  :END:
+
+[[file:demo.org][demo]]
+
+
+,* Sitemap
+  :PROPERTIES:
+  :CUSTOM_ID: sitemap
+  :END:
+
+[[file:sitemap.org][Sitemap]]
+#+END_SRC
+
+
+*** =search=
+The search page (=search.org=) is relatively simple: it contains an input area
+for the user to enter search terms and a result section.  It must also include
+the appropriate javascript libraries.
+
+#+NAME: wikipage-search
+#+HEADER: :tangle org/search.org
+#+BEGIN_SRC org
+,#+TITLE: Search
+,#+HTML_HEAD_EXTRA: <script type="text/javascript" src="_resources/lunr.js"></script>
+,#+HTML_HEAD_EXTRA: <script type="text/javascript" src="_resources/search.js"></script>
+,#+BEGIN_EXPORT html
+Search:
+<input id="search" type="text" />
+<br> Results:
+<ul id="results">
+</ul>
+,#+END_EXPORT
+#+END_SRC
+
+An example of rendered search page is shown on Fig.\nbsp{}[[fig-search-bar]].
+
+#+NAME: fig-search-page
+#+CAPTION: Search page with search results.
+[[file:../images/2017-08-15-Personal_wiki_in_org/searchpage.png][file:../images/2017-08-15-Personal_wiki_in_org/searchpage.png]]
+
+
+*** =demo=
+
+The =demo.org= page is meant as a help for the wiki.  It is designed to describe
+the main functionality:
+
+- text formatting,
+- links,
+- equations,
+- tikz diagrams,
+- figure creation using source blocks,
+- citations to refbase instance.
+
+
+#+NAME: wikipage-demo
+#+HEADER: :tangle org/demo.org
+#+BEGIN_SRC org
+,#+TITLE: demo
+,#+DESCRIPTION:
+,#+KEYWORDS: help
+,#+STARTUP: overview
+,#+PROPERTY: header-args+ :eval no-export
+
+,* Editing the wiki
+  :PROPERTIES:
+  :CUSTOM_ID: editing_the_wiki
+  :END:
+
+To edit the wiki, perform the following:
+1. Open a terminal (or putty)
+2. ssh to the server
+3. Open emacs: ~emacs -nw ~/org/org-wiki/index.org~
+4. Open the wiki page (a =.org= file) to edit
+   - {{{kbd("C-x C-f")}}} then enter a filename in =~/org/org-wiki/=
+   - Alternatively, use the =projectile= package with {{{kbd("C-c p f")}}} and
+     select a file from the list
+5. Edit the file
+   - See the [[#navigation]] and [[#formatting]] sections for help on using org-mode
+   - See the rest of the file for details about advanced editing (equations,
+     diagrams, code blocks)
+   - Note that when using a terminal, some keyboard shortcuts may not work
+     (e.g. some keybindings involving the {{{kbd("Alt")}}} key)
+6. Save the file ({{{kbd("C-x C-s")}}})
+7. To update the website run the command: ~org-wiki-publish~
+   - {{{kbd("M-x")}}} ~org-wiki-publish~
+
+
+,* Navigation
+  :PROPERTIES:
+  :CUSTOM_ID: navigation
+  :END:
+
+See the org-mode documentation for navigation commands and keyboard shortcuts:
+- http://orgmode.org/manual/Motion.html
+- http://orgmode.org/manual/Document-structure.html#Document-structure
+- http://orgmode.org/orgcard.txt
+
+
+,* Formatting
+  :PROPERTIES:
+  :CUSTOM_ID: formatting
+  :END:
+
+- The formatting syntax is that of emacs org-mode (see the [[http://orgmode.org/manual/Markup.html][documentation]]).
+  - bold :: ~*bold*~ is rendered as *bold*
+  - italic :: ~/italic/~ is rendered as /italic/
+  - underlined :: ~_underlined_~ is rendered as _underlined_
+  - verbatim :: ~=verbatim=~ is rendered as =verbatim=
+  - code :: ~~code~~ is rendered as ~code~
+  - strike-through :: ~+strike-through+~ is rendered as +strike-through+
+- To render keyboard shortcuts, the ~kbd~ macro can be used: ~{{{kbd("C-c C-x
+  p")}}}~ is rendered as {{{kbd("C-c C-x p")}}}.
+
+
+,* Links
+  :PROPERTIES:
+  :CUSTOM_ID: links
+  :END:
+
+To link to a wiki page, simply insert ~file:page_name.org~ into the page
+(e.g. file:index.org).  In order to change the label, use ~[[file:page_name.org][Displayed label]]~
+(e.g. [[file:index.org][Index]]).
+
+To link to a specific subsection, use regular org links
+(http://orgmode.org/manual/Search-options.html#Search-options): ~[[file:blender.org::#how_to][link label]]~
+results in the following link: [[file:blender.org::#how_to][link label]] (the anchor name =#how_to= corresponds
+to the =CUSTOM_ID= headline property).  To use the heading title instead of the
+=CUSTOM_ID= property, use ~[[file:blender.org::*How to][link label]]~ which results in a similar link: [[file:blender.org::*How to][link
+label]].
+
+
+,* Equations
+  :PROPERTIES:
+  :CUSTOM_ID: equations
+  :END:
+
+Inline equations can be wrapped with ~$~ characters, e.g. ~$1 + 1 = 2$~
+(rendered as $1 + 1 = 2$).  Longer equations can be defined within ~align~
+blocks:
+
+,#+NAME: eq-demo
+,#+begin_src latex :results drawer :exports both
+\begin{align}
+e^{i\pi} + 1 &= 0\\
+\sum_{n=1}^{\infty}\frac{1}{n^2} &= \frac{\pi^2}{6}\\
+\int_{-\infty}^{\infty}e^{-t^2} &= \sqrt{\pi}
+\end{align}
+,#+end_src
+
+is rendered as:
+
+,#+RESULTS: eq-demo
+:RESULTS:
+\begin{align}
+e^{i\pi} + 1 &= 0\\
+\sum_{n=1}^{\infty}\frac{1}{n^2} &= \frac{\pi^2}{6}\\
+\int_{-\infty}^{\infty}e^{-t^2} &= \sqrt{\pi}
+\end{align}
+:END:
+
+
+,** TikZ diagrams
+   :PROPERTIES:
+   :CUSTOM_ID: tikz_diagrams
+   :END:
+
+TikZ diagrams can be inserted via latex source blocks:
+
+,#+begin_src org
+,,#+NAME: demo-tikz
+,,#+header: :imagemagick t :mkdirp yes
+,,#+header: :iminoptions -density 300 :imoutoptions -geometry 1024 -trim
+,,#+begin_src latex :file demo/tikz.png :results raw :exports results
+\begin{tikzpicture}
+  \draw node (a) [draw] {$h(t)$} (a.west) --
+  ++(-1,0) node[left] {$x(t)$} circle[radius=2pt] (a.east) --
+  ++(1,0) node[right] {$y(t)=h(t)*x(t)$} circle[radius=2pt];
+\end{tikzpicture}
+,,#+end_src
+,#+end_src
+
+which produces the image in Fig.\nbsp [[fig-demo-tikz]] (the ~geometry~ option
+controls the size of the output image).
+
+,#+NAME: demo-tikz
+,#+header: :imagemagick t :mkdirp yes
+,#+header: :iminoptions -density 300 :imoutoptions -geometry 1024 -trim
+,#+begin_src latex :file demo/tikz.png :results raw :exports results
+\begin{tikzpicture}
+  \draw node (a) [draw] {$h(t)$} (a.west) --
+  ++(-1,0) node[left] {$x(t)$} circle[radius=2pt] (a.east) --
+  ++(1,0) node[right] {$y(t)=h(t)*x(t)$} circle[radius=2pt];
+\end{tikzpicture}
+,#+end_src
+
+,#+NAME: fig-demo-tikz
+,#+CAPTION: tikz caption
+,#+RESULTS: demo-tikz
+[[file:demo/tikz.png]]
+
+
+,* Source blocks
+  :PROPERTIES:
+  :CUSTOM_ID: source_blocks
+  :END:
+
+Source blocks should not be executed on export (set ~:eval~ to ~no-export~,
+ideally in the header ~#+PROPERTY: header-args+ :eval no-export~).
+
+Here is an example in python:
+
+,#+BEGIN_SRC org
+,,#+NAME: plot-test
+,,#+BEGIN_SRC python :session yes :results file :exports both
+import numpy as np
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+fname = 'demo/test.png'
+plt.clf()
+plt.plot(np.random.random(100))
+plt.savefig(fname)
+fname
+,,#+END_SRC
+,#+END_SRC
+
+which renders the code:
+
+,#+NAME: plot-test
+,#+BEGIN_SRC python :session yes :results file :exports both
+import numpy as np
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+fname = 'demo/test.png'
+plt.clf()
+plt.plot(np.random.random(100))
+plt.savefig(fname)
+fname
+,#+END_SRC
+
+and the output figure:
+
+,#+RESULTS: plot-test
+[[file:demo/test.png]]
+
+
+,* Citations
+  :PROPERTIES:
+  :CUSTOM_ID: citations
+  :END:
+
+Papers from a refbase installation can be inserted using the ~refbase:~ link
+type: ~refbase:Marin2010c~ is rendered as refbase:Marin2010c.
+#+END_SRC
+
+
+* Dotfiles setup
+This section contains the setup code to store in emacs init file (=.emacs=).
+
+
+** Org-wiki configuration
+The minimum configuration must define the ~org-wiki-location~ variable.  The
+following uses an auxiliary function ~™/get-perso~ which can be replaced by a
+full path.
+
+#+NAME: el-dotfiles-org-wiki
+#+BEGIN_SRC emacs-lisp
+(setq org-wiki-location (™/get-perso "wiki-path")
+      org-wiki-index-level-max 3
+      org-wiki-index-file "_resources/wiki.json")
+#+END_SRC
+
+** Refbase configuration
+
+To use the [[#refbase][refbase]] package, the URL and the name of the MySQL database must be
+defined.
+
+#+NAME: el-dotfiles-refbase
+#+BEGIN_SRC emacs-lisp
+(setq refbase-url (™/get-perso "refbase-url")
+      refbase-db "refbase")
+#+END_SRC
+
+
+* Bash helpers
+
+Finally, some useful bash functions are defined in the following source block.
+
+- The path to the wiki must be set [[(bash-wiki-path)][here]],
+- the [[(bash-owg)][~owg~]] function greps the content of the wikipages for a search string.
+  Lines around the match are shown (using ~-B~ and ~-A~ grep options).
+- The [[(bash-owe)][~owe~]] and [[(bash-owt)][~owt~]] functions open emacs (more specifically emacsclient) in
+  graphical and terminal mode respectively.  These functions support
+  [[(bash-ow-comp)][auto-completion]].
+
+#+NAME: bashrc
+#+BEGIN_SRC sh -r -l " #(ref:%s)"
+## Wiki location
+wiki_path=~/dotfiles/emacs/wiki/org/ #(ref:bash-wiki-path)
+
+## Alias
+alias ow='pushd ${wiki_path}'
+
+## Search function
+owg(){ #(ref:bash-owg)
+	(cd ${wiki_path} && find ./ -name "*.org" -exec grep -Hin "$1" -B1 -A5 "{}" \;)
+}
+
+## Open in emacs
+org_wiki_open(){
+	if [ $(dirname $(readlink -f "$1")) ==
+		 $(dirname $(readlink -f "${wiki_path}/index.org")) ]; then
+		name=$1;
+	else
+		name=${wiki_path}/$1
+	fi
+	if [ "$2" == "gui" ]; then
+		emacsclient -c -a "" "$name"
+	elif [ "$2" == "terminal" ]; then
+		emacsclient -c -t -a "" "$name"
+	fi
+}
+owe (){ #(ref:bash-owe)
+	org_wiki_open "$1" "gui"
+}
+owt (){ #(ref:bash-owt)
+	org_wiki_open "$1" "terminal"
+}
+# Tab completion
+_ow_comp () { #(ref:bash-ow-comp)
+    IFS=$'\n' tmp=( $(compgen -W "$(cd "${wiki_path}" && ls *.org)" -- "${COMP_WORDS[$COMP_CWORD]}" ))
+    COMPREPLY=( "${tmp[@]// /\ }" )
+}
+complete -o default -F _ow_comp owe
+complete -o default -F _ow_comp owt
+#+END_SRC
