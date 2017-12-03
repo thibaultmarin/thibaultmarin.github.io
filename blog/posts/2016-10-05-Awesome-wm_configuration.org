@@ -1,4 +1,4 @@
-# Created 2017-12-03 Sun 03:37
+# Created 2017-12-03 Sun 03:49
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016-10-05

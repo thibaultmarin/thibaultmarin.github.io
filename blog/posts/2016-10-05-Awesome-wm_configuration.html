@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2017-12-03 Sun 03:37 -->
+<!-- 2017-12-03 Sun 03:49 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Awesome-wm configuration</title>
@@ -349,144 +349,144 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org197a772">Introduction </a>
+<li><a href="#org3fae048">Introduction </a>
 <ul>
-<li><a href="#orgfe2445b">Requirements</a></li>
-<li><a href="#org6624982">Makefile</a></li>
+<li><a href="#org013b2a4">Requirements</a></li>
+<li><a href="#orgcf12649">Makefile</a></li>
 </ul>
 </li>
-<li><a href="#orgddbb2dc">Imports </a>
+<li><a href="#orgea4a09c">Imports </a>
 <ul>
-<li><a href="#orgf36a763">Standard awesome imports</a></li>
+<li><a href="#org3b9fbd1">Standard awesome imports</a></li>
 <li><a href="#awesome_paths">Paths</a></li>
-<li><a href="#org791783c">Debian specific</a></li>
-<li><a href="#org361ad9d">Custom modules</a>
+<li><a href="#orgff3ff60">Debian specific</a></li>
+<li><a href="#org8552ada">Custom modules</a>
 <ul>
-<li><a href="#org2dd10f0">launchbar module</a></li>
-<li><a href="#org14cf24c">cmus module</a></li>
-<li><a href="#org9dccbf0">ttrss module</a></li>
-<li><a href="#org07637c5">themes module</a></li>
-<li><a href="#orge21be9e"><code>icon_finder</code> module</a></li>
-<li><a href="#org2b1a658"><code>global_prompt</code> module</a></li>
-<li><a href="#org271a539"><code>my_utility</code> module</a></li>
+<li><a href="#org5038d8c">launchbar module</a></li>
+<li><a href="#org826233b">cmus module</a></li>
+<li><a href="#org5b453ba">ttrss module</a></li>
+<li><a href="#org9ce6146">themes module</a></li>
+<li><a href="#org90c9b4a"><code>icon_finder</code> module</a></li>
+<li><a href="#orgd5c0f78"><code>global_prompt</code> module</a></li>
+<li><a href="#orgb502724"><code>my_utility</code> module</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org5b363a5">Basic setup </a>
+<li><a href="#org196e4e9">Basic setup </a>
 <ul>
 <li><a href="#default_programs">Default programs</a></li>
 <li><a href="#icons">Icons</a></li>
-<li><a href="#org6d373dc">Error handling</a></li>
-<li><a href="#org06d01d9">Modkey setting</a></li>
+<li><a href="#org31aa062">Error handling</a></li>
+<li><a href="#orgf3e2705">Modkey setting</a></li>
 </ul>
 </li>
-<li><a href="#orgc60fc3c">Desktop </a>
+<li><a href="#org2e0fa3c">Desktop </a>
 <ul>
 <li><a href="#layouts">Layouts</a></li>
 <li><a href="#theme">Theme</a>
 <ul>
-<li><a href="#orgd9495b5">Theme management module</a></li>
-<li><a href="#org8c1135d">The <code>custom_defaults</code> file</a></li>
-<li><a href="#orgc5227a3">Theme selection</a></li>
-<li><a href="#org0529728">Selected theme</a></li>
+<li><a href="#org2db66a4">Theme management module</a></li>
+<li><a href="#org225b5ec">The <code>custom_defaults</code> file</a></li>
+<li><a href="#orge293e56">Theme selection</a></li>
+<li><a href="#org95d287e">Selected theme</a></li>
 </ul>
 </li>
 <li><a href="#tags">Tags</a></li>
 </ul>
 </li>
-<li><a href="#org9f6543c">Main bar </a>
+<li><a href="#org148b18f">Main bar </a>
 <ul>
 <li><a href="#launchbar">Launchbar</a>
 <ul>
-<li><a href="#org6ad4366">Module definition</a></li>
-<li><a href="#org090b668">Instantiation</a></li>
+<li><a href="#org1f2bd05">Module definition</a></li>
+<li><a href="#orga8a6cb1">Instantiation</a></li>
 </ul>
 </li>
 <li><a href="#shutdown">Shutdown menu</a></li>
 <li><a href="#main_menu">Main menu</a></li>
 <li><a href="#volume">Volume widget</a>
 <ul>
-<li><a href="#org261f56b">OSD volume</a></li>
+<li><a href="#org7bcd242">OSD volume</a></li>
 </ul>
 </li>
 <li><a href="#memory">Memory</a></li>
 <li><a href="#calendar">Calendar</a></li>
 <li><a href="#email">Mail</a>
 <ul>
-<li><a href="#org837e756">Module definition</a></li>
-<li><a href="#org41973e2">Widget setup</a></li>
+<li><a href="#org6680115">Module definition</a></li>
+<li><a href="#orge809611">Widget setup</a></li>
 </ul>
 </li>
 <li><a href="#cmus">cmus</a>
 <ul>
-<li><a href="#orgaff10d8">Imports</a></li>
+<li><a href="#org8cb1e26">Imports</a></li>
 <li><a href="#cmus_utils">Utility functions</a></li>
 <li><a href="#cmus_global_variables">Global variables</a></li>
 <li><a href="#cmus_pid">Check running instance</a></li>
-<li><a href="#orga48bab7">Controls</a></li>
+<li><a href="#orgc52c4e8">Controls</a></li>
 <li><a href="#cmus_popup">Popup</a></li>
 <li><a href="#cmus_play">Quick play command</a></li>
 <li><a href="#cmus_hook">Main hook</a></li>
-<li><a href="#orgbd52020">cmus module usage</a></li>
+<li><a href="#org8350614">cmus module usage</a></li>
 </ul>
 </li>
 <li><a href="#ttrss">Tiny Tiny RSS</a>
 <ul>
 <li><a href="#ttrss-wrapper-py">Python wrapper script</a></li>
-<li><a href="#orgc7d13fc">Credentials</a></li>
-<li><a href="#org9bc22f9">tt-rss module</a></li>
+<li><a href="#org949d988">Credentials</a></li>
+<li><a href="#org8aee7e7">tt-rss module</a></li>
 <li><a href="#ttrss-widget">tt-rss widget</a></li>
 </ul>
 </li>
-<li><a href="#org8090d22">Keyboard layout</a></li>
+<li><a href="#orgd200681">Keyboard layout</a></li>
 </ul>
 </li>
-<li><a href="#org1058c0b">Effects </a>
+<li><a href="#orgae52fa5">Effects </a>
 <ul>
-<li><a href="#orga3a0818">Monitor highlighting</a></li>
+<li><a href="#orgb3c0e7d">Monitor highlighting</a></li>
 <li><a href="#effects_transparency">Transparency</a></li>
-<li><a href="#org828b5da">Window border change on focus</a></li>
-<li><a href="#orgbbe1138">Snap client to screen edges</a></li>
+<li><a href="#orgbc4aa8c">Window border change on focus</a></li>
+<li><a href="#org1671407">Snap client to screen edges</a></li>
 </ul>
 </li>
-<li><a href="#org604d303">Bindings </a>
+<li><a href="#orgf46aae6">Bindings </a>
 <ul>
-<li><a href="#org06468df">Mouse</a>
+<li><a href="#org560b3ec">Mouse</a>
 <ul>
-<li><a href="#orgfee3744">General bindings</a></li>
-<li><a href="#org6d727b6">Windows</a></li>
+<li><a href="#orgfbc85c1">General bindings</a></li>
+<li><a href="#org25fdd5f">Windows</a></li>
 <li><a href="#bindings_mouse_taglist">Tag list</a></li>
 <li><a href="#bindings_mouse_tasklist">Task list</a></li>
 </ul>
 </li>
 <li><a href="#bindings_keyboard">Keyboard</a>
 <ul>
-<li><a href="#org7fbd7b8">Global bindings </a>
+<li><a href="#org35239ae">Global bindings </a>
 <ul>
-<li><a href="#org3acf2e7">Shortcuts popup</a></li>
-<li><a href="#orge856663">Tags</a></li>
-<li><a href="#org84fbdab">Clients (windows)</a></li>
-<li><a href="#org3d413c9">Layout</a></li>
-<li><a href="#org8ea3e23">Application shortcuts</a></li>
+<li><a href="#orgfd21afd">Shortcuts popup</a></li>
+<li><a href="#orgc87805f">Tags</a></li>
+<li><a href="#org71d5125">Clients (windows)</a></li>
+<li><a href="#org3fa0537">Layout</a></li>
+<li><a href="#orgd7082d4">Application shortcuts</a></li>
 <li><a href="#keybindings_prompts">Prompts</a></li>
-<li><a href="#org2ff720e">Menubar</a></li>
-<li><a href="#orgf2e7bc1">Volume control</a></li>
-<li><a href="#orgae58bd1">Screen lock</a></li>
-<li><a href="#orgd2229dc">Register keybindings</a></li>
+<li><a href="#org2e049bf">Menubar</a></li>
+<li><a href="#org5ba3cae">Volume control</a></li>
+<li><a href="#org8d91c11">Screen lock</a></li>
+<li><a href="#org850e8e2">Register keybindings</a></li>
 </ul>
 </li>
-<li><a href="#org8ddd533">Client bindings</a>
+<li><a href="#org78fca5e">Client bindings</a>
 <ul>
-<li><a href="#org17d8928">Fullscreen</a></li>
-<li><a href="#org1a52136">Kill window</a></li>
-<li><a href="#orgf490fc7">Toggle floating window mode</a></li>
-<li><a href="#org8990534">Move window to master position</a></li>
-<li><a href="#org93212c4">Move window to other screen</a></li>
-<li><a href="#orgcbfb7de">Toggle on-top property</a></li>
-<li><a href="#org2a0dc71">Minimize window</a></li>
-<li><a href="#org30baaa0">Toggle maximized mode</a></li>
-<li><a href="#org17c6b2c">Show window information</a></li>
+<li><a href="#org1c3a644">Fullscreen</a></li>
+<li><a href="#orgfebd545">Kill window</a></li>
+<li><a href="#orgac42e7d">Toggle floating window mode</a></li>
+<li><a href="#org5769155">Move window to master position</a></li>
+<li><a href="#org8302d4c">Move window to other screen</a></li>
+<li><a href="#org50907cc">Toggle on-top property</a></li>
+<li><a href="#org4a86d36">Minimize window</a></li>
+<li><a href="#orgf7f428d">Toggle maximized mode</a></li>
+<li><a href="#org23c8bff">Show window information</a></li>
 </ul>
 </li>
 </ul>
@@ -495,62 +495,62 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#wibox">Wibox </a>
 <ul>
-<li><a href="#org458f4d1">Main prompt box</a></li>
-<li><a href="#org120c6ea">Launchers</a></li>
-<li><a href="#org04f3d4d">Wibox</a></li>
-<li><a href="#org3c1802e">Close screen for loop</a></li>
+<li><a href="#orged68c87">Main prompt box</a></li>
+<li><a href="#org1f91046">Launchers</a></li>
+<li><a href="#org76754c6">Wibox</a></li>
+<li><a href="#org86be7ca">Close screen for loop</a></li>
 </ul>
 </li>
 <li><a href="#rules">Rules</a></li>
-<li><a href="#org7d724d5">Signals</a></li>
+<li><a href="#orga481338">Signals</a></li>
 <li><a href="#icon_finder">Icon finder</a></li>
 <li><a href="#global_prompt">Global prompt </a>
 <ul>
-<li><a href="#org9b6c052">Imports</a></li>
+<li><a href="#org765ccd2">Imports</a></li>
 <li><a href="#global_prompt_utils">Utilities</a></li>
-<li><a href="#orgfdc6d20">Prompts</a>
+<li><a href="#org0a36732">Prompts</a>
 <ul>
 <li><a href="#global_prompt_help">help</a></li>
-<li><a href="#orgac46666">session</a></li>
-<li><a href="#org4cb5be5">window</a></li>
+<li><a href="#org7065290">session</a></li>
+<li><a href="#org1043d43">window</a></li>
 <li><a href="#global_prompt_calc">calc</a>
 <ul>
-<li><a href="#org5a5cba1">Internal script</a></li>
-<li><a href="#orgb648ccb">Prompt definition</a></li>
+<li><a href="#orgf1dddf3">Internal script</a></li>
+<li><a href="#orgb968143">Prompt definition</a></li>
 </ul>
 </li>
-<li><a href="#orgf4475ca">cmus</a></li>
+<li><a href="#org13d0eff">cmus</a></li>
 <li><a href="#global_prompt_music">music</a></li>
-<li><a href="#org88733a2">web&#xa0;&#xa0;&#xa0;<span class="tag"><span class="feature_request">feature_request</span></span></a></li>
+<li><a href="#orgd6c5898">web&#xa0;&#xa0;&#xa0;<span class="tag"><span class="feature_request">feature_request</span></span></a></li>
 </ul>
 </li>
-<li><a href="#orgb8e84cf">Main prompt</a></li>
+<li><a href="#org5fa2689">Main prompt</a></li>
 </ul>
 </li>
 <li><a href="#startup_applications">Startup applications</a>
 <ul>
-<li><a href="#orgcb89a51">Dual screen setup script</a></li>
+<li><a href="#orgda791c5">Dual screen setup script</a></li>
 </ul>
 </li>
 <li><a href="#my_utility">Utilities </a>
 <ul>
-<li><a href="#orgfd82220">String split</a></li>
-<li><a href="#org91c5cb0">HTML escape</a></li>
-<li><a href="#org1c8c183">File listing</a></li>
-<li><a href="#org931a22e">Table operations</a></li>
+<li><a href="#org74c01ab">String split</a></li>
+<li><a href="#orgd577fc3">HTML escape</a></li>
+<li><a href="#org2ed0927">File listing</a></li>
+<li><a href="#org6656b18">Table operations</a></li>
 <li><a href="#my_utility_confirm">Confirmation popup</a></li>
 <li><a href="#my_utility_run_once">Run once</a></li>
-<li><a href="#org2ccb4d4">Return object</a></li>
+<li><a href="#org66f21a6">Return object</a></li>
 </ul>
 </li>
-<li><a href="#orgb9b4e76">Resources</a></li>
+<li><a href="#orgb3ac454">Resources</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org197a772" class="outline-2">
-<h2 id="org197a772">Introduction </h2>
-<div class="outline-text-2" id="text-org197a772">
+<div id="outline-container-org3fae048" class="outline-2">
+<h2 id="org3fae048">Introduction </h2>
+<div class="outline-text-2" id="text-org3fae048">
 <p>
 This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
 documentation of the different modules developed and used. The actual
@@ -559,13 +559,13 @@ on the original org file.
 </p>
 
 <p>
-The resulting desktop is shown on Fig.&nbsp;<a href="#org5650057">1</a>.  The following
+The resulting desktop is shown on Fig.&nbsp;<a href="#orgaa8fb52">1</a>.  The following
 bash script produces the image.  The most interesting part is the top wibox,
-which is shown enlarged on Fig.&nbsp;<a href="#org3331d7a">2</a>.
+which is shown enlarged on Fig.&nbsp;<a href="#org29c8694">2</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org1ef6f2c"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
+<pre class="src src-sh" id="org291a782"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
 <span style="color: #a0522d;">res_x</span>=1920
 <span style="color: #a0522d;">res_y</span>=1080
 <span style="color: #a0522d;">screen_idx</span>=1
@@ -583,7 +583,7 @@ rm desktop.png -rf
 
 
 
-<div id="org5650057" class="figure">
+<div id="orgaa8fb52" class="figure">
 <p><a href="../images/2016-10-05-Awesome-wm_configuration/desktop-main.png" width="100%"><img src="../images/2016-10-05-Awesome-wm_configuration/desktop-main.png" alt="desktop-main.png" width="100%"></a>
 </p>
 <p><span class="figure-number">Figure 1: </span>My awesome-wm desktop.</p>
@@ -598,7 +598,7 @@ This configuration is currently used on the following system:
 <dt>OS</dt><dd></dd>
 </dl>
 <div class="org-src-container">
-<pre class="src src-sh" id="orgd602ad3">lsb_release -a
+<pre class="src src-sh" id="orge25b8a0">lsb_release -a
 uname -a
 </pre>
 </div>
@@ -616,7 +616,7 @@ Linux dell-desktop 4.9.0-1-amd64 #1 SMP Debian 4.9.2-2 (2017-01-12) x86_64 GNU/L
 <dt>awesome</dt><dd></dd>
 </dl>
 <div class="org-src-container">
-<pre class="src src-sh" id="orgd964acf">awesome --version
+<pre class="src src-sh" id="org135335a">awesome --version
 </pre>
 </div>
 
@@ -634,7 +634,7 @@ awesome v4.0 (Harder, Better, Faster, Stronger)
 <dt>emacs</dt><dd></dd>
 </dl>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org8ece885">(emacs-version)
+<pre class="src src-emacs-lisp" id="orgb70c053">(emacs-version)
 </pre>
 </div>
 
@@ -648,7 +648,7 @@ awesome v4.0 (Harder, Better, Faster, Stronger)
 <dt>org-mode</dt><dd></dd>
 </dl>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgc836812">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
+<pre class="src src-emacs-lisp" id="orgcfd7de7">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
 </pre>
 </div>
 
@@ -672,7 +672,7 @@ on the parent heading:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-org" id="orgfe04802"><span style="color: #a0522d;">** Disabled heading</span>
+<pre class="src src-org" id="orge9d01d8"><span style="color: #a0522d;">** Disabled heading</span>
 <span style="color: #a020f0;">   :PROPERTIES:</span>
    <span style="color: #a020f0;">:header-args+:</span> :tangle no
 <span style="color: #a020f0;">   :END:</span>
@@ -705,9 +705,9 @@ screenshots for instance), so use at your own risk.
 </div>
 
 
-<div id="outline-container-orgfe2445b" class="outline-3">
-<h3 id="orgfe2445b">Requirements</h3>
-<div class="outline-text-3" id="text-orgfe2445b">
+<div id="outline-container-org013b2a4" class="outline-3">
+<h3 id="org013b2a4">Requirements</h3>
+<div class="outline-text-3" id="text-org013b2a4">
 <ul class="org-ul">
 <li>Since the configuration is written in an org-mode file, emacs is required to
 extract (tangle) the lua code.  A makefile is provided to run the tangle
@@ -757,9 +757,9 @@ awesome-wm is the running desktop environment).  This requires the <code>scrot</
 </div>
 
 
-<div id="outline-container-org6624982" class="outline-3">
-<h3 id="org6624982">Makefile</h3>
-<div class="outline-text-3" id="text-org6624982">
+<div id="outline-container-orgcf12649" class="outline-3">
+<h3 id="orgcf12649">Makefile</h3>
+<div class="outline-text-3" id="text-orgcf12649">
 <p>
 A simple makefile can be used to generate the configuration files (<code>.lua</code>) and
 the documentation.  Use <code>make</code> to update the configuration files from the org
@@ -774,7 +774,7 @@ provided here:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org8f0eea8"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[makefile-init.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Assume default folder for emacs packages</span>
+<pre class="src src-emacs-lisp" id="org5e0340b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[makefile-init.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Assume default folder for emacs packages</span>
 (<span style="color: #a020f0;">let</span> ((default-directory  <span style="color: #8b2252;">"~/.emacs.d/elpa/"</span>))
   (normal-top-level-add-subdirs-to-load-path))
 
@@ -826,7 +826,7 @@ highlighting.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile" id="org43efd88"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[makefile]</div><span style="color: #b22222;"># </span><span style="color: #b22222;">Makefile for org file, with targets:</span>
+<pre class="src src-makefile" id="org451684c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[makefile]</div><span style="color: #b22222;"># </span><span style="color: #b22222;">Makefile for org file, with targets:</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">all: Tangle source blocks</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">doc-html: Export org-file to html</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">doc-pdf: Export org-file to pdf</span>
@@ -862,9 +862,9 @@ highlighting.
 </div>
 
 
-<div id="outline-container-orgddbb2dc" class="outline-2">
-<h2 id="orgddbb2dc">Imports </h2>
-<div class="outline-text-2" id="text-orgddbb2dc">
+<div id="outline-container-orgea4a09c" class="outline-2">
+<h2 id="orgea4a09c">Imports </h2>
+<div class="outline-text-2" id="text-orgea4a09c">
 <p>
 The first section of the <code>rc.lua</code> file contains library imports used throughout
 the file.
@@ -872,15 +872,15 @@ the file.
 </div>
 
 
-<div id="outline-container-orgf36a763" class="outline-3">
-<h3 id="orgf36a763">Standard awesome imports</h3>
-<div class="outline-text-3" id="text-orgf36a763">
+<div id="outline-container-org3b9fbd1" class="outline-3">
+<h3 id="org3b9fbd1">Standard awesome imports</h3>
+<div class="outline-text-3" id="text-org3b9fbd1">
 <p>
 Standard modules listed here should come installed with awesome.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org2c32640"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Standard awesome library</span>
+<pre class="src src-lua" id="org1205a33"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Standard awesome library</span>
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">gears</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"gears"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">awful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">util</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful.util"</span>)
@@ -900,7 +900,7 @@ Standard modules listed here should come installed with awesome.
 </div>
 
 
-<div id="outline-container-orgdc6092a" class="outline-3">
+<div id="outline-container-org623caca" class="outline-3">
 <h3 id="awesome_paths">Paths</h3>
 <div class="outline-text-3" id="text-awesome_paths">
 <p>
@@ -909,7 +909,7 @@ launchbar programs, theme selection, maildir, icons, etc.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgfdef823"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Define global folders</span>
+<pre class="src src-lua" id="org59c8e3d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Define global folders</span>
 awesome_paths = {}
 
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">config_dir is used for local theme customizations and shortcut search</span>
@@ -932,16 +932,16 @@ awesome_paths.iconapps_dir = { awesome_paths.icon_dir,
 </div>
 
 
-<div id="outline-container-org791783c" class="outline-3">
-<h3 id="org791783c">Debian specific</h3>
-<div class="outline-text-3" id="text-org791783c">
+<div id="outline-container-orgff3ff60" class="outline-3">
+<h3 id="orgff3ff60">Debian specific</h3>
+<div class="outline-text-3" id="text-orgff3ff60">
 <p>
 Use the menu provided on debian, it lists most applications in categories,
 similar to main menus in other desktop environments.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org624b4c1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Load Debian menu entries</span>
+<pre class="src src-lua" id="org0892993"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Load Debian menu entries</span>
 <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"debian.menu"</span>)
 </pre>
 </div>
@@ -949,124 +949,124 @@ similar to main menus in other desktop environments.
 </div>
 
 
-<div id="outline-container-org361ad9d" class="outline-3">
-<h3 id="org361ad9d">Custom modules</h3>
-<div class="outline-text-3" id="text-org361ad9d">
+<div id="outline-container-org8552ada" class="outline-3">
+<h3 id="org8552ada">Custom modules</h3>
+<div class="outline-text-3" id="text-org8552ada">
 <p>
 The following imports are for custom modules implemented in this file.  The
 filenames should match the names used with the <code>require</code> command.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgee2e6d2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Custom libraries</span>
+<pre class="src src-lua" id="org712cb6e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Custom libraries</span>
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-org2dd10f0" class="outline-4">
-<h4 id="org2dd10f0">launchbar module</h4>
-<div class="outline-text-4" id="text-org2dd10f0">
+<div id="outline-container-org5038d8c" class="outline-4">
+<h4 id="org5038d8c">launchbar module</h4>
+<div class="outline-text-4" id="text-org5038d8c">
 <p>
 This module creates the launchers in the wibox from <code>.desktop</code> files (see the
 <a href="#launchbar">Launchbar</a> section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org1135f75"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">launchbar</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">'launchbar'</span>)
+<pre class="src src-lua" id="org1fd0bbe"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">launchbar</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">'launchbar'</span>)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org14cf24c" class="outline-4">
-<h4 id="org14cf24c">cmus module</h4>
-<div class="outline-text-4" id="text-org14cf24c">
+<div id="outline-container-org826233b" class="outline-4">
+<h4 id="org826233b">cmus module</h4>
+<div class="outline-text-4" id="text-org826233b">
 <p>
 Control and display information from the <a href="https://cmus.github.io/">cmus</a> music player (see the <a href="#cmus">cmus</a>
 section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf3bb19a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">cmus</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"cmus"</span>)
+<pre class="src src-lua" id="orgcf2277c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">cmus</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"cmus"</span>)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org9dccbf0" class="outline-4">
-<h4 id="org9dccbf0">ttrss module</h4>
-<div class="outline-text-4" id="text-org9dccbf0">
+<div id="outline-container-org5b453ba" class="outline-4">
+<h4 id="org5b453ba">ttrss module</h4>
+<div class="outline-text-4" id="text-org5b453ba">
 <p>
 View RSS feed updates from <a href="https://tt-rss.org/">Tiny Tiny RSS</a> instance (see the <a href="#ttrss">Tiny Tiny RSS</a>
 section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgca650f8"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">ttrss</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"ttrss"</span>)
+<pre class="src src-lua" id="org09b9dc5"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">ttrss</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"ttrss"</span>)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org07637c5" class="outline-4">
-<h4 id="org07637c5">themes module</h4>
-<div class="outline-text-4" id="text-org07637c5">
+<div id="outline-container-org9ce6146" class="outline-4">
+<h4 id="org9ce6146">themes module</h4>
+<div class="outline-text-4" id="text-org9ce6146">
 <p>
 Manage desktop themes (see the <a href="#theme">Theme</a> section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orge4b6b5e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">theme_customization</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"theme_customization"</span>)
+<pre class="src src-lua" id="orgdec685a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">theme_customization</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"theme_customization"</span>)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orge21be9e" class="outline-4">
-<h4 id="orge21be9e"><code>icon_finder</code> module</h4>
-<div class="outline-text-4" id="text-orge21be9e">
+<div id="outline-container-org90c9b4a" class="outline-4">
+<h4 id="org90c9b4a"><code>icon_finder</code> module</h4>
+<div class="outline-text-4" id="text-org90c9b4a">
 <p>
 Helper utility to find program icons in system paths (see the <a href="#icon_finder">Icon finder</a>
 section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org797cba1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">icon_finder</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"icon_finder"</span>)
+<pre class="src src-lua" id="org8bc496e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">icon_finder</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"icon_finder"</span>)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org2b1a658" class="outline-4">
-<h4 id="org2b1a658"><code>global_prompt</code> module</h4>
-<div class="outline-text-4" id="text-org2b1a658">
+<div id="outline-container-orgd5c0f78" class="outline-4">
+<h4 id="orgd5c0f78"><code>global_prompt</code> module</h4>
+<div class="outline-text-4" id="text-orgd5c0f78">
 <p>
 Generic command launcher (gnome-do style) (see the <a href="#global_prompt">Global prompt</a> section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org55c0345"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">global_prompt</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"global_prompt"</span>)
+<pre class="src src-lua" id="org7fb075a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">global_prompt</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"global_prompt"</span>)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org271a539" class="outline-4">
-<h4 id="org271a539"><code>my_utility</code> module</h4>
-<div class="outline-text-4" id="text-org271a539">
+<div id="outline-container-orgb502724" class="outline-4">
+<h4 id="orgb502724"><code>my_utility</code> module</h4>
+<div class="outline-text-4" id="text-orgb502724">
 <p>
 Some utility functions (see the <a href="#my_utility">Utilities</a> section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf04a604"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">my_utility</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">'my_utility'</span>)
+<pre class="src src-lua" id="org5bd866a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">my_utility</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">'my_utility'</span>)
 </pre>
 </div>
 </div>
@@ -1075,9 +1075,9 @@ Some utility functions (see the <a href="#my_utility">Utilities</a> section).
 </div>
 
 
-<div id="outline-container-org5b363a5" class="outline-2">
-<h2 id="org5b363a5">Basic setup </h2>
-<div class="outline-text-2" id="text-org5b363a5">
+<div id="outline-container-org196e4e9" class="outline-2">
+<h2 id="org196e4e9">Basic setup </h2>
+<div class="outline-text-2" id="text-org196e4e9">
 <p>
 This section contains general settings for the different desktop components:
 search paths, default applications, main key modifiers and some boiler plate
@@ -1086,7 +1086,7 @@ code for error handling.
 </div>
 
 
-<div id="outline-container-org57e4061" class="outline-3">
+<div id="outline-container-orgc26d663" class="outline-3">
 <h3 id="default_programs">Default programs</h3>
 <div class="outline-text-3" id="text-default_programs">
 <p>
@@ -1094,7 +1094,7 @@ Define default programs.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgcc594cc"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Define default programs</span>
+<pre class="src src-lua" id="org91aec12"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Define default programs</span>
 terminal = <span style="color: #8b2252;">"x-terminal-emulator"</span>
 termapps = <span style="color: #8b2252;">"urxvt"</span> <span style="color: #b22222;">-- </span><span style="color: #b22222;">"terminator"</span>
 editor = <span style="color: #483d8b;">os</span>.<span style="color: #483d8b;">getenv</span>(<span style="color: #8b2252;">"EDITOR"</span>) <span style="color: #a020f0;">or</span> <span style="color: #8b2252;">"editor"</span>
@@ -1111,7 +1111,7 @@ music_player = <span style="color: #8b2252;">"mplayer"</span>
 </div>
 
 
-<div id="outline-container-org33d28c7" class="outline-3">
+<div id="outline-container-orgf7648b9" class="outline-3">
 <h3 id="icons">Icons</h3>
 <div class="outline-text-3" id="text-icons">
 <p>
@@ -1120,7 +1120,7 @@ configuration to find icons for programs and session operations (<a href="#shutd
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org07552c7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Icon finder</span>
+<pre class="src src-lua" id="org1ee120d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Icon finder</span>
 myiconfinder = icon_finder.new(awesome_paths.iconapps_dir)
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">}}</span>
 </pre>
@@ -1129,16 +1129,16 @@ myiconfinder = icon_finder.new(awesome_paths.iconapps_dir)
 </div>
 
 
-<div id="outline-container-org6d373dc" class="outline-3">
-<h3 id="org6d373dc">Error handling</h3>
-<div class="outline-text-3" id="text-org6d373dc">
+<div id="outline-container-org31aa062" class="outline-3">
+<h3 id="org31aa062">Error handling</h3>
+<div class="outline-text-3" id="text-org31aa062">
 <p>
 This is default code; it creates notifications when errors occur, which is
 helpful to debug issues in <code>rc.lua</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgce80557"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Error handling</span>
+<pre class="src src-lua" id="org02f2083"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Error handling</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Check if awesome encountered an error during startup and fell back to</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">another config (This code will only ever execute for the fallback config)</span>
 <span style="color: #a020f0;">if</span> awesome.startup_errors <span style="color: #a020f0;">then</span>
@@ -1183,16 +1183,16 @@ helpful to debug issues in <code>rc.lua</code>.
 </div>
 
 
-<div id="outline-container-org06d01d9" class="outline-3">
-<h3 id="org06d01d9">Modkey setting</h3>
-<div class="outline-text-3" id="text-org06d01d9">
+<div id="outline-container-orgf3e2705" class="outline-3">
+<h3 id="orgf3e2705">Modkey setting</h3>
+<div class="outline-text-3" id="text-orgf3e2705">
 <p>
 The modkey is the main key modifier for special bindings: use <code>Super</code> as main
 modifier.  Also set <code>Alt</code> key.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org34a8755"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Default modkey.</span>
+<pre class="src src-lua" id="org39bda49"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Default modkey.</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Usually, Mod4 is the key with a logo between Control and Alt.</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">If you do not like this or do not have such a key,</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">I suggest you to remap Mod4 to another key using xmodmap or other tools.</span>
@@ -1207,24 +1207,24 @@ altkey = <span style="color: #8b2252;">"Mod1"</span>
 </div>
 
 
-<div id="outline-container-orgc60fc3c" class="outline-2">
-<h2 id="orgc60fc3c">Desktop </h2>
-<div class="outline-text-2" id="text-orgc60fc3c">
+<div id="outline-container-org2e0fa3c" class="outline-2">
+<h2 id="org2e0fa3c">Desktop </h2>
+<div class="outline-text-2" id="text-org2e0fa3c">
 <p>
 This configuration is used with a dual screen system, where the widgets are
 identical on both screens (except for the systray, which can only be added to
 one screen).  An example of wibox produced by this file is shown on
-Fig&nbsp;<a href="#org3331d7a">2</a>.
+Fig&nbsp;<a href="#org29c8694">2</a>.
 </p>
 
 <p>
 The following bash snippet produces the screenshot shown on
-Fig.&nbsp;<a href="#org3331d7a">2</a> on export (the result is cached, so it is not
+Fig.&nbsp;<a href="#org29c8694">2</a> on export (the result is cached, so it is not
 re-generated if the content of the code block is not changed).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="orge994bc9"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
+<pre class="src src-sh" id="orgdc29e81"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
 <span style="color: #a0522d;">res_x</span>=1920
 <span style="color: #a0522d;">res_y</span>=1080
 <span style="color: #a0522d;">screen_idx</span>=0
@@ -1245,7 +1245,7 @@ rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
 
 
 
-<div id="org3331d7a" class="figure">
+<div id="org29c8694" class="figure">
 <p><a href="../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png" width="100%"><img src="../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png" alt="desktop-wibox.png" width="100%"></a>
 </p>
 <p><span class="figure-number">Figure 2: </span>Main wibox (split into two rows for display) with widgets (from left to right): <a href="#main_menu">awesome menu</a>, <a href="#tags">tags</a>, <a href="#launchbar">launchbar</a>, tasklist, <a href="#cmus">cmus</a>, <a href="#email">mail</a>, <a href="#ttrss">ttrss</a>, <a href="#memory">memory</a>, <a href="#volume">volume</a>, systray, <a href="#layouts">layout</a>, <a href="#calendar">date + calendar</a>, <a href="#shutdown">shutdown menu</a>.</p>
@@ -1254,7 +1254,7 @@ rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
 
 
 
-<div id="outline-container-orgc8857d8" class="outline-3">
+<div id="outline-container-orgb6d2c5c" class="outline-3">
 <h3 id="layouts">Layouts</h3>
 <div class="outline-text-3" id="text-layouts">
 <p>
@@ -1263,7 +1263,7 @@ entries disabled.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org05c3fcf"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Table of layouts to cover with awful.layout.inc, order matters.</span>
+<pre class="src src-lua" id="orgd0605b4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Table of layouts to cover with awful.layout.inc, order matters.</span>
 awful.layout.layouts =
 {
     <span style="color: #b22222;">-- </span><span style="color: #b22222;">awful.layout.suit.tile,</span>
@@ -1287,7 +1287,7 @@ awful.layout.layouts =
 </div>
 
 
-<div id="outline-container-org042d522" class="outline-3">
+<div id="outline-container-orged17122" class="outline-3">
 <h3 id="theme">Theme</h3>
 <div class="outline-text-3" id="text-theme">
 <p>
@@ -1311,9 +1311,9 @@ overridden by individual themes in the <code>custom.lua</code> file.
 </div>
 
 
-<div id="outline-container-orgd9495b5" class="outline-4">
-<h4 id="orgd9495b5">Theme management module</h4>
-<div class="outline-text-4" id="text-orgd9495b5">
+<div id="outline-container-org2db66a4" class="outline-4">
+<h4 id="org2db66a4">Theme management module</h4>
+<div class="outline-text-4" id="text-org2db66a4">
 <p>
 The theme module has two main functions:
 </p>
@@ -1334,7 +1334,7 @@ table is augmented by inserting fields found in the theme's <code>custom.lua</co
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgd4c42b1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Theme helper script</span>
+<pre class="src src-lua" id="orgbb0c54a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Theme helper script</span>
 
 <span style="color: #a020f0;">local</span> <span style="color: #483d8b;">dofile</span> = <span style="color: #483d8b;">dofile</span>
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">lfs</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"lfs"</span>)
@@ -1464,9 +1464,9 @@ theme_customization.custom_file = <span style="color: #8b2252;">"custom.lua"</sp
 </div>
 
 
-<div id="outline-container-org8c1135d" class="outline-4">
-<h4 id="org8c1135d">The <code>custom_defaults</code> file</h4>
-<div class="outline-text-4" id="text-org8c1135d">
+<div id="outline-container-org225b5ec" class="outline-4">
+<h4 id="org225b5ec">The <code>custom_defaults</code> file</h4>
+<div class="outline-text-4" id="text-org225b5ec">
 <p>
 The <code>custom_defaults</code> file returns a table with theme parameters required by
 modules and absent from the original <code>beautiful</code> table.  For visual consistency,
@@ -1474,7 +1474,7 @@ some of the fields use values from the <code>beautiful</code> table itself.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf9ebd02"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">beautiful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"beautiful"</span>)
+<pre class="src src-lua" id="org71c2d21"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">beautiful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"beautiful"</span>)
 
 custom_defaults = {}
 
@@ -1502,22 +1502,22 @@ custom_defaults.screen_highlight_fg_inactive = beautiful.fg_normal
 </div>
 
 
-<div id="outline-container-orgc5227a3" class="outline-4">
-<h4 id="orgc5227a3">Theme selection</h4>
-<div class="outline-text-4" id="text-orgc5227a3">
+<div id="outline-container-orge293e56" class="outline-4">
+<h4 id="orge293e56">Theme selection</h4>
+<div class="outline-text-4" id="text-orge293e56">
 <p>
 In the main <code>rc.lua</code> file, the theme folders are first added to the
 <code>awesome_paths</code> table (<code>awesome_paths.themes_system_path</code> and
 <code>awesome_paths.themes_custom_path</code>).  Then the theme to load is read from the
 <code>themes/theme</code> file.  This file should contain a single line with the name of
-the theme to use (see the <a href="#org01482f3">theme definition block</a>).  Note that lines starting
+the theme to use (see the <a href="#org50ad281">theme definition block</a>).  Note that lines starting
 with "#" are ignored (such lines occur when tangling this org-file, to allow
 "de-tangling").  Also note that parsing is rudimentary so empty lines may cause
 issues.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orge76d46a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Theme management</span>
+<pre class="src src-lua" id="orgc321e5b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Theme management</span>
 awesome_paths.themes_system_path = awesome_paths.system_dir .. <span style="color: #8b2252;">"/themes/"</span>
 awesome_paths.themes_custom_path = awesome_paths.config_dir .. <span style="color: #8b2252;">"/themes/"</span>
 theme_fname = awesome_paths.themes_custom_path .. <span style="color: #8b2252;">"/theme"</span>
@@ -1567,16 +1567,16 @@ awful.screen.connect_for_each_screen(<span style="color: #a020f0;">function</spa
 </div>
 
 
-<div id="outline-container-org0529728" class="outline-4">
-<h4 id="org0529728">Selected theme</h4>
-<div class="outline-text-4" id="text-org0529728">
+<div id="outline-container-org95d287e" class="outline-4">
+<h4 id="org95d287e">Selected theme</h4>
+<div class="outline-text-4" id="text-org95d287e">
 <p>
 To change the default theme, change the content of the following <code>themes/theme</code>
 file:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf" id="org01482f3"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[themes/theme]</div>xresources
+<pre class="src src-conf" id="org50ad281"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[themes/theme]</div>xresources
 </pre>
 </div>
 </div>
@@ -1584,7 +1584,7 @@ file:
 </div>
 
 
-<div id="outline-container-orgb97ebe1" class="outline-3">
+<div id="outline-container-org50400ec" class="outline-3">
 <h3 id="tags">Tags</h3>
 <div class="outline-text-3" id="text-tags">
 <p>
@@ -1606,7 +1606,7 @@ to place them on the right screen and tag (see the <a href="#rules">Rules</a> se
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org55235bc"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Tags</span>
+<pre class="src src-lua" id="orgdbb80ea"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Tags</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Define a tag table which hold all screen tags.</span>
 awful.screen.connect_for_each_screen(<span style="color: #a020f0;">function</span>(s)
 
@@ -1636,12 +1636,12 @@ awful.screen.connect_for_each_screen(<span style="color: #a020f0;">function</spa
 
 
 
-<div id="outline-container-org9f6543c" class="outline-2">
-<h2 id="org9f6543c">Main bar </h2>
-<div class="outline-text-2" id="text-org9f6543c">
+<div id="outline-container-org148b18f" class="outline-2">
+<h2 id="org148b18f">Main bar </h2>
+<div class="outline-text-2" id="text-org148b18f">
 <p>
 This section is the main part of the configuration, it defines and configures
-the widgets present on the main wibox (Fig.&nbsp;<a href="#org3331d7a">2</a>).
+the widgets present on the main wibox (Fig.&nbsp;<a href="#org29c8694">2</a>).
 </p>
 
 <p>
@@ -1655,7 +1655,7 @@ between widgets.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orge236c1f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">---- </span><span style="color: #b22222;">{{{ Separators</span>
+<pre class="src src-lua" id="org3ea3c1c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">---- </span><span style="color: #b22222;">{{{ Separators</span>
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">separator</span> = wibox.widget.textbox()
 separator:set_markup(<span style="color: #8b2252;">" &lt;span foreground='grey'&gt;&#183;&lt;/span&gt; "</span>)
 <span style="color: #b22222;">---- </span><span style="color: #b22222;">}}}</span>
@@ -1664,7 +1664,7 @@ separator:set_markup(<span style="color: #8b2252;">" &lt;span foreground='grey'&
 </div>
 
 
-<div id="outline-container-orgf3c279c" class="outline-3">
+<div id="outline-container-orgae05fb4" class="outline-3">
 <h3 id="launchbar">Launchbar</h3>
 <div class="outline-text-3" id="text-launchbar">
 <p>
@@ -1672,7 +1672,7 @@ In most desktop environments, application shortcuts are stored in <code>.desktop
 files that give the application name, icon, command, etc.  The specification is
 available <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html">here</a>.  The standard <code>awful.widget.launcher</code> module allows to add
 <code>.desktop</code> files to a launchbar which can be displayed in a wibox (as shown on
-Fig.&nbsp;<a href="#org3331d7a">2</a>).
+Fig.&nbsp;<a href="#org29c8694">2</a>).
 </p>
 
 <p>
@@ -1688,9 +1688,9 @@ launchers are added in alphabetical order.</li>
 </div>
 
 
-<div id="outline-container-org6ad4366" class="outline-4">
-<h4 id="org6ad4366">Module definition</h4>
-<div class="outline-text-4" id="text-org6ad4366">
+<div id="outline-container-org1f2bd05" class="outline-4">
+<h4 id="org1f2bd05">Module definition</h4>
+<div class="outline-text-4" id="text-org1f2bd05">
 <p>
 This version is based on the second code segment, the only difference is that
 the Exec entry of the <code>.desktop</code> file is cleaned up from its command line
@@ -1700,7 +1700,7 @@ described in the <a href="#icon_finder">Icon finder</a> section.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgc8468b4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Quick launchbar widget for Awesome WM</span>
+<pre class="src src-lua" id="org28d8e93"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Quick launchbar widget for Awesome WM</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">http://awesome.naquadah.org/wiki/Quick_launch_bar_widget/3.5</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Put into your awesome/ folder and add the following to rc.lua:</span>
 <span style="color: #b22222;">--   </span><span style="color: #b22222;">local launchbar = require('launchbar')</span>
@@ -1755,9 +1755,9 @@ described in the <a href="#icon_finder">Icon finder</a> section.
 </div>
 
 
-<div id="outline-container-org090b668" class="outline-4">
-<h4 id="org090b668">Instantiation</h4>
-<div class="outline-text-4" id="text-org090b668">
+<div id="outline-container-orga8a6cb1" class="outline-4">
+<h4 id="orga8a6cb1">Instantiation</h4>
+<div class="outline-text-4" id="text-orga8a6cb1">
 <p>
 The simplest way to use the module is to symlink <code>.desktop</code> files into a folder
 and instantiate the launchbar object with the same folder as a parameter.  My
@@ -1770,7 +1770,7 @@ parameter (created in the <a href="#icons">Icons</a> section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orga852b3a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Launchbar</span>
+<pre class="src src-lua" id="org3888225"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Launchbar</span>
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">mylaunchbar</span> = launchbar.new(awesome_paths.config_dir .. <span style="color: #8b2252;">"/shortcuts/"</span>,
                                   myiconfinder)
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">}}</span>
@@ -1781,7 +1781,7 @@ parameter (created in the <a href="#icons">Icons</a> section).
 </div>
 
 
-<div id="outline-container-orgb6c844d" class="outline-3">
+<div id="outline-container-orgf82e08f" class="outline-3">
 <h3 id="shutdown">Shutdown menu</h3>
 <div class="outline-text-3" id="text-shutdown">
 <p>
@@ -1799,7 +1799,7 @@ command without password.  On Debian, the sudoers file can be edited by running
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf" id="org0c76354"><span style="color: #a0522d;">username ALL</span>=SHUTDOWN
+<pre class="src src-conf" id="orgfbc6a33"><span style="color: #a0522d;">username ALL</span>=SHUTDOWN
 <span style="color: #a0522d;">username ALL</span>=NOPASSWD: SHUTDOWN
 </pre>
 </div>
@@ -1813,7 +1813,7 @@ found in folders set in the <code>awesome_paths</code> variable).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org3760860"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Shutdown menu</span>
+<pre class="src src-lua" id="orgf87dae0"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Shutdown menu</span>
 
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Session management icons</span>
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">icon_shutdown</span> = myiconfinder:find(<span style="color: #8b2252;">"system-shutdown.png"</span>)
@@ -1861,7 +1861,7 @@ myleave_launcher = awful.widget.launcher({
 </div>
 
 
-<div id="outline-container-org324d852" class="outline-3">
+<div id="outline-container-org975ea4b" class="outline-3">
 <h3 id="main_menu">Main menu</h3>
 <div class="outline-text-3" id="text-main_menu">
 <p>
@@ -1883,7 +1883,7 @@ and launch applications by typing part of their name.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org0849757"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Menu</span>
+<pre class="src src-lua" id="org8411355"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Menu</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create a laucher widget and a main menu</span>
 myawesomemenu = {
    { <span style="color: #8b2252;">"hotkeys"</span>, <span style="color: #a020f0;">function</span>() <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">false</span>, hotkeys_popup.show_help <span style="color: #a020f0;">end</span>},
@@ -1934,7 +1934,7 @@ menubar.utils.terminal = terminal
 </div>
 
 
-<div id="outline-container-org0c2642c" class="outline-3">
+<div id="outline-container-org2f1c14a" class="outline-3">
 <h3 id="volume">Volume widget</h3>
 <div class="outline-text-3" id="text-volume">
 <p>
@@ -1945,7 +1945,7 @@ with a single entry linking to the mixer program (see <a href="#default_programs
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org9394fcc"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Volume</span>
+<pre class="src src-lua" id="orgeaa3cb2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Volume</span>
 
 volume_text = wibox.widget.textbox()
 volume_text:set_text(<span style="color: #8b2252;">""</span>)
@@ -2025,9 +2025,9 @@ update_volume_widget()
 </div>
 
 
-<div id="outline-container-org261f56b" class="outline-4">
-<h4 id="org261f56b">OSD volume</h4>
-<div class="outline-text-4" id="text-org261f56b">
+<div id="outline-container-org7bcd242" class="outline-4">
+<h4 id="org7bcd242">OSD volume</h4>
+<div class="outline-text-4" id="text-org7bcd242">
 <p>
 The volume widget relies on a bash script to control the volume (using the
 <code>amixer</code> command).  It also displays the volume on the screen via OSD (using the
@@ -2036,7 +2036,7 @@ The volume widget relies on a bash script to control the volume (using the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="orgdc8e2d9"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[scripts/osdvol.sh]</div><span style="color: #b22222;">#</span><span style="color: #b22222;">!/bin/bash</span>
+<pre class="src src-sh" id="orgff580cb"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[scripts/osdvol.sh]</div><span style="color: #b22222;">#</span><span style="color: #b22222;">!/bin/bash</span>
 
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">constants</span>
@@ -2125,7 +2125,7 @@ preKill
 </div>
 
 
-<div id="outline-container-orga032bc3" class="outline-3">
+<div id="outline-container-org2935c8f" class="outline-3">
 <h3 id="memory">Memory</h3>
 <div class="outline-text-3" id="text-memory">
 <p>
@@ -2135,7 +2135,7 @@ with the output of the <code>top</code> command is shown one mouse-over events.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgbe5a4f2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Memory usage</span>
+<pre class="src src-lua" id="org3fc0497"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Memory usage</span>
 
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">memory_label</span> = wibox.widget.textbox()
 memory_label:set_text(<span style="color: #8b2252;">"&#9636; "</span>)
@@ -2234,7 +2234,7 @@ memory_widget_timer = gears.timer.start_new(
 </div>
 
 
-<div id="outline-container-org4ee8666" class="outline-3">
+<div id="outline-container-orgd640cf3" class="outline-3">
 <h3 id="calendar">Calendar</h3>
 <div class="outline-text-3" id="text-calendar">
 <p>
@@ -2244,7 +2244,7 @@ as a popup when the mouse points to the date widet.  This assumes that the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org0665396"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Calendar</span>
+<pre class="src src-lua" id="orgd00e3e2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Calendar</span>
 
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create a textclock widget</span>
 mytextclock = awful.widget.textclock()
@@ -2299,7 +2299,7 @@ mytextclock:connect_signal(
 </div>
 
 
-<div id="outline-container-org961a31b" class="outline-3">
+<div id="outline-container-org0fe0c56" class="outline-3">
 <h3 id="email">Mail</h3>
 <div class="outline-text-3" id="text-email">
 <p>
@@ -2309,9 +2309,9 @@ of active emails when moving the mouse over the widget.
 </p>
 </div>
 
-<div id="outline-container-org837e756" class="outline-4">
-<h4 id="org837e756">Module definition</h4>
-<div class="outline-text-4" id="text-org837e756">
+<div id="outline-container-org6680115" class="outline-4">
+<h4 id="org6680115">Module definition</h4>
+<div class="outline-text-4" id="text-org6680115">
 <p>
 This module was taken from <a href="https://awesome.naquadah.org/wiki/Email_maildir_naughty_hoover">this post</a>, with small modifications to account for my
 local setup.  In particular, the list of emails is obtained via a mu request
@@ -2319,7 +2319,7 @@ local setup.  In particular, the list of emails is obtained via a mu request
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orga32efb6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #483d8b;">string</span> = <span style="color: #483d8b;">string</span>
+<pre class="src src-lua" id="org5659ecc"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #483d8b;">string</span> = <span style="color: #483d8b;">string</span>
 <span style="color: #a020f0;">local</span> <span style="color: #483d8b;">tostring</span> = <span style="color: #483d8b;">tostring</span>
 <span style="color: #a020f0;">local</span> <span style="color: #483d8b;">io</span> = <span style="color: #483d8b;">io</span>
 <span style="color: #a020f0;">local</span> <span style="color: #483d8b;">table</span> = <span style="color: #483d8b;">table</span>
@@ -2398,9 +2398,9 @@ local setup.  In particular, the list of emails is obtained via a mu request
 </div>
 
 
-<div id="outline-container-org41973e2" class="outline-4">
-<h4 id="org41973e2">Widget setup</h4>
-<div class="outline-text-4" id="text-org41973e2">
+<div id="outline-container-orge809611" class="outline-4">
+<h4 id="orge809611">Widget setup</h4>
+<div class="outline-text-4" id="text-orge809611">
 <p>
 The vicious module is used to report the number of new messages in a list of
 maildir folders.  The color of the widget text changes from
@@ -2414,7 +2414,7 @@ open mail clients (thunderbird and mu4e).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orga74d493"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Mail widget</span>
+<pre class="src src-lua" id="orgf9c5013"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Mail widget</span>
 mailicon = wibox.widget.textbox()
 mailfolders = my_utility.scandir(awesome_paths.home_dir  ..
                                     <span style="color: #8b2252;">'/maildir/INBOX'</span>, <span style="color: #8b2252;">'*/ -d'</span>)
@@ -2459,7 +2459,7 @@ mailicon:buttons(mailbuttons)
 </div>
 
 
-<div id="outline-container-org712d1d5" class="outline-3">
+<div id="outline-container-orgc151d30" class="outline-3">
 <h3 id="cmus">cmus</h3>
 <div class="outline-text-3" id="text-cmus">
 <p>
@@ -2484,7 +2484,7 @@ widget but by the <a href="#global_prompt">global prompt module</a>.</li>
 </ol>
 
 <p>
-An example of the widget in action is shown on Fig.&nbsp;<a href="#org90dbf08">3</a>.
+An example of the widget in action is shown on Fig.&nbsp;<a href="#org0abed0d">3</a>.
 </p>
 
 <p>
@@ -2511,15 +2511,15 @@ feasible, with some work.
 </div>
 
 
-<div id="outline-container-orgaff10d8" class="outline-4">
-<h4 id="orgaff10d8">Imports</h4>
-<div class="outline-text-4" id="text-orgaff10d8">
+<div id="outline-container-org8cb1e26" class="outline-4">
+<h4 id="org8cb1e26">Imports</h4>
+<div class="outline-text-4" id="text-org8cb1e26">
 <p>
 First, import the necessary libraries.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf506ada"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">awful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful"</span>)
+<pre class="src src-lua" id="orgefb40d9"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">awful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">naughty</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"naughty"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">beautiful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">'beautiful'</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">util</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful.util"</span>)
@@ -2530,7 +2530,7 @@ First, import the necessary libraries.
 </div>
 
 
-<div id="outline-container-org81fbe8a" class="outline-4">
+<div id="outline-container-orgfe23963" class="outline-4">
 <h4 id="cmus_utils">Utility functions</h4>
 <div class="outline-text-4" id="text-cmus_utils">
 <p>
@@ -2546,7 +2546,7 @@ where the track title is padded so that the whole string length is
 </dl>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orge80a4f8"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">get_path</span>(str, sep)
+<pre class="src src-lua" id="orgaec70be"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">get_path</span>(str, sep)
     sep = sep <span style="color: #a020f0;">or</span> <span style="color: #8b2252;">'/'</span>
     <span style="color: #a020f0;">return</span> str:match(<span style="color: #8b2252;">"(.*"</span> .. sep .. <span style="color: #8b2252;">")"</span>)
 <span style="color: #a020f0;">end</span>
@@ -2581,7 +2581,7 @@ where the track title is padded so that the whole string length is
 </div>
 
 
-<div id="outline-container-org061318f" class="outline-4">
+<div id="outline-container-org175f13b" class="outline-4">
 <h4 id="cmus_global_variables">Global variables</h4>
 <div class="outline-text-4" id="text-cmus_global_variables">
 <p>
@@ -2591,7 +2591,7 @@ art.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgaa8deda"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Album folder regexp</span>
+<pre class="src src-lua" id="orgdae0883"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Album folder regexp</span>
 cmus_album_regex = <span style="color: #8b2252;">"^[0-9]\\{4\\}-"</span>
 
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Album display (with cover)</span>
@@ -2607,7 +2607,7 @@ cmus_file_list_g = <span style="color: #008b8b;">nil</span>
 </div>
 
 
-<div id="outline-container-org9f245df" class="outline-4">
+<div id="outline-container-org6e78f17" class="outline-4">
 <h4 id="cmus_pid">Check running instance</h4>
 <div class="outline-text-4" id="text-cmus_pid">
 <p>
@@ -2615,7 +2615,7 @@ This function detects whether a cmus instance is running by requesting its PID.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org00159b2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Get cmus PID to check if it is running</span>
+<pre class="src src-lua" id="orgb491e57"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Get cmus PID to check if it is running</span>
 <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">getCmusPid</span>()
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">fpid</span> = <span style="color: #483d8b;">io</span>.<span style="color: #483d8b;">popen</span>(<span style="color: #8b2252;">"pgrep cmus"</span>)
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">pid</span> = fpid:read(<span style="color: #8b2252;">"*n"</span>)
@@ -2628,9 +2628,9 @@ This function detects whether a cmus instance is running by requesting its PID.
 </div>
 
 
-<div id="outline-container-orga48bab7" class="outline-4">
-<h4 id="orga48bab7">Controls</h4>
-<div class="outline-text-4" id="text-orga48bab7">
+<div id="outline-container-orgc52c4e8" class="outline-4">
+<h4 id="orgc52c4e8">Controls</h4>
+<div class="outline-text-4" id="text-orgc52c4e8">
 <p>
 A cmus instance can be controlled from a terminal using the <code>cmus-remote</code>
 command.  The following function passes simple controls to cmus-remote (play,
@@ -2640,7 +2640,7 @@ used: clicking on the widget toggles the play state (play / pause).
 
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org78bc42d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Enable cmus control</span>
+<pre class="src src-lua" id="org5ab8d1c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Enable cmus control</span>
 <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">cmus_control</span> (action)
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">cmus_info</span>, <span style="color: #a0522d;">cmus_state</span>
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">cmus_run</span> = getCmusPid()
@@ -2673,17 +2673,17 @@ used: clicking on the widget toggles the play state (play / pause).
 </div>
 
 
-<div id="outline-container-orgfe3b1ee" class="outline-4">
+<div id="outline-container-orgf6efcc6" class="outline-4">
 <h4 id="cmus_popup">Popup</h4>
 <div class="outline-text-4" id="text-cmus_popup">
 <p>
-The popup notification (Fig.&nbsp;<a href="#org90dbf08">3</a>) shows the content of the
+The popup notification (Fig.&nbsp;<a href="#org0abed0d">3</a>) shows the content of the
 global variables defined earlier (see <a href="#cmus_global_variables">global variables</a>) and updated by the
 <code>cmus_hook</code> function (see the <a href="#cmus_hook">Main hook</a> section).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf7f915b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">cmus_popup</span>(timeout)
+<pre class="src src-lua" id="org6ae6240"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">cmus_popup</span>(timeout)
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">img</span>
    <span style="color: #a020f0;">if</span> util.file_readable(cmus_img_g) <span style="color: #a020f0;">then</span>
       img = cmus_img_g
@@ -2708,11 +2708,11 @@ global variables defined earlier (see <a href="#cmus_global_variables">global va
 
 <p>
 The following bash script, uses <code>awesome-client</code> to spawn the popup notification
-and performs a screen capture (Fig.&nbsp;<a href="#org90dbf08">3</a>).
+and performs a screen capture (Fig.&nbsp;<a href="#org0abed0d">3</a>).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org1812136"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
+<pre class="src src-sh" id="orge11b350"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
 <span style="color: #a0522d;">res_x</span>=1920
 <span style="color: #a0522d;">res_y</span>=1080
 <span style="color: #a0522d;">screen_idx</span>=1 <span style="color: #b22222;"># </span><span style="color: #b22222;">starts at 0</span>
@@ -2732,7 +2732,7 @@ rm desktop.png -rf
 </div>
 
 
-<div id="org90dbf08" class="figure">
+<div id="org0abed0d" class="figure">
 <p><a href="../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png" width="60%"><img src="../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png" alt="desktop-cmus-popup.png" width="60%"></a>
 </p>
 <p><span class="figure-number">Figure 3: </span>Cmus popup notification, with album cover and track list.</p>
@@ -2741,7 +2741,7 @@ rm desktop.png -rf
 </div>
 
 
-<div id="outline-container-orgc4b0dfc" class="outline-4">
+<div id="outline-container-orgd965796" class="outline-4">
 <h4 id="cmus_play">Quick play command</h4>
 <div class="outline-text-4" id="text-cmus_play">
 <p>
@@ -2768,7 +2768,7 @@ bash script).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgde711f8"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">cmus_play</span>(mode, fold)
+<pre class="src src-lua" id="org642cc4a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">cmus_play</span>(mode, fold)
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">out</span>
    <span style="color: #a020f0;">if</span> mode == <span style="color: #8b2252;">"rand"</span> <span style="color: #a020f0;">then</span>
       alb_sel_cmd = <span style="color: #8b2252;">"ls "</span> .. global_prompt.music_folder .. <span style="color: #8b2252;">" | "</span> ..
@@ -2825,7 +2825,7 @@ bash script).
 </div>
 
 
-<div id="outline-container-org7f27678" class="outline-4">
+<div id="outline-container-org260241b" class="outline-4">
 <h4 id="cmus_hook">Main hook</h4>
 <div class="outline-text-4" id="text-cmus_hook">
 <p>
@@ -2838,7 +2838,7 @@ timer (2 seconds by default).
 The hook first checks for the presence of a running cmus instance using the
 <a href="#cmus_pid"><code>getCmusPid</code></a> function.  If a running instance is found and its status is
 currently "playing" or "paused", the hook proceeds to extract information about
-the currently playing file.  As shown in Fig.&nbsp;<a href="#org3331d7a">2</a>, the widget
+the currently playing file.  As shown in Fig.&nbsp;<a href="#org29c8694">2</a>, the widget
 shows the playing status with a unicode character (play / pause), the artist and
 song title and the track position (formatted as "position" / "duration").
 </p>
@@ -2865,7 +2865,7 @@ highlighted in the list.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org82e6219"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">cmus_hook</span>()
+<pre class="src src-lua" id="orga18b689"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">cmus_hook</span>()
    <span style="color: #b22222;">-- </span><span style="color: #b22222;">check if cmus is running</span>
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">cmus_run</span> = getCmusPid()
    <span style="color: #a020f0;">if</span> cmus_run <span style="color: #a020f0;">then</span>
@@ -2958,9 +2958,9 @@ highlighted in the list.
 </div>
 
 
-<div id="outline-container-orgbd52020" class="outline-4">
-<h4 id="orgbd52020">cmus module usage</h4>
-<div class="outline-text-4" id="text-orgbd52020">
+<div id="outline-container-org8350614" class="outline-4">
+<h4 id="org8350614">cmus module usage</h4>
+<div class="outline-text-4" id="text-org8350614">
 <p>
 In the main <code>rc.lua</code> file, we create the widget, connect it to the <code>cmus_hook</code>
 function with a timer object (updated every 2 seconds), add the popup
@@ -2968,7 +2968,7 @@ notification to mouse over events and setup the click actions.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org6b1879c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ cmus</span>
+<pre class="src src-lua" id="orgedb929c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[cmus.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ cmus</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Cmus Widget</span>
 tb_cmus = wibox.widget.textbox()
 tb_cmus:set_text(<span style="color: #8b2252;">"cmus"</span>)
@@ -2999,7 +2999,7 @@ cmusover_addToWidget(tb_cmus)
 </div>
 
 
-<div id="outline-container-org8b92de0" class="outline-3">
+<div id="outline-container-org4d95228" class="outline-3">
 <h3 id="ttrss">Tiny Tiny RSS</h3>
 <div class="outline-text-3" id="text-ttrss">
 <p>
@@ -3010,7 +3010,7 @@ wrapper script.
 </div>
 
 
-<div id="outline-container-orgb7cdea4" class="outline-4">
+<div id="outline-container-org6fa3e0a" class="outline-4">
 <h4 id="ttrss-wrapper-py">Python wrapper script</h4>
 <div class="outline-text-4" id="text-ttrss-wrapper-py">
 <p>
@@ -3024,7 +3024,7 @@ requires the following packages (besides <code>ttrss-python</code>):
 </dl>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgabd7a66"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[scripts/ttrss-wrapper.py]</div><span style="color: #8b2252;">"""</span>
+<pre class="src src-python" id="org09307a0"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[scripts/ttrss-wrapper.py]</div><span style="color: #8b2252;">"""</span>
 <span style="color: #8b2252;">Get unread feeds from tt-rss site</span>
 
 <span style="color: #8b2252;">"""</span>
@@ -3119,7 +3119,7 @@ Here is the help text for the <code>ttrss-wrapper.py</code> script:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org75116a0"><span style="color: #b22222;"># </span><span style="color: #b22222;">Use " || echo " to ensure a success code is returned</span>
+<pre class="src src-sh" id="orgccb5fc4"><span style="color: #b22222;"># </span><span style="color: #b22222;">Use " || echo " to ensure a success code is returned</span>
 python3 scripts/ttrss-wrapper.py --help || <span style="color: #483d8b;">echo</span>
 </pre>
 </div>
@@ -3145,9 +3145,9 @@ optional arguments:
 </div>
 
 
-<div id="outline-container-orgc7d13fc" class="outline-4">
-<h4 id="orgc7d13fc">Credentials</h4>
-<div class="outline-text-4" id="text-orgc7d13fc">
+<div id="outline-container-org949d988" class="outline-4">
+<h4 id="org949d988">Credentials</h4>
+<div class="outline-text-4" id="text-org949d988">
 <p>
 In my setup, credentials are stored in the <code>~/.authinfo.gpg</code> file.  The
 following emacs-lisp snippet defines a function to get the username and password
@@ -3163,7 +3163,7 @@ line&nbsp;<a href="#coderef-pass-hardcoded" class="coderef" onmouseover="CodeHig
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgbb7111e"><span class="linenr"> 1: </span>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">get-ttrss-cred</span> (<span style="color: #228b22;">&amp;optional</span> url)
+<pre class="src src-emacs-lisp" id="org052731e"><span class="linenr"> 1: </span>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">get-ttrss-cred</span> (<span style="color: #228b22;">&amp;optional</span> url)
 <span class="linenr"> 2: </span>  (<span style="color: #a020f0;">let</span> ((ttrss-url (<span style="color: #a020f0;">if</span> url url <span style="color: #8b2252;">"127.0.0.1:81/tt-rss"</span>))
 <span id="coderef-user-nil" class="coderef-off"><span class="linenr"> 3: </span>        (ttrss-user nil)</span>
 <span id="coderef-user-hardcoded" class="coderef-off"><span class="linenr"> 4: </span>        <span style="color: #b22222;">;;</span><span style="color: #b22222;">(ttrss-user "myuser")</span></span>
@@ -3190,9 +3190,9 @@ if the org file is version-controlled and the tangled lua files are not.
 </div>
 
 
-<div id="outline-container-org9bc22f9" class="outline-4">
-<h4 id="org9bc22f9">tt-rss module</h4>
-<div class="outline-text-4" id="text-org9bc22f9">
+<div id="outline-container-org8aee7e7" class="outline-4">
+<h4 id="org8aee7e7">tt-rss module</h4>
+<div class="outline-text-4" id="text-org8aee7e7">
 <p>
 The tt-rss module defines functions used by the <a href="#ttrss-widget">widget</a>:
 </p>
@@ -3210,7 +3210,7 @@ These functions internally use the <code>ttrss_get</code> function which interac
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgb1f4e0a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Script options</span>
+<pre class="src src-lua" id="org496ddcb"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Script options</span>
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">ttrss_cmd</span> = <span style="color: #8b2252;">"python3 "</span> .. awesome_paths.config_dir ..
    <span style="color: #8b2252;">"/scripts/ttrss-wrapper.py "</span>
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">ttrss_url</span> = <span style="color: #8b2252;">"http://"</span> .. ttrss_cred[1]
@@ -3269,7 +3269,7 @@ These functions internally use the <code>ttrss_get</code> function which interac
 </div>
 
 
-<div id="outline-container-org2ab41bb" class="outline-4">
+<div id="outline-container-org8fa2a8e" class="outline-4">
 <h4 id="ttrss-widget">tt-rss widget</h4>
 <div class="outline-text-4" id="text-ttrss-widget">
 <p>
@@ -3286,7 +3286,7 @@ applications newsbeuter and liferea.</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org4d0e275"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ tt-rss</span>
+<pre class="src src-lua" id="org1369657"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ tt-rss</span>
 tb_ttrss = wibox.widget.textbox()
 tb_ttrss:set_text(<span style="color: #8b2252;">"ttrss"</span>)
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">refresh</span>
@@ -3326,15 +3326,15 @@ ttrss_set_mouseover(tb_ttrss)
 </div>
 
 
-<div id="outline-container-org8090d22" class="outline-3">
-<h3 id="org8090d22">Keyboard layout</h3>
-<div class="outline-text-3" id="text-org8090d22">
+<div id="outline-container-orgd200681" class="outline-3">
+<h3 id="orgd200681">Keyboard layout</h3>
+<div class="outline-text-3" id="text-orgd200681">
 <p>
 Add a widget to control the keyboard layout.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org916c09b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Keyboard map indicator and switcher</span>
+<pre class="src src-lua" id="org89baa8f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Keyboard map indicator and switcher</span>
 mykeyboardlayout = awful.widget.keyboardlayout()
 </pre>
 </div>
@@ -3343,18 +3343,18 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 </div>
 
 
-<div id="outline-container-org1058c0b" class="outline-2">
-<h2 id="org1058c0b">Effects </h2>
-<div class="outline-text-2" id="text-org1058c0b">
+<div id="outline-container-orgae52fa5" class="outline-2">
+<h2 id="orgae52fa5">Effects </h2>
+<div class="outline-text-2" id="text-orgae52fa5">
 <p>
 This section contains setup of visual effects that can be used with awesome-wm.
 </p>
 </div>
 
 
-<div id="outline-container-orga3a0818" class="outline-3">
-<h3 id="orga3a0818">Monitor highlighting</h3>
-<div class="outline-text-3" id="text-orga3a0818">
+<div id="outline-container-orgb3c0e7d" class="outline-3">
+<h3 id="orgb3c0e7d">Monitor highlighting</h3>
+<div class="outline-text-3" id="text-orgb3c0e7d">
 <p>
 It is sometimes difficult to tell which monitor is the active one, so I
 implemented a simple hook to highlight the wibox on the active screen.  The
@@ -3362,7 +3362,7 @@ actual colors are defined through the <a href="#theme">theme manager</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org4002275"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Highlight current monitor</span>
+<pre class="src src-lua" id="orga6eb385"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Highlight current monitor</span>
 screen_highlight_timer = timer({timeout = 0.2})
 screen_highlight_idx = 1
 screen_highlight_timer:connect_signal(
@@ -3391,7 +3391,7 @@ screen_highlight_timer:start()
 </div>
 
 
-<div id="outline-container-org973ba73" class="outline-3">
+<div id="outline-container-org675eca1" class="outline-3">
 <h3 id="effects_transparency">Transparency</h3>
 <div class="outline-text-3" id="text-effects_transparency">
 <p>
@@ -3402,7 +3402,7 @@ regaining focus.  Note that this block is disabled by default (see the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org9001ded"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Transparency</span>
+<pre class="src src-lua" id="org24e8208"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Transparency</span>
 client.connect_signal(<span style="color: #8b2252;">"focus"</span>, <span style="color: #a020f0;">function</span>(c)
                          c.border_color = beautiful.border_focus
                          c.opacity = 1
@@ -3418,16 +3418,16 @@ client.connect_signal(<span style="color: #8b2252;">"unfocus"</span>, <span styl
 </div>
 
 
-<div id="outline-container-org828b5da" class="outline-3">
-<h3 id="org828b5da">Window border change on focus</h3>
-<div class="outline-text-3" id="text-org828b5da">
+<div id="outline-container-orgbc4aa8c" class="outline-3">
+<h3 id="orgbc4aa8c">Window border change on focus</h3>
+<div class="outline-text-3" id="text-orgbc4aa8c">
 <p>
 Add a signal to change the color of window borders when losing / receiving
 focus.  This comes from the default configuration.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgab2a215"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Window border</span>
+<pre class="src src-lua" id="org67d89fa"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Window border</span>
 client.connect_signal(<span style="color: #8b2252;">"focus"</span>, <span style="color: #a020f0;">function</span>(c)
                          c.border_color = beautiful.border_focus
 <span style="color: #a020f0;">end</span>)
@@ -3441,15 +3441,15 @@ client.connect_signal(<span style="color: #8b2252;">"unfocus"</span>, <span styl
 </div>
 
 
-<div id="outline-container-orgbbe1138" class="outline-3">
-<h3 id="orgbbe1138">Snap client to screen edges</h3>
-<div class="outline-text-3" id="text-orgbbe1138">
+<div id="outline-container-org1671407" class="outline-3">
+<h3 id="org1671407">Snap client to screen edges</h3>
+<div class="outline-text-3" id="text-org1671407">
 <p>
 Awesome 4 adds edge snapping, the following disables it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org8b0bd3b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>awful.mouse.snap.edge_enabled = <span style="color: #008b8b;">false</span>
+<pre class="src src-lua" id="orgae84b1c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>awful.mouse.snap.edge_enabled = <span style="color: #008b8b;">false</span>
 </pre>
 </div>
 </div>
@@ -3457,9 +3457,9 @@ Awesome 4 adds edge snapping, the following disables it.
 </div>
 
 
-<div id="outline-container-org604d303" class="outline-2">
-<h2 id="org604d303">Bindings </h2>
-<div class="outline-text-2" id="text-org604d303">
+<div id="outline-container-orgf46aae6" class="outline-2">
+<h2 id="orgf46aae6">Bindings </h2>
+<div class="outline-text-2" id="text-orgf46aae6">
 <p>
 Bindings include mouse click actions for the different widgets and windows as
 well as keyboard shortcuts.
@@ -3467,18 +3467,18 @@ well as keyboard shortcuts.
 </div>
 
 
-<div id="outline-container-org06468df" class="outline-3">
-<h3 id="org06468df">Mouse</h3>
-<div class="outline-text-3" id="text-org06468df">
+<div id="outline-container-org560b3ec" class="outline-3">
+<h3 id="org560b3ec">Mouse</h3>
+<div class="outline-text-3" id="text-org560b3ec">
 <p>
 Mouse bindings are defined using tables filled by <code>awful.button</code> elements.
 </p>
 </div>
 
 
-<div id="outline-container-orgfee3744" class="outline-4">
-<h4 id="orgfee3744">General bindings</h4>
-<div class="outline-text-4" id="text-orgfee3744">
+<div id="outline-container-orgfbc85c1" class="outline-4">
+<h4 id="orgfbc85c1">General bindings</h4>
+<div class="outline-text-4" id="text-orgfbc85c1">
 <p>
 This section handles mouse actions on an empty workspace:
 </p>
@@ -3488,7 +3488,7 @@ This section handles mouse actions on an empty workspace:
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org0094526"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Mouse bindings</span>
+<pre class="src src-lua" id="org9a70f15"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Mouse bindings</span>
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, <span style="color: #a020f0;">function</span> () mymainmenu:toggle() <span style="color: #a020f0;">end</span>),
     awful.button({ }, 4, awful.tag.viewprev),
@@ -3500,9 +3500,9 @@ root.buttons(awful.util.table.join(
 </div>
 
 
-<div id="outline-container-org6d727b6" class="outline-4">
-<h4 id="org6d727b6">Windows</h4>
-<div class="outline-text-4" id="text-org6d727b6">
+<div id="outline-container-org25fdd5f" class="outline-4">
+<h4 id="org25fdd5f">Windows</h4>
+<div class="outline-text-4" id="text-org25fdd5f">
 <p>
 Mouse actions for clicks on windows are defined here:
 </p>
@@ -3517,7 +3517,7 @@ via the <a href="#rules">rules</a> mechanism.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgb0b8503"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Focus, move, resize window on click</span>
+<pre class="src src-lua" id="org2573f19"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Focus, move, resize window on click</span>
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, <span style="color: #a020f0;">function</span> (c) client.focus = c; c:raise() <span style="color: #a020f0;">end</span>),
     awful.button({ modkey }, 1, awful.mouse.client.move),
@@ -3530,7 +3530,7 @@ clientbuttons = awful.util.table.join(
 </div>
 
 
-<div id="outline-container-org75448ea" class="outline-4">
+<div id="outline-container-org162221d" class="outline-4">
 <h4 id="bindings_mouse_taglist">Tag list</h4>
 <div class="outline-text-4" id="text-bindings_mouse_taglist">
 <p>
@@ -3549,7 +3549,7 @@ the mouse,</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org4d775f6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Create a wibox for each screen and add it</span>
+<pre class="src src-lua" id="org86bc741"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Create a wibox for each screen and add it</span>
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">taglist_buttons</span> = awful.util.table.join(
                     awful.button({ }, 1, <span style="color: #a020f0;">function</span>(t) t:view_only() <span style="color: #a020f0;">end</span>),
                     awful.button({ modkey }, 1, <span style="color: #a020f0;">function</span>(t)
@@ -3574,7 +3574,7 @@ the mouse,</li>
 </div>
 
 
-<div id="outline-container-org215ee1f" class="outline-4">
+<div id="outline-container-orgabe245e" class="outline-4">
 <h4 id="bindings_mouse_tasklist">Task list</h4>
 <div class="outline-text-4" id="text-bindings_mouse_tasklist">
 <p>
@@ -3588,7 +3588,7 @@ tags),</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org3f87d72"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">tasklist_buttons</span> = awful.util.table.join(
+<pre class="src src-lua" id="org4945c99"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">tasklist_buttons</span> = awful.util.table.join(
    awful.button({ }, 1, <span style="color: #a020f0;">function</span> (c)
          <span style="color: #a020f0;">if</span> c == client.focus <span style="color: #a020f0;">then</span>
             c.minimized = <span style="color: #008b8b;">true</span>
@@ -3619,7 +3619,7 @@ tags),</li>
 </div>
 
 
-<div id="outline-container-org854b3d8" class="outline-3">
+<div id="outline-container-orgedaa246" class="outline-3">
 <h3 id="bindings_keyboard">Keyboard</h3>
 <div class="outline-text-3" id="text-bindings_keyboard">
 <p>
@@ -3628,9 +3628,9 @@ Keyboard bindings are split into two categories: global bindings and client
 </p>
 </div>
 
-<div id="outline-container-org7fbd7b8" class="outline-4">
-<h4 id="org7fbd7b8">Global bindings </h4>
-<div class="outline-text-4" id="text-org7fbd7b8">
+<div id="outline-container-org35239ae" class="outline-4">
+<h4 id="org35239ae">Global bindings </h4>
+<div class="outline-text-4" id="text-org35239ae">
 <p>
 Keybindings are defined in subsections, and can be individually disabled by
 setting the <code>tangle</code> property to <code>no</code>.
@@ -3641,21 +3641,21 @@ First, we initialize the table for the keys.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org865c710"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Key bindings</span>
+<pre class="src src-lua" id="orgf29f5e6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Key bindings</span>
 globalkeys = {}
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org3acf2e7" class="outline-5">
-<h5 id="org3acf2e7">Shortcuts popup</h5>
-<div class="outline-text-5" id="text-org3acf2e7">
+<div id="outline-container-orgfd21afd" class="outline-5">
+<h5 id="orgfd21afd">Shortcuts popup</h5>
+<div class="outline-text-5" id="text-orgfd21afd">
 <p>
 Display the help popup.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orga6e58da"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org087e995"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"s"</span>, hotkeys_popup.show_help,
        {description=<span style="color: #8b2252;">"show help"</span>, group=<span style="color: #8b2252;">"awesome"</span>})
 )
@@ -3666,9 +3666,9 @@ Display the help popup.
 
 
 
-<div id="outline-container-orge856663" class="outline-5">
-<h5 id="orge856663">Tags</h5>
-<div class="outline-text-5" id="text-orge856663">
+<div id="outline-container-orgc87805f" class="outline-5">
+<h5 id="orgc87805f">Tags</h5>
+<div class="outline-text-5" id="text-orgc87805f">
 <p>
 This section defines tag navigation keybindings and window movement between
 tags.
@@ -3677,14 +3677,14 @@ tags.
 
 
 <ul class="org-ul">
-<li><a id="orgd75b614"></a>Previous/next tag with <code>modkey</code><br>
-<div class="outline-text-6" id="text-orgd75b614">
+<li><a id="org595b306"></a>Previous/next tag with <code>modkey</code><br>
+<div class="outline-text-6" id="text-org595b306">
 <p>
 Move the the previous / next tag:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org24caf9a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org9b99d1d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"Left"</span>, awful.tag.viewprev,
               {description = <span style="color: #8b2252;">"view previous"</span>, group = <span style="color: #8b2252;">"tag"</span>}),
     awful.key({ modkey, }, <span style="color: #8b2252;">"Right"</span>, awful.tag.viewnext,
@@ -3696,15 +3696,15 @@ Move the the previous / next tag:
 </li>
 
 
-<li><a id="orgf25179c"></a>Previous/next tag on all screens with <code>Ctrl</code> + <code>Alt</code><br>
-<div class="outline-text-6" id="text-orgf25179c">
+<li><a id="orgb824fcf"></a>Previous/next tag on all screens with <code>Ctrl</code> + <code>Alt</code><br>
+<div class="outline-text-6" id="text-orgb824fcf">
 <p>
 Move to the previous / next tag (using <code>Ctrl</code> + <code>Alt</code> as on other desktop
 environments) on all screens:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgaffa25b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="orgb4945e6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ altkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"Left"</span>,
        <span style="color: #a020f0;">function</span> ()
           <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">screen_cur</span> = awful.screen.focused()
@@ -3746,14 +3746,14 @@ environments) on all screens:
 </li>
 
 
-<li><a id="org5f6c7b4"></a>Move window to previous/next with <code>Ctrl</code> + <code>Alt</code> + <code>Shift</code><br>
-<div class="outline-text-6" id="text-org5f6c7b4">
+<li><a id="org248ac23"></a>Move window to previous/next with <code>Ctrl</code> + <code>Alt</code> + <code>Shift</code><br>
+<div class="outline-text-6" id="text-org248ac23">
 <p>
 Move the current window to the previous / next tag:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org49dfceb"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org0843f0a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
    awful.key({ altkey, <span style="color: #8b2252;">"Control"</span>, <span style="color: #8b2252;">"Shift"</span> }, <span style="color: #8b2252;">"Left"</span>,
        <span style="color: #a020f0;">function</span> ()
           <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">screen_cur</span> = awful.screen.focused()
@@ -3823,14 +3823,14 @@ Move the current window to the previous / next tag:
 </li>
 
 
-<li><a id="orgf179b6a"></a>Go to tag number<br>
-<div class="outline-text-6" id="text-orgf179b6a">
+<li><a id="orge95d410"></a>Go to tag number<br>
+<div class="outline-text-6" id="text-orge95d410">
 <p>
 Bind numbers to tags (with <code>modkey</code>):
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org10b03f4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Bind all key numbers to tags.</span>
+<pre class="src src-lua" id="org918e5de"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Bind all key numbers to tags.</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Be careful: we use keycodes to make it works on any keyboard layout.</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">This should map on the top row of your keyboard, usually 1 to 9.</span>
 <span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
@@ -3853,14 +3853,14 @@ Bind numbers to tags (with <code>modkey</code>):
 </li>
 
 
-<li><a id="org2aff4b0"></a>Go to tag number on all screens with <code>Ctrl</code> + <code>Alt</code><br>
-<div class="outline-text-6" id="text-org2aff4b0">
+<li><a id="orgfe8e25e"></a>Go to tag number on all screens with <code>Ctrl</code> + <code>Alt</code><br>
+<div class="outline-text-6" id="text-orgfe8e25e">
 <p>
 Alternative binding to go to a tag by number on all screens with <code>Ctrl</code> + <code>Alt</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org1008e43"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
+<pre class="src src-lua" id="org8c5ac64"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
     globalkeys = awful.util.table.join(globalkeys,
         <span style="color: #b22222;">-- </span><span style="color: #b22222;">View tag for all screens.</span>
         awful.key({ altkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"#"</span> .. i + 9,
@@ -3881,15 +3881,15 @@ Alternative binding to go to a tag by number on all screens with <code>Ctrl</cod
 </li>
 
 
-<li><a id="orgcfb88fd"></a>Change tag on other screen<br>
-<div class="outline-text-6" id="text-orgcfb88fd">
+<li><a id="org70c8018"></a>Change tag on other screen<br>
+<div class="outline-text-6" id="text-org70c8018">
 <p>
 Move the other screen to a specific tag number (assumes two screens) using
 <code>modkey</code> + <code>Alt</code> and a tag number:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org2827d98"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
+<pre class="src src-lua" id="org3e7eb6b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
     globalkeys = awful.util.table.join(globalkeys,
         <span style="color: #b22222;">-- </span><span style="color: #b22222;">View tag for other screen.</span>
         awful.key({ modkey, altkey }, <span style="color: #8b2252;">"#"</span> .. i + 9,
@@ -3913,14 +3913,14 @@ Move the other screen to a specific tag number (assumes two screens) using
 </li>
 
 
-<li><a id="org54f0733"></a>Move window to tag<br>
-<div class="outline-text-6" id="text-org54f0733">
+<li><a id="orge85b3ff"></a>Move window to tag<br>
+<div class="outline-text-6" id="text-orge85b3ff">
 <p>
 Move the current client (window) to tag by number:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgd0ed481"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
+<pre class="src src-lua" id="org1103c10"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
     globalkeys = awful.util.table.join(globalkeys,
         <span style="color: #b22222;">-- </span><span style="color: #b22222;">Move client to tag.</span>
         awful.key({ modkey, <span style="color: #8b2252;">"Shift"</span> }, <span style="color: #8b2252;">"#"</span> .. i + 9,
@@ -3941,14 +3941,14 @@ Move the current client (window) to tag by number:
 </li>
 
 
-<li><a id="org66687e3"></a>Select tag<br>
-<div class="outline-text-6" id="text-org66687e3">
+<li><a id="orga93075a"></a>Select tag<br>
+<div class="outline-text-6" id="text-orga93075a">
 <p>
 Activate other tag on the current one:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org0a1ac68"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
+<pre class="src src-lua" id="orgf70724d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
     globalkeys = awful.util.table.join(globalkeys,
         <span style="color: #b22222;">-- </span><span style="color: #b22222;">Toggle tag.</span>
         awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"#"</span> .. i + 9,
@@ -3969,14 +3969,14 @@ Activate other tag on the current one:
 </li>
 
 
-<li><a id="orgcdc3efd"></a>Show current tag on other tag<br>
-<div class="outline-text-6" id="text-orgcdc3efd">
+<li><a id="orga439299"></a>Show current tag on other tag<br>
+<div class="outline-text-6" id="text-orga439299">
 <p>
 Activate current tag on another one:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgeca2a75"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
+<pre class="src src-lua" id="org7cccbb6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, 9 <span style="color: #a020f0;">do</span>
     globalkeys = awful.util.table.join(globalkeys,
         <span style="color: #b22222;">-- </span><span style="color: #b22222;">Toggle tag.</span>
         awful.key({ modkey, <span style="color: #8b2252;">"Control"</span>, <span style="color: #8b2252;">"Shift"</span> }, <span style="color: #8b2252;">"#"</span> .. i + 9,
@@ -3996,14 +3996,14 @@ Activate current tag on another one:
 </li>
 
 
-<li><a id="org6d9379d"></a>Go to other screen<br>
-<div class="outline-text-6" id="text-org6d9379d">
+<li><a id="org94ace22"></a>Go to other screen<br>
+<div class="outline-text-6" id="text-org94ace22">
 <p>
 Move to previous / next screen with <code>modkey</code> + <code>Ctrl</code> + <code>j</code> / <code>k</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org1b8fd99"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org958ecc7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"j"</span>,
       <span style="color: #a020f0;">function</span> () awful.screen.focus_relative( 1) <span style="color: #a020f0;">end</span>,
@@ -4018,14 +4018,14 @@ Move to previous / next screen with <code>modkey</code> + <code>Ctrl</code> + <c
 </li>
 
 
-<li><a id="orga5ad647"></a>Go to other screen (alternative)<br>
-<div class="outline-text-6" id="text-orga5ad647">
+<li><a id="org87e7563"></a>Go to other screen (alternative)<br>
+<div class="outline-text-6" id="text-org87e7563">
 <p>
 Use <code>modkey</code> + <code>Ctrl</code> + (<code>Shift</code>) <code>TAB</code>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgd72c040"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="orgf11781f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"Tab"</span>,
        <span style="color: #a020f0;">function</span> () awful.screen.focus_relative( 1) <span style="color: #a020f0;">end</span>,
       {description = <span style="color: #8b2252;">"focus the next screen"</span>, group = <span style="color: #8b2252;">"screen"</span>}),
@@ -4041,24 +4041,24 @@ Use <code>modkey</code> + <code>Ctrl</code> + (<code>Shift</code>) <code>TAB</co
 </div>
 
 
-<div id="outline-container-org84fbdab" class="outline-5">
-<h5 id="org84fbdab">Clients (windows)</h5>
-<div class="outline-text-5" id="text-org84fbdab">
+<div id="outline-container-org71d5125" class="outline-5">
+<h5 id="org71d5125">Clients (windows)</h5>
+<div class="outline-text-5" id="text-org71d5125">
 <p>
 This section contains keybindings to operate on clients (windows).
 </p>
 </div>
 
 <ul class="org-ul">
-<li><a id="org72210e2"></a>Go to previous / next window<br>
-<div class="outline-text-6" id="text-org72210e2">
+<li><a id="org16b78ba"></a>Go to previous / next window<br>
+<div class="outline-text-6" id="text-org16b78ba">
 <p>
 Move to the previous / next window on the current screen using <code>modkey</code> + <code>j</code> /
 <code>k</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org45c06c5"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org2a571bf"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     <span style="color: #b22222;">-- </span><span style="color: #b22222;">Clients</span>
     awful.key({ modkey, }, <span style="color: #8b2252;">"j"</span>,
         <span style="color: #a020f0;">function</span> ()
@@ -4077,14 +4077,14 @@ Move to the previous / next window on the current screen using <code>modkey</cod
 </li>
 
 
-<li><a id="org9449c17"></a>Jump to last window<br>
-<div class="outline-text-6" id="text-org9449c17">
+<li><a id="org36aa0e9"></a>Jump to last window<br>
+<div class="outline-text-6" id="text-org36aa0e9">
 <p>
 Go to the tag with the last focused window:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgc4f492d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org328656d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"Escape"</span>, awful.tag.history.restore,
        {description = <span style="color: #8b2252;">"go back"</span>, group = <span style="color: #8b2252;">"tag"</span>})
 )
@@ -4094,14 +4094,14 @@ Go to the tag with the last focused window:
 </li>
 
 
-<li><a id="org60611a4"></a>Jump to urgent window<br>
-<div class="outline-text-6" id="text-org60611a4">
+<li><a id="org0df4588"></a>Jump to urgent window<br>
+<div class="outline-text-6" id="text-org0df4588">
 <p>
 Jump to window with urgent flag:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orga86907d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org2c7640d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"u"</span>, awful.client.urgent.jumpto,
        {description = <span style="color: #8b2252;">"jump to urgent client"</span>, group = <span style="color: #8b2252;">"client"</span>})
 )
@@ -4111,14 +4111,14 @@ Jump to window with urgent flag:
 </li>
 
 
-<li><a id="org0959c67"></a>Browse window history<br>
-<div class="outline-text-6" id="text-org0959c67">
+<li><a id="org858f8ed"></a>Browse window history<br>
+<div class="outline-text-6" id="text-org858f8ed">
 <p>
 Loop through window history on the current tag and screen (like <code>Alt</code> + <code>TAB</code>):
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org027c578"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org1c8b2b2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"Tab"</span>,
         <span style="color: #a020f0;">function</span> ()
             awful.client.focus.history.previous()
@@ -4134,14 +4134,14 @@ Loop through window history on the current tag and screen (like <code>Alt</code>
 </li>
 
 
-<li><a id="org0647dff"></a>Restore window<br>
-<div class="outline-text-6" id="text-org0647dff">
+<li><a id="orgdeca66d"></a>Restore window<br>
+<div class="outline-text-6" id="text-orgdeca66d">
 <p>
 Restore minimized window:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org996ce25"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="orgbabf526"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"n"</span>,
        <span style="color: #a020f0;">function</span> ()
           <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">c</span> = awful.client.restore()
@@ -4161,9 +4161,9 @@ Restore minimized window:
 </div>
 
 
-<div id="outline-container-org3d413c9" class="outline-5">
-<h5 id="org3d413c9">Layout</h5>
-<div class="outline-text-5" id="text-org3d413c9">
+<div id="outline-container-org3fa0537" class="outline-5">
+<h5 id="org3fa0537">Layout</h5>
+<div class="outline-text-5" id="text-org3fa0537">
 <p>
 This sections contains keybindings related to layout manipulations.
 </p>
@@ -4171,15 +4171,15 @@ This sections contains keybindings related to layout manipulations.
 
 
 <ul class="org-ul">
-<li><a id="orgdf07bc4"></a>Move window within layout<br>
-<div class="outline-text-6" id="text-orgdf07bc4">
+<li><a id="org5093954"></a>Move window within layout<br>
+<div class="outline-text-6" id="text-org5093954">
 <p>
 Swap window with previous / next in current layout using <code>modkey</code> + <code>shift</code> +
 <code>j</code> / <code>k</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf3a303a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org298bf58"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    <span style="color: #b22222;">-- </span><span style="color: #b22222;">Layout manipulation</span>
    awful.key({ modkey, <span style="color: #8b2252;">"Shift"</span> }, <span style="color: #8b2252;">"j"</span>,
@@ -4195,14 +4195,14 @@ Swap window with previous / next in current layout using <code>modkey</code> + <
 </li>
 
 
-<li><a id="org277953d"></a>Resize layout<br>
-<div class="outline-text-6" id="text-org277953d">
+<li><a id="org78283f8"></a>Resize layout<br>
+<div class="outline-text-6" id="text-org78283f8">
 <p>
 Control client size within layout:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org39153f9"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="orga2e273d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey,           }, <span style="color: #8b2252;">"l"</span>,
       <span style="color: #a020f0;">function</span> () awful.tag.incmwfact( 0.05) <span style="color: #a020f0;">end</span>,
@@ -4231,14 +4231,14 @@ Control client size within layout:
 </li>
 
 
-<li><a id="org00c5f1b"></a>Change layout<br>
-<div class="outline-text-6" id="text-org00c5f1b">
+<li><a id="org8a26122"></a>Change layout<br>
+<div class="outline-text-6" id="text-org8a26122">
 <p>
 Cycle through available layouts using <code>modkey</code> + <code>space</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org3714f15"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org2097a8d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, <span style="color: #8b2252;">"space"</span>,
       <span style="color: #a020f0;">function</span> () awful.layout.inc( 1) <span style="color: #a020f0;">end</span>,
@@ -4255,9 +4255,9 @@ Cycle through available layouts using <code>modkey</code> + <code>space</code>.
 </div>
 
 
-<div id="outline-container-org8ea3e23" class="outline-5">
-<h5 id="org8ea3e23">Application shortcuts</h5>
-<div class="outline-text-5" id="text-org8ea3e23">
+<div id="outline-container-orgd7082d4" class="outline-5">
+<h5 id="orgd7082d4">Application shortcuts</h5>
+<div class="outline-text-5" id="text-orgd7082d4">
 <p>
 Keybindings for frequently used <a href="#default_programs">applications</a>.
 </p>
@@ -4265,14 +4265,14 @@ Keybindings for frequently used <a href="#default_programs">applications</a>.
 
 
 <ul class="org-ul">
-<li><a id="orgcd4343c"></a>Toggle main menu<br>
-<div class="outline-text-6" id="text-orgcd4343c">
+<li><a id="org8a3a6e3"></a>Toggle main menu<br>
+<div class="outline-text-6" id="text-org8a3a6e3">
 <p>
 Toggle <a href="#main_menu">main menu</a>:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org6569049"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org28a41d7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"w"</span>, <span style="color: #a020f0;">function</span> () mymainmenu:show() <span style="color: #a020f0;">end</span>,
               {description = <span style="color: #8b2252;">"show main menu"</span>, group = <span style="color: #8b2252;">"awesome"</span>})
 )
@@ -4282,14 +4282,14 @@ Toggle <a href="#main_menu">main menu</a>:
 </li>
 
 
-<li><a id="orga0aad03"></a>Terminal<br>
-<div class="outline-text-6" id="text-orga0aad03">
+<li><a id="org38c66c2"></a>Terminal<br>
+<div class="outline-text-6" id="text-org38c66c2">
 <p>
 Open a terminal with <code>modkey</code> + <code>return</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org767d3d4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org27f5577"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, <span style="color: #8b2252;">"Return"</span>,
       <span style="color: #a020f0;">function</span> () awful.spawn(terminal) <span style="color: #a020f0;">end</span>,
@@ -4301,14 +4301,14 @@ Open a terminal with <code>modkey</code> + <code>return</code>.
 </li>
 
 
-<li><a id="orgb4ede22"></a>Internet browser<br>
-<div class="outline-text-6" id="text-orgb4ede22">
+<li><a id="orgbf3f748"></a>Internet browser<br>
+<div class="outline-text-6" id="text-orgbf3f748">
 <p>
 Start the web browser with <code>modkey</code> + <code>ctrl</code> + <code>return</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org9a09af5"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org1e8544a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"Return"</span>,
       <span style="color: #a020f0;">function</span> () awful.spawn(internet_browser) <span style="color: #a020f0;">end</span>,
@@ -4320,15 +4320,15 @@ Start the web browser with <code>modkey</code> + <code>ctrl</code> + <code>retur
 </li>
 
 
-<li><a id="org34a7d03"></a>Conkeror<br>
-<div class="outline-text-6" id="text-org34a7d03">
+<li><a id="orgcd48c38"></a>Conkeror<br>
+<div class="outline-text-6" id="text-orgcd48c38">
 <p>
 Start conkeror, an alternative web browser using <code>modkey</code> + <code>ctrl</code> + <code>shift</code> +
 <code>return</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org139660f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org2abbcd5"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, <span style="color: #8b2252;">"Control"</span>, <span style="color: #8b2252;">"Shift"</span> }, <span style="color: #8b2252;">"Return"</span>,
       <span style="color: #a020f0;">function</span> () awful.spawn(<span style="color: #8b2252;">"conkeror"</span>) <span style="color: #a020f0;">end</span>,
@@ -4340,14 +4340,14 @@ Start conkeror, an alternative web browser using <code>modkey</code> + <code>ctr
 </li>
 
 
-<li><a id="org748d601"></a>Emacs<br>
-<div class="outline-text-6" id="text-org748d601">
+<li><a id="org3eaa08d"></a>Emacs<br>
+<div class="outline-text-6" id="text-org3eaa08d">
 <p>
 Start emacs with <code>modkey</code> + <code>shift</code> + <code>return</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf9ec682"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org973ba73"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, <span style="color: #8b2252;">"Shift"</span> }, <span style="color: #8b2252;">"Return"</span>,
       <span style="color: #a020f0;">function</span> () awful.spawn(emacs) <span style="color: #a020f0;">end</span>,
@@ -4359,14 +4359,14 @@ Start emacs with <code>modkey</code> + <code>shift</code> + <code>return</code>.
 </li>
 
 
-<li><a id="org452b94d"></a>File explorer<br>
-<div class="outline-text-6" id="text-org452b94d">
+<li><a id="orgb10a859"></a>File explorer<br>
+<div class="outline-text-6" id="text-orgb10a859">
 <p>
 Start the file explorer software with <code>modkey</code> + <code>e</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org87806dc"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org7b48276"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, <span style="color: #8b2252;">"e"</span>,
       <span style="color: #a020f0;">function</span> () awful.spawn.with_shell(explorer .. <span style="color: #8b2252;">" ~"</span>) <span style="color: #a020f0;">end</span>,
@@ -4378,14 +4378,14 @@ Start the file explorer software with <code>modkey</code> + <code>e</code>.
 </li>
 
 
-<li><a id="org0d77b09"></a>Awesome restart<br>
-<div class="outline-text-6" id="text-org0d77b09">
+<li><a id="org0359347"></a>Awesome restart<br>
+<div class="outline-text-6" id="text-org0359347">
 <p>
 Restart awesome-wm (reload <code>rc.lua</code>) with <code>modkey</code> + <code>ctrl</code> + <code>r</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgc2fbe4c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org1d90a89"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"r"</span>, awesome.restart,
        {description = <span style="color: #8b2252;">"reload awesome"</span>, group = <span style="color: #8b2252;">"awesome"</span>})
 )
@@ -4395,14 +4395,14 @@ Restart awesome-wm (reload <code>rc.lua</code>) with <code>modkey</code> + <code
 </li>
 
 
-<li><a id="org8bb2d09"></a>Logout<br>
-<div class="outline-text-6" id="text-org8bb2d09">
+<li><a id="org0ff277a"></a>Logout<br>
+<div class="outline-text-6" id="text-org0ff277a">
 <p>
 Log out with <code>modkey</code> + <code>shift</code> + <code>q</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org99e0a17"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org466858f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, <span style="color: #8b2252;">"Shift"</span> }, <span style="color: #8b2252;">"q"</span>, awesome.quit,
        {description = <span style="color: #8b2252;">"quit awesome"</span>, group = <span style="color: #8b2252;">"awesome"</span>})
 )
@@ -4414,7 +4414,7 @@ Log out with <code>modkey</code> + <code>shift</code> + <code>q</code>.
 </div>
 
 
-<div id="outline-container-org88aa17a" class="outline-5">
+<div id="outline-container-orgb2d4136" class="outline-5">
 <h5 id="keybindings_prompts">Prompts</h5>
 <div class="outline-text-5" id="text-keybindings_prompts">
 <p>
@@ -4424,14 +4424,14 @@ This section contains keybindings for prompts.
 
 
 <ul class="org-ul">
-<li><a id="org486b981"></a>Shell execution<br>
-<div class="outline-text-6" id="text-org486b981">
+<li><a id="org6b8a62b"></a>Shell execution<br>
+<div class="outline-text-6" id="text-org6b8a62b">
 <p>
 Execute arbitrary shell commands with <code>modkey</code> + <code>r</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgbca5746"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org94d546d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     <span style="color: #b22222;">-- </span><span style="color: #b22222;">Prompt</span>
     awful.key({ modkey }, <span style="color: #8b2252;">"r"</span>,
        <span style="color: #a020f0;">function</span> () awful.screen.focused().mypromptbox:run() <span style="color: #a020f0;">end</span>,
@@ -4443,14 +4443,14 @@ Execute arbitrary shell commands with <code>modkey</code> + <code>r</code>.
 </li>
 
 
-<li><a id="orge5b9abf"></a>Lua execution<br>
-<div class="outline-text-6" id="text-orge5b9abf">
+<li><a id="org5999c32"></a>Lua execution<br>
+<div class="outline-text-6" id="text-org5999c32">
 <p>
 Execute lua code with <code>modkey</code> + <code>x</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgb7b0fd5"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
+<pre class="src src-lua" id="org027e251"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, <span style="color: #8b2252;">"x"</span>,
               <span style="color: #a020f0;">function</span> ()
                   awful.prompt.run {
@@ -4468,14 +4468,14 @@ Execute lua code with <code>modkey</code> + <code>x</code>.
 </li>
 
 
-<li><a id="org1a3541b"></a>Global prompt<br>
-<div class="outline-text-6" id="text-org1a3541b">
+<li><a id="orgb50d24a"></a>Global prompt<br>
+<div class="outline-text-6" id="text-orgb50d24a">
 <p>
 Toggle the custom <a href="#global_prompt">global prompt</a> with <code>modkey</code> + <code>z</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgb0a6439"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
+<pre class="src src-lua" id="org988e05d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey }, <span style="color: #8b2252;">"z"</span>,
       <span style="color: #a020f0;">function</span> ()
@@ -4503,15 +4503,15 @@ Toggle the custom <a href="#global_prompt">global prompt</a> with <code>modkey</
 </div>
 
 
-<div id="outline-container-org2ff720e" class="outline-5">
-<h5 id="org2ff720e">Menubar</h5>
-<div class="outline-text-5" id="text-org2ff720e">
+<div id="outline-container-org2e049bf" class="outline-5">
+<h5 id="org2e049bf">Menubar</h5>
+<div class="outline-text-5" id="text-org2e049bf">
 <p>
 Start the menubar with <code>modkey</code> + <code>a</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org51b8be4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Menubar</span>
+<pre class="src src-lua" id="org11faa8e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Menubar</span>
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, <span style="color: #8b2252;">"p"</span>, <span style="color: #a020f0;">function</span>() menubar.show() <span style="color: #a020f0;">end</span>,
               {description = <span style="color: #8b2252;">"show the menubar"</span>, group = <span style="color: #8b2252;">"launcher"</span>})
@@ -4522,15 +4522,15 @@ globalkeys = awful.util.table.join(globalkeys,
 </div>
 
 
-<div id="outline-container-orgf2e7bc1" class="outline-5">
-<h5 id="orgf2e7bc1">Volume control</h5>
-<div class="outline-text-5" id="text-orgf2e7bc1">
+<div id="outline-container-org5ba3cae" class="outline-5">
+<h5 id="org5ba3cae">Volume control</h5>
+<div class="outline-text-5" id="text-org5ba3cae">
 <p>
 Use special keyboard keys to control the audio volume:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org03d503a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Volume</span>
+<pre class="src src-lua" id="orgcf165c1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Volume</span>
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ }, <span style="color: #8b2252;">"XF86AudioRaiseVolume"</span>,
@@ -4558,15 +4558,15 @@ globalkeys = awful.util.table.join(
 </div>
 
 
-<div id="outline-container-orgae58bd1" class="outline-5">
-<h5 id="orgae58bd1">Screen lock</h5>
-<div class="outline-text-5" id="text-orgae58bd1">
+<div id="outline-container-org8d91c11" class="outline-5">
+<h5 id="org8d91c11">Screen lock</h5>
+<div class="outline-text-5" id="text-org8d91c11">
 <p>
 Lock the screen using <code>xscreensaver</code> with <code>modkey</code> + <code>ctrl</code> + <code>l</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org577f4ae"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Screen lock</span>
+<pre class="src src-lua" id="org34b7d21"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Screen lock</span>
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"l"</span>,
        <span style="color: #a020f0;">function</span> ()
@@ -4579,15 +4579,15 @@ globalkeys = awful.util.table.join(globalkeys,
 </div>
 
 
-<div id="outline-container-orgd2229dc" class="outline-5">
-<h5 id="orgd2229dc">Register keybindings</h5>
-<div class="outline-text-5" id="text-orgd2229dc">
+<div id="outline-container-org850e8e2" class="outline-5">
+<h5 id="org850e8e2">Register keybindings</h5>
+<div class="outline-text-5" id="text-org850e8e2">
 <p>
 Register the keybindings defined in the <code>globalkeys</code> table:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgd7d5ae3"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Set keys</span>
+<pre class="src src-lua" id="org58a219e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Set keys</span>
 root.keys(globalkeys)
 </pre>
 </div>
@@ -4596,28 +4596,28 @@ root.keys(globalkeys)
 </div>
 
 
-<div id="outline-container-org8ddd533" class="outline-4">
-<h4 id="org8ddd533">Client bindings</h4>
-<div class="outline-text-4" id="text-org8ddd533">
+<div id="outline-container-org78fca5e" class="outline-4">
+<h4 id="org78fca5e">Client bindings</h4>
+<div class="outline-text-4" id="text-org78fca5e">
 <p>
 The keybindings defined in this section control individual windows.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org21b1776"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = {}
+<pre class="src src-lua" id="org32dc0cc"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = {}
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org17d8928" class="outline-5">
-<h5 id="org17d8928">Fullscreen</h5>
-<div class="outline-text-5" id="text-org17d8928">
+<div id="outline-container-org1c3a644" class="outline-5">
+<h5 id="org1c3a644">Fullscreen</h5>
+<div class="outline-text-5" id="text-org1c3a644">
 <p>
 Get the current window in fullscreen with <code>modkey</code> + <code>f</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgd7248e6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(
+<pre class="src src-lua" id="org72b9567"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(
    clientkeys,
    awful.key({ modkey, }, <span style="color: #8b2252;">"f"</span>,
       <span style="color: #a020f0;">function</span> (c) c.fullscreen = <span style="color: #a020f0;">not</span> c.fullscreen  <span style="color: #a020f0;">end</span>)
@@ -4628,15 +4628,15 @@ Get the current window in fullscreen with <code>modkey</code> + <code>f</code>.
 </div>
 
 
-<div id="outline-container-org1a52136" class="outline-5">
-<h5 id="org1a52136">Kill window</h5>
-<div class="outline-text-5" id="text-org1a52136">
+<div id="outline-container-orgfebd545" class="outline-5">
+<h5 id="orgfebd545">Kill window</h5>
+<div class="outline-text-5" id="text-orgfebd545">
 <p>
 Kill current window with <code>modkey</code> + <code>shift</code> + <code>c</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org779c555"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
+<pre class="src src-lua" id="org4a856a0"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, <span style="color: #8b2252;">"Shift"</span> }, <span style="color: #8b2252;">"c"</span>, <span style="color: #a020f0;">function</span> (c) c:kill() <span style="color: #a020f0;">end</span>)
 )
 </pre>
@@ -4645,16 +4645,16 @@ Kill current window with <code>modkey</code> + <code>shift</code> + <code>c</cod
 </div>
 
 
-<div id="outline-container-orgf490fc7" class="outline-5">
-<h5 id="orgf490fc7">Toggle floating window mode</h5>
-<div class="outline-text-5" id="text-orgf490fc7">
+<div id="outline-container-orgac42e7d" class="outline-5">
+<h5 id="orgac42e7d">Toggle floating window mode</h5>
+<div class="outline-text-5" id="text-orgac42e7d">
 <p>
 Set window to floating mode (does not use layout) with <code>modkey</code> + <code>ctrl</code> +
 <code>space</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgcd3db62"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
+<pre class="src src-lua" id="orga49c5a7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"space"</span>, awful.client.floating.toggle )
 )
 </pre>
@@ -4663,9 +4663,9 @@ Set window to floating mode (does not use layout) with <code>modkey</code> + <co
 </div>
 
 
-<div id="outline-container-org8990534" class="outline-5">
-<h5 id="org8990534">Move window to master position</h5>
-<div class="outline-text-5" id="text-org8990534">
+<div id="outline-container-org5769155" class="outline-5">
+<h5 id="org5769155">Move window to master position</h5>
+<div class="outline-text-5" id="text-org5769155">
 <p>
 Swap window with window in the current layout's master position with <code>modkey</code> +
 <code>ctrl</code> + <code>return</code>.  Note that this is currently overridden by the web browser
@@ -4673,7 +4673,7 @@ shortcut.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgd1a6b3f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(
+<pre class="src src-lua" id="org6018ba8"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(
    clientkeys,
    awful.key({ modkey, <span style="color: #8b2252;">"Control"</span> }, <span style="color: #8b2252;">"Return"</span>,
       <span style="color: #a020f0;">function</span> (c) c:swap(awful.client.getmaster()) <span style="color: #a020f0;">end</span>)
@@ -4684,15 +4684,15 @@ shortcut.
 </div>
 
 
-<div id="outline-container-org93212c4" class="outline-5">
-<h5 id="org93212c4">Move window to other screen</h5>
-<div class="outline-text-5" id="text-org93212c4">
+<div id="outline-container-org8302d4c" class="outline-5">
+<h5 id="org8302d4c">Move window to other screen</h5>
+<div class="outline-text-5" id="text-org8302d4c">
 <p>
 Send current window to other screen with <code>modkey</code> + <code>o</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org2272d73"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
+<pre class="src src-lua" id="org5970575"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"o"</span>, awful.client.movetoscreen )
 )
 </pre>
@@ -4701,15 +4701,15 @@ Send current window to other screen with <code>modkey</code> + <code>o</code>.
 </div>
 
 
-<div id="outline-container-orgcbfb7de" class="outline-5">
-<h5 id="orgcbfb7de">Toggle on-top property</h5>
-<div class="outline-text-5" id="text-orgcbfb7de">
+<div id="outline-container-org50907cc" class="outline-5">
+<h5 id="org50907cc">Toggle on-top property</h5>
+<div class="outline-text-5" id="text-org50907cc">
 <p>
 Toggle on-top flag (useful for floating windows) with <code>modkey</code> + <code>t</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orged6525a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
+<pre class="src src-lua" id="orgbe8857c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"t"</span>, <span style="color: #a020f0;">function</span> (c) c.ontop = <span style="color: #a020f0;">not</span> c.ontop <span style="color: #a020f0;">end</span>)
 )
 </pre>
@@ -4718,15 +4718,15 @@ Toggle on-top flag (useful for floating windows) with <code>modkey</code> + <cod
 </div>
 
 
-<div id="outline-container-org2a0dc71" class="outline-5">
-<h5 id="org2a0dc71">Minimize window</h5>
-<div class="outline-text-5" id="text-org2a0dc71">
+<div id="outline-container-org4a86d36" class="outline-5">
+<h5 id="org4a86d36">Minimize window</h5>
+<div class="outline-text-5" id="text-org4a86d36">
 <p>
 Minimize the current window with <code>modkey</code> + <code>n</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org5a11ed4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
+<pre class="src src-lua" id="orgee5e3ea"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, <span style="color: #8b2252;">"n"</span>,
         <span style="color: #a020f0;">function</span> (c)
             <span style="color: #b22222;">-- </span><span style="color: #b22222;">The client currently has the input focus, so it cannot be</span>
@@ -4740,15 +4740,15 @@ Minimize the current window with <code>modkey</code> + <code>n</code>.
 </div>
 
 
-<div id="outline-container-org30baaa0" class="outline-5">
-<h5 id="org30baaa0">Toggle maximized mode</h5>
-<div class="outline-text-5" id="text-org30baaa0">
+<div id="outline-container-orgf7f428d" class="outline-5">
+<h5 id="orgf7f428d">Toggle maximized mode</h5>
+<div class="outline-text-5" id="text-orgf7f428d">
 <p>
 Toggle maximize property for the current window with <code>modkey</code> + <code>m</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org3050c3d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
+<pre class="src src-lua" id="orgce52559"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey,           }, <span style="color: #8b2252;">"m"</span>,
         <span style="color: #a020f0;">function</span> (c)
             c.maximized_horizontal = <span style="color: #a020f0;">not</span> c.maximized_horizontal
@@ -4761,16 +4761,16 @@ Toggle maximize property for the current window with <code>modkey</code> + <code
 </div>
 
 
-<div id="outline-container-org17c6b2c" class="outline-5">
-<h5 id="org17c6b2c">Show window information</h5>
-<div class="outline-text-5" id="text-org17c6b2c">
+<div id="outline-container-org23c8bff" class="outline-5">
+<h5 id="org23c8bff">Show window information</h5>
+<div class="outline-text-5" id="text-org23c8bff">
 <p>
 Show a popup notification with information on the current window (class,
 properties, etc.).  Triggered by pressing <code>modkey</code> + <code>i</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf1f76ae"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
+<pre class="src src-lua" id="org54ab32a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey,           }, <span style="color: #8b2252;">"i"</span>,
       <span style="color: #a020f0;">function</span> (c)
         <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">geom</span> = c:geometry()
@@ -4808,11 +4808,11 @@ properties, etc.).  Triggered by pressing <code>modkey</code> + <code>i</code>.
 </div>
 
 
-<div id="outline-container-org5f2daf5" class="outline-2">
+<div id="outline-container-org320e11a" class="outline-2">
 <h2 id="wibox">Wibox </h2>
 <div class="outline-text-2" id="text-wibox">
 <p>
-The wibox is the top bar shown on Fig.&nbsp;<a href="#org5650057">1</a>.  It is populated
+The wibox is the top bar shown on Fig.&nbsp;<a href="#orgaa8fb52">1</a>.  It is populated
 with widgets previously set up, including the <a href="#main_menu">main menu</a>, <a href="#tags">tag list</a>, task list and
 the custom <a href="#cmus">music</a> / <a href="#email">email</a> / <a href="#ttrss">news</a> widgets.
 </p>
@@ -4824,7 +4824,7 @@ on screen 1 for my configuration).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org9669806"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Wibox</span>
+<pre class="src src-lua" id="orgcaab5b7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{ Wibox</span>
 
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create a wibox for each screen and add it</span>
 awful.screen.connect_for_each_screen(<span style="color: #a020f0;">function</span>(s)
@@ -4837,16 +4837,16 @@ In the following sections, <code>s</code> is the current screen index.
 </div>
 
 
-<div id="outline-container-org458f4d1" class="outline-3">
-<h3 id="org458f4d1">Main prompt box</h3>
-<div class="outline-text-3" id="text-org458f4d1">
+<div id="outline-container-orged68c87" class="outline-3">
+<h3 id="orged68c87">Main prompt box</h3>
+<div class="outline-text-3" id="text-orged68c87">
 <p>
 The prompts defined in the <a href="#keybindings_prompts">key bindings section</a> toggle the visibility of a text
 widget on the wibox for user input.  This text widget is defined here:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org90159d1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>    <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create a promptbox for each screen</span>
+<pre class="src src-lua" id="org0d922fd"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>    <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create a promptbox for each screen</span>
     s.mypromptbox = awful.widget.prompt()
     s.mypromptbox.font = <span style="color: #8b2252;">"Consolas 18"</span>
 
@@ -4868,15 +4868,15 @@ widget on the wibox for user input.  This text widget is defined here:
 </div>
 
 
-<div id="outline-container-org120c6ea" class="outline-3">
-<h3 id="org120c6ea">Launchers</h3>
-<div class="outline-text-3" id="text-org120c6ea">
+<div id="outline-container-org1f91046" class="outline-3">
+<h3 id="org1f91046">Launchers</h3>
+<div class="outline-text-3" id="text-org1f91046">
 <p>
 Create launchers.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org0c7aa93"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>    <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create launchers</span>
+<pre class="src src-lua" id="org88e10ca"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>    <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create launchers</span>
     s.mylaunchbar = launchbar.new(awesome_paths.config_dir .. <span style="color: #8b2252;">"/shortcuts/"</span>,
                                   myiconfinder)
 </pre>
@@ -4885,17 +4885,17 @@ Create launchers.
 </div>
 
 
-<div id="outline-container-org04f3d4d" class="outline-3">
-<h3 id="org04f3d4d">Wibox</h3>
-<div class="outline-text-3" id="text-org04f3d4d">
+<div id="outline-container-org76754c6" class="outline-3">
+<h3 id="org76754c6">Wibox</h3>
+<div class="outline-text-3" id="text-org76754c6">
 <p>
 This section defines the main wibox, which can be seen at the top in
-Fig.&nbsp;<a href="#org5650057">1</a>.  It contains all the widgets and is defined as
+Fig.&nbsp;<a href="#orgaa8fb52">1</a>.  It contains all the widgets and is defined as
 follows:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org013bedb"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>    <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create the wibox</span>
+<pre class="src src-lua" id="orgb728a84"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>    <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create the wibox</span>
     s.mywibox = awful.wibox({ position = <span style="color: #8b2252;">"top"</span>, screen = s })
 
     <span style="color: #b22222;">-- </span><span style="color: #b22222;">Create an imagebox widget which will contains an icon indicating which</span>
@@ -4961,15 +4961,15 @@ turn added to the wibox.
 </div>
 
 
-<div id="outline-container-org3c1802e" class="outline-3">
-<h3 id="org3c1802e">Close screen for loop</h3>
-<div class="outline-text-3" id="text-org3c1802e">
+<div id="outline-container-org86be7ca" class="outline-3">
+<h3 id="org86be7ca">Close screen for loop</h3>
+<div class="outline-text-3" id="text-org86be7ca">
 <p>
-This code block closes the <a href="#org9669806">for loop</a> creating a wibox on each screen.
+This code block closes the <a href="#orgcaab5b7">for loop</a> creating a wibox on each screen.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf2658ee"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">end</span>)
+<pre class="src src-lua" id="orga40375a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">end</span>)
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">}}}</span>
 </pre>
 </div>
@@ -4978,7 +4978,7 @@ This code block closes the <a href="#org9669806">for loop</a> creating a wibox o
 </div>
 
 
-<div id="outline-container-org5c5bd27" class="outline-2">
+<div id="outline-container-org42117e1" class="outline-2">
 <h2 id="rules">Rules</h2>
 <div class="outline-text-2" id="text-rules">
 <p>
@@ -5000,7 +5000,7 @@ here.</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org06f38e7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Rules</span>
+<pre class="src src-lua" id="org9255c5a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Rules</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Rules to apply to new clients (through the "manage" signal).</span>
 awful.rules.rules = {
     <span style="color: #b22222;">-- </span><span style="color: #b22222;">All clients will match this rule.</span>
@@ -5068,16 +5068,16 @@ awful.rules.rules = {
 </div>
 
 
-<div id="outline-container-org7d724d5" class="outline-2">
-<h2 id="org7d724d5">Signals</h2>
-<div class="outline-text-2" id="text-org7d724d5">
+<div id="outline-container-orga481338" class="outline-2">
+<h2 id="orga481338">Signals</h2>
+<div class="outline-text-2" id="text-orga481338">
 <p>
 This is default code setting up focus following the mouse, titlebars (which are
 disabled) and border coloring.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgda25904"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Signals</span>
+<pre class="src src-lua" id="orgd42bdc9"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">{{{ Signals</span>
 <span style="color: #b22222;">-- </span><span style="color: #b22222;">Signal function to execute when a new client appears.</span>
 client.connect_signal(<span style="color: #8b2252;">"manage"</span>, <span style="color: #a020f0;">function</span> (c)
     <span style="color: #b22222;">-- </span><span style="color: #b22222;">Set the windows at the slave,</span>
@@ -5149,7 +5149,7 @@ client.connect_signal(<span style="color: #8b2252;">"mouse::enter"</span>, <span
 </div>
 
 
-<div id="outline-container-org433f43a" class="outline-2">
+<div id="outline-container-org3d07f23" class="outline-2">
 <h2 id="icon_finder">Icon finder</h2>
 <div class="outline-text-2" id="text-icon_finder">
 <p>
@@ -5160,7 +5160,7 @@ variable (<code>png</code> and <code>svg</code> files).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgf600a81"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">util</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful.util"</span>)
+<pre class="src src-lua" id="org235c691"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">util</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful.util"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">beautiful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"beautiful"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">lfs</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"lfs"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #483d8b;">io</span> = <span style="color: #483d8b;">io</span>
@@ -5248,7 +5248,7 @@ icon_finder.__index = icon_finder
 </div>
 
 
-<div id="outline-container-org4def14f" class="outline-2">
+<div id="outline-container-orgd9675dc" class="outline-2">
 <h2 id="global_prompt">Global prompt </h2>
 <div class="outline-text-2" id="text-global_prompt">
 <p>
@@ -5263,15 +5263,15 @@ A few prompts are also defined in this module, more can be added as needed.
 </p>
 </div>
 
-<div id="outline-container-org9b6c052" class="outline-3">
-<h3 id="org9b6c052">Imports</h3>
-<div class="outline-text-3" id="text-org9b6c052">
+<div id="outline-container-org765ccd2" class="outline-3">
+<h3 id="org765ccd2">Imports</h3>
+<div class="outline-text-3" id="text-org765ccd2">
 <p>
 This module requires basic awesome-wm libraries, and file system tools.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org19ab383"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">awful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful"</span>)
+<pre class="src src-lua" id="org12c953a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">awful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">util</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful.util"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">lfs</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"lfs"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">runorraise</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"runorraise"</span>)
@@ -5293,7 +5293,7 @@ global_prompt = {}
 </div>
 
 
-<div id="outline-container-org3b08852" class="outline-3">
+<div id="outline-container-org2f42d5b" class="outline-3">
 <h3 id="global_prompt_utils">Utilities</h3>
 <div class="outline-text-3" id="text-global_prompt_utils">
 <p>
@@ -5311,7 +5311,7 @@ First, define some helper functions:
 </dl>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org32ac9b1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">generic_completion_wrapper</span>(kw, list, str, cur_pos, ncomp)
+<pre class="src src-lua" id="org7012571"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">generic_completion_wrapper</span>(kw, list, str, cur_pos, ncomp)
    out_str, out_pos = awful.completion.generic(str, cur_pos, ncomp, list)
    out_str = kw .. <span style="color: #8b2252;">" "</span> .. out_str
    out_pos = out_pos + kw:len() + 1
@@ -5359,9 +5359,9 @@ First, define some helper functions:
 </div>
 
 
-<div id="outline-container-orgfdc6d20" class="outline-3">
-<h3 id="orgfdc6d20">Prompts</h3>
-<div class="outline-text-3" id="text-orgfdc6d20">
+<div id="outline-container-org0a36732" class="outline-3">
+<h3 id="org0a36732">Prompts</h3>
+<div class="outline-text-3" id="text-org0a36732">
 <p>
 The prompts included in the module are listed here.  Prompts are called by
 entering a keyword, followed by some arguments in the promptbox (i.e. the user
@@ -5369,7 +5369,7 @@ input is of the form <code>KEYWORD ARGS</code>).  A prompt is defined as follows
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orga3de23d">global_prompt.prompt_TEMPLATE = {
+<pre class="src src-lua" id="orgd2968bd">global_prompt.prompt_TEMPLATE = {
    keyword={<span style="color: #8b2252;">"?"</span>, <span style="color: #8b2252;">"h"</span>}, <span style="color: #b22222;">-- </span><span style="color: #b22222;">list of strings</span>
    help=<span style="color: #8b2252;">"Help message for prompt"</span>,
    <span style="color: #0000ff;">run_function</span> = <span style="color: #a020f0;">function</span>(kw, name)
@@ -5398,17 +5398,17 @@ parameter is the <code>ARGS</code> string passed from the prompt (the user input
 </div>
 
 
-<div id="outline-container-org6c22f7e" class="outline-4">
+<div id="outline-container-orgb74eee2" class="outline-4">
 <h4 id="global_prompt_help">help</h4>
 <div class="outline-text-4" id="text-global_prompt_help">
 <p>
 The help prompt prints a list of the available prompts, along with the
-corresponding help text as shown on Fig.&nbsp;<a href="#org26c9ba9">4</a>.  The
+corresponding help text as shown on Fig.&nbsp;<a href="#org9fa8d2e">4</a>.  The
 keyword is <code>h</code> or <code>?</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org612c037"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_help = {
+<pre class="src src-lua" id="org8739244"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_help = {
    keyword={<span style="color: #8b2252;">"?"</span>, <span style="color: #8b2252;">"h"</span>}, help=<span style="color: #8b2252;">"Show a list of available commands"</span>,
    <span style="color: #0000ff;">run_function</span> = <span style="color: #a020f0;">function</span>(kw, name)
       help_str = <span style="color: #8b2252;">""</span>
@@ -5431,11 +5431,11 @@ keyword is <code>h</code> or <code>?</code>.
 
 <p>
 The following script manually spawns the help box shown on
-Fig.&nbsp;<a href="#org26c9ba9">4</a> and performs a screenshot.
+Fig.&nbsp;<a href="#org9fa8d2e">4</a> and performs a screenshot.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org8919190"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
+<pre class="src src-sh" id="orga0b1b68"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
 <span style="color: #a0522d;">res_x</span>=1920
 <span style="color: #a0522d;">res_y</span>=1080
 <span style="color: #a0522d;">screen_idx</span>=0 <span style="color: #b22222;"># </span><span style="color: #b22222;">starts at 0</span>
@@ -5459,7 +5459,7 @@ rm desktop.png -rf
 
 
 
-<div id="org26c9ba9" class="figure">
+<div id="org9fa8d2e" class="figure">
 <p><a href="../images/2016-10-05-Awesome-wm_configuration/desktop-global-prompt-help.png" width="40%"><img src="../images/2016-10-05-Awesome-wm_configuration/desktop-global-prompt-help.png" alt="desktop-global-prompt-help.png" width="40%"></a>
 </p>
 <p><span class="figure-number">Figure 4: </span>Help notification from global prompt.</p>
@@ -5469,9 +5469,9 @@ rm desktop.png -rf
 
 
 
-<div id="outline-container-orgac46666" class="outline-4">
-<h4 id="orgac46666">session</h4>
-<div class="outline-text-4" id="text-orgac46666">
+<div id="outline-container-org7065290" class="outline-4">
+<h4 id="org7065290">session</h4>
+<div class="outline-text-4" id="text-org7065290">
 <p>
 The session prompt offers session management commands (shutdown, restart,
 logout, lock), similar to the <a href="#shutdown">shutdown menu</a>.  The keyword is <code>s</code>, so <code>s
@@ -5479,7 +5479,7 @@ shutdown</code> will trigger a shutdown (with confirmation prompt).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org4f26188"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_session = {
+<pre class="src src-lua" id="orga93b4e7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_session = {
    keyword={<span style="color: #8b2252;">"s"</span>}, help=<span style="color: #8b2252;">"Session control (shutdown, restart, logout, lock)"</span>,
    <span style="color: #0000ff;">run_function</span> = <span style="color: #a020f0;">function</span>(kw, cmd)
       <span style="color: #b22222;">-- </span><span style="color: #b22222;">list of commands: mplayer -input cmdlist | more</span>
@@ -5514,9 +5514,9 @@ shutdown</code> will trigger a shutdown (with confirmation prompt).
 </div>
 
 
-<div id="outline-container-org4cb5be5" class="outline-4">
-<h4 id="org4cb5be5">window</h4>
-<div class="outline-text-4" id="text-org4cb5be5">
+<div id="outline-container-org1043d43" class="outline-4">
+<h4 id="org1043d43">window</h4>
+<div class="outline-text-4" id="text-org1043d43">
 <p>
 The window prompt allows to quickly jump to an existing window.  It lists open
 windows by their class and name and compares the argument to the listed
@@ -5524,7 +5524,7 @@ class / title pairs.  Tab completion is also implemented.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgb6dc3bd"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_window = {
+<pre class="src src-lua" id="org151f0d6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_window = {
    keyword={<span style="color: #8b2252;">"j"</span>}, help=<span style="color: #8b2252;">"Jump to window"</span>,
    <span style="color: #0000ff;">run_function</span> = <span style="color: #a020f0;">function</span>(kw, cmd)
       cmd_l = <span style="color: #483d8b;">string</span>.<span style="color: #483d8b;">lower</span>(cmd)
@@ -5565,7 +5565,7 @@ class / title pairs.  Tab completion is also implemented.
 </div>
 
 
-<div id="outline-container-org7cea8d8" class="outline-4">
+<div id="outline-container-org8c21750" class="outline-4">
 <h4 id="global_prompt_calc">calc</h4>
 <div class="outline-text-4" id="text-global_prompt_calc">
 <p>
@@ -5575,15 +5575,15 @@ logarithmic etc.).
 </p>
 </div>
 
-<div id="outline-container-org5a5cba1" class="outline-5">
-<h5 id="org5a5cba1">Internal script</h5>
-<div class="outline-text-5" id="text-org5a5cba1">
+<div id="outline-container-orgf1dddf3" class="outline-5">
+<h5 id="orgf1dddf3">Internal script</h5>
+<div class="outline-text-5" id="text-orgf1dddf3">
 <p>
 The calculator script was adapted from <a href="http://www.peterbe.com/plog/calculator-in-python-for-dummies">this one</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org8c9aeb4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[scripts/calc.py]</div><span style="color: #b22222;">#</span><span style="color: #b22222;">!/usr/bin/python3</span>
+<pre class="src src-python" id="org3c3193b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[scripts/calc.py]</div><span style="color: #b22222;">#</span><span style="color: #b22222;">!/usr/bin/python3</span>
 
 <span style="color: #8b2252;">""" A simple calculator """</span>
 
@@ -5621,9 +5621,9 @@ The calculator script was adapted from <a href="http://www.peterbe.com/plog/calc
 </div>
 
 
-<div id="outline-container-orgb648ccb" class="outline-5">
-<h5 id="orgb648ccb">Prompt definition</h5>
-<div class="outline-text-5" id="text-orgb648ccb">
+<div id="outline-container-orgb968143" class="outline-5">
+<h5 id="orgb968143">Prompt definition</h5>
+<div class="outline-text-5" id="text-orgb968143">
 <p>
 The definition of the prompt is straightforward: the arguments are wrapped
 around double quotes and passed to the <code>calc.py</code> script.  The result is shown in
@@ -5631,7 +5631,7 @@ a popup notification.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org21c8975"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.calc_cmd = <span style="color: #8b2252;">"python3 "</span> .. awesome_paths.config_dir ..
+<pre class="src src-lua" id="org9d49573"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.calc_cmd = <span style="color: #8b2252;">"python3 "</span> .. awesome_paths.config_dir ..
    <span style="color: #8b2252;">"/scripts/calc.py "</span>
 global_prompt.prompt_calc = {
    keyword={<span style="color: #8b2252;">"c"</span>}, help=<span style="color: #8b2252;">"Calculator"</span>,
@@ -5658,9 +5658,9 @@ global_prompt.prompt_calc = {
 </div>
 
 
-<div id="outline-container-orgf4475ca" class="outline-4">
-<h4 id="orgf4475ca">cmus</h4>
-<div class="outline-text-4" id="text-orgf4475ca">
+<div id="outline-container-org13d0eff" class="outline-4">
+<h4 id="org13d0eff">cmus</h4>
+<div class="outline-text-4" id="text-org13d0eff">
 <p>
 The cmus prompt is an interface to the <a href="#cmus_play">cmus quick play command</a>.  The supported
 arguments are:
@@ -5674,7 +5674,7 @@ arguments are:
 
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org4df65f6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_cmus = {
+<pre class="src src-lua" id="orgcaff068"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_cmus = {
    keyword={<span style="color: #8b2252;">"cm"</span>}, help=<span style="color: #8b2252;">"cmus remote"</span>,
    <span style="color: #0000ff;">run_function</span> = <span style="color: #a020f0;">function</span>(kw, cmd)
       <span style="color: #b22222;">-- </span><span style="color: #b22222;">list of commands: mplayer -input cmdlist | more</span>
@@ -5719,7 +5719,7 @@ arguments are:
 </div>
 
 
-<div id="outline-container-orge88e551" class="outline-4">
+<div id="outline-container-orgc6a075d" class="outline-4">
 <h4 id="global_prompt_music">music</h4>
 <div class="outline-text-4" id="text-global_prompt_music">
 <p>
@@ -5731,7 +5731,7 @@ The <code>music.db</code> file is updated on a schedule (daily) via <code>cronta
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf" id="org653ea4b"><span style="color: #b22222;"># </span><span style="color: #b22222;">Crontab entry for music database update</span>
+<pre class="src src-conf" id="org7c4bfdb"><span style="color: #b22222;"># </span><span style="color: #b22222;">Crontab entry for music database update</span>
 0 9 * * * updatedb --require-visibility 0 -U ~/data/music/ -o ~/data/music/music.db &gt; ~/log/update_musicdb.log
 </pre>
 </div>
@@ -5762,7 +5762,7 @@ for the <code>mc</code> keyword simply lists the available commands.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org7d4587b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.mplayer_pipe = <span style="color: #8b2252;">"/tmp/awesome-mplayer.pipe"</span>
+<pre class="src src-lua" id="org6242415"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.mplayer_pipe = <span style="color: #8b2252;">"/tmp/awesome-mplayer.pipe"</span>
 global_prompt.music_folder = <span style="color: #8b2252;">"/media/data/music/"</span>
 global_prompt.music_locate_db = global_prompt.music_folder .. <span style="color: #8b2252;">"music.db"</span>
 global_prompt.music_ext_list = { <span style="color: #8b2252;">".mp3"</span>, <span style="color: #8b2252;">".flac"</span>, <span style="color: #8b2252;">".ogg"</span>, <span style="color: #8b2252;">".aac"</span> }
@@ -5876,9 +5876,9 @@ global_prompt.prompt_music = {
 
 
 
-<div id="outline-container-org88733a2" class="outline-4">
-<h4 id="org88733a2">web&#xa0;&#xa0;&#xa0;<span class="tag"><span class="feature_request">feature_request</span></span></h4>
-<div class="outline-text-4" id="text-org88733a2">
+<div id="outline-container-orgd6c5898" class="outline-4">
+<h4 id="orgd6c5898">web&#xa0;&#xa0;&#xa0;<span class="tag"><span class="feature_request">feature_request</span></span></h4>
+<div class="outline-text-4" id="text-orgd6c5898">
 <p>
 The web prompt was originally aimed at handling questions where the answer would
 be obtained from a web search (e.g. using <a href="https://duckduckgo.com/api">duckduckgo</a> search API).  This is
@@ -5887,7 +5887,7 @@ and starts a duckduckgo search with the input arguments.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org1ef2341"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.search_url = <span style="color: #8b2252;">"https://duckduckgo.com/?q=%s"</span>
+<pre class="src src-lua" id="org197d056"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.search_url = <span style="color: #8b2252;">"https://duckduckgo.com/?q=%s"</span>
 global_prompt.prompt_web = {
    keyword={<span style="color: #8b2252;">"w"</span>}, help=<span style="color: #8b2252;">"Web search"</span>,
    <span style="color: #0000ff;">run_function</span> = <span style="color: #a020f0;">function</span>(kw, expr)
@@ -5910,9 +5910,9 @@ global_prompt.prompt_web = {
 </div>
 
 
-<div id="outline-container-orgb8e84cf" class="outline-3">
-<h3 id="orgb8e84cf">Main prompt</h3>
-<div class="outline-text-3" id="text-orgb8e84cf">
+<div id="outline-container-org5fa2689" class="outline-3">
+<h3 id="org5fa2689">Main prompt</h3>
+<div class="outline-text-3" id="text-org5fa2689">
 <p>
 Once the prompts are defined they are added to the <code>prompt_list</code> table.  The
 final part of the module defines the main hook handling user input.  The first
@@ -5924,7 +5924,7 @@ respectively.
 
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org989cf6b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_list = { global_prompt.prompt_help,
+<pre class="src src-lua" id="org40eae20"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[global_prompt.lua]</div>global_prompt.prompt_list = { global_prompt.prompt_help,
                               global_prompt.prompt_music,
                               global_prompt.prompt_calc,
                               global_prompt.prompt_cmus,
@@ -5993,7 +5993,7 @@ respectively.
 </div>
 
 
-<div id="outline-container-org0615bb0" class="outline-2">
+<div id="outline-container-orgb7300fe" class="outline-2">
 <h2 id="startup_applications">Startup applications</h2>
 <div class="outline-text-2" id="text-startup_applications">
 <p>
@@ -6013,7 +6013,7 @@ startup are:
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org7c60e22"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>my_utility.run_once(awesome_paths.config_dir .. <span style="color: #8b2252;">"/scripts/dual_default.sh"</span>)
+<pre class="src src-lua" id="orgc66a883"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[rc.lua]</div>my_utility.run_once(awesome_paths.config_dir .. <span style="color: #8b2252;">"/scripts/dual_default.sh"</span>)
 my_utility.run_once(<span style="color: #8b2252;">"numlockx&amp;"</span>)
 my_utility.run_once(awesome_paths.home_dir .. <span style="color: #8b2252;">"/.dropbox-dist/dropboxd"</span>) <span style="color: #b22222;">-- </span><span style="color: #b22222;">drop</span><span style="color: #ee82ee; background-color: #333333;">box</span>
 my_utility.run_once(<span style="color: #8b2252;">"nm-applet"</span>) <span style="color: #b22222;">-- </span><span style="color: #b22222;">networking</span>
@@ -6031,16 +6031,16 @@ my_utility.run_once(termapps .. <span style="color: #8b2252;">" -name cmus -e cm
 </div>
 </div>
 
-<div id="outline-container-orgcb89a51" class="outline-3">
-<h3 id="orgcb89a51">Dual screen setup script</h3>
-<div class="outline-text-3" id="text-orgcb89a51">
+<div id="outline-container-orgda791c5" class="outline-3">
+<h3 id="orgda791c5">Dual screen setup script</h3>
+<div class="outline-text-3" id="text-orgda791c5">
 <p>
 The <code>dual_default.sh</code> script contains the following command (which should be
 changed according to the monitor setup):
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org16896c4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[scripts/dual_default.sh]</div><span style="color: #b22222;">#</span><span style="color: #b22222;">!/bin/sh</span>
+<pre class="src src-sh" id="org38fbbc0"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[scripts/dual_default.sh]</div><span style="color: #b22222;">#</span><span style="color: #b22222;">!/bin/sh</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">Setup screens</span>
 xrandr --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal <span style="color: #8b2252;">\</span>
        --output DP1 --off --output VGA-0 --mode 1920x1080 --pos 0x0 --rotate normal
@@ -6051,7 +6051,7 @@ xrandr --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal <span style
 </div>
 
 
-<div id="outline-container-orgae9926f" class="outline-2">
+<div id="outline-container-org289a711" class="outline-2">
 <h2 id="my_utility">Utilities </h2>
 <div class="outline-text-2" id="text-my_utility">
 <p>
@@ -6060,7 +6060,7 @@ configuration.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org6e019a7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">awful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful"</span>)
+<pre class="src src-lua" id="org1cf641a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">local</span> <span style="color: #a0522d;">awful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"awful"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">naughty</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"naughty"</span>)
 <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">beautiful</span> = <span style="color: #483d8b;">require</span>(<span style="color: #8b2252;">"beautiful"</span>)
 
@@ -6070,9 +6070,9 @@ my_utility = {}
 </div>
 
 
-<div id="outline-container-orgfd82220" class="outline-3">
-<h3 id="orgfd82220">String split</h3>
-<div class="outline-text-3" id="text-orgfd82220">
+<div id="outline-container-org74c01ab" class="outline-3">
+<h3 id="org74c01ab">String split</h3>
+<div class="outline-text-3" id="text-org74c01ab">
 <p>
 The <code>my_utility.lines</code> function splits the input string by rows.  A table with
 the lines is returned; it can be iterated over using <code>for k, v in
@@ -6080,7 +6080,7 @@ pairs(lines_output)</code>.  This was taken from <a href="http://lua-users.org/w
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgb8734a9"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.lines</span>(str)
+<pre class="src src-lua" id="org74f7a4f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.lines</span>(str)
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">t</span> = {}
    <span style="color: #a020f0;">local</span> <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">helper</span>(line) <span style="color: #483d8b;">table</span>.<span style="color: #483d8b;">insert</span>(t, line) <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">""</span> <span style="color: #a020f0;">end</span>
    helper((str:gsub(<span style="color: #8b2252;">"(.-)\r?\n"</span>, helper)))
@@ -6092,9 +6092,9 @@ pairs(lines_output)</code>.  This was taken from <a href="http://lua-users.org/w
 </div>
 
 
-<div id="outline-container-org91c5cb0" class="outline-3">
-<h3 id="org91c5cb0">HTML escape</h3>
-<div class="outline-text-3" id="text-org91c5cb0">
+<div id="outline-container-orgd577fc3" class="outline-3">
+<h3 id="orgd577fc3">HTML escape</h3>
+<div class="outline-text-3" id="text-orgd577fc3">
 <p>
 Notifications in awesome-wm accept HTML inputs, but there is no built-in
 function to cleanup strings.  The <code>my_utility.html_escape</code> function provides
@@ -6102,7 +6102,7 @@ some very basic escaping.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orga2249e3"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.html_escape</span>(str)
+<pre class="src src-lua" id="org0ca9192"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.html_escape</span>(str)
    <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">t</span> = str
    t = t:gsub(<span style="color: #8b2252;">"&amp;"</span>, <span style="color: #8b2252;">"&amp;amp;"</span>)
    t = t:gsub(<span style="color: #8b2252;">"&lt;"</span>, <span style="color: #8b2252;">"&amp;lt;"</span>)
@@ -6125,16 +6125,16 @@ some very basic escaping.
 </div>
 
 
-<div id="outline-container-org1c8c183" class="outline-3">
-<h3 id="org1c8c183">File listing</h3>
-<div class="outline-text-3" id="text-org1c8c183">
+<div id="outline-container-org2ed0927" class="outline-3">
+<h3 id="org2ed0927">File listing</h3>
+<div class="outline-text-3" id="text-org2ed0927">
 <p>
 The <code>scandir</code> utility lists files in a given folder (from
 <a href="http://stackoverflow.com/a/11130774">http://stackoverflow.com/a/11130774</a>).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org7ed4e06"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Lua implementation of scandir function</span>
+<pre class="src src-lua" id="org8c2561c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Lua implementation of scandir function</span>
 <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.scandir</span>(directory, pattern)
     <span style="color: #a020f0;">local</span> <span style="color: #a0522d;">i</span>, <span style="color: #a0522d;">t</span>, <span style="color: #a0522d;">popen</span> = 0, {}, <span style="color: #483d8b;">io</span>.<span style="color: #483d8b;">popen</span>
     <span style="color: #a020f0;">for</span> <span style="color: #a0522d;">filename</span> <span style="color: #a020f0;">in</span> popen(<span style="color: #8b2252;">'ls -a "'</span>..directory..<span style="color: #8b2252;">'/"'</span>..pattern):lines() <span style="color: #a020f0;">do</span>
@@ -6149,11 +6149,11 @@ The <code>scandir</code> utility lists files in a given folder (from
 </div>
 
 
-<div id="outline-container-org931a22e" class="outline-3">
-<h3 id="org931a22e">Table operations</h3>
-<div class="outline-text-3" id="text-org931a22e">
+<div id="outline-container-org6656b18" class="outline-3">
+<h3 id="org6656b18">Table operations</h3>
+<div class="outline-text-3" id="text-org6656b18">
 <div class="org-src-container">
-<pre class="src src-lua" id="org0fa2c37"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Remove paths from list of paths (based on last folder)</span>
+<pre class="src src-lua" id="orgb1745cf"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #b22222;">-- </span><span style="color: #b22222;">Remove paths from list of paths (based on last folder)</span>
 <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.table_path_remove</span>(table_in, remove_list)
 
    <span style="color: #a020f0;">for</span> <span style="color: #a0522d;">i</span> = 1, #remove_list <span style="color: #a020f0;">do</span>
@@ -6175,7 +6175,7 @@ The <code>scandir</code> utility lists files in a given folder (from
 
 
 
-<div id="outline-container-org698a7d5" class="outline-3">
+<div id="outline-container-orgeb84f2d" class="outline-3">
 <h3 id="my_utility_confirm">Confirmation popup</h3>
 <div class="outline-text-3" id="text-my_utility_confirm">
 <p>
@@ -6188,7 +6188,7 @@ color of the whole wibox (on the current screen) is temporarily set to
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgfab66d7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.confirm_action</span>(func, name)
+<pre class="src src-lua" id="orgc1cf9ad"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.confirm_action</span>(func, name)
    awful.screen.focused().mywibox:set_bg(beautiful.bg_urgent)
    awful.screen.focused().mywibox:set_fg(beautiful.fg_urgent)
    awful.prompt.run {
@@ -6213,11 +6213,11 @@ color of the whole wibox (on the current screen) is temporarily set to
 
 <p>
 Here is an example of usage using <code>awesome-client</code>, with a screenshot of the
-confirmation prompt on Fig.&nbsp;<a href="#orgc224969">5</a>.
+confirmation prompt on Fig.&nbsp;<a href="#org034655b">5</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="orgdc014bf"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
+<pre class="src src-sh" id="orgacb8d2b"><span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
 <span style="color: #a0522d;">res_x</span>=1920
 <span style="color: #a0522d;">res_y</span>=1080
 <span style="color: #a0522d;">screen_idx</span>=1 <span style="color: #b22222;"># </span><span style="color: #b22222;">starts at 0</span>
@@ -6240,7 +6240,7 @@ rm desktop.png -rf
 </div>
 
 
-<div id="orgc224969" class="figure">
+<div id="org034655b" class="figure">
 <p><a href="../images/2016-10-05-Awesome-wm_configuration/desktop-confirm-action.png" width="60%"><img src="../images/2016-10-05-Awesome-wm_configuration/desktop-confirm-action.png" alt="desktop-confirm-action.png" width="60%"></a>
 </p>
 <p><span class="figure-number">Figure 5: </span>Confirmation prompt before shutdown (left-most text).</p>
@@ -6249,7 +6249,7 @@ rm desktop.png -rf
 </div>
 
 
-<div id="outline-container-org9b46015" class="outline-3">
+<div id="outline-container-org5bf1ecf" class="outline-3">
 <h3 id="my_utility_run_once">Run once</h3>
 <div class="outline-text-3" id="text-my_utility_run_once">
 <p>
@@ -6259,7 +6259,7 @@ not already running.  The code is from
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="org5dd3144"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.run_once</span>(prg, arg_string, pname, s, tag)
+<pre class="src src-lua" id="orgc455f15"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">function</span> <span style="color: #0000ff;">my_utility.run_once</span>(prg, arg_string, pname, s, tag)
     <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">not</span> prg <span style="color: #a020f0;">then</span>
         <span style="color: #a020f0;">do</span> <span style="color: #a020f0;">return</span> <span style="color: #008b8b;">nil</span> <span style="color: #a020f0;">end</span>
     <span style="color: #a020f0;">end</span>
@@ -6291,16 +6291,16 @@ not already running.  The code is from
 </div>
 
 
-<div id="outline-container-org2ccb4d4" class="outline-3">
-<h3 id="org2ccb4d4">Return object</h3>
-<div class="outline-text-3" id="text-org2ccb4d4">
+<div id="outline-container-org66f21a6" class="outline-3">
+<h3 id="org66f21a6">Return object</h3>
+<div class="outline-text-3" id="text-org66f21a6">
 <p>
 The module is instantiated by <code>local my_utility = require("my_utility")</code> and
 functions are called using <code>my_utility.function(...)</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lua" id="orgbc4cf97"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">return</span> my_utility
+<pre class="src src-lua" id="org499eea3"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_utility.lua]</div><span style="color: #a020f0;">return</span> my_utility
 </pre>
 </div>
 </div>
@@ -6308,9 +6308,9 @@ functions are called using <code>my_utility.function(...)</code>.
 </div>
 
 
-<div id="outline-container-orgb9b4e76" class="outline-2">
-<h2 id="orgb9b4e76">Resources</h2>
-<div class="outline-text-2" id="text-orgb9b4e76">
+<div id="outline-container-orgb3ac454" class="outline-2">
+<h2 id="orgb3ac454">Resources</h2>
+<div class="outline-text-2" id="text-orgb3ac454">
 <ul class="org-ul">
 <li>awesome wiki: <a href="https://awesome.naquadah.org/wiki">https://awesome.naquadah.org/wiki</a> (this may disappear in the
 future as described in <a href="https://github.com/awesomeWM/awesome-www/issues/7">https://github.com/awesomeWM/awesome-www/issues/7</a>)</li>

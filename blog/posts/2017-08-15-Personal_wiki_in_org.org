@@ -1,4 +1,4 @@
-# Created 2017-12-03 Sun 03:37
+# Created 2017-12-03 Sun 03:49
 #+TITLE: Personal wiki in org
 #+DATE: 2017-08-15
 #+AUTHOR: Thibault Marin
@@ -964,7 +964,7 @@ URL (the ~highlight~ parameter).  The ~highlight~ parameter is parsed by the
 
 When the ~highlight~ parameter is passed, a search bar is shown on the target
 page, with button to navigate through results.  This is shown on
-Fig.\nbsp{}[[fig-search-bar]].
+Fig.\nbsp{}[[fig-highlight]].
 
 #+NAME: search-js-highlight
 #+BEGIN_SRC javascript
@@ -1055,7 +1055,7 @@ $(document).ready(function() {
 });
 #+END_SRC
 
-#+NAME: fig-search-bar
+#+NAME: fig-highlight
 #+CAPTION: Search results highlighting and search bar (in the top right corner).
 [[file:../images/2017-08-15-Personal_wiki_in_org/highlight.png][file:../images/2017-08-15-Personal_wiki_in_org/highlight.png]]
 
@@ -1206,7 +1206,7 @@ Search:
 ,#+END_EXPORT
 #+END_SRC
 
-An example of rendered search page is shown on Fig.\nbsp{}[[fig-search-bar]].
+An example of rendered search page is shown on Fig.\nbsp{}[[fig-search-page]].
 
 #+NAME: fig-search-page
 #+CAPTION: Search page with search results.

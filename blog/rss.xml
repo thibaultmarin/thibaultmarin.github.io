@@ -14,8 +14,8 @@
 	<link>/blog/index.html</link>
 	<description><![CDATA[]]></description>
 	<language>en</language>
-	<pubDate>Sun, 03 Dec 2017 03:37:54 -0600</pubDate>
-	<lastBuildDate>Sun, 03 Dec 2017 03:37:54 -0600</lastBuildDate>
+	<pubDate>Sun, 03 Dec 2017 03:49:52 -0600</pubDate>
+	<lastBuildDate>Sun, 03 Dec 2017 03:49:52 -0600</lastBuildDate>
 	<generator>Emacs 25.2 Org-mode 9.1.3</generator>
 	<webMaster>) (nil)</webMaster>
 	<image>
@@ -30,7 +30,7 @@
 			<ul>
 				<li><a href="#org62064b4">Personal wiki in org</a>
 				<ul>
-					<li><a href="#orgac27bf1">Introduction</a></li>
+					<li><a href="#org9beed3f">Introduction</a></li>
 				</ul>
 				</li>
 				<li><a href="#org35bc9e1">hpp2plantuml - Convert C++ header files to PlantUML</a>
@@ -40,12 +40,12 @@
 				</li>
 				<li><a href="#org288365c">Personal website in org</a>
 				<ul>
-					<li><a href="#orga625add">Introduction</a></li>
+					<li><a href="#orga836518">Introduction</a></li>
 				</ul>
 				</li>
 				<li><a href="#orgc498e7a">Awesome-wm configuration</a>
 				<ul>
-					<li><a href="#org9beed3f">Introduction </a></li>
+					<li><a href="#orgba62715">Introduction </a></li>
 				</ul>
 				</li>
 			</ul>
@@ -57,11 +57,11 @@
 		<link>/blog/index.html/rss.html#org62064b4</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org62064b4</guid>
-		<pubDate>Sun, 03 Dec 2017 03:37:00 -0600</pubDate>
+		<pubDate>Sun, 03 Dec 2017 03:49:00 -0600</pubDate>
 
-		<description><![CDATA[<div id="outline-container-orgac27bf1" class="outline-3">
-		<h3 id="orgac27bf1">Introduction</h3>
-		<div class="outline-text-3" id="text-orgac27bf1">
+		<description><![CDATA[<div id="outline-container-org9beed3f" class="outline-3">
+		<h3 id="org9beed3f">Introduction</h3>
+		<div class="outline-text-3" id="text-org9beed3f">
 		<p>
 		This post describes the setup to generate a personal wiki in org.  It elaborates
 		on this <a href="2016-11-13-Personal_website_in_org.html">previous post</a> describing the generation of this website.  Generally, the
@@ -94,7 +94,7 @@
 		<link>/blog/index.html/rss.html#org35bc9e1</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org35bc9e1</guid>
-		<pubDate>Sun, 03 Dec 2017 03:37:00 -0600</pubDate>
+		<pubDate>Sun, 03 Dec 2017 03:49:00 -0600</pubDate>
 
 		<description><![CDATA[<div id="outline-container-orgad486e1" class="outline-3">
 		<h3 id="sec-intro">Motivation</h3>
@@ -141,11 +141,11 @@
 		<link>/blog/index.html/rss.html#org288365c</link>
 		<author>) (nil)</author>
 		<guid isPermaLink="false">/blog/index.html/rss.html#org288365c</guid>
-		<pubDate>Sun, 03 Dec 2017 03:37:00 -0600</pubDate>
+		<pubDate>Sun, 03 Dec 2017 03:49:00 -0600</pubDate>
 
-		<description><![CDATA[<div id="outline-container-orga625add" class="outline-3">
-		<h3 id="orga625add">Introduction</h3>
-		<div class="outline-text-3" id="text-orga625add">
+		<description><![CDATA[<div id="outline-container-orga836518" class="outline-3">
+		<h3 id="orga836518">Introduction</h3>
+		<div class="outline-text-3" id="text-orga836518">
 		<p>
 		This post describes the configuration for this website, which is statically
 		generated using emacs and org-mode.  Org-mode's publishing functionality is used
@@ -251,11 +251,11 @@
 	<link>/blog/index.html/rss.html#orgc498e7a</link>
 	<author>) (nil)</author>
 	<guid isPermaLink="false">/blog/index.html/rss.html#orgc498e7a</guid>
-	<pubDate>Sun, 03 Dec 2017 03:37:00 -0600</pubDate>
+	<pubDate>Sun, 03 Dec 2017 03:49:00 -0600</pubDate>
 
-	<description><![CDATA[<div id="outline-container-org9beed3f" class="outline-3">
-	<h3 id="org9beed3f">Introduction </h3>
-	<div class="outline-text-3" id="text-org9beed3f">
+	<description><![CDATA[<div id="outline-container-orgba62715" class="outline-3">
+	<h3 id="orgba62715">Introduction </h3>
+	<div class="outline-text-3" id="text-orgba62715">
 	<p>
 	This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
 	documentation of the different modules developed and used. The actual
