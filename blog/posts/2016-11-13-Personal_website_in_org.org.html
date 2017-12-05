@@ -904,6 +904,9 @@ main features are:
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Tables</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">d150c2b1-1ada-4154-b768-6bd5a1d26ded</span>
+<span class="org-special-keyword">:END:</span>
 
 The following defines the style of HTML tables:
 
@@ -1036,6 +1039,9 @@ This section defines the layout of the <span class="org-link"><a href="#html_pos
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Fonts</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">ebe36b61-6a4a-46b5-81e3-bea2155c6bee</span>
+<span class="org-special-keyword">:END:</span>
 
 Here, the fonts for text, links and code are selected.
 
@@ -1111,6 +1117,9 @@ defined here:
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Keyboard shortcut (</span><span class="org-level-3"><span class="org-verbatim">=&lt;kbd&gt;=</span></span><span class="org-level-3">)</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">335cbfb0-dbb3-4052-9069-5e731af93ff9</span>
+<span class="org-special-keyword">:END:</span>
 
 Define a simple css style for the html <span class="org-code">~&lt;kbd&gt;~</span> tag.
 
@@ -1336,6 +1345,8 @@ file via the <span class="org-verbatim">=source-blocks.org=</span> file.
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Emacs setup</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
 <span class="org-special-keyword">:header-args+:</span> <span class="org-property-value">:tangle my-website.el</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">f05e3571-2790-467e-9c14-ca7b406204ed</span>
+<span class="org-special-keyword">:PUBDATE:</span>  <span class="org-date">&lt;2017-12-04 Mon 15:43&gt;</span>
 <span class="org-special-keyword">:END:</span>
 
 This section contains the emacs-lisp backend code used to produce the website
@@ -1346,6 +1357,9 @@ When tangled, this section creates the <span class="org-verbatim">=my-website.el
 loaded from the emacs setup file (using <span class="org-verbatim">=(require 'my-website)=</span>).
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Header</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">3658e416-1f72-48a0-a261-172c83b888f2</span>
+<span class="org-special-keyword">:END:</span>
 
 This first section creates the header for the <span class="org-verbatim">=my-website.el=</span> file.
 
@@ -1366,6 +1380,7 @@ This first section creates the header for the <span class="org-verbatim">=my-web
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Sitemap</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">sitemap</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">93a79b16-859e-4432-afbf-5b9fb3c3d065</span>
 <span class="org-special-keyword">:END:</span>
 
 The sitemap is used here to provide an automatically updated list of blog posts.
@@ -1401,6 +1416,7 @@ included in the <span class="org-link"><a href="#page-blog-posts">blog page</a><
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> RSS</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">rss</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">9edbd3bb-3cb7-481f-bc06-d7905ba526f8</span>
 <span class="org-special-keyword">:END:</span>
 
 A simple RSS feed is also created using <span class="org-verbatim">=ox-rss=</span>.  It includes the first section
@@ -1409,13 +1425,17 @@ of the document as feed content (extracted using the
 The RSS feed is also limited to the latest 30 entries.
 
 There are currently issues with the styling and images in the feed, but it is
-sufficient for my simple use.
+sufficient for my simple use.  A few tricks are worth explaining:
+
+- <span class="org-link"><a href="(rss-permalink)">Set the PERMALINK field</a></span> to link to articles.  Since <span class="org-verbatim">=ox-rss=</span> prefixes the
+  permalink with the URL of <span class="org-verbatim">=index.html=</span>, the constructed permalink starts with
+  <span class="org-verbatim">=../=</span> to move up one level in the folder structure.
+- <span class="org-link"><a href="(rss-pubdate)">Set the publication date</a></span> to the post date.
 
 <span class="org-meta-line">#+NAME: elisp-rss</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r
-</span><span class="org-block">
-(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">&#8482;/org-get-first-paragraph</span></span><span class="org-block"> (file)(ref:func-get-paragraph)
-  </span><span class="org-block"><span class="string">"Get string content of first paragraph of file."</span></span><span class="org-block">
+<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+</span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">&#8482;/org-get-first-paragraph</span></span><span class="org-block"> (file) </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:func-get-paragraph)
+</span></span><span class="org-block">  </span><span class="org-block"><span class="doc">"Get string content of first paragraph of file."</span></span><span class="org-block">
   (</span><span class="org-block"><span class="keyword">with-temp-buffer</span></span><span class="org-block">
     (insert-file-contents file)
     (goto-char (point-min))
@@ -1437,6 +1457,7 @@ sufficient for my simple use.
       (insert </span><span class="org-block"><span class="string">"#+TITLE: misc/ blog RSS\n"</span></span><span class="org-block">)
       (insert </span><span class="org-block"><span class="string">"#+SETUPFILE: setup.org\n"</span></span><span class="org-block">)
       (insert </span><span class="org-block"><span class="string">"#+INCLUDE: source-blocks.org\n"</span></span><span class="org-block">)
+      (insert </span><span class="org-block"><span class="string">"#+OPTIONS: toc:nil\n"</span></span><span class="org-block">)
       </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">The following does not seem to work
 </span></span><span class="org-block">      (insert (concat
                </span><span class="org-block"><span class="string">"#+HTML_HEAD: &lt;link rel=\"stylesheet\" type=\"text/css\""</span></span><span class="org-block">
@@ -1448,20 +1469,41 @@ sufficient for my simple use.
         (</span><span class="org-block"><span class="keyword">dolist</span></span><span class="org-block"> (post files)
           (</span><span class="org-block"><span class="keyword">let*</span></span><span class="org-block"> ((post-file (concat (file-name-as-directory postsdir) post))
                  (post-title (org-publish-find-title post-file plist))
-                 (preview-str (&#8482;/org-get-first-paragraph post-file)))
+                 (preview-str (&#8482;/org-get-first-paragraph post-file))
+                 (date (replace-regexp-in-string
+                        </span><span class="org-block"><span class="string">"</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">(</span></span></span><span class="org-block"><span class="string">[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">)</span></span></span><span class="org-block"><span class="string">-.*"</span></span><span class="org-block">
+                        </span><span class="org-block"><span class="string">"\\1"</span></span><span class="org-block"> post)))
             (insert (concat </span><span class="org-block"><span class="string">"* <a href="file:posts/&quot; post &quot;">[[file:posts/"</a></span></span><span class="org-block"><a href="file:posts/&quot; post &quot;"> post </a></span><span class="org-block"><span class="string"><a href="file:posts/&quot; post &quot;">"]["</a></span></span><span class="org-block"><a href="file:posts/&quot; post &quot;"> post-title </a></span><span class="org-block"><span class="string"><a href="file:posts/&quot; post &quot;">"]]</a>\n\n"</span></span><span class="org-block">))
+            (org-set-property </span><span class="org-block"><span class="string">"ID"</span></span><span class="org-block"> post)
+            </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">ox-rss prepends html-link-home to permalink
+</span></span><span class="org-block">            (org-set-property </span><span class="org-block"><span class="string">"RSS_PERMALINK"</span></span><span class="org-block"> </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:rss-permalink)
+</span></span><span class="org-block">                              (concat </span><span class="org-block"><span class="string">"../posts/"</span></span><span class="org-block">
+                                      (file-name-sans-extension post)
+                                      </span><span class="org-block"><span class="string">".html"</span></span><span class="org-block">))
+            (org-set-property
+             </span><span class="org-block"><span class="string">"PUBDATE"</span></span><span class="org-block"> </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:rss-pubdate)
+</span></span><span class="org-block">             (format-time-string
+              </span><span class="org-block"><span class="string">"&lt;%Y-%m-%d %a %H:%M&gt;"</span></span><span class="org-block">
+              (org-time-string-to-time
+               (replace-regexp-in-string
+                </span><span class="org-block"><span class="string">"</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">(</span></span></span><span class="org-block"><span class="string">[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">)</span></span></span><span class="org-block"><span class="string">-.*"</span></span><span class="org-block">
+                </span><span class="org-block"><span class="string">"\\1"</span></span><span class="org-block"> post))))
             (insert </span><span class="org-block"><span class="string">"*"</span></span><span class="org-block">)
             (insert preview-str)
             (newline 1)
             (insert (concat </span><span class="org-block"><span class="string">"<a href="file:posts/&quot; post &quot;">[[file:posts/"</a></span></span><span class="org-block"><a href="file:posts/&quot; post &quot;"> post </a></span><span class="org-block"><span class="string"><a href="file:posts/&quot; post &quot;">"][(Read more)]]</a>\n\n"</span></span><span class="org-block">))))
         (save-buffer))))
-  (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((user-mail-address </span><span class="org-block"><span class="string">")"</span></span><span class="org-block">)
-        (org-export-with-broken-links t))
+  (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((user-mail-address </span><span class="org-block"><span class="string">"t"</span></span><span class="org-block">)
+        (org-export-with-broken-links t)
+        (org-rss-use-entry-url-as-guid nil))
     (org-rss-publish-to-rss plist filename pub-dir)))
 </span><span class="org-block-end-line">#+END_SRC
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Mathjax path</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">e0c8d8c2-2b05-49db-a9ac-d55fa61c47e8</span>
+<span class="org-special-keyword">:END:</span>
 
 In order to use the website on secured connections (<span class="org-verbatim">=https=</span>), the <span class="org-verbatim">=https=</span>
 version of the mathjax library is loaded.
@@ -1476,6 +1518,9 @@ version of the mathjax library is loaded.
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Custom backend</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">0befaaa5-4c08-4e99-ada3-c30a49848e83</span>
+<span class="org-special-keyword">:END:</span>
 
 The backend used for exporting org files to HTML is derived from the builtin
 <span class="org-verbatim">=html=</span> backend, adding one functionality: the name of the tangle file for each
@@ -1490,6 +1535,9 @@ it seems to work on most browsers, so it will do for now.
 
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Preprocess buffer</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">cce9832d-9484-4802-b40a-684281069552</span>
+<span class="org-special-keyword">:END:</span>
 
 The <span class="org-verbatim">=&#8482;/org-export-collect-tangle=</span> function is responsible for collecting source
 blocks for tangling and saving the output filename in the cache.
@@ -1520,6 +1568,7 @@ blocks for tangling and saving the output filename in the cache.
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Source block processing</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">src-block-tangle</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">f720ba42-ff3e-45d4-bbf0-29f40f67eba9</span>
 <span class="org-special-keyword">:END:</span>
 
 The derived backend modifies the source block handling function by inserting the
@@ -1567,6 +1616,9 @@ for source blocks.  Everything else is handled by the regular <span class="org-v
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Publishing function</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">0829606d-6b8f-4bb7-9e30-e8bb8bb25001</span>
+<span class="org-special-keyword">:END:</span>
 
 A simple wrapper function is created to export to the custom backend.  It is
 almost identical to <span class="org-verbatim">=org-html-publish-to-html=</span> with the exception of the actual
@@ -1597,6 +1649,9 @@ Return output file name."</span></span><span class="org-block">
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Org-publishing setup</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">3c1ccccb-618b-43af-b34a-db46311a7185</span>
+<span class="org-special-keyword">:END:</span>
 
 The publishing configuration is set via the <span class="org-verbatim">=org-publish-project-alist=</span>
 variable.  The following function returns a list of project properties to use
@@ -1724,12 +1779,13 @@ website:
        </span><span class="org-block"><span class="builtin">:with-author</span></span><span class="org-block"> nil
        </span><span class="org-block"><span class="builtin">:with-todo-keywords</span></span><span class="org-block"> nil
        </span><span class="org-block"><span class="builtin">:with-statistics-cookies</span></span><span class="org-block"> nil
+       </span><span class="org-block"><span class="builtin">:with-broken-link</span></span><span class="org-block"> t
        </span><span class="org-block"><span class="builtin">:with-email</span></span><span class="org-block"> nil
        </span><span class="org-block"><span class="builtin">:html-link-home</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"/blog/index.html"</span></span><span class="org-block">
        </span><span class="org-block"><span class="builtin">:publishing-directory</span></span><span class="org-block"> ,website-www
        </span><span class="org-block"><span class="builtin">:publishing-function</span></span><span class="org-block"> &#8482;/org-rss-publish-to-rss
        </span><span class="org-block"><span class="builtin">:section-numbers</span></span><span class="org-block"> nil
-       </span><span class="org-block"><span class="builtin">:html-link-use-abs-url</span></span><span class="org-block"> nil)
+       </span><span class="org-block"><span class="builtin">:html-link-use-abs-url</span></span><span class="org-block"> t)
 
       (</span><span class="org-block"><span class="string">"website"</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">:components</span></span><span class="org-block">
        (</span><span class="org-block"><span class="string">"w-org"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"w-images"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"w-js"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"w-css"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"w-rss"</span></span><span class="org-block">)))))
@@ -1739,6 +1795,7 @@ website:
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Publishing wrapper function</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">el-publish-wrapper</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">7d7c4fb2-5c4c-4e53-b0b5-705fa8461589</span>
 <span class="org-special-keyword">:END:</span>
 
 The <span class="org-verbatim">=&#8482;/publish-website=</span> function is the entry point to generate the website
@@ -1768,6 +1825,7 @@ forced: <span class="org-verbatim">=(&#8482;/publish-website "website" t)=</span
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Push org-file to blog</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
 <span class="org-special-keyword">:CUSTOM_ID:</span> <span class="org-property-value">el-push-to-blog</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">6f46fe22-e088-4ea5-8d38-a4bea8b222b1</span>
 <span class="org-special-keyword">:END:</span>
 
 The mechanism to publish new posts uses the <span class="org-verbatim">=&#8482;/push-to-blog=</span> function to convert
@@ -1861,7 +1919,7 @@ a standalone org file into a post.  The function performs the following:
                    (img-path (concat </span><span class="org-block"><span class="string">"../images/"</span></span><span class="org-block">
                                      (file-name-as-directory base-fname)
                                      link-file-base link-file-ext)))
-              (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> (member link-file-ext '(</span><span class="org-block"><span class="string">"png"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"jpg"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"tif"</span></span><span class="org-block">))
+              (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> (member link-file-ext '(</span><span class="org-block"><span class="string">".png"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">".jpg"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">".tif"</span></span><span class="org-block">))
                 </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Copy file
 </span></span><span class="org-block">                (mkdir img-dir t)
                 (copy-file link-file out-link t)
@@ -1877,6 +1935,9 @@ a standalone org file into a post.  The function performs the following:
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Footer</span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">5ccfda3b-70a5-466d-a9e0-97696f93eba1</span>
+<span class="org-special-keyword">:END:</span>
 
 This block closes the <span class="org-verbatim">=my-website.el=</span> file.
 
@@ -1910,6 +1971,10 @@ This block closes the <span class="org-verbatim">=my-website.el=</span> file.
 
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Notes                                                       </span><span class="org-level-1"><span class="org-tag">:noexport:</span></span>
+<span class="org-special-keyword">:PROPERTIES:</span>
+<span class="org-special-keyword">:ID:</span>       <span class="org-property-value">9fe9a462-a86b-473e-94cd-ec8fc84b5a46</span>
+<span class="org-special-keyword">:PUBDATE:</span>  <span class="org-date">&lt;2017-12-04 Mon 15:43&gt;</span>
+<span class="org-special-keyword">:END:</span>
 
 - Fix RSS issues
 - Tag system

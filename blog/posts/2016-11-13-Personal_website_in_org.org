@@ -1,4 +1,4 @@
-# Created 2017-12-03 Sun 03:49
+# Created 2017-12-04 Mon 21:30
 #+OPTIONS: ^:t H:4
 #+TITLE: Personal website in org
 #+DATE: 2016-11-13
@@ -574,7 +574,6 @@ pre.src.src.src-lua {
 
 
 ** Tables
-
 The following defines the style of HTML tables:
 
 #+NAME: style-css-src-block
@@ -686,7 +685,6 @@ This section defines the layout of the [[#html_postamble][HTML postamble]] used 
 
 
 ** Fonts
-
 Here, the fonts for text, links and code are selected.
 
 #+NAME: style-css-fonts
@@ -754,7 +752,6 @@ defined here:
 
 
 *** Keyboard shortcut (=<kbd>=)
-
 Define a simple css style for the html ~<kbd>~ tag.
 
 #+NAME: style-css-kbd
@@ -941,7 +938,6 @@ When tangled, this section creates the =my-website.el= file which can then be
 loaded from the emacs setup file (using =(require 'my-website)=).
 
 ** Header
-
 This first section creates the header for the =my-website.el= file.
 
 #+NAME: elisp-header
@@ -996,12 +992,16 @@ of the document as feed content (extracted using the
 The RSS feed is also limited to the latest 30 entries.
 
 There are currently issues with the styling and images in the feed, but it is
-sufficient for my simple use.
+sufficient for my simple use.  A few tricks are worth explaining:
+
+- [[(rss-permalink)][Set the PERMALINK field]] to link to articles.  Since =ox-rss= prefixes the
+  permalink with the URL of =index.html=, the constructed permalink starts with
+  =../= to move up one level in the folder structure.
+- [[(rss-pubdate)][Set the publication date]] to the post date.
 
 #+NAME: elisp-rss
-#+BEGIN_SRC emacs-lisp -r
-
-(defun ™/org-get-first-paragraph (file)(ref:func-get-paragraph)
+#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+(defun ™/org-get-first-paragraph (file) ;;(ref:func-get-paragraph)
   "Get string content of first paragraph of file."
   (with-temp-buffer
     (insert-file-contents file)
@@ -1024,6 +1024,7 @@ sufficient for my simple use.
       (insert "#+TITLE: misc/ blog RSS\n")
       (insert "#+SETUPFILE: setup.org\n")
       (insert "#+INCLUDE: source-blocks.org\n")
+      (insert "#+OPTIONS: toc:nil\n")
       ;; The following does not seem to work
       (insert (concat
                "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\""
@@ -1035,21 +1036,38 @@ sufficient for my simple use.
         (dolist (post files)
           (let* ((post-file (concat (file-name-as-directory postsdir) post))
                  (post-title (org-publish-find-title post-file plist))
-                 (preview-str (™/org-get-first-paragraph post-file)))
+                 (preview-str (™/org-get-first-paragraph post-file))
+                 (date (replace-regexp-in-string
+                        "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)-.*"
+                        "\\1" post)))
             (insert (concat "* [[file:posts/" post "][" post-title "]]\n\n"))
+            (org-set-property "ID" post)
+            ;; ox-rss prepends html-link-home to permalink
+            (org-set-property "RSS_PERMALINK" ;;(ref:rss-permalink)
+                              (concat "../posts/"
+                                      (file-name-sans-extension post)
+                                      ".html"))
+            (org-set-property
+             "PUBDATE" ;;(ref:rss-pubdate)
+             (format-time-string
+              "<%Y-%m-%d %a %H:%M>"
+              (org-time-string-to-time
+               (replace-regexp-in-string
+                "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)-.*"
+                "\\1" post))))
             (insert "*")
             (insert preview-str)
             (newline 1)
             (insert (concat "[[file:posts/" post "][(Read more)]]\n\n"))))
         (save-buffer))))
-  (let ((user-mail-address ")")
-        (org-export-with-broken-links t))
+  (let ((user-mail-address "t")
+        (org-export-with-broken-links t)
+        (org-rss-use-entry-url-as-guid nil))
     (org-rss-publish-to-rss plist filename pub-dir)))
 #+END_SRC
 
 
 ** Mathjax path
-
 In order to use the website on secured connections (=https=), the =https=
 version of the mathjax library is loaded.
 
@@ -1063,7 +1081,6 @@ version of the mathjax library is loaded.
 
 
 ** Custom backend
-
 The backend used for exporting org files to HTML is derived from the builtin
 =html= backend, adding one functionality: the name of the tangle file for each
 source block is shown in the block, as an overlay.
@@ -1077,7 +1094,6 @@ it seems to work on most browsers, so it will do for now.
 
 
 *** Preprocess buffer
-
 The =™/org-export-collect-tangle= function is responsible for collecting source
 blocks for tangling and saving the output filename in the cache.
 
@@ -1150,7 +1166,6 @@ for source blocks.  Everything else is handled by the regular =html= backend.
 
 
 ** Publishing function
-
 A simple wrapper function is created to export to the custom backend.  It is
 almost identical to =org-html-publish-to-html= with the exception of the actual
 backend used.
@@ -1180,7 +1195,6 @@ Return output file name."
 
 
 ** Org-publishing setup
-
 The publishing configuration is set via the =org-publish-project-alist=
 variable.  The following function returns a list of project properties to use
 with =org-publish-project-alist=.
@@ -1307,12 +1321,13 @@ website:
        :with-author nil
        :with-todo-keywords nil
        :with-statistics-cookies nil
+       :with-broken-link t
        :with-email nil
        :html-link-home "/blog/index.html"
        :publishing-directory ,website-www
        :publishing-function ™/org-rss-publish-to-rss
        :section-numbers nil
-       :html-link-use-abs-url nil)
+       :html-link-use-abs-url t)
 
       ("website" :components
        ("w-org" "w-images" "w-js" "w-css" "w-rss")))))
@@ -1436,7 +1451,7 @@ a standalone org file into a post.  The function performs the following:
                    (img-path (concat "../images/"
                                      (file-name-as-directory base-fname)
                                      link-file-base link-file-ext)))
-              (when (member link-file-ext '("png" "jpg" "tif"))
+              (when (member link-file-ext '(".png" ".jpg" ".tif"))
                 ;; Copy file
                 (mkdir img-dir t)
                 (copy-file link-file out-link t)
@@ -1452,7 +1467,6 @@ a standalone org file into a post.  The function performs the following:
 
 
 ** Footer
-
 This block closes the =my-website.el= file.
 
 #+NAME: elisp-footer
