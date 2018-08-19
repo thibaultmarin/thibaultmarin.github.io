@@ -1,24 +1,24 @@
-# Created 2017-12-04 Mon 21:31
+# Created 2018-08-19 Sun 18:10
 #+OPTIONS: todo:nil ^:nil
 #+TITLE: hpp2plantuml - Convert C++ header files to PlantUML
 #+DATE: 2016-11-30
 #+AUTHOR: Thibault Marin
-#+SETUPFILE: ../setup.org
-#+TODO: TODO REVIEW | DONE DEFERRED ABANDONED
-#+MACRO: tt \nbsp{}
-#+PROPERTY: header-args:conf+ :eval never
-#+PROPERTY: header-args:c+++ :eval never
-#+PROPERTY: header-args:plantuml+ :eval never
-#+PROPERTY: header-args:rst+ :eval never
-#+PROPERTY: header-args+ :exports code :results silent
-#+PROPERTY: header-args:python+ :tangle src/hpp2plantuml/hpp2plantuml.py :mkdirp yes :eval no
+#+setupfile: ../setup.org
+#+todo: TODO REVIEW | DONE DEFERRED ABANDONED
+#+macro: tt \nbsp{}
+#+property: header-args:conf+ :eval never
+#+property: header-args:c+++ :eval never
+#+property: header-args:plantuml+ :eval never
+#+property: header-args:rst+ :eval never
+#+property: header-args+ :exports code :results silent
+#+property: header-args:python+ :tangle src/hpp2plantuml/hpp2plantuml.py :mkdirp yes :eval no
 
 This is the documentation for the =hpp2plantuml= package, fully contained within
 this single org-file.
 
 The current version of the code is:
-#+NAME: hpp2plantuml-version
-: 0.2
+#+name: hpp2plantuml-version
+: 0.3
 
 The source code can be found on GitHub:
 https://github.com/thibaultmarin/hpp2plantuml.
@@ -46,8 +46,8 @@ files.
 
 The license adopted for this project is the MIT license.
 
-#+NAME: license
-#+BEGIN_SRC conf
+#+name: license
+#+begin_src conf
 
 The MIT License (MIT)
 
@@ -70,7 +70,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-#+END_SRC
+#+end_src
 
 
 * Requirements
@@ -78,16 +78,16 @@ THE SOFTWARE.
 This module has mostly standard dependencies; the only exception is the
 [[http://senexcanis.com/open-source/cppheaderparser/][CppHeaderParser]] module used to parse header files.
 
-#+NAME: py-dependency-list
-#+CAPTION: List of dependencies.
+#+name: py-dependency-list
+#+caption: List of dependencies.
 | argparse        |
 | CppHeaderParser |
 
 The full list of non-standard dependencies is produced by the following source
 block (returning either imports or a dependency list used in [[#sec-package-setup-py][=setup.py=]]):
 
-#+NAME: py-dependencies
-#+BEGIN_SRC emacs-lisp
+#+name: py-dependencies
+#+begin_src emacs-lisp
 (cond
  ((string= output "import")
   (mapconcat
@@ -97,17 +97,17 @@ block (returning either imports or a dependency list used in [[#sec-package-setu
           (mapconcat
            (lambda (el) (concat "'" (car el) "'")) dep-list ", ")
           "]")))
-#+END_SRC
+#+end_src
 
-#+NAME: py-imports
-#+BEGIN_SRC python
+#+name: py-imports
+#+begin_src python
 # %% Imports
 
 import re
 import glob
 import argparse
 import CppHeaderParser
-#+END_SRC
+#+end_src
 
 The tests rely on the [[http://nose.readthedocs.io/en/latest/][nosetest]] framework and the package documentation is built
 with [[http://sphinx-doc.org][Sphinx]].
@@ -140,8 +140,8 @@ of elementary properties and links.
 - ~CONTAINER_TYPE_MAP~ associates object types with internal classes used for
   their representation.
 
-#+NAME: py-constants
-#+BEGIN_SRC python
+#+name: py-constants
+#+begin_src python
 # %% Constants
 
 
@@ -168,7 +168,7 @@ CONTAINER_TYPE_MAP = [
     ['structs', lambda objs: objs.items(), lambda obj: Struct(obj)],
     ['enums', lambda objs: objs, lambda obj: Enum(obj)]
 ]
-#+END_SRC
+#+end_src
 
 
 ** Objects
@@ -195,8 +195,8 @@ The ~Container~ class is abstract and contains:
   definition (e.g. "class TestClass") and its members (e.g. member variables and
   methods).
 
-#+NAME: py-obj-container
-#+BEGIN_SRC python
+#+name: py-obj-container
+#+begin_src python
 # %% Base classes
 
 
@@ -289,15 +289,15 @@ class Container(object):
             Container type and name as string
         """
         return self._container_type + ' ' + self._name
-#+END_SRC
+#+end_src
 
 Members of ~Container~ objects (e.g. class member variable) are inherited from
 the ~ContainerMember~ class.  The interface only includes a ~render~ method
 returning a string representation of the member.  The base class
 ~ContainerMember~ defines this method abstract.
 
-#+NAME: py-obj-container-member
-#+BEGIN_SRC python
+#+name: py-obj-container-member
+#+begin_src python
 # %% Object member
 
 
@@ -344,7 +344,7 @@ class ContainerMember(object):
             return self._type, self._name
         else:
             return self._name
-#+END_SRC
+#+end_src
 
 
 *** Classes
@@ -354,8 +354,8 @@ C++ class objects are represented using the ~Class~ class.  It extends the
 parent classes.  It also offers a method to extract the types of its members,
 which is used to determine aggregation relationships between classes.
 
-#+NAME: py-render-classes
-#+BEGIN_SRC python
+#+name: py-render-classes
+#+begin_src python
 # %% Class object
 
 
@@ -459,7 +459,7 @@ class Class(Container):
         if self._template_type is not None:
             class_str += ' <{0}>'.format(self._template_type)
         return class_str
-#+END_SRC
+#+end_src
 
 
 *** Class members
@@ -473,8 +473,8 @@ of the member is mostly common between variables and methods.  The ~ClassMember~
 class provides the common rendering and relies on child classes implementing the
 ~_render_name~ method for specialization.
 
-#+NAME: py-obj-class_member
-#+BEGIN_SRC python
+#+name: py-obj-class_member
+#+begin_src python
 # %% Class member
 
 
@@ -537,7 +537,7 @@ class ClassMember(ContainerMember):
         (e.g. add the function prototype for member functions)
         """
         return self._name
-#+END_SRC
+#+end_src
 
 
 **** Properties
@@ -545,8 +545,8 @@ The specialization required for class member variables is minimal: the member
 type is extracted from the parsed dictionary, and the rest of the setup is left
 to the [[#sec-module-class-member][parent class]].
 
-#+NAME: py-obj-class_variable
-#+BEGIN_SRC python
+#+name: py-obj-class_variable
+#+begin_src python
 # %% Class variable
 
 
@@ -583,7 +583,7 @@ class ClassVariable(ClassMember):
             Variable type as string
         """
         return self._type
-#+END_SRC
+#+end_src
 
 
 **** Methods
@@ -596,8 +596,8 @@ The name rendering includes the method signature.  An option to shorten the list
 of parameters by keeping only types or variable names or using ellipsis may be
 implemented in the future.
 
-#+NAME: py-obj-class_method
-#+BEGIN_SRC python
+#+name: py-obj-class_method
+#+begin_src python
 # %% Class method
 
 
@@ -665,7 +665,7 @@ class ClassMethod(ClassMember):
                                for it in self._param_list) + ')'
 
         return method_str
-#+END_SRC
+#+end_src
 
 
 *** Structures
@@ -674,8 +674,8 @@ While ~struct~ objects are currently not supported, their addition should be
 relatively straightforward and the ~Struct~ class may simply inherit from the
 ~Class~ class.  The following should give a starting point.
 
-#+NAME: py-render-structs
-#+BEGIN_SRC python
+#+name: py-render-structs
+#+begin_src python
 # %% Struct object
 
 
@@ -697,7 +697,7 @@ class Struct(Class):
         """
         super().__init__(header_struct[0])
         super(Class).__init__('struct')
-#+END_SRC
+#+end_src
 
 
 *** Enumeration lists
@@ -706,8 +706,8 @@ The ~Enum~ class representing enumeration object is a trivial extension of the
 base [[#sec-module-container][~Container~]] class.  Note that the enumeration elements are rendered without
 the actual values.
 
-#+NAME: py-render-enums
-#+BEGIN_SRC python
+#+name: py-render-enums
+#+begin_src python
 # %% Enum object
 
 
@@ -725,7 +725,7 @@ class Enum(Container):
         header_enum : CppEnum
             Parsed CppEnum object
         """
-        super().__init__('enum', header_enum['name'])
+        super().__init__('enum', header_enum.get('name', 'empty'))
         self.parse_members(header_enum)
 
     def parse_members(self, header_enum):
@@ -767,7 +767,7 @@ class EnumValue(ContainerMember):
             The enumeration element name
         """
         return self._name
-#+END_SRC
+#+end_src
 
 
 *** Class relationships
@@ -782,8 +782,8 @@ relationships: a parent, a child and a connection type.  All are saved as
 strings and the text representation of a connection link is obtained from the
 [[#sec-module-constants][~CONTAINER_TYPE_MAP~ constant]].
 
-#+NAME: py-class_relationship
-#+BEGIN_SRC python
+#+name: py-class_relationship
+#+begin_src python
 # %% Class connections
 
 
@@ -851,7 +851,7 @@ class ClassRelationship(object):
             The link between parent and child following the PlantUML syntax
         """
         return LINK_TYPE_MAP[self._link_type]
-#+END_SRC
+#+end_src
 
 
 **** Inheritance
@@ -860,8 +860,8 @@ The inheritance relationship is a straightforward specialization of the base
 ~ClassRelationship~ class: it simply forces the link type to be the string
 "inherit".
 
-#+NAME: py-class_inheritance
-#+BEGIN_SRC python
+#+name: py-class_inheritance
+#+begin_src python
 # %% Class inheritance
 
 
@@ -882,7 +882,7 @@ class ClassInheritanceRelationship(ClassRelationship):
             Derived class
         """
         super().__init__('inherit', c_parent, c_child)
-#+END_SRC
+#+end_src
 
 
 **** Aggregation
@@ -892,8 +892,8 @@ using the "aggregation" link type and adding a ~count~ field used to add a label
 with the number of instances of the parent class in the PlantUML diagram (the
 count is omitted when equal to one).
 
-#+NAME: py-class_aggregation
-#+BEGIN_SRC python
+#+name: py-class_aggregation
+#+begin_src python
 # %% Class aggregation
 
 
@@ -934,7 +934,7 @@ class ClassAggregationRelationship(ClassRelationship):
         """
         count_str = '' if self._count == 1 else '"%d" ' % self._count
         return count_str + LINK_TYPE_MAP[self._link_type]
-#+END_SRC
+#+end_src
 
 
 *** Diagram object
@@ -944,21 +944,21 @@ lists of relationships and provides rendering facilities to produce a string
 ready to process by PlantUML.
 
 An example use case for the ~Diagram~ class could be:
-#+NAME: py-diag-example
-#+BEGIN_SRC python
+#+name: py-diag-example
+#+begin_src python
 # Create object
 diag = Diagram()
 # Initialize from filename
 diag.create_from_file(filename)
 # Get output string following PlantUML syntax
 output_string = diag.render()
-#+END_SRC
+#+end_src
 
 The interface methods and their behavior are summarized in
 Table\nbsp{}[[tbl-diagram-interface]].
 
-#+NAME: tbl-diagram-interface
-#+CAPTION: Public interface for populating a ~Diagram~ object.
+#+name: tbl-diagram-interface
+#+caption: Public interface for populating a ~Diagram~ object.
 | Method name             | input type | input list? | reset? | sort? | build lists? |
 |-------------------------+------------+-------------+--------+-------+--------------|
 | create_from_file        | file       | no          | yes    | yes   | yes          |
@@ -997,8 +997,8 @@ members are sorted by type and name and relationships are sorted by parent name,
 child name and link type if necessary.  The ~add_from_*~ interface methods can
 be used to avoid this sorting step.
 
-#+NAME: py-obj-diagram
-#+BEGIN_SRC python
+#+name: py-obj-diagram
+#+begin_src python
 # %% Diagram class
 
 
@@ -1349,20 +1349,21 @@ class Diagram(object):
             The PlantUML postamble text: ``@enduml``
         """
         return '\n@enduml\n'
-#+END_SRC
+#+end_src
 
 
 ** Helper functions
 
 This section briefly describes the helper functions defined in the module.
 
+
 *** Sanitize type string
 
 The ~_cleanup_type~ function tries to unify the string representation of
 variable types by eliminating spaces around =*= characters.
 
-#+NAME: py-helper-cleanup-str
-#+BEGIN_SRC python
+#+name: py-helper-cleanup-str
+#+begin_src python
 # %% Cleanup object type string
 
 
@@ -1384,7 +1385,7 @@ def _cleanup_type(type_str):
     """
     return re.sub(r'[ ]+([*&])', r'\1',
                   re.sub(r'(\s)+', r'\1', type_str))
-#+END_SRC
+#+end_src
 
 
 *** Expand file list
@@ -1394,8 +1395,8 @@ using the =glob= package.  The ~expand_file_list~ function takes as input a list
 of filenames and expands wildcards using the ~glob~ command returning a list of
 existing filenames without wildcards.
 
-#+NAME: py-build-file-list
-#+BEGIN_SRC python
+#+name: py-build-file-list
+#+begin_src python
 # %% Expand wildcards in file list
 
 
@@ -1421,7 +1422,7 @@ def expand_file_list(input_files):
     for input_file in input_files:
         file_list += glob.glob(input_file)
     return file_list
-#+END_SRC
+#+end_src
 
 
 ** Main function: create PlantUML from C++
@@ -1434,8 +1435,8 @@ The function creates a ~Diagram~ object, initializes it with the expanded list
 of input files and writes the content of the ~Diagram.render()~ method to the
 output file.
 
-#+NAME: py-create-plantuml
-#+BEGIN_SRC python
+#+name: py-create-plantuml
+#+begin_src python
 # %% Main function
 
 
@@ -1466,7 +1467,7 @@ def CreatePlantUMLFile(file_list, output_file=None):
     else:
         with open(output_file, 'wt') as fid:
             fid.write(diag_render)
-#+END_SRC
+#+end_src
 
 
 ** Command line interface
@@ -1474,8 +1475,8 @@ The [[(module-main)][~main~]] function provides a minimal command line interface
 to parse input arguments.  The function passes the command line arguments to the
 [[#sec-module-create-uml][~CreatePlantUMLFile~]] function.
 
-#+NAME: py-cmd-main
-#+BEGIN_SRC python -r
+#+name: py-cmd-main
+#+begin_src python -r
 # %% Command line interface
 
 
@@ -1488,13 +1489,15 @@ def main():(ref:module-main)
     Arguments are read from the command-line, run with ``--help`` for help.
     """
     parser = argparse.ArgumentParser(description='hpp2plantuml tool.')
-    parser.add_argument('-o', '--output-file', dest='output_file',
-                        required=False, default=None, metavar='FILE',
-                        help='Output file')
     parser.add_argument('-i', '--input-file', dest='input_files',
                         action='append', metavar='HEADER-FILE', required=True,
-                        help='Input file (must be quoted' +
+                        help='input file (must be quoted' +
                         ' when using wildcards)')
+    parser.add_argument('-o', '--output-file', dest='output_file',
+                        required=False, default=None, metavar='FILE',
+                        help='output file')
+    parser.add_argument('--version', action='version',
+                        version='%(prog)s ' + '0.3')
     args = parser.parse_args()
     if len(args.input_files) > 0:
         CreatePlantUMLFile(args.input_files, args.output_file)
@@ -1504,7 +1507,7 @@ def main():(ref:module-main)
 
 if __name__ == '__main__':
     main()
-#+END_SRC
+#+end_src
 
 
 * Installation
@@ -1513,30 +1516,30 @@ if __name__ == '__main__':
 
 The package is available on [[https://pypi.python.org/][PyPi]] and can be installed using pip:
 
-#+BEGIN_EXAMPLE
+#+begin_example
 pip install hpp2plantuml
-#+END_EXAMPLE
+#+end_example
 
 
 ** From source
 
 The code uses =setuptools=, so it can be built using:
 
-#+BEGIN_EXAMPLE
+#+begin_example
 python setup.py install
-#+END_EXAMPLE
+#+end_example
 
 To build the documentation, run:
 
-#+BEGIN_EXAMPLE
+#+begin_example
 python setup.py sphinx
-#+END_EXAMPLE
+#+end_example
 
 To run the tests, run:
 
-#+BEGIN_EXAMPLE
+#+begin_example
 python setup.py test
-#+END_EXAMPLE
+#+end_example
 
 
 * Usage
@@ -1548,18 +1551,19 @@ other applications.
 The command line usage is (~hpp2plantuml --help~):
 
 
-#+BEGIN_EXAMPLE
-usage: hpp2plantuml [-h] [-o FILE] -i HEADER-FILE
+#+begin_example
+usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [--version]
 
 hpp2plantuml tool.
 
 optional arguments:
   -h, --help            show this help message and exit
-  -o FILE, --output-file FILE
-                        Output file
   -i HEADER-FILE, --input-file HEADER-FILE
-                        Input file (must be quoted when using wildcards)
-#+END_EXAMPLE
+                        input file (must be quoted when using wildcards)
+  -o FILE, --output-file FILE
+                        output file
+  --version             show program's version number and exit
+#+end_example
 
 
 Input files are added using the ~-i~ option.  Inputs can be full file paths or
@@ -1570,10 +1574,10 @@ following the PlantUML syntax.
 For instance, the following command will generate an input file for PlantUML
 (=output.puml=) from several header files.
 
-#+NAME: usage-sh
-#+BEGIN_SRC sh
+#+name: usage-sh
+#+begin_src sh
 hpp2plantuml -i File_1.hpp -i "include/Helper_*.hpp" -o output.puml
-#+END_SRC
+#+end_src
 
 
 ** Module
@@ -1599,8 +1603,8 @@ character in org-mode, it is replaced by "@" in the tables and fixed in python.
 
 Following is the test setup code.
 
-#+NAME: test-setup
-#+BEGIN_SRC python
+#+name: test-setup
+#+begin_src python
 """Test module for hpp2plantuml"""
 
 # %% Imports
@@ -1632,7 +1636,7 @@ def fix_test_list_def(test_list):
             test_entry_out.append(re.sub(u'@', '|', test_str))
         test_list_out.append(test_entry_out)
     return test_list_out
-#+END_SRC
+#+end_src
 
 ** Module tests
 
@@ -1645,8 +1649,8 @@ different modules implemented.
 The test for the ~Container~ class tests elementary functionality: members and
 sorting keys.
 
-#+NAME: test-unit-container
-#+BEGIN_SRC python
+#+name: test-unit-container
+#+begin_src python
 # %% Test containers
 
 
@@ -1674,7 +1678,7 @@ class TestContainer:
         for i in range(len(c_list)):
             nt.assert_equal(c_obj_list[i].get_name(),
                             c_list[ref_sort_idx[i]][1])
-#+END_SRC
+#+end_src
 
 
 *** Class
@@ -1692,8 +1696,8 @@ Class variables have simple functionality (name, type and scope).  The following
 table (Table\nbsp{}[[tbl-unittest-class_var]]) defines tests that validate
 the representation of variables.
 
-#+NAME: tbl-unittest-class_var
-#+CAPTION: List of test segments and corresponding PlantUML strings.
+#+name: tbl-unittest-class_var
+#+caption: List of test segments and corresponding PlantUML strings.
 | C++                                         | plantuml         |
 |---------------------------------------------+------------------|
 | "class Test {\npublic:\nint member; };"     | "+member : int"  |
@@ -1701,8 +1705,8 @@ the representation of variables.
 | "class Test {\nprotected:\nint &member; };" | "#member : int&" |
 
 
-#+NAME: test-unit-class_var
-#+BEGIN_SRC python
+#+name: test-unit-class_var
+#+begin_src python
 # %% Test class variables
 
 
@@ -1719,7 +1723,7 @@ class TestClassVariable:
             nt.assert_equal(output_ref_str, obj_m.render(),
                             'Test {0} failed [input: {1}]'.format(test_idx,
                                                                   input_str))
-#+END_SRC
+#+end_src
 
 
 **** Class method
@@ -1728,8 +1732,8 @@ The tests for class methods are listed in
 Table\nbsp{}[[tbl-unittest-class_method]].  Note that template methods are not
 supported by PlantUML.
 
-#+NAME: tbl-unittest-class_method
-#+CAPTION: List of test segments and corresponding PlantUML strings.
+#+name: tbl-unittest-class_method
+#+caption: List of test segments and corresponding PlantUML strings.
 | C++                                                                            | plantuml                            |
 |--------------------------------------------------------------------------------+-------------------------------------|
 | "class Test {\npublic:\nint & func(int * a); };"                               | "+func(int* a) : int&"              |
@@ -1739,8 +1743,8 @@ supported by PlantUML.
 | "class Test {\nprotected:\ntemplate <typename T>int &func(string &) const; };" | "#func(string &) : int& {query}"    |
 
 
-#+NAME: test-unit-class_method
-#+BEGIN_SRC python
+#+name: test-unit-class_method
+#+begin_src python
 # %% Test class methods
 
 
@@ -1757,7 +1761,7 @@ class TestClassMethod:
             nt.assert_equal(output_ref_str, obj_m.render(),
                             'Test {0} failed [input: {1}]'.format(test_idx,
                                                                   input_str))
-#+END_SRC
+#+end_src
 
 
 **** Class
@@ -1765,8 +1769,8 @@ class TestClassMethod:
 The unit test for classes includes rendering tests for the code segments in
 Table\nbsp{}[[tbl-unittest-class]].  It includes templates and abstract classes.
 
-#+NAME: tbl-unittest-class
-#+CAPTION: List of test segments and corresponding PlantUML strings.
+#+name: tbl-unittest-class
+#+caption: List of test segments and corresponding PlantUML strings.
 | C++                                                                | plantuml                                                                              |
 |--------------------------------------------------------------------+---------------------------------------------------------------------------------------|
 | "class Test {\nprotected:\nint & member; };"                       | "class Test {\n\t#member : int&\n}\n"                                                 |
@@ -1775,8 +1779,8 @@ Table\nbsp{}[[tbl-unittest-class]].  It includes templates and abstract classes.
 | "template <typename T> class Test{\nvirtual T* func(T& arg)=0; };" | "abstract class Test <template <typename T>> {\n\t-{abstract} func(T& arg) : T*\n}\n" |
 
 
-#+NAME: test-unit-class
-#+BEGIN_SRC python
+#+name: test-unit-class
+#+begin_src python
 # %% Test classes
 
 
@@ -1792,7 +1796,7 @@ class TestClass:
             nt.assert_equal(output_ref_str, obj_c.render(),
                             'Test {0} failed [input: {1}]'.format(test_idx,
                                                                   input_str))
-#+END_SRC
+#+end_src
 
 
 *** Enum
@@ -1800,16 +1804,17 @@ class TestClass:
 The unit test for enum objects includes rendering tests for the code segments in
 Table\nbsp{}[[tbl-unittest-enum]].
 
-#+NAME: tbl-unittest-enum
-#+CAPTION: List of test segments and corresponding PlantUML strings.
+#+name: tbl-unittest-enum
+#+caption: List of test segments and corresponding PlantUML strings.
 | C++                                 | plantuml                                |
 |-------------------------------------+-----------------------------------------|
 | "enum Test { A, B, CD, E };"        | "enum Test {\n\tA\n\tB\n\tCD\n\tE\n}\n" |
 | "enum Test\n{\n A = 0, B = 12\n };" | "enum Test {\n\tA\n\tB\n}\n"            |
+| "enum { A, B };"                    | "enum empty {\n\tA\n\tB\n}\n""          |
 
 
-#+NAME: test-unit-enum
-#+BEGIN_SRC python
+#+name: test-unit-enum
+#+begin_src python
 # %% Test enum objects
 
 
@@ -1825,7 +1830,7 @@ class TestEnum:
             nt.assert_equal(output_ref_str, obj_c.render(),
                             'Test {0} failed [input: {1}]'.format(test_idx,
                                                                   input_str))
-#+END_SRC
+#+end_src
 
 
 *** Links
@@ -1835,8 +1840,8 @@ Table\nbsp{}[[tbl-unittest-link]].  It tests inheritance and aggregation
 relationships (with and without count).
 
 
-#+NAME: tbl-unittest-link
-#+CAPTION: List of test segments and corresponding PlantUML strings.
+#+name: tbl-unittest-link
+#+caption: List of test segments and corresponding PlantUML strings.
 | C++                                    | plantuml        |
 |----------------------------------------+-----------------|
 | "class A{};\nclass B : A{};"           | "A <@-- B"      |
@@ -1845,8 +1850,8 @@ relationships (with and without count).
 | "class B{};\nclass A{B obj; B* ptr;};" | "A \"2\" o-- B" |
 
 
-#+NAME: test-unit-link
-#+BEGIN_SRC python
+#+name: test-unit-link
+#+begin_src python
 class TestLink:
     def test_list_entries(self):
         for test_idx, (input_str, output_ref_str) in \
@@ -1861,7 +1866,7 @@ class TestLink:
             nt.assert_equal(output_ref_str, obj_l.render(),
                             'Test {0} failed [input: {1}]'.format(test_idx,
                                                                   input_str))
-#+END_SRC
+#+end_src
 
 
 ** Full system test
@@ -1878,8 +1883,8 @@ etc.).
 The following can be extended to improve testing, as long as the corresponding
 [[#sec-test-system-ref][reference output]] is kept up-to-date.
 
-#+NAME: hpp-simple-classes-1-2
-#+BEGIN_SRC c++
+#+name: hpp-simple-classes-1-2
+#+begin_src c++
 enum Enum01 { VALUE_0, VALUE_1, VALUE_2 };
 
 class Class01 {
@@ -1904,10 +1909,10 @@ private:
 	static bool _StaticPrivateMethod(bool param);
 	bool _AbstractMethod(int param) override;
 };
-#+END_SRC
+#+end_src
 
-#+NAME: hpp-simple-classes-3
-#+BEGIN_SRC c++
+#+name: hpp-simple-classes-3
+#+begin_src c++
 template<typename T>
 class Class03 {
 public:
@@ -1919,7 +1924,7 @@ private:
 	list<Class02> _obj_list;
 	T* _typed_obj;
 };
-#+END_SRC
+#+end_src
 
 
 
@@ -1928,8 +1933,8 @@ Following is the reference output for the input header files defined [[#sec-test
 The comparison takes into account the white space, indentation, etc.
 
 
-#+NAME: puml-simple-classes
-#+BEGIN_SRC plantuml
+#+name: puml-simple-classes
+#+begin_src plantuml
 @startuml
 abstract class Class01 {
 	+{abstract} AbstractPublicMethod(int param) : bool
@@ -1970,7 +1975,7 @@ Class03 "2" o-- Class01
 Class03 o-- Class02
 
 @enduml
-#+END_SRC
+#+end_src
 
 
 *** Test diagram generation
@@ -1983,8 +1988,8 @@ The system test validates the following:
 - the ~CreatePlantUMLFile~ interface, including stdout and file output.
 
 
-#+NAME: test-full-diagram
-#+BEGIN_SRC python
+#+name: test-full-diagram
+#+begin_src python
 # %% Test overall system
 
 
@@ -2098,7 +2103,7 @@ class TestFullDiagram():
             output_fcontent = fid.read()
         nt.assert_equal(self._diag_saved_ref, output_fcontent)
         os.unlink(output_fname)
-#+END_SRC
+#+end_src
 
 
 * Packaging
@@ -2112,6 +2117,13 @@ examples:
 - https://python-packaging.readthedocs.io/en/latest/
 - https://packaging.python.org/distributing/
 
+To build, run ~python setup.py build bdist~, ~python setup.py build
+bdist_wheel~.  To upload to PyPI, run:
+
+#+begin_example
+twine upload -r pypi --sign dist/hpp2plantuml-*
+#+end_example
+
 
 ** =__init__.py=
 
@@ -2122,8 +2134,8 @@ It also imports the main interface: the ~CreatePlantUMLFile~ function and the
 The header is filled with the content of org-mode blocks.  The version number is
 obtained using the source block described [[#sec-org-el-version][here]].
 
-#+NAME: py-init
-#+BEGIN_SRC python
+#+name: py-init
+#+begin_src python
 """ hpp2plantuml module
 
 .. _sec-module:
@@ -2163,16 +2175,17 @@ The command line usage is (``hpp2plantuml --help``):
 
 ::
 
-    usage: hpp2plantuml [-h] [-o FILE] -i HEADER-FILE
+    usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [--version]
 
     hpp2plantuml tool.
 
     optional arguments:
       -h, --help            show this help message and exit
-      -o FILE, --output-file FILE
-                            Output file
       -i HEADER-FILE, --input-file HEADER-FILE
-                            Input file (must be quoted when using wildcards)
+                            input file (must be quoted when using wildcards)
+      -o FILE, --output-file FILE
+                            output file
+      --version             show program's version number and exit
 
 
 Input files are added using the ``-i`` option.  Inputs can be full file paths or
@@ -2201,7 +2214,7 @@ produce a string output instead of writing to a text file.
 
 __title__ = "hpp2plantuml"
 __description__ = "Convert C++ header files to PlantUML"
-__version__ = '0.2'
+__version__ = '0.3'
 __uri__ = "https://github.com/thibaultmarin/hpp2plantuml"
 __doc__ = __description__ + " <" + __uri__ + ">"
 __author__ = "Thibault Marin"
@@ -2212,7 +2225,7 @@ __copyright__ = "Copyright (c) 2016 Thibault Marin"
 from .hpp2plantuml import CreatePlantUMLFile, Diagram
 
 __all__ = ['CreatePlantUMLFile', 'Diagram']
-#+END_SRC
+#+end_src
 
 
 ** =setup.cfg=
@@ -2226,8 +2239,8 @@ The [[#sec-package-doc][documentation]] uses [[http://sphinx-doc.org][Sphinx]] t
 documentation files.  In practice, the documentation is built using a [[#sec-package-doc][custom
 command]] for =setup.py= run using ~python setup.py sphinx~.
 
-#+NAME: cfg-setup
-#+BEGIN_SRC conf
+#+name: cfg-setup
+#+begin_src conf
 
 [bdist_wheel]
 universal = 1
@@ -2242,15 +2255,15 @@ all_files  = 1
 
 [upload_sphinx]
 upload-dir = doc/build/html
-#+END_SRC
+#+end_src
 
 
 ** =setup.py=
 The =setup.py= file is the interface to =setuptools=.  It defines the packaging
 options.  Most of it is taken from [[https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/][this post]].
 
-#+NAME: py-setup-import
-#+BEGIN_SRC python
+#+name: py-setup-import
+#+begin_src python
 
 # %% Imports
 import os
@@ -2264,14 +2277,14 @@ try:
     import sphinx.apidoc
 except ImportError:
     pass
-#+END_SRC
+#+end_src
 
 *** Custom content
 
 The non-boilerplate part of the =setup.py= file defines the package information.
 
-#+NAME: py-setup-custom
-#+BEGIN_SRC python
+#+name: py-setup-custom
+#+begin_src python
 # %% Custom fields
 
 ###################################################################
@@ -2298,7 +2311,7 @@ INSTALL_REQUIRES = ['argparse', 'CppHeaderParser']
 INSTALL_REQUIRES += ['sphinx', ]
 SETUP_REQUIRES = ['sphinx', 'numpydoc']
 ###################################################################
-#+END_SRC
+#+end_src
 
 
 *** Helper functions
@@ -2306,8 +2319,8 @@ SETUP_REQUIRES = ['sphinx', 'numpydoc']
 The following helper functions provide tools to extract metadata from the
 =__init__= file and pass it to the ~setup~ command.
 
-#+NAME: py-setup-helper
-#+BEGIN_SRC python
+#+name: py-setup-helper
+#+begin_src python
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -2367,7 +2380,7 @@ class Sphinx(Command):
         # build the doc sources
         sphinx.main(['', os.path.join('doc', 'source'),
                      os.path.join('doc', 'build', 'html')])
-#+END_SRC
+#+end_src
 
 
 *** Setup
@@ -2378,8 +2391,8 @@ This final block passes all the relevant package information to =setuptools=:
 - testing framework,
 - console script: the package installs the =hpp2plantuml= [[#sec-module-cmd][command]].
 
-#+NAME: py-setup-main
-#+BEGIN_SRC python -r
+#+name: py-setup-main
+#+begin_src python -r
 
 if __name__ == "__main__":
     setup(
@@ -2407,15 +2420,15 @@ if __name__ == "__main__":
         },
         cmdclass={'sphinx': Sphinx}(ref:setup-sphinx)
     )
-#+END_SRC
+#+end_src
 
 
 ** Manifest
 
 The manifest file is used to include extra files to the package.
 
-#+NAME: setup-manifest
-#+BEGIN_SRC conf
+#+name: setup-manifest
+#+begin_src conf
 include *.rst *.txt LICENSE
 recursive-include tests *.py
 recursive-include tests *.hpp
@@ -2423,7 +2436,7 @@ recursive-include tests *.puml
 recursive-include doc *.rst
 recursive-include doc *.py
 prune doc/build
-#+END_SRC
+#+end_src
 
 
 ** README
@@ -2431,8 +2444,8 @@ prune doc/build
 The README file is automatically generated from blocks defined in this
 org-file (converted to RST format).
 
-#+NAME: rst-README
-#+BEGIN_SRC rst
+#+name: rst-README
+#+begin_src rst
 
 hpp2plantuml - Convert C++ header files to PlantUML
 ===================================================
@@ -2479,16 +2492,17 @@ The command line usage is (``hpp2plantuml --help``):
 
 ::
 
-    usage: hpp2plantuml [-h] [-o FILE] -i HEADER-FILE
+    usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [--version]
 
     hpp2plantuml tool.
 
     optional arguments:
       -h, --help            show this help message and exit
-      -o FILE, --output-file FILE
-                            Output file
       -i HEADER-FILE, --input-file HEADER-FILE
-                            Input file (must be quoted when using wildcards)
+                            input file (must be quoted when using wildcards)
+      -o FILE, --output-file FILE
+                            output file
+      --version             show program's version number and exit
 
 
 Input files are added using the ``-i`` option.  Inputs can be full file paths or
@@ -2554,7 +2568,7 @@ The full documentation is available via:
 
 - `This org-mode post <https://thibaultmarin.github.io/blog/posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.html>`_
 - `Read the docs <http://hpp2plantuml.readthedocs.io/en/latest/>`_
-#+END_SRC
+#+end_src
 
 
 ** Documentation
@@ -2580,8 +2594,8 @@ content of the file is mostly following the defaults, with a few exceptions:
 - the =numpydoc= package is used to render the docstrings
   ([[(sphinx-conf-numpydoc)]]).
 
-#+NAME: py-sphinx-conf
-#+BEGIN_SRC python -r
+#+name: py-sphinx-conf
+#+begin_src python -r
 
 # -*- coding: utf-8 -*-
 #
@@ -2664,9 +2678,9 @@ author = u'Thibault Marin'
 # built documents.
 #
 # The short X.Y version.
-version = u'v' + u'0.2'
+version = u'v' + u'0.3'
 # The full version, including alpha/beta/rc tags.
-release = u'v' + u'0.2'
+release = u'v' + u'0.3'
 
 # The language for content autogenerated by Sphinx. Refer to documentation
 # for a list of supported languages.
@@ -2740,7 +2754,7 @@ html_theme = 'alabaster'
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = u'hpp2plantuml ' + u'v' + u'0.2'
+# html_title = u'hpp2plantuml ' + u'v' + u'0.3'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -2947,7 +2961,7 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
-#+END_SRC
+#+end_src
 
 
 *** Index page
@@ -2956,8 +2970,8 @@ The index page is the entry point of the documentation.  It is formed by other
 parts of the org document including a brief description of the usage and links
 to the automatically generated and the org-file documents.
 
-#+NAME: doc-rst-index
-#+BEGIN_SRC rst
+#+name: doc-rst-index
+#+begin_src rst
 
 .. hpp2plantuml documentation master file.
 
@@ -3009,16 +3023,17 @@ The command line usage is (``hpp2plantuml --help``):
 
 ::
 
-    usage: hpp2plantuml [-h] [-o FILE] -i HEADER-FILE
+    usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [--version]
 
     hpp2plantuml tool.
 
     optional arguments:
       -h, --help            show this help message and exit
-      -o FILE, --output-file FILE
-                            Output file
       -i HEADER-FILE, --input-file HEADER-FILE
-                            Input file (must be quoted when using wildcards)
+                            input file (must be quoted when using wildcards)
+      -o FILE, --output-file FILE
+                            output file
+      --version             show program's version number and exit
 
 
 Input files are added using the ``-i`` option.  Inputs can be full file paths or
@@ -3060,7 +3075,7 @@ Indices and tables
 ,* :ref:`genindex`
 ,* :ref:`modindex`
 ,* :ref:`search`
-#+END_SRC
+#+end_src
 
 
 *** Read The Docs
@@ -3068,10 +3083,10 @@ Indices and tables
 In order to build the documentation on the [[http://read-the-docs.readthedocs.io/en/latest/][Read The Docs]] website, a requirement
 file is added for the =numpydoc= package.
 
-#+NAME: req-readthedocs
-#+BEGIN_SRC conf
+#+name: req-readthedocs
+#+begin_src conf
 numpydoc
-#+END_SRC
+#+end_src
 
 
 * Org-mode setup
@@ -3084,11 +3099,11 @@ this process.
 The following source block is used to get the module's version number defined in
 [[hpp2plantuml-version][a single location]] and include it at multiple locations.
 
-#+NAME: get-version
-#+BEGIN_SRC emacs-lisp
+#+name: get-version
+#+begin_src emacs-lisp
 (cond ((string= lang "python")
        (format "'%s'" ver)))
-#+END_SRC
+#+end_src
 
 
 ** org-to-rst
@@ -3101,8 +3116,8 @@ and an additional flag ~children~ can be used to control whether the subsections
 of the target section are removed (~children = "remove"~) of kept (any other
 string, e.g. ~"keep"~).
 
-#+NAME: el-org-exp
-#+BEGIN_SRC emacs-lisp -r
+#+name: el-org-exp
+#+begin_src emacs-lisp -r
 (save-excursion
   (let ((org-tree (org-element-parse-buffer)))
     (org-element-map
@@ -3131,7 +3146,7 @@ string, e.g. ~"keep"~).
                         ;; Could support more languages
                         (t out-text))))))
       nil t)))
-#+END_SRC
+#+end_src
 
 
 ** Generate documentation
@@ -3144,8 +3159,8 @@ to rst.  Its goal is to fix languages unknown to sphinx (which relies on [[http:
 pygmentize program]] for syntax highlighting) such as =plantuml= and org's =conf=
 blocks, replacing them by a simple example block.
 
-#+NAME: ox-rst-filter-src
-#+BEGIN_SRC emacs-lisp -r
+#+name: ox-rst-filter-src
+#+begin_src emacs-lisp -r
 (defun custom-rst-filter-org-block (text backend info)(ref:el-rst-filter)
   (when (org-export-derived-backend-p backend 'rst)
     (let* ((pattern ".*\.\. code:: \\([[:alnum:]]+\\)")
@@ -3156,13 +3171,13 @@ blocks, replacing them by a simple example block.
       (cond ((member lang '("conf" "plantuml"))
              (replace-regexp-in-string pattern-line "::\n" text))
             (t text)))))
-#+END_SRC
+#+end_src
 
 The command and options to generate the org-file documentation in rst format are
 encapsulated in the following source block.
 
-#+NAME: el-export-rst-org-doc
-#+BEGIN_SRC emacs-lisp
+#+name: el-export-rst-org-doc
+#+begin_src emacs-lisp
 (require 'ox-rst)
 (let ((org-export-with-toc nil)
       (org-export-with-todo-keywords nil)
@@ -3171,4 +3186,4 @@ encapsulated in the following source block.
       (org-export-filter-src-block-functions
        '(custom-rst-filter-org-block)))
   (org-export-to-file 'rst "doc/source/org-doc.rst"))
-#+END_SRC
+#+end_src

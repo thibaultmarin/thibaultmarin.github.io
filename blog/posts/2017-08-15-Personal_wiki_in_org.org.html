@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<!-- Created by htmlize-1.51 in css mode. -->
+<!-- Created by htmlize-1.54 in css mode. -->
 <html>
   <head>
     <title>2017-08-15-Personal_wiki_in_org.org</title>
@@ -105,6 +105,10 @@
         color: #228b22;
         font-weight: bold;
       }
+      .org-latex-and-related {
+        /* org-latex-and-related */
+        color: #8b4513;
+      }
       .org-level-1 {
         /* org-level-1 */
         color: #0000ff;
@@ -191,16 +195,16 @@
   </head>
   <body>
     <pre>
-<span class="org-meta-line">#+INCLUDE: ../source-blocks.org</span>
-<span class="org-meta-line">#+SETUPFILE: ../setup.org</span>
-<span class="org-document-info-keyword">#+TITLE:</span> <span class="org-document-title">Personal wiki in org
-</span><span class="org-document-info-keyword">#+DATE:</span> <span class="org-document-info">&lt;2017-08-15 Tue&gt;
-</span><span class="org-meta-line">#+TODO: TODO REVIEW | DONE DEFERRED ABANDONED</span>
-<span class="org-meta-line">#+PROPERTY: COOKIE_DATA todo recursive</span>
-<span class="org-meta-line">#+PROPERTY: header-args :eval no-export :results silent :exports code</span>
-<span class="org-meta-line">#+PROPERTY: header-args+ :comments link</span>
-<span class="org-meta-line">#+STARTUP: hideblocks</span>
-<span class="org-meta-line">#+MACRO: tt \nbsp{}</span>
+<span class="org-meta-line">#+include: ../source-blocks.org</span>
+<span class="org-meta-line">#+setupfile: ../setup.org</span>
+<span class="org-document-info-keyword">#+title:</span> <span class="org-document-title">Personal wiki in org
+</span><span class="org-document-info-keyword">#+date:</span> <span class="org-document-info">&lt;2017-08-15 Tue&gt;
+</span><span class="org-meta-line">#+todo: TODO REVIEW | DONE DEFERRED ABANDONED</span>
+<span class="org-meta-line">#+property: COOKIE_DATA todo recursive</span>
+<span class="org-meta-line">#+property: header-args :eval no-export :results silent :exports code</span>
+<span class="org-meta-line">#+property: header-args+ :comments link</span>
+<span class="org-meta-line">#+startup: hideblocks</span>
+<span class="org-meta-line">#+macro: tt \nbsp{}</span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Introduction</span>
 
@@ -220,15 +224,15 @@ the other hand, it is fully text-based which allows the use of version control.
 
 The wiki currently uses the following versions of emacs and org-mode:
 
-<span class="org-meta-line">#+NAME: el-version</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results replace value :exports results
+<span class="org-meta-line">#+name: el-version</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results replace value :exports results
 </span><span class="org-block">(print (format </span><span class="org-block"><span class="string">"%s\n%s"</span></span><span class="org-block">
                (replace-regexp-in-string </span><span class="org-block"><span class="string">"@ .*org-mode"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"@ .../org-mode"</span></span><span class="org-block">
                                          (org-version nil t))
                (emacs-version)))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
-<span class="org-meta-line">#+RESULTS: el-version</span>
+<span class="org-meta-line">#+results: el-version</span>
 <span class="org-code">: Org mode version 9.1.3 (release_9.1.3-206-g1bb9cf @ .../org-mode/lisp/)
 : GNU Emacs 25.2.2 (x86_64-pc-linux-gnu, GTK+ Version 3.22.20)
 :  of 2017-09-11, modified by Debian
@@ -238,7 +242,7 @@ publishing.
 
 The main requirements for the published wiki are <span class="org-link"><a href="#wiki-js-libs">javascript modules</a></span>:
 - <span class="org-link"><span class="org-list-dt"><a href="https://jquery.com">jQuery</a></span></span><span class="org-list-dt"> ::</span> used to <span class="org-link"><a href="#search-js-index-download">asynchronously download the search index from the server</a></span>,
-  submit search requests to Lunr and <span class="org-link"><a href="#search-js-display">display the results</a></span>,
+     submit search requests to Lunr and <span class="org-link"><a href="#search-js-display">display the results</a></span>,
 - <span class="org-link"><span class="org-list-dt"><a href="https://lunrjs.com">Lunr</a></span></span><span class="org-list-dt"> ::</span> used by the <span class="org-link"><a href="#search-js-search">search tool</a></span>,
 - <span class="org-link"><span class="org-list-dt"><a href="https://markjs.io/">=mark.js=</a></span></span><span class="org-list-dt"> ::</span> used to <span class="org-link"><a href="#search-js-highlight">highlight search results</a></span>,
 - <span class="org-link"><span class="org-list-dt"><a href="http://www.mathjax.org">MathJax</a></span></span><span class="org-list-dt"> ::</span> used to render equations,
@@ -260,8 +264,8 @@ This section defines the main functions used to maintain the wiki.  When
 tangled, it creates the <span class="org-verbatim">=my-org-wiki.el=</span> file, which can then be <span class="org-link"><a href="#dotfiles-org-wiki">loaded and
 further configured</a></span> from <span class="org-verbatim">=.emacs=</span>.
 
-<span class="org-meta-line">#+NAME: el-org-wiki-header</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-org-wiki-header</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block"><span class="comment-delimiter">;;; </span></span><span class="org-block"><span class="comment">my-org-wiki.el --- Personal wiki configuration
 </span></span><span class="org-block">
 </span><span class="org-block"><span class="comment-delimiter">;;; </span></span><span class="org-block"><span class="comment">Commentary:
@@ -275,7 +279,7 @@ further configured</a></span> from <span class="org-verbatim">=.emacs=</span>.
 (</span><span class="org-block"><span class="keyword">require</span></span><span class="org-block"> '</span><span class="org-block"><span class="constant">org</span></span><span class="org-block">)
 (</span><span class="org-block"><span class="keyword">require</span></span><span class="org-block"> '</span><span class="org-block"><span class="constant">my-refbase</span></span><span class="org-block"> nil t)
 (</span><span class="org-block"><span class="keyword">require</span></span><span class="org-block"> '</span><span class="org-block"><span class="constant">cl</span></span><span class="org-block"> nil t)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Custom parameters</span>
@@ -286,21 +290,25 @@ further configured</a></span> from <span class="org-verbatim">=.emacs=</span>.
 The wiki can be configured via the following variables:
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-conf-loc)">~org-wiki-location~</a></span></span><span class="org-list-dt"> ::</span> path to wiki (with both <span class="org-verbatim">=.org=</span> and <span class="org-verbatim">=.html=</span> files),
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-conf-index-level)">~org-wiki-index-level-max~</a></span></span><span class="org-list-dt"> ::</span> maximum level for <span class="org-link"><a href="#org-wiki-index">index generation</a></span> (this
-  controls the granularity of the search results),
+     controls the granularity of the search results),
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-conf-index-file)">~org-wiki-index-file~</a></span></span><span class="org-list-dt"> ::</span> filename for search <span class="org-link"><a href="#org-wiki-index">index</a></span> (stored in <span class="org-verbatim">=json=</span> format),
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-conf-preamble)">~org-wiki-preamble~</a></span></span><span class="org-list-dt"> ::</span> <span class="org-link"><a href="el-dotfiles-org-wiki">HTML preamble</a></span> for published HTML pages (defines the
-  navigation bar, header and a widget to browse search results, hidden when
-  no search is active).
+     navigation bar, header and a widget to browse search results, hidden when
+     no search is active).
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-conf-ignored)">~org-wiki-ignored-files~</a></span></span><span class="org-list-dt"> ::</span> List of files ignored during generation of index
-  page table.
+     page table.
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-conf-index-marker)">~org-wiki-index-page-marker~</a></span></span><span class="org-list-dt"> ::</span> Special string <span class="org-link"><a href="#org-wiki-index-page">automatically replaced</a></span> by a
-  list of wiki pages when added to the <span class="org-link"><a href="#wiki-page-index">=index.org=</a></span> page.  Its default value
-  is:
-<span class="org-meta-line">  #+NAME: el-index-marker</span>
-  <span class="org-code">: #%AUTO-INDEX%#
-</span>
-<span class="org-meta-line">#+NAME: el-setup-config</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)" :noweb yes
+     list of wiki pages when added to the <span class="org-link"><a href="#wiki-page-index">=index.org=</a></span> page.  Its default value
+     is:
+<span class="org-meta-line">     #+name: el-index-marker</span>
+     <span class="org-code">: #%AUTO-INDEX%#
+</span>- <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-conf-index-regexp)">~org-wiki-index-regexp-list~</a></span></span><span class="org-list-dt"> ::</span> List of
+     regular expression / replacement pairs applied to the content of the index
+     sections.  This is used to split strings such as <span class="org-code">~</span><span class="org-link"><span class="org-code"><a href="refbase:Author2000">refbase:Author2000</a></span></span><span class="org-code">~</span> to
+     <span class="org-code">~refbase: Author 2000~</span> to allow searches on author names.
+
+<span class="org-meta-line">#+name: el-setup-config</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp -r -l " ;;(ref:%s)" :noweb yes
 </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Parameters
 </span></span><span class="org-block">
 (</span><span class="org-block"><span class="keyword">defcustom</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">org-wiki-location</span></span><span class="org-block"> </span><span class="org-block"><span class="string">""</span></span><span class="org-block"> </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:org-wiki-conf-loc)
@@ -324,6 +332,7 @@ The wiki can be configured via the following variables:
       &lt;ul&gt;
             &lt;li&gt;&lt;a href='index.html'&gt;Home&lt;/a&gt;&lt;/li&gt;
             &lt;li&gt;&lt;a href='search.html'&gt;Search&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href='demo.html' target='_blank'&gt;Help&lt;/a&gt;&lt;/li&gt;
       &lt;/ul&gt;
   &lt;/div&gt;
 
@@ -351,12 +360,17 @@ The wiki can be configured via the following variables:
 (</span><span class="org-block"><span class="keyword">defcustom</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">org-wiki-index-page-marker</span></span><span class="org-block"> </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:org-wiki-conf-index-marker)
 </span></span><span class="org-block">  </span><span class="org-block"><span class="string">"&lt;&lt;el-index-marker()&gt;&gt;"</span></span><span class="org-block">
   </span><span class="org-block"><span class="doc">"String marker replaced by index table during publishing."</span></span><span class="org-block">)
-</span><span class="org-block-end-line">#+END_SRC
+
+(</span><span class="org-block"><span class="keyword">defcustom</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">org-wiki-index-regexp-list</span></span><span class="org-block"> </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:org-wiki-conf-index-regexp)
+</span></span><span class="org-block">  '((</span><span class="org-block"><span class="string">"refbase:</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">(</span></span></span><span class="org-block"><span class="string"><a href=":alpha:">[[:alpha:]]</a>+</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">)</span></span></span><span class="org-block"><span class="string">"</span></span><span class="org-block"> . </span><span class="org-block"><span class="string">"refbase: \\1 "</span></span><span class="org-block">)
+    (</span><span class="org-block"><span class="string">"file:"</span></span><span class="org-block"> . </span><span class="org-block"><span class="string">"file: "</span></span><span class="org-block">))
+  </span><span class="org-block"><span class="doc">"List of string replacement pairs applied to json index."</span></span><span class="org-block">)
+</span><span class="org-block-end-line">#+end_src
 </span>
-<span class="org-meta-line">#+NAME: el-get-index-json</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results value :exports none :eval yes :tangle no
+<span class="org-meta-line">#+name: el-get-index-json</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results value :exports none :eval yes :tangle no
 </span><span class="org-block">org-wiki-index-file
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Publishing function</span>
@@ -371,8 +385,8 @@ More specifically, this function performs the following:
 - <span class="org-link"><a href="(org-wiki-publish-index)">generate the search index</a></span> file,
 - add the <span class="org-link"><a href="(org-wiki-publish-preamble)">HTML preamble</a></span> to every page.
 
-<span class="org-meta-line">#+NAME: el-setup-publish-function</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+<span class="org-meta-line">#+name: el-setup-publish-function</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp -r -l " ;;(ref:%s)"
 </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Publishing function
 </span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">org-wiki-publish</span></span><span class="org-block"> () </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:org-wiki-publish)
 </span></span><span class="org-block">  </span><span class="org-block"><span class="doc">"Publish org files to html."</span></span><span class="org-block">
@@ -406,7 +420,7 @@ More specifically, this function performs the following:
                '&#8482;/org-wiki-add-setup)
   (remove-hook 'org-export-before-processing-hook
                '&#8482;/org-wiki-insert-index))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Insertion of org header</span>
@@ -418,8 +432,8 @@ The following function inserts common org-mode lines to every page.  It is run
 during publishing.  The actual functionality added by these lines is described
 <span class="org-link"><a href="#wiki-setup-org">here</a></span>.
 
-<span class="org-meta-line">#+NAME: el-setup-org-header</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-setup-org-header</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">&#8482;/org-wiki-add-setup</span></span><span class="org-block"> (backend)
   </span><span class="org-block"><span class="doc">"Add source-blocks.org and setup.org to org file when BACKEND is html."</span></span><span class="org-block">
   (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> (org-export-derived-backend-p backend 'html)
@@ -430,7 +444,7 @@ during publishing.  The actual functionality added by these lines is described
         (goto-char (point-min))
         (insert </span><span class="org-block"><span class="string">"#+INCLUDE: source-blocks.org\n"</span></span><span class="org-block">)
         (insert </span><span class="org-block"><span class="string">"#+SETUPFILE: setup.org\n"</span></span><span class="org-block">)))))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Automatic id generation</span>
@@ -440,11 +454,11 @@ used to automatically generate <span class="org-code">~CUSTOM_ID~</span> propert
 files (up to the maximum heading level defined by <span class="org-link"><a href="(org-wiki-conf-index-level)">~org-wiki-index-level-max~</a></span>).
 
 The function ensures unique <span class="org-code">~CUSTOM_ID~</span> entries for a given org file.  It does
-so by appending a counter digit for duplicate heading titles (this is far from
-ideal, a better option may be to prepend the <span class="org-code">~CUSTOM_ID~</span> of the parent heading).
+so by using the full headline lineage as <span class="org-code">~CUSTOM_ID~</span>.  This require the custom
+<span class="org-code">~&#8482;/org-element-title-lineage~</span> function (see <span class="org-link"><a href="el-setup-title-lineage">here</a></span>).
 
-<span class="org-meta-line">#+NAME: el-setup-set-id-helper</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+<span class="org-meta-line">#+name: el-setup-set-id-helper</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp -r -l " ;;(ref:%s)"
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">org-wiki-set-id</span></span><span class="org-block"> (</span><span class="org-block"><span class="type">&amp;optional</span></span><span class="org-block"> force) </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:org-wiki-set-id)
 </span></span><span class="org-block">  </span><span class="org-block"><span class="doc">"Set :CUSTOM_ID property on all headings.
 Leave existing properties unchanged if FORCE evaluates to nil."</span></span><span class="org-block">
@@ -455,7 +469,10 @@ Leave existing properties unchanged if FORCE evaluates to nil."</span></span><sp
     (org-element-map
         tree 'headline
       (</span><span class="org-block"><span class="keyword">lambda</span></span><span class="org-block"> (el)
-        (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((title (org-element-property </span><span class="org-block"><span class="builtin">:title</span></span><span class="org-block"> el))
+        (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((title (mapconcat 'identity
+                                (reverse
+                                 (&#8482;/org-element-title-lineage el))
+                                </span><span class="org-block"><span class="string">"/"</span></span><span class="org-block">))
               (begin (org-element-property </span><span class="org-block"><span class="builtin">:begin</span></span><span class="org-block"> el))
               (level (org-element-property </span><span class="org-block"><span class="builtin">:level</span></span><span class="org-block"> el))
               (customid (org-element-property </span><span class="org-block"><span class="builtin">:CUSTOM_ID</span></span><span class="org-block"> el)))
@@ -463,23 +480,23 @@ Leave existing properties unchanged if FORCE evaluates to nil."</span></span><sp
             (</span><span class="org-block"><span class="keyword">cond</span></span><span class="org-block"> ((</span><span class="org-block"><span class="keyword">and</span></span><span class="org-block"> (&lt;= level org-wiki-index-level-max)
                         (</span><span class="org-block"><span class="keyword">or</span></span><span class="org-block"> force (not customid) (member customid id-list)))
                    (org-element-put-property el </span><span class="org-block"><span class="builtin">:key</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"CUSTOM_ID"</span></span><span class="org-block">)
-                   (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((cid (org-wiki-make-id (car title) id-list)))
+                   (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((cid (org-wiki-make-id title id-list)))
                      (add-to-list 'insert-list `(,begin . ,cid))
                      (add-to-list 'id-list cid t)))
                   (customid (add-to-list 'id-list customid t)))))))
     (</span><span class="org-block"><span class="keyword">dolist</span></span><span class="org-block"> (insert insert-list)
       (goto-char (car insert))
       (org-entry-put (point) </span><span class="org-block"><span class="string">"CUSTOM_ID"</span></span><span class="org-block"> (cdr insert)))))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 This function can be run manually for each new wikipage or added as a
 preprocessing hook.
 
-The <span class="org-link"><a href="(org-wiki-set-id)">~org-wiki-set-id~ function</a></span> replacing non-ascii characters by reasonable
-ascii equivalents defined in the following function.
+The <span class="org-link"><a href="(org-wiki-set-id)">~org-wiki-set-id~ function</a></span> replaces non-ascii characters by reasonable ascii
+equivalents defined in the following function.
 
-<span class="org-meta-line">#+NAME: el-setup-set-id</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+<span class="org-meta-line">#+name: el-setup-set-id</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp
 </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Create unique id from title and current list
 </span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">org-wiki-make-id</span></span><span class="org-block"> (title cid_list)
   </span><span class="org-block"><span class="doc">"Form CUSTOM_ID from TITLE appending an index if TITLE is in CID_LIST."</span></span><span class="org-block">
@@ -516,7 +533,21 @@ ascii equivalents defined in the following function.
           (</span><span class="org-block"><span class="keyword">incf</span></span><span class="org-block"> n))
         (</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> cid (concat cid </span><span class="org-block"><span class="string">"_"</span></span><span class="org-block"> (format </span><span class="org-block"><span class="string">"%d"</span></span><span class="org-block"> n)))))
     cid))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-meta-line">#+name: el-setup-title-lineage</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :tangle no
+</span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">&#8482;/org-element-title-lineage</span></span><span class="org-block"> (el)
+  </span><span class="org-block"><span class="doc">"Return list of parent headline titles for EL.
+The title of EL is first."</span></span><span class="org-block">
+  (</span><span class="org-block"><span class="keyword">let*</span></span><span class="org-block"> ((parent (org-element-property </span><span class="org-block"><span class="builtin">:parent</span></span><span class="org-block"> el))
+         (p-title (car (org-element-property </span><span class="org-block"><span class="builtin">:title</span></span><span class="org-block"> el)))
+         (out (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> p-title
+                (&#8482;/org-element-title-lineage parent))))
+    (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> p-title
+      (</span><span class="org-block"><span class="keyword">push</span></span><span class="org-block"> (substring-no-properties p-title) out))
+    out))
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Index generation</span>
@@ -541,11 +572,11 @@ The index structure is as follows:
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-index-tree-sec_title)">~sec_title~</a></span></span><span class="org-list-dt"> ::</span> Full path to subsection (e.g. <span class="org-verbatim">=Section 1 &gt; SubSection 2 &gt; ...=</span>)
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-index-tree-keywords)">~keywords~</a></span></span><span class="org-list-dt"> ::</span> Captures the <span class="org-code">~KEYWORDS~</span> property of the org wikipage
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-index-tree-content)">~content~</a></span></span><span class="org-list-dt"> ::</span> The text of the subsection (including its subsections if their
-  level is larger than <span class="org-link"><a href="(org-wiki-conf-index-level)">~org-wiki-index-level-max~</a></span>)
+     level is larger than <span class="org-link"><a href="(org-wiki-conf-index-level)">~org-wiki-index-level-max~</a></span>)
 - <span class="org-link"><span class="org-list-dt"><a href="(org-wiki-index-tree-href)">~href~</a></span></span><span class="org-list-dt"> ::</span> The HTML anchor for linking (i.e. the <span class="org-code">~CUSTOM_ID~</span> property)
 
-<span class="org-meta-line">#+NAME: el-setup-search-index-tree-insert</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+<span class="org-meta-line">#+name: el-setup-search-index-tree-insert</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp -r -l " ;;(ref:%s)"
 </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Lunr index
 </span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">org-wiki~add-to-index-tree</span></span><span class="org-block"> (outlist point-prev point-cur title
                                            title-lineage keywords text
@@ -554,6 +585,9 @@ The index structure is as follows:
   (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> point-prev
     (</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> text (buffer-substring-no-properties
                 point-prev point-cur))
+    (</span><span class="org-block"><span class="keyword">dolist</span></span><span class="org-block"> (regex org-wiki-index-regexp-list)
+      (</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> text (replace-regexp-in-string
+                  (car regex) (cdr regex) text)))
     (add-to-list
      'outlist
      (list `(</span><span class="org-block"><span class="string">"title"</span></span><span class="org-block"> . ,title) </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:org-wiki-index-tree-title)
@@ -566,7 +600,7 @@ The index structure is as follows:
 </span></span><span class="org-block">           `(</span><span class="org-block"><span class="string">"href"</span></span><span class="org-block"> . </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:org-wiki-index-tree-href)
 </span></span><span class="org-block">             ,(concat base-file </span><span class="org-block"><span class="string">".html#"</span></span><span class="org-block"> customid)))))
   outlist)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 The main index function loops over all org files in the wiki folder and
 populates a list of index entries.
@@ -578,8 +612,8 @@ Finally, the index list is stored as a json file.
 This function also captures the <span class="org-code">~CATEGORY~</span> property of each page for use by the
 <span class="org-link"><a href="#org-wiki-index-page">index table generation function</a></span>.
 
-<span class="org-meta-line">#+NAME: el-setup-index</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)"
+<span class="org-meta-line">#+name: el-setup-index</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp -r -l " ;;(ref:%s)"
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">org-wiki-index</span></span><span class="org-block"> (outfile)
   </span><span class="org-block"><span class="doc">"Prepare json index for Lunr search, store in OUTFILE."</span></span><span class="org-block">
   (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((category-list '())
@@ -645,6 +679,7 @@ This function also captures the <span class="org-code">~CATEGORY~</span> propert
                       (</span><span class="org-block"><span class="keyword">setf</span></span><span class="org-block"> (nth n title-lineage) </span><span class="org-block"><span class="string">""</span></span><span class="org-block">))
                     (</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> customid (org-element-property </span><span class="org-block"><span class="builtin">:CUSTOM_ID</span></span><span class="org-block"> el))
                     (</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> point-prev point-cur)))))
+            (</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> point-cur (point-max))
             (</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> outlist
                   (org-wiki~add-to-index-tree
                    outlist point-prev point-cur title title-lineage
@@ -655,7 +690,7 @@ This function also captures the <span class="org-code">~CATEGORY~</span> propert
       (write-file outfile))
     </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Return index table
 </span></span><span class="org-block">    category-list))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Page index</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
@@ -671,8 +706,8 @@ by <span class="org-link"><a href="#org-wiki-params">~org-wiki-index-page-marker
 on the <span class="org-code">~&#8482;/org-wiki-index-category-list~</span> variable to be set by a prior call to
 the <span class="org-link"><a href="el-setup-index">~org-wiki-index~</a></span> function (this is done in the <span class="org-link"><a href="(org-wiki-publish-index)">publishing function</a></span>).
 
-<span class="org-meta-line">#+NAME: el-setup-index-page</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+<span class="org-meta-line">#+name: el-setup-index-page</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">&#8482;/org-wiki-insert-index</span></span><span class="org-block"> (backend)
   </span><span class="org-block"><span class="doc">"Insert index table in index.org file."</span></span><span class="org-block">
   (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> (string= (file-name-nondirectory (buffer-file-name)) </span><span class="org-block"><span class="string">"index.org"</span></span><span class="org-block">)
@@ -695,7 +730,7 @@ the <span class="org-link"><a href="el-setup-index">~org-wiki-index~</a></span> 
                 (insert (concat </span><span class="org-block"><span class="string">"|"</span></span><span class="org-block"> (mapconcat 'identity pages </span><span class="org-block"><span class="string">"|"</span></span><span class="org-block">) </span><span class="org-block"><span class="string">"|\n"</span></span><span class="org-block">))
               (</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> done t))
             (</span><span class="org-block"><span class="keyword">incf</span></span><span class="org-block"> n)))))))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Refbase link</span>
@@ -714,8 +749,8 @@ The following defines an org-link for refbase citations (<span class="org-code">
 
 Note that this assumes that the <span class="org-verbatim">=my-refbase.el=</span> file is in the <span class="org-code">~load-path~</span>.
 
-<span class="org-meta-line">#+NAME: el-setup-rb-link</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+<span class="org-meta-line">#+name: el-setup-rb-link</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp
 </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">refbase link
 </span></span><span class="org-block">
 (</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">rblink-follow</span></span><span class="org-block"> (path)
@@ -744,7 +779,7 @@ Note that this assumes that the <span class="org-verbatim">=my-refbase.el=</span
  </span><span class="org-block"><span class="builtin">:follow</span></span><span class="org-block"> #'rblink-follow
  </span><span class="org-block"><span class="builtin">:help-echo</span></span><span class="org-block"> #'rblink-tooltip
  </span><span class="org-block"><span class="builtin">:export</span></span><span class="org-block"> #'rblink-export)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Helper function</span>
@@ -752,8 +787,8 @@ Note that this assumes that the <span class="org-verbatim">=my-refbase.el=</span
 When migrating from <span class="org-link"><a href="https://www.mediawiki.org/wiki/MediaWiki">MediaWiki</a></span> to this org-mode wiki, the following function
 proved useful as a first pass to convert pages.  It is left here for reference.
 
-<span class="org-meta-line">#+NAME: el-setup-mw-to-org</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent :tangle no
+<span class="org-meta-line">#+name: el-setup-mw-to-org</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent :tangle no
 </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Convert mediawiki to org-wiki
 </span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">&#8482;/org-wiki-convert-mw-to-org</span></span><span class="org-block"> ()
   (</span><span class="org-block"><span class="keyword">interactive</span></span><span class="org-block">)
@@ -792,19 +827,19 @@ proved useful as a first pass to convert pages.  It is left here for reference.
       (goto-char (point-min))
       (</span><span class="org-block"><span class="keyword">while</span></span><span class="org-block"> (re-search-forward (car rep) nil t)
         (replace-match (cdr rep))))))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Footer</span>
 
 This concludes the <span class="org-verbatim">=my-org-wiki=</span> package.
 
-<span class="org-meta-line">#+NAME: el-org-wiki-footer</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+<span class="org-meta-line">#+name: el-org-wiki-footer</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp
 </span><span class="org-block">
 (</span><span class="org-block"><span class="keyword">provide</span></span><span class="org-block"> '</span><span class="org-block"><span class="constant">my-org-wiki</span></span><span class="org-block">)
 </span><span class="org-block"><span class="comment-delimiter">;;; </span></span><span class="org-block"><span class="comment">my-org-wiki.el ends here
-</span></span><span class="org-block-end-line">#+END_SRC
+</span></span><span class="org-block-end-line">#+end_src
 </span>
 
 
@@ -818,23 +853,23 @@ This section describes the minimalist refbase package used to handle
 bibliographic citations.  Note that this package assumes a local refbase
 instance for which the (MySQL) database is accessible.
 
-<span class="org-meta-line">#+NAME: el-rb-header</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-rb-header</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block"><span class="comment-delimiter">;;; </span></span><span class="org-block"><span class="comment">my-refbase.el --- Helper functions to communicate with refbase instance
 </span></span><span class="org-block">
 </span><span class="org-block"><span class="comment-delimiter">;;; </span></span><span class="org-block"><span class="comment">Commentary:
 </span></span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Defines functions to perform requests from a refbase instance (using mysql)
 </span></span><span class="org-block">
 </span><span class="org-block"><span class="comment-delimiter">;;; </span></span><span class="org-block"><span class="comment">Code:
-</span></span><span class="org-block-end-line">#+END_SRC
+</span></span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Parameters</span>
 
 The package is configured by the <span class="org-link"><a href="(refbase-pkg-url)">~refbase-url~</a></span> and <span class="org-link"><a href="(refbase-pkg-db)">~refbase-db~</a></span> parameters which
 control the URL and the name of the MySQL database.
 
-<span class="org-meta-line">#+NAME: el-rb-params</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r -l " ;;(ref:%s)" :results silent
+<span class="org-meta-line">#+name: el-rb-params</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp -r -l " ;;(ref:%s)" :results silent
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defcustom</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">refbase-url</span></span><span class="org-block"> </span><span class="org-block"><span class="string">""</span></span><span class="org-block"> </span><span class="org-block"><span class="comment-delimiter">;;</span></span><span class="org-block"><span class="comment">(ref:refbase-pkg-url)
 </span></span><span class="org-block">  </span><span class="org-block"><span class="doc">"URL of refbase installation."</span></span><span class="org-block">
   </span><span class="org-block"><span class="builtin">:type</span></span><span class="org-block"> 'string
@@ -844,7 +879,7 @@ control the URL and the name of the MySQL database.
 </span></span><span class="org-block">  </span><span class="org-block"><span class="doc">"Name of the MySQL refbase database."</span></span><span class="org-block">
   </span><span class="org-block"><span class="builtin">:type</span></span><span class="org-block"> 'string
   </span><span class="org-block"><span class="builtin">:group</span></span><span class="org-block"> 'refbase)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Main function</span>
 
@@ -853,8 +888,8 @@ The following function interrogates a local mysql instance for arbitrary fields
 bibtex key rather than refbase's serial number.  This requires the <span class="org-verbatim">=citekey=</span>
 field to be populated in refbase.
 
-<span class="org-meta-line">#+NAME: el-rb-get-fields-by-citekey</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-rb-get-fields-by-citekey</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">refbase~get-by-citekey</span></span><span class="org-block"> (citekey fields)
   </span><span class="org-block"><span class="doc">"Perform MySQL query to extract entry information by cite_key field."</span></span><span class="org-block">
   (</span><span class="org-block"><span class="keyword">let*</span></span><span class="org-block"> ((query (concat
@@ -865,55 +900,55 @@ field to be populated in refbase.
                       query refbase-db)))
     (replace-regexp-in-string
      </span><span class="org-block"><span class="string">"\n$"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">""</span></span><span class="org-block"> (shell-command-to-string cmd))))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Get link</span>
 
 Using the <span class="org-link"><a href="el-rb-get-fields-by-citekey">~refbase~get-by-citekey~</a></span> function, the following function returns a
 link to the refbase page for a given citation.
 
-<span class="org-meta-line">#+NAME: el-rb-get-link</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-rb-get-link</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">refbase-get-link</span></span><span class="org-block"> (citekey)
   </span><span class="org-block"><span class="doc">"Get link to refbase page."</span></span><span class="org-block">
   (format </span><span class="org-block"><span class="string">"%s/show.php?record=%s"</span></span><span class="org-block">
           refbase-url
           (refbase~get-by-citekey citekey </span><span class="org-block"><span class="string">"serial"</span></span><span class="org-block">)))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Get abstract</span>
 
 The following function returns the abstract for a citation using
 <span class="org-link"><a href="el-rb-get-fields-by-citekey">~refbase~get-by-citekey~</a></span>.
 
-<span class="org-meta-line">#+NAME: el-rb-get-abstract</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-rb-get-abstract</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">refbase-get-abstract</span></span><span class="org-block"> (citekey)
   </span><span class="org-block"><span class="doc">"Get abstract of refbase entry."</span></span><span class="org-block">
   (refbase~get-by-citekey citekey </span><span class="org-block"><span class="string">"abstract"</span></span><span class="org-block">))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Get citation</span>
 
 The following function builds a short summary of a citation using
 <span class="org-link"><a href="el-rb-get-fields-by-citekey">~refbase~get-by-citekey~</a></span> containing the author, title, publication, and year.
 
-<span class="org-meta-line">#+NAME: el-rb-get-citation</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-rb-get-citation</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">refbase-get-cite</span></span><span class="org-block"> (citekey)
   </span><span class="org-block"><span class="doc">"Get title of refbase entry."</span></span><span class="org-block">
   (replace-regexp-in-string
    </span><span class="org-block"><span class="string">"\t"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">", "</span></span><span class="org-block">
    (refbase~get-by-citekey citekey </span><span class="org-block"><span class="string">"author, title, publication, year"</span></span><span class="org-block">)))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Package footer</span>
 
-<span class="org-meta-line">#+NAME: el-rb-footer</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-rb-footer</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">provide</span></span><span class="org-block"> '</span><span class="org-block"><span class="constant">my-refbase</span></span><span class="org-block">)
 </span><span class="org-block"><span class="comment-delimiter">;;; </span></span><span class="org-block"><span class="comment">my-refbase.el ends here
-</span></span><span class="org-block-end-line">#+END_SRC
+</span></span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Wiki setup</span>
@@ -932,33 +967,33 @@ following source blocks (this requires some shell and wget):
 
 
 - <span class="org-list-dt">JQuery ::</span> version 2.1.3 but more recent versions should also work:
-<span class="org-meta-line">  #+NAME: wiki-js-jquery</span>
-<span class="org-block-begin-line">  #+BEGIN_SRC sh
-</span><span class="org-block">  wget <a href="https://code.jquery.com/jquery-2.1.3.min.js">https://code.jquery.com/jquery-2.1.3.min.js</a> -O org/_resources/jquery-2.1.3.min.js
-</span><span class="org-block-end-line">  #+END_SRC
+<span class="org-meta-line">     #+name: wiki-js-jquery</span>
+<span class="org-block-begin-line">     #+begin_src sh
+</span><span class="org-block">     wget <a href="https://code.jquery.com/jquery-2.1.3.min.js">https://code.jquery.com/jquery-2.1.3.min.js</a> -O org/_resources/jquery-2.1.3.min.js
+</span><span class="org-block-end-line">     #+end_src
 </span>- <span class="org-list-dt">Lunr ::</span> latest version hoping it does not break (2.1.3 is known to work):
-<span class="org-meta-line">  #+NAME: wiki-js-lunr</span>
-<span class="org-block-begin-line">  #+BEGIN_SRC sh
-</span><span class="org-block">  wget <a href="https://unpkg.com/lunr/lunr.js">https://unpkg.com/lunr/lunr.js</a> -O org/_resources/lunr.js
-</span><span class="org-block-end-line">  #+END_SRC
+<span class="org-meta-line">     #+name: wiki-js-lunr</span>
+<span class="org-block-begin-line">     #+begin_src sh
+</span><span class="org-block">     wget <a href="https://unpkg.com/lunr/lunr.js">https://unpkg.com/lunr/lunr.js</a> -O org/_resources/lunr.js
+</span><span class="org-block-end-line">     #+end_src
 </span>- <span class="org-verbatim"><span class="org-list-dt">=mark.js=</span></span><span class="org-list-dt"> ::</span> version 8.11.0 but more recent versions should also work:
-<span class="org-meta-line">  #+NAME: wiki-js-mark</span>
-<span class="org-block-begin-line">  #+BEGIN_SRC sh
-</span><span class="org-block">  wget <a href="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.0/jquery.mark.min.js">https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.0/jquery.mark.min.js</a> -O org/_resources/jquery.mark.min.js
-</span><span class="org-block-end-line">  #+END_SRC
+<span class="org-meta-line">     #+name: wiki-js-mark</span>
+<span class="org-block-begin-line">     #+begin_src sh
+</span><span class="org-block">     wget <a href="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.0/jquery.mark.min.js">https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.0/jquery.mark.min.js</a> -O org/_resources/jquery.mark.min.js
+</span><span class="org-block-end-line">     #+end_src
 </span>- <span class="org-verbatim"><span class="org-list-dt">=org-info.js=</span></span><span class="org-list-dt"> ::</span> use latest version
-<span class="org-meta-line">  #+NAME: wiki-js-org-info</span>
-<span class="org-block-begin-line">  #+BEGIN_SRC sh
-</span><span class="org-block">  wget <a href="http://orgmode.org/worg/code/org-info-js/org-info.js">http://orgmode.org/worg/code/org-info-js/org-info.js</a> -O org/_resources/org-info.js
-</span><span class="org-block-end-line">  #+END_SRC
+<span class="org-meta-line">     #+name: wiki-js-org-info</span>
+<span class="org-block-begin-line">     #+begin_src sh
+</span><span class="org-block">     wget <a href="http://orgmode.org/worg/code/org-info-js/org-info.js">http://orgmode.org/worg/code/org-info-js/org-info.js</a> -O org/_resources/org-info.js
+</span><span class="org-block-end-line">     #+end_src
 </span>- <span class="org-list-dt">MathJax ::</span> version 2.7.2, but more recent versions should also work:
-<span class="org-meta-line">  #+NAME: wiki-js-mathjax</span>
-<span class="org-block-begin-line">  #+BEGIN_SRC sh
-</span><span class="org-block">  wget <a href="https://github.com/mathjax/MathJax/archive/2.7.2.zip">https://github.com/mathjax/MathJax/archive/2.7.2.zip</a> -O org/_resources/mathjax2.7.2.zip
-  unzip org/_resources/mathjax2.7.2.zip
-  mv MathJax-2.7.2 org/_resources/MathJax
-  rm org/_resources/mathjax2.7.2.zip
-</span><span class="org-block-end-line">  #+END_SRC
+<span class="org-meta-line">     #+name: wiki-js-mathjax</span>
+<span class="org-block-begin-line">     #+begin_src sh
+</span><span class="org-block">     wget <a href="https://github.com/mathjax/MathJax/archive/2.7.2.zip">https://github.com/mathjax/MathJax/archive/2.7.2.zip</a> -O org/_resources/mathjax2.7.2.zip
+     unzip org/_resources/mathjax2.7.2.zip
+     mv MathJax-2.7.2 org/_resources/MathJax
+     rm org/_resources/mathjax2.7.2.zip
+</span><span class="org-block-end-line">     #+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Search</span>
@@ -985,8 +1020,8 @@ The following block performs three operations:
    and using the <span class="org-code">~href~</span> link to the wiki entry as <span class="org-link"><a href="(js-search-lunr-index-key)">primary key</a></span>.
 3. <span class="org-link"><a href="(js-search-url-search)">perform a search</a></span> if the URL contains a <span class="org-code">~q=~</span> parameter.
 
-<span class="org-meta-line">#+NAME: search-js-index-download</span>
-<span class="org-block-begin-line">#+BEGIN_SRC javascript -r -l " //(ref:%s)" :noweb yes
+<span class="org-meta-line">#+name: search-js-index-download</span>
+<span class="org-block-begin-line">#+begin_src javascript -r -l " //(ref:%s)" :noweb yes
 </span><span class="org-block"><span class="keyword">var</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">lunrIndex</span></span><span class="org-block">,
     pagesIndex,
     searchStr;
@@ -1041,7 +1076,7 @@ The following block performs three operations:
             console.error(</span><span class="org-block"><span class="string">"Error getting lunr index flie:"</span></span><span class="org-block">, err);
         });
 }
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Search box listener</span>
@@ -1052,8 +1087,8 @@ The following block performs three operations:
 The following adds a listener function to the search box in the <span class="org-link"><a href="#wiki-page-search">search page</a></span>.
 When two or more characters are typed, a search is performed.
 
-<span class="org-meta-line">#+NAME: search-js-searchbox-listener</span>
-<span class="org-block-begin-line">#+BEGIN_SRC javascript
+<span class="org-meta-line">#+name: search-js-searchbox-listener</span>
+<span class="org-block-begin-line">#+begin_src javascript
 </span><span class="org-block"><span class="keyword">var</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">$results</span></span><span class="org-block">
 
 </span><span class="org-block"><span class="comment-delimiter">// </span></span><span class="org-block"><span class="comment">Add events to search box
@@ -1075,7 +1110,7 @@ When two or more characters are typed, a search is performed.
         renderResults(results);
     });
 }
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Lunr search</span>
@@ -1090,8 +1125,8 @@ In order to display, in the results page, more than just the hyperlink, the
 loop may not be optimal in terms of speed but it does not seem prohibitively
 slow yet.
 
-<span class="org-meta-line">#+NAME: search-js-search</span>
-<span class="org-block-begin-line">#+BEGIN_SRC javascript -r -l " //(ref:%s)"
+<span class="org-meta-line">#+name: search-js-search</span>
+<span class="org-block-begin-line">#+begin_src javascript -r -l " //(ref:%s)"
 </span><span class="org-block"><span class="comment-delimiter">/**</span></span><span class="org-block"><span class="comment">
  ,* Trigger a search in lunr and transform the result
  ,*
@@ -1121,7 +1156,7 @@ slow yet.
     }
     </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> out_res;
 }
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Display results</span>
@@ -1136,8 +1171,8 @@ results</a></span>.
 Most of the code in the function deals with creating the HTML output which
 could probably be simplified with better jQuery skills.
 
-<span class="org-meta-line">#+NAME: search-js-display</span>
-<span class="org-block-begin-line">#+BEGIN_SRC javascript -r -l " //(ref:%s)"
+<span class="org-meta-line">#+name: search-js-display</span>
+<span class="org-block-begin-line">#+begin_src javascript -r -l " //(ref:%s)"
 </span><span class="org-block"><span class="comment-delimiter">/**</span></span><span class="org-block"><span class="comment">
  ,* Display the 10 first results
  ,*
@@ -1193,7 +1228,7 @@ could probably be simplified with better jQuery skills.
     }
     $(</span><span class="org-block"><span class="string">'#results'</span></span><span class="org-block">).append($result_all);
 }
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Initialization</span>
@@ -1203,8 +1238,8 @@ could probably be simplified with better jQuery skills.
 
 The following instantiates the <span class="org-verbatim">=json=</span> index download when loading the page.
 
-<span class="org-meta-line">#+NAME: search-js-init</span>
-<span class="org-block-begin-line">#+BEGIN_SRC javascript
+<span class="org-meta-line">#+name: search-js-init</span>
+<span class="org-block-begin-line">#+begin_src javascript
 </span><span class="org-block">
 </span><span class="org-block"><span class="comment-delimiter">// </span></span><span class="org-block"><span class="comment">Initialize
 </span></span><span class="org-block">initLunr();
@@ -1212,7 +1247,7 @@ The following instantiates the <span class="org-verbatim">=json=</span> index do
 $(document).ready(</span><span class="org-block"><span class="keyword">function</span></span><span class="org-block">() {
     initUI();
 });
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Results highlighting</span>
@@ -1223,16 +1258,16 @@ $(document).ready(</span><span class="org-block"><span class="keyword">function<
 
 When a search is performed, the search term is passed to the target page via the
 URL (the <span class="org-code">~highlight~</span> parameter).  The <span class="org-code">~highlight~</span> parameter is parsed by the
-<span class="org-link"><a href="(js-search-render)">render function</a></span>.  The highlighting it handled by the <span class="org-code">~highlight.js~</span> library:
+<span class="org-link"><a href="(js-search-render)">render function</a></span>.  The highlighting is handled by the <span class="org-code">~highlight.js~</span> library:
 1. jump to the first search result,
 2. highlight the search results (using <span class="org-code">~mark.js~</span>).
 
 When the <span class="org-code">~highlight~</span> parameter is passed, a search bar is shown on the target
-page, with button to navigate through results.  This is shown on
+page, with buttons to navigate through results.  This is shown on
 Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="fig-highlight">fig-highlight</a></span>.
 
-<span class="org-meta-line">#+NAME: search-js-highlight</span>
-<span class="org-block-begin-line">#+BEGIN_SRC javascript
+<span class="org-meta-line">#+name: search-js-highlight</span>
+<span class="org-block-begin-line">#+begin_src javascript
 </span><span class="org-block"><span class="keyword">var</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">currentClass</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">"current"</span></span><span class="org-block">;
 </span><span class="org-block"><span class="keyword">var</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">currentIndex</span></span><span class="org-block"> = 0;
 
@@ -1318,11 +1353,11 @@ $(document).ready(</span><span class="org-block"><span class="keyword">function<
         $(</span><span class="org-block"><span class="string">'#searchbar_search'</span></span><span class="org-block">).attr(</span><span class="org-block"><span class="string">'disabled'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'disabled'</span></span><span class="org-block">);
     }
 });
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
-<span class="org-meta-line">#+NAME: fig-highlight</span>
-<span class="org-meta-line">#+ATTR_HTML: :width 70%</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Search results highlighting and search bar (in the top right corner).</span>
+<span class="org-meta-line">#+name: fig-highlight</span>
+<span class="org-meta-line">#+attr_html: :width 70%</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">Search results highlighting and search bar (in the top right corner).</span>
 <span class="org-link"><a href="file:../images/2017-08-15-Personal_wiki_in_org/highlight.png">file:../images/2017-08-15-Personal_wiki_in_org/highlight.png</a></span>
 
 
@@ -1331,10 +1366,10 @@ $(document).ready(</span><span class="org-block"><span class="keyword">function<
 Styling for the wiki is identical to that of the <span class="org-link"><a href="file:2016-11-13-Personal_website_in_org.org">website</a></span>.  The following source
 block creates a symbolic link to the website css.
 
-<span class="org-meta-line">#+NAME: wiki-css-wiki</span>
-<span class="org-block-begin-line">#+BEGIN_SRC sh
+<span class="org-meta-line">#+name: wiki-css-wiki</span>
+<span class="org-block-begin-line">#+begin_src sh
 </span><span class="org-block">ln -sf ../../../website/org/css/site.css org/_resources/wiki.css
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Search</span>
@@ -1346,8 +1381,8 @@ block creates a symbolic link to the website css.
 The highlighting of the search results and the appearance of the search bar are
 controlled by the <span class="org-code">~search.css~</span> file.
 
-<span class="org-meta-line">#+NAME: css-search</span>
-<span class="org-block-begin-line">#+BEGIN_SRC css
+<span class="org-meta-line">#+name: css-search</span>
+<span class="org-block-begin-line">#+begin_src css
 </span><span class="org-block"><span class="css-selector">mark </span></span><span class="org-block">{
   </span><span class="org-block"><span class="css-property">background</span></span><span class="org-block">: </span><span class="org-block"><span class="custom-2"><span class="custom-3">yellow</span></span></span><span class="org-block">;
 }
@@ -1369,7 +1404,7 @@ controlled by the <span class="org-code">~search.css~</span> file.
     </span><span class="org-block"><span class="css-property">min-width</span></span><span class="org-block">: 20px;
     </span><span class="org-block"><span class="css-property">height</span></span><span class="org-block">: 40px;
 }
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Org header</span>
@@ -1386,9 +1421,9 @@ This configures common options:
 - the CSS for the website,
 - the <span class="org-link"><a href="#wiki-js-libs">javascript libraries used</a></span>.
 
-<span class="org-meta-line">#+NAME: org-setup</span>
-<span class="org-meta-line">#+HEADER: :tangle org/setup.org</span>
-<span class="org-block-begin-line">#+BEGIN_SRC org -r -l " #(ref:%s)"
+<span class="org-meta-line">#+name: org-setup</span>
+<span class="org-meta-line">#+header: :tangle org/setup.org</span>
+<span class="org-block-begin-line">#+begin_src org -r -l " #(ref:%s)"
 </span><span class="org-block">,#+INFOJS_OPT: toc:t tdepth:2 view:showall ftoc:t ltoc:nil path:_resources/org-info.js #(ref:org-setup-info-js)
 ,#+PROPERTY: header-args :eval no-export :exports code
 ,#+STARTUP: nohideblocks
@@ -1402,16 +1437,16 @@ This configures common options:
 ,#+HTML_HEAD_EXTRA: &lt;script type="text/javascript" src="_resources/jquery.mark.min.js"&gt;&lt;/script&gt;
 ,#+HTML_HEAD_EXTRA: &lt;script type="text/javascript" src="_resources/highlight.js"&gt;&lt;/script&gt;
 ,#+HTML_HEAD_EXTRA: &lt;link rel="search" type="application/opensearchdescription+xml" title="Org-wiki search" href="_resources/opensearch.xml"/&gt;
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 The <span class="org-link"><a href="(org-setup-kbd)">~kbd~</a></span> macro relies on a org-mode source block defined in <span class="org-verbatim">=source-blocks.org=</span>
 (also from the <span class="org-link"><a href="file:2016-11-13-Personal_website_in_org.org">website</a></span> setup).  I use a symlink to the version used in my
 personal website.
 
-<span class="org-meta-line">#+NAME: org-source-block-ln</span>
-<span class="org-block-begin-line">#+BEGIN_SRC sh
+<span class="org-meta-line">#+name: org-source-block-ln</span>
+<span class="org-block-begin-line">#+begin_src sh
 </span><span class="org-block">ln -sf ../../website/org/source-blocks.org org/source-blocks.org
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Basic wiki pages</span>
@@ -1437,9 +1472,9 @@ this example the index page contains:
 3. a link to the full sitemap.
 
 
-<span class="org-meta-line">#+NAME: wikipage-index</span>
-<span class="org-meta-line">#+HEADER: :tangle org/index.org :noweb yes</span>
-<span class="org-block-begin-line">#+BEGIN_SRC org
+<span class="org-meta-line">#+name: wikipage-index</span>
+<span class="org-meta-line">#+header: :tangle org/index.org :noweb yes</span>
+<span class="org-block-begin-line">#+begin_src org
 </span><span class="org-block">,#+TITLE: index
 ,#+STARTUP: overview
 
@@ -1462,7 +1497,7 @@ this example the index page contains:
 </span><span class="org-block"><span class="org-special-keyword">  :END:</span></span><span class="org-block">
 
 </span><span class="org-block"><span class="org-link"><a href="file:sitemap.org">[[file:sitemap.org][Sitemap]]</a></span></span><span class="org-block">
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> </span><span class="org-level-3"><span class="org-verbatim">=search=</span></span>
@@ -1474,9 +1509,9 @@ The search page (<span class="org-verbatim">=search.org=</span>) is relatively s
 for the user to enter search terms and a result section.  It must also include
 the appropriate javascript libraries.
 
-<span class="org-meta-line">#+NAME: wikipage-search</span>
-<span class="org-meta-line">#+HEADER: :tangle org/search.org</span>
-<span class="org-block-begin-line">#+BEGIN_SRC org
+<span class="org-meta-line">#+name: wikipage-search</span>
+<span class="org-meta-line">#+header: :tangle org/search.org</span>
+<span class="org-block-begin-line">#+begin_src org
 </span><span class="org-block">,#+TITLE: Search
 ,#+HTML_HEAD_EXTRA: &lt;script type="text/javascript" src="_resources/lunr.js"&gt;&lt;/script&gt;
 ,#+HTML_HEAD_EXTRA: &lt;script type="text/javascript" src="_resources/search.js"&gt;&lt;/script&gt;
@@ -1487,13 +1522,13 @@ Search:
 &lt;ul id="results"&gt;
 &lt;/ul&gt;
 ,#+END_EXPORT
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 An example of rendered search page is shown on Fig.<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="fig-search-page">fig-search-page</a></span>.
 
-<span class="org-meta-line">#+NAME: fig-search-page</span>
-<span class="org-meta-line">#+ATTR_HTML: :width 55%</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Search page with search results.</span>
+<span class="org-meta-line">#+name: fig-search-page</span>
+<span class="org-meta-line">#+attr_html: :width 55%</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">Search page with search results.</span>
 <span class="org-link"><a href="file:../images/2017-08-15-Personal_wiki_in_org/searchpage.png">file:../images/2017-08-15-Personal_wiki_in_org/searchpage.png</a></span>
 
 
@@ -1510,9 +1545,9 @@ the main functionality:
 - citations to refbase instance.
 
 
-<span class="org-meta-line">#+NAME: wikipage-demo</span>
-<span class="org-meta-line">#+HEADER: :tangle org/demo.org</span>
-<span class="org-block-begin-line">#+BEGIN_SRC org
+<span class="org-meta-line">#+name: wikipage-demo</span>
+<span class="org-meta-line">#+header: :tangle org/demo.org</span>
+<span class="org-block-begin-line">#+begin_src org
 </span><span class="org-block">,#+TITLE: demo
 ,#+DESCRIPTION:
 ,#+KEYWORDS: help
@@ -1566,8 +1601,8 @@ See the org-mode documentation for navigation commands and keyboard shortcuts:
   - </span><span class="org-block"><span class="org-list-dt">verbatim ::</span></span><span class="org-block"> </span><span class="org-block"><span class="org-code">~=verbatim=~</span></span><span class="org-block"> is rendered as </span><span class="org-block"><span class="org-verbatim">=verbatim=</span></span><span class="org-block">
   - </span><span class="org-block"><span class="org-list-dt">code ::</span></span><span class="org-block"> </span><span class="org-block"><span class="org-code">~~code~~</span></span><span class="org-block"> is rendered as </span><span class="org-block"><span class="org-code">~code~</span></span><span class="org-block">
   - </span><span class="org-block"><span class="org-list-dt">strike-through ::</span></span><span class="org-block"> </span><span class="org-block"><span class="org-code">~+strike-through+~</span></span><span class="org-block"> is rendered as </span><span class="org-block"><span class="custom">+strike-through+</span></span><span class="org-block">
-- To render keyboard shortcuts, the </span><span class="org-block"><span class="org-code">~kbd~</span></span><span class="org-block"> macro can be used: </span><span class="org-block"><span class="org-code">~{{{kbd("C-c C-x
-  p")}}}~</span></span><span class="org-block"> is rendered as </span><span class="org-block"><span class="org-macro">{{{kbd("C-c C-x p")}}}</span></span><span class="org-block">.
+- To render keyboard shortcuts, the </span><span class="org-block"><span class="org-code">~kbd~</span></span><span class="org-block"> macro can be used: </span><span class="org-block"><span class="org-code">~</span></span><span class="org-block"><span class="org-macro"><span class="org-code">{{{kbd("C-c C-x
+  p")}}}</span></span></span><span class="org-block"><span class="org-code">~</span></span><span class="org-block"> is rendered as </span><span class="org-block"><span class="org-macro">{{{kbd("C-c C-x p")}}}</span></span><span class="org-block">.
 
 
 ,* Links
@@ -1593,27 +1628,27 @@ label]]</a></span></span><span class="org-block">.
 </span><span class="org-block"><span class="org-special-keyword">  :END:</span></span><span class="org-block">
 
 Inline equations can be wrapped with </span><span class="org-block"><span class="org-code">~$~</span></span><span class="org-block"> characters, e.g. </span><span class="org-block"><span class="org-code">~$1 + 1 = 2$~</span></span><span class="org-block">
-(rendered as $1 + 1 = 2$).  Longer equations can be defined within </span><span class="org-block"><span class="org-code">~align~</span></span><span class="org-block">
+(rendered as</span><span class="org-block"><span class="org-latex-and-related"> $1 + 1 = 2$)</span></span><span class="org-block">.  Longer equations can be defined within </span><span class="org-block"><span class="org-code">~align~</span></span><span class="org-block">
 blocks:
 
 ,#+NAME: eq-demo
 ,#+begin_src latex :results drawer :exports both
-\begin{align}
+</span><span class="org-block"><span class="org-latex-and-related">\begin{align}
 e^{i\pi} + 1 &amp;= 0\\
 \sum_{n=1}^{\infty}\frac{1}{n^2} &amp;= \frac{\pi^2}{6}\\
 \int_{-\infty}^{\infty}e^{-t^2} &amp;= \sqrt{\pi}
-\end{align}
+\end{align}</span></span><span class="org-block">
 ,#+end_src
 
 is rendered as:
 
 ,#+RESULTS: eq-demo
 </span><span class="org-block"><span class="org-special-keyword">:RESULTS:</span></span><span class="org-block">
-\begin{align}
+</span><span class="org-block"><span class="org-latex-and-related">\begin{align}
 e^{i\pi} + 1 &amp;= 0\\
 \sum_{n=1}^{\infty}\frac{1}{n^2} &amp;= \frac{\pi^2}{6}\\
 \int_{-\infty}^{\infty}e^{-t^2} &amp;= \sqrt{\pi}
-\end{align}
+\end{align}</span></span><span class="org-block">
 </span><span class="org-block"><span class="org-special-keyword">:END:</span></span><span class="org-block">
 
 
@@ -1629,11 +1664,11 @@ TikZ diagrams can be inserted via latex source blocks:
 ,,#+header: :imagemagick t :mkdirp yes
 ,,#+header: :iminoptions -density 300 :imoutoptions -geometry 1024 -trim
 ,,#+begin_src latex :file demo/tikz.png :results raw :exports results
-\begin{tikzpicture}
+</span><span class="org-block"><span class="org-latex-and-related">\begin{tikzpicture}
   \draw node (a) [draw] {$h(t)$} (a.west) --
   ++(-1,0) node[left] {$x(t)$} circle[radius=2pt] (a.east) --
   ++(1,0) node[right] {$y(t)=h(t)*x(t)$} circle[radius=2pt];
-\end{tikzpicture}
+\end{tikzpicture}</span></span><span class="org-block">
 ,,#+end_src
 ,#+end_src
 
@@ -1644,11 +1679,11 @@ controls the size of the output image).
 ,#+header: :imagemagick t :mkdirp yes
 ,#+header: :iminoptions -density 300 :imoutoptions -geometry 1024 -trim
 ,#+begin_src latex :file demo/tikz.png :results raw :exports results
-\begin{tikzpicture}
+</span><span class="org-block"><span class="org-latex-and-related">\begin{tikzpicture}
   \draw node (a) [draw] {$h(t)$} (a.west) --
   ++(-1,0) node[left] {$x(t)$} circle[radius=2pt] (a.east) --
   ++(1,0) node[right] {$y(t)=h(t)*x(t)$} circle[radius=2pt];
-\end{tikzpicture}
+\end{tikzpicture}</span></span><span class="org-block">
 ,#+end_src
 
 ,#+NAME: fig-demo-tikz
@@ -1710,7 +1745,7 @@ and the output figure:
 
 Papers from a refbase installation can be inserted using the </span><span class="org-block"><span class="org-code">~refbase:~</span></span><span class="org-block"> link
 type: </span><span class="org-block"><span class="org-code">~</span></span><span class="org-block"><span class="org-link"><span class="org-code"><a href="refbase:Marin2010c">refbase:Marin2010c</a></span></span></span><span class="org-block"><span class="org-code">~</span></span><span class="org-block"> is rendered as </span><span class="org-block"><span class="org-link"><a href="refbase:Marin2010c">refbase:Marin2010c</a></span></span><span class="org-block">.
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Dotfiles setup</span>
@@ -1730,23 +1765,23 @@ The minimum configuration must define the <span class="org-code">~org-wiki-locat
 following uses an auxiliary function <span class="org-code">~&#8482;/get-perso~</span> which can be replaced by a
 full path.
 
-<span class="org-meta-line">#+NAME: el-dotfiles-org-wiki</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+<span class="org-meta-line">#+name: el-dotfiles-org-wiki</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> org-wiki-location (&#8482;/get-perso </span><span class="org-block"><span class="string">"wiki-path"</span></span><span class="org-block">)
       org-wiki-index-level-max 3
       org-wiki-index-file </span><span class="org-block"><span class="string">"_resources/wiki.json"</span></span><span class="org-block">)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Refbase configuration</span>
 
 To use the <span class="org-link"><a href="#refbase">refbase</a></span> package, the URL and the name of the MySQL database must be
 defined.
 
-<span class="org-meta-line">#+NAME: el-dotfiles-refbase</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp
+<span class="org-meta-line">#+name: el-dotfiles-refbase</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">setq</span></span><span class="org-block"> refbase-url (&#8482;/get-perso </span><span class="org-block"><span class="string">"refbase-url"</span></span><span class="org-block">)
       refbase-db </span><span class="org-block"><span class="string">"refbase"</span></span><span class="org-block">)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Bash helpers</span>
@@ -1760,8 +1795,8 @@ Finally, some useful bash functions are defined in the following source block.
   graphical and terminal mode respectively.  These functions support
   <span class="org-link"><a href="(bash-ow-comp)">auto-completion</a></span>.
 
-<span class="org-meta-line">#+NAME: bashrc</span>
-<span class="org-block-begin-line">#+BEGIN_SRC sh -r -l " #(ref:%s)"
+<span class="org-meta-line">#+name: bashrc</span>
+<span class="org-block-begin-line">#+begin_src sh -r -l " #(ref:%s)"
 </span><span class="org-block"><span class="comment-delimiter">## </span></span><span class="org-block"><span class="comment">Wiki location
 </span></span><span class="org-block"><span class="variable-name">wiki_path</span></span><span class="org-block">=~/dotfiles/emacs/wiki/org/ </span><span class="org-block"><span class="comment-delimiter">#</span></span><span class="org-block"><span class="comment">(ref:bash-wiki-path)
 </span></span><span class="org-block">
@@ -1800,7 +1835,7 @@ Finally, some useful bash functions are defined in the following source block.
 }
 </span><span class="org-block"><span class="builtin">complete</span></span><span class="org-block"> -o default -F _ow_comp owe
 </span><span class="org-block"><span class="builtin">complete</span></span><span class="org-block"> -o default -F _ow_comp owt
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span></pre>
   </body>
 </html>

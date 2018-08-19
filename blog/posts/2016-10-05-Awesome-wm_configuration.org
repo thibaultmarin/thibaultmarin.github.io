@@ -1,18 +1,18 @@
-# Created 2017-12-04 Mon 21:30
+# Created 2018-08-19 Sun 18:10
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016-10-05
 #+AUTHOR: Thibault Marin
-#+SETUPFILE: ../setup.org
-#+TODO: TODO REVIEW | DONE DEFERRED ABANDONED
-#+INFOJS_OPT: view:content toc:t mouse:t ltoc:nil ftoc:nil
-#+PROPERTY: COOKIE_DATA todo recursive
-#+PROPERTY: header-args+ :tangle no
-#+PROPERTY: header-args:lua+ :tangle rc.lua
-#+PROPERTY: header-args+ :exports code
-#+PROPERTY: header-args+ :comments link
-#+STARTUP: hideblocks
-#+MACRO: tt \nbsp{}
+#+setupfile: ../setup.org
+#+todo: TODO REVIEW | DONE DEFERRED ABANDONED
+#+infojs_opt: view:content toc:t mouse:t ltoc:nil ftoc:nil
+#+property: COOKIE_DATA todo recursive
+#+property: header-args+ :tangle no
+#+property: header-args:lua+ :tangle rc.lua
+#+property: header-args+ :exports code
+#+property: header-args+ :comments link
+#+startup: hideblocks
+#+macro: tt \nbsp{}
 
 * Introduction 
 
@@ -25,8 +25,8 @@ The resulting desktop is shown on Fig.\nbsp{}[[img-desktop-main]].  The followin
 bash script produces the image.  The most interesting part is the top wibox,
 which is shown enlarged on Fig.\nbsp{}[[img-desktop]].
 
-#+NAME: sh-scrot-main
-#+BEGIN_SRC sh
+#+name: sh-scrot-main
+#+begin_src sh
 
 # Could get these from xrandr
 res_x=1920
@@ -41,24 +41,24 @@ start_y=$(( 0 ))
 scrot desktop.png
 convert desktop.png -crop ${width}x${height}+${start_x}+${start_y} desktop-main.png
 rm desktop.png -rf
-#+END_SRC
+#+end_src
 
 
-#+NAME: img-desktop-main
-#+CAPTION: My awesome-wm desktop.
+#+name: img-desktop-main
+#+caption: My awesome-wm desktop.
 [[file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-main.png]]
 
 
 This configuration is currently used on the following system:
 
 - OS :: 
-#+NAME: sh-debian-version
-#+BEGIN_SRC sh
+#+name: sh-debian-version
+#+begin_src sh
 lsb_release -a
 uname -a
-#+END_SRC
+#+end_src
 
-#+RESULTS: sh-debian-version
+#+results: sh-debian-version
 : Distributor ID:	Debian
 : Description:	Debian GNU/Linux 9.0 (stretch)
 : Release:	9.0
@@ -66,12 +66,12 @@ uname -a
 : Linux dell-desktop 4.9.0-1-amd64 #1 SMP Debian 4.9.2-2 (2017-01-12) x86_64 GNU/Linux
 
 - awesome :: 
-#+NAME: sh-awesome-wm-version
-#+BEGIN_SRC sh
+#+name: sh-awesome-wm-version
+#+begin_src sh
 awesome --version
-#+END_SRC
+#+end_src
 
-#+RESULTS: sh-awesome-wm-version
+#+results: sh-awesome-wm-version
 : awesome v4.0 (Harder, Better, Faster, Stronger)
 :  • Compiled against Lua 5.1.5 (running with Lua 5.1)
 :  • D-Bus support: ✔
@@ -80,22 +80,22 @@ awesome --version
 :  • LGI version: 0.9.1
 
 - emacs :: 
-#+NAME: el-emacs-version
-#+BEGIN_SRC emacs-lisp
+#+name: el-emacs-version
+#+begin_src emacs-lisp
 (emacs-version)
-#+END_SRC
+#+end_src
 
-#+RESULTS: el-emacs-version
+#+results: el-emacs-version
 : "GNU Emacs 25.1.1 (x86_64-pc-linux-gnu, GTK+ Version 3.22.5)
 :  of 2016-12-31, modified by Debian"
 
 - org-mode :: 
-#+NAME: el-org-version
-#+BEGIN_SRC emacs-lisp
+#+name: el-org-version
+#+begin_src emacs-lisp
 (replace-regexp-in-string "@.*)" "@ ... )" (org-version nil t))
-#+END_SRC
+#+end_src
 
-#+RESULTS: el-org-version
+#+results: el-org-version
 : "Org mode version 9.0.4 (release_9.0.4-270-ga10ddb @ ... )"
 
 Most of the code in this configuration comes from the default =rc.lua= delivered
@@ -108,13 +108,13 @@ corresponding code block must be skipped during tangling.  To disable tangling
 of an individual block, the preferred way is to add the =header-args= property
 on the parent heading:
 
-#+NAME: org-disable-tangle-example
-#+BEGIN_SRC org
+#+name: org-disable-tangle-example
+#+begin_src org
 ,** Disabled heading
    :PROPERTIES:
    :header-args+: :tangle no
    :END:
-#+END_SRC
+#+end_src
 
 This can be done by adding the text manually or by using the =org-set-property=
 function, which is bound to  by default.  Alternatively,
@@ -174,6 +174,9 @@ screenshots for instance), so use at your own risk.
 - The transparency effect on focus (see the [[#effects_transparency][transparency]] section) requires a
   compositor, such as =xcompmgr=.
 
+- The password insertion feature (see the [[#pass_manager][corresponding section]]) requires the
+  [[https://www.passwordstore.org/][pass]] utility, [[https://tools.suckless.org/dmenu/][dmenu]] and the =xclip= and =xdotool= programs.
+
 - When generating the HTML documentation (by running  on
   this buffer), screenshots are taken from the active desktop (assuming
   awesome-wm is the running desktop environment).  This requires the =scrot= and
@@ -190,8 +193,8 @@ lua in the =minted= package).
 To get a reproducible =make= behavior, a minimal emacs initialization file is
 provided here:
 
-#+NAME: makefile-init-el
-#+BEGIN_SRC emacs-lisp
+#+name: makefile-init-el
+#+begin_src emacs-lisp
 
 ;; Assume default folder for emacs packages
 (let ((default-directory  "~/.emacs.d/elpa/"))
@@ -235,14 +238,14 @@ provided here:
 
 ;; Define credential extraction function before tangling
 (add-hook 'org-babel-pre-tangle-hook 'get-ttrss-cred)
-#+END_SRC
+#+end_src
 
 The makefile is relatively simple, one trick is to not use emacs in --batch mode
 when generating the HTML documentation, since it seems to interact with syntax
 highlighting.
 
-#+NAME: makefile
-#+BEGIN_SRC makefile
+#+name: makefile
+#+begin_src makefile
 
 # Makefile for org file, with targets:
 # all: Tangle source blocks
@@ -273,7 +276,7 @@ doc-pdf:
 
 clean:
 	$(RM) $(input).{html,tex,log,aux,dvi,pdf,ps,out,toc}
-#+END_SRC
+#+end_src
 
 
 * Imports 
@@ -286,8 +289,8 @@ the file.
 
 Standard modules listed here should come installed with awesome.
 
-#+NAME: src-imports-standard
-#+BEGIN_SRC lua
+#+name: src-imports-standard
+#+begin_src lua
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -302,15 +305,15 @@ local vicious = require("vicious")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-#+END_SRC
+#+end_src
 
 
 ** Paths
 Paths are stored in the =awesome_paths= object which is later used to search for
 launchbar programs, theme selection, maildir, icons, etc.
 
-#+NAME: src-setup-paths
-#+BEGIN_SRC lua
+#+name: src-setup-paths
+#+begin_src lua
 -- Define global folders
 awesome_paths = {}
 
@@ -328,19 +331,19 @@ awesome_paths.iconapps_dir = { awesome_paths.icon_dir,
                                "/usr/share/icons/gnome/16x16/",
                                "/usr/share/icons/Tango/16x16/",
                                "/usr/share/pixmaps/" }
-#+END_SRC
+#+end_src
 
 
 ** Debian specific
 
-Use the menu provided on debian, it lists most applications in categories,
-similar to main menus in other desktop environments.
+Use the freedesktop menu, which lists most applications in categories, similar
+to main menus in other desktop environments.
 
-#+NAME: src-imports-debian
-#+BEGIN_SRC lua
+#+name: src-imports-debian
+#+begin_src lua
 -- Load Debian menu entries
-require("debian.menu")
-#+END_SRC
+local freedesktop = require("freedesktop")
+#+end_src
 
 
 ** Custom modules
@@ -348,10 +351,10 @@ require("debian.menu")
 The following imports are for custom modules implemented in this file.  The
 filenames should match the names used with the =require= command.
 
-#+NAME: src-imports-custom
-#+BEGIN_SRC lua
+#+name: src-imports-custom
+#+begin_src lua
 -- Custom libraries
-#+END_SRC
+#+end_src
 
 
 *** launchbar module
@@ -359,10 +362,10 @@ filenames should match the names used with the =require= command.
 This module creates the launchers in the wibox from =.desktop= files (see the
 [[#launchbar][Launchbar]] section).
 
-#+NAME: src-imports-custom-launchbar
-#+BEGIN_SRC lua
+#+name: src-imports-custom-launchbar
+#+begin_src lua
 local launchbar = require('launchbar')
-#+END_SRC
+#+end_src
 
 
 *** cmus module
@@ -370,10 +373,10 @@ local launchbar = require('launchbar')
 Control and display information from the [[https://cmus.github.io/][cmus]] music player (see the [[#cmus][cmus]]
 section).
 
-#+NAME: src-imports-custom-cmus
-#+BEGIN_SRC lua
+#+name: src-imports-custom-cmus
+#+begin_src lua
 local cmus = require("cmus")
-#+END_SRC
+#+end_src
 
 
 *** ttrss module
@@ -381,20 +384,20 @@ local cmus = require("cmus")
 View RSS feed updates from [[https://tt-rss.org/][Tiny Tiny RSS]] instance (see the [[#ttrss][Tiny Tiny RSS]]
 section).
 
-#+NAME: src-imports-custom-ttrss
-#+BEGIN_SRC lua
+#+name: src-imports-custom-ttrss
+#+begin_src lua
 local ttrss = require("ttrss")
-#+END_SRC
+#+end_src
 
 
 *** themes module
 
 Manage desktop themes (see the [[#theme][Theme]] section).
 
-#+NAME: src-imports-custom-theme
-#+BEGIN_SRC lua
+#+name: src-imports-custom-theme
+#+begin_src lua
 local theme_customization = require("theme_customization")
-#+END_SRC
+#+end_src
 
 
 *** =icon_finder= module
@@ -402,30 +405,30 @@ local theme_customization = require("theme_customization")
 Helper utility to find program icons in system paths (see the [[#icon_finder][Icon finder]]
 section).
 
-#+NAME: src-imports-custom-icon_finder
-#+BEGIN_SRC lua
+#+name: src-imports-custom-icon_finder
+#+begin_src lua
 local icon_finder = require("icon_finder")
-#+END_SRC
+#+end_src
 
 
 *** =global_prompt= module
 
 Generic command launcher (gnome-do style) (see the [[#global_prompt][Global prompt]] section).
 
-#+NAME: src-imports-custom-global_prompt
-#+BEGIN_SRC lua
+#+name: src-imports-custom-global_prompt
+#+begin_src lua
 local global_prompt = require("global_prompt")
-#+END_SRC
+#+end_src
 
 
 *** =my_utility= module
 
 Some utility functions (see the [[#my_utility][Utilities]] section).
 
-#+NAME: src-imports-custom-utility
-#+BEGIN_SRC lua
+#+name: src-imports-custom-utility
+#+begin_src lua
 local my_utility = require('my_utility')
-#+END_SRC
+#+end_src
 
 
 * Basic setup 
@@ -438,8 +441,8 @@ code for error handling.
 ** Default programs
 Define default programs.
 
-#+NAME: src-setup-default-programs
-#+BEGIN_SRC lua
+#+name: src-setup-default-programs
+#+begin_src lua
 -- Define default programs
 terminal = "x-terminal-emulator"
 termapps = "urxvt" -- "terminator"
@@ -451,19 +454,20 @@ emacs = "emacs"
 explorer = "xdg-open"
 mixer = "pavucontrol"
 music_player = "mplayer"
-#+END_SRC
+passmenu = "bash " .. awesome_paths.config_dir .. "/scripts/passmenu.sh --type"
+#+end_src
 
 
 ** Icons
 Create an instance of the [[#icon_finder][Icon finder]] module.  It is used throughout the
 configuration to find icons for programs and session operations ([[#shutdown][Shutdown menu]]).
 
-#+NAME: src-setup-icons
-#+BEGIN_SRC lua
+#+name: src-setup-icons
+#+begin_src lua
 -- {{ Icon finder
 myiconfinder = icon_finder.new(awesome_paths.iconapps_dir)
 -- }}
-#+END_SRC
+#+end_src
 
 
 ** Error handling
@@ -471,8 +475,8 @@ myiconfinder = icon_finder.new(awesome_paths.iconapps_dir)
 This is default code; it creates notifications when errors occur, which is
 helpful to debug issues in =rc.lua=.
 
-#+NAME: src-setup-error
-#+BEGIN_SRC lua
+#+name: src-setup-error
+#+begin_src lua
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -512,7 +516,7 @@ local function client_menu_toggle_fn()
     end
 end
 -- }}}
-#+END_SRC
+#+end_src
 
 
 ** Modkey setting
@@ -520,8 +524,8 @@ end
 The modkey is the main key modifier for special bindings: use =Super= as main
 modifier.  Also set =Alt= key.
 
-#+NAME: src-setup-modkey
-#+BEGIN_SRC lua
+#+name: src-setup-modkey
+#+begin_src lua
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -530,7 +534,7 @@ modifier.  Also set =Alt= key.
 -- others.
 modkey = "Mod4"
 altkey = "Mod1"
-#+END_SRC
+#+end_src
 
 
 * Desktop 
@@ -544,8 +548,8 @@ The following bash snippet produces the screenshot shown on
 Fig.\nbsp{}[[img-desktop]] on export (the result is cached, so it is not
 re-generated if the content of the code block is not changed).
 
-#+NAME: sh-scrot-wibox
-#+BEGIN_SRC sh
+#+name: sh-scrot-wibox
+#+begin_src sh
 
 # Could get these from xrandr
 res_x=1920
@@ -562,17 +566,17 @@ convert desktop.png -crop ${width}x${height}+${start_x}+0 desktop-wibox-l.png
 convert desktop.png -crop ${width}x${height}+${half_x}+0 desktop-wibox-r.png
 convert desktop-wibox-l.png desktop-wibox-r.png -append desktop-wibox.png
 rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
-#+END_SRC
+#+end_src
 
 
 
-#+NAME: img-desktop
-#+CAPTION: Main wibox (split into two rows for display) with widgets (from left
-#+CAPTION: to right): [[#main_menu][awesome menu]], [[#tags][tags]],
-#+CAPTION: [[#launchbar][launchbar]], tasklist, [[#cmus][cmus]],
-#+CAPTION: [[#email][mail]], [[#ttrss][ttrss]], [[#memory][memory]],
-#+CAPTION: [[#volume][volume]], systray, [[#layouts][layout]],
-#+CAPTION: [[#calendar][date + calendar]], [[#shutdown][shutdown menu]].
+#+name: img-desktop
+#+caption: Main wibox (split into two rows for display) with widgets (from left
+#+caption: to right): [[#main_menu][awesome menu]], [[#tags][tags]],
+#+caption: [[#launchbar][launchbar]], tasklist, [[#cmus][cmus]],
+#+caption: [[#email][mail]], [[#ttrss][ttrss]], [[#memory][memory]],
+#+caption: [[#volume][volume]], systray, [[#layouts][layout]],
+#+caption: [[#calendar][date + calendar]], [[#shutdown][shutdown menu]].
 [[file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-wibox.png]]
 
 
@@ -581,8 +585,8 @@ rm desktop.png desktop-wibox-l.png desktop-wibox-r.png -rf
 This section defines the layouts for windows, I use the default code, with a few
 entries disabled.
 
-#+NAME: src-desktop-layouts
-#+BEGIN_SRC lua
+#+name: src-desktop-layouts
+#+begin_src lua
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts =
 {
@@ -601,7 +605,7 @@ awful.layout.layouts =
     awful.layout.suit.floating
 }
 -- }}}
-#+END_SRC
+#+end_src
 
 
 ** Theme
@@ -635,8 +639,8 @@ with the custom ones required by this configuration.  Finally, the =beautiful=
 table is augmented by inserting fields found in the theme's =custom.lua= file
 (if present).
 
-#+NAME: module-theme
-#+BEGIN_SRC lua
+#+name: module-theme
+#+begin_src lua
 
 -- Theme helper script
 
@@ -762,7 +766,7 @@ function theme_customization.create_themes_menu(awesome_paths)
 end
 
 return theme_customization
-#+END_SRC
+#+end_src
 
 
 *** The =custom_defaults= file
@@ -770,8 +774,8 @@ The =custom_defaults= file returns a table with theme parameters required by
 modules and absent from the original =beautiful= table.  For visual consistency,
 some of the fields use values from the =beautiful= table itself.
 
-#+NAME: src-desktop-theme-custom_defaults
-#+BEGIN_SRC lua
+#+name: src-desktop-theme-custom_defaults
+#+begin_src lua
 
 local beautiful = require("beautiful")
 
@@ -795,7 +799,7 @@ custom_defaults.screen_highlight_bg_inactive = beautiful.bg_normal
 custom_defaults.screen_highlight_fg_inactive = beautiful.fg_normal
 
 return custom_defaults
-#+END_SRC
+#+end_src
 
 
 *** Theme selection
@@ -809,8 +813,8 @@ with "#" are ignored (such lines occur when tangling this org-file, to allow
 "de-tangling").  Also note that parsing is rudimentary so empty lines may cause
 issues.
 
-#+NAME: src-desktop-theme
-#+BEGIN_SRC lua
+#+name: src-desktop-theme
+#+begin_src lua
 -- {{ Theme management
 awesome_paths.themes_system_path = awesome_paths.system_dir .. "/themes/"
 awesome_paths.themes_custom_path = awesome_paths.config_dir .. "/themes/"
@@ -855,18 +859,18 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 end)
 --}}
-#+END_SRC
+#+end_src
 
 
 *** Selected theme
 To change the default theme, change the content of the following =themes/theme=
 file:
 
-#+NAME: src-theme-file
-#+BEGIN_SRC conf
+#+name: src-theme-file
+#+begin_src conf
 
 xresources
-#+END_SRC
+#+end_src
 
 
 ** Tags
@@ -879,13 +883,13 @@ layout on some tags is customized.
   one for my personal email using mu4e (emacs).  These are not started
   automatically, I have a [[#rules][rule]] to force thunderbird on the second screen, and I
   manually start mu4e on the desired tag.
-- The second tag on the second screen is used for my resident instances or
-  [[http://newsbeuter.org/][newsbeuter]] (terminal RSS reader) and [[https://cmus.github.io/][cmus]] (terminal music player).  Both
+- The second tag on the second screen is used for my resident instances of
+  [[http://newsboat.org/][newsboat]] (terminal RSS reader) and [[https://cmus.github.io/][cmus]] (terminal music player).  Both
   programs are launched on startup (see [[#startup_applications][Startup applications]]) and rules are used
   to place them on the right screen and tag (see the [[#rules][Rules]] section).
 
-#+NAME: src-desktop-tags
-#+BEGIN_SRC lua
+#+name: src-desktop-tags
+#+begin_src lua
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 awful.screen.connect_for_each_screen(function(s)
@@ -907,7 +911,7 @@ awful.screen.connect_for_each_screen(function(s)
       s.tags[1]:view_only()
 end)
 -- }}}
-#+END_SRC
+#+end_src
 
 
 
@@ -923,13 +927,13 @@ done in the [[#wibox][Wibox]] section.
 First, we create the simplest widget: a separator used to add visual spacing
 between widgets.
 
-#+NAME: src-main-misc
-#+BEGIN_SRC lua
+#+name: src-main-misc
+#+begin_src lua
 ---- {{{ Separators
 local separator = wibox.widget.textbox()
 separator:set_markup(" <span foreground='grey'>·</span> ")
 ---- }}}
-#+END_SRC
+#+end_src
 
 
 ** Launchbar
@@ -954,8 +958,8 @@ arguments, such as "%u" for firefox (they seem to cause problems when
 launching).  The other addition is the use of the custom =icon_finder= module
 described in the [[#icon_finder][Icon finder]] section.
 
-#+NAME: module-launchbar
-#+BEGIN_SRC lua
+#+name: module-launchbar
+#+begin_src lua
 
 -- Quick launchbar widget for Awesome WM
 -- http://awesome.naquadah.org/wiki/Quick_launch_bar_widget/3.5
@@ -982,9 +986,11 @@ function launchbar.new(filedir, icon_finder_helper)
    launchbar.icon_dirs = icondir
    local items = {}
    local widget = layout.fixed.horizontal()
-   local files = io.popen("ls " .. filedir .. "*.desktop")
+   local files = assert(io.popen("ls " .. filedir .. "*.desktop", 'r'))
    for f in files:lines() do
-      local t = io.open(f):read("*all")
+      local ts = assert(io.open(f))
+      local t = ts:read("*all")
+      ts:close()
       cmd = getValue(t, "Exec")
       cmd = cmd:gsub("%%u", "")
       cmd = cmd:gsub("%%U", "")
@@ -995,6 +1001,7 @@ function launchbar.new(filedir, icon_finder_helper)
             command = cmd,
             position = tonumber(getValue(t,"Position")) or 255 })
    end
+   files:close()
    table.sort(items, function(a,b) return a.position < b.position end)
    for _, v in ipairs(items) do
       if v.image then
@@ -1006,7 +1013,7 @@ end
 
 return setmetatable(launchbar, { __call = function(_, ...)
                                     return launchbar.new(...) end })
-#+END_SRC
+#+end_src
 
 
 *** Instantiation
@@ -1018,13 +1025,13 @@ shortcuts are in a subfolder of the awesome config folder called =shortcuts=.
 Note that the creation function also takes the icon finder instance as a
 parameter (created in the [[#icons][Icons]] section).
 
-#+NAME: src-main-launchbar
-#+BEGIN_SRC lua
+#+name: src-main-launchbar
+#+begin_src lua
 -- {{ Launchbar
 local mylaunchbar = launchbar.new(awesome_paths.config_dir .. "/shortcuts/",
                                   myiconfinder)
 -- }}
-#+END_SRC
+#+end_src
 
 
 ** Shutdown menu
@@ -1038,11 +1045,11 @@ sudoers file must be edited to allow the desired user to run the =shutdown=
 command without password.  On Debian, the sudoers file can be edited by running
 =sudo visudo= from a terminal.  My sudoers file contains the following:
 
-#+NAME: visudo-shutdown
-#+BEGIN_SRC conf
+#+name: visudo-shutdown
+#+begin_src conf
 username ALL=SHUTDOWN
 username ALL=NOPASSWD: SHUTDOWN
-#+END_SRC
+#+end_src
 
 The menu is created as follows.  First, the icons are obtained from the [[#icons][icon
 finder instance]], then the menu is built, wrapping commands with the
@@ -1050,8 +1057,8 @@ finder instance]], then the menu is built, wrapping commands with the
 filenames used to recover icons are the ones used in common themes (icons are in
 found in folders set in the =awesome_paths= variable).
 
-#+NAME: src-main-shutdown
-#+BEGIN_SRC lua
+#+name: src-main-shutdown
+#+begin_src lua
 -- {{ Shutdown menu
 
 -- Session management icons
@@ -1094,7 +1101,7 @@ myleave_launcher = awful.widget.launcher({
       image = icon_shutdown,
       menu = awful.menu({ items = myleave_menuitems}) })
 -- }}
-#+END_SRC
+#+end_src
 
 
 ** Main menu
@@ -1108,8 +1115,8 @@ The icons are found using the [[#icon_finder][icon finder]] module.
 This code block also configures the menubar, which can be used to quickly find
 and launch applications by typing part of their name.
 
-#+NAME: src-main-menu
-#+BEGIN_SRC lua
+#+name: src-main-menu
+#+begin_src lua
 -- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
@@ -1124,16 +1131,14 @@ myawesomemenu = {
    end }
 }
 
-mymainmenu = awful.menu({
-      items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-         { "Debian", debian.menu.Debian_menu.Debian,
-           myiconfinder:find("*debian") },
+mymainmenu = freedesktop.menu.build({
+      before = { { "awesome", myawesomemenu, beautiful.awesome_icon },
          { "Terminal", terminal, myiconfinder:find("terminal") },
          { "Apps",
            {
               { "cmus", termapps .. " -c cmus -e cmus",
                 myiconfinder:find("multimedia-player") },
-              { "newsbeuter", termapps .. " -c newsbeuter -e newsbeuter",
+              { "newsboat", termapps .. " -c newsboat -e newsboat",
                 myiconfinder:find("internet-news-reader") },
               { "Internet", internet_browser,
                 myiconfinder:find("web-browser") },
@@ -1141,8 +1146,9 @@ mymainmenu = awful.menu({
                 myiconfinder:find("internet-mail") },
               { "emacs", emacs, myiconfinder:find(emacs) }
            }
-         },
-         { "Themes", theme_menuitems },
+         }
+      },
+      after = { { "Themes", theme_menuitems },
          { "Leave", myleave_menuitems, icon_shutdown }
       }
 })
@@ -1155,7 +1161,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal
 
 -- }}}
-#+END_SRC
+#+end_src
 
 
 ** Volume widget
@@ -1164,8 +1170,8 @@ awesome-wm 4 versions.  Volume control commands are also supported: a left click
 on the widget toggles the mute option, a right click on the widget spawns a menu
 with a single entry linking to the mixer program (see [[#default_programs][Default programs]]).
 
-#+NAME: src-main-volume
-#+BEGIN_SRC lua
+#+name: src-main-volume
+#+begin_src lua
 -- {{{ Volume
 
 volume_text = wibox.widget.textbox()
@@ -1241,7 +1247,7 @@ volume_buttons = awful.util.table.join(
 volume_master:buttons(volume_buttons)
 update_volume_widget()
 -- }}}
-#+END_SRC
+#+end_src
 
 
 *** OSD volume
@@ -1250,9 +1256,8 @@ The volume widget relies on a bash script to control the volume (using the
 =aosd_cat= command.  The bash script is bound to volume keys on the keyboard
 (see [[#bindings_keyboard][Keyboard bindings]]).
 
-#+NAME: script-osd-sh
-#+BEGIN_SRC sh
-
+#+name: script-osd-sh
+#+begin_src sh
 #!/bin/bash
 
 
@@ -1335,7 +1340,7 @@ case "$1" in
 	,*)
 		;;
 esac
-#+END_SRC
+#+end_src
 
 
 ** Memory
@@ -1343,8 +1348,8 @@ Memory is monitored using a simple graph widget.  The memory metrics (total and
 and used memory) are obtained by calling the ~free~ utility.  A popup window
 with the output of the =top= command is shown one mouse-over events.
 
-#+NAME: src-main-memory
-#+BEGIN_SRC lua
+#+name: src-main-memory
+#+begin_src lua
 -- {{{ Memory usage
 
 local memory_label = wibox.widget.textbox()
@@ -1413,8 +1418,10 @@ function memory_widget_htop()
          end
       )
    else
-      memory_widget_htop_popup(
-         io.popen(memory_cmd):read("*all"))
+      local out = assert(io.popen(memory_cmd, 'r'))
+      local msg = out:read("*all")
+      out:close()
+      memory_widget_htop_popup(msg)
    end
 end
 
@@ -1438,7 +1445,7 @@ memory_widget_timer = gears.timer.start_new(
    5, function () return memory_widget_update() end)
 
 -- }}}
-#+END_SRC
+#+end_src
 
 
 ** Calendar
@@ -1446,8 +1453,8 @@ The calendar widget simply consists in display the output of the =khal= command
 as a popup when the mouse points to the date widet.  This assumes that the
 =khal= program is installed and configured.
 
-#+NAME: src-main-calendar
-#+BEGIN_SRC lua
+#+name: src-main-calendar
+#+begin_src lua
 -- {{{ Calendar
 
 -- Create a textclock widget
@@ -1476,7 +1483,10 @@ function textclock_widget_khal()
          end
       )
    else
-      mytextclock_widget_khal_popup(io.popen(cmd):read("*all"))
+      local out = assert(io.popen(cmd, 'r'))
+      local msg = out:read("*all")
+      out:close()
+      mytextclock_widget_khal_popup(msg)
    end
 end
 
@@ -1497,7 +1507,7 @@ mytextclock:connect_signal(
 )
 
 -- }}}
-#+END_SRC
+#+end_src
 
 
 ** Mail
@@ -1510,8 +1520,8 @@ This module was taken from [[https://awesome.naquadah.org/wiki/Email_maildir_nau
 local setup.  In particular, the list of emails is obtained via a mu request
 (=querystring=).
 
-#+NAME: module-mail
-#+BEGIN_SRC lua
+#+name: module-mail
+#+begin_src lua
 
 local string = string
 local tostring = tostring
@@ -1523,7 +1533,7 @@ local awful = require("awful")
 local naughty = require("naughty")
 local beautiful = require('beautiful')
 local my_utility = require("my_utility")
-module("mailhoover")
+local mailhoover = {}
 
 local popup
 
@@ -1555,9 +1565,9 @@ function mailhoover:read_index(print, querystring, maxcount, mail_colors)
     local info = ""
     local count = 0
 
-    local f = io.popen('mu find -f "d f s m" -s d -z '..querystring)
+    local f = assert(io.popen('mu find -f "d f s m" -s d -z ' ..
+                              querystring, 'r'))
     local out = f:read("*all")
-    print(out)
     f:close()
 
     local nlines = 1
@@ -1586,7 +1596,7 @@ function mailhoover:read_index(print, querystring, maxcount, mail_colors)
 end
 
 return mailhoover
-#+END_SRC
+#+end_src
 
 
 *** Widget setup
@@ -1599,8 +1609,8 @@ present.
 Additionally, a right-click on the widget spawns a small menu with options to
 open mail clients (thunderbird and mu4e).
 
-#+NAME: src-main-mail
-#+BEGIN_SRC lua
+#+name: src-main-mail
+#+begin_src lua
 -- Mail widget
 mailicon = wibox.widget.textbox()
 mailfolders = my_utility.scandir(awesome_paths.home_dir  ..
@@ -1639,7 +1649,7 @@ mailbuttons = awful.util.table.join(
    awful.button({ }, 3, function () mailmenu:toggle() end)
 )
 mailicon:buttons(mailbuttons)
-#+END_SRC
+#+end_src
 
 
 ** cmus
@@ -1682,15 +1692,15 @@ feasible, with some work.
 
 First, import the necessary libraries.
 
-#+NAME: module-cmus-import
-#+BEGIN_SRC lua
+#+name: module-cmus-import
+#+begin_src lua
 
 local awful = require("awful")
 local naughty = require("naughty")
 local beautiful = require('beautiful')
 local util = require("awful.util")
 local my_utility = require("my_utility")
-#+END_SRC
+#+end_src
 
 
 *** Utility functions
@@ -1698,12 +1708,12 @@ A few utility functions are used in the module:
 - =get_path= :: Extract path from filename.
 - =cmusover_addToWidget= :: Show album popup on mouse over.
 - =get_mp3_info= :: Get a string representation of file ID3 tags using eyeD3.  The
-  output string is of the form "track number - track title - track length"
-  where the track title is padded so that the whole string length is
-  =strlen= (this does not seem to work with accentuated letters).
+     output string is of the form "track number - track title - track length"
+     where the track title is padded so that the whole string length is
+     =strlen= (this does not seem to work with accentuated letters).
 
-#+NAME: module-cmus-utils
-#+BEGIN_SRC lua
+#+name: module-cmus-utils
+#+begin_src lua
 
 function get_path(str, sep)
     sep = sep or '/'
@@ -1720,7 +1730,9 @@ end
 function get_mp3_info(fname, strlen)
    -- FIXME: fix padding for accentuated letters.
    cmd = 'eyeD3 --no-color ' .. '"' .. fname .. '"'
-   out = io.popen(cmd):read("*all")
+   cmd_out = assert(io.popen(cmd, 'r'))
+   out = cmd_out:read("*all")
+   cmd_out:close()
    track = string.gsub(string.match(out, 'track: %d*'),
                        'track: ', '')
    title = string.gsub(string.match(out, 'title: %C*'),
@@ -1734,7 +1746,7 @@ function get_mp3_info(fname, strlen)
    sfmt = string.format('%%-%d.%ds', strlen, strlen)
    return string.format('%2d - '..sfmt..' - %s', track, title, time)
 end
-#+END_SRC
+#+end_src
 
 
 *** Global variables
@@ -1742,8 +1754,8 @@ Setup variables are used to find albums by folder name in the music folder
 (using the =cmus_album_regex= variable) and to cache the track listing and cover
 art.
 
-#+NAME: module-cmus-cover-setup
-#+BEGIN_SRC lua
+#+name: module-cmus-cover-setup
+#+begin_src lua
 
 -- Album folder regexp
 cmus_album_regex = "^[0-9]\\{4\\}-"
@@ -1755,23 +1767,23 @@ cmus_img_fold = os.getenv("HOME") .. "/cmus_img/"
 cmus_album_g = ""
 cmus_album_list_g = ""
 cmus_file_list_g = nil
-#+END_SRC
+#+end_src
 
 
 *** Check running instance
 This function detects whether a cmus instance is running by requesting its PID.
 
-#+NAME: module-cmus-get-pid
-#+BEGIN_SRC lua
+#+name: module-cmus-get-pid
+#+begin_src lua
 
 -- Get cmus PID to check if it is running
 function getCmusPid()
-   local fpid = io.popen("pgrep cmus")
+   local fpid = assert(io.popen("pgrep cmus", 'r'))
    local pid = fpid:read("*n")
    fpid:close()
    return pid
 end
-#+END_SRC
+#+end_src
 
 
 *** Controls
@@ -1782,37 +1794,39 @@ pause, stop, next, etc.).  In practice only the play / pause functionality is
 used: clicking on the widget toggles the play state (play / pause).
 
 
-#+NAME: module-cmus-control
-#+BEGIN_SRC lua
+#+name: module-cmus-control
+#+begin_src lua
 
 -- Enable cmus control
 function cmus_control (action)
    local cmus_info, cmus_state
    local cmus_run = getCmusPid()
    if cmus_run then
-      cmus_info = io.popen("cmus-remote -Q"):read("*all")
+      local out = assert(io.popen("cmus-remote -Q", 'r'))
+      cmus_info = out:read("*all")
+      out:close()
       if not cmus_info then return end
       cmus_state = string.gsub(string.match(cmus_info, "status %a*"),
-                               "status ","")
+                               "status ", "")
       if cmus_state ~= "stopped" then
          if action == "next" then
-            io.popen("cmus-remote -n")
+            assert(io.popen("cmus-remote -n", 'r'))
          elseif action == "previous" then
-            io.popen("cmus-remote -r")
+            assert(io.popen("cmus-remote -r", 'r'))
          elseif action == "stop" then
-            io.popen("cmus-remote -s")
+            assert(io.popen("cmus-remote -s", 'r'))
          end
       end
       if action == "play_pause" then
          if cmus_state == "playing" or cmus_state == "paused" then
-            io.popen("cmus-remote -u")
+            assert(io.popen("cmus-remote -u", 'r'))
          elseif cmus_state == "stopped" then
-            io.popen("cmus-remote -p")
+            assert(io.popen("cmus-remote -p", 'r'))
          end
       end
    end
 end
-#+END_SRC
+#+end_src
 
 
 *** Popup
@@ -1820,8 +1834,8 @@ The popup notification (Fig.\nbsp{}[[img-cmus-popup]]) shows the content of the
 global variables defined earlier (see [[#cmus_global_variables][global variables]]) and updated by the
 =cmus_hook= function (see the [[#cmus_hook][Main hook]] section).
 
-#+NAME: module-cmus-popup
-#+BEGIN_SRC lua
+#+name: module-cmus-popup
+#+begin_src lua
 
 function cmus_popup(timeout)
    local img
@@ -1843,13 +1857,13 @@ function cmus_popup(timeout)
       })
    end
 end
-#+END_SRC
+#+end_src
 
 The following bash script, uses =awesome-client= to spawn the popup notification
 and performs a screen capture (Fig.\nbsp{}[[img-cmus-popup]]).
 
-#+NAME: sh-scrot-cmus-info
-#+BEGIN_SRC sh
+#+name: sh-scrot-cmus-info
+#+begin_src sh
 
 # Could get these from xrandr
 res_x=1920
@@ -1867,10 +1881,10 @@ sleep 0.5
 scrot desktop.png
 convert desktop.png -crop ${width}x${height}+${start_x}+0 desktop-cmus-popup.png
 rm desktop.png -rf
-#+END_SRC
+#+end_src
 
-#+NAME: img-cmus-popup
-#+CAPTION: Cmus popup notification, with album cover and track list.
+#+name: img-cmus-popup
+#+caption: Cmus popup notification, with album cover and track list.
 [[file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-cmus-popup.png]]
 
 
@@ -1892,8 +1906,8 @@ The commands are written into a temporary bash script, which is executed at the
 end of the function (I was not able to get this to work without the intermediate
 bash script).
 
-#+NAME: module-cmus-play
-#+BEGIN_SRC lua
+#+name: module-cmus-play
+#+begin_src lua
 
 function cmus_play(mode, fold)
    local out
@@ -1905,12 +1919,12 @@ function cmus_play(mode, fold)
          "grep \"" .. cmus_album_regex .. "\" | grep -i \"" .. fold .. "\" |" ..
          "tail -n1"
    end
-   local f = io.popen(alb_sel_cmd)
+   local f = assert(io.popen(alb_sel_cmd, 'r'))
    out = f:read("*all"):gsub("\n$", "")
    f:close()
 
    -- Determine if play_library flag need to be toggled
-   f = io.popen("cmus-remote -Q | grep play_library | awk '{print $3}'")
+   f = assert(io.popen("cmus-remote -Q | grep play_library | awk '{print $3}'"))
    local lib_flag = f:read("*all"):gsub("\n$", "")
    f:close()
 
@@ -1946,7 +1960,7 @@ function cmus_play(mode, fold)
       end
    end
 end
-#+END_SRC
+#+end_src
 
 
 *** Main hook
@@ -1976,14 +1990,16 @@ listed, their metadata is extracted using the [[#cmus_utils][=get_mp3_info=]] fu
 are added to the =cmus_album_list_g= variable.  The song currently playing is
 highlighted in the list.
 
-#+NAME: module-cmus-hook
-#+BEGIN_SRC lua
+#+name: module-cmus-hook
+#+begin_src lua
 
 function cmus_hook()
    -- check if cmus is running
    local cmus_run = getCmusPid()
    if cmus_run then
-      cmus_info = io.popen("cmus-remote -Q"):read("*all")
+      out = assert(io.popen("cmus-remote -Q", 'r'))
+      cmus_info = out:read("*all")
+      out:close()
       if not cmus_info then return "." end
       cmus_status = string.match(cmus_info, "status %a*")
       if cmus_status == nil then return "." end
@@ -2033,7 +2049,9 @@ function cmus_hook()
                "eyeD3 --no-color --write-images=" .. cmus_img_fold .. "/ " ..
                "\"$(cmus-remote -Q|grep \"^file\"|" ..
                "sed -r 's/^file\\s*//g')\""
-            cmus_img_dump = io.popen(cmd .. " 2>&1"):read("*all")
+            out = assert(io.popen(cmd .. " 2>&1", 'r'))
+            cmus_img_dump = out:read("*all")
+            out:close()
             if not string.match(cmus_img_dump, 'file not found') then
                local fname = string.match(cmus_img_dump, "Writing %C*")
                if fname ~= nil then
@@ -2066,17 +2084,16 @@ function cmus_hook()
       return '-- not running --'
    end
 end
-#+END_SRC
+#+end_src
 
 
 *** cmus module usage
-
 In the main =rc.lua= file, we create the widget, connect it to the =cmus_hook=
 function with a timer object (updated every 2 seconds), add the popup
 notification to mouse over events and setup the click actions.
 
-#+NAME: src-main-cmus
-#+BEGIN_SRC lua
+#+name: src-main-cmus
+#+begin_src lua
 -- {{{ cmus
 -- Cmus Widget
 tb_cmus = wibox.widget.textbox()
@@ -2101,7 +2118,7 @@ cmusbuttons = awful.util.table.join(
 tb_cmus:buttons(cmusbuttons)
 cmusover_addToWidget(tb_cmus)
 -- }}}
-#+END_SRC
+#+end_src
 
 
 ** Tiny Tiny RSS
@@ -2117,8 +2134,8 @@ requires the following packages (besides =ttrss-python=):
 - =keyring= :: extract credentials from keyring,
 - =textwrap= :: wraps output string within fixed width paragraph.
 
-#+NAME: script-ttrss-py
-#+BEGIN_SRC python
+#+name: script-ttrss-py
+#+begin_src python
 """
 Get unread feeds from tt-rss site
 
@@ -2198,7 +2215,7 @@ else:
 
 
 client.logout()
-#+END_SRC
+#+end_src
 
 The script takes as parameters the URL to the Tiny Tiny RSS instance, a user
 name and a password.  It gathers unread feeds and prints them into a string.  It
@@ -2208,15 +2225,15 @@ python package.
 
 Here is the help text for the =ttrss-wrapper.py= script:
 
-#+NAME: sh-ttrss-py-usage
-#+BEGIN_SRC sh
+#+name: sh-ttrss-py-usage
+#+begin_src sh
 
 # Use " || echo " to ensure a success code is returned
 python3 scripts/ttrss-wrapper.py --help || echo
-#+END_SRC
+#+end_src
 
-#+RESULTS[b8ddeafb0e559ca8cf4d92efcbc16d7de54a9090]: sh-ttrss-py-usage
-#+BEGIN_EXAMPLE
+#+results[b8ddeafb0e559ca8cf4d92efcbc16d7de54a9090]: sh-ttrss-py-usage
+#+begin_example
 usage: ttrss-wrapper.py [-h] -U URL -u USER [-p PASSWD] [-W TEXT_WIDTH] [-c]
                         [-r]
 
@@ -2232,7 +2249,7 @@ optional arguments:
                         Width of text output
   -c, --count           Output only the number of unread items
   -r, --mark-read       Mark all unread items as read
-#+END_EXAMPLE
+#+end_example
 
 
 *** Credentials
@@ -2247,8 +2264,8 @@ snippet.  In the following source block, replace line\nbsp{}[[(user-nil)]] by
 line\nbsp{}[[(user-hardcoded)]] and line\nbsp{}[[(pass-nil)]] by
 line\nbsp{}[[(pass-hardcoded)]] and set the correct password.
 
-#+NAME: ttrss-credentials
-#+BEGIN_SRC emacs-lisp -n -r
+#+name: ttrss-credentials
+#+begin_src emacs-lisp -n -r
 (defun get-ttrss-cred (&optional url)
   (let ((ttrss-url (if url url "127.0.0.1:81/tt-rss"))
         (ttrss-user nil)                                         (ref:user-nil)
@@ -2263,7 +2280,7 @@ line\nbsp{}[[(pass-hardcoded)]] and set the correct password.
           (setq ttrss-pass (funcall (plist-get auth :secret))
                 ttrss-user (plist-get auth :user)))))
     `(,ttrss-url ,ttrss-user ,ttrss-pass)))
-#+END_SRC
+#+end_src
 
 Note that this approach saves the credentials unencrypted in the =ttrss.lua=
 module.  It may be preferable to rely on a keyring to get the password.
@@ -2277,14 +2294,14 @@ The tt-rss module defines functions used by the [[#ttrss-widget][widget]]:
 - =ttrss_get_feeds= :: return a formatted list of unread feeds,
 - =ttrss_mark_read= :: mark all feeds as read,
 - =ttrss_set_mouseover= :: setup the widget to display a popup notification with
-  the list of unread feeds on mouse-over.
+     the list of unread feeds on mouse-over.
 
 These functions internally use the =ttrss_get= function which interacts with the
 [[#ttrss-wrapper-py][=ttrss-wrapper.py=]] python script.
 
-#+NAME: module-ttrss
-#+HEADER: :var ttrss_cred=(get-ttrss-cred "127.0.0.1:81/tt-rss")
-#+BEGIN_SRC lua
+#+name: module-ttrss
+#+header: :var ttrss_cred=(get-ttrss-cred "127.0.0.1:81/tt-rss")
+#+begin_src lua
 
 -- Script options
 local ttrss_cmd = "python3 " .. awesome_paths.config_dir ..
@@ -2319,7 +2336,9 @@ function ttrss_get(action)
    end
    cmd = ttrss_cmd .. " -U " .. ttrss_url .. " -u " .. ttrss_user ..
       " -p " .. ttrss_pass .. " -W " .. ttrss_textwidth .. " " .. args
-   ttrss_info = io.popen(cmd):read("*all")
+   local out = assert(io.popen(cmd, 'r'))
+   ttrss_info = out:read("*all")
+   out:close()
    return ttrss_info
 end
 
@@ -2339,7 +2358,7 @@ function ttrss_set_mouseover(mywidget)
    mywidget:connect_signal('mouse::leave', function ()
                               naughty.destroy(popup) end)
 end
-#+END_SRC
+#+end_src
 
 
 *** tt-rss widget
@@ -2350,10 +2369,10 @@ are added to the widget:
 - a left click shows a menu with entries "Refresh" and "Mark as read" which
   respectively refresh the widget count and mark all unread items as read,
 - a right click spawns a menu with shortcuts to the terminal and GUI RSS
-  applications newsbeuter and liferea.
+  applications newsboat and liferea.
 
-#+NAME: src-main-ttrss
-#+BEGIN_SRC lua
+#+name: src-main-ttrss
+#+begin_src lua
 -- {{{ tt-rss
 tb_ttrss = wibox.widget.textbox()
 tb_ttrss:set_text("ttrss")
@@ -2372,9 +2391,9 @@ ttrssmenu_l_items = {
    end }
 }
 ttrssmenu_r_items = {
-   { "newsbeuter", function () run_or_raise(
-           termapps .. " -name newsbeuter -e newsbeuter",
-           { instance="newsbeuter"} ) end },
+   { "newsboat", function () run_or_raise(
+           termapps .. " -name newsboat -e newsboat",
+           { instance="newsboat"} ) end },
    { "liferea", function () run_or_raise(
            "liferea", { class = "Liferea" }) end }
 }
@@ -2387,18 +2406,18 @@ ttrss_buttons = awful.util.table.join(
 tb_ttrss:buttons(ttrss_buttons)
 ttrss_set_mouseover(tb_ttrss)
 -- }}}
-#+END_SRC
+#+end_src
 
 
 ** Keyboard layout
 
 Add a widget to control the keyboard layout.
 
-#+NAME: src-main-keyboard
-#+BEGIN_SRC lua
+#+name: src-main-keyboard
+#+begin_src lua
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
-#+END_SRC
+#+end_src
 
 
 * Effects 
@@ -2412,8 +2431,8 @@ It is sometimes difficult to tell which monitor is the active one, so I
 implemented a simple hook to highlight the wibox on the active screen.  The
 actual colors are defined through the [[#theme][theme manager]].
 
-#+NAME: src-effects-monitor-highlight
-#+BEGIN_SRC lua
+#+name: src-effects-monitor-highlight
+#+begin_src lua
 -- {{{ Highlight current monitor
 screen_highlight_timer = timer({timeout = 0.2})
 screen_highlight_idx = 1
@@ -2437,7 +2456,7 @@ screen_highlight_timer:connect_signal(
 end)
 screen_highlight_timer:start()
 -- }}}
-#+END_SRC
+#+end_src
 
 
 ** Transparency
@@ -2446,8 +2465,8 @@ This block makes windows transparent when losing focus, and opaque when
 regaining focus.  Note that this block is disabled by default (see the
 =:PROPERTY:= drawer).
 
-#+NAME: src-effects-transparency
-#+BEGIN_SRC lua
+#+name: src-effects-transparency
+#+begin_src lua
 
 -- {{ Transparency
 client.connect_signal("focus", function(c)
@@ -2459,7 +2478,7 @@ client.connect_signal("unfocus", function(c)
                          c.opacity = 0.9
 end)
 -- }}
-#+END_SRC
+#+end_src
 
 
 ** Window border change on focus
@@ -2467,8 +2486,8 @@ end)
 Add a signal to change the color of window borders when losing / receiving
 focus.  This comes from the default configuration.
 
-#+NAME: src-effects-border
-#+BEGIN_SRC lua
+#+name: src-effects-border
+#+begin_src lua
 -- {{ Window border
 client.connect_signal("focus", function(c)
                          c.border_color = beautiful.border_focus
@@ -2477,17 +2496,17 @@ client.connect_signal("unfocus", function(c)
                          c.border_color = beautiful.border_normal
 end)
 -- }}
-#+END_SRC
+#+end_src
 
 
 ** Snap client to screen edges
 
 Awesome 4 adds edge snapping, the following disables it.
 
-#+NAME: src-effects-edge-snap
-#+BEGIN_SRC lua
+#+name: src-effects-edge-snap
+#+begin_src lua
 awful.mouse.snap.edge_enabled = false
-#+END_SRC
+#+end_src
 
 
 * Bindings 
@@ -2507,15 +2526,15 @@ This section handles mouse actions on an empty workspace:
 - a right-click pops-up the [[#main_menu][main menu]],
 - the mouse wheel moves to the previous / next tag.
 
-#+NAME: src-bindings-mouse-root
-#+BEGIN_SRC lua
+#+name: src-bindings-mouse-root
+#+begin_src lua
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewprev),
     awful.button({ }, 5, awful.tag.viewnext)
 ))
-#+END_SRC
+#+end_src
 
 
 *** Windows
@@ -2527,8 +2546,8 @@ Mouse actions for clicks on windows are defined here:
 The =clientbuttons= table created by this block is later added to each window
 via the [[#rules][rules]] mechanism.
 
-#+NAME: src-bindings-mouse-client
-#+BEGIN_SRC lua
+#+name: src-bindings-mouse-client
+#+begin_src lua
 -- Focus, move, resize window on click
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
@@ -2536,7 +2555,7 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- }}}
-#+END_SRC
+#+end_src
 
 
 *** Tag list
@@ -2551,8 +2570,8 @@ the tag list widget:
   the mouse,
 - the mouse wheel goes to the previous / next tag.
 
-#+NAME: src-bindings-mouse-taglist
-#+BEGIN_SRC lua
+#+name: src-bindings-mouse-taglist
+#+begin_src lua
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -2572,7 +2591,7 @@ local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 5,
                        function(t) awful.tag.viewnext(t.screen) end)
                 )
-#+END_SRC
+#+end_src
 
 
 *** Task list
@@ -2582,8 +2601,8 @@ Task list mouse actions are the following:
   tags),
 - the mouse wheel cycles through windows in the current screen and tag.
 
-#+NAME: src-bindings-mouse-tasklist
-#+BEGIN_SRC lua
+#+name: src-bindings-mouse-tasklist
+#+begin_src lua
 local tasklist_buttons = awful.util.table.join(
    awful.button({ }, 1, function (c)
          if c == client.focus then
@@ -2608,7 +2627,7 @@ local tasklist_buttons = awful.util.table.join(
    awful.button({ }, 5, function ()
          awful.client.focus.byidx(-1)
 end))
-#+END_SRC
+#+end_src
 
 
 ** Keyboard
@@ -2622,23 +2641,23 @@ setting the =tangle= property to =no=.
 
 First, we initialize the table for the keys.
 
-#+NAME: src-bindings-keyboard-start
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-start
+#+begin_src lua
 -- {{{ Key bindings
 globalkeys = {}
-#+END_SRC
+#+end_src
 
 **** Shortcuts popup
 
 Display the help popup.
 
-#+NAME: src-bindings-keyboard-help
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-help
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, "s", hotkeys_popup.show_help,
        {description="show help", group="awesome"})
 )
-#+END_SRC
+#+end_src
 
 
 
@@ -2652,15 +2671,15 @@ tags.
 
 Move the the previous / next tag:
 
-#+NAME: src-bindings-keyboard-tags-prevnext
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-prevnext
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, "Left", awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey, }, "Right", awful.tag.viewnext,
               {description = "view next", group = "tag"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Previous/next tag on all screens with =Ctrl= + =Alt=
@@ -2668,8 +2687,8 @@ globalkeys = awful.util.table.join(globalkeys,
 Move to the previous / next tag (using =Ctrl= + =Alt= as on other desktop
 environments) on all screens:
 
-#+NAME: src-bindings-keyboard-tags-prevnext-ctrl_alt
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-prevnext-ctrl_alt
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ altkey, "Control" }, "Left",
        function ()
@@ -2706,15 +2725,15 @@ globalkeys = awful.util.table.join(globalkeys,
        end,
        {description = "Move all screens to right tag", group = "tag"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Move window to previous/next with =Ctrl= + =Alt= + =Shift=
 
 Move the current window to the previous / next tag:
 
-#+NAME: src-bindings-keyboard-tags-move-prevnext
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-move-prevnext
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
    awful.key({ altkey, "Control", "Shift" }, "Left",
        function ()
@@ -2779,15 +2798,15 @@ globalkeys = awful.util.table.join(globalkeys,
        end,
        {description = "Move client right tag", group = "tag"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Go to tag number
 
 Bind numbers to tags (with =modkey=):
 
-#+NAME: src-bindings-keyboard-tags-num
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-num
+#+begin_src lua
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
@@ -2805,15 +2824,15 @@ for i = 1, 9 do
                   {description = "view tag #"..i, group = "tag"})
     )
 end
-#+END_SRC
+#+end_src
 
 
 ***** Go to tag number on all screens with =Ctrl= + =Alt=
 
 Alternative binding to go to a tag by number on all screens with =Ctrl= + =Alt=:
 
-#+NAME: src-bindings-keyboard-tags-num-ctrl_alt
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-num-ctrl_alt
+#+begin_src lua
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag for all screens.
@@ -2829,7 +2848,7 @@ for i = 1, 9 do
                   {description = "toggle tag #" .. i, group = "tag"})
     )
 end
-#+END_SRC
+#+end_src
 
 
 ***** Change tag on other screen
@@ -2837,8 +2856,8 @@ end
 Move the other screen to a specific tag number (assumes two screens) using
 =modkey= + =Alt= and a tag number:
 
-#+NAME: src-bindings-keyboard-tags-num-other
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-num-other
+#+begin_src lua
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag for other screen.
@@ -2857,15 +2876,15 @@ for i = 1, 9 do
                   {description = "Change tag for other screen", group = "tag"})
     )
 end
-#+END_SRC
+#+end_src
 
 
 ***** Move window to tag
 
 Move the current client (window) to tag by number:
 
-#+NAME: src-bindings-keyboard-tags-num-move
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-num-move
+#+begin_src lua
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- Move client to tag.
@@ -2881,15 +2900,15 @@ for i = 1, 9 do
            {description = "move focused client to tag #"..i, group = "tag"})
     )
 end
-#+END_SRC
+#+end_src
 
 
 ***** Select tag
 
 Activate other tag on the current one:
 
-#+NAME: src-bindings-keyboard-tags-num-select-from
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-num-select-from
+#+begin_src lua
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- Toggle tag.
@@ -2905,15 +2924,15 @@ for i = 1, 9 do
                    group = "tag"})
     )
 end
-#+END_SRC
+#+end_src
 
 
 ***** Show current tag on other tag
 
 Activate current tag on another one:
 
-#+NAME: src-bindings-keyboard-tags-num-select-to
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-num-select-to
+#+begin_src lua
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- Toggle tag.
@@ -2928,15 +2947,15 @@ for i = 1, 9 do
         end)
     )
 end
-#+END_SRC
+#+end_src
 
 
 ***** Go to other screen
 
 Move to previous / next screen with =modkey= + =Ctrl= + =j= / =k=:
 
-#+NAME: src-bindings-keyboard-tags-screen
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-screen
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, "Control" }, "j",
@@ -2946,24 +2965,24 @@ globalkeys = awful.util.table.join(
       function () awful.screen.focus_relative(-1) end,
       {description = "focus the previous screen", group = "screen"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Go to other screen (alternative)
 
 Use =modkey= + =Ctrl= + (=Shift=) =TAB=:
 
-#+NAME: src-bindings-keyboard-tags-screen-tab
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-tags-screen-tab
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, "Control" }, "Tab",
-       function () awful.screen.focus_relative( 1) end,
+       function () awful.screen.focus_relative(-1) end,
       {description = "focus the next screen", group = "screen"}),
     awful.key({ modkey, "Control", "Shift" }, "Tab",
-       function () awful.screen.focus_relative(-1) end,
+       function () awful.screen.focus_relative(1) end,
       {description = "focus the previous screen", group = "screen"})
 )
-#+END_SRC
+#+end_src
 
 
 **** Clients (windows)
@@ -2975,8 +2994,8 @@ This section contains keybindings to operate on clients (windows).
 Move to the previous / next window on the current screen using =modkey= + =j= /
 =k=.
 
-#+NAME: src-bindings-keyboard-clients-prevnext
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-clients-prevnext
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     -- Clients
     awful.key({ modkey, }, "j",
@@ -2990,41 +3009,41 @@ globalkeys = awful.util.table.join(globalkeys,
         end,
         {description = "focus prev by index", group = "client"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Jump to last window
 
 Go to the tag with the last focused window:
 
-#+NAME: src-bindings-keyboard-clients-last
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-clients-last
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, "Escape", awful.tag.history.restore,
        {description = "go back", group = "tag"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Jump to urgent window
 
 Jump to window with urgent flag:
 
-#+NAME: src-bindings-keyboard-clients-urgent
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-clients-urgent
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, "u", awful.client.urgent.jumpto,
        {description = "jump to urgent client", group = "client"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Browse window history
 
 Loop through window history on the current tag and screen (like =Alt= + =TAB=):
 
-#+NAME: src-bindings-keyboard-clients-history
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-clients-history
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, "Tab",
         function ()
@@ -3035,15 +3054,15 @@ globalkeys = awful.util.table.join(globalkeys,
         end,
         {description = "go back", group = "client"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Restore window
 
 Restore minimized window:
 
-#+NAME: src-bindings-keyboard-clients-restore
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-clients-restore
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, "Control" }, "n",
        function ()
@@ -3056,7 +3075,7 @@ globalkeys = awful.util.table.join(globalkeys,
        end,
        {description = "restore minimized", group = "client"})
 )
-#+END_SRC
+#+end_src
 
 
 **** Layout
@@ -3069,8 +3088,8 @@ This sections contains keybindings related to layout manipulations.
 Swap window with previous / next in current layout using =modkey= + =shift= +
 =j= / =k=.
 
-#+NAME: src-bindings-keyboard-layout-move
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-layout-move
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    -- Layout manipulation
@@ -3081,15 +3100,15 @@ globalkeys = awful.util.table.join(
       function () awful.client.swap.byidx( -1) end,
       {description = "swap with previousclient by index", group = "client"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Resize layout
 
 Control client size within layout:
 
-#+NAME: src-bindings-keyboard-layout-resize
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-layout-resize
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey,           }, "l",
@@ -3113,15 +3132,15 @@ globalkeys = awful.util.table.join(
       function () awful.tag.incncol(-1)      end,
       {description = "decrease the number of columns", group = "layout"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Change layout
 
 Cycle through available layouts using =modkey= + =space=.
 
-#+NAME: src-bindings-keyboard-layout-change
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-layout-change
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, "space",
@@ -3131,7 +3150,7 @@ globalkeys = awful.util.table.join(
       function () awful.layout.inc(-1) end,
       {description = "select previous", group = "layout"})
 )
-#+END_SRC
+#+end_src
 
 
 **** Application shortcuts
@@ -3143,43 +3162,43 @@ Keybindings for frequently used [[#default_programs][applications]].
 
 Toggle [[#main_menu][main menu]]:
 
-#+NAME: src-bindings-keyboard-applications-mainmenu
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-applications-mainmenu
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Terminal
 
 Open a terminal with =modkey= + =return=.
 
-#+NAME: src-bindings-keyboard-applications-terminal
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-applications-terminal
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, "Return",
       function () awful.spawn(terminal) end,
       { description = "open a terminal", group = "launcher" })
 )
-#+END_SRC
+#+end_src
 
 
 ***** Internet browser
 
 Start the web browser with =modkey= + =ctrl= + =return=.
 
-#+NAME: src-bindings-keyboard-applications-web
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-applications-web
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, "Control" }, "Return",
       function () awful.spawn(internet_browser) end,
       { description = "internet browser", group = "launcher" })
 )
-#+END_SRC
+#+end_src
 
 
 ***** Conkeror
@@ -3187,71 +3206,71 @@ globalkeys = awful.util.table.join(
 Start conkeror, an alternative web browser using =modkey= + =ctrl= + =shift= +
 =return=.
 
-#+NAME: src-bindings-keyboard-applications-conkeror
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-applications-conkeror
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, "Control", "Shift" }, "Return",
       function () awful.spawn("conkeror") end,
       { description = "conkeror browser", group = "launcher" })
 )
-#+END_SRC
+#+end_src
 
 
 ***** Emacs
 
 Start emacs with =modkey= + =shift= + =return=.
 
-#+NAME: src-bindings-keyboard-applications-emacs
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-applications-emacs
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, "Shift" }, "Return",
       function () awful.spawn(emacs) end,
       { description = "start emacs", group = "launcher" })
 )
-#+END_SRC
+#+end_src
 
 
 ***** File explorer
 
 Start the file explorer software with =modkey= + =e=.
 
-#+NAME: src-bindings-keyboard-applications-explorer
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-applications-explorer
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey, }, "e",
       function () awful.spawn.with_shell(explorer .. " ~") end,
       { description = "open file explorer", group = "launcher" })
 )
-#+END_SRC
+#+end_src
 
 
 ***** Awesome restart
 
 Restart awesome-wm (reload =rc.lua=) with =modkey= + =ctrl= + =r=.
 
-#+NAME: src-bindings-keyboard-applications-restart
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-applications-restart
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, "Control" }, "r", awesome.restart,
        {description = "reload awesome", group = "awesome"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Logout
 
 Log out with =modkey= + =shift= + =q=.
 
-#+NAME: src-bindings-keyboard-applications-logout
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-applications-logout
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, "Shift" }, "q", awesome.quit,
        {description = "quit awesome", group = "awesome"})
 )
-#+END_SRC
+#+end_src
 
 
 **** Prompts
@@ -3262,23 +3281,23 @@ This section contains keybindings for prompts.
 
 Execute arbitrary shell commands with =modkey= + =r=.
 
-#+NAME: src-bindings-keyboard-prompts-exec
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-prompts-exec
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     -- Prompt
     awful.key({ modkey }, "r",
        function () awful.screen.focused().mypromptbox:run() end,
        {description = "run prompt", group = "launcher"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Lua execution
 
 Execute lua code with =modkey= + =x=.
 
-#+NAME: src-bindings-keyboard-prompts-lua
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-prompts-lua
+#+begin_src lua
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, "x",
               function ()
@@ -3291,15 +3310,15 @@ globalkeys = awful.util.table.join(globalkeys,
               end,
               {description = "lua execute prompt", group = "awesome"})
 )
-#+END_SRC
+#+end_src
 
 
 ***** Global prompt
 
 Toggle the custom [[#global_prompt][global prompt]] with =modkey= + =z=.
 
-#+NAME: src-bindings-keyboard-prompts-global
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-prompts-global
+#+begin_src lua
 globalkeys = awful.util.table.join(
    globalkeys,
    awful.key({ modkey }, "z",
@@ -3318,31 +3337,32 @@ globalkeys = awful.util.table.join(
                end
             end
          }
-   end)
+      end,
+      {description = "Global prompt", group = "launcher"})
 )
-#+END_SRC
+#+end_src
 
 
 **** Menubar
 
 Start the menubar with =modkey= + =a=.
 
-#+NAME: src-bindings-keyboard-menubar
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-menubar
+#+begin_src lua
 -- Menubar
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
-#+END_SRC
+#+end_src
 
 
 **** Volume control
 
 Use special keyboard keys to control the audio volume:
 
-#+NAME: src-bindings-keyboard-volume
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-volume
+#+begin_src lua
 -- Volume
 globalkeys = awful.util.table.join(
    globalkeys,
@@ -3365,69 +3385,147 @@ globalkeys = awful.util.table.join(
          update_volume_widget()
    end)
 )
-#+END_SRC
+#+end_src
 
 
 **** Screen lock
 
 Lock the screen using =xscreensaver= with =modkey= + =ctrl= + =l=.
 
-#+NAME: src-bindings-keyboard-lock
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-lock
+#+begin_src lua
 -- Screen lock
 globalkeys = awful.util.table.join(globalkeys,
     awful.key({ modkey, "Control" }, "l",
        function ()
           awful.spawn("xscreensaver-command -lock")
-    end)
+       end,
+       {description = "Lock screen", group = "awesome"})
 )
-#+END_SRC
+#+end_src
+
+
+**** Password manager
+I use the [[https://www.passwordstore.org/][pass]] utility to manage passwords.  It comes with a [[https://tools.suckless.org/dmenu/][dmenu]] tool
+(=passmenu=) for inserting passwords (or copying them to the clipboard).  The
+following is a slightly modified version of the =passmenu= script.  The original
+script returns the first line for each password entry; instead, the following
+script reads the line preceding the first empty line.
+
+#+name: script-passmenu-sh
+#+header: :tangle scripts/passmenu.sh
+#+begin_src sh
+#!/usr/bin/env bash
+# Add `--type` to type the password using xdotool
+
+shopt -s nullglob globstar
+
+# If set to true the password name must be passed via the command line (after
+# --type)
+flag_debug=false
+
+# Type or copy to clipboard
+typeit=0
+if [[ $1 == "--type" ]]; then
+	typeit=1
+	shift
+fi
+
+# Build list of passwords for dmenu
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix"/**/*.gpg )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
+
+# Read password name from command line if used in debug mode
+if [[ "$flag_debug" = true ]]; then
+	password=$1
+else
+	password=$(printf '%s\n' "${password_files[@]}" | dmenu "$@")
+fi
+
+[[ -n $password ]] || exit
+
+# Get password
+pass_full=$(pass show "$password")
+
+# Keep line before first empty line
+pass=$(echo "$pass_full" | awk '{if ($0 ~ /^$/){ exit; } else { a=$0; }} END {print a}')
+
+# Print, type or store password
+if [[ "$flag_debug" = true ]]; then
+	echo "type=$typeit, $pass"
+else
+	if [[ $typeit -eq 0 ]]; then
+		echo $pass | xclip -selection c
+	else
+		echo $pass | xdotool type --clearmodifiers --file -
+	fi
+fi
+#+end_src
+
+The following adds a keybinding to start the custom =passmenu= command.  To use
+it, place the cursor on a password field (e.g. in a terminal or web page) and
+press the keybinding.  Then use a fuzzy text search on the spawned =dmenu=.
+This will insert the corresponding password.
+
+#+name: src-bindings-pass
+#+begin_src lua
+-- Screen lock
+globalkeys = awful.util.table.join(globalkeys,
+    awful.key({ modkey, "Control" }, "p",
+       function ()
+          awful.spawn(passmenu)
+       end,
+       {description = "Insert password", group = "awesome"})
+)
+#+end_src
 
 
 **** Register keybindings
 
 Register the keybindings defined in the =globalkeys= table:
 
-#+NAME: src-bindings-keyboard-register
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-register
+#+begin_src lua
 -- Set keys
 root.keys(globalkeys)
-#+END_SRC
+#+end_src
 
 
 *** Client bindings
 
 The keybindings defined in this section control individual windows.
 
-#+NAME: src-bindings-keyboard-client
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client
+#+begin_src lua
 clientkeys = {}
-#+END_SRC
+#+end_src
 
 **** Fullscreen
 
 Get the current window in fullscreen with =modkey= + =f=.
 
-#+NAME: src-bindings-keyboard-client-fullscreen
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client-fullscreen
+#+begin_src lua
 clientkeys = awful.util.table.join(
    clientkeys,
    awful.key({ modkey, }, "f",
       function (c) c.fullscreen = not c.fullscreen  end)
 )
-#+END_SRC
+#+end_src
 
 
 **** Kill window
 
 Kill current window with =modkey= + =shift= + =c=.
 
-#+NAME: src-bindings-keyboard-client-kill
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client-kill
+#+begin_src lua
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, "Shift" }, "c", function (c) c:kill() end)
 )
-#+END_SRC
+#+end_src
 
 
 **** Toggle floating window mode
@@ -3435,12 +3533,12 @@ clientkeys = awful.util.table.join(clientkeys,
 Set window to floating mode (does not use layout) with =modkey= + =ctrl= +
 =space=.
 
-#+NAME: src-bindings-keyboard-client-floating
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client-floating
+#+begin_src lua
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle )
 )
-#+END_SRC
+#+end_src
 
 
 **** Move window to master position
@@ -3449,46 +3547,49 @@ Swap window with window in the current layout's master position with =modkey= +
 =ctrl= + =return=.  Note that this is currently overridden by the web browser
 shortcut.
 
-#+NAME: src-bindings-keyboard-client-swap-master
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client-swap-master
+#+begin_src lua
 clientkeys = awful.util.table.join(
    clientkeys,
    awful.key({ modkey, "Control" }, "Return",
       function (c) c:swap(awful.client.getmaster()) end)
 )
-#+END_SRC
+#+end_src
 
 
 **** Move window to other screen
 
 Send current window to other screen with =modkey= + =o=.
 
-#+NAME: src-bindings-keyboard-client-other-screen
-#+BEGIN_SRC lua
-clientkeys = awful.util.table.join(clientkeys,
-    awful.key({ modkey, }, "o", awful.client.movetoscreen )
+#+name: src-bindings-keyboard-client-other-screen
+#+begin_src lua
+clientkeys = awful.util.table.join(
+   clientkeys,
+   awful.key({ modkey, }, "o", function (c)
+         c:move_to_screen(c.screen.index - 1)
+   end)
 )
-#+END_SRC
+#+end_src
 
 
 **** Toggle on-top property
 
 Toggle on-top flag (useful for floating windows) with =modkey= + =t=.
 
-#+NAME: src-bindings-keyboard-client-ontop
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client-ontop
+#+begin_src lua
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, "t", function (c) c.ontop = not c.ontop end)
 )
-#+END_SRC
+#+end_src
 
 
 **** Minimize window
 
 Minimize the current window with =modkey= + =n=.
 
-#+NAME: src-bindings-keyboard-client-minimize
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client-minimize
+#+begin_src lua
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey, }, "n",
         function (c)
@@ -3497,15 +3598,15 @@ clientkeys = awful.util.table.join(clientkeys,
             c.minimized = true
         end)
 )
-#+END_SRC
+#+end_src
 
 
 **** Toggle maximized mode
 
 Toggle maximize property for the current window with =modkey= + =m=.
 
-#+NAME: src-bindings-keyboard-client-maximize
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client-maximize
+#+begin_src lua
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey,           }, "m",
         function (c)
@@ -3513,7 +3614,7 @@ clientkeys = awful.util.table.join(clientkeys,
             c.maximized_vertical   = not c.maximized_vertical
         end)
 )
-#+END_SRC
+#+end_src
 
 
 **** Show window information
@@ -3521,8 +3622,8 @@ clientkeys = awful.util.table.join(clientkeys,
 Show a popup notification with information on the current window (class,
 properties, etc.).  Triggered by pressing =modkey= + =i=.
 
-#+NAME: src-bindings-keyboard-client-info
-#+BEGIN_SRC lua
+#+name: src-bindings-keyboard-client-info
+#+begin_src lua
 clientkeys = awful.util.table.join(clientkeys,
     awful.key({ modkey,           }, "i",
       function (c)
@@ -3552,7 +3653,7 @@ clientkeys = awful.util.table.join(clientkeys,
 )
 
 -- }}}
-#+END_SRC
+#+end_src
 
 
 * Wibox 
@@ -3564,13 +3665,13 @@ A wibox is created on each screen; the only difference between the screens is
 that only a single instance of the system tray widget can be added (it is added
 on screen 1 for my configuration).
 
-#+NAME: src-wibox-start-loop
-#+BEGIN_SRC lua
+#+name: src-wibox-start-loop
+#+begin_src lua
 -- {{ Wibox
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
-#+END_SRC
+#+end_src
 
 In the following sections, =s= is the current screen index.
 
@@ -3580,8 +3681,8 @@ In the following sections, =s= is the current screen index.
 The prompts defined in the [[#keybindings_prompts][key bindings section]] toggle the visibility of a text
 widget on the wibox for user input.  This text widget is defined here:
 
-#+NAME: src-wibox-prompt
-#+BEGIN_SRC lua
+#+name: src-wibox-prompt
+#+begin_src lua
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
     s.mypromptbox.font = "Consolas 18"
@@ -3598,19 +3699,19 @@ widget on the wibox for user input.  This text widget is defined here:
        s.myglobalpromptbox
     }
     s.mywibox_globalprompt.visible = false
-#+END_SRC
+#+end_src
 
 
 ** Launchers
 
 Create launchers.
 
-#+NAME: src-wibox-launchers
-#+BEGIN_SRC lua
+#+name: src-wibox-launchers
+#+begin_src lua
     -- Create launchers
     s.mylaunchbar = launchbar.new(awesome_paths.config_dir .. "/shortcuts/",
                                   myiconfinder)
-#+END_SRC
+#+end_src
 
 
 ** Wibox
@@ -3619,8 +3720,8 @@ This section defines the main wibox, which can be seen at the top in
 Fig.\nbsp{}[[img-desktop-main]].  It contains all the widgets and is defined as
 follows:
 
-#+NAME: src-wibox-wibox
-#+BEGIN_SRC lua
+#+name: src-wibox-wibox
+#+begin_src lua
     -- Create the wibox
     s.mywibox = awful.wibox({ position = "top", screen = s })
 
@@ -3675,7 +3776,7 @@ follows:
             myleave_launcher
         },
     }
-#+END_SRC
+#+end_src
 
 The wibox is decomposed into three sections: left, center and right.  Widgets
 are added to each section and then concatenated into a single layout which is in
@@ -3686,11 +3787,11 @@ turn added to the wibox.
 
 This code block closes the [[src-wibox-start-loop][for loop]] creating a wibox on each screen.
 
-#+NAME: src-wibox-end-loop
-#+BEGIN_SRC lua
+#+name: src-wibox-end-loop
+#+begin_src lua
 end)
 -- }}}
-#+END_SRC
+#+end_src
 
 
 * Rules
@@ -3700,14 +3801,14 @@ basic description of rules.
 
 Only a few simple rules are defined here:
 - Set of few programs as "floating": mplayer, pinentry, gimp.
-- Fix cmus, newsbeuter on the second tag of the second screen.
+- Fix cmus, newsboat on the second tag of the second screen.
 - Thunderbird goes on the first tag of the second screen.
 - I had issues with =ristretto= starting in a maximized state; I am not sure
   whether it is necessary, but I am explicitly disabling the "maximized" option
   here.
 
-#+NAME: src-rules
-#+BEGIN_SRC lua
+#+name: src-rules
+#+begin_src lua
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -3762,15 +3863,15 @@ awful.rules.rules = {
       properties = { screen = 2, tag = "2" } },
     { rule = { instance = "tmplayer" },
       properties = { screen = 2, tag = "2" } },
-    { rule = { instance = "newsbeuter" },
+    { rule = { instance = "newsboat" },
       properties = { screen = 2, tag = "2" } },
     { rule = { class = "Thunderbird" },
-      properties = { screen = 2, tag = "@" } }
-    --{ rule = { instance = "ristretto" },
-    --  properties = { maximized = false } },
+      properties = { screen = 2, tag = "@" } },
+    { rule = { instance = "ristretto" },
+      properties = { maximized = false } },
 }
 -- }}}
-#+END_SRC
+#+end_src
 
 
 * Signals
@@ -3778,8 +3879,8 @@ awful.rules.rules = {
 This is default code setting up focus following the mouse, titlebars (which are
 disabled) and border coloring.
 
-#+NAME: src-signals
-#+BEGIN_SRC lua
+#+name: src-signals
+#+begin_src lua
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
@@ -3846,7 +3947,7 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 -- }}}
-#+END_SRC
+#+end_src
 
 
 * Icon finder
@@ -3855,8 +3956,8 @@ is used by the [[#launchbar][launchbar]] module, and menus ([[#main_menu][main m
 searches for icons in folders defined in the =awesome_paths.iconapps_dir=
 variable (=png= and =svg= files).
 
-#+NAME: module-icon_finder
-#+BEGIN_SRC lua
+#+name: module-icon_finder
+#+begin_src lua
 
 local util = require("awful.util")
 local beautiful = require("beautiful")
@@ -3906,7 +4007,7 @@ function icon_finder:find(icon_name)
       iname = icon_name
    end
    for _, ext in ipairs(self.ext_list) do
-      iname = iname:gsub("\." .. ext .. "$", "")
+      iname = iname:gsub("%." .. ext .. "$", "")
    end
    if self.icondirs_list then
       for _, v_base in ipairs(self.icondirs_list) do
@@ -3940,7 +4041,7 @@ end
 
 return setmetatable(icon_finder, { __call = function(cls, ...)
                                       return cls.new(...) end })
-#+END_SRC
+#+end_src
 
 
 * Global prompt 
@@ -3955,8 +4056,8 @@ A few prompts are also defined in this module, more can be added as needed.
 
 This module requires basic awesome-wm libraries, and file system tools.
 
-#+NAME: module-global_prompt-setup
-#+BEGIN_SRC lua
+#+name: module-global_prompt-setup
+#+begin_src lua
 
 local awful = require("awful")
 local util = require("awful.util")
@@ -3974,7 +4075,7 @@ local naughty = require("naughty")
 local cmus = require("cmus")
 
 global_prompt = {}
-#+END_SRC
+#+end_src
 
 
 ** Utilities
@@ -3988,8 +4089,8 @@ First, define some helper functions:
 
 - =table.tostring= :: convert table to string.
 
-#+NAME: module-global_prompt-utils
-#+BEGIN_SRC lua
+#+name: module-global_prompt-utils
+#+begin_src lua
 
 function generic_completion_wrapper(kw, list, str, cur_pos, ncomp)
    out_str, out_pos = awful.completion.generic(str, cur_pos, ncomp, list)
@@ -4033,7 +4134,7 @@ function table.tostring( tbl )
   end
   return "{" .. table.concat( result, "," ) .. "}"
 end
-#+END_SRC
+#+end_src
 
 
 ** Prompts
@@ -4042,8 +4143,8 @@ The prompts included in the module are listed here.  Prompts are called by
 entering a keyword, followed by some arguments in the promptbox (i.e. the user
 input is of the form =KEYWORD ARGS=).  A prompt is defined as follows:
 
-#+NAME: global_prompt_template
-#+BEGIN_SRC lua
+#+name: global_prompt_template
+#+begin_src lua
 
 global_prompt.prompt_TEMPLATE = {
    keyword={"?", "h"}, -- list of strings
@@ -4056,16 +4157,16 @@ global_prompt.prompt_TEMPLATE = {
                                               "AUTOCOMPLETE-WORD-2" },
                                         name, cur_pos, ncomp)
 }
-#+END_SRC
+#+end_src
 
 A prompt is a table with the following entries:
 - =keyword= :: List of keywords for prompt.
 - =help= :: Help message (for use with [[#global_prompt_help][help prompt]]).
 - =run_function= :: Function to run when calling the prompt.  The =name=
-  parameter is the =ARGS= string passed from the prompt (the user input is
-  =KEYWORD ARGS=).
+     parameter is the =ARGS= string passed from the prompt (the user input is
+     =KEYWORD ARGS=).
 - =comp_function= :: Completion function which can be created using
-  [[#global_prompt_utils][=generic_completion_wrapper=]].
+     [[#global_prompt_utils][=generic_completion_wrapper=]].
 
 
 *** help
@@ -4073,8 +4174,8 @@ The help prompt prints a list of the available prompts, along with the
 corresponding help text as shown on Fig.\nbsp{}[[img-global_prompt-help]].  The
 keyword is =h= or =?=.
 
-#+NAME: module-global_prompt-help
-#+BEGIN_SRC lua
+#+name: module-global_prompt-help
+#+begin_src lua
 
 global_prompt.prompt_help = {
    keyword={"?", "h"}, help="Show a list of available commands",
@@ -4094,13 +4195,13 @@ global_prompt.prompt_help = {
    end,
    comp_function = nil
 }
-#+END_SRC
+#+end_src
 
 The following script manually spawns the help box shown on
 Fig.\nbsp{}[[img-global_prompt-help]] and performs a screenshot.
 
-#+NAME: sh-scrot-global_prompt-help
-#+BEGIN_SRC sh
+#+name: sh-scrot-global_prompt-help
+#+begin_src sh
 
 # Could get these from xrandr
 res_x=1920
@@ -4121,11 +4222,11 @@ sleep 0.5
 scrot desktop.png
 convert desktop.png -crop ${width}x${height}+${start_x}+0 desktop-global_prompt-help.png
 rm desktop.png -rf
-#+END_SRC
+#+end_src
 
 
-#+NAME: img-global_prompt-help
-#+CAPTION: Help notification from global prompt.
+#+name: img-global_prompt-help
+#+caption: Help notification from global prompt.
 [[file:../images/2016-10-05-Awesome-wm_configuration/desktop-global-prompt-help.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-global-prompt-help.png]]
 
 
@@ -4136,8 +4237,8 @@ The session prompt offers session management commands (shutdown, restart,
 logout, lock), similar to the [[#shutdown][shutdown menu]].  The keyword is =s=, so =s
 shutdown= will trigger a shutdown (with confirmation prompt).
 
-#+NAME: module-global_prompt-session
-#+BEGIN_SRC lua
+#+name: module-global_prompt-session
+#+begin_src lua
 
 global_prompt.prompt_session = {
    keyword={"s"}, help="Session control (shutdown, restart, logout, lock)",
@@ -4168,7 +4269,7 @@ global_prompt.prompt_session = {
                                         name, cur_pos, ncomp)
    end
 }
-#+END_SRC
+#+end_src
 
 
 *** window
@@ -4177,8 +4278,8 @@ The window prompt allows to quickly jump to an existing window.  It lists open
 windows by their class and name and compares the argument to the listed
 class / title pairs.  Tab completion is also implemented.
 
-#+NAME: module-global_prompt-window
-#+BEGIN_SRC lua
+#+name: module-global_prompt-window
+#+begin_src lua
 
 global_prompt.prompt_window = {
    keyword={"j"}, help="Jump to window",
@@ -4215,7 +4316,7 @@ global_prompt.prompt_window = {
                                         name, cur_pos, ncomp)
    end
 }
-#+END_SRC
+#+end_src
 
 
 *** calc
@@ -4226,8 +4327,8 @@ logarithmic etc.).
 **** Internal script
 The calculator script was adapted from [[http://www.peterbe.com/plog/calculator-in-python-for-dummies][this one]].
 
-#+NAME: script-calc-py
-#+BEGIN_SRC python
+#+name: script-calc-py
+#+begin_src python
 
 #!/usr/bin/python3
 
@@ -4261,7 +4362,7 @@ def calc(expr, advanced=True):
 
 if __name__ == '__main__':
     print(calc(' '.join(sys.argv[1:])))
-#+END_SRC
+#+end_src
 
 
 **** Prompt definition
@@ -4270,8 +4371,8 @@ The definition of the prompt is straightforward: the arguments are wrapped
 around double quotes and passed to the =calc.py= script.  The result is shown in
 a popup notification.
 
-#+NAME: module-global_prompt-calc
-#+BEGIN_SRC lua
+#+name: module-global_prompt-calc
+#+begin_src lua
 
 global_prompt.calc_cmd = "python3 " .. awesome_paths.config_dir ..
    "/scripts/calc.py "
@@ -4285,7 +4386,7 @@ global_prompt.prompt_calc = {
       if expr.sub(-1, 1) ~= "\"" then
          expr = expr .. "\""
       end
-      local c, err = io.popen(global_prompt.calc_cmd .. " " .. expr)
+      local c = assert(io.popen(global_prompt.calc_cmd .. " " .. expr, 'r'))
       local result = c:read("*all"):gsub("\n$", "")
       c:close()
       naughty.notify({ text = string.sub(expr, 2, -2) .. " = " .. result,
@@ -4293,7 +4394,7 @@ global_prompt.prompt_calc = {
    end,
    comp_function = nil
 }
-#+END_SRC
+#+end_src
 
 
 *** cmus
@@ -4306,8 +4407,8 @@ arguments are:
 - album :: play an album with title matching the remaining prompt arguments.
 
 
-#+NAME: module-global_prompt-cmus
-#+BEGIN_SRC lua
+#+name: module-global_prompt-cmus
+#+begin_src lua
 
 global_prompt.prompt_cmus = {
    keyword={"cm"}, help="cmus remote",
@@ -4348,7 +4449,7 @@ global_prompt.prompt_cmus = {
                                         name, cur_pos, ncomp)
    end
 }
-#+END_SRC
+#+end_src
 
 
 *** music
@@ -4358,21 +4459,21 @@ the =music.db= file using the =updatedb= program, and song searches are
 performed using the =locate= program (both parts of the =findutils= package).
 The =music.db= file is updated on a schedule (daily) via =crontab=:
 
-#+NAME: cron-musicdb-update
-#+BEGIN_SRC conf
+#+name: cron-musicdb-update
+#+begin_src conf
 
 # Crontab entry for music database update
 0 9 * * * updatedb --require-visibility 0 -U ~/data/music/ -o ~/data/music/music.db > ~/log/update_musicdb.log
-#+END_SRC
+#+end_src
 
 The music prompt defines two keywords:
 - =m= :: play an audio file (with file format in the list defined by
-  =global_prompt.music_ext_list=).  The extra argument is either a full path
-  to a file name in which case the file is played or a search string which is
-  used to interrogate the =music.db= database and obtain a file to play.
+     =global_prompt.music_ext_list=).  The extra argument is either a full path
+     to a file name in which case the file is played or a search string which is
+     used to interrogate the =music.db= database and obtain a file to play.
 - =mc= :: control the existing mplayer instance via a named pipe constructed
-  using =mkfifo=.  Available commands are =pause= (or =p=) and =quit= (or
-  =q=).
+     using =mkfifo=.  Available commands are =pause= (or =p=) and =quit= (or
+     =q=).
 
 Note that the spawned mplayer instance is given a custom class name (=-c
 tmplayer=) to apply a custom [[#rules][rule]] to it: it is placed on the same screen and
@@ -4382,8 +4483,8 @@ The completion function for the =m= keyword performs a search on the argument
 and returns the list of matching files in the =music.db= database.  Completion
 for the =mc= keyword simply lists the available commands.
 
-#+NAME: module-global_prompt-mplayer
-#+BEGIN_SRC lua
+#+name: module-global_prompt-mplayer
+#+begin_src lua
 
 global_prompt.mplayer_pipe = "/tmp/awesome-mplayer.pipe"
 global_prompt.music_folder = "/media/data/music/"
@@ -4402,13 +4503,13 @@ global_prompt.prompt_music = {
          else
             locate_file = global_prompt.music_locate_db
             search_str = name
-            search_str = search_str:gsub("['\"?!-:,]", "\.")
-            search_str = search_str:gsub("[ ]+", "\.*")
+            search_str = search_str:gsub("['\"?!-:,]", ".")
+            search_str = search_str:gsub("[ ]+", ".*")
             for _, ext in ipairs(global_prompt.music_ext_list) do
                local m = "locate -d " .. locate_file ..
                   " -i --limit 1 -r \"" .. search_str .. ".*\\" ..
                   ext .. "$\""
-               local c, err = io.popen(m)
+               local c = assert(io.popen(m, 'r'))
                if c then
                   local mfile = c:read("*line")
                   fname = mfile
@@ -4457,11 +4558,11 @@ global_prompt.prompt_music = {
       if kw == "m" then
          local file_list = {}
          search_str = name
-         search_str = search_str:gsub("['\"?!-:,]", "\.")
-         search_str = search_str:gsub("[ ]+", "\.*")
+         search_str = search_str:gsub("['\"?!-:,]", ".")
+         search_str = search_str:gsub("[ ]+", ".*")
          local m = "locate -d " .. global_prompt.music_locate_db ..
                    " -i -r " .. search_str
-         local c, err = io.popen(m)
+         local c = assert(io.popen(m, 'r'))
          if c then
             local mfiles = c:read("*all")
             c:close()
@@ -4469,7 +4570,7 @@ global_prompt.prompt_music = {
                line_s = line:gsub(global_prompt.music_folder, "")
                if line_s then
                   for _, ext in ipairs(global_prompt.music_ext_list) do
-                     if line_s:find("\." .. ext .. "$") then
+                     if line_s:find(ext .. "$") then
                         table.insert(file_list, line_s)
                      end
                   end
@@ -4492,7 +4593,7 @@ global_prompt.prompt_music = {
       end
    end
 }
-#+END_SRC
+#+end_src
 
 
 
@@ -4503,8 +4604,8 @@ be obtained from a web search (e.g. using [[https://duckduckgo.com/api][duckduck
 currently not implemented and the web prompt simply spawns a web browser window,
 and starts a duckduckgo search with the input arguments.
 
-#+NAME: module-global_prompt-web
-#+BEGIN_SRC lua
+#+name: module-global_prompt-web
+#+begin_src lua
 
 global_prompt.search_url = "https://duckduckgo.com/?q=%s"
 global_prompt.prompt_web = {
@@ -4522,7 +4623,7 @@ global_prompt.prompt_web = {
    end,
    comp_function = nil
 }
-#+END_SRC
+#+end_src
 
 
 ** Main prompt
@@ -4535,8 +4636,8 @@ prompt keyword is found, the remaining arguments are passed to the corresponding
 respectively.
 
 
-#+NAME: module-global_prompt-main
-#+BEGIN_SRC lua
+#+name: module-global_prompt-main
+#+begin_src lua
 
 global_prompt.prompt_list = { global_prompt.prompt_help,
                               global_prompt.prompt_music,
@@ -4600,67 +4701,72 @@ return global_prompt
 -- X Goto window
 -- X mplayer: start in slave, control
 -- (http://ubuntuforums.org/showthread.php?t=1629000)
-#+END_SRC
+#+end_src
 
 
 * Startup applications
 The end of the =rc.lua= file contains a list of applications to run on startup.
 Programs are spawned using the [[#my_utility_run_once][=run_once=]] utility.  The applications launched on
 startup are:
-- =dual_default.sh= which is a =xrandr= script to setup my monitors
+- =screen_default.sh= which is a =xrandr= script to setup my monitors
 - =numlock&= which switches the numlock key on
 - the dropbox daemon
 - the network-manager applet
 - =xscreensaver= for screen locking
 - the UPnP server [[https://wiki.gnome.org/Projects/Rygel][=rygel=]]
-- the RSS reader =newsbeuter=
+- the RSS reader =newsboat=
 - the music player =cmus=
 
-#+NAME: src-startup-apps
-#+BEGIN_SRC lua
-my_utility.run_once(awesome_paths.config_dir .. "/scripts/dual_default.sh")
+#+name: src-startup-apps
+#+begin_src lua
 my_utility.run_once("numlockx&")
-my_utility.run_once(awesome_paths.home_dir .. "/.dropbox-dist/dropboxd") -- dropbox
+my_utility.run_once("bash " .. awesome_paths.config_dir
+                       .. "/scripts/screen_default.sh")
+my_utility.run_once(awesome_paths.home_dir .. "/.dropbox-dist/dropboxd")
 my_utility.run_once("nm-applet") -- networking
 my_utility.run_once("xscreensaver -nosplash")
 my_utility.run_once("rygel")
 -- Compositing (required for transparency)
 --my_utility.run_once("xcompmgr")
 
-my_utility.run_once(termapps .. " -name newsbeuter -e newsbeuter")
+my_utility.run_once(termapps .. " -name newsboat -e newsboat")
 my_utility.run_once(termapps .. " -name cmus -e cmus")
 
 --run_or_raise(terminal)
 --my_utility.run_once("pidgin",nil,nil,2)
-#+END_SRC
+#+end_src
 
-** Dual screen setup script
-The =dual_default.sh= script contains the following command (which should be
+** Screen setup script
+The =screen_default.sh= script contains the following command (which should be
 changed according to the monitor setup):
 
-#+NAME: script-dual_default-sh
-#+BEGIN_SRC sh
-
+#+name: script-screen_default.sh
+#+begin_src sh
 #!/bin/sh
 # Setup screens
-xrandr --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal \
-	   --output DP1 --off --output VGA-0 --mode 1920x1080 --pos 0x0 --rotate normal
-#+END_SRC
+xrandr --setprovideroutputsource 1 0
+xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+	   --output DP-1 --off \
+	   --output VGA-1 --off \
+	   --output VGA-1-2  --mode 1600x900 --pos 3840x0 --rotate normal \
+	   --output HDMI-1-2 --mode 1920x1080 --pos 1920x0 --rotate normal \
+	   --output DVI-I-1-1 --off
+#+end_src
 
 
 * Utilities 
 The =my_utility= module contains some helper functions used throughout the
 configuration.
 
-#+NAME: module-utility-imports
-#+BEGIN_SRC lua
+#+name: module-utility-imports
+#+begin_src lua
 
 local awful = require("awful")
 local naughty = require("naughty")
 local beautiful = require("beautiful")
 
 my_utility = {}
-#+END_SRC
+#+end_src
 
 
 ** String split
@@ -4669,8 +4775,8 @@ The =my_utility.lines= function splits the input string by rows.  A table with
 the lines is returned; it can be iterated over using =for k, v in
 pairs(lines_output)=.  This was taken from http://lua-users.org/wiki/SplitJoin.
 
-#+NAME: module-utility-lines
-#+BEGIN_SRC lua
+#+name: module-utility-lines
+#+begin_src lua
 
 function my_utility.lines(str)
    local t = {}
@@ -4678,7 +4784,7 @@ function my_utility.lines(str)
    helper((str:gsub("(.-)\r?\n", helper)))
    return t
 end
-#+END_SRC
+#+end_src
 
 
 ** HTML escape
@@ -4687,8 +4793,8 @@ Notifications in awesome-wm accept HTML inputs, but there is no built-in
 function to cleanup strings.  The =my_utility.html_escape= function provides
 some very basic escaping.
 
-#+NAME: module-utility-html_escape
-#+BEGIN_SRC lua
+#+name: module-utility-html_escape
+#+begin_src lua
 
 function my_utility.html_escape(str)
    local t = str
@@ -4707,7 +4813,7 @@ function my_utility.filename_escape(str)
 
    return t
 end
-#+END_SRC
+#+end_src
 
 
 ** File listing
@@ -4715,25 +4821,27 @@ end
 The =scandir= utility lists files in a given folder (from
 http://stackoverflow.com/a/11130774).
 
-#+NAME: module-utility-scandir
-#+BEGIN_SRC lua
+#+name: module-utility-scandir
+#+begin_src lua
 
 -- Lua implementation of scandir function
 function my_utility.scandir(directory, pattern)
     local i, t, popen = 0, {}, io.popen
-    for filename in popen('ls -a "'..directory..'/"'..pattern):lines() do
+    local f = assert(popen('ls -a "'..directory..'/"'..pattern, 'r'))
+    for filename in f:lines() do
         i = i + 1
         t[i] = string.gsub(filename, "//", "/")
     end
+    f:close()
     return t
 end
-#+END_SRC
+#+end_src
 
 
 ** Table operations
 
-#+NAME: module-utility-scandir
-#+BEGIN_SRC lua
+#+name: module-utility-scandir
+#+begin_src lua
 
 -- Remove paths from list of paths (based on last folder)
 function my_utility.table_path_remove(table_in, remove_list)
@@ -4750,7 +4858,7 @@ function my_utility.table_path_remove(table_in, remove_list)
    end
 
 end
-#+END_SRC
+#+end_src
 
 
 
@@ -4762,8 +4870,8 @@ entered in the promptbox.  Note that, since the promptbox is barely visible, the
 color of the whole wibox (on the current screen) is temporarily set to
 =beautiful.bg_urgent= / =beautiful.fg_urgent=.
 
-#+NAME: module-utility-confirm
-#+BEGIN_SRC lua
+#+name: module-utility-confirm
+#+begin_src lua
 
 function my_utility.confirm_action(func, name)
    awful.screen.focused().mywibox:set_bg(beautiful.bg_urgent)
@@ -4785,13 +4893,13 @@ function my_utility.confirm_action(func, name)
          end
    }
 end
-#+END_SRC
+#+end_src
 
 Here is an example of usage using =awesome-client=, with a screenshot of the
 confirmation prompt on Fig.\nbsp{}[[img-confirm_action]].
 
-#+NAME: sh-scrot-confirm_action
-#+BEGIN_SRC sh
+#+name: sh-scrot-confirm_action
+#+begin_src sh
 
 # Could get these from xrandr
 res_x=1920
@@ -4812,10 +4920,10 @@ sleep 0.5
 scrot desktop.png
 convert desktop.png -crop ${width}x${height}+${start_x}+0 desktop-confirm_action.png
 rm desktop.png -rf
-#+END_SRC
+#+end_src
 
-#+NAME: img-confirm_action
-#+CAPTION: Confirmation prompt before shutdown (left-most text).
+#+name: img-confirm_action
+#+caption: Confirmation prompt before shutdown (left-most text).
 [[file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm-action.png][file:../images/2016-10-05-Awesome-wm_configuration/desktop-confirm-action.png]]
 
 
@@ -4824,8 +4932,8 @@ The =run_once= utility is a commonly used lua function to spawn a program if is
 not already running.  The code is from
 https://awesome.naquadah.org/wiki/Autostart.
 
-#+NAME: module-utility-run_once
-#+BEGIN_SRC lua
+#+name: module-utility-run_once
+#+begin_src lua
 
 function my_utility.run_once(prg, arg_string, pname, s, tag)
     if not prg then
@@ -4845,7 +4953,9 @@ function my_utility.run_once(prg, arg_string, pname, s, tag)
     end
     cmd = "pgrep -f -u $USER -x '" .. cmd_pgrep .. "' || (" .. cmd_exe .. ")"
     if s and tag then
-       local pid = io.popen("pgrep -f -x '" .. cmd_pgrep .. "'"):read("*all")
+       local out = assert(io.popen("pgrep -f -x '" .. cmd_pgrep .. "'"))
+       local pid = out:read("*all")
+       out:close()
        if pid == "" then
           awful.spawn(cmd_exe, { tag = screen[s].tags[tag] })
        end
@@ -4853,7 +4963,7 @@ function my_utility.run_once(prg, arg_string, pname, s, tag)
        awful.spawn.with_shell(cmd)
     end
 end
-#+END_SRC
+#+end_src
 
 
 ** Return object
@@ -4861,11 +4971,11 @@ end
 The module is instantiated by =local my_utility = require("my_utility")= and
 functions are called using =my_utility.function(...)=.
 
-#+NAME: module-utility-close
-#+BEGIN_SRC lua
+#+name: module-utility-close
+#+begin_src lua
 
 return my_utility
-#+END_SRC
+#+end_src
 
 
 * Resources

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<!-- Created by htmlize-1.51 in css mode. -->
+<!-- Created by htmlize-1.54 in css mode. -->
 <html>
   <head>
     <title>2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.org</title>
@@ -8,6 +8,10 @@
       body {
         color: #657b83;
         background-color: #fdf6e3;
+      }
+      .bold {
+        /* bold */
+        font-weight: bold;
       }
       .builtin {
         /* font-lock-builtin-face */
@@ -34,6 +38,10 @@
       .function-name {
         /* font-lock-function-name-face */
         color: #0000ff;
+      }
+      .italic {
+        /* italic */
+        font-style: italic;
       }
       .keyword {
         /* font-lock-keyword-face */
@@ -201,26 +209,26 @@
   </head>
   <body>
     <pre>
-<span class="org-meta-line">#+INCLUDE: ../source-blocks.org</span>
-<span class="org-meta-line">#+SETUPFILE: ../setup.org</span>
-<span class="org-document-info-keyword">#+TITLE:</span> <span class="org-document-title">hpp2plantuml - Convert C++ header files to PlantUML
-</span><span class="org-document-info-keyword">#+DATE:</span> <span class="org-document-info">&lt;2016-11-30 Wed&gt;
-</span><span class="org-meta-line">#+OPTIONS: todo:nil ^:nil</span>
-<span class="org-meta-line">#+TODO: TODO REVIEW | DONE DEFERRED ABANDONED</span>
-<span class="org-meta-line">#+MACRO: tt \nbsp{}</span>
-<span class="org-meta-line">#+PROPERTY: header-args:conf+ :eval never</span>
-<span class="org-meta-line">#+PROPERTY: header-args:c+++ :eval never</span>
-<span class="org-meta-line">#+PROPERTY: header-args:plantuml+ :eval never</span>
-<span class="org-meta-line">#+PROPERTY: header-args:rst+ :eval never</span>
-<span class="org-meta-line">#+PROPERTY: header-args+ :exports code :results silent</span>
-<span class="org-meta-line">#+PROPERTY: header-args:python+ :tangle src/hpp2plantuml/hpp2plantuml.py :mkdirp yes :eval no</span>
+<span class="org-meta-line">#+include: ../source-blocks.org</span>
+<span class="org-meta-line">#+setupfile: ../setup.org</span>
+<span class="org-document-info-keyword">#+title:</span> <span class="org-document-title">hpp2plantuml - Convert C++ header files to PlantUML
+</span><span class="org-document-info-keyword">#+date:</span> <span class="org-document-info">&lt;2016-11-30 Wed&gt;
+</span><span class="org-meta-line">#+options: todo:nil ^:nil</span>
+<span class="org-meta-line">#+todo: TODO REVIEW | DONE DEFERRED ABANDONED</span>
+<span class="org-meta-line">#+macro: tt \nbsp{}</span>
+<span class="org-meta-line">#+property: header-args:conf+ :eval never</span>
+<span class="org-meta-line">#+property: header-args:c+++ :eval never</span>
+<span class="org-meta-line">#+property: header-args:plantuml+ :eval never</span>
+<span class="org-meta-line">#+property: header-args:rst+ :eval never</span>
+<span class="org-meta-line">#+property: header-args+ :exports code :results silent</span>
+<span class="org-meta-line">#+property: header-args:python+ :tangle src/hpp2plantuml/hpp2plantuml.py :mkdirp yes :eval no</span>
 
 This is the documentation for the <span class="org-verbatim">=hpp2plantuml=</span> package, fully contained within
 this single org-file.
 
 The current version of the code is:
-<span class="org-meta-line">#+NAME: hpp2plantuml-version</span>
-<span class="org-code">: 0.2
+<span class="org-meta-line">#+name: hpp2plantuml-version</span>
+<span class="org-code">: 0.3
 </span>
 The source code can be found on GitHub:
 <span class="org-link"><a href="https://github.com/thibaultmarin/hpp2plantuml">https://github.com/thibaultmarin/hpp2plantuml</a></span>.
@@ -252,8 +260,8 @@ files.
 
 The license adopted for this project is the MIT license.
 
-<span class="org-meta-line">#+NAME: license</span>
-<span class="org-block-begin-line">#+BEGIN_SRC conf :tangle LICENSE
+<span class="org-meta-line">#+name: license</span>
+<span class="org-block-begin-line">#+begin_src conf :tangle LICENSE
 </span><span class="org-block">
 </span><span class="org-block"><span class="variable-name">The</span></span><span class="org-block"> MIT License (MIT)
 
@@ -276,7 +284,7 @@ The license adopted for this project is the MIT license.
 </span><span class="org-block"><span class="variable-name">LIABILITY,</span></span><span class="org-block"> WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 </span><span class="org-block"><span class="variable-name">OUT</span></span><span class="org-block"> OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 </span><span class="org-block"><span class="variable-name">THE</span></span><span class="org-block"> SOFTWARE.
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Requirements</span>
@@ -284,16 +292,16 @@ The license adopted for this project is the MIT license.
 This module has mostly standard dependencies; the only exception is the
 <span class="org-link"><a href="http://senexcanis.com/open-source/cppheaderparser/">CppHeaderParser</a></span> module used to parse header files.
 
-<span class="org-meta-line">#+NAME: py-dependency-list</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of dependencies.</span>
+<span class="org-meta-line">#+name: py-dependency-list</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">List of dependencies.</span>
 <span class="org-table">| argparse        |</span>
 <span class="org-table">| CppHeaderParser |</span>
 
 The full list of non-standard dependencies is produced by the following source
 block (returning either imports or a dependency list used in <span class="org-link"><a href="#sec-package-setup-py">=setup.py=</a></span>):
 
-<span class="org-meta-line">#+NAME: py-dependencies</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :var output="import" :var dep-list=py-dependency-list :results value :eval yes
+<span class="org-meta-line">#+name: py-dependencies</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :var output="import" :var dep-list=py-dependency-list :results value :eval yes
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">cond</span></span><span class="org-block">
  ((string= output </span><span class="org-block"><span class="string">"import"</span></span><span class="org-block">)
   (mapconcat
@@ -303,16 +311,16 @@ block (returning either imports or a dependency list used in <span class="org-li
           (mapconcat
            (</span><span class="org-block"><span class="keyword">lambda</span></span><span class="org-block"> (el) (concat </span><span class="org-block"><span class="string">"'"</span></span><span class="org-block"> (car el) </span><span class="org-block"><span class="string">"'"</span></span><span class="org-block">)) dep-list </span><span class="org-block"><span class="string">", "</span></span><span class="org-block">)
           </span><span class="org-block"><span class="string">"]"</span></span><span class="org-block">)))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
-<span class="org-meta-line">#+NAME: py-imports</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python :noweb yes
+<span class="org-meta-line">#+name: py-imports</span>
+<span class="org-block-begin-line">#+begin_src python :noweb yes
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Imports</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> re
 </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> glob
 &lt;&lt;py-dependencies(</span><span class="org-block"><span class="string">"import"</span></span><span class="org-block">)&gt;&gt;
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 The tests rely on the <span class="org-link"><a href="http://nose.readthedocs.io/en/latest/">nosetest</a></span> framework and the package documentation is built
 with <span class="org-link"><a href="http://sphinx-doc.org">Sphinx</a></span>.
@@ -353,8 +361,8 @@ of elementary properties and links.
 - <span class="org-code">~CONTAINER_TYPE_MAP~</span> associates object types with internal classes used for
   their representation.
 
-<span class="org-meta-line">#+NAME: py-constants</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-constants</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Constants</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -381,7 +389,7 @@ of elementary properties and links.
     [</span><span class="org-block"><span class="string">'structs'</span></span><span class="org-block">, </span><span class="org-block"><span class="keyword">lambda</span></span><span class="org-block"> objs: objs.items(), </span><span class="org-block"><span class="keyword">lambda</span></span><span class="org-block"> obj: Struct(obj)],
     [</span><span class="org-block"><span class="string">'enums'</span></span><span class="org-block">, </span><span class="org-block"><span class="keyword">lambda</span></span><span class="org-block"> objs: objs, </span><span class="org-block"><span class="keyword">lambda</span></span><span class="org-block"> obj: Enum(obj)]
 ]
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Objects</span>
@@ -412,8 +420,8 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
   definition (e.g. "class TestClass") and its members (e.g. member variables and
   methods).
 
-<span class="org-meta-line">#+NAME: py-obj-container</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-obj-container</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Base classes</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -428,8 +436,8 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
         Parameters
         ----------
         container_type : str
-            String representation of container type (``class``, ``struct`` or
-            ``enum``)
+            String representation of container type (</span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">class</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">, </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">struct</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> or
+            </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">enum</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">)
         name : str
             Object name
         """</span></span><span class="org-block">
@@ -459,7 +467,7 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
             Parsed header for container
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">raise</span></span><span class="org-block"> </span><span class="org-block"><span class="type">NotImplementedError</span></span><span class="org-block">(
-            </span><span class="org-block"><span class="string">'Derived class must implement :func:`parse_members`.'</span></span><span class="org-block">)
+            </span><span class="org-block"><span class="string">'Derived class must implement </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`parse_members`</span></span><span class="org-block"><span class="string">.'</span></span><span class="org-block">)
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">render</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Render object to string
@@ -506,15 +514,15 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
             Container type and name as string
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._container_type + </span><span class="org-block"><span class="string">' '</span></span><span class="org-block"> + </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._name
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 Members of <span class="org-code">~Container~</span> objects (e.g. class member variable) are inherited from
 the <span class="org-code">~ContainerMember~</span> class.  The interface only includes a <span class="org-code">~render~</span> method
 returning a string representation of the member.  The base class
 <span class="org-code">~ContainerMember~</span> defines this method abstract.
 
-<span class="org-meta-line">#+NAME: py-obj-container-member</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-obj-container-member</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Object member</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -561,7 +569,7 @@ returning a string representation of the member.  The base class
             </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._type, </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._name
         </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
             </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._name
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Classes</span>
@@ -571,8 +579,8 @@ C++ class objects are represented using the <span class="org-code">~Class~</span
 parent classes.  It also offers a method to extract the types of its members,
 which is used to determine aggregation relationships between classes.
 
-<span class="org-meta-line">#+NAME: py-render-classes</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-render-classes</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Class object</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -593,7 +601,7 @@ which is used to determine aggregation relationships between classes.
 
         Extract the class name and properties (template, abstract) and
         inheritance.  Then, extract the class members from the header using the
-        :func:`parse_members` method.
+        </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`parse_members`</span></span><span class="org-block"><span class="doc"> method.
 
         Parameters
         ----------
@@ -676,7 +684,7 @@ which is used to determine aggregation relationships between classes.
         </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._template_type </span><span class="org-block"><span class="keyword">is</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">:
             </span><span class="org-block"><span class="variable-name">class_str</span></span><span class="org-block"> += </span><span class="org-block"><span class="string">' &lt;{0}&gt;'</span></span><span class="org-block">.</span><span class="org-block"><span class="builtin">format</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._template_type)
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> class_str
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Class members</span>
@@ -694,8 +702,8 @@ of the member is mostly common between variables and methods.  The <span class="
 class provides the common rendering and relies on child classes implementing the
 <span class="org-code">~_render_name~</span> method for specialization.
 
-<span class="org-meta-line">#+NAME: py-obj-class_member</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-obj-class_member</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Class member</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -703,8 +711,8 @@ class provides the common rendering and relies on child classes implementing the
     </span><span class="org-block"><span class="doc">"""Class member (variable and method) representation
 
     This class is the base class for class members.  The representation
-    includes the member type (variable or method), name, scope (``public``,
-    ``private`` or ``protected``) and a static flag.
+    includes the member type (variable or method), name, scope (</span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">public</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">,
+    </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">private</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> or </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">protected</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">) and a static flag.
 
     """</span></span><span class="org-block">
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, class_member, member_scope=</span><span class="org-block"><span class="string">'private'</span></span><span class="org-block">):
@@ -715,7 +723,7 @@ class provides the common rendering and relies on child classes implementing the
         class_member : CppVariable or CppMethod
             Parsed member object (variable or method)
         member_scope : str
-            Member scope property: ``public``, ``private`` or ``protected``
+            Member scope property: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">public</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">, </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">private</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> or </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">protected</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(class_member[</span><span class="org-block"><span class="string">'name'</span></span><span class="org-block">])
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._type = </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">
@@ -728,10 +736,10 @@ class provides the common rendering and relies on child classes implementing the
 
         The string representation is with the scope indicator and a static
         keyword when the member is static.  It is postfixed by the type (return
-        type for class methods) and additional properties (e.g. ``const``
-        methods are flagged with the ``query`` property).  The inner part of
+        type for class methods) and additional properties (e.g. </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">const</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
+        methods are flagged with the </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">query</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> property).  The inner part of
         the returned string contains the variable name and signature for
-        methods.  This is obtained using the :func:`_render_name` method.
+        methods.  This is obtained using the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_render_name`</span></span><span class="org-block"><span class="doc"> method.
 
         Returns
         -------
@@ -758,7 +766,7 @@ class provides the common rendering and relies on child classes implementing the
         (e.g. add the function prototype for member functions)
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._name
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Properties</span>
@@ -770,8 +778,8 @@ The specialization required for class member variables is minimal: the member
 type is extracted from the parsed dictionary, and the rest of the setup is left
 to the <span class="org-link"><a href="#sec-module-class-member">parent class</a></span>.
 
-<span class="org-meta-line">#+NAME: py-obj-class_variable</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-obj-class_variable</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Class variable</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -808,7 +816,7 @@ to the <span class="org-link"><a href="#sec-module-class-member">parent class</a
             Variable type as string
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._type
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Methods</span>
@@ -825,8 +833,8 @@ The name rendering includes the method signature.  An option to shorten the list
 of parameters by keeping only types or variable names or using ellipsis may be
 implemented in the future.
 
-<span class="org-meta-line">#+NAME: py-obj-class_method</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-obj-class_method</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Class method</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -843,8 +851,8 @@ implemented in the future.
         header.
 
         ,* A list of parameter types is stored to retain the function signature.
-        ,* The ``~`` character is appended to destructor methods.
-        ,* ``const`` methods are flagged with the ``query`` property.
+        ,* The </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">~</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> character is appended to destructor methods.
+        ,* </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">const</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> methods are flagged with the </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">query</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> property.
 
         Parameters
         ----------
@@ -877,13 +885,13 @@ implemented in the future.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_render_name</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Internal rendering of method name
 
-        This method extends the base :func:`ClassMember._render_name` method by
+        This method extends the base </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`ClassMember._render_name`</span></span><span class="org-block"><span class="doc"> method by
         adding the method signature to the returned string.
 
         Returns
         -------
         str
-            The method name (prefixed with the ``abstract`` keyword when
+            The method name (prefixed with the </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">abstract</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> keyword when
             appropriate) and signature
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">assert</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._static </span><span class="org-block"><span class="keyword">or</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._abstract)
@@ -894,7 +902,7 @@ implemented in the future.
                                </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> it </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._param_list) + </span><span class="org-block"><span class="string">')'</span></span><span class="org-block">
 
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> method_str
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Structures</span>
@@ -903,8 +911,8 @@ While <span class="org-code">~struct~</span> objects are currently not supported
 relatively straightforward and the <span class="org-code">~Struct~</span> class may simply inherit from the
 <span class="org-code">~Class~</span> class.  The following should give a starting point.
 
-<span class="org-meta-line">#+NAME: py-render-structs</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-render-structs</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Struct object</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -926,7 +934,7 @@ relatively straightforward and the <span class="org-code">~Struct~</span> class 
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(header_struct[0])
         </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">(Class).__init__(</span><span class="org-block"><span class="string">'struct'</span></span><span class="org-block">)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Enumeration lists</span>
@@ -935,8 +943,8 @@ The <span class="org-code">~Enum~</span> class representing enumeration object i
 base <span class="org-link"><a href="#sec-module-container">~Container~</a></span> class.  Note that the enumeration elements are rendered without
 the actual values.
 
-<span class="org-meta-line">#+NAME: py-render-enums</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-render-enums</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Enum object</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -954,7 +962,7 @@ the actual values.
         header_enum : CppEnum
             Parsed CppEnum object
         """</span></span><span class="org-block">
-        </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(</span><span class="org-block"><span class="string">'enum'</span></span><span class="org-block">, header_enum[</span><span class="org-block"><span class="string">'name'</span></span><span class="org-block">])
+        </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(</span><span class="org-block"><span class="string">'enum'</span></span><span class="org-block">, header_enum.get(</span><span class="org-block"><span class="string">'name'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'empty'</span></span><span class="org-block">))
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.parse_members(header_enum)
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">parse_members</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_enum):
@@ -996,7 +1004,7 @@ the actual values.
             The enumeration element name
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._name
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Class relationships</span>
@@ -1015,8 +1023,8 @@ relationships: a parent, a child and a connection type.  All are saved as
 strings and the text representation of a connection link is obtained from the
 <span class="org-link"><a href="#sec-module-constants">~CONTAINER_TYPE_MAP~ constant</a></span>.
 
-<span class="org-meta-line">#+NAME: py-class_relationship</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-class_relationship</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Class connections</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1033,7 +1041,7 @@ strings and the text representation of a connection link is obtained from the
         Parameters
         ----------
         link_type : str
-            Relationship type: ``inherit`` or ``aggregation``
+            Relationship type: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">inherit</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> or </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">aggregation</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         c_parent : str
             Name of parent class
         c_child : str
@@ -1060,7 +1068,7 @@ strings and the text representation of a connection link is obtained from the
         </span><span class="org-block"><span class="doc">"""Render class relationship to string
 
         This method generically appends the parent name, a rendering of the
-        link type (obtained from the :func:`_render_link_type` method) and the
+        link type (obtained from the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_render_link_type`</span></span><span class="org-block"><span class="doc"> method) and the
         child object name.
 
         Returns
@@ -1084,7 +1092,7 @@ strings and the text representation of a connection link is obtained from the
             The link between parent and child following the PlantUML syntax
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> LINK_TYPE_MAP[</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._link_type]
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Inheritance</span>
@@ -1093,8 +1101,8 @@ The inheritance relationship is a straightforward specialization of the base
 <span class="org-code">~ClassRelationship~</span> class: it simply forces the link type to be the string
 "inherit".
 
-<span class="org-meta-line">#+NAME: py-class_inheritance</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-class_inheritance</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Class inheritance</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1102,7 +1110,7 @@ The inheritance relationship is a straightforward specialization of the base
     </span><span class="org-block"><span class="doc">"""Representation of inheritance relationships
 
     This module extends the base `ClassRelationship` class by setting the link
-    type to ``inherit``.
+    type to </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">inherit</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">.
     """</span></span><span class="org-block">
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, c_parent, c_child):
         </span><span class="org-block"><span class="doc">"""Constructor
@@ -1115,7 +1123,7 @@ The inheritance relationship is a straightforward specialization of the base
             Derived class
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(</span><span class="org-block"><span class="string">'inherit'</span></span><span class="org-block">, c_parent, c_child)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Aggregation</span>
@@ -1125,8 +1133,8 @@ using the "aggregation" link type and adding a <span class="org-code">~count~</s
 with the number of instances of the parent class in the PlantUML diagram (the
 count is omitted when equal to one).
 
-<span class="org-meta-line">#+NAME: py-class_aggregation</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-class_aggregation</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Class aggregation</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1134,7 +1142,7 @@ count is omitted when equal to one).
     </span><span class="org-block"><span class="doc">"""Representation of aggregation relationships
 
     This module extends the base `ClassRelationship` class by setting the link
-    type to ``aggregation``.  It also keeps a count of aggregation, which is
+    type to </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">aggregation</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">.  It also keeps a count of aggregation, which is
     displayed near the arrow when using PlantUML.
 
     Aggregation relationships are simplified to represent the presence of a
@@ -1152,8 +1160,8 @@ count is omitted when equal to one).
         c_child : str
             Child (or client) class of the aggregation relationship
         c_cout : int
-            The number of members of ``c_child`` that are of type (possibly
-            through containers) ``c_parent``
+            The number of members of </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">c_child</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> that are of type (possibly
+            through containers) </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">c_parent</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(</span><span class="org-block"><span class="string">'aggregation'</span></span><span class="org-block">, c_parent, c_child)
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._count = c_count
@@ -1162,12 +1170,12 @@ count is omitted when equal to one).
         </span><span class="org-block"><span class="doc">"""Internal link rendering
 
         This method overrides the default link rendering defined in
-        :func:`ClassRelationship._render_link_type` to include a count near the
+        </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`ClassRelationship._render_link_type`</span></span><span class="org-block"><span class="doc"> to include a count near the
         end of the arrow.
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="variable-name">count_str</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">''</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._count == 1 </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'"%d" '</span></span><span class="org-block"> % </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._count
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> count_str + LINK_TYPE_MAP[</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._link_type]
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Diagram object</span>
@@ -1181,21 +1189,21 @@ lists of relationships and provides rendering facilities to produce a string
 ready to process by PlantUML.
 
 An example use case for the <span class="org-code">~Diagram~</span> class could be:
-<span class="org-meta-line">#+NAME: py-diag-example</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python :tangle no
+<span class="org-meta-line">#+name: py-diag-example</span>
+<span class="org-block-begin-line">#+begin_src python :tangle no
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Create object
 </span></span><span class="org-block"><span class="variable-name">diag</span></span><span class="org-block"> = Diagram()
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Initialize from filename
 </span></span><span class="org-block">diag.create_from_file(filename)
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Get output string following PlantUML syntax
 </span></span><span class="org-block"><span class="variable-name">output_string</span></span><span class="org-block"> = diag.render()
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 The interface methods and their behavior are summarized in
 Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-diagram-interface">tbl-diagram-interface</a></span>.
 
-<span class="org-meta-line">#+NAME: tbl-diagram-interface</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">Public interface for populating a ~Diagram~ object.</span>
+<span class="org-meta-line">#+name: tbl-diagram-interface</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">Public interface for populating a ~Diagram~ object.</span>
 <span class="org-table">| Method name             | input type | input list? | reset? | sort? | build lists? |</span>
 <span class="org-table">|-------------------------+------------+-------------+--------+-------+--------------|</span>
 <span class="org-table">| create_from_file        | file       | no          | yes    | yes   | yes          |</span>
@@ -1234,8 +1242,8 @@ members are sorted by type and name and relationships are sorted by parent name,
 child name and link type if necessary.  The <span class="org-code">~add_from_*~</span> interface methods can
 be used to avoid this sorting step.
 
-<span class="org-meta-line">#+NAME: py-obj-diagram</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-obj-diagram</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Diagram class</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1245,8 +1253,8 @@ be used to avoid this sorting step.
     This class lists the objects in the set of files considere, and the
     relationships between object.
 
-    The main interface to the `Diagram` object is via the ``create_*`` and
-    ``add_*`` methods.  The former parses objects and builds relationship lists
+    The main interface to the `Diagram` object is via the </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">create_*</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> and
+    </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">add_*</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> methods.  The former parses objects and builds relationship lists
     between the different parsed objects.  The latter only parses objects and
     does not builds relationship lists.
 
@@ -1273,7 +1281,7 @@ be used to avoid this sorting step.
         Parameters
         ----------
         input_list : list(ClassRelationship)
-            Sort list using the :func:`ClassRelationship.comparison_keys`
+            Sort list using the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`ClassRelationship.comparison_keys`</span></span><span class="org-block"><span class="doc">
             comparison function
         """</span></span><span class="org-block">
         input_list.sort(key=</span><span class="org-block"><span class="keyword">lambda</span></span><span class="org-block"> obj: obj.comparison_keys())
@@ -1282,7 +1290,7 @@ be used to avoid this sorting step.
         </span><span class="org-block"><span class="doc">"""Sort elements in diagram
 
         Sort the objects and relationship links.  Objects are sorted using the
-        :func:`Container.comparison_keys` comparison function and list are
+        </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`Container.comparison_keys`</span></span><span class="org-block"><span class="doc"> comparison function and list are
         sorted using the `_sort_list` helper function.
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects.sort(key=</span><span class="org-block"><span class="keyword">lambda</span></span><span class="org-block"> obj: obj.comparison_keys())
@@ -1299,15 +1307,15 @@ be used to avoid this sorting step.
         ----------
         input : CppHeader or str or list(CppHeader) or list(str)
             Input of arbitrary type.  The processing depends on the
-            ``build_from`` parameter
+            </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">build_from</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> parameter
         build_from : str
-            Determines the type of the ``input`` variable:
+            Determines the type of the </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">input</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> variable:
 
-            ,* ``string``: ``input`` is a string containing C++ header code
-            ,* ``file``: ``input`` is a filename to parse
-            ,* ``string_list``: ``input`` is a list of strings containing C++
+            ,* </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">string</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">input</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> is a string containing C++ header code
+            ,* </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">file</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">input</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> is a filename to parse
+            ,* </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">string_list</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">input</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> is a list of strings containing C++
               header code
-            ,* ``file_list``: ``input`` is a list of filenames to parse
+            ,* </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">file_list</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">input</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> is a list of filenames to parse
 
         flag_build_lists : bool
             When True, relationships lists are built and the objects in the
@@ -1332,7 +1340,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">create_from_file</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_file):
         </span><span class="org-block"><span class="doc">"""Initialize `Diagram` object from header file
 
-        Wrapper around the :func:`_build_helper` function, with ``file`` input,
+        Wrapper around the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_build_helper`</span></span><span class="org-block"><span class="doc"> function, with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">file</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> input,
         building the relationship lists and with object reset.
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._build_helper(header_file, build_from=</span><span class="org-block"><span class="string">'file'</span></span><span class="org-block">,
@@ -1341,7 +1349,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">create_from_file_list</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, file_list):
         </span><span class="org-block"><span class="doc">"""Initialize `Diagram` object from list of header files
 
-        Wrapper around the :func:`_build_helper` function, with ``file_list``
+        Wrapper around the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_build_helper`</span></span><span class="org-block"><span class="doc"> function, with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">file_list</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         input, building the relationship lists and with object reset.
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._build_helper(file_list, build_from=</span><span class="org-block"><span class="string">'file_list'</span></span><span class="org-block">,
@@ -1350,7 +1358,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">add_from_file</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_file):
         </span><span class="org-block"><span class="doc">"""Augment `Diagram` object from header file
 
-        Wrapper around the :func:`_build_helper` function, with ``file`` input,
+        Wrapper around the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_build_helper`</span></span><span class="org-block"><span class="doc"> function, with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">file</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> input,
         skipping building of the relationship lists and without object reset
         (new objects are added to the object).
         """</span></span><span class="org-block">
@@ -1360,7 +1368,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">add_from_file_list</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, file_list):
         </span><span class="org-block"><span class="doc">"""Augment `Diagram` object from list of header files
 
-        Wrapper around the :func:`_build_helper` function, with ``file_list``
+        Wrapper around the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_build_helper`</span></span><span class="org-block"><span class="doc"> function, with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">file_list</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         input, skipping building of the relationship lists and without object
         reset (new objects are added to the object).
         """</span></span><span class="org-block">
@@ -1370,7 +1378,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">create_from_string</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_string):
         </span><span class="org-block"><span class="doc">"""Initialize `Diagram` object from header string
 
-        Wrapper around the :func:`_build_helper` function, with ``string``
+        Wrapper around the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_build_helper`</span></span><span class="org-block"><span class="doc"> function, with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">string</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         input, building the relationship lists and with object reset.
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._build_helper(header_string, build_from=</span><span class="org-block"><span class="string">'string'</span></span><span class="org-block">,
@@ -1379,7 +1387,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">create_from_string_list</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, string_list):
         </span><span class="org-block"><span class="doc">"""Initialize `Diagram` object from list of header strings
 
-        Wrapper around the :func:`_build_helper` function, with ``string_list``
+        Wrapper around the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_build_helper`</span></span><span class="org-block"><span class="doc"> function, with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">string_list</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         input, skipping building of the relationship lists and with object
         reset.
         """</span></span><span class="org-block">
@@ -1389,7 +1397,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">add_from_string</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_string):
         </span><span class="org-block"><span class="doc">"""Augment `Diagram` object from header string
 
-        Wrapper around the :func:`_build_helper` function, with ``string``
+        Wrapper around the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_build_helper`</span></span><span class="org-block"><span class="doc"> function, with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">string</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         input, skipping building of the relationship lists and without object
         reset (new objects are added to the object).
         """</span></span><span class="org-block">
@@ -1399,7 +1407,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">add_from_string_list</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, string_list):
         </span><span class="org-block"><span class="doc">"""Augment `Diagram` object from list of header strings
 
-        Wrapper around the :func:`_build_helper` function, with ``string_list``
+        Wrapper around the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_build_helper`</span></span><span class="org-block"><span class="doc"> function, with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">string_list</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         input, building the relationship lists and without object reset (new
         objects are added to the object).
         """</span></span><span class="org-block">
@@ -1409,8 +1417,8 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">build_relationship_lists</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Build inheritance and aggregation lists from parsed objects
 
-        This method successively calls the :func:`build_inheritance_list` and
-        :func:`build_aggregation_list` methods.
+        This method successively calls the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`build_inheritance_list`</span></span><span class="org-block"><span class="doc"> and
+        </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`build_aggregation_list`</span></span><span class="org-block"><span class="doc"> methods.
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.build_inheritance_list()
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.build_aggregation_list()
@@ -1427,7 +1435,7 @@ be used to avoid this sorting step.
             A string containing C++ header code or a filename with C++ header
             code
         arg_type : str
-            It set to ``string``, ``header_file`` is considered to be a string,
+            It set to </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">string</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">, </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">header_file</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> is considered to be a string,
             otherwise, it is assumed to be a filename
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Parse header file
@@ -1474,7 +1482,7 @@ be used to avoid this sorting step.
         a count of occurrences).
 
         The procedure first build an internal dictionary of relationships
-        found, augmenting the count using the :func:`_augment_comp` function.
+        found, augmenting the count using the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_augment_comp`</span></span><span class="org-block"><span class="doc"> function.
         In a second phase, `ClassAggregationRelationship` objects are created
         for each relationships, using the calculated count.
         """</span></span><span class="org-block">
@@ -1509,7 +1517,7 @@ be used to avoid this sorting step.
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_augment_comp</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, c_dict, c_parent, c_child):
         </span><span class="org-block"><span class="doc">"""Increment the aggregation reference count
 
-        If the aggregation relationship is not in the list (``c_dict``), then
+        If the aggregation relationship is not in the list (</span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">c_dict</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">), then
         add a new entry with count 1.  If the relationship is already in the
         list, then increment the count.
 
@@ -1573,7 +1581,7 @@ be used to avoid this sorting step.
         Returns
         -------
         str
-            The PlantUML preamble text: ``@startuml``
+            The PlantUML preamble text: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">@startuml</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'@startuml\n'</span></span><span class="org-block">
 
@@ -1583,30 +1591,31 @@ be used to avoid this sorting step.
         Returns
         -------
         str
-            The PlantUML postamble text: ``@enduml``
+            The PlantUML postamble text: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">@enduml</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'\n@enduml\n'</span></span><span class="org-block">
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Helper functions</span>
 
 This section briefly describes the helper functions defined in the module.
 
+
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Sanitize type string</span>
 
 The <span class="org-code">~_cleanup_type~</span> function tries to unify the string representation of
 variable types by eliminating spaces around <span class="org-verbatim">=*=</span> characters.
 
-<span class="org-meta-line">#+NAME: py-helper-cleanup-str</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-helper-cleanup-str</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Cleanup object type string</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
 </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_cleanup_type</span></span><span class="org-block">(type_str):
     </span><span class="org-block"><span class="doc">"""Cleanup string representing a C++ type
 
-    Cleanup simply consists in removing spaces before a ``*`` character and
+    Cleanup simply consists in removing spaces before a </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">*</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> character and
     preventing multiple successive spaces in the string.
 
     Parameters
@@ -1621,7 +1630,7 @@ variable types by eliminating spaces around <span class="org-verbatim">=*=</span
     """</span></span><span class="org-block">
     </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> re.sub(r</span><span class="org-block"><span class="string">'[ ]+([*&amp;])'</span></span><span class="org-block">, r</span><span class="org-block"><span class="string">'\1'</span></span><span class="org-block">,
                   re.sub(r</span><span class="org-block"><span class="string">'(\s)+'</span></span><span class="org-block">, r</span><span class="org-block"><span class="string">'\1'</span></span><span class="org-block">, type_str))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Expand file list</span>
@@ -1631,8 +1640,8 @@ using the <span class="org-verbatim">=glob=</span> package.  The <span class="or
 of filenames and expands wildcards using the <span class="org-code">~glob~</span> command returning a list of
 existing filenames without wildcards.
 
-<span class="org-meta-line">#+NAME: py-build-file-list</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-build-file-list</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Expand wildcards in file list</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1658,7 +1667,7 @@ existing filenames without wildcards.
     </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> input_file </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> input_files:
         </span><span class="org-block"><span class="variable-name">file_list</span></span><span class="org-block"> += glob.glob(input_file)
     </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> file_list
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Main function: create PlantUML from C++</span>
@@ -1675,8 +1684,8 @@ The function creates a <span class="org-code">~Diagram~</span> object, initializ
 of input files and writes the content of the <span class="org-code">~Diagram.render()~</span> method to the
 output file.
 
-<span class="org-meta-line">#+NAME: py-create-plantuml</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-create-plantuml</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Main function</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1690,7 +1699,7 @@ output file.
     ----------
     file_list : list(str)
         List of filenames (possibly, with wildcards resolved with the
-        :func:`expand_file_list` function)
+        </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`expand_file_list`</span></span><span class="org-block"><span class="doc"> function)
     output_file : str
         Name of the output file
     """</span></span><span class="org-block">
@@ -1707,7 +1716,7 @@ output file.
     </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
         </span><span class="org-block"><span class="keyword">with</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">open</span></span><span class="org-block">(output_file, </span><span class="org-block"><span class="string">'wt'</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">as</span></span><span class="org-block"> fid:
             fid.write(diag_render)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Command line interface</span>
@@ -1719,8 +1728,8 @@ The <span class="org-link"><a href="(module-main)">~main~</a></span> function pr
 to parse input arguments.  The function passes the command line arguments to the
 <span class="org-link"><a href="#sec-module-create-uml">~CreatePlantUMLFile~</a></span> function.
 
-<span class="org-meta-line">#+NAME: py-cmd-main</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python -r
+<span class="org-meta-line">#+name: py-cmd-main</span>
+<span class="org-block-begin-line">#+begin_src python -r :noweb yes
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Command line interface</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1728,18 +1737,20 @@ to parse input arguments.  The function passes the command line arguments to the
     </span><span class="org-block"><span class="doc">"""Command line interface
 
     This function is a command-line interface to the
-    :func:`hpp2plantuml.CreatePlantUMLFile` function.
+    </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`hpp2plantuml.CreatePlantUMLFile`</span></span><span class="org-block"><span class="doc"> function.
 
-    Arguments are read from the command-line, run with ``--help`` for help.
+    Arguments are read from the command-line, run with </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">--help</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> for help.
     """</span></span><span class="org-block">
     </span><span class="org-block"><span class="variable-name">parser</span></span><span class="org-block"> = argparse.ArgumentParser(description=</span><span class="org-block"><span class="string">'hpp2plantuml tool.'</span></span><span class="org-block">)
-    parser.add_argument(</span><span class="org-block"><span class="string">'-o'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--output-file'</span></span><span class="org-block">, dest=</span><span class="org-block"><span class="string">'output_file'</span></span><span class="org-block">,
-                        required=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">, default=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, metavar=</span><span class="org-block"><span class="string">'FILE'</span></span><span class="org-block">,
-                        </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'Output file'</span></span><span class="org-block">)
     parser.add_argument(</span><span class="org-block"><span class="string">'-i'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--input-file'</span></span><span class="org-block">, dest=</span><span class="org-block"><span class="string">'input_files'</span></span><span class="org-block">,
                         action=</span><span class="org-block"><span class="string">'append'</span></span><span class="org-block">, metavar=</span><span class="org-block"><span class="string">'HEADER-FILE'</span></span><span class="org-block">, required=</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">,
-                        </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'Input file (must be quoted'</span></span><span class="org-block"> +
+                        </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'input file (must be quoted'</span></span><span class="org-block"> +
                         </span><span class="org-block"><span class="string">' when using wildcards)'</span></span><span class="org-block">)
+    parser.add_argument(</span><span class="org-block"><span class="string">'-o'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--output-file'</span></span><span class="org-block">, dest=</span><span class="org-block"><span class="string">'output_file'</span></span><span class="org-block">,
+                        required=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">, default=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, metavar=</span><span class="org-block"><span class="string">'FILE'</span></span><span class="org-block">,
+                        </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'output file'</span></span><span class="org-block">)
+    parser.add_argument(</span><span class="org-block"><span class="string">'--version'</span></span><span class="org-block">, action=</span><span class="org-block"><span class="string">'version'</span></span><span class="org-block">,
+                        version=</span><span class="org-block"><span class="string">'%(prog)s '</span></span><span class="org-block"> + &lt;&lt;get-version()&gt;&gt;)
     </span><span class="org-block"><span class="variable-name">args</span></span><span class="org-block"> = parser.parse_args()
     </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">len</span></span><span class="org-block">(args.input_files) &gt; 0:
         CreatePlantUMLFile(args.input_files, args.output_file)
@@ -1749,7 +1760,7 @@ to parse input arguments.  The function passes the command line arguments to the
 
 </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">__name__</span></span><span class="org-block"> == </span><span class="org-block"><span class="string">'__main__'</span></span><span class="org-block">:
     main()
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Installation</span>
@@ -1761,30 +1772,30 @@ to parse input arguments.  The function passes the command line arguments to the
 
 The package is available on <span class="org-link"><a href="https://pypi.python.org/">PyPi</a></span> and can be installed using pip:
 
-<span class="org-block-begin-line">#+BEGIN_EXAMPLE
+<span class="org-block-begin-line">#+begin_example
 </span><span class="custom">pip install hpp2plantuml
-</span><span class="org-block-end-line">#+END_EXAMPLE
+</span><span class="org-block-end-line">#+end_example
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> From source</span>
 
 The code uses <span class="org-verbatim">=setuptools=</span>, so it can be built using:
 
-<span class="org-block-begin-line">#+BEGIN_EXAMPLE
+<span class="org-block-begin-line">#+begin_example
 </span><span class="custom">python setup.py install
-</span><span class="org-block-end-line">#+END_EXAMPLE
+</span><span class="org-block-end-line">#+end_example
 </span>
 To build the documentation, run:
 
-<span class="org-block-begin-line">#+BEGIN_EXAMPLE
+<span class="org-block-begin-line">#+begin_example
 </span><span class="custom">python setup.py sphinx
-</span><span class="org-block-end-line">#+END_EXAMPLE
+</span><span class="org-block-end-line">#+end_example
 </span>
 To run the tests, run:
 
-<span class="org-block-begin-line">#+BEGIN_EXAMPLE
+<span class="org-block-begin-line">#+begin_example
 </span><span class="custom">python setup.py test
-</span><span class="org-block-end-line">#+END_EXAMPLE
+</span><span class="org-block-end-line">#+end_example
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Usage</span>
@@ -1800,18 +1811,19 @@ other applications.
 The command line usage is (<span class="org-code">~hpp2plantuml --help~</span>):
 
 
-<span class="org-block-begin-line">#+BEGIN_EXAMPLE
-</span><span class="custom">usage: hpp2plantuml [-h] [-o FILE] -i HEADER-FILE
+<span class="org-block-begin-line">#+begin_example
+</span><span class="custom">usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [--version]
 
 hpp2plantuml tool.
 
 optional arguments:
   -h, --help            show this help message and exit
-  -o FILE, --output-file FILE
-                        Output file
   -i HEADER-FILE, --input-file HEADER-FILE
-                        Input file (must be quoted when using wildcards)
-</span><span class="org-block-end-line">#+END_EXAMPLE
+                        input file (must be quoted when using wildcards)
+  -o FILE, --output-file FILE
+                        output file
+  --version             show program's version number and exit
+</span><span class="org-block-end-line">#+end_example
 </span>
 
 Input files are added using the <span class="org-code">~-i~</span> option.  Inputs can be full file paths or
@@ -1822,10 +1834,10 @@ following the PlantUML syntax.
 For instance, the following command will generate an input file for PlantUML
 (<span class="org-verbatim">=output.puml=</span>) from several header files.
 
-<span class="org-meta-line">#+NAME: usage-sh</span>
-<span class="org-block-begin-line">#+BEGIN_SRC sh
+<span class="org-meta-line">#+name: usage-sh</span>
+<span class="org-block-begin-line">#+begin_src sh
 </span><span class="org-block">hpp2plantuml -i File_1.hpp -i </span><span class="org-block"><span class="string">"include/Helper_*.hpp"</span></span><span class="org-block"> -o output.puml
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** Module</span>
@@ -1855,8 +1867,8 @@ character in org-mode, it is replaced by "@" in the tables and fixed in python.
 
 Following is the test setup code.
 
-<span class="org-meta-line">#+NAME: test-setup</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: test-setup</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="doc">"""Test module for hpp2plantuml"""</span></span><span class="org-block">
 
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Imports</span></span></span><span class="org-block"><span class="comment">
@@ -1888,7 +1900,7 @@ Following is the test setup code.
             test_entry_out.append(re.sub(u</span><span class="org-block"><span class="string">'@'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'|'</span></span><span class="org-block">, test_str))
         test_list_out.append(test_entry_out)
     </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> test_list_out
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Module tests</span>
 
@@ -1901,8 +1913,8 @@ different modules implemented.
 The test for the <span class="org-code">~Container~</span> class tests elementary functionality: members and
 sorting keys.
 
-<span class="org-meta-line">#+NAME: test-unit-container</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: test-unit-container</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Test containers</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1930,7 +1942,7 @@ sorting keys.
         </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> i </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">range</span></span><span class="org-block">(</span><span class="org-block"><span class="builtin">len</span></span><span class="org-block">(c_list)):
             nt.assert_equal(c_obj_list[i].get_name(),
                             c_list[ref_sort_idx[i]][1])
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Class</span>
@@ -1948,8 +1960,8 @@ Class variables have simple functionality (name, type and scope).  The following
 table (Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-unittest-class_var">tbl-unittest-class_var</a></span>) defines tests that validate
 the representation of variables.
 
-<span class="org-meta-line">#+NAME: tbl-unittest-class_var</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-meta-line">#+name: tbl-unittest-class_var</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
 <span class="org-table">| C++                                         | plantuml         |</span>
 <span class="org-table">|---------------------------------------------+------------------|</span>
 <span class="org-table">| "class Test {\npublic:\nint member; };"     | "+member : int"  |</span>
@@ -1957,8 +1969,8 @@ the representation of variables.
 <span class="org-table">| "class Test {\nprotected:\nint &amp;member; };" | "#member : int&amp;" |</span>
 
 
-<span class="org-meta-line">#+NAME: test-unit-class_var</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python :var test_list_classvar=tbl-unittest-class_var
+<span class="org-meta-line">#+name: test-unit-class_var</span>
+<span class="org-block-begin-line">#+begin_src python :var test_list_classvar=tbl-unittest-class_var
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Test class variables</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -1975,7 +1987,7 @@ the representation of variables.
             nt.assert_equal(output_ref_str, obj_m.render(),
                             </span><span class="org-block"><span class="string">'Test {0} failed [input: {1}]'</span></span><span class="org-block">.</span><span class="org-block"><span class="builtin">format</span></span><span class="org-block">(test_idx,
                                                                   input_str))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Class method</span>
@@ -1984,8 +1996,8 @@ The tests for class methods are listed in
 Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-unittest-class_method">tbl-unittest-class_method</a></span>.  Note that template methods are not
 supported by PlantUML.
 
-<span class="org-meta-line">#+NAME: tbl-unittest-class_method</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-meta-line">#+name: tbl-unittest-class_method</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
 <span class="org-table">| C++                                                                            | plantuml                            |</span>
 <span class="org-table">|--------------------------------------------------------------------------------+-------------------------------------|</span>
 <span class="org-table">| "class Test {\npublic:\nint &amp; func(int * a); };"                               | "+func(int* a) : int&amp;"              |</span>
@@ -1995,8 +2007,8 @@ supported by PlantUML.
 <span class="org-table">| "class Test {\nprotected:\ntemplate &lt;typename T&gt;int &amp;func(string &amp;) const; };" | "#func(string &amp;) : int&amp; {query}"    |</span>
 
 
-<span class="org-meta-line">#+NAME: test-unit-class_method</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python :var test_list_classmethod=tbl-unittest-class_method
+<span class="org-meta-line">#+name: test-unit-class_method</span>
+<span class="org-block-begin-line">#+begin_src python :var test_list_classmethod=tbl-unittest-class_method
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Test class methods</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -2013,7 +2025,7 @@ supported by PlantUML.
             nt.assert_equal(output_ref_str, obj_m.render(),
                             </span><span class="org-block"><span class="string">'Test {0} failed [input: {1}]'</span></span><span class="org-block">.</span><span class="org-block"><span class="builtin">format</span></span><span class="org-block">(test_idx,
                                                                   input_str))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Class</span>
@@ -2021,8 +2033,8 @@ supported by PlantUML.
 The unit test for classes includes rendering tests for the code segments in
 Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-unittest-class">tbl-unittest-class</a></span>.  It includes templates and abstract classes.
 
-<span class="org-meta-line">#+NAME: tbl-unittest-class</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-meta-line">#+name: tbl-unittest-class</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
 <span class="org-table">| C++                                                                | plantuml                                                                              |</span>
 <span class="org-table">|--------------------------------------------------------------------+---------------------------------------------------------------------------------------|</span>
 <span class="org-table">| "class Test {\nprotected:\nint &amp; member; };"                       | "class Test {\n\t#member : int&amp;\n}\n"                                                 |</span>
@@ -2031,8 +2043,8 @@ Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-
 <span class="org-table">| "template &lt;typename T&gt; class Test{\nvirtual T* func(T&amp; arg)=0; };" | "abstract class Test &lt;template &lt;typename T&gt;&gt; {\n\t-{abstract} func(T&amp; arg) : T*\n}\n" |</span>
 
 
-<span class="org-meta-line">#+NAME: test-unit-class</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python :var test_list_class=tbl-unittest-class
+<span class="org-meta-line">#+name: test-unit-class</span>
+<span class="org-block-begin-line">#+begin_src python :var test_list_class=tbl-unittest-class
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Test classes</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -2048,7 +2060,7 @@ Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-
             nt.assert_equal(output_ref_str, obj_c.render(),
                             </span><span class="org-block"><span class="string">'Test {0} failed [input: {1}]'</span></span><span class="org-block">.</span><span class="org-block"><span class="builtin">format</span></span><span class="org-block">(test_idx,
                                                                   input_str))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Enum</span>
@@ -2056,16 +2068,17 @@ Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-
 The unit test for enum objects includes rendering tests for the code segments in
 Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-unittest-enum">tbl-unittest-enum</a></span>.
 
-<span class="org-meta-line">#+NAME: tbl-unittest-enum</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-meta-line">#+name: tbl-unittest-enum</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
 <span class="org-table">| C++                                 | plantuml                                |</span>
 <span class="org-table">|-------------------------------------+-----------------------------------------|</span>
 <span class="org-table">| "enum Test { A, B, CD, E };"        | "enum Test {\n\tA\n\tB\n\tCD\n\tE\n}\n" |</span>
 <span class="org-table">| "enum Test\n{\n A = 0, B = 12\n };" | "enum Test {\n\tA\n\tB\n}\n"            |</span>
+<span class="org-table">| "enum { A, B };"                    | "enum empty {\n\tA\n\tB\n}\n""          |</span>
 
 
-<span class="org-meta-line">#+NAME: test-unit-enum</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python :var test_list_enum=tbl-unittest-enum
+<span class="org-meta-line">#+name: test-unit-enum</span>
+<span class="org-block-begin-line">#+begin_src python :var test_list_enum=tbl-unittest-enum
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Test enum objects</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -2081,7 +2094,7 @@ Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-
             nt.assert_equal(output_ref_str, obj_c.render(),
                             </span><span class="org-block"><span class="string">'Test {0} failed [input: {1}]'</span></span><span class="org-block">.</span><span class="org-block"><span class="builtin">format</span></span><span class="org-block">(test_idx,
                                                                   input_str))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Links</span>
@@ -2091,8 +2104,8 @@ Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-
 relationships (with and without count).
 
 
-<span class="org-meta-line">#+NAME: tbl-unittest-link</span>
-<span class="org-meta-line">#+CAPTION:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
+<span class="org-meta-line">#+name: tbl-unittest-link</span>
+<span class="org-meta-line">#+caption:</span> <span class="org-block">List of test segments and corresponding PlantUML strings.</span>
 <span class="org-table">| C++                                    | plantuml        |</span>
 <span class="org-table">|----------------------------------------+-----------------|</span>
 <span class="org-table">| "class A{};\nclass B : A{};"           | "A &lt;@-- B"      |</span>
@@ -2101,8 +2114,8 @@ relationships (with and without count).
 <span class="org-table">| "class B{};\nclass A{B obj; B* ptr;};" | "A \"2\" o-- B" |</span>
 
 
-<span class="org-meta-line">#+NAME: test-unit-link</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python :var test_list_link=tbl-unittest-link
+<span class="org-meta-line">#+name: test-unit-link</span>
+<span class="org-block-begin-line">#+begin_src python :var test_list_link=tbl-unittest-link
 </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">TestLink</span></span><span class="org-block">:
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">test_list_entries</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
         </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> test_idx, (input_str, output_ref_str) </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> \
@@ -2117,7 +2130,7 @@ relationships (with and without count).
             nt.assert_equal(output_ref_str, obj_l.render(),
                             </span><span class="org-block"><span class="string">'Test {0} failed [input: {1}]'</span></span><span class="org-block">.</span><span class="org-block"><span class="builtin">format</span></span><span class="org-block">(test_idx,
                                                                   input_str))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Full system test</span>
@@ -2138,8 +2151,8 @@ etc.).
 The following can be extended to improve testing, as long as the corresponding
 <span class="org-link"><a href="#sec-test-system-ref">reference output</a></span> is kept up-to-date.
 
-<span class="org-meta-line">#+NAME: hpp-simple-classes-1-2</span>
-<span class="org-block-begin-line">#+BEGIN_SRC c++ :mkdirp yes :tangle tests/simple_classes_1_2.hpp
+<span class="org-meta-line">#+name: hpp-simple-classes-1-2</span>
+<span class="org-block-begin-line">#+begin_src c++ :mkdirp yes :tangle tests/simple_classes_1_2.hpp
 </span><span class="org-block"><span class="keyword">enum</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Enum01</span></span><span class="org-block"> { </span><span class="org-block"><span class="variable-name">VALUE_0</span></span><span class="org-block">, </span><span class="org-block"><span class="variable-name">VALUE_1</span></span><span class="org-block">, </span><span class="org-block"><span class="variable-name">VALUE_2</span></span><span class="org-block"> };
 
 </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block"> {
@@ -2164,10 +2177,10 @@ The following can be extended to improve testing, as long as the corresponding
     </span><span class="org-block"><span class="keyword">static</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_StaticPrivateMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
     </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_AbstractMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">override</span></span><span class="org-block">;
 };
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
-<span class="org-meta-line">#+NAME: hpp-simple-classes-3</span>
-<span class="org-block-begin-line">#+BEGIN_SRC c++ :mkdirp yes :tangle tests/simple_classes_3.hpp
+<span class="org-meta-line">#+name: hpp-simple-classes-3</span>
+<span class="org-block-begin-line">#+begin_src c++ :mkdirp yes :tangle tests/simple_classes_3.hpp
 </span><span class="org-block"><span class="keyword">template</span></span><span class="org-block">&lt;</span><span class="org-block"><span class="keyword">typename</span></span><span class="org-block"> </span><span class="org-block"><span class="type">T</span></span><span class="org-block">&gt;
 </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class03</span></span><span class="org-block"> {
 </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block">:
@@ -2179,7 +2192,7 @@ The following can be extended to improve testing, as long as the corresponding
     </span><span class="org-block"><span class="type">list</span></span><span class="org-block">&lt;Class02&gt; </span><span class="org-block"><span class="variable-name">_obj_list</span></span><span class="org-block">;
     </span><span class="org-block"><span class="type">T</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_typed_obj</span></span><span class="org-block">;
 };
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 
@@ -2192,8 +2205,8 @@ Following is the reference output for the input header files defined <span class
 The comparison takes into account the white space, indentation, etc.
 
 
-<span class="org-meta-line">#+NAME: puml-simple-classes</span>
-<span class="org-block-begin-line">#+BEGIN_SRC plantuml :mkdirp yes :tangle tests/simple_classes.puml
+<span class="org-meta-line">#+name: puml-simple-classes</span>
+<span class="org-block-begin-line">#+begin_src plantuml :mkdirp yes :tangle tests/simple_classes.puml
 </span><span class="org-block"><span class="keyword">@startuml</span></span><span class="org-block">
 </span><span class="org-block"><span class="type">abstract</span></span><span class="org-block"> class Class01 {
     +{abstract} AbstractPublicMethod(int param) : bool
@@ -2234,7 +2247,7 @@ Class03 </span><span class="org-block"><span class="string">"2"</span></span><sp
 Class03 </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> Class02
 
 </span><span class="org-block"><span class="keyword">@enduml</span></span><span class="org-block">
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Test diagram generation</span>
@@ -2247,8 +2260,8 @@ The system test validates the following:
 - the <span class="org-code">~CreatePlantUMLFile~</span> interface, including stdout and file output.
 
 
-<span class="org-meta-line">#+NAME: test-full-diagram</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: test-full-diagram</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Test overall system</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
@@ -2362,7 +2375,7 @@ The system test validates the following:
             </span><span class="org-block"><span class="variable-name">output_fcontent</span></span><span class="org-block"> = fid.read()
         nt.assert_equal(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref, output_fcontent)
         os.unlink(output_fname)
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Packaging</span>
@@ -2376,6 +2389,13 @@ examples:
 - <span class="org-link"><a href="https://python-packaging.readthedocs.io/en/latest/">https://python-packaging.readthedocs.io/en/latest/</a></span>
 - <span class="org-link"><a href="https://packaging.python.org/distributing/">https://packaging.python.org/distributing/</a></span>
 
+To build, run <span class="org-code">~python setup.py build bdist~</span>, <span class="org-code">~python setup.py build
+bdist_wheel~</span>.  To upload to PyPI, run:
+
+<span class="org-block-begin-line">#+begin_example
+</span><span class="custom">twine upload -r pypi --sign dist/hpp2plantuml-*
+</span><span class="org-block-end-line">#+end_example
+</span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> </span><span class="org-level-2"><span class="org-verbatim">=__init__.py=</span></span>
 
@@ -2386,8 +2406,8 @@ It also imports the main interface: the <span class="org-code">~CreatePlantUMLFi
 The header is filled with the content of org-mode blocks.  The version number is
 obtained using the source block described <span class="org-link"><a href="#sec-org-el-version">here</a></span>.
 
-<span class="org-meta-line">#+NAME: py-init</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python :noweb yes :tangle src/hpp2plantuml/__init__.py
+<span class="org-meta-line">#+name: py-init</span>
+<span class="org-block-begin-line">#+begin_src python :noweb yes :tangle src/hpp2plantuml/__init__.py
 </span><span class="org-block"><span class="doc">""" hpp2plantuml module
 
 &lt;&lt;el-org-exp("sec-module", "rst")&gt;&gt;
@@ -2408,7 +2428,7 @@ obtained using the source block described <span class="org-link"><a href="#sec-o
 </span><span class="org-block"><span class="keyword">from</span></span><span class="org-block"> .hpp2plantuml </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> CreatePlantUMLFile, Diagram
 
 </span><span class="org-block"><span class="builtin">__all__</span></span><span class="org-block"> = [</span><span class="org-block"><span class="string">'CreatePlantUMLFile'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'Diagram'</span></span><span class="org-block">]
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> </span><span class="org-level-2"><span class="org-verbatim">=setup.cfg=</span></span>
@@ -2422,8 +2442,8 @@ The <span class="org-link"><a href="#sec-package-doc">documentation</a></span> u
 documentation files.  In practice, the documentation is built using a <span class="org-link"><a href="#sec-package-doc">custom
 command</a></span> for <span class="org-verbatim">=setup.py=</span> run using <span class="org-code">~python setup.py sphinx~</span>.
 
-<span class="org-meta-line">#+NAME: cfg-setup</span>
-<span class="org-block-begin-line">#+BEGIN_SRC conf :tangle setup.cfg
+<span class="org-meta-line">#+name: cfg-setup</span>
+<span class="org-block-begin-line">#+begin_src conf :tangle setup.cfg
 </span><span class="org-block">
 [</span><span class="org-block"><span class="type">bdist_wheel</span></span><span class="org-block">]
 </span><span class="org-block"><span class="variable-name">universal</span></span><span class="org-block"> = 1
@@ -2438,7 +2458,7 @@ command</a></span> for <span class="org-verbatim">=setup.py=</span> run using <s
 
 [</span><span class="org-block"><span class="type">upload_sphinx</span></span><span class="org-block">]
 </span><span class="org-block"><span class="variable-name">upload-dir</span></span><span class="org-block"> = doc/build/html
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> </span><span class="org-level-2"><span class="org-verbatim">=setup.py=</span></span>
@@ -2450,8 +2470,8 @@ command</a></span> for <span class="org-verbatim">=setup.py=</span> run using <s
 The <span class="org-verbatim">=setup.py=</span> file is the interface to <span class="org-verbatim">=setuptools=</span>.  It defines the packaging
 options.  Most of it is taken from <span class="org-link"><a href="https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/">this post</a></span>.
 
-<span class="org-meta-line">#+NAME: py-setup-import</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-setup-import</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block">
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Imports</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> os
@@ -2465,14 +2485,14 @@ options.  Most of it is taken from <span class="org-link"><a href="https://hynek
     </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> sphinx.apidoc
 </span><span class="org-block"><span class="keyword">except</span></span><span class="org-block"> </span><span class="org-block"><span class="type">ImportError</span></span><span class="org-block">:
     </span><span class="org-block"><span class="keyword">pass</span></span><span class="org-block">
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Custom content</span>
 
 The non-boilerplate part of the <span class="org-verbatim">=setup.py=</span> file defines the package information.
 
-<span class="org-meta-line">#+NAME: py-setup-custom</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-setup-custom</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Custom fields</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 </span><span class="org-block"><span class="comment-delimiter">###################################################################</span></span><span class="org-block"><span class="comment">
@@ -2499,7 +2519,7 @@ The non-boilerplate part of the <span class="org-verbatim">=setup.py=</span> fil
 </span><span class="org-block"><span class="variable-name">INSTALL_REQUIRES</span></span><span class="org-block"> += [</span><span class="org-block"><span class="string">'sphinx'</span></span><span class="org-block">, ]
 </span><span class="org-block"><span class="variable-name">SETUP_REQUIRES</span></span><span class="org-block"> = [</span><span class="org-block"><span class="string">'sphinx'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'numpydoc'</span></span><span class="org-block">]
 </span><span class="org-block"><span class="comment-delimiter">###################################################################</span></span><span class="org-block"><span class="comment">
-</span></span><span class="org-block-end-line">#+END_SRC
+</span></span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Helper functions</span>
@@ -2507,8 +2527,8 @@ The non-boilerplate part of the <span class="org-verbatim">=setup.py=</span> fil
 The following helper functions provide tools to extract metadata from the
 <span class="org-verbatim">=__init__=</span> file and pass it to the <span class="org-code">~setup~</span> command.
 
-<span class="org-meta-line">#+NAME: py-setup-helper</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python
+<span class="org-meta-line">#+name: py-setup-helper</span>
+<span class="org-block-begin-line">#+begin_src python
 </span><span class="org-block">
 </span><span class="org-block"><span class="variable-name">HERE</span></span><span class="org-block"> = os.path.abspath(os.path.dirname(__file__))
 
@@ -2568,7 +2588,7 @@ The following helper functions provide tools to extract metadata from the
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">build the doc sources
 </span></span><span class="org-block">        sphinx.main([</span><span class="org-block"><span class="string">''</span></span><span class="org-block">, os.path.join(</span><span class="org-block"><span class="string">'doc'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'source'</span></span><span class="org-block">),
                      os.path.join(</span><span class="org-block"><span class="string">'doc'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'build'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'html'</span></span><span class="org-block">)])
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Setup</span>
@@ -2579,8 +2599,8 @@ This final block passes all the relevant package information to <span class="org
 - testing framework,
 - console script: the package installs the <span class="org-verbatim">=hpp2plantuml=</span> <span class="org-link"><a href="#sec-module-cmd">command</a></span>.
 
-<span class="org-meta-line">#+NAME: py-setup-main</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python -r
+<span class="org-meta-line">#+name: py-setup-main</span>
+<span class="org-block-begin-line">#+begin_src python -r
 </span><span class="org-block">
 </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">__name__</span></span><span class="org-block"> == </span><span class="org-block"><span class="string">"__main__"</span></span><span class="org-block">:
     setup(
@@ -2608,15 +2628,15 @@ This final block passes all the relevant package information to <span class="org
         },
         cmdclass={</span><span class="org-block"><span class="string">'sphinx'</span></span><span class="org-block">: Sphinx}(ref:setup-sphinx)
     )
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Manifest</span>
 
 The manifest file is used to include extra files to the package.
 
-<span class="org-meta-line">#+NAME: setup-manifest</span>
-<span class="org-block-begin-line">#+BEGIN_SRC conf :tangle MANIFEST.in
+<span class="org-meta-line">#+name: setup-manifest</span>
+<span class="org-block-begin-line">#+begin_src conf :tangle MANIFEST.in
 </span><span class="org-block"><span class="variable-name">include</span></span><span class="org-block"> *.rst *.txt LICENSE
 </span><span class="org-block"><span class="variable-name">recursive-include</span></span><span class="org-block"> tests *.py
 </span><span class="org-block"><span class="variable-name">recursive-include</span></span><span class="org-block"> tests *.hpp
@@ -2624,7 +2644,7 @@ The manifest file is used to include extra files to the package.
 </span><span class="org-block"><span class="variable-name">recursive-include</span></span><span class="org-block"> doc *.rst
 </span><span class="org-block"><span class="variable-name">recursive-include</span></span><span class="org-block"> doc *.py
 </span><span class="org-block"><span class="variable-name">prune</span></span><span class="org-block"> doc/build
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> README</span>
@@ -2632,8 +2652,8 @@ The manifest file is used to include extra files to the package.
 The README file is automatically generated from blocks defined in this
 org-file (converted to RST format).
 
-<span class="org-meta-line">#+NAME: rst-README</span>
-<span class="org-block-begin-line">#+BEGIN_SRC rst :noweb yes :tangle README.rst
+<span class="org-meta-line">#+name: rst-README</span>
+<span class="org-block-begin-line">#+begin_src rst :noweb yes :tangle README.rst
 </span><span class="org-block">
 </span><span class="org-block"><span class="rst-level-1">hpp2plantuml - Convert C++ header files to PlantUML</span></span><span class="org-block">
 </span><span class="org-block"><span class="rst-adornment">===================================================</span></span><span class="org-block">
@@ -2652,7 +2672,7 @@ The full documentation is available via:
 </a></span><span class="org-block"><span class="rst-block"><a href="https://thibaultmarin.github.io/blog/posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.html&gt;`_
 - `Read the docs &lt;http://hpp2plantuml.readthedocs.io/en/latest/">- </a></span></span><span class="org-block"><span class="rst-reference"><a href="https://thibaultmarin.github.io/blog/posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.html&gt;`_
 - `Read the docs &lt;http://hpp2plantuml.readthedocs.io/en/latest/">`Read the docs &lt;http://hpp2plantuml.readthedocs.io/en/latest/&gt;</a>`_</span></span><span class="org-block">
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Documentation</span>
@@ -2682,8 +2702,8 @@ content of the file is mostly following the defaults, with a few exceptions:
 - the <span class="org-verbatim">=numpydoc=</span> package is used to render the docstrings
   (<span class="org-link"><a href="(sphinx-conf-numpydoc)">(sphinx-conf-numpydoc)</a></span>).
 
-<span class="org-meta-line">#+NAME: py-sphinx-conf</span>
-<span class="org-block-begin-line">#+BEGIN_SRC python -r :noweb yes :mkdirp yes :tangle doc/source/conf.py
+<span class="org-meta-line">#+name: py-sphinx-conf</span>
+<span class="org-block-begin-line">#+begin_src python -r :noweb yes :mkdirp yes :tangle doc/source/conf.py
 </span><span class="org-block">
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">-*- coding: utf-8 -*-
 </span></span><span class="org-block"><span class="comment-delimiter">#</span></span><span class="org-block"><span class="comment">
@@ -3049,7 +3069,7 @@ content of the file is mostly following the defaults, with a few exceptions:
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Example configuration for intersphinx: refer to the Python standard library.
 </span></span><span class="org-block"><span class="variable-name">intersphinx_mapping</span></span><span class="org-block"> = {</span><span class="org-block"><span class="string">'https://docs.python.org/'</span></span><span class="org-block">: </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">}
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Index page</span>
@@ -3058,8 +3078,8 @@ The index page is the entry point of the documentation.  It is formed by other
 parts of the org document including a brief description of the usage and links
 to the automatically generated and the org-file documents.
 
-<span class="org-meta-line">#+NAME: doc-rst-index</span>
-<span class="org-block-begin-line">#+BEGIN_SRC rst :noweb yes :mkdirp yes :tangle doc/source/index.rst
+<span class="org-meta-line">#+name: doc-rst-index</span>
+<span class="org-block-begin-line">#+begin_src rst :noweb yes :mkdirp yes :tangle doc/source/index.rst
 </span><span class="org-block">
 </span><span class="org-block"><span class="rst-comment">.. hpp2plantuml documentation master file.
 </span></span><span class="org-block">
@@ -3089,7 +3109,7 @@ to the automatically generated and the org-file documents.
 ,* </span><span class="org-block"><span class="rst-directive">:ref:</span></span><span class="org-block"><span class="rst-external">`genindex`</span></span><span class="org-block">
 ,* </span><span class="org-block"><span class="rst-directive">:ref:</span></span><span class="org-block"><span class="rst-external">`modindex`</span></span><span class="org-block">
 ,* </span><span class="org-block"><span class="rst-directive">:ref:</span></span><span class="org-block"><span class="rst-external">`search`</span></span><span class="org-block">
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Read The Docs</span>
@@ -3097,10 +3117,10 @@ to the automatically generated and the org-file documents.
 In order to build the documentation on the <span class="org-link"><a href="http://read-the-docs.readthedocs.io/en/latest/">Read The Docs</a></span> website, a requirement
 file is added for the <span class="org-verbatim">=numpydoc=</span> package.
 
-<span class="org-meta-line">#+NAME: req-readthedocs</span>
-<span class="org-block-begin-line">#+BEGIN_SRC conf :mkdirp yes :tangle doc/source/readthedocs-requirements.txt
+<span class="org-meta-line">#+name: req-readthedocs</span>
+<span class="org-block-begin-line">#+begin_src conf :mkdirp yes :tangle doc/source/readthedocs-requirements.txt
 </span><span class="org-block"><span class="variable-name">numpydoc</span></span><span class="org-block">
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Org-mode setup</span>
@@ -3117,11 +3137,11 @@ this process.
 The following source block is used to get the module's version number defined in
 <span class="org-link"><a href="hpp2plantuml-version">a single location</a></span> and include it at multiple locations.
 
-<span class="org-meta-line">#+NAME: get-version</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :var ver=hpp2plantuml-version :var lang="python" :eval yes
+<span class="org-meta-line">#+name: get-version</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :var ver=hpp2plantuml-version :var lang="python" :eval yes
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">cond</span></span><span class="org-block"> ((string= lang </span><span class="org-block"><span class="string">"python"</span></span><span class="org-block">)
        (format </span><span class="org-block"><span class="string">"'%s'"</span></span><span class="org-block"> ver)))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> org-to-rst</span>
@@ -3134,8 +3154,8 @@ and an additional flag <span class="org-code">~children~</span> can be used to c
 of the target section are removed (<span class="org-code">~children = "remove"</span><span class="org-code"><span class="org-code">~</span></span><span class="org-code">) of kept (any other
 string, e.g. </span><span class="org-code"><span class="org-code">~"keep"~</span></span>).
 
-<span class="org-meta-line">#+NAME: el-org-exp</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r :var input="sec-module-usage" :var lang="rst" :var children="remove" :results silent :eval yes
+<span class="org-meta-line">#+name: el-org-exp</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp -r :var input="sec-module-usage" :var lang="rst" :var children="remove" :results silent :eval yes
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">save-excursion</span></span><span class="org-block">
   (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((org-tree (org-element-parse-buffer)))
     (org-element-map
@@ -3164,7 +3184,7 @@ string, e.g. </span><span class="org-code"><span class="org-code">~"keep"~</span
                         </span><span class="org-block"><span class="comment-delimiter">;; </span></span><span class="org-block"><span class="comment">Could support more languages
 </span></span><span class="org-block">                        (t out-text))))))
       nil t)))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Generate documentation</span>
@@ -3177,8 +3197,8 @@ to rst.  Its goal is to fix languages unknown to sphinx (which relies on <span c
 pygmentize program</a></span> for syntax highlighting) such as <span class="org-verbatim">=plantuml=</span> and org's <span class="org-verbatim">=conf=</span>
 blocks, replacing them by a simple example block.
 
-<span class="org-meta-line">#+NAME: ox-rst-filter-src</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp -r
+<span class="org-meta-line">#+name: ox-rst-filter-src</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp -r
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">custom-rst-filter-org-block</span></span><span class="org-block"> (text backend info)(ref:el-rst-filter)
   (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> (org-export-derived-backend-p backend 'rst)
     (</span><span class="org-block"><span class="keyword">let*</span></span><span class="org-block"> ((pattern </span><span class="org-block"><span class="string">".*\.\. code:: </span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">(</span></span></span><span class="org-block"><span class="string"><a href=":alnum:">[[:alnum:]]</a>+</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">)</span></span></span><span class="org-block"><span class="string">"</span></span><span class="org-block">)
@@ -3189,13 +3209,13 @@ blocks, replacing them by a simple example block.
       (</span><span class="org-block"><span class="keyword">cond</span></span><span class="org-block"> ((member lang '(</span><span class="org-block"><span class="string">"conf"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"plantuml"</span></span><span class="org-block">))
              (replace-regexp-in-string pattern-line </span><span class="org-block"><span class="string">"::\n"</span></span><span class="org-block"> text))
             (t text)))))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 The command and options to generate the org-file documentation in rst format are
 encapsulated in the following source block.
 
-<span class="org-meta-line">#+NAME: el-export-rst-org-doc</span>
-<span class="org-block-begin-line">#+BEGIN_SRC emacs-lisp :results silent
+<span class="org-meta-line">#+name: el-export-rst-org-doc</span>
+<span class="org-block-begin-line">#+begin_src emacs-lisp :results silent
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">require</span></span><span class="org-block"> '</span><span class="org-block"><span class="constant">ox-rst</span></span><span class="org-block">)
 (</span><span class="org-block"><span class="keyword">let</span></span><span class="org-block"> ((org-export-with-toc nil)
       (org-export-with-todo-keywords nil)
@@ -3204,7 +3224,7 @@ encapsulated in the following source block.
       (org-export-filter-src-block-functions
        '(custom-rst-filter-org-block)))
   (org-export-to-file 'rst </span><span class="org-block"><span class="string">"doc/source/org-doc.rst"</span></span><span class="org-block">))
-</span><span class="org-block-end-line">#+END_SRC
+</span><span class="org-block-end-line">#+end_src
 </span>
 
 

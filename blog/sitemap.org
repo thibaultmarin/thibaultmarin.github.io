@@ -1,8 +1,8 @@
-# Created 2017-12-04 Mon 21:31
+# Created 2018-08-19 Sun 18:10
 #+TITLE: Sitemap
 #+AUTHOR: Thibault Marin
 
-* [[file:blog.org][(2017-12-04) Blog posts]]
+* [[file:blog.org][(2017-12-07) Blog posts]]
 * [[file:index.org][(2016-10-02) misc/]]
 * posts
 ** [[file:posts/2017-08-15-Personal_wiki_in_org.org][(2017-08-15) Personal wiki in org]]

@@ -1,4 +1,4 @@
-# Created 2017-12-04 Mon 21:31
+# Created 2018-08-19 Sun 18:10
 #+TITLE: Blog posts
 #+AUTHOR: Thibault Marin
 All the blog posts:
