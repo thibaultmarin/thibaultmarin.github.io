@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-08-19 Sun 18:10 -->
+<!-- 2018-08-27 Mon 22:30 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>hpp2plantuml - Convert C++ header files to PlantUML</title>
@@ -374,7 +374,7 @@ for the JavaScript code in this tag.
 </div>
 
 <div class="foreword">
-  [2016-11-30 Wed 00:00 (last updated: 2018-08-19 Sun 18:00) Press <kbd>?</kbd> for navigation help]
+  [2016-11-30 Wed 00:00 (last updated: 2018-08-27 Mon 22:29) Press <kbd>?</kbd> for navigation help]
 </div>
 <!-- html-preamble ends here -->
 </div>
@@ -385,36 +385,37 @@ for the JavaScript code in this tag.
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-intro">Motivation</a></li>
-<li><a href="#orga1d3cd4">License</a></li>
-<li><a href="#org644e0b2">Requirements</a></li>
+<li><a href="#orgf7e082f">License</a></li>
+<li><a href="#org1a03bf4">Requirements</a></li>
 <li><a href="#sec-module">Module source code</a>
 <ul>
 <li><a href="#sec-module-constants">String representation constants</a></li>
-<li><a href="#org039224a">Objects</a>
+<li><a href="#orgf7d2df1">Objects</a>
 <ul>
 <li><a href="#sec-module-container">Base class</a></li>
-<li><a href="#org598f16d">Classes</a></li>
+<li><a href="#org93c9ef1">Classes</a></li>
 <li><a href="#sec-module-class-member">Class members</a>
 <ul>
 <li><a href="#sec_class_properties">Properties</a></li>
 <li><a href="#sec_class_methods">Methods</a></li>
 </ul>
 </li>
-<li><a href="#org0f486fa">Structures</a></li>
-<li><a href="#orgca78587">Enumeration lists</a></li>
+<li><a href="#org6f5db4f">Structures</a></li>
+<li><a href="#orgd32bffa">Enumeration lists</a></li>
 <li><a href="#sec-module-relationship">Class relationships</a>
 <ul>
-<li><a href="#orge25217f">Inheritance</a></li>
-<li><a href="#orgcec382f">Aggregation</a></li>
+<li><a href="#org69d7ae8">Inheritance</a></li>
+<li><a href="#orgccbc277">Aggregation</a></li>
 </ul>
 </li>
 <li><a href="#sec-module-diagram">Diagram object</a></li>
 </ul>
 </li>
-<li><a href="#org3a46024">Helper functions</a>
+<li><a href="#orgc8681ac">Helper functions</a>
 <ul>
-<li><a href="#org0b3ebac">Sanitize type string</a></li>
-<li><a href="#org9d1a3e1">Expand file list</a></li>
+<li><a href="#orgd44fdec">Sanitize strings</a></li>
+<li><a href="#orgbce5c8e">Expand file list</a></li>
+<li><a href="#orgfe69bf2">Namespace wrapper</a></li>
 </ul>
 </li>
 <li><a href="#sec-module-create-uml">Main function: create PlantUML from C++</a></li>
@@ -423,68 +424,68 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-module-install">Installation</a>
 <ul>
-<li><a href="#org51326d1">Using <code>pip</code></a></li>
-<li><a href="#org37ed11c">From source</a></li>
+<li><a href="#org7bc4954">Using <code>pip</code></a></li>
+<li><a href="#org92cfaa1">From source</a></li>
 </ul>
 </li>
 <li><a href="#sec-module-usage">Usage</a>
 <ul>
-<li><a href="#orgbde677d">Command line</a></li>
-<li><a href="#org122663c">Module</a></li>
+<li><a href="#orgcbad47e">Command line</a></li>
+<li><a href="#org3d59da4">Module</a></li>
 </ul>
 </li>
-<li><a href="#orgdc2a3ad">Tests</a>
+<li><a href="#org6763e1c">Tests</a>
 <ul>
-<li><a href="#org711591a">Module tests</a>
+<li><a href="#org9b0de53">Module tests</a>
 <ul>
-<li><a href="#org68935ab">Container</a></li>
-<li><a href="#org2a6c6f4">Class</a>
+<li><a href="#org796ee8d">Container</a></li>
+<li><a href="#org8b75797">Class</a>
 <ul>
-<li><a href="#org7e6a007">Class variable</a></li>
-<li><a href="#orgb630280">Class method</a></li>
-<li><a href="#orgc30c700">Class</a></li>
+<li><a href="#org14b6845">Class variable</a></li>
+<li><a href="#org48986ac">Class method</a></li>
+<li><a href="#org19cc7bb">Class</a></li>
 </ul>
 </li>
-<li><a href="#orgb05d517">Enum</a></li>
-<li><a href="#orgc9aeef2">Links</a></li>
+<li><a href="#org08b8b30">Enum</a></li>
+<li><a href="#org797b73b">Links</a></li>
 </ul>
 </li>
-<li><a href="#org1a63a23">Full system test</a>
+<li><a href="#orgc4bea36">Full system test</a>
 <ul>
 <li><a href="#sec-test-system-hpp">Input files</a></li>
 <li><a href="#sec-test-system-ref">Reference output</a></li>
-<li><a href="#org43c17d6">Test diagram generation</a></li>
+<li><a href="#org5cae9fe">Test diagram generation</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org5cab457">Packaging</a>
+<li><a href="#orgfccd2a4">Packaging</a>
 <ul>
-<li><a href="#orgd73b8bf"><code>__init__.py</code></a></li>
-<li><a href="#org30b7fc6"><code>setup.cfg</code></a></li>
+<li><a href="#orgd586f43"><code>__init__.py</code></a></li>
+<li><a href="#org0d55c12"><code>setup.cfg</code></a></li>
 <li><a href="#sec-package-setup-py"><code>setup.py</code></a>
 <ul>
-<li><a href="#org5bb2405">Custom content</a></li>
-<li><a href="#orgec1b3a2">Helper functions</a></li>
-<li><a href="#org53ca475">Setup</a></li>
+<li><a href="#org853b00c">Custom content</a></li>
+<li><a href="#org1f874a2">Helper functions</a></li>
+<li><a href="#org9c7ea08">Setup</a></li>
 </ul>
 </li>
-<li><a href="#orgeb4e3f3">Manifest</a></li>
-<li><a href="#org350bc2a">README</a></li>
+<li><a href="#org7e0b694">Manifest</a></li>
+<li><a href="#org72dfd18">README</a></li>
 <li><a href="#sec-package-doc">Documentation</a>
 <ul>
-<li><a href="#orgb5575da">Sphinx configuration</a></li>
-<li><a href="#orgeaa6037">Index page</a></li>
-<li><a href="#orgd333d37">Read The Docs</a></li>
+<li><a href="#org82ebe3b">Sphinx configuration</a></li>
+<li><a href="#org393a1d6">Index page</a></li>
+<li><a href="#orgf2a8437">Read The Docs</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgb814630">Org-mode setup</a>
+<li><a href="#org17a1f4c">Org-mode setup</a>
 <ul>
 <li><a href="#sec-org-el-version">Version string</a></li>
-<li><a href="#org177010d">org-to-rst</a></li>
-<li><a href="#orgb973346">Generate documentation</a></li>
+<li><a href="#orgb48aad0">org-to-rst</a></li>
+<li><a href="#orgfb20c69">Generate documentation</a></li>
 </ul>
 </li>
 </ul>
@@ -499,7 +500,7 @@ this single org-file.
 The current version of the code is:
 </p>
 <pre class="example">
-0.3
+0.4
 
 </pre>
 
@@ -508,7 +509,7 @@ The source code can be found on GitHub:
 <a href="https://github.com/thibaultmarin/hpp2plantuml">https://github.com/thibaultmarin/hpp2plantuml</a>.
 </p>
 
-<div id="outline-container-org8f2a211" class="outline-2">
+<div id="outline-container-org22ee5ae" class="outline-2">
 <h2 id="sec-intro">Motivation</h2>
 <div class="outline-text-2" id="text-sec-intro">
 <p>
@@ -541,15 +542,15 @@ files.
 </div>
 
 
-<div id="outline-container-orga1d3cd4" class="outline-2">
-<h2 id="orga1d3cd4">License</h2>
-<div class="outline-text-2" id="text-orga1d3cd4">
+<div id="outline-container-orgf7e082f" class="outline-2">
+<h2 id="orgf7e082f">License</h2>
+<div class="outline-text-2" id="text-orgf7e082f">
 <p>
 The license adopted for this project is the MIT license.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf" id="orga92388e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[LICENSE]</div>
+<pre class="src src-conf" id="org727801f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[LICENSE]</div>
 The MIT License (MIT)
 
 Copyright (c) 2016 T
@@ -577,15 +578,15 @@ THE SOFTWARE.
 </div>
 
 
-<div id="outline-container-org644e0b2" class="outline-2">
-<h2 id="org644e0b2">Requirements</h2>
-<div class="outline-text-2" id="text-org644e0b2">
+<div id="outline-container-org1a03bf4" class="outline-2">
+<h2 id="org1a03bf4">Requirements</h2>
+<div class="outline-text-2" id="text-org1a03bf4">
 <p>
 This module has mostly standard dependencies; the only exception is the
 <a href="http://senexcanis.com/open-source/cppheaderparser/">CppHeaderParser</a> module used to parse header files.
 </p>
 
-<table id="org299b701">
+<table id="org60edfbd">
 <caption class="t-above"><span class="table-number">Table 1:</span> List of dependencies.</caption>
 
 <colgroup>
@@ -608,7 +609,7 @@ block (returning either imports or a dependency list used in <a href="#sec-packa
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orged81cc1">(<span style="color: #a020f0;">cond</span>
+<pre class="src src-emacs-lisp" id="orge3a985d">(<span style="color: #a020f0;">cond</span>
  ((string= output <span style="color: #8b2252;">"import"</span>)
   (mapconcat
    (<span style="color: #a020f0;">lambda</span> (el) (concat <span style="color: #8b2252;">"import "</span> (car el))) dep-list <span style="color: #8b2252;">"\n"</span>))
@@ -621,7 +622,7 @@ block (returning either imports or a dependency list used in <a href="#sec-packa
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgc34f58a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Imports</span>
+<pre class="src src-python" id="org1dbc9ff"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Imports</span>
 
 <span style="color: #a020f0;">import</span> re
 <span style="color: #a020f0;">import</span> glob
@@ -638,7 +639,7 @@ with <a href="http://sphinx-doc.org">Sphinx</a>.
 </div>
 
 
-<div id="outline-container-orga2c3527" class="outline-2">
+<div id="outline-container-org6b7be93" class="outline-2">
 <h2 id="sec-module">Module source code</h2>
 <div class="outline-text-2" id="text-sec-module">
 <p>
@@ -666,7 +667,7 @@ inheritance properties and parsing member types into <a href="#sec-module-relati
 </div>
 
 
-<div id="outline-container-org3ff19f3" class="outline-3">
+<div id="outline-container-orga9181e4" class="outline-3">
 <h3 id="sec-module-constants">String representation constants</h3>
 <div class="outline-text-3" id="text-sec-module-constants">
 <p>
@@ -683,7 +684,7 @@ their representation.</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orga1c088d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Constants</span>
+<pre class="src src-python" id="org3620072"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Constants</span>
 
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">Association between member property and PlantUML symbol</span>
@@ -715,9 +716,9 @@ their representation.</li>
 </div>
 
 
-<div id="outline-container-org039224a" class="outline-3">
-<h3 id="org039224a">Objects</h3>
-<div class="outline-text-3" id="text-org039224a">
+<div id="outline-container-orgf7d2df1" class="outline-3">
+<h3 id="orgf7d2df1">Objects</h3>
+<div class="outline-text-3" id="text-orgf7d2df1">
 <p>
 C++ objects parsed by the <code>CppHeaderParser</code> module are converted to internal
 objects which perform two tasks:
@@ -735,7 +736,7 @@ class.
 </div>
 
 
-<div id="outline-container-orgfb9c110" class="outline-4">
+<div id="outline-container-org7d7e177" class="outline-4">
 <h4 id="sec-module-container">Base class</h4>
 <div class="outline-text-4" id="text-sec-module-container">
 <p>
@@ -754,7 +755,7 @@ methods).</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org044d46b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Base classes</span>
+<pre class="src src-python" id="org3eaa642"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Base classes</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Container</span>(<span style="color: #483d8b;">object</span>):
@@ -776,6 +777,7 @@ methods).</li>
         <span style="color: #a020f0;">self</span>._container_type = container_type
         <span style="color: #a020f0;">self</span>._name = name
         <span style="color: #a020f0;">self</span>._member_list = []
+        <span style="color: #a020f0;">self</span>._namespace = <span style="color: #008b8b;">None</span>
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">get_name</span>(<span style="color: #a020f0;">self</span>):
         <span style="color: #8b2252;">"""Name property accessor</span>
@@ -788,6 +790,22 @@ methods).</li>
         <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>._name
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">parse_members</span>(<span style="color: #a020f0;">self</span>, header_container):
+        <span style="color: #8b2252;">"""Initialize object from header</span>
+
+<span style="color: #8b2252;">        Extract object from CppHeaderParser dictionary representing a class, a</span>
+<span style="color: #8b2252;">        struct or an enum object.  This extracts the namespace.</span>
+
+<span style="color: #8b2252;">        Parameters</span>
+<span style="color: #8b2252;">        ----------</span>
+<span style="color: #8b2252;">        header_container : CppClass, CppStruct or CppEnum</span>
+<span style="color: #8b2252;">            Parsed header for container</span>
+<span style="color: #8b2252;">        """</span>
+        <span style="color: #a0522d;">namespace</span> = header_container.get(<span style="color: #8b2252;">'namespace'</span>, <span style="color: #008b8b;">None</span>)
+        <span style="color: #a020f0;">if</span> namespace:
+            <span style="color: #a020f0;">self</span>._namespace = re.sub(<span style="color: #8b2252;">':+$'</span>, <span style="color: #8b2252;">''</span>, namespace)
+        <span style="color: #a020f0;">self</span>._do_parsed_members(header_container)
+
+    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_do_parsed_members</span>(<span style="color: #a020f0;">self</span>, header_container):
         <span style="color: #8b2252;">"""Initialize object from header (abstract method)</span>
 
 <span style="color: #8b2252;">        Extract object from CppHeaderParser dictionary representing a class, a</span>
@@ -799,7 +817,7 @@ methods).</li>
 <span style="color: #8b2252;">            Parsed header for container</span>
 <span style="color: #8b2252;">        """</span>
         <span style="color: #a020f0;">raise</span> <span style="color: #228b22;">NotImplementedError</span>(
-            <span style="color: #8b2252;">'Derived class must implement </span><span style="color: #0000ff;">:func:</span><span style="color: #008b8b;">`parse_members`</span><span style="color: #8b2252;">.'</span>)
+            <span style="color: #8b2252;">'Derived class must implement </span><span style="color: #0000ff;">:func:</span><span style="color: #008b8b;">`_do_parse_members`</span><span style="color: #8b2252;">.'</span>)
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">render</span>(<span style="color: #a020f0;">self</span>):
         <span style="color: #8b2252;">"""Render object to string</span>
@@ -813,6 +831,8 @@ methods).</li>
         <span style="color: #a020f0;">for</span> member <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>._member_list:
             <span style="color: #a0522d;">container_str</span> += <span style="color: #8b2252;">'\t'</span> + member.render() + <span style="color: #8b2252;">'\n'</span>
         <span style="color: #a0522d;">container_str</span> += <span style="color: #8b2252;">'}\n'</span>
+        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>._namespace <span style="color: #a020f0;">is</span> <span style="color: #a020f0;">not</span> <span style="color: #008b8b;">None</span>:
+            <span style="color: #a020f0;">return</span> wrap_namespace(container_str, <span style="color: #a020f0;">self</span>._namespace)
         <span style="color: #a020f0;">return</span> container_str
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">comparison_keys</span>(<span style="color: #a020f0;">self</span>):
@@ -857,7 +877,7 @@ returning a string representation of the member.  The base class
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgc827de9"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Object member</span>
+<pre class="src src-python" id="org8a53528"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Object member</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ContainerMember</span>(<span style="color: #483d8b;">object</span>):
@@ -909,9 +929,9 @@ returning a string representation of the member.  The base class
 </div>
 
 
-<div id="outline-container-org598f16d" class="outline-4">
-<h4 id="org598f16d">Classes</h4>
-<div class="outline-text-4" id="text-org598f16d">
+<div id="outline-container-org93c9ef1" class="outline-4">
+<h4 id="org93c9ef1">Classes</h4>
+<div class="outline-text-4" id="text-org93c9ef1">
 <p>
 C++ class objects are represented using the <code>Class</code> class.  It extends the
 <a href="#sec-module-container"><code>Container</code></a> class adding class properties (template, abstract) and a list of
@@ -920,7 +940,7 @@ which is used to determine aggregation relationships between classes.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgb825c56"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class object</span>
+<pre class="src src-python" id="orgd1b4b59"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class object</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Class</span>(Container):
@@ -953,12 +973,13 @@ which is used to determine aggregation relationships between classes.
         <span style="color: #a020f0;">self</span>._abstract = header_class[1][<span style="color: #8b2252;">'abstract'</span>]
         <span style="color: #a020f0;">self</span>._template_type = <span style="color: #008b8b;">None</span>
         <span style="color: #a020f0;">if</span> <span style="color: #8b2252;">'template'</span> <span style="color: #a020f0;">in</span> header_class[1]:
-            <span style="color: #a020f0;">self</span>._template_type = header_class[1][<span style="color: #8b2252;">'template'</span>]
+            <span style="color: #a020f0;">self</span>._template_type = _cleanup_single_line(
+                header_class[1][<span style="color: #8b2252;">'template'</span>])
         <span style="color: #a020f0;">self</span>._inheritance_list = [re.sub(<span style="color: #8b2252;">'&lt;.*&gt;'</span>, <span style="color: #8b2252;">''</span>, parent[<span style="color: #8b2252;">'class'</span>])
                                   <span style="color: #a020f0;">for</span> parent <span style="color: #a020f0;">in</span> header_class[1][<span style="color: #8b2252;">'inherits'</span>]]
         <span style="color: #a020f0;">self</span>.parse_members(header_class[1])
 
-    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">parse_members</span>(<span style="color: #a020f0;">self</span>, header_class):
+    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_do_parsed_members</span>(<span style="color: #a020f0;">self</span>, header_class):
         <span style="color: #8b2252;">"""Initialize class object from header</span>
 
 <span style="color: #8b2252;">        This method extracts class member variables and methods from header.</span>
@@ -1029,7 +1050,7 @@ which is used to determine aggregation relationships between classes.
 </div>
 
 
-<div id="outline-container-org9fa0171" class="outline-4">
+<div id="outline-container-org62184e5" class="outline-4">
 <h4 id="sec-module-class-member">Class members</h4>
 <div class="outline-text-4" id="text-sec-module-class-member">
 <p>
@@ -1047,7 +1068,7 @@ class provides the common rendering and relies on child classes implementing the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org9b9be1f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class member</span>
+<pre class="src src-python" id="orgb2c9ac0"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class member</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ClassMember</span>(ContainerMember):
@@ -1114,7 +1135,7 @@ class provides the common rendering and relies on child classes implementing the
 </div>
 
 
-<div id="outline-container-orge2088ed" class="outline-5">
+<div id="outline-container-org1912b6c" class="outline-5">
 <h5 id="sec_class_properties">Properties</h5>
 <div class="outline-text-5" id="text-sec_class_properties">
 <p>
@@ -1124,7 +1145,7 @@ to the <a href="#sec-module-class-member">parent class</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org5870a46"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class variable</span>
+<pre class="src src-python" id="org177d0cb"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class variable</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ClassVariable</span>(ClassMember):
@@ -1166,7 +1187,7 @@ to the <a href="#sec-module-class-member">parent class</a>.
 </div>
 
 
-<div id="outline-container-orga3465cb" class="outline-5">
+<div id="outline-container-orgba55ab8" class="outline-5">
 <h5 id="sec_class_methods">Methods</h5>
 <div class="outline-text-5" id="text-sec_class_methods">
 <p>
@@ -1183,7 +1204,7 @@ implemented in the future.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org346a0fc"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class method</span>
+<pre class="src src-python" id="org5371199"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class method</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ClassMethod</span>(ClassMember):
@@ -1257,9 +1278,9 @@ implemented in the future.
 </div>
 
 
-<div id="outline-container-org0f486fa" class="outline-4">
-<h4 id="org0f486fa">Structures</h4>
-<div class="outline-text-4" id="text-org0f486fa">
+<div id="outline-container-org6f5db4f" class="outline-4">
+<h4 id="org6f5db4f">Structures</h4>
+<div class="outline-text-4" id="text-org6f5db4f">
 <p>
 While <code>struct</code> objects are currently not supported, their addition should be
 relatively straightforward and the <code>Struct</code> class may simply inherit from the
@@ -1267,7 +1288,7 @@ relatively straightforward and the <code>Struct</code> class may simply inherit 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orga6b4976"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Struct object</span>
+<pre class="src src-python" id="org192a7ac"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Struct object</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Struct</span>(Class):
@@ -1294,9 +1315,9 @@ relatively straightforward and the <code>Struct</code> class may simply inherit 
 </div>
 
 
-<div id="outline-container-orgca78587" class="outline-4">
-<h4 id="orgca78587">Enumeration lists</h4>
-<div class="outline-text-4" id="text-orgca78587">
+<div id="outline-container-orgd32bffa" class="outline-4">
+<h4 id="orgd32bffa">Enumeration lists</h4>
+<div class="outline-text-4" id="text-orgd32bffa">
 <p>
 The <code>Enum</code> class representing enumeration object is a trivial extension of the
 base <a href="#sec-module-container"><code>Container</code></a> class.  Note that the enumeration elements are rendered without
@@ -1304,7 +1325,7 @@ the actual values.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org57c42c7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Enum object</span>
+<pre class="src src-python" id="orge422b2e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Enum object</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Enum</span>(Container):
@@ -1324,7 +1345,7 @@ the actual values.
         <span style="color: #483d8b;">super</span>().__init__(<span style="color: #8b2252;">'enum'</span>, header_enum.get(<span style="color: #8b2252;">'name'</span>, <span style="color: #8b2252;">'empty'</span>))
         <span style="color: #a020f0;">self</span>.parse_members(header_enum)
 
-    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">parse_members</span>(<span style="color: #a020f0;">self</span>, header_enum):
+    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_do_parsed_members</span>(<span style="color: #a020f0;">self</span>, header_enum):
         <span style="color: #8b2252;">"""Extract enum values from header</span>
 
 <span style="color: #8b2252;">        Parameters</span>
@@ -1332,7 +1353,7 @@ the actual values.
 <span style="color: #8b2252;">        header_enum : CppEnum</span>
 <span style="color: #8b2252;">            Parsed `CppEnum` object</span>
 <span style="color: #8b2252;">        """</span>
-        <span style="color: #a020f0;">for</span> value <span style="color: #a020f0;">in</span> header_enum[<span style="color: #8b2252;">'values'</span>]:
+        <span style="color: #a020f0;">for</span> value <span style="color: #a020f0;">in</span> header_enum.get(<span style="color: #8b2252;">'values'</span>, []):
             <span style="color: #a020f0;">self</span>._member_list.append(EnumValue(value[<span style="color: #8b2252;">'name'</span>]))
 
 
@@ -1369,7 +1390,7 @@ the actual values.
 </div>
 
 
-<div id="outline-container-org85c7762" class="outline-4">
+<div id="outline-container-org4c7b9a4" class="outline-4">
 <h4 id="sec-module-relationship">Class relationships</h4>
 <div class="outline-text-4" id="text-sec-module-relationship">
 <p>
@@ -1388,7 +1409,7 @@ strings and the text representation of a connection link is obtained from the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgba9f5fe"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class connections</span>
+<pre class="src src-python" id="org497574b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class connections</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ClassRelationship</span>(<span style="color: #483d8b;">object</span>):
@@ -1398,7 +1419,7 @@ strings and the text representation of a connection link is obtained from the
 <span style="color: #8b2252;">    This includes a parent/child pair and a relationship type (e.g. inheritance</span>
 <span style="color: #8b2252;">    or aggregation).</span>
 <span style="color: #8b2252;">    """</span>
-    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, link_type, c_parent, c_child):
+    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, link_type, c_parent, c_child, flag_use_namespace=<span style="color: #008b8b;">False</span>):
         <span style="color: #8b2252;">"""Constructor</span>
 
 <span style="color: #8b2252;">        Parameters</span>
@@ -1410,9 +1431,12 @@ strings and the text representation of a connection link is obtained from the
 <span style="color: #8b2252;">        c_child : str</span>
 <span style="color: #8b2252;">            Name of child class</span>
 <span style="color: #8b2252;">        """</span>
-        <span style="color: #a020f0;">self</span>._parent = c_parent
-        <span style="color: #a020f0;">self</span>._child = c_child
+        <span style="color: #a020f0;">self</span>._parent = c_parent.get_name()
+        <span style="color: #a020f0;">self</span>._child = c_child.get_name()
         <span style="color: #a020f0;">self</span>._link_type = link_type
+        <span style="color: #a020f0;">self</span>._parent_namespace = c_parent._namespace <span style="color: #a020f0;">or</span> <span style="color: #008b8b;">None</span>
+        <span style="color: #a020f0;">self</span>._child_namespace = c_child._namespace <span style="color: #a020f0;">or</span> <span style="color: #008b8b;">None</span>
+        <span style="color: #a020f0;">self</span>._flag_use_namespace = flag_use_namespace
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">comparison_keys</span>(<span style="color: #a020f0;">self</span>):
         <span style="color: #8b2252;">"""Order comparison key between `ClassRelationship` objects</span>
@@ -1427,6 +1451,32 @@ strings and the text representation of a connection link is obtained from the
 <span style="color: #8b2252;">        """</span>
         <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>._parent, <span style="color: #a020f0;">self</span>._child, <span style="color: #a020f0;">self</span>._link_type
 
+    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_render_name</span>(<span style="color: #a020f0;">self</span>, class_name, class_namespace, flag_use_namespace):
+        <span style="color: #8b2252;">"""Render class name with namespace prefix if necessary</span>
+
+<span style="color: #8b2252;">        Parameters</span>
+<span style="color: #8b2252;">        ----------</span>
+<span style="color: #8b2252;">        class_name : str</span>
+<span style="color: #8b2252;">           Name of the class</span>
+<span style="color: #8b2252;">        class_namespace : str</span>
+<span style="color: #8b2252;">            Namespace or None if the class is defined in the default namespace</span>
+<span style="color: #8b2252;">        flag_use_namespace : bool</span>
+<span style="color: #8b2252;">            When False, do not use the namespace</span>
+
+<span style="color: #8b2252;">        Returns</span>
+<span style="color: #8b2252;">        -------</span>
+<span style="color: #8b2252;">        str</span>
+<span style="color: #8b2252;">            Class name with appropriate prefix for use with link rendering</span>
+<span style="color: #8b2252;">        """</span>
+        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">not</span> flag_use_namespace:
+            <span style="color: #a020f0;">return</span> class_name
+
+        <span style="color: #a020f0;">if</span> class_namespace <span style="color: #a020f0;">is</span> <span style="color: #008b8b;">None</span>:
+            <span style="color: #a0522d;">prefix</span> = <span style="color: #8b2252;">'.'</span>
+        <span style="color: #a020f0;">else</span>:
+            <span style="color: #a0522d;">prefix</span> = class_namespace + <span style="color: #8b2252;">'.'</span>
+        <span style="color: #a020f0;">return</span> prefix + class_name
+
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">render</span>(<span style="color: #a020f0;">self</span>):
         <span style="color: #8b2252;">"""Render class relationship to string</span>
 
@@ -1440,8 +1490,29 @@ strings and the text representation of a connection link is obtained from the
 <span style="color: #8b2252;">            The string representation of the class relationship following the</span>
 <span style="color: #8b2252;">            PlantUML syntax</span>
 <span style="color: #8b2252;">        """</span>
-        <span style="color: #a020f0;">return</span> <span style="color: #a020f0;">self</span>._parent + <span style="color: #8b2252;">' '</span> + <span style="color: #a020f0;">self</span>._render_link_type() + \
-            <span style="color: #8b2252;">' '</span> + <span style="color: #a020f0;">self</span>._child
+        <span style="color: #a0522d;">link_str</span> = <span style="color: #8b2252;">''</span>
+
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">Wrap the link in namespace block (if both parent and child are in the</span>
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">same namespace)</span>
+        <span style="color: #a0522d;">namespace_wrap</span> = <span style="color: #008b8b;">None</span>
+        <span style="color: #a020f0;">if</span> <span style="color: #a020f0;">self</span>._parent_namespace == <span style="color: #a020f0;">self</span>._child_namespace <span style="color: #a020f0;">and</span> \
+           <span style="color: #a020f0;">self</span>._parent_namespace <span style="color: #a020f0;">is</span> <span style="color: #a020f0;">not</span> <span style="color: #008b8b;">None</span>:
+            <span style="color: #a0522d;">namespace_wrap</span> = <span style="color: #a020f0;">self</span>._parent_namespace
+
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">Prepend the namespace to the class name</span>
+        <span style="color: #a0522d;">flag_render_namespace</span> = <span style="color: #a020f0;">self</span>._flag_use_namespace <span style="color: #a020f0;">and</span> <span style="color: #a020f0;">not</span> namespace_wrap
+        <span style="color: #a0522d;">parent_str</span> = <span style="color: #a020f0;">self</span>._render_name(<span style="color: #a020f0;">self</span>._parent, <span style="color: #a020f0;">self</span>._parent_namespace,
+                                       flag_render_namespace)
+        <span style="color: #a0522d;">child_str</span> = <span style="color: #a020f0;">self</span>._render_name(<span style="color: #a020f0;">self</span>._child, <span style="color: #a020f0;">self</span>._child_namespace,
+                                      flag_render_namespace)
+
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">Link string</span>
+        <span style="color: #a0522d;">link_str</span> += parent_str + <span style="color: #8b2252;">' '</span> + <span style="color: #a020f0;">self</span>._render_link_type() + \
+                    <span style="color: #8b2252;">' '</span> + child_str + <span style="color: #8b2252;">'\n'</span>
+
+        <span style="color: #a020f0;">if</span> namespace_wrap <span style="color: #a020f0;">is</span> <span style="color: #a020f0;">not</span> <span style="color: #008b8b;">None</span>:
+            <span style="color: #a020f0;">return</span> wrap_namespace(link_str, namespace_wrap)
+        <span style="color: #a020f0;">return</span> link_str
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_render_link_type</span>(<span style="color: #a020f0;">self</span>):
         <span style="color: #8b2252;">"""Internal representation of link</span>
@@ -1460,9 +1531,9 @@ strings and the text representation of a connection link is obtained from the
 </div>
 
 
-<div id="outline-container-orge25217f" class="outline-5">
-<h5 id="orge25217f">Inheritance</h5>
-<div class="outline-text-5" id="text-orge25217f">
+<div id="outline-container-org69d7ae8" class="outline-5">
+<h5 id="org69d7ae8">Inheritance</h5>
+<div class="outline-text-5" id="text-org69d7ae8">
 <p>
 The inheritance relationship is a straightforward specialization of the base
 <code>ClassRelationship</code> class: it simply forces the link type to be the string
@@ -1470,7 +1541,7 @@ The inheritance relationship is a straightforward specialization of the base
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org9a720de"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class inheritance</span>
+<pre class="src src-python" id="orga6672f1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class inheritance</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ClassInheritanceRelationship</span>(ClassRelationship):
@@ -1479,7 +1550,7 @@ The inheritance relationship is a straightforward specialization of the base
 <span style="color: #8b2252;">    This module extends the base `ClassRelationship` class by setting the link</span>
 <span style="color: #8b2252;">    type to </span><span style="color: #008b8b;">``</span><span style="font-weight: bold; font-style: italic;">inherit</span><span style="color: #008b8b;">``</span><span style="color: #8b2252;">.</span>
 <span style="color: #8b2252;">    """</span>
-    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, c_parent, c_child):
+    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, c_parent, c_child, **kwargs):
         <span style="color: #8b2252;">"""Constructor</span>
 
 <span style="color: #8b2252;">        Parameters</span>
@@ -1488,17 +1559,19 @@ The inheritance relationship is a straightforward specialization of the base
 <span style="color: #8b2252;">            Parent class</span>
 <span style="color: #8b2252;">        c_child : str</span>
 <span style="color: #8b2252;">            Derived class</span>
+<span style="color: #8b2252;">        kwargs : dict</span>
+<span style="color: #8b2252;">            Additional parameters passed to parent class</span>
 <span style="color: #8b2252;">        """</span>
-        <span style="color: #483d8b;">super</span>().__init__(<span style="color: #8b2252;">'inherit'</span>, c_parent, c_child)
+        <span style="color: #483d8b;">super</span>().__init__(<span style="color: #8b2252;">'inherit'</span>, c_parent, c_child, **kwargs)
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-orgcec382f" class="outline-5">
-<h5 id="orgcec382f">Aggregation</h5>
-<div class="outline-text-5" id="text-orgcec382f">
+<div id="outline-container-orgccbc277" class="outline-5">
+<h5 id="orgccbc277">Aggregation</h5>
+<div class="outline-text-5" id="text-orgccbc277">
 <p>
 The aggregation relationship specializes the base <code>ClassRelationship</code> class by
 using the "aggregation" link type and adding a <code>count</code> field used to add a label
@@ -1507,7 +1580,7 @@ count is omitted when equal to one).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org34978a5"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class aggregation</span>
+<pre class="src src-python" id="org2975dcf"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Class aggregation</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">ClassAggregationRelationship</span>(ClassRelationship):
@@ -1521,7 +1594,7 @@ count is omitted when equal to one).
 <span style="color: #8b2252;">    variable type (possibly within a container such as a list) in a class</span>
 <span style="color: #8b2252;">    definition.</span>
 <span style="color: #8b2252;">    """</span>
-    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, c_parent, c_child, c_count=1):
+    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">__init__</span>(<span style="color: #a020f0;">self</span>, c_parent, c_child, c_count=1, **kwargs):
         <span style="color: #8b2252;">"""Constructor</span>
 
 <span style="color: #8b2252;">        Parameters</span>
@@ -1534,8 +1607,10 @@ count is omitted when equal to one).
 <span style="color: #8b2252;">        c_cout : int</span>
 <span style="color: #8b2252;">            The number of members of </span><span style="color: #008b8b;">``</span><span style="font-weight: bold; font-style: italic;">c_child</span><span style="color: #008b8b;">``</span><span style="color: #8b2252;"> that are of type (possibly</span>
 <span style="color: #8b2252;">            through containers) </span><span style="color: #008b8b;">``</span><span style="font-weight: bold; font-style: italic;">c_parent</span><span style="color: #008b8b;">``</span>
+<span style="color: #8b2252;">        kwargs : dict</span>
+<span style="color: #8b2252;">            Additional parameters passed to parent class</span>
 <span style="color: #8b2252;">        """</span>
-        <span style="color: #483d8b;">super</span>().__init__(<span style="color: #8b2252;">'aggregation'</span>, c_parent, c_child)
+        <span style="color: #483d8b;">super</span>().__init__(<span style="color: #8b2252;">'aggregation'</span>, c_parent, c_child, **kwargs)
         <span style="color: #a020f0;">self</span>._count = c_count
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_render_link_type</span>(<span style="color: #a020f0;">self</span>):
@@ -1554,7 +1629,7 @@ count is omitted when equal to one).
 </div>
 
 
-<div id="outline-container-org621cf0b" class="outline-4">
+<div id="outline-container-orgd501269" class="outline-4">
 <h4 id="sec-module-diagram">Diagram object</h4>
 <div class="outline-text-4" id="text-sec-module-diagram">
 <p>
@@ -1568,7 +1643,7 @@ ready to process by PlantUML.
 An example use case for the <code>Diagram</code> class could be:
 </p>
 <div class="org-src-container">
-<pre class="src src-python" id="org1080552"><span style="color: #b22222;"># </span><span style="color: #b22222;">Create object</span>
+<pre class="src src-python" id="org4bf9079"><span style="color: #b22222;"># </span><span style="color: #b22222;">Create object</span>
 <span style="color: #a0522d;">diag</span> = Diagram()
 <span style="color: #b22222;"># </span><span style="color: #b22222;">Initialize from filename</span>
 diag.create_from_file(filename)
@@ -1579,10 +1654,10 @@ diag.create_from_file(filename)
 
 <p>
 The interface methods and their behavior are summarized in
-Table&nbsp;<a href="#org78ae74d">2</a>.
+Table&nbsp;<a href="#org8de8351">2</a>.
 </p>
 
-<table id="org78ae74d">
+<table id="org8de8351">
 <caption class="t-above"><span class="table-number">Table 2:</span> Public interface for populating a <code>Diagram</code> object.</caption>
 
 <colgroup>
@@ -1721,7 +1796,7 @@ be used to avoid this sorting step.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org36a72d4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Diagram class</span>
+<pre class="src src-python" id="orgbae9941"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Diagram class</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Diagram</span>(<span style="color: #483d8b;">object</span>):
@@ -1924,6 +1999,18 @@ be used to avoid this sorting step.
             <span style="color: #a020f0;">for</span> obj <span style="color: #a020f0;">in</span> container_iterator(objects):
                 <span style="color: #a020f0;">self</span>._objects.append(container_handler(obj))
 
+    <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_make_class_list</span>(<span style="color: #a020f0;">self</span>):
+        <span style="color: #8b2252;">"""Build list of classes</span>
+
+<span style="color: #8b2252;">        Returns</span>
+<span style="color: #8b2252;">        -------</span>
+<span style="color: #8b2252;">        list(dict)</span>
+<span style="color: #8b2252;">            Each entry is a dictionary with keys </span><span style="color: #008b8b;">``</span><span style="font-weight: bold; font-style: italic;">name</span><span style="color: #008b8b;">``</span><span style="color: #8b2252;"> (class name) and</span>
+<span style="color: #8b2252;">            </span><span style="color: #008b8b;">``</span><span style="font-weight: bold; font-style: italic;">obj</span><span style="color: #008b8b;">``</span><span style="color: #8b2252;"> the instance of the `Class` class</span>
+<span style="color: #8b2252;">        """</span>
+        <span style="color: #a020f0;">return</span> [{<span style="color: #8b2252;">'name'</span>: obj.get_name(), <span style="color: #8b2252;">'obj'</span>: obj}
+                <span style="color: #a020f0;">for</span> obj <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>._objects <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">isinstance</span>(obj, Class)]
+
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">build_inheritance_list</span>(<span style="color: #a020f0;">self</span>):
         <span style="color: #8b2252;">"""Build list of inheritance between objects</span>
 
@@ -1937,8 +2024,9 @@ be used to avoid this sorting step.
 <span style="color: #8b2252;">        """</span>
         <span style="color: #a020f0;">self</span>._inheritance_list = []
         <span style="color: #b22222;"># </span><span style="color: #b22222;">Build list of classes in diagram</span>
-        <span style="color: #a0522d;">class_list</span> = [obj.get_name() <span style="color: #a020f0;">for</span> obj <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>._objects
-                      <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">isinstance</span>(obj, Class)]
+        <span style="color: #a0522d;">class_list_obj</span> = <span style="color: #a020f0;">self</span>._make_class_list()
+        <span style="color: #a0522d;">class_list</span> = [c[<span style="color: #8b2252;">'name'</span>] <span style="color: #a020f0;">for</span> c <span style="color: #a020f0;">in</span> class_list_obj]
+        <span style="color: #a0522d;">flag_use_namespace</span> = <span style="color: #483d8b;">any</span>([c[<span style="color: #8b2252;">'obj'</span>]._namespace <span style="color: #a020f0;">for</span> c <span style="color: #a020f0;">in</span> class_list_obj])
 
         <span style="color: #b22222;"># </span><span style="color: #b22222;">Create relationships</span>
 
@@ -1948,8 +2036,12 @@ be used to avoid this sorting step.
             <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">isinstance</span>(obj, Class):
                 <span style="color: #a020f0;">for</span> parent <span style="color: #a020f0;">in</span> obj.build_inheritance_list():
                     <span style="color: #a020f0;">if</span> parent <span style="color: #a020f0;">in</span> class_list:
+                        <span style="color: #a0522d;">parent_obj</span> = class_list_obj[
+                            class_list.index(parent)][<span style="color: #8b2252;">'obj'</span>]
                         <span style="color: #a020f0;">self</span>._inheritance_list.append(
-                            ClassInheritanceRelationship(parent, obj_name))
+                            ClassInheritanceRelationship(
+                                parent_obj, obj,
+                                flag_use_namespace=flag_use_namespace))
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">build_aggregation_list</span>(<span style="color: #a020f0;">self</span>):
         <span style="color: #8b2252;">"""Build list of aggregation relationships</span>
@@ -1965,8 +2057,10 @@ be used to avoid this sorting step.
 <span style="color: #8b2252;">        """</span>
         <span style="color: #a020f0;">self</span>._aggregation_list = []
         <span style="color: #b22222;"># </span><span style="color: #b22222;">Build list of classes in diagram</span>
-        <span style="color: #a0522d;">class_list</span> = [obj.get_name() <span style="color: #a020f0;">for</span> obj <span style="color: #a020f0;">in</span> <span style="color: #a020f0;">self</span>._objects
-                      <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">isinstance</span>(obj, Class)]
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">Build list of classes in diagram</span>
+        <span style="color: #a0522d;">class_list_obj</span> = <span style="color: #a020f0;">self</span>._make_class_list()
+        <span style="color: #a0522d;">class_list</span> = [c[<span style="color: #8b2252;">'name'</span>] <span style="color: #a020f0;">for</span> c <span style="color: #a020f0;">in</span> class_list_obj]
+        <span style="color: #a0522d;">flag_use_namespace</span> = <span style="color: #483d8b;">any</span>([c[<span style="color: #8b2252;">'obj'</span>]._namespace <span style="color: #a020f0;">for</span> c <span style="color: #a020f0;">in</span> class_list_obj])
 
         <span style="color: #b22222;"># </span><span style="color: #b22222;">Build member type list</span>
         <span style="color: #a0522d;">variable_type_list</span> = {}
@@ -1987,9 +2081,14 @@ be used to avoid this sorting step.
                                                child_class)
         <span style="color: #a020f0;">for</span> obj_class, obj_comp_list <span style="color: #a020f0;">in</span> aggregation_counts.items():
             <span style="color: #a020f0;">for</span> comp_parent, comp_count <span style="color: #a020f0;">in</span> obj_comp_list:
+                <span style="color: #a0522d;">obj_class_idx</span> = class_list.index(obj_class)
+                <span style="color: #a0522d;">obj_class_obj</span> = class_list_obj[obj_class_idx][<span style="color: #8b2252;">'obj'</span>]
+                <span style="color: #a0522d;">comp_parent_idx</span> = class_list.index(comp_parent)
+                <span style="color: #a0522d;">comp_parent_obj</span> = class_list_obj[comp_parent_idx][<span style="color: #8b2252;">'obj'</span>]
                 <span style="color: #a020f0;">self</span>._aggregation_list.append(
-                    ClassAggregationRelationship(obj_class, comp_parent,
-                                                 comp_count))
+                    ClassAggregationRelationship(
+                        obj_class_obj, comp_parent_obj, comp_count,
+                        flag_use_namespace=flag_use_namespace))
 
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_augment_comp</span>(<span style="color: #a020f0;">self</span>, c_dict, c_parent, c_child):
         <span style="color: #8b2252;">"""Increment the aggregation reference count</span>
@@ -2078,25 +2177,25 @@ be used to avoid this sorting step.
 </div>
 
 
-<div id="outline-container-org3a46024" class="outline-3">
-<h3 id="org3a46024">Helper functions</h3>
-<div class="outline-text-3" id="text-org3a46024">
+<div id="outline-container-orgc8681ac" class="outline-3">
+<h3 id="orgc8681ac">Helper functions</h3>
+<div class="outline-text-3" id="text-orgc8681ac">
 <p>
 This section briefly describes the helper functions defined in the module.
 </p>
 </div>
 
 
-<div id="outline-container-org0b3ebac" class="outline-4">
-<h4 id="org0b3ebac">Sanitize type string</h4>
-<div class="outline-text-4" id="text-org0b3ebac">
+<div id="outline-container-orgd44fdec" class="outline-4">
+<h4 id="orgd44fdec">Sanitize strings</h4>
+<div class="outline-text-4" id="text-orgd44fdec">
 <p>
 The <code>_cleanup_type</code> function tries to unify the string representation of
 variable types by eliminating spaces around <code>*</code> characters.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org9d35e77"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Cleanup object type string</span>
+<pre class="src src-python" id="org997b363"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Cleanup object type string</span>
 
 
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_cleanup_type</span>(type_str):
@@ -2119,13 +2218,40 @@ variable types by eliminating spaces around <code>*</code> characters.
                   re.sub(r<span style="color: #8b2252;">'(\s)+'</span>, r<span style="color: #8b2252;">'\1'</span>, type_str))
 </pre>
 </div>
+
+<p>
+The <code>_cleanup_single_line</code> function transforms a multiline input string into a
+single string version.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org9f0b8d2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Single line version of string</span>
+
+
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">_cleanup_single_line</span>(input_str):
+    <span style="color: #8b2252;">"""Cleanup string representing a C++ type</span>
+
+<span style="color: #8b2252;">    Remove line returns</span>
+
+<span style="color: #8b2252;">    Parameters</span>
+<span style="color: #8b2252;">    ----------</span>
+<span style="color: #8b2252;">    input_str : str</span>
+<span style="color: #8b2252;">        A string possibly spreading multiple lines</span>
+
+<span style="color: #8b2252;">    Returns</span>
+<span style="color: #8b2252;">    -------</span>
+<span style="color: #8b2252;">    str</span>
+<span style="color: #8b2252;">        The type string in a single line</span>
+<span style="color: #8b2252;">    """</span>
+    <span style="color: #a020f0;">return</span> re.sub(r<span style="color: #8b2252;">'\s+'</span>, <span style="color: #8b2252;">' '</span>, re.sub(r<span style="color: #8b2252;">'(\r)?\n'</span>, <span style="color: #8b2252;">' '</span>, input_str))
+</pre>
+</div>
 </div>
 </div>
 
-
-<div id="outline-container-org9d1a3e1" class="outline-4">
-<h4 id="org9d1a3e1">Expand file list</h4>
-<div class="outline-text-4" id="text-org9d1a3e1">
+<div id="outline-container-orgbce5c8e" class="outline-4">
+<h4 id="orgbce5c8e">Expand file list</h4>
+<div class="outline-text-4" id="text-orgbce5c8e">
 <p>
 The <a href="#sec-module-create-uml">main interface function</a> accepts wildcards in filenames; they are resolved
 using the <code>glob</code> package.  The <code>expand_file_list</code> function takes as input a list
@@ -2134,7 +2260,7 @@ existing filenames without wildcards.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org17100c4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Expand wildcards in file list</span>
+<pre class="src src-python" id="org683b112"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Expand wildcards in file list</span>
 
 
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">expand_file_list</span>(input_files):
@@ -2163,10 +2289,43 @@ existing filenames without wildcards.
 </div>
 </div>
 </div>
+
+<div id="outline-container-orgfe69bf2" class="outline-4">
+<h4 id="orgfe69bf2">Namespace wrapper</h4>
+<div class="outline-text-4" id="text-orgfe69bf2">
+<p>
+The <code>wrap_namespace</code> function wraps a rendered PlantUML string in a <code>namespace</code>
+block.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org9ad1d1c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">wrap_namespace</span>(input_str, namespace):
+    <span style="color: #8b2252;">"""Wrap string in namespace</span>
+
+<span style="color: #8b2252;">    Parameters</span>
+<span style="color: #8b2252;">    ----------</span>
+<span style="color: #8b2252;">    input_str : str</span>
+<span style="color: #8b2252;">        String containing PlantUML code</span>
+<span style="color: #8b2252;">    namespace : str</span>
+<span style="color: #8b2252;">       Namespace name</span>
+
+<span style="color: #8b2252;">    Returns</span>
+<span style="color: #8b2252;">    -------</span>
+<span style="color: #8b2252;">    str</span>
+<span style="color: #8b2252;">        </span><span style="color: #008b8b;">``</span><span style="font-weight: bold; font-style: italic;">input_str</span><span style="color: #008b8b;">``</span><span style="color: #8b2252;"> wrapped in </span><span style="color: #008b8b;">``</span><span style="font-weight: bold; font-style: italic;">namespace</span><span style="color: #008b8b;">``</span><span style="color: #8b2252;"> block</span>
+<span style="color: #8b2252;">    """</span>
+    <span style="color: #a020f0;">return</span> <span style="color: #8b2252;">'namespace {} {{\n'</span>.<span style="color: #483d8b;">format</span>(namespace) + \
+        <span style="color: #8b2252;">'\n'</span>.join([re.sub(<span style="color: #8b2252;">'^'</span>, <span style="color: #8b2252;">'\t'</span>, line)
+                   <span style="color: #a020f0;">for</span> line <span style="color: #a020f0;">in</span> input_str.splitlines()]) + \
+        <span style="color: #8b2252;">'\n}\n'</span>
+</pre>
+</div>
+</div>
+</div>
 </div>
 
 
-<div id="outline-container-org9f1703b" class="outline-3">
+<div id="outline-container-orgb27c73e" class="outline-3">
 <h3 id="sec-module-create-uml">Main function: create PlantUML from C++</h3>
 <div class="outline-text-3" id="text-sec-module-create-uml">
 <p>
@@ -2183,7 +2342,7 @@ output file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org7af7f43"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Main function</span>
+<pre class="src src-python" id="orgf94effd"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Main function</span>
 
 
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">CreatePlantUMLFile</span>(file_list, output_file=<span style="color: #008b8b;">None</span>):
@@ -2219,7 +2378,7 @@ output file.
 </div>
 
 
-<div id="outline-container-org8f43178" class="outline-3">
+<div id="outline-container-org8c99ba0" class="outline-3">
 <h3 id="sec-module-cmd">Command line interface</h3>
 <div class="outline-text-3" id="text-sec-module-cmd">
 <p>
@@ -2229,7 +2388,7 @@ to parse input arguments.  The function passes the command line arguments to the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org69a470c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Command line interface</span>
+<pre class="src src-python" id="orgefb78bd"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Command line interface</span>
 
 
 <span id="coderef-module-main" class="coderef-off"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">main</span>():</span>
@@ -2249,7 +2408,7 @@ to parse input arguments.  The function passes the command line arguments to the
                         required=<span style="color: #008b8b;">False</span>, default=<span style="color: #008b8b;">None</span>, metavar=<span style="color: #8b2252;">'FILE'</span>,
                         <span style="color: #483d8b;">help</span>=<span style="color: #8b2252;">'output file'</span>)
     parser.add_argument(<span style="color: #8b2252;">'--version'</span>, action=<span style="color: #8b2252;">'version'</span>,
-                        version=<span style="color: #8b2252;">'%(prog)s '</span> + <span style="color: #8b2252;">'0.3'</span>)
+                        version=<span style="color: #8b2252;">'%(prog)s '</span> + <span style="color: #8b2252;">'0.4'</span>)
     <span style="color: #a0522d;">args</span> = parser.parse_args()
     <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">len</span>(args.input_files) &gt; 0:
         CreatePlantUMLFile(args.input_files, args.output_file)
@@ -2266,14 +2425,14 @@ to parse input arguments.  The function passes the command line arguments to the
 </div>
 
 
-<div id="outline-container-orgbe98eae" class="outline-2">
+<div id="outline-container-orga10e624" class="outline-2">
 <h2 id="sec-module-install">Installation</h2>
 <div class="outline-text-2" id="text-sec-module-install">
 </div>
 
-<div id="outline-container-org51326d1" class="outline-3">
-<h3 id="org51326d1">Using <code>pip</code></h3>
-<div class="outline-text-3" id="text-org51326d1">
+<div id="outline-container-org7bc4954" class="outline-3">
+<h3 id="org7bc4954">Using <code>pip</code></h3>
+<div class="outline-text-3" id="text-org7bc4954">
 <p>
 The package is available on <a href="https://pypi.python.org/">PyPi</a> and can be installed using pip:
 </p>
@@ -2285,9 +2444,9 @@ pip install hpp2plantuml
 </div>
 
 
-<div id="outline-container-org37ed11c" class="outline-3">
-<h3 id="org37ed11c">From source</h3>
-<div class="outline-text-3" id="text-org37ed11c">
+<div id="outline-container-org92cfaa1" class="outline-3">
+<h3 id="org92cfaa1">From source</h3>
+<div class="outline-text-3" id="text-org92cfaa1">
 <p>
 The code uses <code>setuptools</code>, so it can be built using:
 </p>
@@ -2316,7 +2475,7 @@ python setup.py test
 </div>
 
 
-<div id="outline-container-org6cb2a47" class="outline-2">
+<div id="outline-container-org88a5dd2" class="outline-2">
 <h2 id="sec-module-usage">Usage</h2>
 <div class="outline-text-2" id="text-sec-module-usage">
 <p>
@@ -2325,9 +2484,9 @@ other applications.
 </p>
 </div>
 
-<div id="outline-container-orgbde677d" class="outline-3">
-<h3 id="orgbde677d">Command line</h3>
-<div class="outline-text-3" id="text-orgbde677d">
+<div id="outline-container-orgcbad47e" class="outline-3">
+<h3 id="orgcbad47e">Command line</h3>
+<div class="outline-text-3" id="text-orgcbad47e">
 <p>
 The command line usage is (<code>hpp2plantuml --help</code>):
 </p>
@@ -2361,16 +2520,16 @@ For instance, the following command will generate an input file for PlantUML
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org7409824">hpp2plantuml -i File_1.hpp -i <span style="color: #8b2252;">"include/Helper_*.hpp"</span> -o output.puml
+<pre class="src src-sh" id="orgfb6ecdf">hpp2plantuml -i File_1.hpp -i <span style="color: #8b2252;">"include/Helper_*.hpp"</span> -o output.puml
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org122663c" class="outline-3">
-<h3 id="org122663c">Module</h3>
-<div class="outline-text-3" id="text-org122663c">
+<div id="outline-container-org3d59da4" class="outline-3">
+<h3 id="org3d59da4">Module</h3>
+<div class="outline-text-3" id="text-org3d59da4">
 <p>
 To use as a module, simply <code>import hpp2plantuml</code>.  The <code>CreatePlantUMLFile</code>
 function can then be used to create a PlantUML file from a set of input files.
@@ -2383,9 +2542,9 @@ produce a string output instead of writing to a text file.
 </div>
 
 
-<div id="outline-container-orgdc2a3ad" class="outline-2">
-<h2 id="orgdc2a3ad">Tests</h2>
-<div class="outline-text-2" id="text-orgdc2a3ad">
+<div id="outline-container-org6763e1c" class="outline-2">
+<h2 id="org6763e1c">Tests</h2>
+<div class="outline-text-2" id="text-org6763e1c">
 <p>
 Testing is performed using the <a href="http://nose.readthedocs.io/en/latest/">nose</a> framework.  The tests are defined in the
 <code>test_hpp2plantuml.py</code> file located in the test folder.  They can be run with
@@ -2408,7 +2567,7 @@ Following is the test setup code.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org68bf910"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #8b2252;">"""Test module for hpp2plantuml"""</span>
+<pre class="src src-python" id="orgdccf61d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #8b2252;">"""Test module for hpp2plantuml"""</span>
 
 <span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Imports</span>
 
@@ -2443,9 +2602,9 @@ Following is the test setup code.
 </div>
 </div>
 
-<div id="outline-container-org711591a" class="outline-3">
-<h3 id="org711591a">Module tests</h3>
-<div class="outline-text-3" id="text-org711591a">
+<div id="outline-container-org9b0de53" class="outline-3">
+<h3 id="org9b0de53">Module tests</h3>
+<div class="outline-text-3" id="text-org9b0de53">
 <p>
 The module tests are not strictly speaking unit tests, as they rely on parsing
 of a header file, but they aim at evaluating simple functionality of the
@@ -2453,16 +2612,16 @@ different modules implemented.
 </p>
 </div>
 
-<div id="outline-container-org68935ab" class="outline-4">
-<h4 id="org68935ab">Container</h4>
-<div class="outline-text-4" id="text-org68935ab">
+<div id="outline-container-org796ee8d" class="outline-4">
+<h4 id="org796ee8d">Container</h4>
+<div class="outline-text-4" id="text-org796ee8d">
 <p>
 The test for the <code>Container</code> class tests elementary functionality: members and
 sorting keys.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgeb8c683"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test containers</span>
+<pre class="src src-python" id="orgf8f28a7"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test containers</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">TestContainer</span>:
@@ -2495,9 +2654,9 @@ sorting keys.
 </div>
 
 
-<div id="outline-container-org2a6c6f4" class="outline-4">
-<h4 id="org2a6c6f4">Class</h4>
-<div class="outline-text-4" id="text-org2a6c6f4">
+<div id="outline-container-org8b75797" class="outline-4">
+<h4 id="org8b75797">Class</h4>
+<div class="outline-text-4" id="text-org8b75797">
 <p>
 Testing for classes is performed by parsing minimal C++ code segments and
 comparing the rendered text to a reference.  The input/output pairs are stored
@@ -2508,16 +2667,16 @@ in a single row of the table.
 </div>
 
 
-<div id="outline-container-org7e6a007" class="outline-5">
-<h5 id="org7e6a007">Class variable</h5>
-<div class="outline-text-5" id="text-org7e6a007">
+<div id="outline-container-org14b6845" class="outline-5">
+<h5 id="org14b6845">Class variable</h5>
+<div class="outline-text-5" id="text-org14b6845">
 <p>
 Class variables have simple functionality (name, type and scope).  The following
-table (Table&nbsp;<a href="#org36ff6ab">3</a>) defines tests that validate
+table (Table&nbsp;<a href="#org9ca67b0">3</a>) defines tests that validate
 the representation of variables.
 </p>
 
-<table id="org36ff6ab">
+<table id="org9ca67b0">
 <caption class="t-above"><span class="table-number">Table 3:</span> List of test segments and corresponding PlantUML strings.</caption>
 
 <colgroup>
@@ -2551,7 +2710,7 @@ the representation of variables.
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="org7681fb2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test class variables</span>
+<pre class="src src-python" id="org56a8ca9"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test class variables</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">TestClassVariable</span>:
@@ -2573,16 +2732,16 @@ the representation of variables.
 </div>
 
 
-<div id="outline-container-orgb630280" class="outline-5">
-<h5 id="orgb630280">Class method</h5>
-<div class="outline-text-5" id="text-orgb630280">
+<div id="outline-container-org48986ac" class="outline-5">
+<h5 id="org48986ac">Class method</h5>
+<div class="outline-text-5" id="text-org48986ac">
 <p>
 The tests for class methods are listed in
-Table&nbsp;<a href="#org8ac5d6c">4</a>.  Note that template methods are not
+Table&nbsp;<a href="#orgd9ca612">4</a>.  Note that template methods are not
 supported by PlantUML.
 </p>
 
-<table id="org8ac5d6c">
+<table id="orgd9ca612">
 <caption class="t-above"><span class="table-number">Table 4:</span> List of test segments and corresponding PlantUML strings.</caption>
 
 <colgroup>
@@ -2626,7 +2785,7 @@ supported by PlantUML.
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="org9845fab"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test class methods</span>
+<pre class="src src-python" id="org6143673"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test class methods</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">TestClassMethod</span>:
@@ -2648,15 +2807,15 @@ supported by PlantUML.
 </div>
 
 
-<div id="outline-container-orgc30c700" class="outline-5">
-<h5 id="orgc30c700">Class</h5>
-<div class="outline-text-5" id="text-orgc30c700">
+<div id="outline-container-org19cc7bb" class="outline-5">
+<h5 id="org19cc7bb">Class</h5>
+<div class="outline-text-5" id="text-org19cc7bb">
 <p>
 The unit test for classes includes rendering tests for the code segments in
-Table&nbsp;<a href="#orgea5f0c7">5</a>.  It includes templates and abstract classes.
+Table&nbsp;<a href="#org67a23b6">5</a>.  It includes templates and abstract classes.
 </p>
 
-<table id="orgea5f0c7">
+<table id="org67a23b6">
 <caption class="t-above"><span class="table-number">Table 5:</span> List of test segments and corresponding PlantUML strings.</caption>
 
 <colgroup>
@@ -2690,12 +2849,16 @@ Table&nbsp;<a href="#orgea5f0c7">5</a>.  It includes templates and abstract clas
 <td class="org-left">"template &lt;typename T&gt; class Test{\nvirtual T* func(T&amp; arg)=0; };"</td>
 <td class="org-left">"abstract class Test &lt;template &lt;typename T&gt;&gt; {\n\t-{abstract} func(T&amp; arg) : T*\n}\n"</td>
 </tr>
+
+<tr>
+<td class="org-left">"namespace Interface {\nclass Test {\nprotected:\nint &amp; member; };};"</td>
+<td class="org-left">"namespace Interface {\n\tclass Test {\n\t\t#member : int&amp;\n\t}\n}\n"</td>
+</tr>
 </tbody>
 </table>
 
-
 <div class="org-src-container">
-<pre class="src src-python" id="orgfbac524"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test classes</span>
+<pre class="src src-python" id="org49517ca"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test classes</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">TestClass</span>:
@@ -2717,15 +2880,15 @@ Table&nbsp;<a href="#orgea5f0c7">5</a>.  It includes templates and abstract clas
 </div>
 
 
-<div id="outline-container-orgb05d517" class="outline-4">
-<h4 id="orgb05d517">Enum</h4>
-<div class="outline-text-4" id="text-orgb05d517">
+<div id="outline-container-org08b8b30" class="outline-4">
+<h4 id="org08b8b30">Enum</h4>
+<div class="outline-text-4" id="text-org08b8b30">
 <p>
 The unit test for enum objects includes rendering tests for the code segments in
-Table&nbsp;<a href="#orgce263a5">6</a>.
+Table&nbsp;<a href="#orgb6147b4">6</a>.
 </p>
 
-<table id="orgce263a5">
+<table id="orgb6147b4">
 <caption class="t-above"><span class="table-number">Table 6:</span> List of test segments and corresponding PlantUML strings.</caption>
 
 <colgroup>
@@ -2759,7 +2922,7 @@ Table&nbsp;<a href="#orgce263a5">6</a>.
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="org1542d67"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test enum objects</span>
+<pre class="src src-python" id="org64b7aa1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test enum objects</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">TestEnum</span>:
@@ -2780,17 +2943,17 @@ Table&nbsp;<a href="#orgce263a5">6</a>.
 </div>
 
 
-<div id="outline-container-orgc9aeef2" class="outline-4">
-<h4 id="orgc9aeef2">Links</h4>
-<div class="outline-text-4" id="text-orgc9aeef2">
+<div id="outline-container-org797b73b" class="outline-4">
+<h4 id="org797b73b">Links</h4>
+<div class="outline-text-4" id="text-org797b73b">
 <p>
 The unit test for link objects includes rendering tests for the code segments in
-Table&nbsp;<a href="#orgd061432">7</a>.  It tests inheritance and aggregation
+Table&nbsp;<a href="#orgd347c36">7</a>.  It tests inheritance and aggregation
 relationships (with and without count).
 </p>
 
 
-<table id="orgd061432">
+<table id="orgd347c36">
 <caption class="t-above"><span class="table-number">Table 7:</span> List of test segments and corresponding PlantUML strings.</caption>
 
 <colgroup>
@@ -2807,29 +2970,39 @@ relationships (with and without count).
 <tbody>
 <tr>
 <td class="org-left">"class A{};\nclass B : A{};"</td>
-<td class="org-left">"A &lt;@&#x2013; B"</td>
+<td class="org-left">"A &lt;@&#x2013; B\n"</td>
 </tr>
 
 <tr>
 <td class="org-left">"class A{};\nclass B : public A{};"</td>
-<td class="org-left">"A &lt;@&#x2013; B"</td>
+<td class="org-left">"A &lt;@&#x2013; B\n"</td>
 </tr>
 
 <tr>
 <td class="org-left">"class B{};\nclass A{B obj;};"</td>
-<td class="org-left">"A o&#x2013; B"</td>
+<td class="org-left">"A o&#x2013; B\n"</td>
 </tr>
 
 <tr>
 <td class="org-left">"class B{};\nclass A{B obj; B* ptr;};"</td>
-<td class="org-left">"A \"2\" o&#x2013; B"</td>
+<td class="org-left">"A \"2\" o&#x2013; B\n"</td>
+</tr>
+
+<tr>
+<td class="org-left">"namespace T {class A{}; class B: A{};};"</td>
+<td class="org-left">"namespace T {\n\tA &lt;@&#x2013; B\n}\n"</td>
+</tr>
+
+<tr>
+<td class="org-left">"namespace T {\nclass A{};};\nclass B{T::A* _obj;};"</td>
+<td class="org-left">".B o&#x2013; T.A\n"</td>
 </tr>
 </tbody>
 </table>
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="org3d5ee47"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #a020f0;">class</span> <span style="color: #228b22;">TestLink</span>:
+<pre class="src src-python" id="org774eeeb"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #a020f0;">class</span> <span style="color: #228b22;">TestLink</span>:
     <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">test_list_entries</span>(<span style="color: #a020f0;">self</span>):
         <span style="color: #a020f0;">for</span> test_idx, (input_str, output_ref_str) <span style="color: #a020f0;">in</span> \
             <span style="color: #483d8b;">enumerate</span>(fix_test_list_def(test_list_link)):
@@ -2850,16 +3023,17 @@ relationships (with and without count).
 </div>
 
 
-<div id="outline-container-org1a63a23" class="outline-3">
-<h3 id="org1a63a23">Full system test</h3>
-<div class="outline-text-3" id="text-org1a63a23">
+
+<div id="outline-container-orgc4bea36" class="outline-3">
+<h3 id="orgc4bea36">Full system test</h3>
+<div class="outline-text-3" id="text-orgc4bea36">
 <p>
 The system test uses example header files and validates the PlantUML string
 rendering compared to a saved reference.
 </p>
 </div>
 
-<div id="outline-container-org7668d66" class="outline-4">
+<div id="outline-container-org6fe98a3" class="outline-4">
 <h4 id="sec-test-system-hpp">Input files</h4>
 <div class="outline-text-4" id="text-sec-test-system-hpp">
 <p>
@@ -2875,7 +3049,7 @@ The following can be extended to improve testing, as long as the corresponding
 </p>
 
 <div class="org-src-container">
-<pre class="src src-c++" id="org21f3197"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/simple_classes_1_2.hpp]</div><span style="color: #a020f0;">enum</span> <span style="color: #228b22;">Enum01</span> { <span style="color: #a0522d;">VALUE_0</span>, <span style="color: #a0522d;">VALUE_1</span>, <span style="color: #a0522d;">VALUE_2</span> };
+<pre class="src src-c++" id="orgffb3ce0"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/simple_classes_1_2.hpp]</div><span style="color: #a020f0;">enum</span> <span style="color: #228b22;">Enum01</span> { <span style="color: #a0522d;">VALUE_0</span>, <span style="color: #a0522d;">VALUE_1</span>, <span style="color: #a0522d;">VALUE_2</span> };
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Class01</span> {
 <span style="color: #a020f0;">protected</span>:
@@ -2903,7 +3077,7 @@ The following can be extended to improve testing, as long as the corresponding
 </div>
 
 <div class="org-src-container">
-<pre class="src src-c++" id="org751cd2a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/simple_classes_3.hpp]</div><span style="color: #a020f0;">template</span>&lt;<span style="color: #a020f0;">typename</span> <span style="color: #228b22;">T</span>&gt;
+<pre class="src src-c++" id="orgdc2c25a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/simple_classes_3.hpp]</div><span style="color: #a020f0;">template</span>&lt;<span style="color: #a020f0;">typename</span> <span style="color: #228b22;">T</span>&gt;
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Class03</span> {
 <span style="color: #a020f0;">public</span>:
     <span style="color: #0000ff;">Class03</span>();
@@ -2914,6 +3088,27 @@ The following can be extended to improve testing, as long as the corresponding
     <span style="color: #228b22;">list</span>&lt;Class02&gt; <span style="color: #a0522d;">_obj_list</span>;
     <span style="color: #228b22;">T</span>* <span style="color: #a0522d;">_typed_obj</span>;
 };
+
+<span style="color: #a020f0;">namespace</span> <span style="color: #008b8b;">Interface</span> {
+
+    <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Class04</span> {
+    <span style="color: #a020f0;">public</span>:
+        <span style="color: #0000ff;">Class04</span>();
+        ~<span style="color: #0000ff;">Class04</span>();
+    <span style="color: #a020f0;">private</span>:
+        <span style="color: #228b22;">bool</span> <span style="color: #a0522d;">_flag</span>;
+        <span style="color: #228b22;">Class01</span>* <span style="color: #a0522d;">_obj</span>;
+    };
+
+    <span style="color: #a020f0;">class</span> <span style="color: #228b22;">Class04_derived</span> : <span style="color: #a020f0;">public</span> <span style="color: #228b22;">Class04</span> {
+    <span style="color: #a020f0;">public</span>:
+        <span style="color: #0000ff;">Class04_derived</span>();
+        ~<span style="color: #0000ff;">Class04_derived</span>();
+    <span style="color: #a020f0;">private</span>:
+        <span style="color: #228b22;">int</span> <span style="color: #a0522d;">_var</span>;
+    };
+
+};
 </pre>
 </div>
 </div>
@@ -2921,7 +3116,7 @@ The following can be extended to improve testing, as long as the corresponding
 
 
 
-<div id="outline-container-org2f47b52" class="outline-4">
+<div id="outline-container-org5a7952f" class="outline-4">
 <h4 id="sec-test-system-ref">Reference output</h4>
 <div class="outline-text-4" id="text-sec-test-system-ref">
 <p>
@@ -2931,7 +3126,7 @@ The comparison takes into account the white space, indentation, etc.
 
 
 <div class="org-src-container">
-<pre class="src src-plantuml" id="orged40c83"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/simple_classes.puml]</div><span style="color: #a020f0;">@startuml</span>
+<pre class="src src-plantuml" id="org37e3317"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/simple_classes.puml]</div><span style="color: #a020f0;">@startuml</span>
 <span style="color: #228b22;">abstract</span> class Class01 {
     +{abstract} AbstractPublicMethod(int param) : bool
     +PublicMethod(int param) : bool {query}
@@ -2960,15 +3155,41 @@ The comparison takes into account the white space, indentation, etc.
     -_obj_list : list&lt;Class02&gt;
 }
 
+<span style="color: #a020f0;">namespace</span> Interface {
+<span style="color: #228b22;">    class</span> Class04 {
+        +Class04()
+        +~Class04()
+        -_obj : Class01*
+        -_flag : bool
+    }
+}
+
+<span style="color: #a020f0;">namespace</span> Interface {
+<span style="color: #228b22;">    class</span> Class04_derived {
+        +Class04_derived()
+        +~Class04_derived()
+        -_var : int
+    }
+}
+
 <span style="color: #228b22;">enum</span> Enum01 {
     VALUE_0
     VALUE_1
     VALUE_2
 }
 
-Class01 <span style="color: #a020f0;">&lt;|--</span> Class02
-Class03 <span style="color: #8b2252;">"2"</span> <span style="color: #a020f0;">o--</span> Class01
-Class03 <span style="color: #a020f0;">o--</span> Class02
+.Class01 <span style="color: #a020f0;">&lt;|--</span> .Class02
+
+<span style="color: #a020f0;">namespace</span> Interface {
+    Class04 <span style="color: #a020f0;">&lt;|--</span> Class04_derived
+}
+
+.Class03 <span style="color: #8b2252;">"2"</span> <span style="color: #a020f0;">o--</span> .Class01
+
+.Class03 <span style="color: #a020f0;">o--</span> .Class02
+
+<span style="color: #228b22;">Interface</span>.Class04 <span style="color: #a020f0;">o--</span> .Class01
+
 
 <span style="color: #a020f0;">@enduml</span>
 </pre>
@@ -2977,23 +3198,23 @@ Class03 <span style="color: #a020f0;">o--</span> Class02
 </div>
 
 
-<div id="outline-container-org43c17d6" class="outline-4">
-<h4 id="org43c17d6">Test diagram generation</h4>
-<div class="outline-text-4" id="text-org43c17d6">
+<div id="outline-container-org5cae9fe" class="outline-4">
+<h4 id="org5cae9fe">Test diagram generation</h4>
+<div class="outline-text-4" id="text-org5cae9fe">
 <p>
 The system test validates the following:
 </p>
 <ul class="org-ul">
 <li>input from multiple files, with and without wildcards,</li>
 <li>interfaces to the <code>Diagram</code> class listed in
-Table&nbsp;<a href="#org78ae74d">2</a>,</li>
+Table&nbsp;<a href="#org8de8351">2</a>,</li>
 <li>object reset,</li>
 <li>the <code>CreatePlantUMLFile</code> interface, including stdout and file output.</li>
 </ul>
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="orge793b05"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test overall system</span>
+<pre class="src src-python" id="orge957924"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[tests/test_hpp2plantuml.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Test overall system</span>
 
 
 <span style="color: #a020f0;">class</span> <span style="color: #228b22;">TestFullDiagram</span>():
@@ -3114,9 +3335,9 @@ Table&nbsp;<a href="#org78ae74d">2</a>,</li>
 </div>
 
 
-<div id="outline-container-org5cab457" class="outline-2">
-<h2 id="org5cab457">Packaging</h2>
-<div class="outline-text-2" id="text-org5cab457">
+<div id="outline-container-orgfccd2a4" class="outline-2">
+<h2 id="orgfccd2a4">Packaging</h2>
+<div class="outline-text-2" id="text-orgfccd2a4">
 <p>
 In order to distribute and publish the hpp2plantuml module to <a href="https://pypi.python.org/pypi">PyPI</a>, the
 <code>setuptools</code> package was used.
@@ -3143,9 +3364,9 @@ twine upload -r pypi --sign dist/hpp2plantuml-*
 </div>
 
 
-<div id="outline-container-orgd73b8bf" class="outline-3">
-<h3 id="orgd73b8bf"><code>__init__.py</code></h3>
-<div class="outline-text-3" id="text-orgd73b8bf">
+<div id="outline-container-orgd586f43" class="outline-3">
+<h3 id="orgd586f43"><code>__init__.py</code></h3>
+<div class="outline-text-3" id="text-orgd586f43">
 <p>
 The module's init file simply defines meta variables required by <code>setuptools</code>.
 It also imports the main interface: the <code>CreatePlantUMLFile</code> function and the
@@ -3158,7 +3379,7 @@ obtained using the source block described <a href="#sec-org-el-version">here</a>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgf1efb66"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/__init__.py]</div><span style="color: #8b2252;">""" hpp2plantuml module</span>
+<pre class="src src-python" id="org7a66f15"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[src/hpp2plantuml/__init__.py]</div><span style="color: #8b2252;">""" hpp2plantuml module</span>
 
 <span style="color: #8b2252;">.. _sec-module:</span>
 
@@ -3236,7 +3457,7 @@ obtained using the source block described <a href="#sec-org-el-version">here</a>
 
 <span style="color: #a0522d;">__title__</span> = <span style="color: #8b2252;">"hpp2plantuml"</span>
 <span style="color: #a0522d;">__description__</span> = <span style="color: #8b2252;">"Convert C++ header files to PlantUML"</span>
-<span style="color: #a0522d;">__version__</span> = <span style="color: #8b2252;">'0.3'</span>
+<span style="color: #a0522d;">__version__</span> = <span style="color: #8b2252;">'0.4'</span>
 <span style="color: #a0522d;">__uri__</span> = <span style="color: #8b2252;">"https://github.com/thibaultmarin/hpp2plantuml"</span>
 <span style="color: #483d8b;">__doc__</span> = __description__ + <span style="color: #8b2252;">" &lt;"</span> + __uri__ + <span style="color: #8b2252;">"&gt;"</span>
 <span style="color: #a0522d;">__author__</span> = <span style="color: #8b2252;">"Thibault Marin"</span>
@@ -3253,9 +3474,9 @@ obtained using the source block described <a href="#sec-org-el-version">here</a>
 </div>
 
 
-<div id="outline-container-org30b7fc6" class="outline-3">
-<h3 id="org30b7fc6"><code>setup.cfg</code></h3>
-<div class="outline-text-3" id="text-org30b7fc6">
+<div id="outline-container-org0d55c12" class="outline-3">
+<h3 id="org0d55c12"><code>setup.cfg</code></h3>
+<div class="outline-text-3" id="text-org0d55c12">
 <p>
 The <code>setup.cfg</code> file defines some basic properties of the package.  It forces
 "universal" wheel builds, sets the license file and defines documentation
@@ -3270,7 +3491,7 @@ command</a> for <code>setup.py</code> run using <code>python setup.py sphinx</co
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf" id="org071a947"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.cfg]</div>
+<pre class="src src-conf" id="org19f3136"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.cfg]</div>
 [<span style="color: #228b22;">bdist_wheel</span>]
 <span style="color: #a0522d;">universal</span> = 1
 
@@ -3290,7 +3511,7 @@ command</a> for <code>setup.py</code> run using <code>python setup.py sphinx</co
 </div>
 
 
-<div id="outline-container-org4a70ce2" class="outline-3">
+<div id="outline-container-org83e3edb" class="outline-3">
 <h3 id="sec-package-setup-py"><code>setup.py</code></h3>
 <div class="outline-text-3" id="text-sec-package-setup-py">
 <p>
@@ -3299,7 +3520,7 @@ options.  Most of it is taken from <a href="https://hynek.me/articles/sharing-yo
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgba9b60d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.py]</div>
+<pre class="src src-python" id="orgc57fcbf"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.py]</div>
 <span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Imports</span>
 <span style="color: #a020f0;">import</span> os
 <span style="color: #a020f0;">import</span> sys
@@ -3316,15 +3537,15 @@ options.  Most of it is taken from <a href="https://hynek.me/articles/sharing-yo
 </div>
 </div>
 
-<div id="outline-container-org5bb2405" class="outline-4">
-<h4 id="org5bb2405">Custom content</h4>
-<div class="outline-text-4" id="text-org5bb2405">
+<div id="outline-container-org853b00c" class="outline-4">
+<h4 id="org853b00c">Custom content</h4>
+<div class="outline-text-4" id="text-org853b00c">
 <p>
 The non-boilerplate part of the <code>setup.py</code> file defines the package information.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org506c745"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Custom fields</span>
+<pre class="src src-python" id="org2063a54"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.py]</div><span style="color: #b22222; font-weight: bold; text-decoration: overline;"># </span><span style="color: #b22222; font-weight: bold; text-decoration: overline;">%% Custom fields</span>
 
 <span style="color: #b22222;">###################################################################</span>
 
@@ -3356,16 +3577,16 @@ The non-boilerplate part of the <code>setup.py</code> file defines the package i
 </div>
 
 
-<div id="outline-container-orgec1b3a2" class="outline-4">
-<h4 id="orgec1b3a2">Helper functions</h4>
-<div class="outline-text-4" id="text-orgec1b3a2">
+<div id="outline-container-org1f874a2" class="outline-4">
+<h4 id="org1f874a2">Helper functions</h4>
+<div class="outline-text-4" id="text-org1f874a2">
 <p>
 The following helper functions provide tools to extract metadata from the
 <code>__init__</code> file and pass it to the <code>setup</code> command.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org10c2924"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.py]</div>
+<pre class="src src-python" id="org8edbd6f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.py]</div>
 <span style="color: #a0522d;">HERE</span> = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -3430,9 +3651,9 @@ The following helper functions provide tools to extract metadata from the
 </div>
 
 
-<div id="outline-container-org53ca475" class="outline-4">
-<h4 id="org53ca475">Setup</h4>
-<div class="outline-text-4" id="text-org53ca475">
+<div id="outline-container-org9c7ea08" class="outline-4">
+<h4 id="org9c7ea08">Setup</h4>
+<div class="outline-text-4" id="text-org9c7ea08">
 <p>
 This final block passes all the relevant package information to <code>setuptools</code>:
 </p>
@@ -3444,7 +3665,7 @@ This final block passes all the relevant package information to <code>setuptools
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orge4ee1a5"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.py]</div>
+<pre class="src src-python" id="org57cf591"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[setup.py]</div>
 <span style="color: #a020f0;">if</span> <span style="color: #483d8b;">__name__</span> == <span style="color: #8b2252;">"__main__"</span>:
     setup(
         name=NAME,
@@ -3478,15 +3699,15 @@ This final block passes all the relevant package information to <code>setuptools
 </div>
 
 
-<div id="outline-container-orgeb4e3f3" class="outline-3">
-<h3 id="orgeb4e3f3">Manifest</h3>
-<div class="outline-text-3" id="text-orgeb4e3f3">
+<div id="outline-container-org7e0b694" class="outline-3">
+<h3 id="org7e0b694">Manifest</h3>
+<div class="outline-text-3" id="text-org7e0b694">
 <p>
 The manifest file is used to include extra files to the package.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf" id="orga665007"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[MANIFEST.in]</div>include *.rst *.txt LICENSE
+<pre class="src src-conf" id="orgae18e1b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[MANIFEST.in]</div>include *.rst *.txt LICENSE
 recursive-include tests *.py
 recursive-include tests *.hpp
 recursive-include tests *.puml
@@ -3499,16 +3720,16 @@ prune doc/build
 </div>
 
 
-<div id="outline-container-org350bc2a" class="outline-3">
-<h3 id="org350bc2a">README</h3>
-<div class="outline-text-3" id="text-org350bc2a">
+<div id="outline-container-org72dfd18" class="outline-3">
+<h3 id="org72dfd18">README</h3>
+<div class="outline-text-3" id="text-org72dfd18">
 <p>
 The README file is automatically generated from blocks defined in this
 org-file (converted to RST format).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-rst" id="orgd594f52"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[README.rst]</div>
+<pre class="src src-rst" id="org0f78f58"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[README.rst]</div>
 <span style="background-color: #d9d9d9;">hpp2plantuml - Convert C++ header files to PlantUML</span>
 <span style="color: #a020f0;">===================================================</span>
 
@@ -17178,7 +17399,7 @@ The full documentation is available via:
 </div>
 
 
-<div id="outline-container-orge0b0bed" class="outline-3">
+<div id="outline-container-org3583e9f" class="outline-3">
 <h3 id="sec-package-doc">Documentation</h3>
 <div class="outline-text-3" id="text-sec-package-doc">
 <p>
@@ -17202,9 +17423,9 @@ docstrings in the code.</li>
 </ul>
 </div>
 
-<div id="outline-container-orgb5575da" class="outline-4">
-<h4 id="orgb5575da">Sphinx configuration</h4>
-<div class="outline-text-4" id="text-orgb5575da">
+<div id="outline-container-org82ebe3b" class="outline-4">
+<h4 id="org82ebe3b">Sphinx configuration</h4>
+<div class="outline-text-4" id="text-org82ebe3b">
 <p>
 Sphinx configuration is performed via the <code>conf.py</code> file.  An example
 configuration file can be generated using the <code>sphinx-quickstart</code> command.  The
@@ -17218,7 +17439,7 @@ content of the file is mostly following the defaults, with a few exceptions:
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org910ce15"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[doc/source/conf.py]</div>
+<pre class="src src-python" id="org22e99e9"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[doc/source/conf.py]</div>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">-*- coding: utf-8 -*-</span>
 <span style="color: #b22222;">#</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">hpp2plantuml documentation build configuration file, created by</span>
@@ -17300,9 +17521,9 @@ content of the file is mostly following the defaults, with a few exceptions:
 <span style="color: #b22222;"># </span><span style="color: #b22222;">built documents.</span>
 <span style="color: #b22222;">#</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">The short X.Y version.</span>
-<span style="color: #a0522d;">version</span> = u<span style="color: #8b2252;">'v'</span> + u<span style="color: #8b2252;">'0.3'</span>
+<span style="color: #a0522d;">version</span> = u<span style="color: #8b2252;">'v'</span> + u<span style="color: #8b2252;">'0.4'</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">The full version, including alpha/beta/rc tags.</span>
-<span style="color: #a0522d;">release</span> = u<span style="color: #8b2252;">'v'</span> + u<span style="color: #8b2252;">'0.3'</span>
+<span style="color: #a0522d;">release</span> = u<span style="color: #8b2252;">'v'</span> + u<span style="color: #8b2252;">'0.4'</span>
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">The language for content autogenerated by Sphinx. Refer to documentation</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">for a list of supported languages.</span>
@@ -17376,7 +17597,7 @@ content of the file is mostly following the defaults, with a few exceptions:
 <span style="color: #b22222;"># </span><span style="color: #b22222;">The name for this set of Sphinx documents.</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">"&lt;project&gt; v&lt;release&gt; documentation" by default.</span>
 <span style="color: #b22222;">#</span>
-<span style="color: #b22222;"># </span><span style="color: #b22222;">html_title = u'hpp2plantuml ' + u'v' + u'0.3'</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">html_title = u'hpp2plantuml ' + u'v' + u'0.4'</span>
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">A shorter title for the navigation bar.  Default is the same as html_title.</span>
 <span style="color: #b22222;">#</span>
@@ -17589,9 +17810,9 @@ content of the file is mostly following the defaults, with a few exceptions:
 </div>
 
 
-<div id="outline-container-orgeaa6037" class="outline-4">
-<h4 id="orgeaa6037">Index page</h4>
-<div class="outline-text-4" id="text-orgeaa6037">
+<div id="outline-container-org393a1d6" class="outline-4">
+<h4 id="org393a1d6">Index page</h4>
+<div class="outline-text-4" id="text-org393a1d6">
 <p>
 The index page is the entry point of the documentation.  It is formed by other
 parts of the org document including a brief description of the usage and links
@@ -17599,7 +17820,7 @@ to the automatically generated and the org-file documents.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-rst" id="org33471b1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[doc/source/index.rst]</div>
+<pre class="src src-rst" id="org8ca33c0"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[doc/source/index.rst]</div>
 <span style="color: #b22222;">.. hpp2plantuml documentation master file.</span>
 
 <span style="background-color: #d9d9d9;">hpp2plantuml documentation</span>
@@ -18012,16 +18233,16 @@ produce a string output instead of writing to a text file.
 </div>
 
 
-<div id="outline-container-orgd333d37" class="outline-4">
-<h4 id="orgd333d37">Read The Docs</h4>
-<div class="outline-text-4" id="text-orgd333d37">
+<div id="outline-container-orgf2a8437" class="outline-4">
+<h4 id="orgf2a8437">Read The Docs</h4>
+<div class="outline-text-4" id="text-orgf2a8437">
 <p>
 In order to build the documentation on the <a href="http://read-the-docs.readthedocs.io/en/latest/">Read The Docs</a> website, a requirement
 file is added for the <code>numpydoc</code> package.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-conf" id="org23e36ba"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[doc/source/readthedocs-requirements.txt]</div>numpydoc
+<pre class="src src-conf" id="orgc7c192a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[doc/source/readthedocs-requirements.txt]</div>numpydoc
 </pre>
 </div>
 </div>
@@ -18030,9 +18251,9 @@ file is added for the <code>numpydoc</code> package.
 </div>
 
 
-<div id="outline-container-orgb814630" class="outline-2">
-<h2 id="orgb814630">Org-mode setup</h2>
-<div class="outline-text-2" id="text-orgb814630">
+<div id="outline-container-org17a1f4c" class="outline-2">
+<h2 id="org17a1f4c">Org-mode setup</h2>
+<div class="outline-text-2" id="text-org17a1f4c">
 <p>
 The generation of the package code depends on org-mode, mostly to expand blocks
 with the <a href="http://orgmode.org/manual/Noweb-reference-syntax.html"><code>noweb</code></a> interface.  The following defines helper functions to simplify
@@ -18040,16 +18261,16 @@ this process.
 </p>
 </div>
 
-<div id="outline-container-org44247e4" class="outline-3">
+<div id="outline-container-org5bdba42" class="outline-3">
 <h3 id="sec-org-el-version">Version string</h3>
 <div class="outline-text-3" id="text-sec-org-el-version">
 <p>
 The following source block is used to get the module's version number defined in
-<a href="#orge4ed5b6">a single location</a> and include it at multiple locations.
+<a href="#orgd12d27c">a single location</a> and include it at multiple locations.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgdcd4e50">(<span style="color: #a020f0;">cond</span> ((string= lang <span style="color: #8b2252;">"python"</span>)
+<pre class="src src-emacs-lisp" id="orgafc77d1">(<span style="color: #a020f0;">cond</span> ((string= lang <span style="color: #8b2252;">"python"</span>)
        (format <span style="color: #8b2252;">"'%s'"</span> ver)))
 </pre>
 </div>
@@ -18057,9 +18278,9 @@ The following source block is used to get the module's version number defined in
 </div>
 
 
-<div id="outline-container-org177010d" class="outline-3">
-<h3 id="org177010d">org-to-rst</h3>
-<div class="outline-text-3" id="text-org177010d">
+<div id="outline-container-orgb48aad0" class="outline-3">
+<h3 id="orgb48aad0">org-to-rst</h3>
+<div class="outline-text-3" id="text-orgb48aad0">
 <p>
 The following source block converts the content of an org heading to rst format
 using the <a href="#coderef-rst-convert-region" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-rst-convert-region');" onmouseout="CodeHighlightOff(this, 'coderef-rst-convert-region');"><code>org-rst-convert-region-to-rst</code></a> function.  The heading to process is
@@ -18071,7 +18292,7 @@ string, e.g. <code>"keep"</code>).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orga23ffa2">(<span style="color: #a020f0;">save-excursion</span>
+<pre class="src src-emacs-lisp" id="orgffdef08">(<span style="color: #a020f0;">save-excursion</span>
   (<span style="color: #a020f0;">let</span> ((org-tree (org-element-parse-buffer)))
     (org-element-map
         org-tree 'headline
@@ -18105,9 +18326,9 @@ string, e.g. <code>"keep"</code>).
 </div>
 
 
-<div id="outline-container-orgb973346" class="outline-3">
-<h3 id="orgb973346">Generate documentation</h3>
-<div class="outline-text-3" id="text-orgb973346">
+<div id="outline-container-orgfb20c69" class="outline-3">
+<h3 id="orgfb20c69">Generate documentation</h3>
+<div class="outline-text-3" id="text-orgfb20c69">
 <p>
 When generating the rst documentation from this org-file, special handling is
 required for source languages known to org but not to rst..  This is performed
@@ -18119,7 +18340,7 @@ blocks, replacing them by a simple example block.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org01d6f95"><span id="coderef-el-rst-filter" class="coderef-off">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">custom-rst-filter-org-block</span> (text backend info)</span>
+<pre class="src src-emacs-lisp" id="org755edf8"><span id="coderef-el-rst-filter" class="coderef-off">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">custom-rst-filter-org-block</span> (text backend info)</span>
   (<span style="color: #a020f0;">when</span> (org-export-derived-backend-p backend 'rst)
     (<span style="color: #a020f0;">let*</span> ((pattern <span style="color: #8b2252;">".*\.\. code:: </span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">(</span><span style="color: #8b2252;">[[:alnum:]]+</span><span style="color: #8b2252; font-weight: bold;">\\</span><span style="color: #8b2252; font-weight: bold;">)</span><span style="color: #8b2252;">"</span>)
            (pattern-line (concat pattern <span style="color: #8b2252;">".*$"</span>))
@@ -18138,7 +18359,7 @@ encapsulated in the following source block.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org82ac668">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ox-rst</span>)
+<pre class="src src-emacs-lisp" id="org8a3a767">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ox-rst</span>)
 (<span style="color: #a020f0;">let</span> ((org-export-with-toc nil)
       (org-export-with-todo-keywords nil)
       (org-export-with-section-numbers nil)
@@ -18161,7 +18382,7 @@ encapsulated in the following source block.
          onClick='show_org_source()' />
 </div>
 <div class='footer'>
-  Last updated 2018-08-19 Sun 18:00. <br>
+  Last updated 2018-08-27 Mon 22:29. <br>
   Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.2.2 (<a href="https://orgmode.org">Org</a> mode 9.1.13).
 </div>
 <!-- html-postamble ends here -->
