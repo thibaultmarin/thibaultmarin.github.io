@@ -2033,11 +2033,10 @@ parameter):
 </span><span class="org-block">hpp2plantuml -i File_1.hpp -i </span><span class="org-block"><span class="string">"include/Helper_*.hpp"</span></span><span class="org-block"> -o output.puml -t template.puml
 </span><span class="org-block-end-line">#+end_src
 </span>
-This will use the <span class="org-verbatim">=template.puml=</span> file as template.  Templates follow the
-<span class="org-link"><a href="http://jinja.pocoo.org/">=jinja=</a></span> syntax.  For instance, to add a preamble to the PlantUML output, the
-template file may contain:
+This will use the <span class="org-verbatim">=template.puml=</span> file as template.  Templates follow the <span class="org-link"><a href="http://jinja.pocoo.org/">jinja</a></span>
+syntax.  For instance, to add a preamble to the PlantUML output, the template
+file may contain:
 
-<span class="org-meta-line">#+name: usage-template</span>
 <span class="org-block-begin-line">#+begin_example
 </span><span class="custom">{% extends 'default.puml' %}
 
