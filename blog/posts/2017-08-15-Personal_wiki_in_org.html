@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2018-08-19 Sun 18:10 -->
+<!-- 2018-09-29 Sat 15:33 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Personal wiki in org</title>
@@ -362,35 +362,35 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org70271bd">Introduction</a></li>
-<li><a href="#org10f586e">Requirements</a></li>
-<li><a href="#org18c2f43">Org setup</a>
+<li><a href="#orge75822a">Introduction</a></li>
+<li><a href="#org5a6e390">Requirements</a></li>
+<li><a href="#orgb587648">Org setup</a>
 <ul>
 <li><a href="#org-wiki-params">Custom parameters</a></li>
-<li><a href="#org31ab8a4">Publishing function</a></li>
+<li><a href="#orgdcc680d">Publishing function</a></li>
 <li><a href="#org-wiki-org-setup">Insertion of org header</a></li>
-<li><a href="#org3fa841e">Automatic id generation</a></li>
+<li><a href="#org6b5d950">Automatic id generation</a></li>
 <li><a href="#org-wiki-index">Index generation</a>
 <ul>
 <li><a href="#org-wiki-index-page">Page index</a></li>
 </ul>
 </li>
-<li><a href="#org54a4fed">Refbase link</a></li>
-<li><a href="#org197baa8">Helper function</a></li>
-<li><a href="#org7ece55a">Footer</a></li>
+<li><a href="#org8f6c354">Refbase link</a></li>
+<li><a href="#org79c99dc">Helper function</a></li>
+<li><a href="#org4f28970">Footer</a></li>
 </ul>
 </li>
 <li><a href="#refbase">Refbase package</a>
 <ul>
-<li><a href="#org5e85ee3">Parameters</a></li>
-<li><a href="#orgdc8df90">Main function</a></li>
-<li><a href="#orgfe464f2">Get link</a></li>
-<li><a href="#org8973cc5">Get abstract</a></li>
-<li><a href="#org7bfff6d">Get citation</a></li>
-<li><a href="#org1d0aa6d">Package footer</a></li>
+<li><a href="#org0aec207">Parameters</a></li>
+<li><a href="#orge9be52c">Main function</a></li>
+<li><a href="#org9242968">Get link</a></li>
+<li><a href="#org5ba2eef">Get abstract</a></li>
+<li><a href="#org998b028">Get citation</a></li>
+<li><a href="#orgb09effe">Package footer</a></li>
 </ul>
 </li>
-<li><a href="#org4def164">Wiki setup</a>
+<li><a href="#orgde7de03">Wiki setup</a>
 <ul>
 <li><a href="#wiki-js-libs">Javascript libraries</a></li>
 <li><a href="#wiki-search">Search</a>
@@ -403,35 +403,35 @@ for the JavaScript code in this tag.
 </ul>
 </li>
 <li><a href="#search-js-highlight">Results highlighting</a></li>
-<li><a href="#orgfe84d3b">CSS</a>
+<li><a href="#org6e1f514">CSS</a>
 <ul>
 <li><a href="#css-search">Search</a></li>
 </ul>
 </li>
 <li><a href="#wiki-setup-org">Org header</a></li>
-<li><a href="#org6b091b5">Basic wiki pages</a>
+<li><a href="#org8e4e6e7">Basic wiki pages</a>
 <ul>
 <li><a href="#wiki-page-index"><code>index</code></a></li>
 <li><a href="#wiki-page-search"><code>search</code></a></li>
-<li><a href="#org9708ae5"><code>demo</code></a></li>
+<li><a href="#orgea0db09"><code>demo</code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orge4a40b6">Dotfiles setup</a>
+<li><a href="#orga3123f1">Dotfiles setup</a>
 <ul>
 <li><a href="#dotfiles-org-wiki">Org-wiki configuration</a></li>
-<li><a href="#org7a2a114">Refbase configuration</a></li>
+<li><a href="#org5017070">Refbase configuration</a></li>
 </ul>
 </li>
-<li><a href="#org7fef065">Bash helpers</a></li>
+<li><a href="#org7d02fa5">Bash helpers</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org70271bd" class="outline-2">
-<h2 id="org70271bd">Introduction</h2>
-<div class="outline-text-2" id="text-org70271bd">
+<div id="outline-container-orge75822a" class="outline-2">
+<h2 id="orge75822a">Introduction</h2>
+<div class="outline-text-2" id="text-orge75822a">
 <p>
 This post describes the setup to generate a personal wiki in org.  It elaborates
 on this <a href="2016-11-13-Personal_website_in_org.html">previous post</a> describing the generation of this website.  Generally, the
@@ -452,9 +452,9 @@ the other hand, it is fully text-based which allows the use of version control.
 </div>
 
 
-<div id="outline-container-org10f586e" class="outline-2">
-<h2 id="org10f586e">Requirements</h2>
-<div class="outline-text-2" id="text-org10f586e">
+<div id="outline-container-org5a6e390" class="outline-2">
+<h2 id="org5a6e390">Requirements</h2>
+<div class="outline-text-2" id="text-org5a6e390">
 <p>
 The wiki currently uses the following versions of emacs and org-mode:
 </p>
@@ -463,8 +463,8 @@ The wiki currently uses the following versions of emacs and org-mode:
 Org mode version 9.1.3 (release_9.1.3-206-g1bb9cf @ .../org-mode/lisp/)
 GNU Emacs 25.2.2 (x86_64-pc-linux-gnu, GTK+ Version 3.22.20)
  of 2017-09-11, modified by Debian
-
 </pre>
+
 
 <p>
 The emacs-side setup only requires the <code>htmlize</code> package used during HTML
@@ -496,9 +496,9 @@ and setup for it to be useful.
 </div>
 
 
-<div id="outline-container-org18c2f43" class="outline-2">
-<h2 id="org18c2f43">Org setup</h2>
-<div class="outline-text-2" id="text-org18c2f43">
+<div id="outline-container-orgb587648" class="outline-2">
+<h2 id="orgb587648">Org setup</h2>
+<div class="outline-text-2" id="text-orgb587648">
 <p>
 This section defines the main functions used to maintain the wiki.  When
 tangled, it creates the <code>my-org-wiki.el</code> file, which can then be <a href="#dotfiles-org-wiki">loaded and
@@ -506,7 +506,7 @@ further configured</a> from <code>.emacs</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgb6766e2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-org-wiki.el --- Personal wiki configuration</span>
+<pre class="src src-emacs-lisp" id="orgd17c831"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-org-wiki.el --- Personal wiki configuration</span>
 
 <span style="color: #b22222;">;;; </span><span style="color: #b22222;">Commentary:</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Defines functions for publishing a static wiki.  This file was produced</span>
@@ -524,7 +524,7 @@ further configured</a> from <code>.emacs</code>.
 </div>
 
 
-<div id="outline-container-orgab89ec1" class="outline-3">
+<div id="outline-container-orgf8f3a7b" class="outline-3">
 <h3 id="org-wiki-params">Custom parameters</h3>
 <div class="outline-text-3" id="text-org-wiki-params">
 <p>
@@ -535,7 +535,7 @@ The wiki can be configured via the following variables:
 <dt><a href="#coderef-org-wiki-conf-index-level" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-conf-index-level');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-conf-index-level');"><code>org-wiki-index-level-max</code></a></dt><dd>maximum level for <a href="#org-wiki-index">index generation</a> (this
 controls the granularity of the search results),</dd>
 <dt><a href="#coderef-org-wiki-conf-index-file" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-conf-index-file');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-conf-index-file');"><code>org-wiki-index-file</code></a></dt><dd>filename for search <a href="#org-wiki-index">index</a> (stored in <code>json</code> format),</dd>
-<dt><a href="#coderef-org-wiki-conf-preamble" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-conf-preamble');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-conf-preamble');"><code>org-wiki-preamble</code></a></dt><dd><a href="#org4f8d70d">HTML preamble</a> for published HTML pages (defines the
+<dt><a href="#coderef-org-wiki-conf-preamble" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-conf-preamble');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-conf-preamble');"><code>org-wiki-preamble</code></a></dt><dd><a href="#org31e668e">HTML preamble</a> for published HTML pages (defines the
 navigation bar, header and a widget to browse search results, hidden when
 no search is active).</dd>
 <dt><a href="#coderef-org-wiki-conf-ignored" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-conf-ignored');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-conf-ignored');"><code>org-wiki-ignored-files</code></a></dt><dd>List of files ignored during generation of index
@@ -547,7 +547,6 @@ is:
 </p>
 <pre class="example">
 #%AUTO-INDEX%#
-
 </pre></dd>
 <dt><a href="#coderef-org-wiki-conf-index-regexp" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-conf-index-regexp');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-conf-index-regexp');"><code>org-wiki-index-regexp-list</code></a></dt><dd>List of
 regular expression / replacement pairs applied to the content of the index
@@ -556,7 +555,7 @@ sections.  This is used to split strings such as <code>refbase:Author2000</code>
 </dl>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org37dc805"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Parameters</span>
+<pre class="src src-emacs-lisp" id="org785ff36"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Parameters</span>
 
 <span id="coderef-org-wiki-conf-loc" class="coderef-off">(<span style="color: #a020f0;">defcustom</span> <span style="color: #a0522d;">org-wiki-location</span> <span style="color: #8b2252;">""</span></span>
   <span style="color: #8b2252;">"Base directory of wiki."</span>
@@ -617,9 +616,9 @@ sections.  This is used to split strings such as <code>refbase:Author2000</code>
 </div>
 </div>
 
-<div id="outline-container-org31ab8a4" class="outline-3">
-<h3 id="org31ab8a4">Publishing function</h3>
-<div class="outline-text-3" id="text-org31ab8a4">
+<div id="outline-container-orgdcc680d" class="outline-3">
+<h3 id="orgdcc680d">Publishing function</h3>
+<div class="outline-text-3" id="text-orgdcc680d">
 <p>
 The wiki is updated by running the <a href="#coderef-org-wiki-publish" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-publish');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-publish');"><code>org-wiki-publish</code></a> function.  It is a simple
 wrapper around <code>org-publish</code> setting common options.
@@ -637,7 +636,7 @@ a <a href="#coderef-org-wiki-publish-index-table" class="coderef" onmouseover="C
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgfb1597f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Publishing function</span>
+<pre class="src src-emacs-lisp" id="orgbed7b9e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Publishing function</span>
 <span id="coderef-org-wiki-publish" class="coderef-off">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">org-wiki-publish</span> ()</span>
   <span style="color: #8b2252;">"Publish org files to html."</span>
   (<span style="color: #a020f0;">interactive</span>)
@@ -676,7 +675,7 @@ a <a href="#coderef-org-wiki-publish-index-table" class="coderef" onmouseover="C
 </div>
 
 
-<div id="outline-container-org8dadb4b" class="outline-3">
+<div id="outline-container-orgf373398" class="outline-3">
 <h3 id="org-wiki-org-setup">Insertion of org header</h3>
 <div class="outline-text-3" id="text-org-wiki-org-setup">
 <p>
@@ -686,7 +685,7 @@ during publishing.  The actual functionality added by these lines is described
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org08e93a3"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-wiki-add-setup</span> (backend)
+<pre class="src src-emacs-lisp" id="org55c977a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-wiki-add-setup</span> (backend)
   <span style="color: #8b2252;">"Add source-blocks.org and setup.org to org file when BACKEND is html."</span>
   (<span style="color: #a020f0;">when</span> (org-export-derived-backend-p backend 'html)
     (<span style="color: #a020f0;">save-excursion</span>
@@ -702,9 +701,9 @@ during publishing.  The actual functionality added by these lines is described
 </div>
 
 
-<div id="outline-container-org3fa841e" class="outline-3">
-<h3 id="org3fa841e">Automatic id generation</h3>
-<div class="outline-text-3" id="text-org3fa841e">
+<div id="outline-container-org6b5d950" class="outline-3">
+<h3 id="org6b5d950">Automatic id generation</h3>
+<div class="outline-text-3" id="text-org6b5d950">
 <p>
 To simplify linking between wikipages, the <a href="#coderef-org-wiki-set-id" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-set-id');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-set-id');"><code>org-wiki-set-id</code> function</a> can be
 used to automatically generate <code>CUSTOM_ID</code> properties for each heading in org
@@ -714,11 +713,11 @@ files (up to the maximum heading level defined by <a href="#coderef-org-wiki-con
 <p>
 The function ensures unique <code>CUSTOM_ID</code> entries for a given org file.  It does
 so by using the full headline lineage as <code>CUSTOM_ID</code>.  This require the custom
-<code>™/org-element-title-lineage</code> function (see <a href="#orgfac83f7">here</a>).
+<code>™/org-element-title-lineage</code> function (see <a href="#orgbb61752">here</a>).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgcf908c4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span id="coderef-org-wiki-set-id" class="coderef-off">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">org-wiki-set-id</span> (<span style="color: #228b22;">&amp;optional</span> force)</span>
+<pre class="src src-emacs-lisp" id="org5ec6096"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span id="coderef-org-wiki-set-id" class="coderef-off">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">org-wiki-set-id</span> (<span style="color: #228b22;">&amp;optional</span> force)</span>
   <span style="color: #8b2252;">"Set :CUSTOM_ID property on all headings.</span>
 <span style="color: #8b2252;">Leave existing properties unchanged if FORCE evaluates to nil."</span>
   (<span style="color: #a020f0;">interactive</span> <span style="color: #8b2252;">"P"</span>)
@@ -760,7 +759,7 @@ equivalents defined in the following function.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org13ffee2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Create unique id from title and current list</span>
+<pre class="src src-emacs-lisp" id="orgf173ec6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Create unique id from title and current list</span>
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">org-wiki-make-id</span> (title cid_list)
   <span style="color: #8b2252;">"Form CUSTOM_ID from TITLE appending an index if TITLE is in CID_LIST."</span>
   (<span style="color: #a020f0;">let</span> ((rep-list '((<span style="color: #8b2252;">"[[:space:]]+"</span> . <span style="color: #8b2252;">"_"</span>)
@@ -800,7 +799,7 @@ equivalents defined in the following function.
 </div>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgfac83f7">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-element-title-lineage</span> (el)
+<pre class="src src-emacs-lisp" id="orgbb61752">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-element-title-lineage</span> (el)
   <span style="color: #8b2252;">"Return list of parent headline titles for EL.</span>
 <span style="color: #8b2252;">The title of EL is first."</span>
   (<span style="color: #a020f0;">let*</span> ((parent (org-element-property <span style="color: #483d8b;">:parent</span> el))
@@ -816,7 +815,7 @@ equivalents defined in the following function.
 </div>
 
 
-<div id="outline-container-orgdeb42e7" class="outline-3">
+<div id="outline-container-orgf972acc" class="outline-3">
 <h3 id="org-wiki-index">Index generation</h3>
 <div class="outline-text-3" id="text-org-wiki-index">
 <p>
@@ -850,7 +849,7 @@ level is larger than <a href="#coderef-org-wiki-conf-index-level" class="coderef
 </dl>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org88fa3f4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Lunr index</span>
+<pre class="src src-emacs-lisp" id="org4f49c05"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">Lunr index</span>
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">org-wiki~add-to-index-tree</span> (outlist point-prev point-cur title
                                            title-lineage keywords text
                                            base-file customid)
@@ -893,7 +892,7 @@ This function also captures the <code>CATEGORY</code> property of each page for 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgf7822c2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">org-wiki-index</span> (outfile)
+<pre class="src src-emacs-lisp" id="org5245ef8"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">org-wiki-index</span> (outfile)
   <span style="color: #8b2252;">"Prepare json index for Lunr search, store in OUTFILE."</span>
   (<span style="color: #a020f0;">let</span> ((category-list '())
         (file-list
@@ -973,24 +972,24 @@ This function also captures the <code>CATEGORY</code> property of each page for 
 </div>
 </div>
 
-<div id="outline-container-orge38209d" class="outline-4">
+<div id="outline-container-orga3e0bd8" class="outline-4">
 <h4 id="org-wiki-index-page">Page index</h4>
 <div class="outline-text-4" id="text-org-wiki-index-page">
 <p>
 The page index is not used for the search but to insert a list of pages grouped
 by categories in the <code>index.org</code> page.  The list is obtained during the
-<a href="#orgf7822c2">generation of the search index</a>.
+<a href="#org5245ef8">generation of the search index</a>.
 </p>
 
 <p>
 The following function replaces the content of <code>index.org</code> at the marker given
 by <a href="#org-wiki-params"><code>org-wiki-index-page-marker</code></a>.  It is used as a <a href="#coderef-org-wiki-publish-index-table" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-publish-index-table');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-publish-index-table');">preprocessing hook</a> and relies
 on the <code>™/org-wiki-index-category-list</code> variable to be set by a prior call to
-the <a href="#orgf7822c2"><code>org-wiki-index</code></a> function (this is done in the <a href="#coderef-org-wiki-publish-index" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-publish-index');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-publish-index');">publishing function</a>).
+the <a href="#org5245ef8"><code>org-wiki-index</code></a> function (this is done in the <a href="#coderef-org-wiki-publish-index" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-org-wiki-publish-index');" onmouseout="CodeHighlightOff(this, 'coderef-org-wiki-publish-index');">publishing function</a>).
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgc130317"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-wiki-insert-index</span> (backend)
+<pre class="src src-emacs-lisp" id="orgcf2ab5c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-wiki-insert-index</span> (backend)
   <span style="color: #8b2252;">"Insert index table in index.org file."</span>
   (<span style="color: #a020f0;">when</span> (string= (file-name-nondirectory (buffer-file-name)) <span style="color: #8b2252;">"index.org"</span>)
     (<span style="color: #a020f0;">save-excursion</span>
@@ -1019,9 +1018,9 @@ the <a href="#orgf7822c2"><code>org-wiki-index</code></a> function (this is done
 </div>
 
 
-<div id="outline-container-org54a4fed" class="outline-3">
-<h3 id="org54a4fed">Refbase link</h3>
-<div class="outline-text-3" id="text-org54a4fed">
+<div id="outline-container-org8f6c354" class="outline-3">
+<h3 id="org8f6c354">Refbase link</h3>
+<div class="outline-text-3" id="text-org8f6c354">
 <p>
 Bibliographic citations are handled by org-links to an existing refbase
 instance.  The interface with the refbase instance is handled by the
@@ -1045,7 +1044,7 @@ Note that this assumes that the <code>my-refbase.el</code> file is in the <code>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgd7b244e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">refbase link</span>
+<pre class="src src-emacs-lisp" id="orgd2c51d6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div><span style="color: #b22222;">;; </span><span style="color: #b22222;">refbase link</span>
 
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">rblink-follow</span> (path)
   (<span style="color: #a020f0;">let</span> ((link (refbase-get-link path)))
@@ -1079,16 +1078,16 @@ Note that this assumes that the <code>my-refbase.el</code> file is in the <code>
 </div>
 
 
-<div id="outline-container-org197baa8" class="outline-3">
-<h3 id="org197baa8">Helper function</h3>
-<div class="outline-text-3" id="text-org197baa8">
+<div id="outline-container-org79c99dc" class="outline-3">
+<h3 id="org79c99dc">Helper function</h3>
+<div class="outline-text-3" id="text-org79c99dc">
 <p>
 When migrating from <a href="https://www.mediawiki.org/wiki/MediaWiki">MediaWiki</a> to this org-mode wiki, the following function
 proved useful as a first pass to convert pages.  It is left here for reference.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org1832b6b"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Convert mediawiki to org-wiki</span>
+<pre class="src src-emacs-lisp" id="orgacbceec"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Convert mediawiki to org-wiki</span>
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">&#8482;/org-wiki-convert-mw-to-org</span> ()
   (<span style="color: #a020f0;">interactive</span>)
   (<span style="color: #a020f0;">dolist</span> (n (number-sequence 10 1 -1))
@@ -1132,15 +1131,15 @@ proved useful as a first pass to convert pages.  It is left here for reference.
 </div>
 
 
-<div id="outline-container-org7ece55a" class="outline-3">
-<h3 id="org7ece55a">Footer</h3>
-<div class="outline-text-3" id="text-org7ece55a">
+<div id="outline-container-org4f28970" class="outline-3">
+<h3 id="org4f28970">Footer</h3>
+<div class="outline-text-3" id="text-org4f28970">
 <p>
 This concludes the <code>my-org-wiki</code> package.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org1d91083"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div>
+<pre class="src src-emacs-lisp" id="org0985b17"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-org-wiki.el]</div>
 (<span style="color: #a020f0;">provide</span> '<span style="color: #008b8b;">my-org-wiki</span>)
 <span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-org-wiki.el ends here</span>
 </pre>
@@ -1151,7 +1150,7 @@ This concludes the <code>my-org-wiki</code> package.
 
 
 
-<div id="outline-container-org14b11aa" class="outline-2">
+<div id="outline-container-orgd6b15cb" class="outline-2">
 <h2 id="refbase">Refbase package</h2>
 <div class="outline-text-2" id="text-refbase">
 <p>
@@ -1161,7 +1160,7 @@ instance for which the (MySQL) database is accessible.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgd8acacf"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div><span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-refbase.el --- Helper functions to communicate with refbase instance</span>
+<pre class="src src-emacs-lisp" id="org4f86595"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div><span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-refbase.el --- Helper functions to communicate with refbase instance</span>
 
 <span style="color: #b22222;">;;; </span><span style="color: #b22222;">Commentary:</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Defines functions to perform requests from a refbase instance (using mysql)</span>
@@ -1171,16 +1170,16 @@ instance for which the (MySQL) database is accessible.
 </div>
 </div>
 
-<div id="outline-container-org5e85ee3" class="outline-3">
-<h3 id="org5e85ee3">Parameters</h3>
-<div class="outline-text-3" id="text-org5e85ee3">
+<div id="outline-container-org0aec207" class="outline-3">
+<h3 id="org0aec207">Parameters</h3>
+<div class="outline-text-3" id="text-org0aec207">
 <p>
 The package is configured by the <a href="#coderef-refbase-pkg-url" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-refbase-pkg-url');" onmouseout="CodeHighlightOff(this, 'coderef-refbase-pkg-url');"><code>refbase-url</code></a> and <a href="#coderef-refbase-pkg-db" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-refbase-pkg-db');" onmouseout="CodeHighlightOff(this, 'coderef-refbase-pkg-db');"><code>refbase-db</code></a> parameters which
 control the URL and the name of the MySQL database.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgd2643e3"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div><span id="coderef-refbase-pkg-url" class="coderef-off">(<span style="color: #a020f0;">defcustom</span> <span style="color: #a0522d;">refbase-url</span> <span style="color: #8b2252;">""</span></span>
+<pre class="src src-emacs-lisp" id="org89839bd"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div><span id="coderef-refbase-pkg-url" class="coderef-off">(<span style="color: #a020f0;">defcustom</span> <span style="color: #a0522d;">refbase-url</span> <span style="color: #8b2252;">""</span></span>
   <span style="color: #8b2252;">"URL of refbase installation."</span>
   <span style="color: #483d8b;">:type</span> 'string
   <span style="color: #483d8b;">:group</span> 'refbase)
@@ -1194,9 +1193,9 @@ control the URL and the name of the MySQL database.
 </div>
 </div>
 
-<div id="outline-container-orgdc8df90" class="outline-3">
-<h3 id="orgdc8df90">Main function</h3>
-<div class="outline-text-3" id="text-orgdc8df90">
+<div id="outline-container-orge9be52c" class="outline-3">
+<h3 id="orge9be52c">Main function</h3>
+<div class="outline-text-3" id="text-orge9be52c">
 <p>
 The following function interrogates a local mysql instance for arbitrary fields
 (e.g. author, title, publication, year, etc.).  Requests are performed for a
@@ -1205,7 +1204,7 @@ field to be populated in refbase.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgaaa2b74"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">refbase~get-by-citekey</span> (citekey fields)
+<pre class="src src-emacs-lisp" id="org5be7343"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">refbase~get-by-citekey</span> (citekey fields)
   <span style="color: #8b2252;">"Perform MySQL query to extract entry information by cite_key field."</span>
   (<span style="color: #a020f0;">let*</span> ((query (concat
                  (format <span style="color: #8b2252;">"SELECT %s FROM refs r "</span> fields)
@@ -1220,16 +1219,16 @@ field to be populated in refbase.
 </div>
 </div>
 
-<div id="outline-container-orgfe464f2" class="outline-3">
-<h3 id="orgfe464f2">Get link</h3>
-<div class="outline-text-3" id="text-orgfe464f2">
+<div id="outline-container-org9242968" class="outline-3">
+<h3 id="org9242968">Get link</h3>
+<div class="outline-text-3" id="text-org9242968">
 <p>
-Using the <a href="#orgaaa2b74"><code>refbase~get-by-citekey</code></a> function, the following function returns a
+Using the <a href="#org5be7343"><code>refbase~get-by-citekey</code></a> function, the following function returns a
 link to the refbase page for a given citation.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org0ef211d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">refbase-get-link</span> (citekey)
+<pre class="src src-emacs-lisp" id="org22d927b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">refbase-get-link</span> (citekey)
   <span style="color: #8b2252;">"Get link to refbase page."</span>
   (format <span style="color: #8b2252;">"%s/show.php?record=%s"</span>
           refbase-url
@@ -1239,16 +1238,16 @@ link to the refbase page for a given citation.
 </div>
 </div>
 
-<div id="outline-container-org8973cc5" class="outline-3">
-<h3 id="org8973cc5">Get abstract</h3>
-<div class="outline-text-3" id="text-org8973cc5">
+<div id="outline-container-org5ba2eef" class="outline-3">
+<h3 id="org5ba2eef">Get abstract</h3>
+<div class="outline-text-3" id="text-org5ba2eef">
 <p>
 The following function returns the abstract for a citation using
-<a href="#orgaaa2b74"><code>refbase~get-by-citekey</code></a>.
+<a href="#org5be7343"><code>refbase~get-by-citekey</code></a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org75ae197"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">refbase-get-abstract</span> (citekey)
+<pre class="src src-emacs-lisp" id="org462d1e4"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">refbase-get-abstract</span> (citekey)
   <span style="color: #8b2252;">"Get abstract of refbase entry."</span>
   (refbase~get-by-citekey citekey <span style="color: #8b2252;">"abstract"</span>))
 </pre>
@@ -1256,16 +1255,16 @@ The following function returns the abstract for a citation using
 </div>
 </div>
 
-<div id="outline-container-org7bfff6d" class="outline-3">
-<h3 id="org7bfff6d">Get citation</h3>
-<div class="outline-text-3" id="text-org7bfff6d">
+<div id="outline-container-org998b028" class="outline-3">
+<h3 id="org998b028">Get citation</h3>
+<div class="outline-text-3" id="text-org998b028">
 <p>
 The following function builds a short summary of a citation using
-<a href="#orgaaa2b74"><code>refbase~get-by-citekey</code></a> containing the author, title, publication, and year.
+<a href="#org5be7343"><code>refbase~get-by-citekey</code></a> containing the author, title, publication, and year.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org76d56b1"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">refbase-get-cite</span> (citekey)
+<pre class="src src-emacs-lisp" id="orge3a128f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">refbase-get-cite</span> (citekey)
   <span style="color: #8b2252;">"Get title of refbase entry."</span>
   (replace-regexp-in-string
    <span style="color: #8b2252;">"\t"</span> <span style="color: #8b2252;">", "</span>
@@ -1275,11 +1274,11 @@ The following function builds a short summary of a citation using
 </div>
 </div>
 
-<div id="outline-container-org1d0aa6d" class="outline-3">
-<h3 id="org1d0aa6d">Package footer</h3>
-<div class="outline-text-3" id="text-org1d0aa6d">
+<div id="outline-container-orgb09effe" class="outline-3">
+<h3 id="orgb09effe">Package footer</h3>
+<div class="outline-text-3" id="text-orgb09effe">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org8a2d237"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">provide</span> '<span style="color: #008b8b;">my-refbase</span>)
+<pre class="src src-emacs-lisp" id="org3d6d4c2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my-refbase.el]</div>(<span style="color: #a020f0;">provide</span> '<span style="color: #008b8b;">my-refbase</span>)
 <span style="color: #b22222;">;;; </span><span style="color: #b22222;">my-refbase.el ends here</span>
 </pre>
 </div>
@@ -1288,9 +1287,9 @@ The following function builds a short summary of a citation using
 </div>
 
 
-<div id="outline-container-org4def164" class="outline-2">
-<h2 id="org4def164">Wiki setup</h2>
-<div class="outline-text-2" id="text-org4def164">
+<div id="outline-container-orgde7de03" class="outline-2">
+<h2 id="orgde7de03">Wiki setup</h2>
+<div class="outline-text-2" id="text-orgde7de03">
 <p>
 This section defines the static content of the wiki website.  It includes the
 javascripts libraries, style sheets and the basic wiki pages.
@@ -1298,7 +1297,7 @@ javascripts libraries, style sheets and the basic wiki pages.
 </div>
 
 
-<div id="outline-container-org3710c1d" class="outline-3">
+<div id="outline-container-orge6d2c07" class="outline-3">
 <h3 id="wiki-js-libs">Javascript libraries</h3>
 <div class="outline-text-3" id="text-wiki-js-libs">
 <p>
@@ -1312,35 +1311,35 @@ following source blocks (this requires some shell and wget):
 version 2.1.3 but more recent versions should also work:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh" id="orgd540ce2">     wget https://code.jquery.com/jquery-2.1.3.min.js -O org/_resources/jquery-2.1.3.min.js
+<pre class="src src-sh" id="orgd39d20c">     wget https://code.jquery.com/jquery-2.1.3.min.js -O org/_resources/jquery-2.1.3.min.js
 </pre>
 </div></dd>
 <dt>Lunr</dt><dd><p>
 latest version hoping it does not break (2.1.3 is known to work):
 </p>
 <div class="org-src-container">
-<pre class="src src-sh" id="org185f842">     wget https://unpkg.com/lunr/lunr.js -O org/_resources/lunr.js
+<pre class="src src-sh" id="org73e345b">     wget https://unpkg.com/lunr/lunr.js -O org/_resources/lunr.js
 </pre>
 </div></dd>
 <dt><code>mark.js</code></dt><dd><p>
 version 8.11.0 but more recent versions should also work:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh" id="org6e1a652">     wget https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.0/jquery.mark.min.js -O org/_resources/jquery.mark.min.js
+<pre class="src src-sh" id="org19776b9">     wget https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.0/jquery.mark.min.js -O org/_resources/jquery.mark.min.js
 </pre>
 </div></dd>
 <dt><code>org-info.js</code></dt><dd><p>
 use latest version
 </p>
 <div class="org-src-container">
-<pre class="src src-sh" id="orgfc261c6">     wget http://orgmode.org/worg/code/org-info-js/org-info.js -O org/_resources/org-info.js
+<pre class="src src-sh" id="org3149237">     wget http://orgmode.org/worg/code/org-info-js/org-info.js -O org/_resources/org-info.js
 </pre>
 </div></dd>
 <dt>MathJax</dt><dd><p>
 version 2.7.2, but more recent versions should also work:
 </p>
 <div class="org-src-container">
-<pre class="src src-sh" id="orgdfbe876">     wget https://github.com/mathjax/MathJax/archive/2.7.2.zip -O org/_resources/mathjax2.7.2.zip
+<pre class="src src-sh" id="orgeeb2906">     wget https://github.com/mathjax/MathJax/archive/2.7.2.zip -O org/_resources/mathjax2.7.2.zip
      unzip org/_resources/mathjax2.7.2.zip
      mv MathJax-2.7.2 org/_resources/MathJax
      rm org/_resources/mathjax2.7.2.zip
@@ -1351,7 +1350,7 @@ version 2.7.2, but more recent versions should also work:
 </div>
 
 
-<div id="outline-container-org8fbf23a" class="outline-3">
+<div id="outline-container-org9d6543e" class="outline-3">
 <h3 id="wiki-search">Search</h3>
 <div class="outline-text-3" id="text-wiki-search">
 <p>
@@ -1366,7 +1365,7 @@ request and use Lunr to search the index.
 </div>
 
 
-<div id="outline-container-org839f718" class="outline-4">
+<div id="outline-container-org36c36ae" class="outline-4">
 <h4 id="search-js-index-download">Asynchronous index download using jQuery</h4>
 <div class="outline-text-4" id="text-search-js-index-download">
 <p>
@@ -1380,7 +1379,7 @@ and using the <code>href</code> link to the wiki entry as <a href="#coderef-js-s
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-javascript" id="orgb9a9427"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">lunrIndex</span>,
+<pre class="src src-javascript" id="org7e91782"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">lunrIndex</span>,
     pagesIndex,
     searchStr;
 
@@ -1440,7 +1439,7 @@ and using the <code>href</code> link to the wiki entry as <a href="#coderef-js-s
 </div>
 
 
-<div id="outline-container-org0908ead" class="outline-4">
+<div id="outline-container-org4b2f490" class="outline-4">
 <h4 id="search-js-listener">Search box listener</h4>
 <div class="outline-text-4" id="text-search-js-listener">
 <p>
@@ -1449,7 +1448,7 @@ When two or more characters are typed, a search is performed.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript" id="orgbc2ac3f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">$results</span>
+<pre class="src src-javascript" id="org6f9dd0a"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">$results</span>
 
 <span style="color: #b22222;">// </span><span style="color: #b22222;">Add events to search box</span>
 <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">initUI</span>() {
@@ -1476,7 +1475,7 @@ When two or more characters are typed, a search is performed.
 </div>
 
 
-<div id="outline-container-org0510311" class="outline-4">
+<div id="outline-container-orgb7ea7fb" class="outline-4">
 <h4 id="search-js-search">Lunr search</h4>
 <div class="outline-text-4" id="text-search-js-search">
 <p>
@@ -1489,7 +1488,7 @@ slow yet.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript" id="orgc06a07e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div><span style="color: #b22222;">/**</span>
+<pre class="src src-javascript" id="org28cf2b6"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div><span style="color: #b22222;">/**</span>
 <span style="color: #b22222;"> * Trigger a search in lunr and transform the result</span>
 <span style="color: #b22222;"> *</span>
 <span style="color: #b22222;"> * @param  {String} query</span>
@@ -1524,7 +1523,7 @@ slow yet.
 </div>
 
 
-<div id="outline-container-orge468a3a" class="outline-4">
+<div id="outline-container-orgcdffddf" class="outline-4">
 <h4 id="search-js-display">Display results</h4>
 <div class="outline-text-4" id="text-search-js-display">
 <p>
@@ -1539,7 +1538,7 @@ could probably be simplified with better jQuery skills.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript" id="org9eca419"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div><span style="color: #b22222;">/**</span>
+<pre class="src src-javascript" id="orgc2a9605"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div><span style="color: #b22222;">/**</span>
 <span style="color: #b22222;"> * Display the 10 first results</span>
 <span style="color: #b22222;"> *</span>
 <span style="color: #b22222;"> * @param  {Array} results to display</span>
@@ -1600,7 +1599,7 @@ could probably be simplified with better jQuery skills.
 </div>
 
 
-<div id="outline-container-orgd03e095" class="outline-4">
+<div id="outline-container-org93b51e8" class="outline-4">
 <h4 id="search-js-init">Initialization</h4>
 <div class="outline-text-4" id="text-search-js-init">
 <p>
@@ -1608,7 +1607,7 @@ The following instantiates the <code>json</code> index download when loading the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript" id="org4294d23"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div>
+<pre class="src src-javascript" id="org42f2310"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.js]</div>
 <span style="color: #b22222;">// </span><span style="color: #b22222;">Initialize</span>
 initLunr();
 
@@ -1622,7 +1621,7 @@ $(document).ready(<span style="color: #a020f0;">function</span>() {
 </div>
 
 
-<div id="outline-container-org5b16c75" class="outline-3">
+<div id="outline-container-orga4a10ee" class="outline-3">
 <h3 id="search-js-highlight">Results highlighting</h3>
 <div class="outline-text-3" id="text-search-js-highlight">
 <p>
@@ -1638,11 +1637,11 @@ URL (the <code>highlight</code> parameter).  The <code>highlight</code> paramete
 <p>
 When the <code>highlight</code> parameter is passed, a search bar is shown on the target
 page, with buttons to navigate through results.  This is shown on
-Fig.&nbsp;<a href="#org0aabe9e">1</a>.
+Fig.&nbsp;<a href="#org26e90ff">1</a>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript" id="org6b07a73"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/highlight.js]</div><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">currentClass</span> = <span style="color: #8b2252;">"current"</span>;
+<pre class="src src-javascript" id="org775fac2"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/highlight.js]</div><span style="color: #a020f0;">var</span> <span style="color: #a0522d;">currentClass</span> = <span style="color: #8b2252;">"current"</span>;
 <span style="color: #a020f0;">var</span> <span style="color: #a0522d;">currentIndex</span> = 0;
 
 <span style="color: #a020f0;">function</span> <span style="color: #0000ff;">jumpTo</span>() {
@@ -1731,7 +1730,7 @@ $(document).ready(<span style="color: #a020f0;">function</span>() {
 </div>
 
 
-<div id="org0aabe9e" class="figure">
+<div id="org26e90ff" class="figure">
 <p><a href="../images/2017-08-15-Personal_wiki_in_org/highlight.png" width="70%"><img src="../images/2017-08-15-Personal_wiki_in_org/highlight.png" alt="highlight.png" width="70%"></a>
 </p>
 <p><span class="figure-number">Figure 1: </span>Search results highlighting and search bar (in the top right corner).</p>
@@ -1740,22 +1739,22 @@ $(document).ready(<span style="color: #a020f0;">function</span>() {
 </div>
 
 
-<div id="outline-container-orgfe84d3b" class="outline-3">
-<h3 id="orgfe84d3b">CSS</h3>
-<div class="outline-text-3" id="text-orgfe84d3b">
+<div id="outline-container-org6e1f514" class="outline-3">
+<h3 id="org6e1f514">CSS</h3>
+<div class="outline-text-3" id="text-org6e1f514">
 <p>
 Styling for the wiki is identical to that of the <a href="2016-11-13-Personal_website_in_org.html">website</a>.  The following source
 block creates a symbolic link to the website css.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org0a68a82">ln -sf ../../../website/org/css/site.css org/_resources/wiki.css
+<pre class="src src-sh" id="orgb46d33c">ln -sf ../../../website/org/css/site.css org/_resources/wiki.css
 </pre>
 </div>
 </div>
 
 
-<div id="outline-container-orgfd7b06d" class="outline-4">
+<div id="outline-container-org1162ddf" class="outline-4">
 <h4 id="css-search">Search</h4>
 <div class="outline-text-4" id="text-css-search">
 <p>
@@ -1764,7 +1763,7 @@ controlled by the <code>search.css</code> file.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-css" id="org8d1108b"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.css]</div><span style="color: #0000ff;">mark </span>{
+<pre class="src src-css" id="orgd34c3ee"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/_resources/search.css]</div><span style="color: #0000ff;">mark </span>{
   <span style="color: #a0522d;">background</span>: <span style="color: #000000; background-color: #FFFF00;">yellow</span>;
 }
 
@@ -1792,7 +1791,7 @@ controlled by the <code>search.css</code> file.
 </div>
 
 
-<div id="outline-container-orge2e221e" class="outline-3">
+<div id="outline-container-org6b0acea" class="outline-3">
 <h3 id="wiki-setup-org">Org header</h3>
 <div class="outline-text-3" id="text-wiki-setup-org">
 <p>
@@ -1809,7 +1808,7 @@ for published pages,</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-org" id="org664a366"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/setup.org]</div><span id="coderef-org-setup-info-js" class="coderef-off"><span style="color: #b22222;">#+INFOJS_OPT: toc:t tdepth:2 view:showall ftoc:t ltoc:nil path:_resources/org-info.js</span></span>
+<pre class="src src-org" id="org7713638"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/setup.org]</div><span id="coderef-org-setup-info-js" class="coderef-off"><span style="color: #b22222;">#+INFOJS_OPT: toc:t tdepth:2 view:showall ftoc:t ltoc:nil path:_resources/org-info.js</span></span>
 <span style="color: #b22222;">#+PROPERTY: header-args :eval no-export :exports code</span>
 <span style="color: #b22222;">#+STARTUP: nohideblocks</span>
 <span style="color: #b22222;">#+MACRO: tt \nbsp{}</span>
@@ -1832,25 +1831,25 @@ personal website.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org2391b7f">ln -sf ../../website/org/source-blocks.org org/source-blocks.org
+<pre class="src src-sh" id="orgef0c9d6">ln -sf ../../website/org/source-blocks.org org/source-blocks.org
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org6b091b5" class="outline-3">
-<h3 id="org6b091b5">Basic wiki pages</h3>
-<div class="outline-text-3" id="text-org6b091b5">
+<div id="outline-container-org8e4e6e7" class="outline-3">
+<h3 id="org8e4e6e7">Basic wiki pages</h3>
+<div class="outline-text-3" id="text-org8e4e6e7">
 <p>
 Wikipages are simple org files which are exported to HTML during the call to the
-<a href="#orgfb1597f">publishing function</a>.  The wiki comes with three predefined pages described in
+<a href="#orgbed7b9e">publishing function</a>.  The wiki comes with three predefined pages described in
 this section.
 </p>
 </div>
 
 
-<div id="outline-container-orgcba8dfc" class="outline-4">
+<div id="outline-container-orgbd8f7aa" class="outline-4">
 <h4 id="wiki-page-index"><code>index</code></h4>
 <div class="outline-text-4" id="text-wiki-page-index">
 <p>
@@ -1869,7 +1868,7 @@ links),</li>
 
 
 <div class="org-src-container">
-<pre class="src src-org" id="org0ebd12c"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/index.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">index</span>
+<pre class="src src-org" id="org3376d21"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/index.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">index</span>
 <span style="color: #b22222;">#+STARTUP: overview</span>
 
 <span style="color: #0000ff;">* Index</span>
@@ -1897,7 +1896,7 @@ links),</li>
 </div>
 
 
-<div id="outline-container-orge060f91" class="outline-4">
+<div id="outline-container-org69f16d6" class="outline-4">
 <h4 id="wiki-page-search"><code>search</code></h4>
 <div class="outline-text-4" id="text-wiki-page-search">
 <p>
@@ -1907,7 +1906,7 @@ the appropriate javascript libraries.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-org" id="orge807214"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/search.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">Search</span>
+<pre class="src src-org" id="orgcbccc82"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/search.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">Search</span>
 <span style="color: #b22222;">#+HTML_HEAD_EXTRA: &lt;script type="text/javascript" src="_resources/lunr.js"&gt;&lt;/script&gt;</span>
 <span style="color: #b22222;">#+HTML_HEAD_EXTRA: &lt;script type="text/javascript" src="_resources/search.js"&gt;&lt;/script&gt;</span>
 <span style="color: #b22222;">#+BEGIN_EXPORT html</span>
@@ -1921,11 +1920,11 @@ the appropriate javascript libraries.
 </div>
 
 <p>
-An example of rendered search page is shown on Fig.&nbsp;<a href="#orgfcd477d">2</a>.
+An example of rendered search page is shown on Fig.&nbsp;<a href="#org60145d7">2</a>.
 </p>
 
 
-<div id="orgfcd477d" class="figure">
+<div id="org60145d7" class="figure">
 <p><a href="../images/2017-08-15-Personal_wiki_in_org/searchpage.png" width="55%"><img src="../images/2017-08-15-Personal_wiki_in_org/searchpage.png" alt="searchpage.png" width="55%"></a>
 </p>
 <p><span class="figure-number">Figure 2: </span>Search page with search results.</p>
@@ -1934,9 +1933,9 @@ An example of rendered search page is shown on Fig.&nbsp;<a href="#orgfcd477d">2
 </div>
 
 
-<div id="outline-container-org9708ae5" class="outline-4">
-<h4 id="org9708ae5"><code>demo</code></h4>
-<div class="outline-text-4" id="text-org9708ae5">
+<div id="outline-container-orgea0db09" class="outline-4">
+<h4 id="orgea0db09"><code>demo</code></h4>
+<div class="outline-text-4" id="text-orgea0db09">
 <p>
 The <code>demo.org</code> page is meant as a help for the wiki.  It is designed to describe
 the main functionality:
@@ -1953,7 +1952,7 @@ the main functionality:
 
 
 <div class="org-src-container">
-<pre class="src src-org" id="org07db036"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/demo.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">demo</span>
+<pre class="src src-org" id="orgd7af24f"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[org/demo.org]</div><span style="color: #7f7f7f;">#+TITLE:</span> <span style="color: #191970; font-weight: bold;">demo</span>
 <span style="color: #b22222;">#+DESCRIPTION:</span>
 <span style="color: #b22222;">#+KEYWORDS: help</span>
 <span style="color: #b22222;">#+STARTUP: overview</span>
@@ -2158,16 +2157,16 @@ type: <span style="color: #7f7f7f;">~</span><span style="color: #7f7f7f; text-de
 </div>
 
 
-<div id="outline-container-orge4a40b6" class="outline-2">
-<h2 id="orge4a40b6">Dotfiles setup</h2>
-<div class="outline-text-2" id="text-orge4a40b6">
+<div id="outline-container-orga3123f1" class="outline-2">
+<h2 id="orga3123f1">Dotfiles setup</h2>
+<div class="outline-text-2" id="text-orga3123f1">
 <p>
 This section contains the setup code to store in emacs init file (<code>.emacs</code>).
 </p>
 </div>
 
 
-<div id="outline-container-orge824c91" class="outline-3">
+<div id="outline-container-orgaabfa34" class="outline-3">
 <h3 id="dotfiles-org-wiki">Org-wiki configuration</h3>
 <div class="outline-text-3" id="text-dotfiles-org-wiki">
 <p>
@@ -2177,7 +2176,7 @@ full path.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org4f8d70d"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_wiki.el]</div>(<span style="color: #a020f0;">setq</span> org-wiki-location (&#8482;/get-perso <span style="color: #8b2252;">"wiki-path"</span>)
+<pre class="src src-emacs-lisp" id="org31e668e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_wiki.el]</div>(<span style="color: #a020f0;">setq</span> org-wiki-location (&#8482;/get-perso <span style="color: #8b2252;">"wiki-path"</span>)
       org-wiki-index-level-max 3
       org-wiki-index-file <span style="color: #8b2252;">"_resources/wiki.json"</span>)
 </pre>
@@ -2185,16 +2184,16 @@ full path.
 </div>
 </div>
 
-<div id="outline-container-org7a2a114" class="outline-3">
-<h3 id="org7a2a114">Refbase configuration</h3>
-<div class="outline-text-3" id="text-org7a2a114">
+<div id="outline-container-org5017070" class="outline-3">
+<h3 id="org5017070">Refbase configuration</h3>
+<div class="outline-text-3" id="text-org5017070">
 <p>
 To use the <a href="#refbase">refbase</a> package, the URL and the name of the MySQL database must be
 defined.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="org30d0689"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_wiki.el]</div>(<span style="color: #a020f0;">setq</span> refbase-url (&#8482;/get-perso <span style="color: #8b2252;">"refbase-url"</span>)
+<pre class="src src-emacs-lisp" id="orgfdf789e"><div style="position: absolute; top: 0; right: 0; text-align:right;" class="src-label">[my_wiki.el]</div>(<span style="color: #a020f0;">setq</span> refbase-url (&#8482;/get-perso <span style="color: #8b2252;">"refbase-url"</span>)
       refbase-db <span style="color: #8b2252;">"refbase"</span>)
 </pre>
 </div>
@@ -2203,9 +2202,9 @@ defined.
 </div>
 
 
-<div id="outline-container-org7fef065" class="outline-2">
-<h2 id="org7fef065">Bash helpers</h2>
-<div class="outline-text-2" id="text-org7fef065">
+<div id="outline-container-org7d02fa5" class="outline-2">
+<h2 id="org7d02fa5">Bash helpers</h2>
+<div class="outline-text-2" id="text-org7d02fa5">
 <p>
 Finally, some useful bash functions are defined in the following source block.
 </p>
@@ -2220,7 +2219,7 @@ graphical and terminal mode respectively.  These functions support
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="orgb639f88"><span style="color: #b22222;">## </span><span style="color: #b22222;">Wiki location</span>
+<pre class="src src-sh" id="org13bbeca"><span style="color: #b22222;">## </span><span style="color: #b22222;">Wiki location</span>
 <span id="coderef-bash-wiki-path" class="coderef-off"><span style="color: #a0522d;">wiki_path</span>=~/dotfiles/emacs/wiki/org/</span>
 
 <span style="color: #b22222;">## </span><span style="color: #b22222;">Alias</span>
@@ -2273,7 +2272,7 @@ graphical and terminal mode respectively.  These functions support
 </div>
 <div class='footer'>
   Last updated 2018-08-19 Sun 18:00. <br>
-  Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.2.2 (<a href="https://orgmode.org">Org</a> mode 9.1.13).
+  Built with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.2.2 (<a href="https://orgmode.org">Org</a> mode 9.1.14).
 </div>
 <!-- html-postamble ends here -->
 </div>

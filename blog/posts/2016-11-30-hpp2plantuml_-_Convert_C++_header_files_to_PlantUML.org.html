@@ -106,6 +106,10 @@
         color: #3a5fcd;
         text-decoration: underline;
       }
+      .org-list-dt {
+        /* org-list-dt */
+        font-weight: bold;
+      }
       .org-macro {
         /* org-macro */
         color: #8b4513;
@@ -228,8 +232,9 @@ this single org-file.
 
 The current version of the code is:
 <span class="org-meta-line">#+name: hpp2plantuml-version</span>
-<span class="org-code">: 0.4
+<span class="org-code">: 0.5
 </span>
+
 The source code can be found on GitHub:
 <span class="org-link"><a href="https://github.com/thibaultmarin/hpp2plantuml">https://github.com/thibaultmarin/hpp2plantuml</a></span>.
 
@@ -296,6 +301,7 @@ This module has mostly standard dependencies; the only exception is the
 <span class="org-meta-line">#+caption:</span> <span class="org-block">List of dependencies.</span>
 <span class="org-table">| argparse        |</span>
 <span class="org-table">| CppHeaderParser |</span>
+<span class="org-table">| jinja2          |</span>
 
 The full list of non-standard dependencies is produced by the following source
 block (returning either imports or a dependency list used in <span class="org-link"><a href="#sec-package-setup-py">=setup.py=</a></span>):
@@ -317,6 +323,7 @@ block (returning either imports or a dependency list used in <span class="org-li
 <span class="org-block-begin-line">#+begin_src python :noweb yes
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Imports</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
+</span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> os
 </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> re
 </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> glob
 &lt;&lt;py-dependencies(</span><span class="org-block"><span class="string">"import"</span></span><span class="org-block">)&gt;&gt;
@@ -1335,19 +1342,29 @@ be used to avoid this sorting step.
     Each method has versions for file and string inputs and folder string lists
     and file lists inputs.
     """</span></span><span class="org-block">
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, template_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Constructor
 
         The `Diagram` class constructor simply initializes object lists.  It
         does not create objects or relationships.
         """</span></span><span class="org-block">
-        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects = []
-        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._inheritance_list = []
-        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list = []
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.clear()
+        </span><span class="org-block"><span class="variable-name">loader_list</span></span><span class="org-block"> = []
+        </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> template_file </span><span class="org-block"><span class="keyword">is</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">:
+            loader_list.append(jinja2.FileSystemLoader(
+                os.path.abspath(os.path.dirname(template_file))))
+            </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._template_file = os.path.basename(template_file)
+        </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
+            </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._template_file = </span><span class="org-block"><span class="string">'default.puml'</span></span><span class="org-block">
+        loader_list.append(jinja2.PackageLoader(</span><span class="org-block"><span class="string">'hpp2plantuml'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'templates'</span></span><span class="org-block">))
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._env = jinja2.Environment(loader=jinja2.ChoiceLoader(
+            loader_list), keep_trailing_newline=</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">)
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">clear</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Reinitiliaze object"""</span></span><span class="org-block">
-        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.__init__()
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects = []
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._inheritance_list = []
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list = []
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_sort_list</span></span><span class="org-block">(input_list):
         </span><span class="org-block"><span class="doc">"""Sort list using `ClassRelationship` comparison
@@ -1653,45 +1670,10 @@ be used to avoid this sorting step.
             String containing the full string representation of the `Diagram`
             object, including objects and object relationships
         """</span></span><span class="org-block">
-        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Preamble
-</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diagram_str</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._preamble()
-
-        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Objects
-</span></span><span class="org-block">        </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> obj </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects:
-            </span><span class="org-block"><span class="variable-name">diagram_str</span></span><span class="org-block"> += obj.render() + </span><span class="org-block"><span class="string">'\n'</span></span><span class="org-block">
-
-        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Inheritance
-</span></span><span class="org-block">        </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> inherit </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._inheritance_list:
-            </span><span class="org-block"><span class="variable-name">diagram_str</span></span><span class="org-block"> += inherit.render() + </span><span class="org-block"><span class="string">'\n'</span></span><span class="org-block">
-
-        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Aggregation
-</span></span><span class="org-block">        </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> comp </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list:
-            </span><span class="org-block"><span class="variable-name">diagram_str</span></span><span class="org-block"> += comp.render() + </span><span class="org-block"><span class="string">'\n'</span></span><span class="org-block">
-
-        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Postamble
-</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diagram_str</span></span><span class="org-block"> += </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._postamble()
-
-        </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> diagram_str
-
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_preamble</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
-        </span><span class="org-block"><span class="doc">"""PlantUML preamble text
-
-        Returns
-        -------
-        str
-            The PlantUML preamble text: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">@startuml</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
-        """</span></span><span class="org-block">
-        </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'@startuml\n'</span></span><span class="org-block">
-
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_postamble</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
-        </span><span class="org-block"><span class="doc">"""PlantUML postamble text
-
-        Returns
-        -------
-        str
-            The PlantUML postamble text: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">@enduml</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
-        """</span></span><span class="org-block">
-        </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'\n@enduml\n'</span></span><span class="org-block">
+        </span><span class="org-block"><span class="variable-name">template</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._env.get_template(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._template_file)
+        </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> template.render(objects=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects,
+                               inheritance_list=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._inheritance_list,
+                               aggregation_list=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list)
 </span><span class="org-block-end-line">#+end_src
 </span>
 
@@ -1840,8 +1822,8 @@ output file.
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Main function</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
-</span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">CreatePlantUMLFile</span></span><span class="org-block">(file_list, output_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">):
-    </span><span class="org-block"><span class="doc">""" Create PlantUML file from list of header files
+</span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">CreatePlantUMLFile</span></span><span class="org-block">(file_list, output_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, template_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">):
+    </span><span class="org-block"><span class="doc">"""Create PlantUML file from list of header files
 
     This function parses a list of C++ header files and generates a file for
     use with PlantUML.
@@ -1853,12 +1835,14 @@ output file.
         </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`expand_file_list`</span></span><span class="org-block"><span class="doc"> function)
     output_file : str
         Name of the output file
+    template_file : str
+        When not None, the name of the jinja2 template file used for rendering
     """</span></span><span class="org-block">
     </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">isinstance</span></span><span class="org-block">(file_list, </span><span class="org-block"><span class="builtin">str</span></span><span class="org-block">):
         </span><span class="org-block"><span class="variable-name">file_list_c</span></span><span class="org-block"> = [file_list, ]
     </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
         </span><span class="org-block"><span class="variable-name">file_list_c</span></span><span class="org-block"> = file_list
-    </span><span class="org-block"><span class="variable-name">diag</span></span><span class="org-block"> = Diagram()
+    </span><span class="org-block"><span class="variable-name">diag</span></span><span class="org-block"> = Diagram(template_file=template_file)
     diag.create_from_file_list(</span><span class="org-block"><span class="builtin">list</span></span><span class="org-block">(</span><span class="org-block"><span class="builtin">set</span></span><span class="org-block">(expand_file_list(file_list_c))))
     </span><span class="org-block"><span class="variable-name">diag_render</span></span><span class="org-block"> = diag.render()
 
@@ -1869,6 +1853,51 @@ output file.
             fid.write(diag_render)
 </span><span class="org-block-end-line">#+end_src
 </span>
+
+<span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Default template</span>
+
+The rendering of the PlantUML file is managed by a <span class="org-link"><a href="http://jinja.pocoo.org/">=jinja=</a></span> template.  The
+default template is as follows:
+
+<span class="org-meta-line">#+name: jinja2-tpl</span>
+<span class="org-block-begin-line">#+begin_src plantuml :mkdirp yes :tangle src/hpp2plantuml/templates/default.puml
+</span><span class="org-block"><span class="keyword">@startuml</span></span><span class="org-block">
+
+{% block preamble %}
+{% endblock %}
+
+{% block objects %}
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Objects </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+{% for object in objects %}
+{{ object.render() }}
+{% endfor %}
+{% endblock %}
+
+{% block inheritance %}
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Inheritance relationships </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+{% for link in inheritance_list %}
+{{ link.render() }}
+{% endfor %}
+{% endblock %}
+
+{% block aggregation %}
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Aggregation relationships </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+{% for link in aggregation_list %}
+{{ link.render() }}
+{% endfor %}
+{% endblock %}
+
+</span><span class="org-block"><span class="keyword">@enduml</span></span><span class="org-block">
+</span><span class="org-block-end-line">#+end_src
+</span>
+The template successively prints the following blocks
+
+- <span class="org-verbatim"><span class="org-list-dt">=preamble=</span></span><span class="org-list-dt"> ::</span> Empty by default, can be used to insert a title and PlantUML
+     <span class="org-verbatim">=skinparam=</span> options
+- <span class="org-verbatim"><span class="org-list-dt">=objects=</span></span><span class="org-list-dt"> ::</span> Classes, structs and enum objects
+- <span class="org-verbatim"><span class="org-list-dt">=inheritance=</span></span><span class="org-list-dt"> ::</span> Inheritance links
+- <span class="org-verbatim"><span class="org-list-dt">=aggregation=</span></span><span class="org-list-dt"> ::</span> Aggregation links
+
 
 <span class="org-level-2">** </span><span class="org-done">DONE</span><span class="org-level-2"> Command line interface</span>
 <span class="org-special-keyword">:PROPERTIES:</span>
@@ -1900,11 +1929,15 @@ to parse input arguments.  The function passes the command line arguments to the
     parser.add_argument(</span><span class="org-block"><span class="string">'-o'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--output-file'</span></span><span class="org-block">, dest=</span><span class="org-block"><span class="string">'output_file'</span></span><span class="org-block">,
                         required=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">, default=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, metavar=</span><span class="org-block"><span class="string">'FILE'</span></span><span class="org-block">,
                         </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'output file'</span></span><span class="org-block">)
+    parser.add_argument(</span><span class="org-block"><span class="string">'-t'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--template-file'</span></span><span class="org-block">, dest=</span><span class="org-block"><span class="string">'template_file'</span></span><span class="org-block">,
+                        required=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">, default=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, metavar=</span><span class="org-block"><span class="string">'JINJA-FILE'</span></span><span class="org-block">,
+                        </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'path to jinja2 template file'</span></span><span class="org-block">)
     parser.add_argument(</span><span class="org-block"><span class="string">'--version'</span></span><span class="org-block">, action=</span><span class="org-block"><span class="string">'version'</span></span><span class="org-block">,
                         version=</span><span class="org-block"><span class="string">'%(prog)s '</span></span><span class="org-block"> + &lt;&lt;get-version()&gt;&gt;)
     </span><span class="org-block"><span class="variable-name">args</span></span><span class="org-block"> = parser.parse_args()
     </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">len</span></span><span class="org-block">(args.input_files) &gt; 0:
-        CreatePlantUMLFile(args.input_files, args.output_file)
+        CreatePlantUMLFile(args.input_files, args.output_file,
+                           template_file=args.template_file)
 
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Standalone mode</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
@@ -1963,7 +1996,7 @@ The command line usage is (<span class="org-code">~hpp2plantuml --help~</span>):
 
 
 <span class="org-block-begin-line">#+begin_example
-</span><span class="custom">usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [--version]
+</span><span class="custom">usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [-t JINJA-FILE] [--version]
 
 hpp2plantuml tool.
 
@@ -1973,6 +2006,8 @@ optional arguments:
                         input file (must be quoted when using wildcards)
   -o FILE, --output-file FILE
                         output file
+  -t JINJA-FILE, --template-file JINJA-FILE
+                        path to jinja2 template file
   --version             show program's version number and exit
 </span><span class="org-block-end-line">#+end_example
 </span>
@@ -1990,6 +2025,31 @@ For instance, the following command will generate an input file for PlantUML
 </span><span class="org-block">hpp2plantuml -i File_1.hpp -i </span><span class="org-block"><span class="string">"include/Helper_*.hpp"</span></span><span class="org-block"> -o output.puml
 </span><span class="org-block-end-line">#+end_src
 </span>
+To customize the output PlantUML file, templates can be used (using the <span class="org-code">~-t~</span>
+parameter):
+
+<span class="org-meta-line">#+name: usage-sh-template</span>
+<span class="org-block-begin-line">#+begin_src sh
+</span><span class="org-block">hpp2plantuml -i File_1.hpp -i </span><span class="org-block"><span class="string">"include/Helper_*.hpp"</span></span><span class="org-block"> -o output.puml -t template.puml
+</span><span class="org-block-end-line">#+end_src
+</span>
+This will use the <span class="org-verbatim">=template.puml=</span> file as template.  Templates follow the
+<span class="org-link"><a href="http://jinja.pocoo.org/">=jinja=</a></span> syntax.  For instance, to add a preamble to the PlantUML output, the
+template file may contain:
+
+<span class="org-meta-line">#+name: usage-template</span>
+<span class="org-block-begin-line">#+begin_example
+</span><span class="custom">{% extends 'default.puml' %}
+
+{% block preamble %}
+title "This is a title"
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+{% endblock %}
+</span><span class="org-block-end-line">#+end_example
+</span>
+This will inherit from the default template and override the preamble only.
+
 
 <span class="org-level-2">** Module</span>
 
@@ -1997,7 +2057,8 @@ To use as a module, simply <span class="org-code">~import hpp2plantuml~</span>. 
 function can then be used to create a PlantUML file from a set of input files.
 Alternatively, the <span class="org-code">~Diagram~</span> object can be used directly to build internal
 objects (from files or strings).  The <span class="org-code">~Diagram.render()~</span> method can be used to
-produce a string output instead of writing to a text file.
+produce a string output instead of writing to a text file.  See the API
+documentation for more details.
 
 
 <span class="org-level-1">* </span><span class="org-done">DONE</span><span class="org-level-1"> Tests</span>
@@ -2383,6 +2444,13 @@ The comparison takes into account the white space, indentation, etc.
 <span class="org-meta-line">#+name: puml-simple-classes</span>
 <span class="org-block-begin-line">#+begin_src plantuml :mkdirp yes :tangle tests/simple_classes.puml
 </span><span class="org-block"><span class="keyword">@startuml</span></span><span class="org-block">
+
+
+
+
+
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Objects </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+
 </span><span class="org-block"><span class="type">abstract</span></span><span class="org-block"> class Class01 {
     +{abstract} AbstractPublicMethod(int param) : bool
     +PublicMethod(int param) : bool {query}
@@ -2394,6 +2462,7 @@ The comparison takes into account the white space, indentation, etc.
     +public_var : int
 }
 
+
 </span><span class="org-block"><span class="type">class</span></span><span class="org-block"> Class02 {
     +AbstractPublicMethod(int param) : bool
     -_AbstractMethod(int param) : bool
@@ -2401,6 +2470,7 @@ The comparison takes into account the white space, indentation, etc.
     -{static} _StaticPrivateMethod(bool param) : bool
     -_private_var : int
 }
+
 
 </span><span class="org-block"><span class="type">class</span></span><span class="org-block"> Class03 &lt;template&lt;typename T&gt;&gt; {
     +Class03()
@@ -2411,6 +2481,7 @@ The comparison takes into account the white space, indentation, etc.
     -_obj_list : list&lt;Class02&gt;
 }
 
+
 </span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
 </span><span class="org-block"><span class="type">    class</span></span><span class="org-block"> Class04 {
         +Class04()
@@ -2420,6 +2491,7 @@ The comparison takes into account the white space, indentation, etc.
     }
 }
 
+
 </span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
 </span><span class="org-block"><span class="type">    class</span></span><span class="org-block"> Class04_derived {
         +Class04_derived()
@@ -2428,23 +2500,41 @@ The comparison takes into account the white space, indentation, etc.
     }
 }
 
+
 </span><span class="org-block"><span class="type">enum</span></span><span class="org-block"> Enum01 {
     VALUE_0
     VALUE_1
     VALUE_2
 }
 
+
+
+
+
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Inheritance relationships </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+
 .Class01 </span><span class="org-block"><span class="keyword">&lt;|--</span></span><span class="org-block"> .Class02
+
 
 </span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
     Class04 </span><span class="org-block"><span class="keyword">&lt;|--</span></span><span class="org-block"> Class04_derived
 }
 
+
+
+
+
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Aggregation relationships </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+
 .Class03 </span><span class="org-block"><span class="string">"2"</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> .Class01
+
 
 .Class03 </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> .Class02
 
+
 </span><span class="org-block"><span class="type">Interface</span></span><span class="org-block">.Class04 </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> .Class01
+
+
 
 
 </span><span class="org-block"><span class="keyword">@enduml</span></span><span class="org-block">
@@ -2458,8 +2548,20 @@ The system test validates the following:
 - interfaces to the <span class="org-code">~Diagram~</span> class listed in
   Table<span class="org-macro">{{{tt}}}</span><span class="org-link"><a href="tbl-diagram-interface">tbl-diagram-interface</a></span>,
 - object reset,
-- the <span class="org-code">~CreatePlantUMLFile~</span> interface, including stdout and file output.
+- the <span class="org-code">~CreatePlantUMLFile~</span> interface, including stdout and file output.  This
+  test also includes a run with custom template.
 
+<span class="org-meta-line">#+name: test-full-template</span>
+<span class="org-block-begin-line">#+begin_src plantuml :tangle tests/custom_template.puml
+</span><span class="org-block">{% extends </span><span class="org-block"><span class="comment-delimiter">'</span></span><span class="org-block"><span class="comment">default.puml' %}
+</span></span><span class="org-block">
+{% block preamble %}
+</span><span class="org-block"><span class="keyword">title</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"This is a title"</span></span><span class="org-block">
+</span><span class="org-block"><span class="keyword">skinparam</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">backgroundColor</span></span><span class="org-block"> #EEEBDC
+</span><span class="org-block"><span class="keyword">skinparam</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">handwritten</span></span><span class="org-block"> true
+{% endblock %}
+</span><span class="org-block-end-line">#+end_src
+</span>
 
 <span class="org-meta-line">#+name: test-full-diagram</span>
 <span class="org-block-begin-line">#+begin_src python
@@ -2570,11 +2672,30 @@ The system test validates the following:
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Output to file
 </span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">output_fname</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">'output.puml'</span></span><span class="org-block">
-        hpp2plantuml.CreatePlantUMLFile(file_list, output_fname)
-        </span><span class="org-block"><span class="variable-name">output_fcontent</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">''</span></span><span class="org-block">
-        </span><span class="org-block"><span class="keyword">with</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">open</span></span><span class="org-block">(output_fname, </span><span class="org-block"><span class="string">'rt'</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">as</span></span><span class="org-block"> fid:
-            </span><span class="org-block"><span class="variable-name">output_fcontent</span></span><span class="org-block"> = fid.read()
-        nt.assert_equal(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref, output_fcontent)
+        </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> template </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> [</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, os.path.join(test_fold,
+                                            </span><span class="org-block"><span class="string">'custom_template.puml'</span></span><span class="org-block">)]:
+            hpp2plantuml.CreatePlantUMLFile(file_list, output_fname,
+                                            template_file=template)
+            </span><span class="org-block"><span class="variable-name">output_fcontent</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">''</span></span><span class="org-block">
+            </span><span class="org-block"><span class="keyword">with</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">open</span></span><span class="org-block">(output_fname, </span><span class="org-block"><span class="string">'rt'</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">as</span></span><span class="org-block"> fid:
+                </span><span class="org-block"><span class="variable-name">output_fcontent</span></span><span class="org-block"> = fid.read()
+            </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> template </span><span class="org-block"><span class="keyword">is</span></span><span class="org-block"> </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">:
+                </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Default template check
+</span></span><span class="org-block">                nt.assert_equal(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref, output_fcontent)
+            </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
+                </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Check that all lines of reference are in the output
+</span></span><span class="org-block">                </span><span class="org-block"><span class="variable-name">ref_re</span></span><span class="org-block"> = re.search(</span><span class="org-block"><span class="string">'(@startuml)\s*(.*)'</span></span><span class="org-block">, </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref,
+                                   re.DOTALL)
+                </span><span class="org-block"><span class="keyword">assert</span></span><span class="org-block"> ref_re
+                </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Build regular expression: allow arbitrary text between
+</span></span><span class="org-block">                </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">@startuml and the rest of the string
+</span></span><span class="org-block">                </span><span class="org-block"><span class="variable-name">ref_groups</span></span><span class="org-block"> = ref_re.groups()
+                </span><span class="org-block"><span class="variable-name">match_re</span></span><span class="org-block"> = re.</span><span class="org-block"><span class="builtin">compile</span></span><span class="org-block">(</span><span class="org-block"><span class="string">'\n'</span></span><span class="org-block">.join([
+                    re.escape(ref_groups[0]),    </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">@startuml line
+</span></span><span class="org-block">                    </span><span class="org-block"><span class="string">'.*'</span></span><span class="org-block">,                        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">preamble
+</span></span><span class="org-block">                    re.escape(ref_groups[1])]),  </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">main output
+</span></span><span class="org-block">                                      re.DOTALL)
+                nt.assert_true(match_re.search(output_fcontent))
         os.unlink(output_fname)
 </span><span class="org-block-end-line">#+end_src
 </span>
@@ -2609,7 +2730,7 @@ obtained using the source block described <span class="org-link"><a href="#sec-o
 
 <span class="org-meta-line">#+name: py-init</span>
 <span class="org-block-begin-line">#+begin_src python :noweb yes :tangle src/hpp2plantuml/__init__.py
-</span><span class="org-block"><span class="doc">""" hpp2plantuml module
+</span><span class="org-block"><span class="doc">"""hpp2plantuml module
 
 &lt;&lt;el-org-exp("sec-module", "rst")&gt;&gt;
 
@@ -2701,7 +2822,7 @@ The non-boilerplate part of the <span class="org-verbatim">=setup.py=</span> fil
 </span><span class="org-block"><span class="variable-name">NAME</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">"hpp2plantuml"</span></span><span class="org-block">
 </span><span class="org-block"><span class="variable-name">PACKAGES</span></span><span class="org-block"> = find_packages(where=</span><span class="org-block"><span class="string">"src"</span></span><span class="org-block">)
 </span><span class="org-block"><span class="variable-name">META_PATH</span></span><span class="org-block"> = os.path.join(</span><span class="org-block"><span class="string">"src"</span></span><span class="org-block">, NAME, </span><span class="org-block"><span class="string">"__init__.py"</span></span><span class="org-block">)
-</span><span class="org-block"><span class="variable-name">KEYWORDS</span></span><span class="org-block"> = [</span><span class="org-block"><span class="string">"class"</span></span><span class="org-block">, </span><span class="org-block"><span class="string">"attribute"</span></span><span class="org-block">, </span><span class="org-block"><span class="string">"boilerplate"</span></span><span class="org-block">]
+</span><span class="org-block"><span class="variable-name">KEYWORDS</span></span><span class="org-block"> = [</span><span class="org-block"><span class="string">"class"</span></span><span class="org-block">]
 </span><span class="org-block"><span class="variable-name">CLASSIFIERS</span></span><span class="org-block"> = [
     </span><span class="org-block"><span class="string">"Development Status :: 4 - Beta"</span></span><span class="org-block">,
     </span><span class="org-block"><span class="string">"Intended Audience :: Developers"</span></span><span class="org-block">,
@@ -2776,7 +2897,6 @@ The following helper functions provide tools to extract metadata from the
         </span><span class="org-block"><span class="variable-name">src_dir</span></span><span class="org-block"> = (</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.distribution.package_dir </span><span class="org-block"><span class="keyword">or</span></span><span class="org-block"> {</span><span class="org-block"><span class="string">''</span></span><span class="org-block">: </span><span class="org-block"><span class="string">''</span></span><span class="org-block">})[</span><span class="org-block"><span class="string">''</span></span><span class="org-block">]
         </span><span class="org-block"><span class="variable-name">src_dir</span></span><span class="org-block"> = os.path.join(os.getcwd(),  src_dir)
         sys.path.append(</span><span class="org-block"><span class="string">'src'</span></span><span class="org-block">)
-        </span><span class="org-block"><span class="keyword">print</span></span><span class="org-block">(</span><span class="org-block"><span class="string">'pwd='</span></span><span class="org-block">, os.getcwd(), </span><span class="org-block"><span class="string">' src-dir='</span></span><span class="org-block">, src_dir)
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Run sphinx by calling the main method, '--full' also adds a
 </span></span><span class="org-block">        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">conf.py
 </span></span><span class="org-block">        sphinx.apidoc.main(
@@ -2818,6 +2938,8 @@ This final block passes all the relevant package information to <span class="org
         long_description=read(</span><span class="org-block"><span class="string">"README.rst"</span></span><span class="org-block">),
         packages=PACKAGES,
         package_dir={</span><span class="org-block"><span class="string">""</span></span><span class="org-block">: </span><span class="org-block"><span class="string">"src"</span></span><span class="org-block">},
+        package_data={PACKAGES[0]: [</span><span class="org-block"><span class="string">'templates/*.puml'</span></span><span class="org-block">]},
+        include_package_data=</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">,
         zip_safe=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">,
         classifiers=CLASSIFIERS,
         install_requires=INSTALL_REQUIRES,

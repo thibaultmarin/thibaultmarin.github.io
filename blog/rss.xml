@@ -14,9 +14,9 @@
 	<link>/blog/index.html</link>
 	<description><![CDATA[]]></description>
 	<language>en</language>
-	<pubDate>Sun, 19 Aug 2018 18:10:33 -0500</pubDate>
-	<lastBuildDate>Sun, 19 Aug 2018 18:10:33 -0500</lastBuildDate>
-	<generator>Emacs 25.2 Org-mode 9.1.13</generator>
+	<pubDate>Sat, 29 Sep 2018 15:33:55 -0500</pubDate>
+	<lastBuildDate>Sat, 29 Sep 2018 15:33:55 -0500</lastBuildDate>
+	<generator>Emacs 25.2 Org-mode 9.1.14</generator>
 	<webMaster>t (nil)</webMaster>
 	<image>
 		<url>https://orgmode.org/img/org-mode-unicorn-logo.png</url>
@@ -30,7 +30,7 @@
 			<ul>
 				<li><a href="#org62064b4">Personal wiki in org</a>
 				<ul>
-					<li><a href="#org13ade06">Introduction</a></li>
+					<li><a href="#org0c16704">Introduction</a></li>
 				</ul>
 				</li>
 				<li><a href="#org35bc9e1">hpp2plantuml - Convert C++ header files to PlantUML</a>
@@ -40,12 +40,12 @@
 				</li>
 				<li><a href="#org288365c">Personal website in org</a>
 				<ul>
-					<li><a href="#orgcbc1034">Introduction</a></li>
+					<li><a href="#org2c32f5a">Introduction</a></li>
 				</ul>
 				</li>
 				<li><a href="#orgc498e7a">Awesome-wm configuration</a>
 				<ul>
-					<li><a href="#org71bcf02">Introduction </a></li>
+					<li><a href="#org8df0f2a">Introduction </a></li>
 				</ul>
 				</li>
 			</ul>
@@ -59,9 +59,9 @@
 		<guid isPermaLink="false">2017-08-15-Personal_wiki_in_org.org</guid>
 		<pubDate>Tue, 15 Aug 2017 00:00:00 -0500</pubDate>
 
-		<description><![CDATA[<div id="outline-container-org13ade06" class="outline-3">
-		<h3 id="org13ade06">Introduction</h3>
-		<div class="outline-text-3" id="text-org13ade06">
+		<description><![CDATA[<div id="outline-container-org0c16704" class="outline-3">
+		<h3 id="org0c16704">Introduction</h3>
+		<div class="outline-text-3" id="text-org0c16704">
 		<p>
 		This post describes the setup to generate a personal wiki in org.  It elaborates
 		on this <a href="2016-11-13-Personal_website_in_org.html">previous post</a> describing the generation of this website.  Generally, the
@@ -143,9 +143,9 @@
 		<guid isPermaLink="false">2016-11-13-Personal_website_in_org.org</guid>
 		<pubDate>Sun, 13 Nov 2016 00:00:00 -0600</pubDate>
 
-		<description><![CDATA[<div id="outline-container-orgcbc1034" class="outline-3">
-		<h3 id="orgcbc1034">Introduction</h3>
-		<div class="outline-text-3" id="text-orgcbc1034">
+		<description><![CDATA[<div id="outline-container-org2c32f5a" class="outline-3">
+		<h3 id="org2c32f5a">Introduction</h3>
+		<div class="outline-text-3" id="text-org2c32f5a">
 		<p>
 		This post describes the configuration for this website, which is statically
 		generated using emacs and org-mode.  Org-mode's publishing functionality is used
@@ -253,9 +253,9 @@
 	<guid isPermaLink="false">2016-10-05-Awesome-wm_configuration.org</guid>
 	<pubDate>Wed, 05 Oct 2016 00:00:00 -0500</pubDate>
 
-	<description><![CDATA[<div id="outline-container-org71bcf02" class="outline-3">
-	<h3 id="org71bcf02">Introduction </h3>
-	<div class="outline-text-3" id="text-org71bcf02">
+	<description><![CDATA[<div id="outline-container-org8df0f2a" class="outline-3">
+	<h3 id="org8df0f2a">Introduction </h3>
+	<div class="outline-text-3" id="text-org8df0f2a">
 	<p>
 	This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
 	documentation of the different modules developed and used. The actual
@@ -315,8 +315,8 @@
 	Release:	9.0
 	Codename:	stretch
 	Linux dell-desktop 4.9.0-1-amd64 #1 SMP Debian 4.9.2-2 (2017-01-12) x86_64 GNU/Linux
-
 	</pre>
+
 
 	<dl class="org-dl">
 	<dt>awesome</dt><dd></dd>
@@ -333,8 +333,8 @@
 	• execinfo support: ✔
 	• RandR 1.5 support: ✔
 	• LGI version: 0.9.1
-
 	</pre>
+
 
 	<dl class="org-dl">
 	<dt>emacs</dt><dd></dd>
@@ -347,8 +347,8 @@
 	<pre class="example">
 	"GNU Emacs 25.1.1 (x86_64-pc-linux-gnu, GTK+ Version 3.22.5)
 	of 2016-12-31, modified by Debian"
-
 	</pre>
+
 
 	<dl class="org-dl">
 	<dt>org-mode</dt><dd></dd>
@@ -360,8 +360,8 @@
 
 	<pre class="example">
 	"Org mode version 9.0.4 (release_9.0.4-270-ga10ddb @ ... )"
-
 	</pre>
+
 
 	<p>
 	Most of the code in this configuration comes from the default <code>rc.lua</code> delivered

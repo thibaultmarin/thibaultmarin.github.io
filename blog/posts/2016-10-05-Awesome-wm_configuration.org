@@ -1,4 +1,4 @@
-# Created 2018-08-19 Sun 18:10
+# Created 2018-09-29 Sat 15:33
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016-10-05
@@ -65,6 +65,7 @@ uname -a
 : Codename:	stretch
 : Linux dell-desktop 4.9.0-1-amd64 #1 SMP Debian 4.9.2-2 (2017-01-12) x86_64 GNU/Linux
 
+
 - awesome :: 
 #+name: sh-awesome-wm-version
 #+begin_src sh
@@ -79,6 +80,7 @@ awesome --version
 :  • RandR 1.5 support: ✔
 :  • LGI version: 0.9.1
 
+
 - emacs :: 
 #+name: el-emacs-version
 #+begin_src emacs-lisp
@@ -89,6 +91,7 @@ awesome --version
 : "GNU Emacs 25.1.1 (x86_64-pc-linux-gnu, GTK+ Version 3.22.5)
 :  of 2016-12-31, modified by Debian"
 
+
 - org-mode :: 
 #+name: el-org-version
 #+begin_src emacs-lisp
@@ -97,6 +100,7 @@ awesome --version
 
 #+results: el-org-version
 : "Org mode version 9.0.4 (release_9.0.4-270-ga10ddb @ ... )"
+
 
 Most of the code in this configuration comes from the default =rc.lua= delivered
 with awesome-wm.  On my system, it is located under =/etc/xdg/awesome/rc.lua=.
