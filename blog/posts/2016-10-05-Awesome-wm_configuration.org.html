@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<!-- Created by htmlize-1.54 in css mode. -->
+<!-- Created by htmlize-1.55 in css mode. -->
 <html>
   <head>
     <title>2016-10-05-Awesome-wm_configuration.org</title>
@@ -246,7 +246,7 @@ rm desktop.png -rf
 
 This configuration is currently used on the following system:
 
-- <span class="org-list-dt">OS ::</span> 
+- <span class="org-list-dt">OS ::</span>
 <span class="org-meta-line">#+name: sh-debian-version</span>
 <span class="org-block-begin-line">#+begin_src sh :results verbatim :exports both :tangle no
 </span><span class="org-block">lsb_release -a
@@ -254,13 +254,13 @@ uname -a
 </span><span class="org-block-end-line">#+end_src
 </span>
 <span class="org-meta-line">#+results: sh-debian-version</span>
-<span class="org-code">: Distributor ID:   Debian
+<span class="org-code">: Distributor ID:       Debian
 : Description:  Debian GNU/Linux 9.0 (stretch)
-: Release:  9.0
-: Codename: stretch
+: Release:      9.0
+: Codename:     stretch
 : Linux dell-desktop 4.9.0-1-amd64 #1 SMP Debian 4.9.2-2 (2017-01-12) x86_64 GNU/Linux
 </span>
-- <span class="org-list-dt">awesome ::</span> 
+- <span class="org-list-dt">awesome ::</span>
 <span class="org-meta-line">#+name: sh-awesome-wm-version</span>
 <span class="org-block-begin-line">#+begin_src sh :results verbatim :exports both :tangle no
 </span><span class="org-block">awesome --version
@@ -274,7 +274,7 @@ uname -a
 :  &#8226; RandR 1.5 support: &#10004;
 :  &#8226; LGI version: 0.9.1
 </span>
-- <span class="org-list-dt">emacs ::</span> 
+- <span class="org-list-dt">emacs ::</span>
 <span class="org-meta-line">#+name: el-emacs-version</span>
 <span class="org-block-begin-line">#+begin_src emacs-lisp :results verbatim :exports both :tangle no
 </span><span class="org-block">(emacs-version)
@@ -284,7 +284,7 @@ uname -a
 <span class="org-code">: "GNU Emacs 25.1.1 (x86_64-pc-linux-gnu, GTK+ Version 3.22.5)
 :  of 2016-12-31, modified by Debian"
 </span>
-- <span class="org-list-dt">org-mode ::</span> 
+- <span class="org-list-dt">org-mode ::</span>
 <span class="org-meta-line">#+name: el-org-version</span>
 <span class="org-block-begin-line">#+begin_src emacs-lisp :results verbatim :exports both :tangle no
 </span><span class="org-block">(replace-regexp-in-string </span><span class="org-block"><span class="string">"@.*)"</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"@ ... )"</span></span><span class="org-block"> (org-version nil t))
@@ -452,16 +452,16 @@ highlighting.
 </span></span><span class="org-block"><span class="variable-name">RM</span></span><span class="org-block"> = rm -rf
 
 </span><span class="org-block"><span class="makefile-targets">all</span></span><span class="org-block">:
-    $(</span><span class="org-block"><span class="variable-name">emacs_batch</span></span><span class="org-block">) --funcall org-babel-tangle --kill
+        $(</span><span class="org-block"><span class="variable-name">emacs_batch</span></span><span class="org-block">) --funcall org-babel-tangle --kill
 
 </span><span class="org-block"><span class="makefile-targets">doc-html</span></span><span class="org-block">:
-    $(</span><span class="org-block"><span class="variable-name">emacs</span></span><span class="org-block">) --funcall org-html-export-to-html --kill
+        $(</span><span class="org-block"><span class="variable-name">emacs</span></span><span class="org-block">) --funcall org-html-export-to-html --kill
 
 </span><span class="org-block"><span class="makefile-targets">doc-pdf</span></span><span class="org-block">:
-    $(</span><span class="org-block"><span class="variable-name">emacs</span></span><span class="org-block">) --funcall org-latex-export-to-pdf --kill
+        $(</span><span class="org-block"><span class="variable-name">emacs</span></span><span class="org-block">) --funcall org-latex-export-to-pdf --kill
 
 </span><span class="org-block"><span class="makefile-targets">clean</span></span><span class="org-block">:
-    $(</span><span class="org-block"><span class="variable-name">RM</span></span><span class="org-block">) $(</span><span class="org-block"><span class="variable-name">input</span></span><span class="org-block">).{html,tex,log,aux,dvi,pdf,ps,out,toc}
+        $(</span><span class="org-block"><span class="variable-name">RM</span></span><span class="org-block">) $(</span><span class="org-block"><span class="variable-name">input</span></span><span class="org-block">).{html,tex,log,aux,dvi,pdf,ps,out,toc}
 </span><span class="org-block-end-line">#+end_src
 </span>
 
@@ -1526,42 +1526,42 @@ The volume widget relies on a bash script to control the volume (using the
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">kills an existing osd_cat process
 </span></span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">needed when holding down a key to force repaint of the onscreen message
 </span></span><span class="org-block"><span class="function-name">preKill</span></span><span class="org-block">() {
-    killall aosd_cat
+        killall aosd_cat
 }
 
 </span><span class="org-block"><span class="function-name">isMute</span></span><span class="org-block">() {
-    </span><span class="org-block"><span class="variable-name">VOLMUTE</span></span><span class="org-block">=</span><span class="org-block"><span class="string">"$(</span></span><span class="org-block"><span class="sh-quoted-exec">amixer</span></span><span class="org-block"><span class="string"> sget Master,0 | grep "Front Left:" | awk '{print $6}')"</span></span><span class="org-block">
+        </span><span class="org-block"><span class="variable-name">VOLMUTE</span></span><span class="org-block">=</span><span class="org-block"><span class="string">"$(</span></span><span class="org-block"><span class="sh-quoted-exec">amixer</span></span><span class="org-block"><span class="string"> sget Master,0 | grep "Front Left:" | awk '{print $6}')"</span></span><span class="org-block">
 }
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">gets the actual volume value
 </span></span><span class="org-block"><span class="function-name">getVol</span></span><span class="org-block">() {
-    </span><span class="org-block"><span class="variable-name">VOL</span></span><span class="org-block">=</span><span class="org-block"><span class="string">"$(</span></span><span class="org-block"><span class="sh-quoted-exec">amixer</span></span><span class="org-block"><span class="string"> sget Master,0 | grep "Front Left:"|
-     awk '{print $5}'|sed -r 's/[][]//g')"</span></span><span class="org-block">
+        </span><span class="org-block"><span class="variable-name">VOL</span></span><span class="org-block">=</span><span class="org-block"><span class="string">"$(</span></span><span class="org-block"><span class="sh-quoted-exec">amixer</span></span><span class="org-block"><span class="string"> sget Master,0 | grep "Front Left:"|
+         awk '{print $5}'|sed -r 's/[][]//g')"</span></span><span class="org-block">
 }
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">gets the actual volume value and prints is on the screen
 </span></span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">with a percent bar + a percent number
 </span></span><span class="org-block"><span class="function-name">showVol</span></span><span class="org-block">() {
-    getVol
-    </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> $</span><span class="org-block"><span class="variable-name">VOL</span></span><span class="org-block"> |  aosd_cat -p 1 --fore-color=green --shadow-color=</span><span class="org-block"><span class="string">\#</span></span><span class="org-block">006633 </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
-                          --font=</span><span class="org-block"><span class="string">"Droid Sans Mono 32"</span></span><span class="org-block"> </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
-                          --x-offset=50 --y-offset=-0 --transparency=2 </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
-                          --fade-in=0 --fade-out=0 --fade-full=1000
+        getVol
+        </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> $</span><span class="org-block"><span class="variable-name">VOL</span></span><span class="org-block"> |  aosd_cat -p 1 --fore-color=green --shadow-color=</span><span class="org-block"><span class="string">\#</span></span><span class="org-block">006633 </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
+                                                  --font=</span><span class="org-block"><span class="string">"Droid Sans Mono 32"</span></span><span class="org-block"> </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
+                                                  --x-offset=50 --y-offset=-0 --transparency=2 </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
+                                                  --fade-in=0 --fade-out=0 --fade-full=1000
 }
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">reises the master channel by "VOLSTEP"
 </span></span><span class="org-block"><span class="function-name">volUp</span></span><span class="org-block">() {
-    amixer sset Master,0 </span><span class="org-block"><span class="string">"$VOLSTEP+"</span></span><span class="org-block">
+        amixer sset Master,0 </span><span class="org-block"><span class="string">"$VOLSTEP+"</span></span><span class="org-block">
 }
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">decreases the master channel by "VOLSTEP"
 </span></span><span class="org-block"><span class="function-name">volDown</span></span><span class="org-block">() {
-    amixer sset Master,0 </span><span class="org-block"><span class="string">"$VOLSTEP-"</span></span><span class="org-block">
+        amixer sset Master,0 </span><span class="org-block"><span class="string">"$VOLSTEP-"</span></span><span class="org-block">
 }
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">mutes the master channel
 </span></span><span class="org-block"><span class="function-name">volMute</span></span><span class="org-block">() {
-    amixer sset Master,0 toggle
+        amixer sset Master,0 toggle
 }
 
 
@@ -1569,25 +1569,25 @@ The volume widget relies on a bash script to control the volume (using the
 </span></span><span class="org-block">preKill
 
 </span><span class="org-block"><span class="keyword">case</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"$1"</span></span><span class="org-block"><span class="keyword"> in</span></span><span class="org-block">
-    </span><span class="org-block"><span class="string">"volup"</span></span><span class="org-block">)
-        volUp
-        showVol
-        ;;
-    </span><span class="org-block"><span class="string">"voldown"</span></span><span class="org-block">)
-        volDown
-        showVol
-        ;;
-    </span><span class="org-block"><span class="string">"mute"</span></span><span class="org-block">)
-        volMute
-        showVol
-        ;;
-    </span><span class="org-block"><span class="string">"get"</span></span><span class="org-block">)
-        getVol
+        </span><span class="org-block"><span class="string">"volup"</span></span><span class="org-block">)
+                volUp
+                showVol
+                ;;
+        </span><span class="org-block"><span class="string">"voldown"</span></span><span class="org-block">)
+                volDown
+                showVol
+                ;;
+        </span><span class="org-block"><span class="string">"mute"</span></span><span class="org-block">)
+                volMute
+                showVol
+                ;;
+        </span><span class="org-block"><span class="string">"get"</span></span><span class="org-block">)
+                getVol
         isMute
         </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"$VOL $VOLMUTE"</span></span><span class="org-block">
-        ;;
-    ,*)
-        ;;
+                ;;
+        ,*)
+                ;;
 </span><span class="org-block"><span class="keyword">esac</span></span><span class="org-block">
 </span><span class="org-block-end-line">#+end_src
 </span>
@@ -3791,8 +3791,8 @@ script reads the line preceding the first empty line.
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Type or copy to clipboard
 </span></span><span class="org-block"><span class="variable-name">typeit</span></span><span class="org-block">=0
 </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> <a href=" $1 == &quot;--type&quot; ">[[ $</a></span><span class="org-block"><span class="variable-name"><a href=" $1 == &quot;--type&quot; ">1</a></span></span><span class="org-block"><a href=" $1 == &quot;--type&quot; "> == </a></span><span class="org-block"><span class="string"><a href=" $1 == &quot;--type&quot; ">"--type"</a></span></span><span class="org-block"><a href=" $1 == &quot;--type&quot; "> ]]</a>; </span><span class="org-block"><span class="keyword">then</span></span><span class="org-block">
-    </span><span class="org-block"><span class="variable-name">typeit</span></span><span class="org-block">=1
-    </span><span class="org-block"><span class="builtin">shift</span></span><span class="org-block">
+        </span><span class="org-block"><span class="variable-name">typeit</span></span><span class="org-block">=1
+        </span><span class="org-block"><span class="builtin">shift</span></span><span class="org-block">
 </span><span class="org-block"><span class="keyword">fi</span></span><span class="org-block">
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Build list of passwords for dmenu
@@ -3803,9 +3803,9 @@ script reads the line preceding the first empty line.
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Read password name from command line if used in debug mode
 </span></span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> <a href=" &quot;$flag_debug&quot; = true ">[[ </a></span><span class="org-block"><span class="string"><a href=" &quot;$flag_debug&quot; = true ">"$flag_debug"</a></span></span><span class="org-block"><a href=" &quot;$flag_debug&quot; = true "> = true ]]</a>; </span><span class="org-block"><span class="keyword">then</span></span><span class="org-block">
-    </span><span class="org-block"><span class="variable-name">password</span></span><span class="org-block">=$</span><span class="org-block"><span class="variable-name">1</span></span><span class="org-block">
+        </span><span class="org-block"><span class="variable-name">password</span></span><span class="org-block">=$</span><span class="org-block"><span class="variable-name">1</span></span><span class="org-block">
 </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">
-    </span><span class="org-block"><span class="variable-name">password</span></span><span class="org-block">=$(</span><span class="org-block"><span class="sh-quoted-exec">printf</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'%s\n'</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"${password_files[@]}"</span></span><span class="org-block"> | dmenu </span><span class="org-block"><span class="string">"$@"</span></span><span class="org-block">)
+        </span><span class="org-block"><span class="variable-name">password</span></span><span class="org-block">=$(</span><span class="org-block"><span class="sh-quoted-exec">printf</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'%s\n'</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"${password_files[@]}"</span></span><span class="org-block"> | dmenu </span><span class="org-block"><span class="string">"$@"</span></span><span class="org-block">)
 </span><span class="org-block"><span class="keyword">fi</span></span><span class="org-block">
 
 <a href=" -n $password ">[[ -n $</a></span><span class="org-block"><span class="variable-name"><a href=" -n $password ">password</a></span></span><span class="org-block"><a href=" -n $password "> ]]</a> || </span><span class="org-block"><span class="keyword">exit</span></span><span class="org-block">
@@ -3818,13 +3818,13 @@ script reads the line preceding the first empty line.
 
 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Print, type or store password
 </span></span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> <a href=" &quot;$flag_debug&quot; = true ">[[ </a></span><span class="org-block"><span class="string"><a href=" &quot;$flag_debug&quot; = true ">"$flag_debug"</a></span></span><span class="org-block"><a href=" &quot;$flag_debug&quot; = true "> = true ]]</a>; </span><span class="org-block"><span class="keyword">then</span></span><span class="org-block">
-    </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"type=$typeit, $pass"</span></span><span class="org-block">
+        </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> </span><span class="org-block"><span class="string">"type=$typeit, $pass"</span></span><span class="org-block">
 </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">
-    </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> <a href=" $typeit -eq 0 ">[[ $</a></span><span class="org-block"><span class="variable-name"><a href=" $typeit -eq 0 ">typeit</a></span></span><span class="org-block"><a href=" $typeit -eq 0 "> -eq 0 ]]</a>; </span><span class="org-block"><span class="keyword">then</span></span><span class="org-block">
-        </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> $</span><span class="org-block"><span class="variable-name">pass</span></span><span class="org-block"> | xclip -selection c
-    </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">
-        </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> $</span><span class="org-block"><span class="variable-name">pass</span></span><span class="org-block"> | xdotool type --clearmodifiers --file -
-    </span><span class="org-block"><span class="keyword">fi</span></span><span class="org-block">
+        </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> <a href=" $typeit -eq 0 ">[[ $</a></span><span class="org-block"><span class="variable-name"><a href=" $typeit -eq 0 ">typeit</a></span></span><span class="org-block"><a href=" $typeit -eq 0 "> -eq 0 ]]</a>; </span><span class="org-block"><span class="keyword">then</span></span><span class="org-block">
+                </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> $</span><span class="org-block"><span class="variable-name">pass</span></span><span class="org-block"> | xclip -selection c
+        </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">
+                </span><span class="org-block"><span class="builtin">echo</span></span><span class="org-block"> $</span><span class="org-block"><span class="variable-name">pass</span></span><span class="org-block"> | xdotool type --clearmodifiers --file -
+        </span><span class="org-block"><span class="keyword">fi</span></span><span class="org-block">
 </span><span class="org-block"><span class="keyword">fi</span></span><span class="org-block">
 </span><span class="org-block-end-line">#+end_src
 </span>
@@ -5159,11 +5159,11 @@ changed according to the monitor setup):
 </span></span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Setup screens
 </span></span><span class="org-block">xrandr --setprovideroutputsource 1 0
 xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
-       --output DP-1 --off </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
-       --output VGA-1 --off </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
-       --output VGA-1-2  --mode 1600x900 --pos 3840x0 --rotate normal </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
-       --output HDMI-1-2 --mode 1920x1080 --pos 1920x0 --rotate normal </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
-       --output DVI-I-1-1 --off
+           --output DP-1 --off </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
+           --output VGA-1 --off </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
+           --output VGA-1-2  --mode 1600x900 --pos 3840x0 --rotate normal </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
+           --output HDMI-1-2 --mode 1920x1080 --pos 1920x0 --rotate normal </span><span class="org-block"><span class="sh-escaped-newline">\</span></span><span class="org-block">
+           --output DVI-I-1-1 --off
 </span><span class="org-block-end-line">#+end_src
 </span>
 

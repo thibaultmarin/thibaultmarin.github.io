@@ -14,9 +14,9 @@
 	<link>/blog/index.html</link>
 	<description><![CDATA[]]></description>
 	<language>en</language>
-	<pubDate>Sat, 29 Sep 2018 15:33:55 -0500</pubDate>
-	<lastBuildDate>Sat, 29 Sep 2018 15:33:55 -0500</lastBuildDate>
-	<generator>Emacs 25.2 Org-mode 9.1.14</generator>
+	<pubDate>Sat, 26 Oct 2019 20:06:31 -0400</pubDate>
+	<lastBuildDate>Sat, 26 Oct 2019 20:06:31 -0400</lastBuildDate>
+	<generator>Emacs 26.1 Org-mode 9.1.14</generator>
 	<webMaster>t (nil)</webMaster>
 	<image>
 		<url>https://orgmode.org/img/org-mode-unicorn-logo.png</url>
@@ -28,24 +28,24 @@
 		<h2>Table of Contents</h2>
 		<div id="text-table-of-contents">
 			<ul>
-				<li><a href="#org62064b4">Personal wiki in org</a>
+				<li><a href="#org7b716bc">Personal wiki in org</a>
 				<ul>
-					<li><a href="#org0c16704">Introduction</a></li>
+					<li><a href="#org3c154d7">Introduction</a></li>
 				</ul>
 				</li>
-				<li><a href="#org35bc9e1">hpp2plantuml - Convert C++ header files to PlantUML</a>
+				<li><a href="#orge8e8fdd">hpp2plantuml - Convert C++ header files to PlantUML</a>
 				<ul>
 					<li><a href="#sec-intro">Motivation</a></li>
 				</ul>
 				</li>
-				<li><a href="#org288365c">Personal website in org</a>
+				<li><a href="#org0dfece9">Personal website in org</a>
 				<ul>
-					<li><a href="#org2c32f5a">Introduction</a></li>
+					<li><a href="#org5ad3a66">Introduction</a></li>
 				</ul>
 				</li>
-				<li><a href="#orgc498e7a">Awesome-wm configuration</a>
+				<li><a href="#org996d804">Awesome-wm configuration</a>
 				<ul>
-					<li><a href="#org8df0f2a">Introduction </a></li>
+					<li><a href="#orgbff4743">Introduction </a></li>
 				</ul>
 				</li>
 			</ul>
@@ -57,11 +57,11 @@
 		<link>/blog/index.html/../posts/2017-08-15-Personal_wiki_in_org.html</link>
 		<author>t (nil)</author>
 		<guid isPermaLink="false">2017-08-15-Personal_wiki_in_org.org</guid>
-		<pubDate>Tue, 15 Aug 2017 00:00:00 -0500</pubDate>
+		<pubDate>Tue, 15 Aug 2017 00:00:00 -0400</pubDate>
 
-		<description><![CDATA[<div id="outline-container-org0c16704" class="outline-3">
-		<h3 id="org0c16704">Introduction</h3>
-		<div class="outline-text-3" id="text-org0c16704">
+		<description><![CDATA[<div id="outline-container-org3c154d7" class="outline-3">
+		<h3 id="org3c154d7">Introduction</h3>
+		<div class="outline-text-3" id="text-org3c154d7">
 		<p>
 		This post describes the setup to generate a personal wiki in org.  It elaborates
 		on this <a href="2016-11-13-Personal_website_in_org.html">previous post</a> describing the generation of this website.  Generally, the
@@ -94,9 +94,9 @@
 		<link>/blog/index.html/../posts/2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.html</link>
 		<author>t (nil)</author>
 		<guid isPermaLink="false">2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.org</guid>
-		<pubDate>Wed, 30 Nov 2016 00:00:00 -0600</pubDate>
+		<pubDate>Wed, 30 Nov 2016 00:00:00 -0500</pubDate>
 
-		<description><![CDATA[<div id="outline-container-orgad486e1" class="outline-3">
+		<description><![CDATA[<div id="outline-container-org7e797bd" class="outline-3">
 		<h3 id="sec-intro">Motivation</h3>
 		<div class="outline-text-3" id="text-sec-intro">
 		<p>
@@ -119,6 +119,7 @@
 		basic qualifiers (<code>static</code>, abstract),</li>
 		<li>inheritance relationships,</li>
 		<li>aggregation relationships (very basic support).</li>
+		<li>dependency relationships</li>
 		</ul>
 
 		<p>
@@ -141,11 +142,11 @@
 		<link>/blog/index.html/../posts/2016-11-13-Personal_website_in_org.html</link>
 		<author>t (nil)</author>
 		<guid isPermaLink="false">2016-11-13-Personal_website_in_org.org</guid>
-		<pubDate>Sun, 13 Nov 2016 00:00:00 -0600</pubDate>
+		<pubDate>Sun, 13 Nov 2016 00:00:00 -0500</pubDate>
 
-		<description><![CDATA[<div id="outline-container-org2c32f5a" class="outline-3">
-		<h3 id="org2c32f5a">Introduction</h3>
-		<div class="outline-text-3" id="text-org2c32f5a">
+		<description><![CDATA[<div id="outline-container-org5ad3a66" class="outline-3">
+		<h3 id="org5ad3a66">Introduction</h3>
+		<div class="outline-text-3" id="text-org5ad3a66">
 		<p>
 		This post describes the configuration for this website, which is statically
 		generated using emacs and org-mode.  Org-mode's publishing functionality is used
@@ -175,7 +176,7 @@
 		</p>
 
 		<div class="org-src-container">
-		<pre class="src src-sh" id="org3aca044">tree -a org/ -I <span style="color: #8b2252;">"*~"</span>
+		<pre class="src src-sh" id="orgce70f3b">tree -a org/ -I <span style="color: #8b2252;">"*~"</span>
 		</pre>
 		</div>
 
@@ -251,11 +252,11 @@
 	<link>/blog/index.html/../posts/2016-10-05-Awesome-wm_configuration.html</link>
 	<author>t (nil)</author>
 	<guid isPermaLink="false">2016-10-05-Awesome-wm_configuration.org</guid>
-	<pubDate>Wed, 05 Oct 2016 00:00:00 -0500</pubDate>
+	<pubDate>Wed, 05 Oct 2016 00:00:00 -0400</pubDate>
 
-	<description><![CDATA[<div id="outline-container-org8df0f2a" class="outline-3">
-	<h3 id="org8df0f2a">Introduction </h3>
-	<div class="outline-text-3" id="text-org8df0f2a">
+	<description><![CDATA[<div id="outline-container-orgbff4743" class="outline-3">
+	<h3 id="orgbff4743">Introduction </h3>
+	<div class="outline-text-3" id="text-orgbff4743">
 	<p>
 	This file contains my configuration for the <a href="https://awesome.naquadah.org/">awesome</a> window manager along with
 	documentation of the different modules developed and used. The actual
@@ -264,13 +265,13 @@
 	</p>
 
 	<p>
-	The resulting desktop is shown on Fig.&nbsp;<a href="#orgb690de8">1</a>.  The following
+	The resulting desktop is shown on Fig.&nbsp;<a href="#orgb72991e">1</a>.  The following
 	bash script produces the image.  The most interesting part is the top wibox,
 	which is shown enlarged on Fig.&nbsp;.
 	</p>
 
 	<div class="org-src-container">
-	<pre class="src src-sh" id="org257ae27">
+	<pre class="src src-sh" id="orgaa47ef2">
 	<span style="color: #b22222;"># </span><span style="color: #b22222;">Could get these from xrandr</span>
 	<span style="color: #a0522d;">res_x</span>=1920
 	<span style="color: #a0522d;">res_y</span>=1080
@@ -289,7 +290,7 @@
 
 
 
-	<div id="orgb690de8" class="figure">
+	<div id="orgb72991e" class="figure">
 	<p><a href="../images/2016-10-05-Awesome-wm_configuration/desktop-main.png" width="100%"><img src="../images/2016-10-05-Awesome-wm_configuration/desktop-main.png" alt="desktop-main.png" width="100%" /></a>
 	</p>
 	<p><span class="figure-number">Figure 1: </span>My awesome-wm desktop.</p>
@@ -304,7 +305,7 @@
 	<dt>OS</dt><dd></dd>
 	</dl>
 	<div class="org-src-container">
-	<pre class="src src-sh" id="org6f0a31c">lsb_release -a
+	<pre class="src src-sh" id="org8005991">lsb_release -a
 	uname -a
 	</pre>
 	</div>
@@ -322,7 +323,7 @@
 	<dt>awesome</dt><dd></dd>
 	</dl>
 	<div class="org-src-container">
-	<pre class="src src-sh" id="org2c325eb">awesome --version
+	<pre class="src src-sh" id="org9b54d0d">awesome --version
 	</pre>
 	</div>
 
@@ -340,7 +341,7 @@
 	<dt>emacs</dt><dd></dd>
 	</dl>
 	<div class="org-src-container">
-	<pre class="src src-emacs-lisp" id="orgcdf0814">(emacs-version)
+	<pre class="src src-emacs-lisp" id="orga1f35fc">(emacs-version)
 	</pre>
 	</div>
 
@@ -354,7 +355,7 @@
 	<dt>org-mode</dt><dd></dd>
 	</dl>
 	<div class="org-src-container">
-	<pre class="src src-emacs-lisp" id="org40c6986">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
+	<pre class="src src-emacs-lisp" id="orgca264d3">(replace-regexp-in-string <span style="color: #8b2252;">"@.*)"</span> <span style="color: #8b2252;">"@ ... )"</span> (org-version nil t))
 	</pre>
 	</div>
 
@@ -378,7 +379,7 @@
 	</p>
 
 	<div class="org-src-container">
-	<pre class="src src-org" id="org5632e95"><span style="color: #a0522d;">** Disabled heading</span>
+	<pre class="src src-org" id="orgc1443ff"><span style="color: #a0522d;">** Disabled heading</span>
 	<span style="color: #a020f0;">   :PROPERTIES:</span>
 	<span style="color: #a020f0;">:header-args+:</span> :tangle no
 	<span style="color: #a020f0;">   :END:</span>

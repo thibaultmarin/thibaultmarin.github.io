@@ -1,4 +1,4 @@
-# Created 2018-09-29 Sat 15:33
+# Created 2019-10-26 Sat 20:06
 #+OPTIONS: ^:t H:4
 #+TITLE: Awesome-wm configuration
 #+DATE: 2016-10-05
@@ -14,7 +14,7 @@
 #+startup: hideblocks
 #+macro: tt \nbsp{}
 
-* Introduction 
+* Introduction
 
 This file contains my configuration for the [[https://awesome.naquadah.org/][awesome]] window manager along with
 documentation of the different modules developed and used. The actual
@@ -51,7 +51,7 @@ rm desktop.png -rf
 
 This configuration is currently used on the following system:
 
-- OS :: 
+- OS ::
 #+name: sh-debian-version
 #+begin_src sh
 lsb_release -a
@@ -66,7 +66,7 @@ uname -a
 : Linux dell-desktop 4.9.0-1-amd64 #1 SMP Debian 4.9.2-2 (2017-01-12) x86_64 GNU/Linux
 
 
-- awesome :: 
+- awesome ::
 #+name: sh-awesome-wm-version
 #+begin_src sh
 awesome --version
@@ -81,7 +81,7 @@ awesome --version
 :  • LGI version: 0.9.1
 
 
-- emacs :: 
+- emacs ::
 #+name: el-emacs-version
 #+begin_src emacs-lisp
 (emacs-version)
@@ -92,7 +92,7 @@ awesome --version
 :  of 2016-12-31, modified by Debian"
 
 
-- org-mode :: 
+- org-mode ::
 #+name: el-org-version
 #+begin_src emacs-lisp
 (replace-regexp-in-string "@.*)" "@ ... )" (org-version nil t))
@@ -283,7 +283,7 @@ clean:
 #+end_src
 
 
-* Imports 
+* Imports
 
 The first section of the =rc.lua= file contains library imports used throughout
 the file.
@@ -435,7 +435,7 @@ local my_utility = require('my_utility')
 #+end_src
 
 
-* Basic setup 
+* Basic setup
 
 This section contains general settings for the different desktop components:
 search paths, default applications, main key modifiers and some boiler plate
@@ -541,7 +541,7 @@ altkey = "Mod1"
 #+end_src
 
 
-* Desktop 
+* Desktop
 
 This configuration is used with a dual screen system, where the widgets are
 identical on both screens (except for the systray, which can only be added to
@@ -920,7 +920,7 @@ end)
 
 
 
-* Main bar 
+* Main bar
 
 This section is the main part of the configuration, it defines and configures
 the widgets present on the main wibox (Fig.\nbsp{}[[img-desktop]]).
@@ -2424,7 +2424,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 #+end_src
 
 
-* Effects 
+* Effects
 
 This section contains setup of visual effects that can be used with awesome-wm.
 
@@ -2513,7 +2513,7 @@ awful.mouse.snap.edge_enabled = false
 #+end_src
 
 
-* Bindings 
+* Bindings
 
 Bindings include mouse click actions for the different widgets and windows as
 well as keyboard shortcuts.
@@ -2638,7 +2638,7 @@ end))
 Keyboard bindings are split into two categories: global bindings and client
 (windows) bindings.
 
-*** Global bindings 
+*** Global bindings
 
 Keybindings are defined in subsections, and can be individually disabled by
 setting the =tangle= property to =no=.
@@ -3660,7 +3660,7 @@ clientkeys = awful.util.table.join(clientkeys,
 #+end_src
 
 
-* Wibox 
+* Wibox
 The wibox is the top bar shown on Fig.\nbsp{}[[img-desktop-main]].  It is populated
 with widgets previously set up, including the [[#main_menu][main menu]], [[#tags][tag list]], task list and
 the custom [[#cmus][music]] / [[#email][email]] / [[#ttrss][news]] widgets.
@@ -4048,7 +4048,7 @@ return setmetatable(icon_finder, { __call = function(cls, ...)
 #+end_src
 
 
-* Global prompt 
+* Global prompt
 The default awesome-wm configuration provides two prompts: one to execute shell
 commands and one to execute lua code.  The =global_prompt= module is a custom
 module aimed at simplifying the addition of prompts, similar to launchers such
@@ -4758,7 +4758,7 @@ xrandr --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
 #+end_src
 
 
-* Utilities 
+* Utilities
 The =my_utility= module contains some helper functions used throughout the
 configuration.
 

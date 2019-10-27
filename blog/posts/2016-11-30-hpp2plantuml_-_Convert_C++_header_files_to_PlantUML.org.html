@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<!-- Created by htmlize-1.54 in css mode. -->
+<!-- Created by htmlize-1.55 in css mode. -->
 <html>
   <head>
     <title>2016-11-30-hpp2plantuml_-_Convert_C++_header_files_to_PlantUML.org</title>
@@ -35,6 +35,10 @@
         /* font-lock-doc-face */
         color: #8b2252;
       }
+      .flyspell-duplicate {
+        /* flyspell-duplicate */
+        text-decoration: underline;
+      }
       .function-name {
         /* font-lock-function-name-face */
         color: #0000ff;
@@ -66,6 +70,11 @@
       .org-code {
         /* org-code */
         color: #7f7f7f;
+      }
+      .org-date {
+        /* org-date */
+        color: #a020f0;
+        text-decoration: underline;
       }
       .org-document-info {
         /* org-document-info */
@@ -232,7 +241,7 @@ this single org-file.
 
 The current version of the code is:
 <span class="org-meta-line">#+name: hpp2plantuml-version</span>
-<span class="org-code">: 0.5
+<span class="org-code">: 0.6
 </span>
 
 The source code can be found on GitHub:
@@ -244,7 +253,7 @@ The source code can be found on GitHub:
 <span class="org-special-keyword">:END:</span>
 
 The purpose of this tool is to convert C++ header files to a UML representation
-in <span class="org-link"><a href="https://plantuml.com">PlantUML</a></span> syntax that can be used to generate diagrams with PlantUML.
+in <span class="org-link"><a href="https://plantuml.com">PlantUML</a></span> syntax that can be used to generate diagrams with <span class="flyspell-duplicate">PlantUML</span>.
 
 <span class="org-link"><a href="https://plantuml.com">PlantUML</a></span> is a program rendering UML diagrams from plain text inputs using an
 expressive language.
@@ -256,6 +265,7 @@ hierarchies.  It aims at supporting:
   basic qualifiers (<span class="org-code">~static~</span>, abstract),
 - inheritance relationships,
 - aggregation relationships (very basic support).
+- dependency relationships
 
 The package relies on the <span class="org-link"><a href="http://senexcanis.com/open-source/cppheaderparser/">CppHeaderParser</a></span> package for parsing of C++ header
 files.
@@ -384,10 +394,11 @@ of elementary properties and links.
 </span></span><span class="org-block"><span class="variable-name">LINK_TYPE_MAP</span></span><span class="org-block"> = {
     </span><span class="org-block"><span class="string">'inherit'</span></span><span class="org-block">: </span><span class="org-block"><span class="string">'&lt;|--'</span></span><span class="org-block">,
     </span><span class="org-block"><span class="string">'aggregation'</span></span><span class="org-block">: </span><span class="org-block"><span class="string">'o--'</span></span><span class="org-block">,
-    </span><span class="org-block"><span class="string">'composition'</span></span><span class="org-block">: </span><span class="org-block"><span class="string">'*--'</span></span><span class="org-block">
+    </span><span class="org-block"><span class="string">'composition'</span></span><span class="org-block">: </span><span class="org-block"><span class="string">'*--'</span></span><span class="org-block">,
+    </span><span class="org-block"><span class="string">'dependency'</span></span><span class="org-block">: </span><span class="org-block"><span class="string">'&lt;..'</span></span><span class="org-block">
 }
 
-</span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Assiocation between object names and objects
+</span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Association between object names and objects
 </span></span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">- The first element is the object type name in the CppHeader object
 </span></span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">- The second element is the iterator used to loop over objects
 </span></span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">- The third element is a function returning the corresponding internal object
@@ -477,9 +488,9 @@ The <span class="org-code">~Container~</span> class is abstract and contains:
         </span><span class="org-block"><span class="variable-name">namespace</span></span><span class="org-block"> = header_container.get(</span><span class="org-block"><span class="string">'namespace'</span></span><span class="org-block">, </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">)
         </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> namespace:
             </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._namespace = re.sub(</span><span class="org-block"><span class="string">':+$'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">''</span></span><span class="org-block">, namespace)
-        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._do_parsed_members(header_container)
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._do_parse_members(header_container)
 
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_do_parsed_members</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_container):
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_do_parse_members</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_container):
         </span><span class="org-block"><span class="doc">"""Initialize object from header (abstract method)
 
         Extract object from CppHeaderParser dictionary representing a class, a
@@ -646,7 +657,7 @@ which is used to determine aggregation relationships between classes.
                                   </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> parent </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> header_class[1][</span><span class="org-block"><span class="string">'inherits'</span></span><span class="org-block">]]
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.parse_members(header_class[1])
 
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_do_parsed_members</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_class):
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_do_parse_members</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_class):
         </span><span class="org-block"><span class="doc">"""Initialize class object from header
 
         This method extracts class member variables and methods from header.
@@ -976,7 +987,7 @@ the actual values.
 </span></span><span class="org-block">
 
 </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Enum</span></span><span class="org-block">(Container):
-    </span><span class="org-block"><span class="doc">"""Class represnting enum objects
+    </span><span class="org-block"><span class="doc">"""Class representing enum objects
 
     This class defines a simple object inherited from the base `Container`
     class.  It simply lists enumerated values.
@@ -992,7 +1003,7 @@ the actual values.
         </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(</span><span class="org-block"><span class="string">'enum'</span></span><span class="org-block">, header_enum.get(</span><span class="org-block"><span class="string">'name'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'empty'</span></span><span class="org-block">))
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.parse_members(header_enum)
 
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_do_parsed_members</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_enum):
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_do_parse_members</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_enum):
         </span><span class="org-block"><span class="doc">"""Extract enum values from header
 
         Parameters
@@ -1205,12 +1216,15 @@ The inheritance relationship is a straightforward specialization of the base
 </span><span class="org-block-end-line">#+end_src
 </span>
 
-<span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Aggregation</span>
+<span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Aggregation / Composition</span>
 
 The aggregation relationship specializes the base <span class="org-code">~ClassRelationship~</span> class by
-using the "aggregation" link type and adding a <span class="org-code">~count~</span> field used to add a label
-with the number of instances of the parent class in the PlantUML diagram (the
-count is omitted when equal to one).
+using the "aggregation" or "composition" link type and adding a <span class="org-code">~count~</span> field
+used to add a label with the number of instances of the parent class in the
+PlantUML diagram (the count is omitted when equal to one).  The difference
+between aggregation and composition is mainly in the ownership of the member
+variable.  A raw pointer is interpreted as an aggregation relationship while any
+other container is interpreted as a composition relationship.
 
 <span class="org-meta-line">#+name: py-class_aggregation</span>
 <span class="org-block-begin-line">#+begin_src python
@@ -1228,23 +1242,26 @@ count is omitted when equal to one).
     variable type (possibly within a container such as a list) in a class
     definition.
     """</span></span><span class="org-block">
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, c_parent, c_child, c_count=1, **kwargs):
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, c_object, c_container, c_count=1,
+                 rel_type=</span><span class="org-block"><span class="string">'aggregation'</span></span><span class="org-block">, **kwargs):
         </span><span class="org-block"><span class="doc">"""Constructor
 
         Parameters
         ----------
-        c_parent : str
+        c_object : str
             Class corresponding to the type of the member variable in the
             aggregation relationship
-        c_child : str
+        c_container : str
             Child (or client) class of the aggregation relationship
-        c_cout : int
-            The number of members of </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">c_child</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> that are of type (possibly
-            through containers) </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">c_parent</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
+        c_count : int
+            The number of members of </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">c_container</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> that are of type (possibly
+            through containers) </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">c_object</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
+        rel_type : str
+            Relationship type: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">aggregation</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> or </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">composition</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         kwargs : dict
             Additional parameters passed to parent class
         """</span></span><span class="org-block">
-        </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(</span><span class="org-block"><span class="string">'aggregation'</span></span><span class="org-block">, c_parent, c_child, **kwargs)
+        </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(rel_type, c_object, c_container, **kwargs)
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._count = c_count
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_render_link_type</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
@@ -1256,6 +1273,40 @@ count is omitted when equal to one).
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="variable-name">count_str</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">''</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._count == 1 </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'"%d" '</span></span><span class="org-block"> % </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._count
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> count_str + LINK_TYPE_MAP[</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._link_type]
+</span><span class="org-block-end-line">#+end_src
+</span>
+
+<span class="org-level-4">**** </span><span class="org-done">DONE</span><span class="org-level-4"> Dependency</span>
+
+The dependency relationship is not directly extracted from C++ code, but it can
+be manipulated when using the <span class="org-verbatim">=Diagram=</span> object.  In PlantUML, it corresponds to
+the <span class="org-verbatim">=&lt;..=</span> link type (<span class="org-link"><a href="http://plantuml.com/class-diagram">http://plantuml.com/class-diagram</a></span>).
+
+<span class="org-meta-line">#+name: py-class_dependency</span>
+<span class="org-block-begin-line">#+begin_src python
+</span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Class dependency</span></span></span><span class="org-block"><span class="comment">
+</span></span><span class="org-block">
+
+</span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">ClassDependencyRelationship</span></span><span class="org-block">(ClassRelationship):
+    </span><span class="org-block"><span class="doc">"""Dependency relationship
+
+    Dependencies occur when member methods depend on an object of another class
+    in the diagram.
+    """</span></span><span class="org-block">
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, c_parent, c_child, **kwargs):
+        </span><span class="org-block"><span class="doc">"""Constructor
+
+        Parameters
+        ----------
+        c_parent : str
+            Class corresponding to the type of the member variable in the
+            dependency relationship
+        c_child : str
+            Child (or client) class of the dependency relationship
+        kwargs : dict
+            Additional parameters passed to parent class
+        """</span></span><span class="org-block">
+        </span><span class="org-block"><span class="builtin">super</span></span><span class="org-block">().__init__(</span><span class="org-block"><span class="string">'dependency'</span></span><span class="org-block">, c_parent, c_child, **kwargs)
 </span><span class="org-block-end-line">#+end_src
 </span>
 
@@ -1331,7 +1382,7 @@ be used to avoid this sorting step.
 </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Diagram</span></span><span class="org-block">(</span><span class="org-block"><span class="builtin">object</span></span><span class="org-block">):
     </span><span class="org-block"><span class="doc">"""UML diagram object
 
-    This class lists the objects in the set of files considere, and the
+    This class lists the objects in the set of files considered, and the
     relationships between object.
 
     The main interface to the `Diagram` object is via the </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">create_*</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> and
@@ -1342,12 +1393,13 @@ be used to avoid this sorting step.
     Each method has versions for file and string inputs and folder string lists
     and file lists inputs.
     """</span></span><span class="org-block">
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, template_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">):
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">__init__</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, template_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, flag_dep=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Constructor
 
         The `Diagram` class constructor simply initializes object lists.  It
         does not create objects or relationships.
         """</span></span><span class="org-block">
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._flag_dep = flag_dep
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.clear()
         </span><span class="org-block"><span class="variable-name">loader_list</span></span><span class="org-block"> = []
         </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> template_file </span><span class="org-block"><span class="keyword">is</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">:
@@ -1361,10 +1413,11 @@ be used to avoid this sorting step.
             loader_list), keep_trailing_newline=</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">)
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">clear</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
-        </span><span class="org-block"><span class="doc">"""Reinitiliaze object"""</span></span><span class="org-block">
+        </span><span class="org-block"><span class="doc">"""Reinitialize object"""</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects = []
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._inheritance_list = []
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list = []
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._dependency_list = []
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_sort_list</span></span><span class="org-block">(input_list):
         </span><span class="org-block"><span class="doc">"""Sort list using `ClassRelationship` comparison
@@ -1389,6 +1442,7 @@ be used to avoid this sorting step.
             obj.sort_members()
         Diagram._sort_list(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._inheritance_list)
         Diagram._sort_list(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list)
+        Diagram._sort_list(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._dependency_list)
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_build_helper</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, </span><span class="org-block"><span class="builtin">input</span></span><span class="org-block">, build_from=</span><span class="org-block"><span class="string">'string'</span></span><span class="org-block">, flag_build_lists=</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">,
                       flag_reset=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">):
@@ -1513,6 +1567,8 @@ be used to avoid this sorting step.
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.build_inheritance_list()
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.build_aggregation_list()
+        </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._flag_dep:
+            </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">.build_dependency_list()
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">parse_objects</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, header_file, arg_type=</span><span class="org-block"><span class="string">'string'</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Parse objects
@@ -1558,8 +1614,8 @@ be used to avoid this sorting step.
 
         The implementation establishes a list of available classes and loops
         over objects to obtain their inheritance.  When parent classes are in
-        the list of available classes, their a `ClassInheritanceRelationship`
-        object is added to the list.
+        the list of available classes, a `ClassInheritanceRelationship` object
+        is added to the list.
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._inheritance_list = []
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Build list of classes in diagram
@@ -1589,7 +1645,7 @@ be used to avoid this sorting step.
         corresponding to other classes defined in the `Diagram` object (keeping
         a count of occurrences).
 
-        The procedure first build an internal dictionary of relationships
+        The procedure first builds an internal dictionary of relationships
         found, augmenting the count using the </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`_augment_comp`</span></span><span class="org-block"><span class="doc"> function.
         In a second phase, `ClassAggregationRelationship` objects are created
         for each relationships, using the calculated count.
@@ -1616,10 +1672,13 @@ be used to avoid this sorting step.
                 </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> var_type </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> var_types:
                     </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> parent </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> class_list:
                         </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> re.search(r</span><span class="org-block"><span class="string">'\b'</span></span><span class="org-block"> + parent + r</span><span class="org-block"><span class="string">'\b'</span></span><span class="org-block">, var_type):
+                            </span><span class="org-block"><span class="variable-name">rel_type</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">'composition'</span></span><span class="org-block">
+                            </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="string">'{}*'</span></span><span class="org-block">.</span><span class="org-block"><span class="builtin">format</span></span><span class="org-block">(parent) </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> var_type:
+                                </span><span class="org-block"><span class="variable-name">rel_type</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">'aggregation'</span></span><span class="org-block">
                             </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._augment_comp(aggregation_counts, parent,
-                                               child_class)
+                                               child_class, rel_type=rel_type)
         </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> obj_class, obj_comp_list </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> aggregation_counts.items():
-            </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> comp_parent, comp_count </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> obj_comp_list:
+            </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> comp_parent, rel_type, comp_count </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> obj_comp_list:
                 </span><span class="org-block"><span class="variable-name">obj_class_idx</span></span><span class="org-block"> = class_list.index(obj_class)
                 </span><span class="org-block"><span class="variable-name">obj_class_obj</span></span><span class="org-block"> = class_list_obj[obj_class_idx][</span><span class="org-block"><span class="string">'obj'</span></span><span class="org-block">]
                 </span><span class="org-block"><span class="variable-name">comp_parent_idx</span></span><span class="org-block"> = class_list.index(comp_parent)
@@ -1627,9 +1686,58 @@ be used to avoid this sorting step.
                 </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list.append(
                     ClassAggregationRelationship(
                         obj_class_obj, comp_parent_obj, comp_count,
+                        rel_type=rel_type,
                         flag_use_namespace=flag_use_namespace))
 
-    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_augment_comp</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, c_dict, c_parent, c_child):
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">build_dependency_list</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
+        </span><span class="org-block"><span class="doc">"""Build list of dependency between objects
+
+        This method lists all the dependency relationships between objects
+        contained in the `Diagram` object (external relationships are ignored).
+
+        The implementation establishes a list of available classes and loops
+        over objects, list their methods adds a dependency relationship when a
+        method takes an object as input.
+        """</span></span><span class="org-block">
+
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._dependency_list = []
+        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Build list of classes in diagram
+</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">class_list_obj</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._make_class_list()
+        </span><span class="org-block"><span class="variable-name">class_list</span></span><span class="org-block"> = [c[</span><span class="org-block"><span class="string">'name'</span></span><span class="org-block">] </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> c </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> class_list_obj]
+        </span><span class="org-block"><span class="variable-name">flag_use_namespace</span></span><span class="org-block"> = </span><span class="org-block"><span class="builtin">any</span></span><span class="org-block">([c[</span><span class="org-block"><span class="string">'obj'</span></span><span class="org-block">]._namespace </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> c </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> class_list_obj])
+
+        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Create relationships
+</span></span><span class="org-block">
+        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Add all objects name to list
+</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">objects_name</span></span><span class="org-block"> = []
+        </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> obj </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects:
+            objects_name.append(obj.get_name())
+
+        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Dependency
+</span></span><span class="org-block">        </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> obj </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects:
+            </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">isinstance</span></span><span class="org-block">(obj, Class):
+                </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> member </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> obj._member_list:
+                    </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Check if the member is a method
+</span></span><span class="org-block">                    </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">isinstance</span></span><span class="org-block">(member, ClassMethod):
+                        </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> method </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> member._param_list:
+                            </span><span class="org-block"><span class="variable-name">index</span></span><span class="org-block"> = </span><span class="org-block"><span class="type">ValueError</span></span><span class="org-block">
+                            </span><span class="org-block"><span class="keyword">try</span></span><span class="org-block">:
+                                </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Check if the method param type is a Class
+</span></span><span class="org-block">                                </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">type
+</span></span><span class="org-block">                                </span><span class="org-block"><span class="variable-name">index</span></span><span class="org-block"> = [re.search(o, method[0]) </span><span class="org-block"><span class="keyword">is</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">
+                                         </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> o </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> objects_name].index(</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">)
+                            </span><span class="org-block"><span class="keyword">except</span></span><span class="org-block"> </span><span class="org-block"><span class="type">ValueError</span></span><span class="org-block">:
+                                </span><span class="org-block"><span class="keyword">pass</span></span><span class="org-block">
+                            </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> index != </span><span class="org-block"><span class="type">ValueError</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">and</span></span><span class="org-block"> \
+                               method[0] != obj.get_name():
+                                </span><span class="org-block"><span class="variable-name">depend_obj</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects[index]
+
+                                </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._dependency_list.append(
+                                    ClassDependencyRelationship(
+                                        depend_obj, obj,
+                                        flag_use_namespace=flag_use_namespace))
+
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_augment_comp</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, c_dict, c_parent, c_child, rel_type=</span><span class="org-block"><span class="string">'aggregation'</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Increment the aggregation reference count
 
         If the aggregation relationship is not in the list (</span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">c_dict</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">), then
@@ -1645,16 +1753,18 @@ be used to avoid this sorting step.
             Parent class name
         c_child : str
             Child class name
+        rel_type : str
+            Relationship type: </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">aggregation</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc"> or </span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="italic"><span class="bold">composition</span></span></span><span class="org-block"><span class="constant">``</span></span><span class="org-block"><span class="doc">
         """</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> c_child </span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> c_dict:
-            </span><span class="org-block"><span class="variable-name">c_dict</span></span><span class="org-block">[c_child] = [[c_parent, 1], ]
+            </span><span class="org-block"><span class="variable-name">c_dict</span></span><span class="org-block">[c_child] = [[c_parent, rel_type, 1], ]
         </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
-            </span><span class="org-block"><span class="variable-name">parent_list</span></span><span class="org-block"> = [c[0] </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> c </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> c_dict[c_child]]
-            </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> c_parent </span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> parent_list:
-                c_dict[c_child].append([c_parent, 1])
+            </span><span class="org-block"><span class="variable-name">parent_list</span></span><span class="org-block"> = [c[:2] </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> c </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> c_dict[c_child]]
+            </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> [c_parent, rel_type] </span><span class="org-block"><span class="keyword">not</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> parent_list:
+                c_dict[c_child].append([c_parent, rel_type, 1])
             </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
-                </span><span class="org-block"><span class="variable-name">c_idx</span></span><span class="org-block"> = parent_list.index(c_parent)
-                c_dict[c_child][c_idx][1] += 1
+                </span><span class="org-block"><span class="variable-name">c_idx</span></span><span class="org-block"> = parent_list.index([c_parent, rel_type])
+                c_dict[c_child][c_idx][2] += 1
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">render</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
         </span><span class="org-block"><span class="doc">"""Render full UML diagram
@@ -1673,7 +1783,9 @@ be used to avoid this sorting step.
         </span><span class="org-block"><span class="variable-name">template</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._env.get_template(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._template_file)
         </span><span class="org-block"><span class="keyword">return</span></span><span class="org-block"> template.render(objects=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._objects,
                                inheritance_list=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._inheritance_list,
-                               aggregation_list=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list)
+                               aggregation_list=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._aggregation_list,
+                               dependency_list=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._dependency_list,
+                               flag_dep=</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._flag_dep)
 </span><span class="org-block-end-line">#+end_src
 </span>
 
@@ -1822,7 +1934,7 @@ output file.
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Main function</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
 
-</span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">CreatePlantUMLFile</span></span><span class="org-block">(file_list, output_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, template_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">):
+</span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">CreatePlantUMLFile</span></span><span class="org-block">(file_list, output_file=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, **diagram_kwargs):
     </span><span class="org-block"><span class="doc">"""Create PlantUML file from list of header files
 
     This function parses a list of C++ header files and generates a file for
@@ -1835,14 +1947,14 @@ output file.
         </span></span><span class="org-block"><span class="function-name">:func:</span></span><span class="org-block"><span class="constant">`expand_file_list`</span></span><span class="org-block"><span class="doc"> function)
     output_file : str
         Name of the output file
-    template_file : str
-        When not None, the name of the jinja2 template file used for rendering
+    diagram_kwargs : dict
+        Additional parameters passed to </span></span><span class="org-block"><span class="function-name">:class:</span></span><span class="org-block"><span class="constant">`Diagram`</span></span><span class="org-block"><span class="doc"> constructor
     """</span></span><span class="org-block">
     </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">isinstance</span></span><span class="org-block">(file_list, </span><span class="org-block"><span class="builtin">str</span></span><span class="org-block">):
         </span><span class="org-block"><span class="variable-name">file_list_c</span></span><span class="org-block"> = [file_list, ]
     </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
         </span><span class="org-block"><span class="variable-name">file_list_c</span></span><span class="org-block"> = file_list
-    </span><span class="org-block"><span class="variable-name">diag</span></span><span class="org-block"> = Diagram(template_file=template_file)
+    </span><span class="org-block"><span class="variable-name">diag</span></span><span class="org-block"> = Diagram(**diagram_kwargs)
     diag.create_from_file_list(</span><span class="org-block"><span class="builtin">list</span></span><span class="org-block">(</span><span class="org-block"><span class="builtin">set</span></span><span class="org-block">(expand_file_list(file_list_c))))
     </span><span class="org-block"><span class="variable-name">diag_render</span></span><span class="org-block"> = diag.render()
 
@@ -1886,6 +1998,15 @@ default template is as follows:
 {{ link.render() }}
 {% endfor %}
 {% endblock %}
+{% if flag_dep %}
+{% block dependency %}
+
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Dependency relationships </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+{% for link in dependency_list %}
+{{ link.render() }}
+{% endfor %}
+{% endblock %}
+{% endif %}
 
 </span><span class="org-block"><span class="keyword">@enduml</span></span><span class="org-block">
 </span><span class="org-block-end-line">#+end_src
@@ -1929,6 +2050,10 @@ to parse input arguments.  The function passes the command line arguments to the
     parser.add_argument(</span><span class="org-block"><span class="string">'-o'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--output-file'</span></span><span class="org-block">, dest=</span><span class="org-block"><span class="string">'output_file'</span></span><span class="org-block">,
                         required=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">, default=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, metavar=</span><span class="org-block"><span class="string">'FILE'</span></span><span class="org-block">,
                         </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'output file'</span></span><span class="org-block">)
+    parser.add_argument(</span><span class="org-block"><span class="string">'-d'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--enable-dependency'</span></span><span class="org-block">, dest=</span><span class="org-block"><span class="string">'flag_dep'</span></span><span class="org-block">,
+                        required=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">, default=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">, action=</span><span class="org-block"><span class="string">'store_true'</span></span><span class="org-block">,
+                        </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'Extract dependency relationships from method '</span></span><span class="org-block"> +
+                        </span><span class="org-block"><span class="string">'arguments'</span></span><span class="org-block">)
     parser.add_argument(</span><span class="org-block"><span class="string">'-t'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--template-file'</span></span><span class="org-block">, dest=</span><span class="org-block"><span class="string">'template_file'</span></span><span class="org-block">,
                         required=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">, default=</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, metavar=</span><span class="org-block"><span class="string">'JINJA-FILE'</span></span><span class="org-block">,
                         </span><span class="org-block"><span class="builtin">help</span></span><span class="org-block">=</span><span class="org-block"><span class="string">'path to jinja2 template file'</span></span><span class="org-block">)
@@ -1937,7 +2062,8 @@ to parse input arguments.  The function passes the command line arguments to the
     </span><span class="org-block"><span class="variable-name">args</span></span><span class="org-block"> = parser.parse_args()
     </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">len</span></span><span class="org-block">(args.input_files) &gt; 0:
         CreatePlantUMLFile(args.input_files, args.output_file,
-                           template_file=args.template_file)
+                           template_file=args.template_file,
+                           flag_dep=args.flag_dep)
 
 </span><span class="org-block"><span class="comment-delimiter"><span class="python-cell-cellbreak"># </span></span></span><span class="org-block"><span class="comment"><span class="python-cell-cellbreak">%% Standalone mode</span></span></span><span class="org-block"><span class="comment">
 </span></span><span class="org-block">
@@ -1996,7 +2122,8 @@ The command line usage is (<span class="org-code">~hpp2plantuml --help~</span>):
 
 
 <span class="org-block-begin-line">#+begin_example
-</span><span class="custom">usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [-t JINJA-FILE] [--version]
+</span><span class="custom">usage: hpp2plantuml [-h] -i HEADER-FILE [-o FILE] [-d] [-t JINJA-FILE]
+                    [--version]
 
 hpp2plantuml tool.
 
@@ -2006,6 +2133,8 @@ optional arguments:
                         input file (must be quoted when using wildcards)
   -o FILE, --output-file FILE
                         output file
+  -d, --enable-dependency
+                        Extract dependency relationships from method arguments
   -t JINJA-FILE, --template-file JINJA-FILE
                         path to jinja2 template file
   --version             show program's version number and exit
@@ -2321,8 +2450,10 @@ relationships (with and without count).
 <span class="org-table">|------------------------------------------------------+----------------------------------|</span>
 <span class="org-table">| "class A{};\nclass B : A{};"                         | "A &lt;@-- B\n"                     |</span>
 <span class="org-table">| "class A{};\nclass B : public A{};"                  | "A &lt;@-- B\n"                     |</span>
-<span class="org-table">| "class B{};\nclass A{B obj;};"                       | "A o-- B\n"                      |</span>
-<span class="org-table">| "class B{};\nclass A{B obj; B* ptr;};"               | "A \"2\" o-- B\n"                |</span>
+<span class="org-table">| "class B{};\nclass A{B obj;};"                       | "A *-- B\n"                      |</span>
+<span class="org-table">| "class B{};\nclass A{B* obj;};"                      | "A o-- B\n"                      |</span>
+<span class="org-table">| "class B{};\nclass A{B * obj_ptr; B* ptr;};"         | "A \"2\" o-- B\n"                |</span>
+<span class="org-table">| "class A{};\nclass B{void Method(A* obj);};"         | "A &lt;.. B\n"                      |</span>
 <span class="org-table">| "namespace T {class A{}; class B: A{};};"            | "namespace T {\n\tA &lt;@-- B\n}\n" |</span>
 <span class="org-table">| "namespace T {\nclass A{};};\nclass B{T::A* _obj;};" | ".B o-- T.A\n"                   |</span>
 
@@ -2333,13 +2464,15 @@ relationships (with and without count).
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">test_list_entries</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
         </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> test_idx, (input_str, output_ref_str) </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> \
             </span><span class="org-block"><span class="builtin">enumerate</span></span><span class="org-block">(fix_test_list_def(test_list_link)):
-            </span><span class="org-block"><span class="variable-name">obj_d</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+            </span><span class="org-block"><span class="variable-name">obj_d</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">)
             </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Not very unittest-y
 </span></span><span class="org-block">            obj_d.create_from_string(input_str)
             </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">len</span></span><span class="org-block">(obj_d._inheritance_list) &gt; 0:
                 </span><span class="org-block"><span class="variable-name">obj_l</span></span><span class="org-block"> = obj_d._inheritance_list[0]
             </span><span class="org-block"><span class="keyword">elif</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">len</span></span><span class="org-block">(obj_d._aggregation_list) &gt; 0:
                 </span><span class="org-block"><span class="variable-name">obj_l</span></span><span class="org-block"> = obj_d._aggregation_list[0]
+            </span><span class="org-block"><span class="keyword">elif</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">len</span></span><span class="org-block">(obj_d._dependency_list) &gt; 0:
+                </span><span class="org-block"><span class="variable-name">obj_l</span></span><span class="org-block"> = obj_d._dependency_list[0]
             nt.assert_equal(output_ref_str, obj_l.render(),
                             </span><span class="org-block"><span class="string">'Test {0} failed [input: {1}]'</span></span><span class="org-block">.</span><span class="org-block"><span class="builtin">format</span></span><span class="org-block">(test_idx,
                                                                   input_str))
@@ -2371,25 +2504,25 @@ The following can be extended to improve testing, as long as the corresponding
 
 </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block"> {
 </span><span class="org-block"><span class="keyword">protected</span></span><span class="org-block">:
-    </span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">_protected_var</span></span><span class="org-block">;
-    </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_ProtectedMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
-    </span><span class="org-block"><span class="keyword">static</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_StaticProtectedMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
-    </span><span class="org-block"><span class="keyword">virtual</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_AbstractMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) = 0;
+        </span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">_protected_var</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_ProtectedMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
+        </span><span class="org-block"><span class="keyword">static</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_StaticProtectedMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
+        </span><span class="org-block"><span class="keyword">virtual</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_AbstractMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) = 0;
 </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block">:
-    </span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">public_var</span></span><span class="org-block">;
-    </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">PublicMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">const</span></span><span class="org-block">;
-    </span><span class="org-block"><span class="keyword">static</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">StaticPublicMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
-    </span><span class="org-block"><span class="keyword">virtual</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">AbstractPublicMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) = 0;
+        </span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">public_var</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">PublicMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">const</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="keyword">static</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">StaticPublicMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
+        </span><span class="org-block"><span class="keyword">virtual</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">AbstractPublicMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) = 0;
 };
 
 </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class02</span></span><span class="org-block"> : </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block"> {
 </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block">:
-    </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">AbstractPublicMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">override</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">AbstractPublicMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">override</span></span><span class="org-block">;
 </span><span class="org-block"><span class="keyword">private</span></span><span class="org-block">:
-    </span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">_private_var</span></span><span class="org-block">;
-    </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_PrivateMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
-    </span><span class="org-block"><span class="keyword">static</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_StaticPrivateMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
-    </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_AbstractMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">override</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">_private_var</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_PrivateMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
+        </span><span class="org-block"><span class="keyword">static</span></span><span class="org-block"> </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_StaticPrivateMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">);
+        </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_AbstractMethod</span></span><span class="org-block">(</span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">param</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">override</span></span><span class="org-block">;
 };
 </span><span class="org-block-end-line">#+end_src
 </span>
@@ -2398,33 +2531,34 @@ The following can be extended to improve testing, as long as the corresponding
 </span><span class="org-block"><span class="keyword">template</span></span><span class="org-block">&lt;</span><span class="org-block"><span class="keyword">typename</span></span><span class="org-block"> </span><span class="org-block"><span class="type">T</span></span><span class="org-block">&gt;
 </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class03</span></span><span class="org-block"> {
 </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block">:
-    </span><span class="org-block"><span class="function-name">Class03</span></span><span class="org-block">();
-    ~</span><span class="org-block"><span class="function-name">Class03</span></span><span class="org-block">();
+        </span><span class="org-block"><span class="function-name">Class03</span></span><span class="org-block">();
+        ~</span><span class="org-block"><span class="function-name">Class03</span></span><span class="org-block">();
+        </span><span class="org-block"><span class="type">void</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">Method</span></span><span class="org-block">(</span><span class="org-block"><span class="constant">Interface</span></span><span class="org-block">::</span><span class="org-block"><span class="type">Class04</span></span><span class="org-block">&amp; </span><span class="org-block"><span class="variable-name">c4</span></span><span class="org-block">);
 </span><span class="org-block"><span class="keyword">private</span></span><span class="org-block">:
-    </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_obj</span></span><span class="org-block">;
-    </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_data</span></span><span class="org-block">;
-    </span><span class="org-block"><span class="type">list</span></span><span class="org-block">&lt;Class02&gt; </span><span class="org-block"><span class="variable-name">_obj_list</span></span><span class="org-block">;
-    </span><span class="org-block"><span class="type">T</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_typed_obj</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_obj</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_data</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">list</span></span><span class="org-block">&lt;Class02&gt; </span><span class="org-block"><span class="variable-name">_obj_list</span></span><span class="org-block">;
+        </span><span class="org-block"><span class="type">T</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_typed_obj</span></span><span class="org-block">;
 };
 
 </span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> </span><span class="org-block"><span class="constant">Interface</span></span><span class="org-block"> {
 
-    </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class04</span></span><span class="org-block"> {
-    </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block">:
-        </span><span class="org-block"><span class="function-name">Class04</span></span><span class="org-block">();
-        ~</span><span class="org-block"><span class="function-name">Class04</span></span><span class="org-block">();
-    </span><span class="org-block"><span class="keyword">private</span></span><span class="org-block">:
-        </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">_flag</span></span><span class="org-block">;
-        </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_obj</span></span><span class="org-block">;
-    };
+        </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class04</span></span><span class="org-block"> {
+        </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block">:
+                </span><span class="org-block"><span class="function-name">Class04</span></span><span class="org-block">();
+                ~</span><span class="org-block"><span class="function-name">Class04</span></span><span class="org-block">();
+        </span><span class="org-block"><span class="keyword">private</span></span><span class="org-block">:
+                </span><span class="org-block"><span class="type">bool</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">_flag</span></span><span class="org-block">;
+                </span><span class="org-block"><span class="type">Class01</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">_obj</span></span><span class="org-block">;
+        };
 
-    </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class04_derived</span></span><span class="org-block"> : </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class04</span></span><span class="org-block"> {
-    </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block">:
-        </span><span class="org-block"><span class="function-name">Class04_derived</span></span><span class="org-block">();
-        ~</span><span class="org-block"><span class="function-name">Class04_derived</span></span><span class="org-block">();
-    </span><span class="org-block"><span class="keyword">private</span></span><span class="org-block">:
-        </span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">_var</span></span><span class="org-block">;
-    };
+        </span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class04_derived</span></span><span class="org-block"> : </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Class04</span></span><span class="org-block"> {
+        </span><span class="org-block"><span class="keyword">public</span></span><span class="org-block">:
+                </span><span class="org-block"><span class="function-name">Class04_derived</span></span><span class="org-block">();
+                ~</span><span class="org-block"><span class="function-name">Class04_derived</span></span><span class="org-block">();
+        </span><span class="org-block"><span class="keyword">private</span></span><span class="org-block">:
+                </span><span class="org-block"><span class="type">int</span></span><span class="org-block"> </span><span class="org-block"><span class="variable-name">_var</span></span><span class="org-block">;
+        };
 
 };
 </span><span class="org-block-end-line">#+end_src
@@ -2451,59 +2585,60 @@ The comparison takes into account the white space, indentation, etc.
 </span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Objects </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
 
 </span><span class="org-block"><span class="type">abstract</span></span><span class="org-block"> class Class01 {
-    +{abstract} AbstractPublicMethod(int param) : bool
-    +PublicMethod(int param) : bool {query}
-    +{static} StaticPublicMethod(bool param) : bool
-    #{abstract} _AbstractMethod(int param) : bool
-    #_ProtectedMethod(int param) : bool
-    #{static} _StaticProtectedMethod(bool param) : bool
-    #_protected_var : int
-    +public_var : int
+        +{abstract} AbstractPublicMethod(int param) : bool
+        +PublicMethod(int param) : bool {query}
+        +{static} StaticPublicMethod(bool param) : bool
+        #{abstract} _AbstractMethod(int param) : bool
+        #_ProtectedMethod(int param) : bool
+        #{static} _StaticProtectedMethod(bool param) : bool
+        #_protected_var : int
+        +public_var : int
 }
 
 
 </span><span class="org-block"><span class="type">class</span></span><span class="org-block"> Class02 {
-    +AbstractPublicMethod(int param) : bool
-    -_AbstractMethod(int param) : bool
-    -_PrivateMethod(int param) : bool
-    -{static} _StaticPrivateMethod(bool param) : bool
-    -_private_var : int
+        +AbstractPublicMethod(int param) : bool
+        -_AbstractMethod(int param) : bool
+        -_PrivateMethod(int param) : bool
+        -{static} _StaticPrivateMethod(bool param) : bool
+        -_private_var : int
 }
 
 
 </span><span class="org-block"><span class="type">class</span></span><span class="org-block"> Class03 &lt;template&lt;typename T&gt;&gt; {
-    +Class03()
-    +~Class03()
-    -_data : Class01*
-    -_obj : Class01*
-    -_typed_obj : T*
-    -_obj_list : list&lt;Class02&gt;
-}
-
-
-</span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
-</span><span class="org-block"><span class="type">    class</span></span><span class="org-block"> Class04 {
-        +Class04()
-        +~Class04()
+        +Class03()
+        +~Class03()
+        -_data : Class01*
         -_obj : Class01*
-        -_flag : bool
-    }
+        -_typed_obj : T*
+        -_obj_list : list&lt;Class02&gt;
+        +Method(Interface::Class04&amp; c4) : void
 }
 
 
 </span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
-</span><span class="org-block"><span class="type">    class</span></span><span class="org-block"> Class04_derived {
-        +Class04_derived()
-        +~Class04_derived()
-        -_var : int
-    }
+</span><span class="org-block"><span class="type">        class</span></span><span class="org-block"> Class04 {
+                +Class04()
+                +~Class04()
+                -_obj : Class01*
+                -_flag : bool
+        }
+}
+
+
+</span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
+</span><span class="org-block"><span class="type">        class</span></span><span class="org-block"> Class04_derived {
+                +Class04_derived()
+                +~Class04_derived()
+                -_var : int
+        }
 }
 
 
 </span><span class="org-block"><span class="type">enum</span></span><span class="org-block"> Enum01 {
-    VALUE_0
-    VALUE_1
-    VALUE_2
+        VALUE_0
+        VALUE_1
+        VALUE_2
 }
 
 
@@ -2516,7 +2651,7 @@ The comparison takes into account the white space, indentation, etc.
 
 
 </span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
-    Class04 </span><span class="org-block"><span class="keyword">&lt;|--</span></span><span class="org-block"> Class04_derived
+        Class04 </span><span class="org-block"><span class="keyword">&lt;|--</span></span><span class="org-block"> Class04_derived
 }
 
 
@@ -2528,10 +2663,121 @@ The comparison takes into account the white space, indentation, etc.
 .Class03 </span><span class="org-block"><span class="string">"2"</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> .Class01
 
 
-.Class03 </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> .Class02
+.Class03 </span><span class="org-block"><span class="keyword">*--</span></span><span class="org-block"> .Class02
 
 
 </span><span class="org-block"><span class="type">Interface</span></span><span class="org-block">.Class04 </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> .Class01
+
+
+
+
+
+
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Dependency relationships </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+
+</span><span class="org-block"><span class="type">Interface</span></span><span class="org-block">.Class04 </span><span class="org-block"><span class="keyword">&lt;..</span></span><span class="org-block"> .Class03
+
+
+
+
+
+</span><span class="org-block"><span class="keyword">@enduml</span></span><span class="org-block">
+</span><span class="org-block-end-line">#+end_src
+</span>
+<span class="org-meta-line">#+name: puml-simple-classes-no-dependency</span>
+<span class="org-block-begin-line">#+begin_src plantuml :mkdirp yes :tangle tests/simple_classes_nodep.puml
+</span><span class="org-block"><span class="keyword">@startuml</span></span><span class="org-block">
+
+
+
+
+
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Objects </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+
+</span><span class="org-block"><span class="type">abstract</span></span><span class="org-block"> class Class01 {
+        +{abstract} AbstractPublicMethod(int param) : bool
+        +PublicMethod(int param) : bool {query}
+        +{static} StaticPublicMethod(bool param) : bool
+        #{abstract} _AbstractMethod(int param) : bool
+        #_ProtectedMethod(int param) : bool
+        #{static} _StaticProtectedMethod(bool param) : bool
+        #_protected_var : int
+        +public_var : int
+}
+
+
+</span><span class="org-block"><span class="type">class</span></span><span class="org-block"> Class02 {
+        +AbstractPublicMethod(int param) : bool
+        -_AbstractMethod(int param) : bool
+        -_PrivateMethod(int param) : bool
+        -{static} _StaticPrivateMethod(bool param) : bool
+        -_private_var : int
+}
+
+
+</span><span class="org-block"><span class="type">class</span></span><span class="org-block"> Class03 &lt;template&lt;typename T&gt;&gt; {
+        +Class03()
+        +~Class03()
+        -_data : Class01*
+        -_obj : Class01*
+        -_typed_obj : T*
+        -_obj_list : list&lt;Class02&gt;
+        +Method(Interface::Class04&amp; c4) : void
+}
+
+
+</span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
+</span><span class="org-block"><span class="type">        class</span></span><span class="org-block"> Class04 {
+                +Class04()
+                +~Class04()
+                -_obj : Class01*
+                -_flag : bool
+        }
+}
+
+
+</span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
+</span><span class="org-block"><span class="type">        class</span></span><span class="org-block"> Class04_derived {
+                +Class04_derived()
+                +~Class04_derived()
+                -_var : int
+        }
+}
+
+
+</span><span class="org-block"><span class="type">enum</span></span><span class="org-block"> Enum01 {
+        VALUE_0
+        VALUE_1
+        VALUE_2
+}
+
+
+
+
+
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Inheritance relationships </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+
+.Class01 </span><span class="org-block"><span class="keyword">&lt;|--</span></span><span class="org-block"> .Class02
+
+
+</span><span class="org-block"><span class="keyword">namespace</span></span><span class="org-block"> Interface {
+        Class04 </span><span class="org-block"><span class="keyword">&lt;|--</span></span><span class="org-block"> Class04_derived
+}
+
+
+
+
+
+</span><span class="org-block"><span class="comment-delimiter">/' </span></span><span class="org-block"><span class="comment">Aggregation relationships </span></span><span class="org-block"><span class="comment-delimiter">'/</span></span><span class="org-block">
+
+.Class03 </span><span class="org-block"><span class="string">"2"</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> .Class01
+
+
+.Class03 </span><span class="org-block"><span class="keyword">*--</span></span><span class="org-block"> .Class02
+
+
+</span><span class="org-block"><span class="type">Interface</span></span><span class="org-block">.Class04 </span><span class="org-block"><span class="keyword">o--</span></span><span class="org-block"> .Class01
+
 
 
 
@@ -2575,17 +2821,29 @@ The system test validates the following:
         </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref = </span><span class="org-block"><span class="string">''</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">with</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">open</span></span><span class="org-block">(os.path.join(test_fold, </span><span class="org-block"><span class="string">'simple_classes.puml'</span></span><span class="org-block">), </span><span class="org-block"><span class="string">'rt'</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">as</span></span><span class="org-block"> fid:
             </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref = fid.read()
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref_nodep = </span><span class="org-block"><span class="string">''</span></span><span class="org-block">
+        </span><span class="org-block"><span class="keyword">with</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">open</span></span><span class="org-block">(os.path.join(test_fold,
+                               </span><span class="org-block"><span class="string">'simple_classes_nodep.puml'</span></span><span class="org-block">), </span><span class="org-block"><span class="string">'rt'</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">as</span></span><span class="org-block"> fid:
+            </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref_nodep = fid.read()
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">test_full_files</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._test_full_files_helper(</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">)
+        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._test_full_files_helper(</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">)
+
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_test_full_files_helper</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, flag_dep=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">):
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Create first version
 </span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">file_list_ref</span></span><span class="org-block"> = </span><span class="org-block"><span class="builtin">list</span></span><span class="org-block">(</span><span class="org-block"><span class="builtin">set</span></span><span class="org-block">(hpp2plantuml.hpp2plantuml.expand_file_list(
             [os.path.join(test_fold, f) </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> f </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._input_files])))
-        </span><span class="org-block"><span class="variable-name">diag_ref</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+        </span><span class="org-block"><span class="variable-name">diag_ref</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=flag_dep)
         diag_ref.create_from_file_list(file_list_ref)
         </span><span class="org-block"><span class="variable-name">diag_render_ref</span></span><span class="org-block"> = diag_ref.render()
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Compare to saved reference
-</span></span><span class="org-block">        nt.assert_equal(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref, diag_render_ref)
+</span></span><span class="org-block">        </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> flag_dep:
+            </span><span class="org-block"><span class="variable-name">saved_ref</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref
+        </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
+            </span><span class="org-block"><span class="variable-name">saved_ref</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref_nodep
+        nt.assert_equal(saved_ref, diag_render_ref)
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment"># Validate equivalent inputs
 </span></span><span class="org-block">
@@ -2595,19 +2853,19 @@ The system test validates the following:
                 [os.path.join(test_fold, f) </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> f </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> file_list])))
 
             </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Create from file list
-</span></span><span class="org-block">            </span><span class="org-block"><span class="variable-name">diag_c</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+</span></span><span class="org-block">            </span><span class="org-block"><span class="variable-name">diag_c</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=flag_dep)
             diag_c.create_from_file_list(file_list_c)
             nt.assert_equal(diag_render_ref, diag_c.render())
 
             </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Add from file list
-</span></span><span class="org-block">            </span><span class="org-block"><span class="variable-name">diag_c_add</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+</span></span><span class="org-block">            </span><span class="org-block"><span class="variable-name">diag_c_add</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=flag_dep)
             diag_c_add.add_from_file_list(file_list_c)
             diag_c_add.build_relationship_lists()
             diag_c_add.sort_elements()
             nt.assert_equal(diag_render_ref, diag_c_add.render())
 
             </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Create from first file, add from rest of the list
-</span></span><span class="org-block">            </span><span class="org-block"><span class="variable-name">diag_c_file</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+</span></span><span class="org-block">            </span><span class="org-block"><span class="variable-name">diag_c_file</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=flag_dep)
             diag_c_file.create_from_file(file_list_c[0])
             </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> file_c </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> file_list_c[1:]:
                 diag_c_file.add_from_file(file_c)
@@ -2622,19 +2880,19 @@ The system test validates the following:
                 input_str_list.append(fid.read())
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Create from string list
-</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diag_str_list</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diag_str_list</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=flag_dep)
         diag_str_list.create_from_string_list(input_str_list)
         nt.assert_equal(diag_render_ref, diag_str_list.render())
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Add from string list
-</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diag_str_list_add</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diag_str_list_add</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=flag_dep)
         diag_str_list_add.add_from_string_list(input_str_list)
         diag_str_list_add.build_relationship_lists()
         diag_str_list_add.sort_elements()
         nt.assert_equal(diag_render_ref, diag_str_list_add.render())
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Create from string
-</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diag_str</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diag_str</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=flag_dep)
         diag_str.create_from_string(</span><span class="org-block"><span class="string">'\n'</span></span><span class="org-block">.join(input_str_list))
         nt.assert_equal(diag_render_ref, diag_str.render())
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Reset and parse
@@ -2643,7 +2901,7 @@ The system test validates the following:
         nt.assert_equal(diag_render_ref, diag_str.render())
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Manually build object
-</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diag_manual_add</span></span><span class="org-block"> = hpp2plantuml.Diagram()
+</span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">diag_manual_add</span></span><span class="org-block"> = hpp2plantuml.Diagram(flag_dep=flag_dep)
         </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> idx, (file_c, string_c) </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">enumerate</span></span><span class="org-block">(</span><span class="org-block"><span class="builtin">zip</span></span><span class="org-block">(file_list_ref,
                                                      input_str_list)):
             </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> idx == 0:
@@ -2655,6 +2913,10 @@ The system test validates the following:
         nt.assert_equal(diag_render_ref, diag_manual_add.render())
 
     </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">test_main_function</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">):
+        </span><span class="org-block"><span class="comment-delimiter">#</span></span><span class="org-block"><span class="comment">self._test_main_function_helper(False)
+</span></span><span class="org-block">        </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._test_main_function_helper(</span><span class="org-block"><span class="constant">True</span></span><span class="org-block">)
+
+    </span><span class="org-block"><span class="keyword">def</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">_test_main_function_helper</span></span><span class="org-block">(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">, flag_dep=</span><span class="org-block"><span class="constant">False</span></span><span class="org-block">):
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">List files
 </span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">file_list</span></span><span class="org-block"> = [os.path.join(test_fold, f) </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> f </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._input_files]
@@ -2662,29 +2924,33 @@ The system test validates the following:
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Output to string
 </span></span><span class="org-block">        </span><span class="org-block"><span class="keyword">with</span></span><span class="org-block"> io.StringIO() </span><span class="org-block"><span class="keyword">as</span></span><span class="org-block"> io_stream:
             </span><span class="org-block"><span class="variable-name">sys.stdout</span></span><span class="org-block"> = io_stream
-            hpp2plantuml.CreatePlantUMLFile(file_list)
+            hpp2plantuml.CreatePlantUMLFile(file_list, flag_dep=flag_dep)
             io_stream.seek(0)
             </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Read string output, exclude final line return
 </span></span><span class="org-block">            </span><span class="org-block"><span class="variable-name">output_str</span></span><span class="org-block"> = io_stream.read()[:-1]
         </span><span class="org-block"><span class="variable-name">sys.stdout</span></span><span class="org-block"> = sys.__stdout__
-        nt.assert_equal(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref, output_str)
+        </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> flag_dep:
+            </span><span class="org-block"><span class="variable-name">saved_ref</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref
+        </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
+            </span><span class="org-block"><span class="variable-name">saved_ref</span></span><span class="org-block"> = </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref_nodep
+        nt.assert_equal(saved_ref, output_str)
 
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Output to file
 </span></span><span class="org-block">        </span><span class="org-block"><span class="variable-name">output_fname</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">'output.puml'</span></span><span class="org-block">
         </span><span class="org-block"><span class="keyword">for</span></span><span class="org-block"> template </span><span class="org-block"><span class="keyword">in</span></span><span class="org-block"> [</span><span class="org-block"><span class="constant">None</span></span><span class="org-block">, os.path.join(test_fold,
                                             </span><span class="org-block"><span class="string">'custom_template.puml'</span></span><span class="org-block">)]:
             hpp2plantuml.CreatePlantUMLFile(file_list, output_fname,
-                                            template_file=template)
+                                            template_file=template,
+                                            flag_dep=flag_dep)
             </span><span class="org-block"><span class="variable-name">output_fcontent</span></span><span class="org-block"> = </span><span class="org-block"><span class="string">''</span></span><span class="org-block">
             </span><span class="org-block"><span class="keyword">with</span></span><span class="org-block"> </span><span class="org-block"><span class="builtin">open</span></span><span class="org-block">(output_fname, </span><span class="org-block"><span class="string">'rt'</span></span><span class="org-block">) </span><span class="org-block"><span class="keyword">as</span></span><span class="org-block"> fid:
                 </span><span class="org-block"><span class="variable-name">output_fcontent</span></span><span class="org-block"> = fid.read()
             </span><span class="org-block"><span class="keyword">if</span></span><span class="org-block"> template </span><span class="org-block"><span class="keyword">is</span></span><span class="org-block"> </span><span class="org-block"><span class="constant">None</span></span><span class="org-block">:
                 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Default template check
-</span></span><span class="org-block">                nt.assert_equal(</span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref, output_fcontent)
+</span></span><span class="org-block">                nt.assert_equal(saved_ref, output_fcontent)
             </span><span class="org-block"><span class="keyword">else</span></span><span class="org-block">:
                 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Check that all lines of reference are in the output
-</span></span><span class="org-block">                </span><span class="org-block"><span class="variable-name">ref_re</span></span><span class="org-block"> = re.search(</span><span class="org-block"><span class="string">'(@startuml)\s*(.*)'</span></span><span class="org-block">, </span><span class="org-block"><span class="keyword">self</span></span><span class="org-block">._diag_saved_ref,
-                                   re.DOTALL)
+</span></span><span class="org-block">                </span><span class="org-block"><span class="variable-name">ref_re</span></span><span class="org-block"> = re.search(</span><span class="org-block"><span class="string">'(@startuml)\s*(.*)'</span></span><span class="org-block">, saved_ref, re.DOTALL)
                 </span><span class="org-block"><span class="keyword">assert</span></span><span class="org-block"> ref_re
                 </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Build regular expression: allow arbitrary text between
 </span></span><span class="org-block">                </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">@startuml and the rest of the string
@@ -2803,7 +3069,8 @@ options.  Most of it is taken from <span class="org-link"><a href="https://hynek
 </span><span class="org-block"><span class="keyword">from</span></span><span class="org-block"> setuptools </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> setup, find_packages, Command
 </span><span class="org-block"><span class="keyword">try</span></span><span class="org-block">:
     </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> sphinx
-    </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> sphinx.apidoc
+    </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> sphinx.ext.apidoc
+    </span><span class="org-block"><span class="keyword">import</span></span><span class="org-block"> sphinx.cmd.build
 </span><span class="org-block"><span class="keyword">except</span></span><span class="org-block"> </span><span class="org-block"><span class="type">ImportError</span></span><span class="org-block">:
     </span><span class="org-block"><span class="keyword">pass</span></span><span class="org-block">
 </span><span class="org-block-end-line">#+end_src
@@ -2898,16 +3165,16 @@ The following helper functions provide tools to extract metadata from the
         sys.path.append(</span><span class="org-block"><span class="string">'src'</span></span><span class="org-block">)
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">Run sphinx by calling the main method, '--full' also adds a
 </span></span><span class="org-block">        </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">conf.py
-</span></span><span class="org-block">        sphinx.apidoc.main(
-            [</span><span class="org-block"><span class="string">''</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'--private'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'-H'</span></span><span class="org-block">, metadata.name,
+</span></span><span class="org-block">        sphinx.ext.apidoc.main(
+            [</span><span class="org-block"><span class="string">'--private'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'-H'</span></span><span class="org-block">, metadata.name,
              </span><span class="org-block"><span class="string">'-A'</span></span><span class="org-block">, metadata.author,
              </span><span class="org-block"><span class="string">'-V'</span></span><span class="org-block">, metadata.version,
              </span><span class="org-block"><span class="string">'-R'</span></span><span class="org-block">, metadata.version,
              </span><span class="org-block"><span class="string">'-o'</span></span><span class="org-block">, os.path.join(</span><span class="org-block"><span class="string">'doc'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'source'</span></span><span class="org-block">), src_dir]
         )
         </span><span class="org-block"><span class="comment-delimiter"># </span></span><span class="org-block"><span class="comment">build the doc sources
-</span></span><span class="org-block">        sphinx.main([</span><span class="org-block"><span class="string">''</span></span><span class="org-block">, os.path.join(</span><span class="org-block"><span class="string">'doc'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'source'</span></span><span class="org-block">),
-                     os.path.join(</span><span class="org-block"><span class="string">'doc'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'build'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'html'</span></span><span class="org-block">)])
+</span></span><span class="org-block">        sphinx.cmd.build.main([os.path.join(</span><span class="org-block"><span class="string">'doc'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'source'</span></span><span class="org-block">),
+                               os.path.join(</span><span class="org-block"><span class="string">'doc'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'build'</span></span><span class="org-block">, </span><span class="org-block"><span class="string">'html'</span></span><span class="org-block">)])
 </span><span class="org-block-end-line">#+end_src
 </span>
 
@@ -3523,7 +3790,7 @@ blocks, replacing them by a simple example block.
 <span class="org-block-begin-line">#+begin_src emacs-lisp -r
 </span><span class="org-block">(</span><span class="org-block"><span class="keyword">defun</span></span><span class="org-block"> </span><span class="org-block"><span class="function-name">custom-rst-filter-org-block</span></span><span class="org-block"> (text backend info)(ref:el-rst-filter)
   (</span><span class="org-block"><span class="keyword">when</span></span><span class="org-block"> (org-export-derived-backend-p backend 'rst)
-    (</span><span class="org-block"><span class="keyword">let*</span></span><span class="org-block"> ((pattern </span><span class="org-block"><span class="string">".*\.\. code:: </span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">(</span></span></span><span class="org-block"><span class="string"><a href=":alnum:">[[:alnum:]]</a>+</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">)</span></span></span><span class="org-block"><span class="string">"</span></span><span class="org-block">)
+    (</span><span class="org-block"><span class="keyword">let*</span></span><span class="org-block"> ((pattern </span><span class="org-block"><span class="string">".*</span></span><span class="org-block"><span class="string"><span class="warning">\</span></span></span><span class="org-block"><span class="string">.</span></span><span class="org-block"><span class="string"><span class="warning">\</span></span></span><span class="org-block"><span class="string">. code:: </span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">(</span></span></span><span class="org-block"><span class="string"><a href=":alnum:">[[:alnum:]]</a>+</span></span><span class="org-block"><span class="string"><span class="regexp-grouping-backslash">\\</span></span></span><span class="org-block"><span class="string"><span class="regexp-grouping-construct">)</span></span></span><span class="org-block"><span class="string">"</span></span><span class="org-block">)
            (pattern-line (concat pattern </span><span class="org-block"><span class="string">".*$"</span></span><span class="org-block">))
            (lang (</span><span class="org-block"><span class="keyword">progn</span></span><span class="org-block">
                    (string-match pattern text)
@@ -3575,6 +3842,62 @@ encapsulated in the following source block.
   - <span class="org-checkbox">[X]</span> tangles source files
   - <span class="org-checkbox">[X]</span> creates documentation rst (and README.rst)
 - <span class="org-checkbox">[X]</span> Link to org-mode rst documentation from index.rst -&gt; Use only org-mode rst?
+
+<span class="org-level-2">** v0.6</span>
+
+<span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Rename </span><span class="org-level-3"><span class="org-verbatim">=do_parsed_member=</span></span>
+<span class="org-special-keyword">CLOSED:</span> <span class="org-date">[2019-10-14 Mon 17:44]</span>
+
+<span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Possible bug in </span><span class="org-level-3"><span class="org-verbatim">=Aggregation=</span></span>
+<span class="org-special-keyword">CLOSED:</span> <span class="org-date">[2019-10-15 Tue 00:25]</span>
+
+<span class="org-block-begin-line">#+begin_src python :tangle no
+</span><span class="org-block">ClassAggregationRelationship(
+    obj_class_obj, comp_parent_obj, comp_count,
+    flag_use_namespace=flag_use_namespace))
+</span><span class="org-block-end-line">#+end_src
+</span>
+- The result in v05 is correct
+- The naming convention is inconsistent (switch of parent/child arguments)
+
+<span class="org-level-4">**** Code comment</span>
+
+I would suggest leaving this change out of this pull request.
+
+I believe the current version (v0.5) is producing the correct output:
+<span class="org-block-begin-line">#+begin_src c++
+</span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Engine</span></span><span class="org-block"> {};
+</span><span class="org-block"><span class="keyword">class</span></span><span class="org-block"> </span><span class="org-block"><span class="type">Car</span></span><span class="org-block">{ </span><span class="org-block"><span class="type">Engine</span></span><span class="org-block">* </span><span class="org-block"><span class="variable-name">engine</span></span><span class="org-block">; };
+</span><span class="org-block-end-line">#+end_src
+</span>produces <span class="org-verbatim">=Car o-- Engine=</span> as expected.
+
+However, the current code is misleading/wrong, thanks for pointing that out.  I
+am passing <span class="org-code">~obj_class_obj~</span> as <span class="org-code">~c_parent~</span> and <span class="org-code">~comp_parent_obj~</span> as <span class="org-code">~c_child~</span> when
+instantiating the <span class="org-verbatim">=ClassAggregationRelationship=</span> object.  This is wrong and your
+change is correct, but the code needs to be further modified to produce the same
+output as v0.5.  I would propose removing this change and fix that in another
+commit (I will take care of that before releasing v0.6).
+
+<span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Run tests</span>
+<span class="org-special-keyword">CLOSED:</span> <span class="org-date">[2019-10-14 Mon 17:44]</span>
+
+<span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Example for dependency list</span>
+<span class="org-special-keyword">CLOSED:</span> <span class="org-date">[2019-10-15 Tue 00:25]</span>
+
+<span class="org-level-3">*** </span><span class="org-done">DONE</span><span class="org-level-3"> Pull request review</span>
+<span class="org-special-keyword">CLOSED:</span> <span class="org-date">[2019-10-14 Mon 17:44]</span>
+
+Thanks for the pull request.  It looks good.  I have left a few comments and
+suggestions (mostly nitpicking) for you to look at.
+
+I have a general question about the typical use-case for this change.  What c++
+code would produce a dependency relationship (could you share an example?)?  Are
+you using the Diagram object directly (without c++ header)?
+
+The only other thing is I'd like to make sure all tests pass and that the new
+feature is added to the unit tests before merging this.
+
+It should be easy to get this merged.  Thanks a lot for your work.
 </pre>
   </body>
 </html>

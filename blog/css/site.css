@@ -424,6 +424,20 @@ body {
 }
 /* style-css-content ends here */
 
+/* [[file:~/dotfiles/emacs/website/website.org::style-css-blockquote][style-css-blockquote]] */
+blockquote {
+    width: 80%;
+    margin: 10px auto;
+    font-family: Open Sans;
+    font-style: italic;
+    color: #616161;
+    padding: 0 10px 0 20px;
+    border-left: 4px solid #616161;
+    position: relative;
+    background: #EDEDED;
+}
+/* style-css-blockquote ends here */
+
 /* [[file:~/dotfiles/emacs/website/website.org::style-css-postamble][style-css-postamble]] */
 #postamble {
     padding: var(--footer-padding);
